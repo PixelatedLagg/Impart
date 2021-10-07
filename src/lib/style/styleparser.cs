@@ -1,13 +1,34 @@
 using System;
 using Csweb;
-
+using System.Linq;
 namespace Csweb
 {
-    internal class styleparser
+    static internal class StyleParser
     {
-        internal void parse()
+        //parses string into css
+        //note: maybe use another dependency for better and easier parsing
+        static internal string Parse(string style)
         {
-            //parse string to html style
+            string temp = "";
+            switch (style)
+            {
+                case string a when a.Contains(Colors.Any().ToString()):
+                    Console.WriteLine("aids");
+                    break;
+            }
+            return temp;
         }
+        private static string[] Colors = 
+        {
+            "red",
+            "orange",
+            "yellow",
+            "green",
+            "blue",
+            "purple",
+            "pink",
+            "white",
+            "black"
+        };
     }
 }

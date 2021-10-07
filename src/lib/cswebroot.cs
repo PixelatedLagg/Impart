@@ -4,14 +4,14 @@ namespace Csweb
 {
     public class cswebroot
     {
-        public string source;
-        public cswebroot(string page)
+        public string path;
+        public cswebroot(string path)
         {
-            if (String.IsNullOrEmpty(page))
+            if (String.IsNullOrEmpty(path) || !new Writer().ValidPath(path))
             {
-                throw new ArgumentException("ID or Page source missing/invalid!");
+                throw new ArgumentException("Not a valid file path!");
             }
-            source = page;
+            this.path = path;
         }
     }
 }

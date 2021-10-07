@@ -6,28 +6,37 @@ namespace Csweb
 {
     public class cswebobj
     {
-        private string source;
+        private string path;
         public string id;
+        internal string textCache;
         public cswebobj(cswebroot root, string id)
         {
-            source = root.source;
+            path = root.path;
             this.id = id;
+            textCache = "";
         }
-        public void AddComponent(int component, string name, string style)
+        //how the developer adds elements
+        public void AddComponent(int component, string text, string style)
         {
             switch (component)
             {
                 case 0:
-                //text
-                break;
+                    if (String.IsNullOrEmpty(style))
+                    {
+                        textCache = $"{textCache}%^<p>{text}</p>";
+                        break;
+                    }
+                    textCache = StyleParser.Parse(style);
+                    break;
                 case 1:
                 //image
                 break;
             }
         }
+        //how the developer writes the text cache to file
         public void Render()
         {
-            //render all components
+            Changer.Change(path, textCache.Replace("%^", Environment.NewLine));
         }
     }
 }

@@ -1,12 +1,21 @@
+using System.IO;
 using System;
 
 namespace Csweb
 {
-    internal class changer
+    static internal class Changer
     {
-        internal void change()
+        //deletes all file contents
+        static internal void Delete(string path) => File.WriteAllText(path, "");
+        //called everytime a new set of components is rendered
+        static internal void Change(string path, string text)
         {
-            //change html
+            Delete(path);
+            using (StreamWriter _streamWriter = new StreamWriter(path))
+            {
+                _streamWriter.Write(text);
+                _streamWriter.Close();
+            }
         }
     }
 }
