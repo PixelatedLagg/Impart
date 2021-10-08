@@ -7,7 +7,7 @@ namespace Csweb
         public string path;
         public cswebroot(string path)
         {
-            if (String.IsNullOrEmpty(path) || !new Writer().ValidPath(path))
+            if (String.IsNullOrEmpty(path) || !Common.ValidPath(path, null))
             {
                 throw new ArgumentException("Not a valid file path!");
             }

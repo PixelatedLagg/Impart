@@ -7,6 +7,7 @@ namespace Csweb
         internal void read()
         {
             //read html
+            //maybe use a foreach() loop
         }
     }
 }
