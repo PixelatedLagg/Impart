@@ -11,11 +11,12 @@ namespace Csweb
         private string path;
         public string id;
         internal string textCache;
-        public cswebobj(cswebroot root, string id)
+        public cswebobj(string path, string id)
         {
-            path = root.path;
+            this.path = path;
             this.id = id;
             textCache = "";
+            CswebMethods.AddObject(this);
         }
         //how the developer adds elements
         public void AddText(string text, string id)
