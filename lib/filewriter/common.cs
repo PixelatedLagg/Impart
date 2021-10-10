@@ -5,9 +5,7 @@ namespace Csweb
 {
     static internal class Common
     {
-        //deletes all file contents
         static internal void Delete(string path) => File.WriteAllText(path, "");
-        //called everytime a new set of components is rendered
         static internal void Change(string path, string text)
         {
             Delete(path);
@@ -17,7 +15,6 @@ namespace Csweb
                 _streamWriter.Close();
             }
         }
-        //checks file path by relying the streamwriter class throwing an error
         static internal bool ValidPath(string path, string message)
         {
             try
@@ -37,9 +34,9 @@ namespace Csweb
                 return false;
             }
         }
-        static internal bool IsImage(string extension)
+        static internal bool IsImage(string path)
         {
-            switch (extension)
+            switch (Path.GetExtension(path))
             {
                 case ".apng":
                 case ".avif":
@@ -52,7 +49,6 @@ namespace Csweb
                 default:
                     return false;
             }
-            //.apng .avif .gif .jpeg .png .svg .webp"
         }
     }
 }

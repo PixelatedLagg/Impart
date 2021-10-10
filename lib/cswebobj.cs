@@ -9,14 +9,13 @@ namespace Csweb
     public class cswebobj
     {
         private string path;
-        public string id;
-        internal string textCache;
-        public cswebobj(string path, string id)
+        internal string textCache {get; private set;}
+        private bool externalCSS;
+        public cswebobj(string path, bool externalCSS)
         {
             this.path = path;
-            this.id = id;
             textCache = "";
-            CswebMethods.AddObject(this);
+            this.externalCSS = externalCSS;
         }
         //how the developer adds elements
         public void AddText(string text, string id)
