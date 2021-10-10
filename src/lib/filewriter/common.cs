@@ -37,5 +37,22 @@ namespace Csweb
                 return false;
             }
         }
+        static internal bool IsImage(string extension)
+        {
+            switch (extension)
+            {
+                case ".apng":
+                case ".avif":
+                case ".gif":
+                case ".jpeg":
+                case ".png":
+                case ".svg":
+                case ".webp":
+                    return true;
+                default:
+                    return false;
+            }
+            //.apng .avif .gif .jpeg .png .svg .webp"
+        }
     }
 }
