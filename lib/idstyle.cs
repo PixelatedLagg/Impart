@@ -33,14 +33,14 @@ namespace Csweb
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
         }
-        public void AddRGBColor((int x, int y, int z) rgb)
+        public void AddRGBColor(int x, int y, int z)
         {
             CheckColor();
-            if (!(rgb.x >= 0 && rgb.y >= 0 && rgb.z >= 0 && rgb.x <= 255 && rgb.y <= 255 && rgb.z <= 255))
+            if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
             {
                 throw new ArgumentException("Invalid RGB value!");
             }
-            textCache = $"{textCache}{CheckLB()}    color: #{rgb};";
+            textCache = $"{textCache}{CheckLB()}    color: rgb({x},{y},{z});";
         }
         public void AddAlign(string alignment)
         {

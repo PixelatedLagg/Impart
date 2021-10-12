@@ -10,7 +10,7 @@ namespace Csweb
     public class cswebobj
     {
         private string path;
-        internal string textCache {get; private set;}
+        internal string textCache;
         private string cssPath;
         private List<idstyle> styles = new List<idstyle>();
         public cswebobj(string path, string cssPath)
