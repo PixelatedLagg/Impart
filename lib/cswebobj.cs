@@ -23,7 +23,6 @@ namespace Csweb
         {
             styles.Add(style);
         }
-        //how the developer adds elements
         public void AddText(string text, string id)
         {
             if (String.IsNullOrEmpty(text)) 
@@ -76,7 +75,6 @@ namespace Csweb
                 }
             }
         }
-        //how the developer writes the text cache to file
         public void Render()
         {
             string tempCache = "";
