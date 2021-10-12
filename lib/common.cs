@@ -6,6 +6,7 @@ namespace Csweb
     static internal class Common
     {
         static internal void Delete(string path) => File.WriteAllText(path, "");
+        static internal string GetAllText(string path) => File.ReadAllText(path);
         static internal void Change(string path, string text)
         {
             Delete(path);
