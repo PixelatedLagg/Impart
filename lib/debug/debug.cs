@@ -6,9 +6,13 @@ namespace Csweb.Debug
     {
         public static event Action<Log> CSWebObjEvent;
         public static event Action<Log> IDStyleEvent;
-        internal static void CallEvent(Log log)
+        internal static void CallCSWebEvent(Log log)
         {
             CSWebObjEvent?.Invoke(log);
+        }
+        internal static void CallIDStyleEvent(Log log)
+        {
+            IDStyleEvent?.Invoke(log);
         }
     }
 }

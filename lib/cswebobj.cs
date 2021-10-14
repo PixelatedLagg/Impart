@@ -16,7 +16,7 @@ namespace Csweb
             this.path = path;
             textCache = "";
             this.cssPath = cssPath;
-            Debug.Debug.CallEvent(new Log("created cswebobj", Timer.GetTime()));
+            Debug.Debug.CallCSWebEvent(new Log("[cswebobj] created cswebobj", Timer.GetTime()));
         }
         public void AddStyle(idstyle style)
         {
@@ -37,7 +37,7 @@ namespace Csweb
             {
                 textCache = $"{textCache}%^    <p id=\"{id}\">{text}</p>";
             }
-            Debug.Debug.CallEvent(new Log("added text", Timer.GetTime()));
+            Debug.Debug.CallCSWebEvent(new Log("[cswebobj] added text element", Timer.GetTime()));
         }
         public void SetTitle(string title)
         {
@@ -47,7 +47,7 @@ namespace Csweb
                 throw new ArgumentException("Title cannot be null or empty!");
             }
             textCache = $"{textCache}%^    <title>{title}</title>";
-            Debug.Debug.CallEvent(new Log("set title", Timer.GetTime()));
+            Debug.Debug.CallCSWebEvent(new Log("[cswebobj] set title", Timer.GetTime()));
         }
         public void AddImage(string path, Nullable<(int x, int y)> dimensions, string id)
         {
@@ -86,7 +86,7 @@ namespace Csweb
                     textCache = $"{textCache}%^    <img src=\"{path}\" id=\"{id}\"></img>";
                 }
             }
-            Debug.Debug.CallEvent(new Log("added image", Timer.GetTime()));
+            Debug.Debug.CallCSWebEvent(new Log("[cswebobj] added image element", Timer.GetTime()));
         }
         /// <summary>
         /// Aids
@@ -112,7 +112,7 @@ namespace Csweb
             + $"{textCache.Replace("%^", Environment.NewLine)}{Environment.NewLine}</html>");
             Common.Delete(cssPath);
             Common.Change(cssPath, tempCache);
-            Debug.Debug.CallEvent(new Log("rendered cswebobj", Timer.GetTime()));
+            Debug.Debug.CallCSWebEvent(new Log("[cswebobj] rendered cswebobj", Timer.GetTime()));
         }
     }
 }
