@@ -1,8 +1,5 @@
-using System.Threading;
-using System.Globalization;
 using System;
 using System.IO;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace Csweb
@@ -15,9 +12,11 @@ namespace Csweb
         private List<idstyle> styles = new List<idstyle>();
         public cswebobj(string path, string cssPath)
         {
+            Timer.StartTimer();
             this.path = path;
             textCache = "";
             this.cssPath = cssPath;
+            Debug.Debug.CallEvent(new Log("created cswebobj", Timer.GetTime()));
         }
         public void AddStyle(idstyle style)
         {
@@ -25,6 +24,7 @@ namespace Csweb
         }
         public void AddText(string text, string id)
         {
+            Timer.StartTimer();
             if (String.IsNullOrEmpty(text)) 
             {
                 throw new ArgumentException("Text cannot be empty or null!");
@@ -37,9 +37,21 @@ namespace Csweb
             {
                 textCache = $"{textCache}%^    <p id=\"{id}\">{text}</p>";
             }
+            Debug.Debug.CallEvent(new Log("added text", Timer.GetTime()));
+        }
+        public void SetTitle(string title)
+        {
+            Timer.StartTimer();
+            if (String.IsNullOrEmpty(title))
+            {
+                throw new ArgumentException("Title cannot be null or empty!");
+            }
+            textCache = $"{textCache}%^    <title>{title}</title>";
+            Debug.Debug.CallEvent(new Log("set title", Timer.GetTime()));
         }
         public void AddImage(string path, Nullable<(int x, int y)> dimensions, string id)
         {
+            Timer.StartTimer();
             if (String.IsNullOrEmpty(path)) 
             {
                 throw new ArgumentException("Image path cannot be empty or null!");
@@ -74,9 +86,14 @@ namespace Csweb
                     textCache = $"{textCache}%^    <img src=\"{path}\" id=\"{id}\"></img>";
                 }
             }
+            Debug.Debug.CallEvent(new Log("added image", Timer.GetTime()));
         }
+        /// <summary>
+        /// Aids
+        /// <summary>
         public void Render()
         {
+            Timer.StartTimer();
             string tempCache = "";
             foreach (idstyle style in styles)
             {
@@ -95,6 +112,7 @@ namespace Csweb
             + $"{textCache.Replace("%^", Environment.NewLine)}{Environment.NewLine}</html>");
             Common.Delete(cssPath);
             Common.Change(cssPath, tempCache);
+            Debug.Debug.CallEvent(new Log("rendered cswebobj", Timer.GetTime()));
         }
     }
 }

@@ -1,8 +1,4 @@
-using System.Threading;
-using System.Globalization;
 using System;
-using System.IO;
-using System.Linq;
 using System.Drawing;
 
 namespace Csweb
@@ -16,7 +12,7 @@ namespace Csweb
         {
             this.id = id;
             hasColor = false;
-            textCache = $"#{id} {{{Environment.NewLine}";
+            textCache = $"#{id} {{%^";
         }
         public void AddColor(Color color)
         {
@@ -29,7 +25,7 @@ namespace Csweb
             CheckColor();
             if (hex.Length != 6)
             {
-                throw new ArgumentException("Invalid RGB value!");
+                throw new ArgumentException("Invalid hex value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
         }
@@ -52,11 +48,11 @@ namespace Csweb
         }
         private string CheckLB()
         {
-            if (textCache == $"#{id} {{{Environment.NewLine}")
+            if (textCache == $"#{id} {{%^")
             {
                 return "";
             }
-            return Environment.NewLine;
+            return "%^";
         }
         private void CheckColor()
         {
@@ -67,6 +63,7 @@ namespace Csweb
         }
         internal string Render()
         {
+            textCache = textCache.Replace("%^", Environment.NewLine);
             return $"{textCache}{Environment.NewLine}}}";
         }
     }
