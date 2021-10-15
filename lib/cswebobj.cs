@@ -9,18 +9,23 @@ namespace Csweb
         private string path;
         internal string textCache;
         private string cssPath;
-        private List<idstyle> styles = new List<idstyle>();
+        private List<idstyle> idstyles = new List<idstyle>();
+        private List<estyle> estyles = new List<estyle>();
         public cswebobj(string path, string cssPath)
         {
             Timer.StartTimer();
             this.path = path;
             textCache = "";
             this.cssPath = cssPath;
-            Debug.CallCSWebEvent(new Log("[cswebobj] created cswebobj", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[cswebobj] created cswebobj", Timer.GetTime()));
+        }
+        public void AddStyle(estyle style)
+        {
+            estyles.Add(style);
         }
         public void AddStyle(idstyle style)
         {
-            styles.Add(style);
+            idstyles.Add(style);
         }
         public void AddText(string text, string id)
         {
@@ -37,7 +42,7 @@ namespace Csweb
             {
                 textCache = $"{textCache}%^    <p id=\"{id}\">{text}</p>";
             }
-            Debug.CallCSWebEvent(new Log("[cswebobj] added text element", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[cswebobj] added text element", Timer.GetTime()));
         }
         public void SetTitle(string title)
         {
@@ -47,7 +52,7 @@ namespace Csweb
                 throw new ArgumentException("Title cannot be null or empty!");
             }
             textCache = $"{textCache}%^    <title>{title}</title>";
-            Debug.CallCSWebEvent(new Log("[cswebobj] set title", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[cswebobj] set title", Timer.GetTime()));
         }
         public void AddImage(string path, Nullable<(int x, int y)> dimensions, string id)
         {
@@ -86,7 +91,7 @@ namespace Csweb
                     textCache = $"{textCache}%^    <img src=\"{path}\" id=\"{id}\"></img>";
                 }
             }
-            Debug.CallCSWebEvent(new Log("[cswebobj] added image element", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[cswebobj] added image element", Timer.GetTime()));
         }
         public void AddHeader(int number, string text, string id)
         {
@@ -107,13 +112,24 @@ namespace Csweb
             {
                 textCache = $"{textCache}%^    <h{number}>{text}</h{number}>";
             }
-            Debug.CallIDStyleEvent(new Log("[cswebobj] added header", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[cswebobj] added header", Timer.GetTime()));
         }
         public void Render()
         {
             Timer.StartTimer();
             string tempCache = "";
-            foreach (idstyle style in styles)
+            foreach (estyle style in estyles)
+            {
+                if (tempCache == "")
+                {
+                    tempCache = $"{tempCache}{style.Render()}{Environment.NewLine}";
+                }
+                else
+                {
+                    tempCache = $"{tempCache}{Environment.NewLine}{style.Render()}{Environment.NewLine}";
+                }
+            }
+            foreach (idstyle style in idstyles)
             {
                 if (tempCache == "")
                 {
@@ -128,7 +144,7 @@ namespace Csweb
             + $"{Environment.NewLine}<html>{Environment.NewLine}    <link rel=\"stylesheet\" href=\"{cssPath}\">"
             + $"{textCache.Replace("%^", Environment.NewLine)}{Environment.NewLine}</html>");
             Common.Change(cssPath, tempCache);
-            Debug.CallCSWebEvent(new Log("[cswebobj] rendered cswebobj", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[cswebobj] rendered cswebobj", Timer.GetTime()));
         }
     }
 }
