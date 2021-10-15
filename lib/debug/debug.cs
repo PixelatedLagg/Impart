@@ -1,6 +1,6 @@
 using System;
 
-namespace Csweb.Debug
+namespace Csweb
 {
     public static class Debug
     {

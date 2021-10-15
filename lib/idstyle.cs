@@ -14,7 +14,7 @@ namespace Csweb
             this.id = id;
             hasColor = false;
             textCache = $"#{id} {{%^";
-            Debug.Debug.CallIDStyleEvent(new Log("[idstyle] created idstyle", Timer.GetTime()));
+            Debug.CallIDStyleEvent(new Log("[idstyle] created idstyle", Timer.GetTime()));
         }
         public void AddColor(Color color)
         {
@@ -22,7 +22,7 @@ namespace Csweb
             CheckColor();
             textCache = $"{textCache}{CheckLB()}    color: {color.ToKnownColor()};";
             hasColor = true;
-            Debug.Debug.CallIDStyleEvent(new Log("[idstyle] added color (normal)", Timer.GetTime()));
+            Debug.CallIDStyleEvent(new Log("[idstyle] added color (normal)", Timer.GetTime()));
         }
         public void AddHexColor(string hex)
         {
@@ -33,7 +33,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid hex value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
-            Debug.Debug.CallIDStyleEvent(new Log("[idstyle] added color (hex)", Timer.GetTime()));
+            Debug.CallIDStyleEvent(new Log("[idstyle] added color (hex)", Timer.GetTime()));
         }
         public void AddRGBColor(int x, int y, int z)
         {
@@ -44,7 +44,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid RGB value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: rgb({x},{y},{z});";
-            Debug.Debug.CallIDStyleEvent(new Log("[idstyle] added color (rgb)", Timer.GetTime()));
+            Debug.CallIDStyleEvent(new Log("[idstyle] added color (rgb)", Timer.GetTime()));
         }
         public void AddAlign(string alignment)
         {
@@ -54,7 +54,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid alignment value!");
             }
             textCache = $"{textCache}{CheckLB()}    text-align: {alignment};";
-            Debug.Debug.CallIDStyleEvent(new Log("[idstyle] added alignment", Timer.GetTime()));
+            Debug.CallIDStyleEvent(new Log("[idstyle] added alignment", Timer.GetTime()));
         }
         private string CheckLB()
         {
