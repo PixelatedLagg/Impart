@@ -88,6 +88,27 @@ namespace Csweb
             }
             Debug.CallCSWebEvent(new Log("[cswebobj] added image element", Timer.GetTime()));
         }
+        public void AddHeader(int number, string text, string id)
+        {
+            Timer.StartTimer();
+            if (String.IsNullOrEmpty(text))
+            {
+                throw new ArgumentException("Text cannot be null of empty!");
+            }
+            if (number < 1 || number > 5)
+            {
+                throw new ArgumentException("Number must be between 1-5!");
+            }
+            if (id != null)
+            {
+                textCache = $"{textCache}%^    <h{number} id=\"{id}\">{text}</h{number}>";
+            }
+            else
+            {
+                textCache = $"{textCache}%^    <h{number}>{text}</h{number}>";
+            }
+            Debug.CallIDStyleEvent(new Log("[cswebobj] added header", Timer.GetTime()));
+        }
         public void Render()
         {
             Timer.StartTimer();
