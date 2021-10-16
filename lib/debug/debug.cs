@@ -30,7 +30,6 @@ namespace Csweb
                     return;
                 }
             }
-            Console.WriteLine(File.ReadAllText("DEBUG.txt"));
             ObjectEvent?.Invoke(log);
         }
     }
