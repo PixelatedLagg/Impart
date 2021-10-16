@@ -1,3 +1,5 @@
+using System.Net;
+using System.IO;
 using System;
 
 namespace Csweb
@@ -5,8 +7,30 @@ namespace Csweb
     public static class Debug
     {
         public static event Action<Log> ObjectEvent;
+        public static bool FileLogging = false;
+        private static string tempCache = "";
         internal static void CallObjectEvent(Log log)
         {
+            if (FileLogging)
+            {
+                if (!Common.ValidPath("DEBUG.txt", ""))
+                {
+                    File.Create("DEBUG.txt");
+                }
+                if (tempCache == "")
+                {
+                    tempCache = $"-- DEBUG FILE --{Environment.NewLine}{log.log} [{log.ms}ms]";
+                    Common.Write("DEBUG.txt", tempCache);
+                    return;
+                }
+                else
+                {
+                    tempCache = $"{tempCache}{Environment.NewLine}{log.log} [{log.ms}ms]";
+                    Common.Write("DEBUG.txt", tempCache);
+                    return;
+                }
+            }
+            Console.WriteLine(File.ReadAllText("DEBUG.txt"));
             ObjectEvent?.Invoke(log);
         }
     }

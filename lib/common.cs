@@ -15,6 +15,14 @@ namespace Csweb
                 _streamWriter.Close();
             }
         }
+        static internal void Write(string path, string text)
+        {
+            using (StreamWriter _streamWriter = new StreamWriter(path))
+            {
+                _streamWriter.Write(text);
+                _streamWriter.Close();
+            }
+        }
         static internal bool ValidPath(string path, string message)
         {
             try
