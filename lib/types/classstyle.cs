@@ -3,18 +3,18 @@ using System.Drawing;
 
 namespace Csweb
 {
-    public class idstyle
+    public class classstyle
     {
         private string textCache;
         private string id;
         private bool hasColor;
-        public idstyle(string id)
+        public classstyle(string id)
         {
             Timer.StartTimer();
             this.id = id;
             hasColor = false;
-            textCache = $"#{id} {{%^";
-            Debug.CallObjectEvent(new Log("[idstyle] created idstyle", Timer.GetTime()));
+            textCache = $".{id} {{%^";
+            Debug.CallObjectEvent(new Log("[classstyle] created classstyle", Timer.GetTime()));
         }
         public void AddColor(Color color)
         {
@@ -33,7 +33,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid hex value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
-            Debug.CallObjectEvent(new Log("[idstyle] added color (hex)", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[classstyle] added color (hex)", Timer.GetTime()));
         }
         public void AddRGBColor(int x, int y, int z)
         {
@@ -44,7 +44,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid RGB value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: rgb({x},{y},{z});";
-            Debug.CallObjectEvent(new Log("[idstyle] added color (rgb)", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[classstyle] added color (rgb)", Timer.GetTime()));
         }
         public void AddAlign(string alignment)
         {
@@ -54,11 +54,11 @@ namespace Csweb
                 throw new ArgumentException("Invalid alignment value!");
             }
             textCache = $"{textCache}{CheckLB()}    text-align: {alignment};";
-            Debug.CallObjectEvent(new Log("[idstyle] added alignment", Timer.GetTime()));
+            Debug.CallObjectEvent(new Log("[classstyle] added alignment", Timer.GetTime()));
         }
         private string CheckLB()
         {
-            if (textCache == $"#{id} {{%^")
+            if (textCache == $".{id} {{%^")
             {
                 return "";
             }

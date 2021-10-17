@@ -11,6 +11,7 @@ namespace Csweb
         private string cssPath;
         private List<idstyle> idstyles = new List<idstyle>();
         private List<estyle> estyles = new List<estyle>();
+        private List<classstyle> classstyles = new List<classstyle>();
         public cswebobj(string path, string cssPath)
         {
             Timer.StartTimer();
@@ -26,6 +27,10 @@ namespace Csweb
         public void AddStyle(idstyle style)
         {
             idstyles.Add(style);
+        }
+        public void AddStyle(classstyle style)
+        {
+            classstyles.Add(style);
         }
         public void AddText(string text, string id)
         {
@@ -119,6 +124,17 @@ namespace Csweb
             Timer.StartTimer();
             string tempCache = "";
             foreach (estyle style in estyles)
+            {
+                if (tempCache == "")
+                {
+                    tempCache = $"{tempCache}{style.Render()}{Environment.NewLine}";
+                }
+                else
+                {
+                    tempCache = $"{tempCache}{Environment.NewLine}{style.Render()}{Environment.NewLine}";
+                }
+            }
+            foreach (classstyle style in classstyles)
             {
                 if (tempCache == "")
                 {

@@ -4,11 +4,10 @@ namespace Csweb
 {
     static internal class Common
     {
-        private static void Delete(string path) => File.WriteAllText(path, "");
         static internal string GetAllText(string path) => File.ReadAllText(path);
         static internal void Change(string path, string text)
         {
-            Delete(path);
+            File.WriteAllText(path, "");
             using (StreamWriter _streamWriter = new StreamWriter(path))
             {
                 _streamWriter.Write(text);
