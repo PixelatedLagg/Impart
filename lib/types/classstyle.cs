@@ -14,7 +14,7 @@ namespace Csweb
             this.id = id;
             hasColor = false;
             textCache = $".{id} {{%^";
-            Debug.CallObjectEvent(new Log("[classstyle] created classstyle", Timer.GetTime()));
+            Debug.CallObjectEvent("[classstyle] created classstyle");
         }
         public void AddColor(Color color)
         {
@@ -22,7 +22,7 @@ namespace Csweb
             CheckColor();
             textCache = $"{textCache}{CheckLB()}    color: {color.ToKnownColor()};";
             hasColor = true;
-            Debug.CallObjectEvent(new Log("[idstyle] added color (normal)", Timer.GetTime()));
+            Debug.CallObjectEvent("[idstyle] added color (normal)");
         }
         public void AddHexColor(string hex)
         {
@@ -33,7 +33,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid hex value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
-            Debug.CallObjectEvent(new Log("[classstyle] added color (hex)", Timer.GetTime()));
+            Debug.CallObjectEvent("[classstyle] added color (hex)");
         }
         public void AddRGBColor(int x, int y, int z)
         {
@@ -44,7 +44,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid RGB value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: rgb({x},{y},{z});";
-            Debug.CallObjectEvent(new Log("[classstyle] added color (rgb)", Timer.GetTime()));
+            Debug.CallObjectEvent("[classstyle] added color (rgb)");
         }
         public void AddAlign(string alignment)
         {
@@ -54,7 +54,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid alignment value!");
             }
             textCache = $"{textCache}{CheckLB()}    text-align: {alignment};";
-            Debug.CallObjectEvent(new Log("[classstyle] added alignment", Timer.GetTime()));
+            Debug.CallObjectEvent("[classstyle] added alignment");
         }
         private string CheckLB()
         {

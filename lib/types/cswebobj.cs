@@ -19,7 +19,7 @@ namespace Csweb
             this.path = path;
             textCache = "";
             this.cssPath = cssPath;
-            Debug.CallObjectEvent(new Log("[cswebobj] created cswebobj", Timer.GetTime()));
+            Debug.CallObjectEvent("[cswebobj] created cswebobj");
         }
         public void AddStyle(estyle style)
         {
@@ -48,7 +48,7 @@ namespace Csweb
             {
                 textCache = $"{textCache}%^    <p id=\"{id}\">{text}</p>";
             }
-            Debug.CallObjectEvent(new Log("[cswebobj] added text element", Timer.GetTime()));
+            Debug.CallObjectEvent("[cswebobj] added text element");
         }
         public void SetTitle(string title)
         {
@@ -58,7 +58,7 @@ namespace Csweb
                 throw new ArgumentException("Title cannot be null or empty!");
             }
             textCache = $"{textCache}%^    <title>{title}</title>";
-            Debug.CallObjectEvent(new Log("[cswebobj] set title", Timer.GetTime()));
+            Debug.CallObjectEvent("[cswebobj] set title");
         }
         public void AddImage(string path, Nullable<(int x, int y)> dimensions, string id)
         {
@@ -97,7 +97,7 @@ namespace Csweb
                     textCache = $"{textCache}%^    <img src=\"{path}\" id=\"{id}\"></img>";
                 }
             }
-            Debug.CallObjectEvent(new Log("[cswebobj] added image element", Timer.GetTime()));
+            Debug.CallObjectEvent("[cswebobj] added image element");
         }
         public void AddHeader(int number, string text, string id)
         {
@@ -118,7 +118,7 @@ namespace Csweb
             {
                 textCache = $"{textCache}%^    <h{number}>{text}</h{number}>";
             }
-            Debug.CallObjectEvent(new Log("[cswebobj] added header", Timer.GetTime()));
+            Debug.CallObjectEvent("[cswebobj] added header");
         }
         public void Render()
         {
@@ -161,7 +161,7 @@ namespace Csweb
             + $"{Environment.NewLine}<html>{Environment.NewLine}    <link rel=\"stylesheet\" href=\"{cssPath}\">"
             + $"{textCache.Replace("%^", Environment.NewLine)}{Environment.NewLine}</html>");
             Common.Change(cssPath, tempCache);
-            Debug.CallObjectEvent(new Log("[cswebobj] rendered cswebobj", Timer.GetTime()));
+            Debug.CallObjectEvent("[cswebobj] rendered cswebobj");
         }
     }
 }

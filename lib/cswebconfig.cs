@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Reflection;
 
 namespace Csweb
 {
@@ -13,6 +12,7 @@ namespace Csweb
             {
                 using (StreamWriter writer = new StreamWriter("config.csweb"))
                 {
+                    writer.Write("<Debug>false</Debug>");
                     writer.Write("<DebugFileWrite>false</DebugFileWrite>");
                     writer.Close();
                 }
@@ -21,19 +21,21 @@ namespace Csweb
             {
                 using (StreamReader reader = new StreamReader("config.csweb"))
                 {
-                    string temp = reader.ReadLine().Replace("<DebugFileWrite>", "").Replace("</DebugFileWrite>", "");
-                    if (temp.Contains("true") || temp.Contains("false"))
+                    string debug = reader.ReadLine().Replace("<Debug>", "").Replace("</Debug>", "");
+                    string debugFileWrite = reader.ReadLine().Replace("<DebugFileWrite>", "").Replace("</DebugFileWrite>", "");
+                    if ((debugFileWrite.Contains("true") || debugFileWrite.Contains("false")) && (debug.Contains("true") || debug.Contains("false")))
                     {
-                        Debug.FileLogging = Convert.ToBoolean(temp);
+                        Debug.debug = Convert.ToBoolean(debug);
+                        Debug.FileLogging = Convert.ToBoolean(debugFileWrite);
                     }
                     else
                     {
-                        throw new ArgumentException("Value must be \"true\" or \"false\"!");
+                        throw new ArgumentException("Debug and DebugFileWrite values must be \"true\" or \"false\"!");
                     }
                     reader.Close();
                 }
             }
-            Debug.CallObjectEvent(new Log("[csweb] initialized config file", Timer.GetTime()));
+            Debug.CallObjectEvent("[csweb] initialized config file");
         }
     }
 }

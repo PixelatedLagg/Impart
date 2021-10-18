@@ -18,7 +18,7 @@ namespace Csweb
             this.element = element;
             textCache = $"{element} {{%^";
             hasColor = false;
-            Debug.CallObjectEvent(new Log("[estyle] created estyle", Timer.GetTime()));
+            Debug.CallObjectEvent("[estyle] created estyle");
         }
         public void AddColor(Color color)
         {
@@ -26,7 +26,7 @@ namespace Csweb
             CheckColor();
             textCache = $"{textCache}{CheckLB()}    color: {color.ToKnownColor()};";
             hasColor = true;
-            Debug.CallObjectEvent(new Log("[estyle] added color (normal)", Timer.GetTime()));
+            Debug.CallObjectEvent("[estyle] added color (normal)");
         }
         public void AddHexColor(string hex)
         {
@@ -37,7 +37,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid hex value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
-            Debug.CallObjectEvent(new Log("[estyle] added color (hex)", Timer.GetTime()));
+            Debug.CallObjectEvent("[estyle] added color (hex)");
         }
         public void AddRGBColor(int x, int y, int z)
         {
@@ -48,7 +48,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid RGB value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: rgb({x},{y},{z});";
-            Debug.CallObjectEvent(new Log("[estyle] added color (rgb)", Timer.GetTime()));
+            Debug.CallObjectEvent("[estyle] added color (rgb)");
         }
         public void AddAlign(string alignment)
         {
@@ -58,7 +58,7 @@ namespace Csweb
                 throw new ArgumentException("Invalid alignment value!");
             }
             textCache = $"{textCache}{CheckLB()}    text-align: {alignment};";
-            Debug.CallObjectEvent(new Log("[estyle] added alignment", Timer.GetTime()));
+            Debug.CallObjectEvent("[estyle] added alignment");
         }
         private string CheckLB()
         {

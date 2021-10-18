@@ -7,6 +7,10 @@ namespace Csweb
         private static Stopwatch time;
         internal static void StartTimer()
         {
+            if (!Debug.debug)
+            {
+                return;
+            }
             time = new Stopwatch();
             time.Start();
         }
