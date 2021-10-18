@@ -7,7 +7,7 @@ namespace Csweb
     public static class Debug
     {
         public static event Action<Log> ObjectEvent;
-        public static bool FileLogging = false;
+        internal static bool FileLogging;
         private static string tempCache = "";
         internal static void CallObjectEvent(Log log)
         {

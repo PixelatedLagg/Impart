@@ -14,6 +14,7 @@ namespace Csweb
         private List<classstyle> classstyles = new List<classstyle>();
         public cswebobj(string path, string cssPath)
         {
+            CSwebconfig.Initialize();
             Timer.StartTimer();
             this.path = path;
             textCache = "";
