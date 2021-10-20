@@ -1,14 +1,15 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Csweb.Templates;
 
 namespace Csweb
 {
     public class cswebobj
     {
-        private string path;
+        internal string path;
         internal string textCache;
-        private string cssPath;
+        internal string cssPath;
         private List<idstyle> idstyles = new List<idstyle>();
         private List<estyle> estyles = new List<estyle>();
         private List<classstyle> classstyles = new List<classstyle>();
@@ -119,6 +120,18 @@ namespace Csweb
                 textCache = $"{textCache}%^    <h{number}>{text}</h{number}>";
             }
             Debug.CallObjectEvent("[cswebobj] added header");
+        }
+        public void AddTemplate(Template templates, object[] args = null)
+        {
+            Templates.Templates.RenderTemplate(templates, args);
+        }
+        public void AddCustomTemplate(string name)
+        {
+            if (!Templates.Templates.CustomTemplates.ContainsKey(name))
+            {
+                throw new ArgumentException("Template does not exist!");
+            }
+            textCache = $"{textCache}{Templates.Templates.CustomTemplates[name]}";
         }
         public void Render()
         {
