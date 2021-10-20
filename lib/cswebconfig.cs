@@ -30,7 +30,7 @@ namespace Csweb
                     }
                     else
                     {
-                        throw new ArgumentException("Debug and DebugFileWrite values must be \"true\" or \"false\"!");
+                        throw new ConfigError("Debug and DebugFileWrite values must be \"true\" or \"false\"!");
                     }
                     reader.Close();
                 }

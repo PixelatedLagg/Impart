@@ -29,7 +29,7 @@ namespace Csweb
             colorCheck++;
             if (hex.Length != 6)
             {
-                throw new ArgumentException("Invalid hex value!");
+                throw new IDStyleError("Invalid hex value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
             Debug.CallObjectEvent("[idstyle] added color (hex)");
@@ -40,7 +40,7 @@ namespace Csweb
             colorCheck++;
             if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
             {
-                throw new ArgumentException("Invalid RGB value!");
+                throw new IDStyleError("Invalid RGB value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: rgb({x},{y},{z});";
             Debug.CallObjectEvent("[idstyle] added color (rgb)");
@@ -50,7 +50,7 @@ namespace Csweb
             Timer.StartTimer();
             if (!Alignment.Any(alignment))
             {
-                throw new ArgumentException("Invalid alignment value!");
+                throw new IDStyleError("Invalid alignment value!");
             }
             textCache = $"{textCache}{CheckLB()}    text-align: {alignment};";
             Debug.CallObjectEvent("[idstyle] added alignment");
@@ -67,7 +67,7 @@ namespace Csweb
         {
             if (colorCheck > 1)
             {
-                throw new ArgumentException("Cannot assign multiple color instances!");
+                throw new IDStyleError("Cannot assign multiple color instances!");
             }
             textCache = textCache.Replace("%^", Environment.NewLine);
             return $"{textCache}{Environment.NewLine}}}";

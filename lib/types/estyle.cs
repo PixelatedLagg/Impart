@@ -13,7 +13,7 @@ namespace Csweb
             Timer.StartTimer();
             if (!Elements.Any(element))
             {
-                throw new ArgumentException("Invalid element value!");
+                throw new EStyleError("Invalid element value!");
             }
             this.element = element;
             textCache = $"{element} {{%^";
@@ -34,7 +34,7 @@ namespace Csweb
             CheckColor();
             if (hex.Length != 6)
             {
-                throw new ArgumentException("Invalid hex value!");
+                throw new EStyleError("Invalid hex value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: #{hex};";
             Debug.CallObjectEvent("[estyle] added color (hex)");
@@ -45,7 +45,7 @@ namespace Csweb
             CheckColor();
             if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
             {
-                throw new ArgumentException("Invalid RGB value!");
+                throw new EStyleError("Invalid RGB value!");
             }
             textCache = $"{textCache}{CheckLB()}    color: rgb({x},{y},{z});";
             Debug.CallObjectEvent("[estyle] added color (rgb)");
@@ -55,7 +55,7 @@ namespace Csweb
             Timer.StartTimer();
             if (!Alignment.Any(alignment))
             {
-                throw new ArgumentException("Invalid alignment value!");
+                throw new EStyleError("Invalid alignment value!");
             }
             textCache = $"{textCache}{CheckLB()}    text-align: {alignment};";
             Debug.CallObjectEvent("[estyle] added alignment");
@@ -72,7 +72,7 @@ namespace Csweb
         {
             if (hasColor)
             {
-                throw new ArgumentException("Style already has color!");
+                throw new EStyleError("Style already has color!");
             }
         }
         internal string Render()

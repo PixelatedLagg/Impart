@@ -39,7 +39,7 @@ namespace Csweb
             Timer.StartTimer();
             if (String.IsNullOrEmpty(text)) 
             {
-                throw new ArgumentException("Text cannot be empty or null!");
+                throw new CSWebObjError("Text cannot be empty or null!", this);
             }
             if (String.IsNullOrEmpty(id))
             {
@@ -56,7 +56,7 @@ namespace Csweb
             Timer.StartTimer();
             if (String.IsNullOrEmpty(title))
             {
-                throw new ArgumentException("Title cannot be null or empty!");
+                throw new CSWebObjError("Title cannot be null or empty!", this);
             }
             textCache = $"{textCache}%^    <title>{title}</title>";
             Debug.CallObjectEvent("[cswebobj] set title");
@@ -66,15 +66,15 @@ namespace Csweb
             Timer.StartTimer();
             if (String.IsNullOrEmpty(path)) 
             {
-                throw new ArgumentException("Image path cannot be empty or null!");
+                throw new CSWebObjError("Image path cannot be empty or null!", this);
             }
             if (!File.Exists(path))
             {
-                throw new FileNotFoundException("Image file not found!");
+                throw new CSWebObjError("Image file not found!", this);
             }
             if (!Common.IsImage(Path.GetExtension(path)))
             {
-                throw new ArgumentException("Unsupported file extension!");
+                throw new CSWebObjError("Unsupported file extension!", this);
             }
             if (dimensions != null)
             {
@@ -105,11 +105,11 @@ namespace Csweb
             Timer.StartTimer();
             if (String.IsNullOrEmpty(text))
             {
-                throw new ArgumentException("Text cannot be null of empty!");
+                throw new CSWebObjError("Text cannot be null of empty!", this);
             }
             if (number < 1 || number > 5)
             {
-                throw new ArgumentException("Number must be between 1-5!");
+                throw new CSWebObjError("Number must be between 1-5!", this);
             }
             if (id != null)
             {
@@ -129,7 +129,7 @@ namespace Csweb
         {
             if (!Templates.Templates.CustomTemplates.ContainsKey(name))
             {
-                throw new ArgumentException("Template does not exist!");
+                throw new TemplateError("Template does not exist!");
             }
             textCache = $"{textCache}{Templates.Templates.CustomTemplates[name]}";
         }
