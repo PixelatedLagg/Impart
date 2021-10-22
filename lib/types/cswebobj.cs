@@ -106,34 +106,39 @@ namespace Csweb
             }
             Debug.CallObjectEvent("[cswebobj] added image element");
         }
-        public void AddHeader(int number, string text, string id = null)
+        public void AddHeader(Header header)
         {
             Timer.StartTimer();
-            if (String.IsNullOrEmpty(text))
+            if (header.id != null)
             {
-                throw new CSWebObjError("Text cannot be null of empty!", this);
-            }
-            if (number < 1 || number > 5)
-            {
-                throw new CSWebObjError("Number must be between 1-5!", this);
-            }
-            if (id != null)
-            {
-                textCache = $"{textCache}%^    <h{number} id=\"{id}\">{text}</h{number}>";
+                textCache = $"{textCache}%^    <h{header.num} id=\"{header.id}\">{header.text}</h{header.num}>";
             }
             else
             {
-                textCache = $"{textCache}%^    <h{number}>{text}</h{number}>";
+                textCache = $"{textCache}%^    <h{header.num}>{header.text}</h{header.num}>";
             }
             Debug.CallObjectEvent("[cswebobj] added header");
         }
-        public void AddLink(string text, string link)
+        public void AddLink(Link link)
         {
-            if (String.IsNullOrEmpty(text) || String.IsNullOrEmpty(link))
+            if (link.image != null)
             {
-                throw new CSWebObjError("Text of link cannot be null or empty!", this);
+                switch (link.id, link.image.id)
+                {
+                    case (null, null):
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <img src=\"{link.image.path}\">%^    </a>";
+                        break;
+                    case (string, string) a when a.Item1 != null && a.Item2 != null:
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <img src=\"{link.image.path}\" id=\"{link.image.id}\">%^    </a>";
+                        break;
+                    case (string, string) b when b.Item1 == null && b.Item2 != null:
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <img src=\"{link.image.path}\" id=\"{link.image.id}\">%^    </a>";
+                        break;
+                    case (string, string) c when c.Item1 != null && c.Item2 == null:
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <img src=\"{link.image.path}\">%^    </a>";
+                        break;
+                }
             }
-            textCache = $"{textCache}%^    <a href=\"{link}\">{text}</a>";
         }
         public void AddTable(int rowNum, params string[] obj)
         {
