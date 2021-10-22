@@ -127,6 +127,14 @@ namespace Csweb
             }
             Debug.CallObjectEvent("[cswebobj] added header");
         }
+        public void AddLink(string text, string link)
+        {
+            if (String.IsNullOrEmpty(text) || String.IsNullOrEmpty(link))
+            {
+                throw new CSWebObjError("Text of link cannot be null or empty!", this);
+            }
+            textCache = $"{textCache}%^    <a href=\"{link}\">{text}</a>";
+        }
         public void AddTable(int rowNum, params string[] obj)
         {
             Timer.StartTimer();
@@ -162,9 +170,6 @@ namespace Csweb
                     }
                     tempCache = $"{tempCache}%^        </tr>"; 
                 }
-                textCache = $"{textCache}{tempCache}%^    </table>";
-                Debug.CallObjectEvent("[cswebobj] added table");
-                return;
             }
             int currentObj = 0;
             for (int a = 0; a < vertRowNum; a++)
