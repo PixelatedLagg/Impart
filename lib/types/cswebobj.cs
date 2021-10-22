@@ -129,6 +129,7 @@ namespace Csweb
         }
         public void AddTable(int rowNum, params string[] obj)
         {
+            Timer.StartTimer();
             if (rowNum > obj.Length)
             {
                 throw new CSWebObjError("Number of table rows cannot be bigger than number of table entries!", this);
@@ -140,7 +141,31 @@ namespace Csweb
                 tempCache = $"{tempCache}%^            <th>{obj[x]}</th>";
             }
             tempCache = $"{tempCache}%^        </tr>"; 
-            int vertRowNum = (int)Math.Round(Convert.ToDouble((obj.Length - rowNum) / rowNum));
+            int vertRowNum = (int)Math.Round(Convert.ToDouble(((double)obj.Length - (double)rowNum) / (double)rowNum), MidpointRounding.AwayFromZero);
+            if ((obj.Length - rowNum) % rowNum > 0)
+            {
+                int _currentobj = 0;
+                for (int a = 0; a < vertRowNum + 1; a++)
+                {
+                    tempCache = $"{tempCache}%^        <tr>";
+                    for (int x = 0; x < rowNum; x++)
+                    {
+                        if (obj.Length <= rowNum + _currentobj)
+                        {
+                            tempCache = $"{tempCache}%^        </tr>"; 
+                            textCache = $"{textCache}{tempCache}%^    </table>";
+                            Debug.CallObjectEvent("[cswebobj] added table");
+                            return;
+                        }
+                        tempCache = $"{tempCache}%^            <td>{obj[rowNum + _currentobj]}</td>";
+                        _currentobj++;
+                    }
+                    tempCache = $"{tempCache}%^        </tr>"; 
+                }
+                textCache = $"{textCache}{tempCache}%^    </table>";
+                Debug.CallObjectEvent("[cswebobj] added table");
+                return;
+            }
             int currentObj = 0;
             for (int a = 0; a < vertRowNum; a++)
             {
@@ -153,18 +178,23 @@ namespace Csweb
                 tempCache = $"{tempCache}%^        </tr>"; 
             }
             textCache = $"{textCache}{tempCache}%^    </table>";
+            Debug.CallObjectEvent("[cswebobj] added table");
         }
         public void AddTemplate(Template templates, string[] args = null)
         {
-            textCache = $"{textCache}%^    {Templates.Templates.RenderTemplate(templates, args)}";
+            Timer.StartTimer();
+            textCache = $"{textCache}    {Templates.Templates.RenderTemplate(templates, args)}";
+            Debug.CallObjectEvent("[cswebobj] added template (generic)");
         }
         public void AddCustomTemplate(string name)
         {
+            Timer.StartTimer();
             if (!Templates.Templates.CustomTemplates.ContainsKey(name))
             {
                 throw new TemplateError("Template does not exist!");
             }
             textCache = $"{textCache}{Templates.Templates.CustomTemplates[name]}";
+            Debug.CallObjectEvent("[cswebobj] added template (custom)");
         }
         public void Render()
         {
