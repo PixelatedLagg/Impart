@@ -127,6 +127,33 @@ namespace Csweb
             }
             Debug.CallObjectEvent("[cswebobj] added header");
         }
+        public void AddTable(int rowNum, params string[] obj)
+        {
+            if (rowNum > obj.Length)
+            {
+                throw new CSWebObjError("Number of table rows cannot be bigger than number of table entries!", this);
+            }
+            string tempCache = "%^    <table>";
+            tempCache = $"{tempCache}%^        <tr>";
+            for (int x = 0; x < rowNum; x++)
+            {
+                tempCache = $"{tempCache}%^            <th>{obj[x]}</th>";
+            }
+            tempCache = $"{tempCache}%^        </tr>"; 
+            int vertRowNum = (int)Math.Round(Convert.ToDouble((obj.Length - rowNum) / rowNum));
+            int currentObj = 0;
+            for (int a = 0; a < vertRowNum; a++)
+            {
+                tempCache = $"{tempCache}%^        <tr>";
+                for (int x = 0; x < rowNum; x++)
+                {
+                    tempCache = $"{tempCache}%^            <td>{obj[rowNum + currentObj]}</td>";
+                    currentObj++;
+                }
+                tempCache = $"{tempCache}%^        </tr>"; 
+            }
+            textCache = $"{textCache}{tempCache}%^    </table>";
+        }
         public void AddTemplate(Template templates, string[] args = null)
         {
             textCache = $"{textCache}%^    {Templates.Templates.RenderTemplate(templates, args)}";
