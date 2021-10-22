@@ -139,6 +139,24 @@ namespace Csweb
                         break;
                 }
             }
+            else
+            {
+                switch (link.id, link.text.id)
+                {
+                    case (null, null):
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <p>{link.text.text}</p>%^    </a>";
+                        break;
+                    case (string, string) a when a.Item1 != null && a.Item2 != null:
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <p id=\"{link.image.id}\">{link.text.text}</p>%^    </a>";
+                        break;
+                    case (string, string) b when b.Item1 == null && b.Item2 != null:
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <p id=\"{link.image.id}\">{link.text.text}</p>%^    </a>";
+                        break;
+                    case (string, string) c when c.Item1 != null && c.Item2 == null:
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <p>{link.text.text}</p>%^    </a>";
+                        break;
+                }
+            }
         }
         public void AddTable(int rowNum, params string[] obj)
         {

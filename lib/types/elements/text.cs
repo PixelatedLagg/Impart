@@ -1,3 +1,5 @@
+using System;
+
 namespace Csweb
 {
     public class Text
@@ -20,6 +22,10 @@ namespace Csweb
         }
         public Text(string text, string id = null)
         {
+            if (String.IsNullOrEmpty(text))
+            {
+                throw new TextError("Text cannot be null or empty!", null);
+            }
             this._text = text;
             this._id = id;
         }

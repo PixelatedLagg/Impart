@@ -27,4 +27,20 @@ namespace Csweb
     {
         internal ConfigError(string error) : base($"{{ Error: ({error}) Trace: (config.csweb) }}") {}
     }
+    internal class TextError : Exception
+    {
+        internal TextError(string error, Text text) : base($"{{ Error: ({error}) Trace: ({text}) }}") {}
+    }
+    internal class ImageError : Exception
+    {
+        internal ImageError(string error, Image image) : base($"{{ Error: ({error}) Trace: ({image}) }}") {}
+    }
+    internal class LinkError : Exception
+    {
+        internal LinkError(string error, Link link) : base($"{{ Error: ({error}) Trace: ({link}) }}") {}
+    }
+    internal class HeaderError : Exception
+    {
+        internal HeaderError(string error, Header header) : base($"{{ Error: ({error}) Trace: ({header}) }}") {}
+    }
 }

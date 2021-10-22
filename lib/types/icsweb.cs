@@ -14,13 +14,13 @@ namespace Csweb
         {
             return new Header(num, text, id);
         }
-        public static Link Link(Text text, string id = null)
+        public static Link Link(Text text, string path, string id = null)
         {
-            return new Link(text, id);
+            return new Link(text, path, id);
         }
-        public static Link Link(Image image, string id = null)
+        public static Link Link(Image image, string path, string id = null)
         {
-            return new Link(image, id);
+            return new Link(image, path, id);
         }
     }
 }
