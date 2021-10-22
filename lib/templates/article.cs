@@ -5,14 +5,24 @@ namespace Csweb.Templates
 {
     internal static class Article
     {
-        internal static string Render(object[] args = null)
+        internal static string Render(string[] args = null)
         {
             string textCache = "";
-            foreach (object obj in args)
+            bool header = true;
+            foreach (string obj in args)
             {
-                textCache = $"{textCache}";
+                if (header)
+                {
+                    textCache = $"{textCache}%^    <h1>{obj}</h1>";
+                    header = false;
+                }
+                else
+                {
+                    textCache = $"{textCache}%^    <p>{obj}</p>";
+                    header = true;
+                }
             }
-            return null;
+            return textCache;
         }
     }
 }

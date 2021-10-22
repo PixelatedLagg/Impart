@@ -11,7 +11,7 @@ namespace Csweb.Templates
         {
             CustomTemplates.Add(name, obj.textCache.Replace($"<html>{Environment.NewLine}    <link rel=\"stylesheet\" href=\"{obj.cssPath}\">", "").Replace("</html>", ""));
         }
-        static internal string RenderTemplate(Template templates, object[] args = null)
+        static internal string RenderTemplate(Template templates, string[] args = null)
         {
             switch (templates)
             {

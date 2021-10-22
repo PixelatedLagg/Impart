@@ -24,17 +24,23 @@ namespace Csweb
         }
         public void AddStyle(estyle style)
         {
+            Timer.StartTimer();
             estyles.Add(style);
+            Debug.CallObjectEvent("[cswebobj] added style (estyle)");
         }
         public void AddStyle(idstyle style)
         {
+            Timer.StartTimer();
             idstyles.Add(style);
+            Debug.CallObjectEvent("[cswebobj] added style (idstyle)");
         }
         public void AddStyle(classstyle style)
         {
+            Timer.StartTimer();
             classstyles.Add(style);
+            Debug.CallObjectEvent("[cswebobj] added style (classstyle)");
         }
-        public void AddText(string text, string id)
+        public void AddText(string text, string id = null)
         {
             Timer.StartTimer();
             if (String.IsNullOrEmpty(text)) 
@@ -61,7 +67,7 @@ namespace Csweb
             textCache = $"{textCache}%^    <title>{title}</title>";
             Debug.CallObjectEvent("[cswebobj] set title");
         }
-        public void AddImage(string path, Nullable<(int x, int y)> dimensions, string id)
+        public void AddImage(string path, Nullable<(int x, int y)> dimensions, string id = null)
         {
             Timer.StartTimer();
             if (String.IsNullOrEmpty(path)) 
@@ -100,7 +106,7 @@ namespace Csweb
             }
             Debug.CallObjectEvent("[cswebobj] added image element");
         }
-        public void AddHeader(int number, string text, string id)
+        public void AddHeader(int number, string text, string id = null)
         {
             Timer.StartTimer();
             if (String.IsNullOrEmpty(text))
@@ -121,9 +127,9 @@ namespace Csweb
             }
             Debug.CallObjectEvent("[cswebobj] added header");
         }
-        public void AddTemplate(Template templates, object[] args = null)
+        public void AddTemplate(Template templates, string[] args = null)
         {
-            Templates.Templates.RenderTemplate(templates, args);
+            textCache = $"{textCache}%^    {Templates.Templates.RenderTemplate(templates, args)}";
         }
         public void AddCustomTemplate(string name)
         {
