@@ -40,20 +40,16 @@ namespace Csweb
             classstyles.Add(style);
             Debug.CallObjectEvent("[cswebobj] added style (classstyle)");
         }
-        public void AddText(string text, string id = null)
+        public void AddText(Text text)
         {
             Timer.StartTimer();
-            if (String.IsNullOrEmpty(text)) 
+            if (text.id == null)
             {
-                throw new CSWebObjError("Text cannot be empty or null!", this);
-            }
-            if (String.IsNullOrEmpty(id))
-            {
-                textCache = $"{textCache}%^    <p>{text}</p>";
+                textCache = $"{textCache}%^    <p>{text.text}</p>";
             }
             else
             {
-                textCache = $"{textCache}%^    <p id=\"{id}\">{text}</p>";
+                textCache = $"{textCache}%^    <p id=\"{text.id}\">{text.text}</p>";
             }
             Debug.CallObjectEvent("[cswebobj] added text element");
         }
@@ -67,42 +63,16 @@ namespace Csweb
             textCache = $"{textCache}%^    <title>{title}</title>";
             Debug.CallObjectEvent("[cswebobj] set title");
         }
-        public void AddImage(string path, Nullable<(int x, int y)> dimensions, string id = null)
+        public void AddImage(Image image)
         {
             Timer.StartTimer();
-            if (String.IsNullOrEmpty(path)) 
+            if (image.id == null)
             {
-                throw new CSWebObjError("Image path cannot be empty or null!", this);
-            }
-            if (!File.Exists(path))
-            {
-                throw new CSWebObjError("Image file not found!", this);
-            }
-            if (!Common.IsImage(Path.GetExtension(path)))
-            {
-                throw new CSWebObjError("Unsupported file extension!", this);
-            }
-            if (dimensions != null)
-            {
-                if (String.IsNullOrEmpty(id))
-                {
-                    textCache = $"{textCache}%^    <img src=\"{path}\" width=\"{dimensions.Value.x}\" height=\"{dimensions.Value.y}\"></img>";
-                }
-                else 
-                {
-                    textCache = $"{textCache}%^    <img src=\"{path}\" id=\"{id}\" width=\"{dimensions.Value.x}\" height=\"{dimensions.Value.y}\"></img>";
-                }
+                textCache = $"{textCache}%^    <img src=\"{image.path}\" {image.style}>";
             }
             else
             {
-                if (String.IsNullOrEmpty(id))
-                {
-                    textCache = $"{textCache}%^    <img src=\"{path}\"></img>";
-                }
-                else 
-                {
-                    textCache = $"{textCache}%^    <img src=\"{path}\" id=\"{id}\"></img>";
-                }
+                textCache = $"{textCache}%^    <img src=\"{image.path}\" id=\"{image.id}\" {image.style}>";
             }
             Debug.CallObjectEvent("[cswebobj] added image element");
         }
@@ -126,16 +96,16 @@ namespace Csweb
                 switch (link.id, link.image.id)
                 {
                     case (null, null):
-                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <img src=\"{link.image.path}\">%^    </a>";
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <img src=\"{link.image.path}\" {link.image.style}>%^    </a>";
                         break;
                     case (string, string) a when a.Item1 != null && a.Item2 != null:
-                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <img src=\"{link.image.path}\" id=\"{link.image.id}\">%^    </a>";
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <img src=\"{link.image.path}\" id=\"{link.image.id}\" {link.image.style}>%^    </a>";
                         break;
                     case (string, string) b when b.Item1 == null && b.Item2 != null:
-                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <img src=\"{link.image.path}\" id=\"{link.image.id}\">%^    </a>";
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\">%^        <img src=\"{link.image.path}\" id=\"{link.image.id}\" {link.image.style}>%^    </a>";
                         break;
                     case (string, string) c when c.Item1 != null && c.Item2 == null:
-                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <img src=\"{link.image.path}\">%^    </a>";
+                        textCache = $"{textCache}%^    <a href=\"{link.path}\" id=\"{link.id}\">%^        <img src=\"{link.image.path}\" {link.image.style}>%^    </a>";
                         break;
                 }
             }
