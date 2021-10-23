@@ -9,11 +9,23 @@ namespace Csweb
         private string _path;
         private string _id;
         private string _style;
+        private string _attributes;
+        internal string attributes 
+        {
+            get
+            {
+                return _attributes;
+            }
+        }
         internal string style 
         {
             get
             {
-                return $"{_style}\"";
+                if (_style == "")
+                {
+                    return "";
+                }
+                return $" style=\"{_style}\"";
             }
         }
         public string path 
@@ -53,7 +65,7 @@ namespace Csweb
                 this._id = id;
             }
             this._path = path;
-            _style = "style=\"";
+            _style = "";
         }
         public Image SetSize(int x, int y)
         {
@@ -61,7 +73,7 @@ namespace Csweb
             {
                 throw new ImageError("Width and height values must be positive!", this);
             }
-            _style = $"{_style} width: {x}; height: {y};";
+            _attributes = $"{_attributes} width=\"{x}\" height=\"{y}\"";
             return this;
         }
         public Image SetBorder(int pixels, string border, Color color)

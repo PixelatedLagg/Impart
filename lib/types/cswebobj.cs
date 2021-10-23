@@ -68,11 +68,11 @@ namespace Csweb
             Timer.StartTimer();
             if (image.id == null)
             {
-                textCache = $"{textCache}%^    <img src=\"{image.path}\" {image.style}>";
+                textCache = $"{textCache}%^    <img src=\"{image.path}\"{image.attributes}{image.style}>";
             }
             else
             {
-                textCache = $"{textCache}%^    <img src=\"{image.path}\" id=\"{image.id}\" {image.style}>";
+                textCache = $"{textCache}%^    <img src=\"{image.path}\" id=\"{image.id}\"{image.attributes}{image.style}>";
             }
             Debug.CallObjectEvent("[cswebobj] added image element");
         }
