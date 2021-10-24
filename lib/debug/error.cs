@@ -7,17 +7,9 @@ namespace Csweb
     {
         internal CSWebObjError(string error, cswebobj obj) : base($"{{ Error: ({error}) Trace: ({obj.path}, {obj.cssPath}) }}") {}
     }
-    internal class ClassStyleError : Exception
+    internal class StyleError : Exception
     {
-        internal ClassStyleError(string error) : base($"{{ Error: ({error}) }}") {}
-    }
-    internal class EStyleError : Exception
-    {
-        internal EStyleError(string error) : base($"{{ Error: ({error}) }}") {}
-    }
-    internal class IDStyleError : Exception
-    {
-        internal IDStyleError(string error) : base($"{{ Error: ({error}) }}") {}
+        internal StyleError(string error, style style) : base($"{{ Error: ({error}) Trace: ({style}) }}") {}
     }
     internal class TemplateError : Exception
     {

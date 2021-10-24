@@ -25,7 +25,7 @@ namespace Csweb
                 {
                     return "";
                 }
-                return $" style=\"{_style}\"";
+                return $" style=\"{_style}\"".Replace("\" ", "\"");
             }
         }
         public string path 
@@ -66,6 +66,7 @@ namespace Csweb
             }
             this._path = path;
             _style = "";
+            _attributes = "";
         }
         public Image SetSize(int x, int y)
         {

@@ -8,7 +8,7 @@ namespace Csweb
         internal static void Initialize()
         {
             Timer.StartTimer();
-            if (Directory.GetFiles(System.Environment.CurrentDirectory, "*.csweb").Length == 0)
+            if (Directory.GetFiles(Environment.CurrentDirectory, "*.csweb").Length == 0)
             {
                 using (StreamWriter writer = new StreamWriter("config.csweb"))
                 {

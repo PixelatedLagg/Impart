@@ -22,5 +22,9 @@ namespace Csweb
         {
             return new Link(image, path, id);
         }
+        public static style Style(Style style, string id)
+        {
+            return new style(style, id);
+        }
     }
 }
