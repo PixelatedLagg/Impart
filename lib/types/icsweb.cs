@@ -26,5 +26,9 @@ namespace Csweb
         {
             return new style(style, id);
         }
+        public static Division Division(DivisionType? type = null, string id = null)
+        {
+            return new Division(type, id);
+        }
     }
 }

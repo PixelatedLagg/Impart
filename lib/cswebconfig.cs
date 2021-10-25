@@ -12,8 +12,8 @@ namespace Csweb
             {
                 using (StreamWriter writer = new StreamWriter("config.csweb"))
                 {
-                    writer.Write("<Debug>false</Debug>");
-                    writer.Write("<DebugFileWrite>false</DebugFileWrite>");
+                    writer.WriteLine("<Debug>false</Debug>");
+                    writer.WriteLine("<DebugFileWrite>false</DebugFileWrite>");
                     writer.Close();
                 }
             }

@@ -106,5 +106,14 @@ namespace Csweb
             _attributes = $"{_attributes} draggable=\"{obj}\"";
             return this;
         }
+        public Text SetFontSize(int pixels)
+        {
+            if (pixels < 0)
+            {
+                throw new TextError("Font size cannot be negative!", this);
+            }
+            _style = $"{_style} font-size: {pixels}px;";
+            return this;
+        }
     } 
 }

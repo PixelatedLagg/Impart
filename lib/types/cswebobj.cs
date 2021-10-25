@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using Csweb.Templates;
 
@@ -185,6 +186,10 @@ namespace Csweb
             }
             textCache = $"{textCache}{Templates.Templates.CustomTemplates[name]}";
             Debug.CallObjectEvent("[cswebobj] added template (custom)");
+        }
+        public void AddDivision(Division div)
+        {
+            textCache = $"{textCache}{div.textCache}";
         }
         public void Render()
         {

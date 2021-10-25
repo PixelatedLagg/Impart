@@ -35,4 +35,8 @@ namespace Csweb
     {
         internal HeaderError(string error, Header header) : base($"{{ Error: ({error}) Trace: ({header}) }}") {}
     }
+    internal class DivisionError : Exception
+    {
+        internal DivisionError(string error, Division division) : base($"{{ Error: ({error}) Trace: ({division}) }}") {}
+    }
 }
