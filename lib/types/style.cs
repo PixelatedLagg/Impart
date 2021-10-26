@@ -63,7 +63,7 @@ namespace Csweb
             Debug.CallObjectEvent("[style] added color (rgb)");
             return this;
         }
-        public void AddAlign(string alignment)
+        public style AddAlign(string alignment)
         {
             Timer.StartTimer();
             if (!Alignment.Any(alignment))
@@ -72,6 +72,7 @@ namespace Csweb
             }
             textCache = $"{textCache}    text-align: {alignment};%^";
             Debug.CallObjectEvent("[idstyle] added alignment");
+            return this;
         }
         internal string Render()
         {

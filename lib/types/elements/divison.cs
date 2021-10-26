@@ -14,14 +14,7 @@ namespace Csweb
         {
             get 
             {
-                if (styleCache == "")
-                {
-                    return $"%^    <div{attributeCache}>{elementCache}%^    </div>";
-                }
-                else
-                {
-                    return $"%^    <div{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
-                }
+                return $"%^    <div{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
             }
         }
         public Division(DivisionType? type = null, string id = null)
@@ -48,6 +41,7 @@ namespace Csweb
                     throw new DivisionError("Type and ID must both be null or not null!", this);
             }
             colorCheck = 0;
+            styleCache = " margin: 0px;";
         }
         public void AddText(Text text)
         {
@@ -99,7 +93,7 @@ namespace Csweb
             {
                 throw new DivisionError("Invalid hex value!", this);
             }
-            styleCache += $" color: #{hex};";
+            styleCache += $" background-color: #{hex};";
             Debug.CallObjectEvent("[division] added color");
             return this;
         }
@@ -115,7 +109,7 @@ namespace Csweb
                 throw new DivisionError("Invalid RGB value!", this);
             }
             colorCheck++;
-            styleCache += $" color: rgb({x},{y},{z});";
+            styleCache += $" background-color: rgb({x},{y},{z});";
             Debug.CallObjectEvent("[division] added color");
             return this;
         }
@@ -148,6 +142,44 @@ namespace Csweb
             styleCache = $" border: {percent * 100}% {border} {color.ToKnownColor()};";
             Debug.CallObjectEvent("[division] added border");
             return this;
+        }
+        public Division SetFollowScroll(bool obj)
+        {
+            if (obj)
+            {
+                styleCache += " position: fixed;";
+            }
+            else
+            {
+                throw new DivisionError("Default value for follow scroll is false!", this);
+            }
+            return this;
+        }
+        public Division SetMargin(float percent)
+        {
+            if (percent > 1 || percent < 0)
+            {
+                throw new DivisionError("Percent number must be between 1-0!", this);
+            }
+            styleCache = $" margin: {percent * 100}%;";
+            return this;
+        }
+        public Division SetMargin(int pixels)
+        {
+            if (pixels == 0)
+            {
+                throw new DivisionError("Border thickness is default 0 pixels!", this);
+            }
+            if (pixels < 0)
+            {
+                throw new DivisionError("Margin thickness must be above 0!", this);
+            }
+            styleCache = $" margin: {pixels}px;";
+            return this;
+        }
+        public void Break()
+        {
+            elementCache += $"%^        <br>";
         }
         public void Dispose() {}
     } 
