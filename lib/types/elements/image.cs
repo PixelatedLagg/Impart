@@ -74,7 +74,7 @@ namespace Csweb
             {
                 throw new ImageError("Width and height values must be positive!", this);
             }
-            _attributes = $"{_attributes} width=\"{x}\" height=\"{y}\"";
+            _attributes += $" width=\"{x}\" height=\"{y}\"";
             return this;
         }
         public Image SetBorder(int pixels, string border, Color color)
@@ -87,7 +87,7 @@ namespace Csweb
             {
                 throw new ImageError("Invalid border value!", this);
             }
-            _style = $"{_style} border: {pixels}px {border} {color.ToKnownColor()};";
+            _style += $" border: {pixels}px {border} {color.ToKnownColor()};";
             return this;
         }
         public Image SetBorder(float percent, string border, Color color)
@@ -100,7 +100,7 @@ namespace Csweb
             {
                 throw new ImageError("Invalid border value!", this);
             }
-            _style = $"{_style} border: {percent * 100}% {border} {color.ToKnownColor()};";
+            _style += $" border: {percent * 100}% {border} {color.ToKnownColor()};";
             return this;
         }
     } 

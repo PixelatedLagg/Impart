@@ -29,7 +29,7 @@ namespace Csweb
                 }
                 else
                 {
-                    tempCache = $"{tempCache}{Environment.NewLine}{log} [{Timer.GetTime()}ms]";
+                    tempCache += $"{Environment.NewLine}{log} [{Timer.GetTime()}ms]";
                     Common.Write("DEBUG.txt", tempCache);
                     return;
                 }

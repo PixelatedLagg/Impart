@@ -61,7 +61,7 @@ namespace Csweb
                 throw new TextError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            _style = $"{_style} color: {color.ToKnownColor()};";
+            _style += $" color: {color.ToKnownColor()};";
             return this;
         }
         public Text AddColor(string hex)
@@ -75,7 +75,7 @@ namespace Csweb
             {
                 throw new TextError("Invalid hex value!", this);
             }
-            _style = $"{_style} color: #{hex};";
+            _style += $" color: #{hex};";
             return this;
         }
         public Text AddColor(int x, int y, int z)
@@ -89,7 +89,7 @@ namespace Csweb
             {
                 throw new TextError("Invalid RGB value!", this);
             }
-            _style = $"{_style} color: rgb({x},{y},{z});";
+            _style += $" color: rgb({x},{y},{z});";
             return this;
         }
         public Text SetHoverMessage(string message)
@@ -98,12 +98,12 @@ namespace Csweb
             {
                 throw new TextError("Hover message cannot be empty or null!", this);
             }
-            _attributes = $"{_attributes} title=\"{message}\"";
+            _attributes += $" title=\"{message}\"";
             return this;
         }
         public Text SetDraggable(bool obj)
         {
-            _attributes = $"{_attributes} draggable=\"{obj}\"";
+            _attributes += $" draggable=\"{obj}\"";
             return this;
         }
         public Text SetFontSize(int pixels)
@@ -112,7 +112,7 @@ namespace Csweb
             {
                 throw new TextError("Font size cannot be negative!", this);
             }
-            _style = $"{_style} font-size: {pixels}px;";
+            _style += $" font-size: {pixels}px;";
             return this;
         }
     } 

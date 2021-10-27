@@ -124,7 +124,7 @@ namespace Csweb
             {
                 throw new DivisionError("Invalid border value!", this);
             }
-            styleCache = $" border: {pixels}px {border} {color.ToKnownColor()};";
+            styleCache += $" border: {pixels}px {border} {color.ToKnownColor()};";
             Debug.CallObjectEvent("[division] added border");
             return this;
         }
@@ -139,8 +139,19 @@ namespace Csweb
             {
                 throw new DivisionError("Invalid border value!", this);
             }
-            styleCache = $" border: {percent * 100}% {border} {color.ToKnownColor()};";
+            styleCache += $" border: {percent * 100}% {border} {color.ToKnownColor()};";
             Debug.CallObjectEvent("[division] added border");
+            return this;
+        }
+        public Division SetRoundedBorder(int pixels)
+        {
+            Timer.StartTimer();
+            if (pixels < 0)
+            {
+                throw new DivisionError("Corner radius must be above 0!", this);
+            }
+            styleCache += $" border-radius: {pixels}px;";
+            Debug.CallObjectEvent("[division] added rounded border");
             return this;
         }
         public Division SetFollowScroll(bool obj)
@@ -161,7 +172,7 @@ namespace Csweb
             {
                 throw new DivisionError("Percent number must be between 1-0!", this);
             }
-            styleCache = $" margin: {percent * 100}%;";
+            styleCache += $" margin: {percent * 100}%;";
             return this;
         }
         public Division SetMargin(int pixels)
@@ -174,7 +185,16 @@ namespace Csweb
             {
                 throw new DivisionError("Margin thickness must be above 0!", this);
             }
-            styleCache = $" margin: {pixels}px;";
+            styleCache += $" margin: {pixels}px;";
+            return this;
+        }
+        public Division SetWidth(int pixels)
+        {
+            if (pixels < 0)
+            {
+                throw new DivisionError("Width must be above 0!", this);
+            }
+            styleCache += $" max-width: {pixels}px;";
             return this;
         }
         public void Break()
