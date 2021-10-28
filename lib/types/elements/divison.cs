@@ -69,19 +69,7 @@ namespace Csweb
             }
             Debug.CallObjectEvent("[division] added image element");
         }
-        public Division AddColor(Color color)
-        {
-            Timer.StartTimer();
-            if (colorCheck > 1)
-            {
-                throw new DivisionError("Cannot set color more than once!", this);
-            }
-            colorCheck++;
-            styleCache += $" color: {color.ToKnownColor()};";
-            Debug.CallObjectEvent("[division] added color");
-            return this;
-        }
-        public Division AddColor(string hex)
+        public Division SetColor(string hex)
         {
             Timer.StartTimer();
             if (colorCheck > 1)
@@ -97,61 +85,19 @@ namespace Csweb
             Debug.CallObjectEvent("[division] added color");
             return this;
         }
-        public Division AddColor(int x, int y, int z)
+        public Division SetBorder(int pixels, string border, string hex, int roundedPixels = 0)
         {
             Timer.StartTimer();
-            if (colorCheck > 1)
-            {
-                throw new DivisionError("Cannot set color more than once!", this);
-            }
-            if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
-            {
-                throw new DivisionError("Invalid RGB value!", this);
-            }
-            colorCheck++;
-            styleCache += $" background-color: rgb({x},{y},{z});";
-            Debug.CallObjectEvent("[division] added color");
-            return this;
-        }
-        public Division SetBorder(int pixels, string border, Color color)
-        {
-            Timer.StartTimer();
-            if (pixels < 0)
-            {
-                throw new DivisionError("Border thickness must be above 0!", this);
-            }
             if (!Border.Any(border))
             {
                 throw new DivisionError("Invalid border value!", this);
             }
-            styleCache += $" border: {pixels}px {border} {color.ToKnownColor()};";
+            styleCache += $" border: {pixels}px {border} #{hex};";
+            if (roundedPixels > 0)
+            {
+                styleCache += $" border-radius: {roundedPixels}px;";
+            }
             Debug.CallObjectEvent("[division] added border");
-            return this;
-        }
-        public Division SetBorder(float percent, string border, Color color)
-        {
-            Timer.StartTimer();
-            if (percent > 1 || percent < 0)
-            {
-                throw new DivisionError("Percent number must be between 1-0!", this);
-            }
-            if (!Border.Any(border))
-            {
-                throw new DivisionError("Invalid border value!", this);
-            }
-            styleCache += $" border: {percent * 100}% {border} {color.ToKnownColor()};";
-            Debug.CallObjectEvent("[division] added border");
-            return this;
-        }
-        public Division SetRoundedBorder(int pixels)
-        {
-            Timer.StartTimer();
-            if (pixels < 0)
-            {
-                throw new DivisionError("Corner radius must be above 0!", this);
-            }
-            styleCache += $" border-radius: {pixels}px;";
-            Debug.CallObjectEvent("[division] added rounded border");
             return this;
         }
         public Division SetFollowScroll(bool obj)

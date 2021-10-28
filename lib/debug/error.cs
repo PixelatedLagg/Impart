@@ -39,4 +39,8 @@ namespace Csweb
     {
         internal DivisionError(string error, Division division) : base($"{{ Error: ({error}) Trace: ({division}) }}") {}
     }
+    internal class ButtonError : Exception
+    {
+        internal ButtonError(string error, Button button) : base($"{{ Error: ({error}) Trace: ({button}) }}") {}
+    }
 }
