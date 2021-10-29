@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-
 namespace Csweb
 {
     internal static class CSwebconfig
@@ -12,18 +9,17 @@ namespace Csweb
             {
                 using (StreamWriter writer = new StreamWriter("config.csweb"))
                 {
-                    writer.WriteLine("<Debug>false</Debug>");
-                    writer.WriteLine("<DebugFileWrite>false</DebugFileWrite>");
+                    writer.WriteLine($"<Debug>false</Debug>{Environment.NewLine}<DebugFileWrite>false</DebugFileWrite>");
                     writer.Close();
                 }
             }
             else
             {
-                using (StreamReader reader = new StreamReader("config.csweb"))
+                using (StreamReader r = new StreamReader("config.csweb"))
                 {
-                    string debug = reader.ReadLine().Replace("<Debug>", "").Replace("</Debug>", "");
-                    string debugFileWrite = reader.ReadLine().Replace("<DebugFileWrite>", "").Replace("</DebugFileWrite>", "");
-                    if ((debugFileWrite.Contains("true") || debugFileWrite.Contains("false")) && (debug.Contains("true") || debug.Contains("false")))
+                    bool debug = false;
+					bool debugFileWrite = false;
+                    if (Boolean.TryParse(r.ReadLine().Replace("<Debug>", "").Replace("</Debug>", ""), out debug) && Boolean.TryParse(r.ReadLine().Replace("<DebugFileWrite>", "").Replace("</DebugFileWrite>", ""), out debugFileWrite))
                     {
                         Debug.debug = Convert.ToBoolean(debug);
                         Debug.FileLogging = Convert.ToBoolean(debugFileWrite);
@@ -32,10 +28,11 @@ namespace Csweb
                     {
                         throw new ConfigError("Debug and DebugFileWrite values must be \"true\" or \"false\"!");
                     }
-                    reader.Close();
+                    r.Close();
                 }
             }
             Debug.CallObjectEvent("[csweb] initialized config file");
         }
     }
+
 }
