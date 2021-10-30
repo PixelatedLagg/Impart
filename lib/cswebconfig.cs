@@ -1,5 +1,5 @@
-using System.IO;
 using System;
+using System.IO;
 
 namespace Csweb
 {
@@ -24,8 +24,8 @@ namespace Csweb
 					bool debugFileWrite = false;
                     if (Boolean.TryParse(r.ReadLine().Replace("<Debug>", "").Replace("</Debug>", ""), out debug) && Boolean.TryParse(r.ReadLine().Replace("<DebugFileWrite>", "").Replace("</DebugFileWrite>", ""), out debugFileWrite))
                     {
-                        Debug.debug = Convert.ToBoolean(debug);
-                        Debug.FileLogging = Convert.ToBoolean(debugFileWrite);
+                        Debug.debug = System.Convert.ToBoolean(debug);
+                        Debug.FileLogging = System.Convert.ToBoolean(debugFileWrite);
                     }
                     else
                     {
@@ -37,5 +37,4 @@ namespace Csweb
             Debug.CallObjectEvent("[csweb] initialized config file");
         }
     }
-
 }

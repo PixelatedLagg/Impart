@@ -135,7 +135,7 @@ namespace Csweb
                 tempCache += $"%^            <th>{obj[x]}</th>";
             }
             tempCache += $"%^        </tr>"; 
-            int vertRowNum = (int)Math.Round(Convert.ToDouble(((double)obj.Length - (double)rowNum) / (double)rowNum), MidpointRounding.AwayFromZero);
+            int vertRowNum = (int)Math.Round(System.Convert.ToDouble(((double)obj.Length - (double)rowNum) / (double)rowNum), MidpointRounding.AwayFromZero);
             if ((obj.Length - rowNum) % rowNum > 0)
             {
                 int _currentobj = 0;
