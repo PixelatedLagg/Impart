@@ -7,8 +7,10 @@ namespace Csweb
     {
         public static event Action<Log> ObjectEvent;
         internal static bool FileLogging;
+        internal static bool Formatting;
         private static string tempCache = "";
         internal static bool debug = true;
+        public static readonly (int, int, int) Version = (1, 1, 2);
         internal static void CallObjectEvent(string log)
         {
             if (!debug)
