@@ -43,4 +43,13 @@ namespace Csweb
     {
         internal ButtonError(string error, Button button) : base($"{{ Error: ({error}) Trace: ({button}) }}") {}
     }
+    internal class ColorError : Exception
+    {
+        internal ColorError(string error, Rgb color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
+        internal ColorError(string error, Hsl color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
+    }
+    internal class ConversionError : Exception
+    {
+        internal ConversionError(string error) : base($"{{ Error: ({error}) }}") {}
+    }
 }

@@ -30,6 +30,14 @@ namespace Csweb
         {
             return new Division(type, id);
         }
+        public static Rgb Rgb(int r, int g, int b)
+        {
+            return new Rgb(r, g, b);
+        }
+        public static Hsl Rgb(float h, float s, float l)
+        {
+            return new Hsl(h, s, l);
+        }
     }
     public static class Alignment
     {
