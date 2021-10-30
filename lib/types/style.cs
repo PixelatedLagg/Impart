@@ -35,8 +35,8 @@ namespace Csweb
         {
             Timer.StartTimer();
             colorCheck++;
-            textCache = $"{textCache}    color: {color.ToKnownColor()};%^";
-            Debug.CallObjectEvent("[style] added color (normal)");
+            textCache += $"    color: {color.ToKnownColor()};%^";
+            Debug.CallObjectEvent("[style] added color");
             return this;
         }
         public style AddColor(string hex)
@@ -47,8 +47,8 @@ namespace Csweb
             {
                 throw new StyleError("Invalid hex value!", this);
             }
-            textCache = $"{textCache}    color: #{hex};%^";
-            Debug.CallObjectEvent("[style] added color (hex)");
+            textCache += $"    color: #{hex};%^";
+            Debug.CallObjectEvent("[style] added color");
             return this;
         }
         public style AddColor(int x, int y, int z)
@@ -59,8 +59,8 @@ namespace Csweb
             {
                 throw new StyleError("Invalid RGB value!", this);
             }
-            textCache = $"{textCache}    color: rgb({x}, {y}, {z});%^";
-            Debug.CallObjectEvent("[style] added color (rgb)");
+            textCache += $"    color: rgb({x}, {y}, {z});%^";
+            Debug.CallObjectEvent("[style] added color");
             return this;
         }
         public style AddAlign(string alignment)
@@ -70,8 +70,18 @@ namespace Csweb
             {
                 throw new StyleError("Invalid alignment value!", this);
             }
-            textCache = $"{textCache}    text-align: {alignment};%^";
-            Debug.CallObjectEvent("[idstyle] added alignment");
+            textCache += $"    text-align: {alignment};%^";
+            Debug.CallObjectEvent("[style] added alignment");
+            return this;
+        }
+        public style SetMargin(int pixels)
+        {
+            if (pixels < 0)
+            {
+                throw new StyleError("Invalid margin value!", this);
+            }
+            textCache += $"    margin: {pixels}px;%^";
+            Debug.CallObjectEvent("[style] added margin");
             return this;
         }
         internal string Render()

@@ -34,9 +34,13 @@ namespace Csweb
         {
             return new Rgb(r, g, b);
         }
-        public static Hsl Rgb(float h, float s, float l)
+        public static Hsl Hsl(float h, float s, float l)
         {
             return new Hsl(h, s, l);
+        }
+        public static Hex Hex(string hex)
+        {
+            return new Hex(hex);
         }
     }
     public static class Alignment
@@ -114,5 +118,10 @@ namespace Csweb
         IDStyle = 0,
         EStyle = 1,
         ClassStyle = 2
+    }
+    public enum DivisionType
+    {
+        ID = 1,
+        Class = 0
     }
 }

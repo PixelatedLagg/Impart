@@ -32,4 +32,24 @@ namespace Csweb
             }
         }
     }
+    public struct Hex
+    {
+        public string hex;
+        public Hex(string hex)
+        {
+            this.hex = hex;
+            if (hex.Length != 6)
+            {
+                throw new ConversionError("Invalid hex value!");
+            }
+            try
+            {
+                int.Parse(hex, System.Globalization.NumberStyles.AllowHexSpecifier);
+            }
+            catch
+            {
+                throw new ConversionError("Invalid hex value!");
+            }
+        }
+    }
 }

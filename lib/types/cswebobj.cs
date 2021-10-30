@@ -72,13 +72,13 @@ namespace Csweb
         public void AddHeader(Header header)
         {
             Timer.StartTimer();
-            if (header.id != null)
+            if (header.id == null)
             {
-                textCache += $"%^    <h{header.num} id=\"{header.id}\">{header.text}</h{header.num}>";
+                textCache += $"%^    <h{header.num}{header.attributes}{header.style}>{header.text}</h{header.num}>";
             }
             else
             {
-                textCache += $"%^    <h{header.num}>{header.text}</h{header.num}>";
+                textCache += $"%^    <h{header.num} id=\"{header.id}\"{header.attributes}{header.style}>{header.text}</h{header.num}>";
             }
             Debug.CallObjectEvent("[cswebobj] added header");
         }

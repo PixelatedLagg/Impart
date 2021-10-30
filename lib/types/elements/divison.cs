@@ -6,6 +6,7 @@ namespace Csweb
 {
     public class Division : IDisposable
     {
+        public (int? x, int? y) size;
         private int colorCheck;
         private string elementCache;
         private string styleCache;
@@ -14,6 +15,10 @@ namespace Csweb
         {
             get 
             {
+                if (styleCache == "")
+                {
+                    return $"%^    <div{attributeCache}>{elementCache}%^    </div>";
+                }
                 return $"%^    <div{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
             }
         }
@@ -42,6 +47,7 @@ namespace Csweb
             }
             colorCheck = 0;
             styleCache = " margin: 0px;";
+            size = (null, null);
         }
         public void AddText(Text text)
         {
@@ -69,23 +75,37 @@ namespace Csweb
             }
             Debug.CallObjectEvent("[division] added image element");
         }
-        public Division SetColor(string hex)
+        public Division SetColor(Hex hex)
         {
-            Timer.StartTimer();
             if (colorCheck > 1)
             {
                 throw new DivisionError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            if (hex == null || hex.Length != 6)
-            {
-                throw new DivisionError("Invalid hex value!", this);
-            }
-            styleCache += $" background-color: #{hex};";
-            Debug.CallObjectEvent("[division] added color");
+            styleCache += $" background-color: #{hex.hex};";
             return this;
         }
-        public Division SetBorder(int pixels, string border, string hex, int roundedPixels = 0)
+        public Division SetColor(Hsl hsl)
+        {
+            if (colorCheck > 1)
+            {
+                throw new DivisionError("Cannot set color more than once!", this);
+            }
+            colorCheck++;
+            styleCache += $" background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+            return this;
+        }
+        public Division SetColor(Rgb rgb)
+        {
+            if (colorCheck > 1)
+            {
+                throw new DivisionError("Cannot set color more than once!", this);
+            }
+            colorCheck++;
+            styleCache += $" background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+            return this;
+        }
+        public Division SetBorder(int pixels, string border, Hex hex, int roundedPixels = 0)
         {
             Timer.StartTimer();
             if (!Border.Any(border))
@@ -93,6 +113,36 @@ namespace Csweb
                 throw new DivisionError("Invalid border value!", this);
             }
             styleCache += $" border: {pixels}px {border} #{hex};";
+            if (roundedPixels > 0)
+            {
+                styleCache += $" border-radius: {roundedPixels}px;";
+            }
+            Debug.CallObjectEvent("[division] added border");
+            return this;
+        }
+        public Division SetBorder(int pixels, string border, Hsl hsl, int roundedPixels = 0)
+        {
+            Timer.StartTimer();
+            if (!Border.Any(border))
+            {
+                throw new DivisionError("Invalid border value!", this);
+            }
+            styleCache += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+            if (roundedPixels > 0)
+            {
+                styleCache += $" border-radius: {roundedPixels}px;";
+            }
+            Debug.CallObjectEvent("[division] added border");
+            return this;
+        }
+        public Division SetBorder(int pixels, string border, Rgb rgb, int roundedPixels = 0)
+        {
+            Timer.StartTimer();
+            if (!Border.Any(border))
+            {
+                throw new DivisionError("Invalid border value!", this);
+            }
+            styleCache += $" border: {pixels}px {border} rgb({rgb.rgb.r}, {rgb.rgb.g}, {rgb.rgb.b});";
             if (roundedPixels > 0)
             {
                 styleCache += $" border-radius: {roundedPixels}px;";
@@ -112,15 +162,6 @@ namespace Csweb
             }
             return this;
         }
-        public Division SetMargin(float percent)
-        {
-            if (percent > 1 || percent < 0)
-            {
-                throw new DivisionError("Percent number must be between 1-0!", this);
-            }
-            styleCache += $" margin: {percent * 100}%;";
-            return this;
-        }
         public Division SetMargin(int pixels)
         {
             if (pixels == 0)
@@ -134,13 +175,20 @@ namespace Csweb
             styleCache += $" margin: {pixels}px;";
             return this;
         }
-        public Division SetWidth(int pixels)
+        public Division SetSize(int? x, int? y)
         {
-            if (pixels < 0)
+            if (y < 0 || x < 0)
             {
-                throw new DivisionError("Width must be above 0!", this);
+                throw new DivisionError("Invalid size values!", this);
             }
-            styleCache += $" max-width: {pixels}px;";
+            if (x != null)
+            {
+                styleCache += $" max-width: {x}px;";
+            }
+            if (y != null)
+            {
+                styleCache += $" max-height: {y}px;";
+            }
             return this;
         }
         public void Break()
@@ -149,9 +197,4 @@ namespace Csweb
         }
         public void Dispose() {}
     } 
-    public enum DivisionType
-    {
-        ID = 1,
-        Class = 0
-    }
 }

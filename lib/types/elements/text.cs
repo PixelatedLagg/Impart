@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 
 namespace Csweb
 {
@@ -54,42 +53,43 @@ namespace Csweb
             _attributes = "";
             colorCheck = 0;
         }
-        public Text AddColor(Color color)
+        public Text AddColor(Hex hex)
         {
             if (colorCheck > 1)
             {
                 throw new TextError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            _style += $" color: {color.ToKnownColor()};";
+            _style += $" color: #{hex.hex};";
             return this;
         }
-        public Text AddColor(string hex)
+        public Text AddColor(Hsl hsl)
         {
             if (colorCheck > 1)
             {
                 throw new TextError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            if (hex == null || hex.Length != 6)
-            {
-                throw new TextError("Invalid hex value!", this);
-            }
-            _style += $" color: #{hex};";
+            _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
             return this;
         }
-        public Text AddColor(int x, int y, int z)
+        public Text AddColor(Rgb rgb)
         {
             if (colorCheck > 1)
             {
                 throw new TextError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
+            _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+            return this;
+        }
+        public Text SetMargin(int pixels)
+        {
+            if (pixels < 0)
             {
-                throw new TextError("Invalid RGB value!", this);
+                throw new TextError("Invalid margin value!", this);
             }
-            _style += $" color: rgb({x},{y},{z});";
+            _style += $" margin: {pixels}px;";
             return this;
         }
         public Text SetHoverMessage(string message)
@@ -101,16 +101,11 @@ namespace Csweb
             _attributes += $" title=\"{message}\"";
             return this;
         }
-        public Text SetDraggable(bool obj)
-        {
-            _attributes += $" draggable=\"{obj}\"";
-            return this;
-        }
         public Text SetFontSize(int pixels)
         {
             if (pixels < 0)
             {
-                throw new TextError("Font size cannot be negative!", this);
+                throw new TextError("Invalid font size!", this);
             }
             _style += $" font-size: {pixels}px;";
             return this;

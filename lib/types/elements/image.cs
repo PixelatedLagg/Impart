@@ -90,18 +90,5 @@ namespace Csweb
             _style += $" border: {pixels}px {border} {color.ToKnownColor()};";
             return this;
         }
-        public Image SetBorder(float percent, string border, Color color)
-        {
-            if (percent > 1 || percent < 0)
-            {
-                throw new ImageError("Percent number must be between 1-0!", this);
-            }
-            if (!Border.Any(border))
-            {
-                throw new ImageError("Invalid border value!", this);
-            }
-            _style += $" border: {percent * 100}% {border} {color.ToKnownColor()};";
-            return this;
-        }
     } 
 }
