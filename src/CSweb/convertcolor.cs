@@ -1,6 +1,7 @@
-using System.Globalization;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
+using System.Linq;
 using s = System;
 
 namespace Csweb
@@ -32,14 +33,14 @@ namespace Csweb
             }
             return new Rgb((int)r, (int)g, (int)b);
         }
-        public static Hsl RgbToHsl(Rgb rgb)
+        static public Hsl RgbToHsl(Rgb rgb)
         {
             Hsl hsl = new Hsl();
             float r = (rgb.rgb.r / 255.0f);
             float g = (rgb.rgb.g / 255.0f);
             float b = (rgb.rgb.b / 255.0f);
-            float min = s.Math.Min(s.Math.Min(r, g), b);
-            float max = s.Math.Max(s.Math.Max(r, g), b);
+            float min = Math.Min(Math.Min(r, g), b);
+            float max = Math.Max(Math.Max(r, g), b);
             float delta = max - min;
             hsl.hsl.l = (max + min) / 2;
             if (delta == 0)
@@ -67,12 +68,14 @@ namespace Csweb
                 {
                     hue += 1;
                 }
-                if (hue > 1)
+                else if (hue > 1)
                 {
                     hue -= 1;
                 }
-                hsl.hsl.h = hue * 360;
+                hsl.hsl.h = (int)(hue * 360);
             }
+            hsl.hsl.s *= 100;
+            hsl.hsl.l = (int)Math.Round(hsl.hsl.l *= 100, MidpointRounding.ToZero);
             return hsl;
         }
         static public Rgb HexToRgb(Hex hex)
@@ -103,6 +106,14 @@ namespace Csweb
                 return v1 + (v2 - v1) * ((2.0f / 3) - vH) * 6;
             }
             return v1;
+        }
+        private static int Max(params int[] numbers)
+        {
+            return numbers.Max();
+        }
+        private static int Min(params int[] numbers)
+        {
+            return numbers.Min();
         }
     }
 }
