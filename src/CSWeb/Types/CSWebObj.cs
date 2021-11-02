@@ -12,7 +12,7 @@ namespace CSWeb
         private string styleCache;
         public cswebobj(string path, string cssPath)
         {
-            CSwebconfig.Initialize();
+            CSWebConfig.Initialize();
             Timer.StartTimer();
             this.path = path;
             textCache = "";
@@ -198,7 +198,7 @@ namespace CSWeb
             + $"{Environment.NewLine}<html xmlns=\"http://www.w3.org/1999/xhtml\">{Environment.NewLine}    <link rel=\"stylesheet\" href=\"{cssPath}\">{Environment.NewLine}    <body>"
             + $"{textCache.Replace("%^", $"{Environment.NewLine}    ")}{Environment.NewLine}    </body>{Environment.NewLine}</html>");
             Common.Change(cssPath, styleCache.Replace("%^", Environment.NewLine));
-            if (Debug.Formatting == false)
+            if (!Debug.Formatting)
             {
                 Common.Change(path, Common.GetAllText(path).Replace("    ", ""));
                 Common.Change(cssPath, Common.GetAllText(cssPath).Replace("    ", ""));

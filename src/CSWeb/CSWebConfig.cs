@@ -3,7 +3,7 @@ using System.IO;
 
 namespace CSWeb
 {
-    internal static class CSwebconfig
+    internal static class CSWebConfig
     {
         internal static void Initialize()
         {

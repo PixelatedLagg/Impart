@@ -1,9 +1,5 @@
 using System;
-using System.Globalization;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using s = System;
 
 namespace CSWeb
 {
@@ -94,7 +90,7 @@ namespace CSWeb
         static public Rgb HexToRgb(Hex hex)
         {
             char[] temp = hex.hex.ToCharArray();
-            return new Rgb(s.Convert.ToInt32($"{temp[0]}{temp[1]}", 16), s.Convert.ToInt32($"{temp[2]}{temp[3]}", 16), s.Convert.ToInt32($"{temp[4]}{temp[5]}", 16));
+            return new Rgb(System.Convert.ToInt32($"{temp[0]}{temp[1]}", 16), System.Convert.ToInt32($"{temp[2]}{temp[3]}", 16), System.Convert.ToInt32($"{temp[4]}{temp[5]}", 16));
         }
         private static float HueToRgb(float v1, float v2, float vH)
         {

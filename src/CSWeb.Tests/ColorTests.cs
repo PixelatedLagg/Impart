@@ -1,8 +1,8 @@
 using System;
-using Csweb;
+using CSWeb;
 using Xunit;
 
-namespace Csweb.Tests
+namespace CSWeb.Tests
 {
     public class ColorTests
     {
