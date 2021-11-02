@@ -1,6 +1,6 @@
 using System;
 
-namespace Csweb
+namespace CSWeb
 {
     public class Link
     {

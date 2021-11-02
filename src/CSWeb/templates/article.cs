@@ -1,7 +1,7 @@
 using System;
-using Csweb;
+using CSWeb;
 
-namespace Csweb.Templates
+namespace CSWeb.Templates
 {
     internal static class Article
     {

@@ -1,14 +1,14 @@
 using System;
+using System.Drawing;
 
-namespace Csweb
+namespace CSWeb
 {
-    public class Header
+    public class Button
     {
         private string _text;
         private string _id;
         private string _style;
         private string _attributes;
-        internal int num;
         private int colorCheck;
         internal string attributes 
         {
@@ -42,64 +42,75 @@ namespace Csweb
                 return _id;
             }
         }
-        public Header(int num, string text, string id = null)
+        public Button(string text, string id = null)
         {
-            if (num > 5 || num < 1)
-            {
-                throw new HeaderError("Number must be between 1-5!", this);
-            }
             if (String.IsNullOrEmpty(text))
             {
-                throw new HeaderError("Text cannot be null or empty!", null);
+                throw new ButtonError("Text cannot be null or empty!", null);
             }
             this._text = text;
             this._id = id;
-            this.num = num;
+            _style = "";
+            _attributes = "";
+            colorCheck = 0;
         }
-        public Header AddColor(Hex hex)
+        public Button AddColor(Color color)
         {
             if (colorCheck > 1)
             {
-                throw new HeaderError("Cannot set color more than once!", this);
+                throw new ButtonError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            _style += $" color: #{hex.hex};";
+            _style += $" color: {color.ToKnownColor()};";
             return this;
         }
-        public Header AddColor(Hsl hsl)
+        public Button AddColor(string hex)
         {
             if (colorCheck > 1)
             {
-                throw new HeaderError("Cannot set color more than once!", this);
+                throw new ButtonError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+            if (hex == null || hex.Length != 6)
+            {
+                throw new ButtonError("Invalid hex value!", this);
+            }
+            _style += $" color: #{hex};";
             return this;
         }
-        public Header AddColor(Rgb rgb)
+        public Button AddColor(int x, int y, int z)
         {
             if (colorCheck > 1)
             {
-                throw new HeaderError("Cannot set color more than once!", this);
+                throw new ButtonError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+            if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
+            {
+                throw new ButtonError("Invalid RGB value!", this);
+            }
+            _style += $" color: rgb({x},{y},{z});";
             return this;
         }
-        public Header SetHoverMessage(string message)
+        public Button SetHoverMessage(string message)
         {
             if (String.IsNullOrEmpty(message))
             {
-                throw new HeaderError("Hover message cannot be empty or null!", this);
+                throw new ButtonError("Hover message cannot be empty or null!", this);
             }
             _attributes += $" title=\"{message}\"";
             return this;
         }
-        public Header SetFontSize(int pixels)
+        public Button SetDraggable(bool obj)
+        {
+            _attributes += $" draggable=\"{obj}\"";
+            return this;
+        }
+        public Button SetFontSize(int pixels)
         {
             if (pixels < 0)
             {
-                throw new HeaderError("Invalid font size!", this);
+                throw new ButtonError("Font size cannot be negative!", this);
             }
             _style += $" font-size: {pixels}px;";
             return this;

@@ -1,13 +1,14 @@
 using System;
 
-namespace Csweb
+namespace CSWeb
 {
-    public class Text
+    public class Header
     {
         private string _text;
         private string _id;
         private string _style;
         private string _attributes;
+        internal int num;
         private int colorCheck;
         internal string attributes 
         {
@@ -41,71 +42,64 @@ namespace Csweb
                 return _id;
             }
         }
-        public Text(string text, string id = null)
+        public Header(int num, string text, string id = null)
         {
+            if (num > 5 || num < 1)
+            {
+                throw new HeaderError("Number must be between 1-5!", this);
+            }
             if (String.IsNullOrEmpty(text))
             {
-                throw new TextError("Text cannot be null or empty!", null);
+                throw new HeaderError("Text cannot be null or empty!", null);
             }
             this._text = text;
             this._id = id;
-            _style = "";
-            _attributes = "";
-            colorCheck = 0;
+            this.num = num;
         }
-        public Text AddColor(Hex hex)
+        public Header AddColor(Hex hex)
         {
             if (colorCheck > 1)
             {
-                throw new TextError("Cannot set color more than once!", this);
+                throw new HeaderError("Cannot set color more than once!", this);
             }
             colorCheck++;
             _style += $" color: #{hex.hex};";
             return this;
         }
-        public Text AddColor(Hsl hsl)
+        public Header AddColor(Hsl hsl)
         {
             if (colorCheck > 1)
             {
-                throw new TextError("Cannot set color more than once!", this);
+                throw new HeaderError("Cannot set color more than once!", this);
             }
             colorCheck++;
             _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
             return this;
         }
-        public Text AddColor(Rgb rgb)
+        public Header AddColor(Rgb rgb)
         {
             if (colorCheck > 1)
             {
-                throw new TextError("Cannot set color more than once!", this);
+                throw new HeaderError("Cannot set color more than once!", this);
             }
             colorCheck++;
             _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
             return this;
         }
-        public Text SetMargin(int pixels)
-        {
-            if (pixels < 0)
-            {
-                throw new TextError("Invalid margin value!", this);
-            }
-            _style += $" margin: {pixels}px;";
-            return this;
-        }
-        public Text SetHoverMessage(string message)
+        public Header SetHoverMessage(string message)
         {
             if (String.IsNullOrEmpty(message))
             {
-                throw new TextError("Hover message cannot be empty or null!", this);
+                throw new HeaderError("Hover message cannot be empty or null!", this);
             }
             _attributes += $" title=\"{message}\"";
             return this;
         }
-        public Text SetFontSize(int pixels)
+        public Header SetFontSize(int pixels)
         {
             if (pixels < 0)
             {
-                throw new TextError("Invalid font size!", this);
+                throw new HeaderError("Invalid font size!", this);
             }
             _style += $" font-size: {pixels}px;";
             return this;

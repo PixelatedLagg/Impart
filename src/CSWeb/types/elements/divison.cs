@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using System;
 using System.Drawing;
 
-namespace Csweb
+namespace CSWeb
 {
     public class Division : IDisposable
     {

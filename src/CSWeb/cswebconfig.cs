@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Csweb
+namespace CSWeb
 {
     internal static class CSwebconfig
     {

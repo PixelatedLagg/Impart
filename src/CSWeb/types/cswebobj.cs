@@ -1,8 +1,8 @@
 using System.Collections;
 using System;
-using Csweb.Templates;
+using CSWeb.Templates;
 
-namespace Csweb
+namespace CSWeb
 {
     public class cswebobj
     {

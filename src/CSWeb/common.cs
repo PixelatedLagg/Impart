@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Csweb
+namespace CSWeb
 {
     static internal class Common
     {

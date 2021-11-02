@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace Csweb
+namespace CSWeb
 {
     public class style
     {

@@ -1,10 +1,8 @@
-#define aids
 using System;
-using System.Drawing;
 
-namespace Csweb
+namespace CSWeb
 {
-    public class Button
+    public class Text
     {
         private string _text;
         private string _id;
@@ -43,11 +41,11 @@ namespace Csweb
                 return _id;
             }
         }
-        public Button(string text, string id = null)
+        public Text(string text, string id = null)
         {
             if (String.IsNullOrEmpty(text))
             {
-                throw new ButtonError("Text cannot be null or empty!", null);
+                throw new TextError("Text cannot be null or empty!", null);
             }
             this._text = text;
             this._id = id;
@@ -55,63 +53,59 @@ namespace Csweb
             _attributes = "";
             colorCheck = 0;
         }
-        public Button AddColor(Color color)
+        public Text AddColor(Hex hex)
         {
             if (colorCheck > 1)
             {
-                throw new ButtonError("Cannot set color more than once!", this);
+                throw new TextError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            _style += $" color: {color.ToKnownColor()};";
+            _style += $" color: #{hex.hex};";
             return this;
         }
-        public Button AddColor(string hex)
+        public Text AddColor(Hsl hsl)
         {
             if (colorCheck > 1)
             {
-                throw new ButtonError("Cannot set color more than once!", this);
+                throw new TextError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            if (hex == null || hex.Length != 6)
-            {
-                throw new ButtonError("Invalid hex value!", this);
-            }
-            _style += $" color: #{hex};";
+            _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
             return this;
         }
-        public Button AddColor(int x, int y, int z)
+        public Text AddColor(Rgb rgb)
         {
             if (colorCheck > 1)
             {
-                throw new ButtonError("Cannot set color more than once!", this);
+                throw new TextError("Cannot set color more than once!", this);
             }
             colorCheck++;
-            if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
-            {
-                throw new ButtonError("Invalid RGB value!", this);
-            }
-            _style += $" color: rgb({x},{y},{z});";
+            _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
             return this;
         }
-        public Button SetHoverMessage(string message)
+        public Text SetMargin(int pixels)
+        {
+            if (pixels < 0)
+            {
+                throw new TextError("Invalid margin value!", this);
+            }
+            _style += $" margin: {pixels}px;";
+            return this;
+        }
+        public Text SetHoverMessage(string message)
         {
             if (String.IsNullOrEmpty(message))
             {
-                throw new ButtonError("Hover message cannot be empty or null!", this);
+                throw new TextError("Hover message cannot be empty or null!", this);
             }
             _attributes += $" title=\"{message}\"";
             return this;
         }
-        public Button SetDraggable(bool obj)
-        {
-            _attributes += $" draggable=\"{obj}\"";
-            return this;
-        }
-        public Button SetFontSize(int pixels)
+        public Text SetFontSize(int pixels)
         {
             if (pixels < 0)
             {
-                throw new ButtonError("Font size cannot be negative!", this);
+                throw new TextError("Invalid font size!", this);
             }
             _style += $" font-size: {pixels}px;";
             return this;

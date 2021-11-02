@@ -2,7 +2,7 @@ using System.Drawing;
 using System;
 using System.IO;
 
-namespace Csweb
+namespace CSWeb
 {
     public class Image
     {

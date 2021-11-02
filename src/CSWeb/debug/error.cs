@@ -1,7 +1,7 @@
 using System.IO;
 using System;
 
-namespace Csweb
+namespace CSWeb
 {
     internal class CSWebObjError : Exception
     {

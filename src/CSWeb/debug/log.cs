@@ -1,4 +1,4 @@
-namespace Csweb
+namespace CSWeb
 {
     public struct Log
     {

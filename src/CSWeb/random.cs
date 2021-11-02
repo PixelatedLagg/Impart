@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Csweb
+namespace CSWeb
 {
     static public class RandomColor
     {

@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Csweb
+namespace CSWeb
 {
     internal static class Timer
     {

@@ -1,8 +1,8 @@
-using Csweb;
+using CSWeb;
 using System;
 using System.Collections.Generic;
 
-namespace Csweb.Templates
+namespace CSWeb.Templates
 {
     static class Templates
     {
