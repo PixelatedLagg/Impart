@@ -2,7 +2,7 @@ using System;
 
 namespace CSWeb
 {
-    public class Text
+    public class Text : Element
     {
         private string _text;
         private string _id;
@@ -47,7 +47,7 @@ namespace CSWeb
             {
                 throw new TextError("Text cannot be null or empty!", null);
             }
-            this._text = text;
+            this._text = text.Str();
             this._id = id;
             _style = "";
             _attributes = "";
@@ -98,7 +98,7 @@ namespace CSWeb
             {
                 throw new TextError("Hover message cannot be empty or null!", this);
             }
-            _attributes += $" title=\"{message}\"";
+            _attributes += $" title=\"{message.Str()}\"";
             return this;
         }
         public Text SetFontSize(int pixels)

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace CSWeb
 {
-    public class Image
+    public class Image : Element
     {
         private string _path;
         private string _id;

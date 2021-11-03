@@ -2,7 +2,7 @@ using System;
 
 namespace CSWeb
 {
-    public class Header
+    public class Header : Element
     {
         private string _text;
         private string _id;

@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace CSWeb
 {
-    public class Division : IDisposable
+    public class Division : Element, IDisposable
     {
         public (int? x, int? y) size;
         private int colorCheck;

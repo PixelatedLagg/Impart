@@ -43,6 +43,7 @@ namespace CSWeb
             return new Hex(hex);
         }
     }
+    public class Element {}
     public static class Alignment
     {
         public const string Left = "left";
@@ -123,5 +124,10 @@ namespace CSWeb
     {
         ID = 1,
         Class = 0
+    }
+    public enum Template
+    {
+        Article,
+        Footer
     }
 }

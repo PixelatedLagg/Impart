@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace CSWeb
 {
-    public class Button
+    public class Button : Element
     {
         private string _text;
         private string _id;

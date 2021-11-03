@@ -2,7 +2,7 @@ using System;
 
 namespace CSWeb
 {
-    public class Link
+    public class Link : Element
     {
         private Text _text;
         private Image _image;

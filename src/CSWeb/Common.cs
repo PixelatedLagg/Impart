@@ -57,5 +57,9 @@ namespace CSWeb
                     return false;
             }
         }
+        static internal string Str(this string str)
+        {
+            return str.Replace("<", "&lt;").Replace(">", "&gt;");
+        }
     }
 }
