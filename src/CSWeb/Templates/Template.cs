@@ -1,4 +1,3 @@
-using CSWeb;
 using System;
 using System.Collections.Generic;
 
@@ -9,17 +8,17 @@ namespace CSWeb.Templates
         internal static Dictionary<string, string> CustomTemplates = new Dictionary<string, string>();
         public static void AddCustomTemplate(string name, cswebobj obj)
         {
-            CustomTemplates.Add(name, obj.textCache.Replace($"<html>{Environment.NewLine}    <link rel=\"stylesheet\" href=\"{obj.cssPath}\">", "").Replace("</html>", ""));
+            CustomTemplates.Add(name, obj.textCache);
         }
-        static internal string RenderTemplate(Template templates, params string[] args)
+        public static void AddCustomTemplate(this cswebobj obj, string name)
         {
-            switch (templates)
+            Timer.StartTimer();
+            if (!CustomTemplates.ContainsKey(name))
             {
-                case Template.Article:
-                    return Article.Render(args);
-                default:
-                    return "";
+                throw new TemplateError("Template does not exist!");
             }
+            obj.textCache += $"{CustomTemplates[name]}";
+            Debug.CallObjectEvent("[cswebobj] added custom template");
         }
     }
 }

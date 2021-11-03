@@ -1,28 +1,43 @@
-using System;
-using CSWeb;
-
 namespace CSWeb.Templates
 {
-    internal static class Article
+    public static class Article
     {
-        internal static string Render(string[] args = null)
+        public static void AddArticleTemplate(this cswebobj obj, params Element[] args)
         {
-            string textCache = "";
-            bool header = true;
-            foreach (string obj in args)
+            Timer.StartTimer();
+            string textCache = "%^";
+            foreach (Element e in args)
             {
-                if (header)
+                switch (e.GetType().FullName)
                 {
-                    textCache = $"{textCache}%^    <h1>{obj}</h1>";
-                    header = false;
-                }
-                else
-                {
-                    textCache = $"{textCache}%^    <p>{obj}</p>";
-                    header = true;
+                    case "CSWeb.Text":
+                        Text text = (Text)e;
+                        if (text.id == null)
+                        {
+                            textCache += $"    <p{text.attributes}{text.style}>{text.text}</p>%^";
+                        }
+                        else
+                        {
+                            textCache += $"    <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^";
+                        }
+                        break;
+                    case "CSWeb.Header":
+                        Header header = (Header)e;
+                        if (header.id == null)
+                        {
+                            textCache += $"    <h{header.attributes}{header.style}>{header.text}</h>%^";
+                        }
+                        else
+                        {
+                            textCache += $"    <h id=\"{header.id}\"{header.attributes}{header.style}>{header.text}</h>%^";
+                        }
+                        break;
+                    default:
+                        throw new TemplateError("Article element invalid!");
                 }
             }
-            return textCache;
+            obj.textCache += $"{textCache}<>".Replace("%^<>", "");
+            Debug.CallObjectEvent("[cswebobj] added article template");
         }
     }
 }

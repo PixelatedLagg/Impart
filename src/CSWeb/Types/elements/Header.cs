@@ -55,6 +55,7 @@ namespace CSWeb
             this._text = text;
             this._id = id;
             this.num = num;
+            _style = "";
         }
         public Header AddColor(Hex hex)
         {

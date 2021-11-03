@@ -1,6 +1,4 @@
-using System.Collections;
 using System;
-using CSWeb.Templates;
 
 namespace CSWeb
 {
@@ -170,22 +168,6 @@ namespace CSWeb
             }
             textCache += $"{tempCache}%^    </table>";
             Debug.CallObjectEvent("[cswebobj] added table");
-        }
-        public void AddTemplate(Template templates, string[] args = null)
-        {
-            Timer.StartTimer();
-            textCache += $"    {Templates.Templates.RenderTemplate(templates, args)}";
-            Debug.CallObjectEvent("[cswebobj] added template (generic)");
-        }
-        public void AddCustomTemplate(string name)
-        {
-            Timer.StartTimer();
-            if (!Templates.Templates.CustomTemplates.ContainsKey(name))
-            {
-                throw new TemplateError("Template does not exist!");
-            }
-            textCache += $"{Templates.Templates.CustomTemplates[name]}";
-            Debug.CallObjectEvent("[cswebobj] added template (custom)");
         }
         public void AddDivision(Division div)
         {
