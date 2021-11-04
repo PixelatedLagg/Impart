@@ -42,6 +42,8 @@ namespace CSWeb
         {
             return new Hex(hex);
         }
+        public const int Unordered = 0;
+        public const int Ordered = 1;
     }
     public class Element {}
     public static class Alignment
@@ -124,10 +126,5 @@ namespace CSWeb
     {
         ID = 1,
         Class = 0
-    }
-    public enum Template
-    {
-        Article,
-        Footer
     }
 }

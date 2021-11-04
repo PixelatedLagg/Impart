@@ -52,4 +52,8 @@ namespace CSWeb
     {
         internal ConversionError(string error) : base($"{{ Error: ({error}) }}") {}
     }
+    internal class ListError : Exception
+    {
+        internal ListError(string error, List list) : base($"{{ Error: ({error}) Trace: ({list}) }}") {}
+    }
 }

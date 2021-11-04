@@ -59,7 +59,7 @@ namespace CSWeb
         }
         static internal string Str(this string str)
         {
-            return str.Replace("<", "&lt;").Replace(">", "&gt;");
+            return str.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&#39;");
         }
     }
 }
