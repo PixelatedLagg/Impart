@@ -42,6 +42,10 @@ namespace CSWeb
         {
             return new Hex(hex);
         }
+        public static List List(int type, string id = null)
+        {
+            return new List(type, id);
+        }
         public const int Unordered = 0;
         public const int Ordered = 1;
     }
