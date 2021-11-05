@@ -22,11 +22,11 @@ namespace CSWeb
         {
             return new Link(image, path, id);
         }
-        public static style Style(Style style, string id)
+        public static style Style(StyleType style, string id)
         {
             return new style(style, id);
         }
-        public static Division Division(DivisionType? type = null, string id = null)
+        public static Division Division(IDType? type = null, string id = null)
         {
             return new Division(type, id);
         }
@@ -46,8 +46,27 @@ namespace CSWeb
         {
             return new List(type, id);
         }
-        public const int Unordered = 0;
-        public const int Ordered = 1;
+        public enum ListTypes
+        {
+            Unordered = 0,
+            Ordered = 1
+        }
+        public enum StyleType
+        {
+            IDStyle = 0,
+            EStyle = 1,
+            ClassStyle = 2
+        }
+        public enum IDType
+        {
+            ID = 1,
+            Class = 0
+        }
+        public enum Axis
+        {
+            X = 0,
+            Y = 1
+        }
     }
     public class Element {}
     public static class Alignment
@@ -119,16 +138,5 @@ namespace CSWeb
                     return false;
             }
         }
-    }
-    public enum Style
-    {
-        IDStyle = 0,
-        EStyle = 1,
-        ClassStyle = 2
-    }
-    public enum DivisionType
-    {
-        ID = 1,
-        Class = 0
     }
 }

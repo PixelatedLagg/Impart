@@ -19,14 +19,14 @@ namespace CSWeb
                 return _entries;
             }
         }
-        public List(int type, params Text[] textEntries)
+        public List(ICSWeb.ListTypes type, params Text[] textEntries)
         {
             switch (type)
             {
-                case 0:
+                case ICSWeb.ListTypes.Unordered:
                     this.type = "ul";
                     break;
-                case 1:
+                case ICSWeb.ListTypes.Ordered:
                     this.type = "ol";
                     break;
                 default:

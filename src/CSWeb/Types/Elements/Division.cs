@@ -22,7 +22,7 @@ namespace CSWeb
                 return $"%^    <div{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
             }
         }
-        public Division(DivisionType? type = null, string id = null)
+        public Division(ICSWeb.IDType? type = null, string id = null)
         {
             if (String.IsNullOrEmpty(id))
             {
@@ -30,8 +30,8 @@ namespace CSWeb
             }
             switch (type, id)
             {
-                case (DivisionType, string) a when a != (null, null):
-                    if (type == DivisionType.ID)
+                case (ICSWeb.IDType, string) a when a != (null, null):
+                    if (type == ICSWeb.IDType.ID)
                     {
                         attributeCache = $"id=\"{id}\"";
                     }
@@ -40,9 +40,9 @@ namespace CSWeb
                         attributeCache = $"class=\"{id}\"";
                     }
                     break;
-                case (DivisionType, string) b when b.type == null && b.id != null:
+                case (ICSWeb.IDType, string) b when b.type == null && b.id != null:
                     throw new DivisionError("Type and ID must both be null or not null!", this);
-                case (DivisionType, string) c when c.type != null && c.id == null:
+                case (ICSWeb.IDType, string) c when c.type != null && c.id == null:
                     throw new DivisionError("Type and ID must both be null or not null!", this);
             }
             colorCheck = 0;
@@ -189,6 +189,10 @@ namespace CSWeb
             {
                 styleCache += $" max-height: {y}px;";
             }
+            return this;
+        }
+        public Division SetScroll(int axis)
+        {
             return this;
         }
         public void Break()

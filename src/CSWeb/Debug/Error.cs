@@ -56,4 +56,8 @@ namespace CSWeb
     {
         internal ListError(string error, List list) : base($"{{ Error: ({error}) Trace: ({list}) }}") {}
     }
+    internal class ScrollbarError : Exception
+    {
+        internal ScrollbarError(string error, Scrollbar scrollbar) : base($"{{ Error: ({error}) Trace: ({scrollbar}) }}") {}
+    }
 }

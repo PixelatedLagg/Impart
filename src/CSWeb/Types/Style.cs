@@ -8,7 +8,7 @@ namespace CSWeb
         private string textCache;
         private string id;
         private int colorCheck;
-        public style(Style style, string id)
+        public style(ICSWeb.StyleType style, string id)
         {
             Timer.StartTimer();
             if (String.IsNullOrEmpty(id))
@@ -17,13 +17,13 @@ namespace CSWeb
             }
             switch (style)
             {
-                case Style.IDStyle:
+                case ICSWeb.StyleType.IDStyle:
                     textCache = $"#{id} {{%^";
                     break;
-                case Style.EStyle:
+                case ICSWeb.StyleType.EStyle:
                     textCache = $"{id} {{%^";
                     break;
-                case Style.ClassStyle:
+                case ICSWeb.StyleType.ClassStyle:
                     textCache = $".{id} {{%^";
                     break;
             }
