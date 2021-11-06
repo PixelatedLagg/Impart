@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 namespace CSWeb
 {
     public class ICSWeb
@@ -45,6 +46,10 @@ namespace CSWeb
         public static List List(int type, string id = null)
         {
             return new List(type, id);
+        }
+        public static Scrollbar Scrollbar(Axis axis, string id, IDType type, int width)
+        {
+            return new Scrollbar(axis, id, type, width);
         }
         public enum ListTypes
         {

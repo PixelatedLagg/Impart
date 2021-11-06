@@ -1,6 +1,4 @@
-using System.Linq.Expressions;
 using System;
-using System.Drawing;
 
 namespace CSWeb
 {
@@ -11,15 +9,17 @@ namespace CSWeb
         private string elementCache;
         private string styleCache;
         private string attributeCache;
+        internal string cssCache;
+        internal string id;
         internal string textCache 
         {
             get 
             {
                 if (styleCache == "")
                 {
-                    return $"%^    <div{attributeCache}>{elementCache}%^    </div>";
+                    return $"%^    <div{id}{attributeCache}>{elementCache}%^    </div>";
                 }
-                return $"%^    <div{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
+                return $"%^    <div{id}{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
             }
         }
         public Division(ICSWeb.IDType? type = null, string id = null)
@@ -33,11 +33,11 @@ namespace CSWeb
                 case (ICSWeb.IDType, string) a when a != (null, null):
                     if (type == ICSWeb.IDType.ID)
                     {
-                        attributeCache = $"id=\"{id}\"";
+                        this.id = $" id=\"{id}\"";
                     }
                     else
                     {
-                        attributeCache = $"class=\"{id}\"";
+                        this.id = $" class=\"{id}\"";
                     }
                     break;
                 case (ICSWeb.IDType, string) b when b.type == null && b.id != null:
@@ -48,6 +48,7 @@ namespace CSWeb
             colorCheck = 0;
             styleCache = " margin: 0px;";
             size = (null, null);
+            cssCache = "";
         }
         public void AddText(Text text)
         {
@@ -191,8 +192,17 @@ namespace CSWeb
             }
             return this;
         }
-        public Division SetScroll(int axis)
+        public Division SetScrollBar(Scrollbar scrollbar)
         {
+            if (scrollbar.divID != id && id != null)
+            {
+                throw new ScrollbarError("ID of division must either be null or match the ID inputted to the scrollbar!", scrollbar);
+            }
+            if (id == null)
+            {
+                id = scrollbar.divID;
+            }
+            cssCache += scrollbar.cssCache;
             return this;
         }
         public void Break()

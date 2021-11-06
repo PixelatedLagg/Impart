@@ -171,7 +171,8 @@ namespace CSWeb
         }
         public void AddDivision(Division div)
         {
-            textCache += $"{div.textCache}";
+            textCache += div.textCache;
+            styleCache += div.cssCache;
         }
         public void AddList(List list)
         {
