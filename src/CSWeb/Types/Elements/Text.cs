@@ -53,34 +53,28 @@ namespace CSWeb
             _attributes = "";
             colorCheck = 0;
         }
-        public Text AddColor(Hex hex)
+        public Text SetColor(Color color)
         {
             if (colorCheck > 1)
             {
                 throw new TextError("Cannot set color more than once!", this);
             }
-            colorCheck++;
-            _style += $" color: #{hex.hex};";
-            return this;
-        }
-        public Text AddColor(Hsl hsl)
-        {
-            if (colorCheck > 1)
+            switch (color.GetType().FullName)
             {
-                throw new TextError("Cannot set color more than once!", this);
+                case "CSWeb.Rgb":
+                    Rgb rgb = (Rgb)color;
+                    _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+                    break;
+                case "CSWeb.Hsl":
+                    Hsl hsl = (Hsl)color;
+                    _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+                    break;
+                case "CSWeb.Hex":
+                    Hex hex = (Hex)color;
+                    _style += $" color: #{hex.hex};";
+                    break;
             }
             colorCheck++;
-            _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
-            return this;
-        }
-        public Text AddColor(Rgb rgb)
-        {
-            if (colorCheck > 1)
-            {
-                throw new TextError("Cannot set color more than once!", this);
-            }
-            colorCheck++;
-            _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
             return this;
         }
         public Text SetMargin(int pixels)

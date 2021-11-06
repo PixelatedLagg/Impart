@@ -57,34 +57,28 @@ namespace CSWeb
             this.num = num;
             _style = "";
         }
-        public Header AddColor(Hex hex)
+        public Header SetColor(Color color)
         {
             if (colorCheck > 1)
             {
                 throw new HeaderError("Cannot set color more than once!", this);
             }
-            colorCheck++;
-            _style += $" color: #{hex.hex};";
-            return this;
-        }
-        public Header AddColor(Hsl hsl)
-        {
-            if (colorCheck > 1)
+            switch (color.GetType().FullName)
             {
-                throw new HeaderError("Cannot set color more than once!", this);
+                case "CSWeb.Rgb":
+                    Rgb rgb = (Rgb)color;
+                    _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+                    break;
+                case "CSWeb.Hsl":
+                    Hsl hsl = (Hsl)color;
+                    _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+                    break;
+                case "CSWeb.Hex":
+                    Hex hex = (Hex)color;
+                    _style += $" color: #{hex.hex};";
+                    break;
             }
             colorCheck++;
-            _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
-            return this;
-        }
-        public Header AddColor(Rgb rgb)
-        {
-            if (colorCheck > 1)
-            {
-                throw new HeaderError("Cannot set color more than once!", this);
-            }
-            colorCheck++;
-            _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
             return this;
         }
         public Header SetHoverMessage(string message)

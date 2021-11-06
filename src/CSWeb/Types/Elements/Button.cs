@@ -54,42 +54,28 @@ namespace CSWeb
             _attributes = "";
             colorCheck = 0;
         }
-        public Button AddColor(System.Drawing.Color color)
+        public Button SetColor(Color color)
         {
             if (colorCheck > 1)
             {
                 throw new ButtonError("Cannot set color more than once!", this);
             }
-            colorCheck++;
-            _style += $" color: {color.ToKnownColor()};";
-            return this;
-        }
-        public Button AddColor(string hex)
-        {
-            if (colorCheck > 1)
+            switch (color.GetType().FullName)
             {
-                throw new ButtonError("Cannot set color more than once!", this);
+                case "CSWeb.Rgb":
+                    Rgb rgb = (Rgb)color;
+                    _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+                    break;
+                case "CSWeb.Hsl":
+                    Hsl hsl = (Hsl)color;
+                    _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+                    break;
+                case "CSWeb.Hex":
+                    Hex hex = (Hex)color;
+                    _style += $" color: #{hex.hex};";
+                    break;
             }
             colorCheck++;
-            if (hex == null || hex.Length != 6)
-            {
-                throw new ButtonError("Invalid hex value!", this);
-            }
-            _style += $" color: #{hex};";
-            return this;
-        }
-        public Button AddColor(int x, int y, int z)
-        {
-            if (colorCheck > 1)
-            {
-                throw new ButtonError("Cannot set color more than once!", this);
-            }
-            colorCheck++;
-            if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
-            {
-                throw new ButtonError("Invalid RGB value!", this);
-            }
-            _style += $" color: rgb({x},{y},{z});";
             return this;
         }
         public Button SetHoverMessage(string message)
