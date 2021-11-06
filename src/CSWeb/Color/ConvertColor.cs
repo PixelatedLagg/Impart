@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 
 namespace CSWeb
 {
@@ -7,7 +6,7 @@ namespace CSWeb
     {
         static public Hsl RgbToHsl(Rgb rgb)
         {
-            Hsl hsl = new Hsl();
+            Hsl hsl = new Hsl(1, 1, 1);
             float r = (rgb.rgb.r / 255.0f);
             float g = (rgb.rgb.g / 255.0f);
             float b = (rgb.rgb.b / 255.0f);
@@ -53,7 +52,7 @@ namespace CSWeb
         }
         static public Hex RgbToHex(Rgb rgb)
         {
-            Color myColor = Color.FromArgb(rgb.rgb.r, rgb.rgb.g, rgb.rgb.b);
+            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(rgb.rgb.r, rgb.rgb.g, rgb.rgb.b);
             return new Hex(myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2"));
         }
         public static Rgb HslToRgb(Hsl hsl)

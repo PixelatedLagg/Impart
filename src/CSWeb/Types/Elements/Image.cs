@@ -77,7 +77,7 @@ namespace CSWeb
             _attributes += $" width=\"{x}\" height=\"{y}\"";
             return this;
         }
-        public Image SetBorder(int pixels, string border, Color color)
+        public Image SetBorder(int pixels, string border, System.Drawing.Color color)
         {
             if (pixels < 0)
             {

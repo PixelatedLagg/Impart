@@ -1,4 +1,3 @@
-using System.ComponentModel.Design;
 namespace CSWeb
 {
     public class ICSWeb
@@ -47,9 +46,9 @@ namespace CSWeb
         {
             return new List(type, id);
         }
-        public static Scrollbar Scrollbar(Axis axis, string id, IDType type, int width)
+        public static Scrollbar Scrollbar(Axis axis, string id, IDType type, int width, Color color, Color colorThumb, int? rounded = null)
         {
-            return new Scrollbar(axis, id, type, width);
+            return new Scrollbar(axis, id, type, width, color, colorThumb, rounded);
         }
         public enum ListTypes
         {
@@ -74,6 +73,7 @@ namespace CSWeb
         }
     }
     public class Element {}
+    public class Color {}
     public static class Alignment
     {
         public const string Left = "left";

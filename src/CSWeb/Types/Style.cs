@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 
 namespace CSWeb
 {
@@ -31,7 +30,7 @@ namespace CSWeb
             colorCheck = 0;
             Debug.CallObjectEvent("[style] created idstyle");
         }
-        public style AddColor(Color color)
+        public style AddColor(System.Drawing.Color color)
         {
             Timer.StartTimer();
             colorCheck++;

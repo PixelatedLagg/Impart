@@ -1,6 +1,6 @@
 namespace CSWeb
 {
-    public struct Rgb
+    public class Rgb : Color
     {
         public (int r, int g, int b) rgb;
         public Rgb(int r, int g, int b)
@@ -12,7 +12,7 @@ namespace CSWeb
             }
         }
     }
-    public struct Hsl
+    public class Hsl : Color
     {
         public (float h, float s, float l) hsl;
         public Hsl(float h, float s, float l)
@@ -32,7 +32,7 @@ namespace CSWeb
             }
         }
     }
-    public struct Hex
+    public class Hex : Color
     {
         public string hex;
         public Hex(string hex)

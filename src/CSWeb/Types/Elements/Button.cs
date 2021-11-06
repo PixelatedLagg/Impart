@@ -54,7 +54,7 @@ namespace CSWeb
             _attributes = "";
             colorCheck = 0;
         }
-        public Button AddColor(Color color)
+        public Button AddColor(System.Drawing.Color color)
         {
             if (colorCheck > 1)
             {

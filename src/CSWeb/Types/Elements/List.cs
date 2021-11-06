@@ -9,7 +9,6 @@ namespace CSWeb
         private string id;
         private string style;
         private string attributes;
-        private int colorCheck;
         private string type;
         internal string textCache;
         public Dictionary<int, Text> entries 
@@ -48,7 +47,6 @@ namespace CSWeb
             id = "";
             style = "";
             attributes = "";
-            colorCheck = 0;
         }
         public List(int type, string id, params Text[] textEntries)
         {
@@ -86,7 +84,6 @@ namespace CSWeb
             }
             style = "";
             attributes = "";
-            colorCheck = 0;
         }
         internal string Render()
         {

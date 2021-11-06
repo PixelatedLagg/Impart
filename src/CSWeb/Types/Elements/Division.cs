@@ -49,6 +49,7 @@ namespace CSWeb
             styleCache = " margin: 0px;";
             size = (null, null);
             cssCache = "";
+            attributeCache = "";
         }
         public void AddText(Text text)
         {
@@ -76,34 +77,28 @@ namespace CSWeb
             }
             Debug.CallObjectEvent("[division] added image element");
         }
-        public Division SetColor(Hex hex)
+        public Division SetColor(Color color)
         {
             if (colorCheck > 1)
             {
                 throw new DivisionError("Cannot set color more than once!", this);
             }
-            colorCheck++;
-            styleCache += $" background-color: #{hex.hex};";
-            return this;
-        }
-        public Division SetColor(Hsl hsl)
-        {
-            if (colorCheck > 1)
+            switch (color.GetType().FullName)
             {
-                throw new DivisionError("Cannot set color more than once!", this);
+                case "CSWeb.Rgb":
+                    Rgb rgb = (Rgb)color;
+                    styleCache += $" background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+                    break;
+                case "CSWeb.Hsl":
+                    Hsl hsl = (Hsl)color;
+                    styleCache += $" background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+                    break;
+                case "CSWeb.Hex":
+                    Hex hex = (Hex)color;
+                    styleCache += $" background-color: #{hex.hex};";
+                    break;
             }
             colorCheck++;
-            styleCache += $" background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
-            return this;
-        }
-        public Division SetColor(Rgb rgb)
-        {
-            if (colorCheck > 1)
-            {
-                throw new DivisionError("Cannot set color more than once!", this);
-            }
-            colorCheck++;
-            styleCache += $" background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
             return this;
         }
         public Division SetBorder(int pixels, string border, Hex hex, int roundedPixels = 0)
