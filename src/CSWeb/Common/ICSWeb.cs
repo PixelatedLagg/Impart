@@ -72,8 +72,8 @@ namespace CSWeb
             Y = 1
         }
     }
-    public class Element {}
-    public class Color {}
+    public interface Element {}
+    public interface Color {}
     public static class Alignment
     {
         public const string Left = "left";
