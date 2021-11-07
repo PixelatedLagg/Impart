@@ -47,6 +47,7 @@ namespace CSWeb
     {
         internal ColorError(string error, Rgb color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
         internal ColorError(string error, Hsl color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
+        internal ColorError(string error, Hex color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
     }
     internal class ConversionError : Exception
     {
