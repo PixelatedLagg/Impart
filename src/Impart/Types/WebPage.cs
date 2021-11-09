@@ -10,7 +10,7 @@ namespace Impart
         private string styleCache;
         public WebPage(string path, string cssPath)
         {
-            CSWebConfig.Initialize();
+            ImpartConfig.Initialize();
             Timer.StartTimer();
             this.path = path;
             textCache = "";
