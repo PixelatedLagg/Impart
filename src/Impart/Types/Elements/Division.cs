@@ -22,7 +22,7 @@ namespace Impart
                 return $"%^    <div{id}{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
             }
         }
-        public Division(ICommon.IDType? type = null, string id = null)
+        public Division(ImpartCommon.IDType? type = null, string id = null)
         {
             if (String.IsNullOrEmpty(id))
             {
@@ -30,8 +30,8 @@ namespace Impart
             }
             switch (type, id)
             {
-                case (ICommon.IDType, string) a when a != (null, null):
-                    if (type == ICommon.IDType.ID)
+                case (ImpartCommon.IDType, string) a when a != (null, null):
+                    if (type == ImpartCommon.IDType.ID)
                     {
                         this.id = $" id=\"{id}\"";
                     }
@@ -40,9 +40,9 @@ namespace Impart
                         this.id = $" class=\"{id}\"";
                     }
                     break;
-                case (ICommon.IDType, string) b when b.type == null && b.id != null:
+                case (ImpartCommon.IDType, string) b when b.type == null && b.id != null:
                     throw new DivisionError("Type and ID must both be null or not null!", this);
-                case (ICommon.IDType, string) c when c.type != null && c.id == null:
+                case (ImpartCommon.IDType, string) c when c.type != null && c.id == null:
                     throw new DivisionError("Type and ID must both be null or not null!", this);
             }
             colorCheck = 0;

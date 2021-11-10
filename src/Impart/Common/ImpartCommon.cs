@@ -1,7 +1,19 @@
+using System;
 namespace Impart
 {
-    public class ICommon
+    public class ImpartCommon
     {
+        public ImpartCommon()
+        {
+            if (ImpartConfig.CommonInitialization == 0)
+            {
+                ImpartConfig.Initialize();
+            }
+            else
+            {
+                throw new ConfigError("Cannot initialize ImpartCommon more than once!");
+            }
+        }
         public static Text Text(string text, string id = null)
         {
             return new Text(text, id);

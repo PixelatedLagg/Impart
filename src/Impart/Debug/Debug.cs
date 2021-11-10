@@ -5,7 +5,7 @@ namespace Impart
 {
     public static class Debug
     {
-        public static event Action<Log> ObjectEvent;
+        internal static event Action<Log> ObjectEvent;
         internal static bool FileLogging;
         internal static bool Formatting;
         private static string tempCache = "";

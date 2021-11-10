@@ -7,7 +7,7 @@ namespace Impart
         private string textCache;
         private string id;
         private int colorCheck;
-        public Style(ICommon.StyleType style, string id)
+        public Style(ImpartCommon.StyleType style, string id)
         {
             Timer.StartTimer();
             if (String.IsNullOrEmpty(id))
@@ -16,13 +16,13 @@ namespace Impart
             }
             switch (style)
             {
-                case ICommon.StyleType.IDStyle:
+                case ImpartCommon.StyleType.IDStyle:
                     textCache = $"#{id} {{%^";
                     break;
-                case ICommon.StyleType.EStyle:
+                case ImpartCommon.StyleType.EStyle:
                     textCache = $"{id} {{%^";
                     break;
-                case ICommon.StyleType.ClassStyle:
+                case ImpartCommon.StyleType.ClassStyle:
                     textCache = $".{id} {{%^";
                     break;
             }

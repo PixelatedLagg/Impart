@@ -18,14 +18,14 @@ namespace Impart
                 return _entries;
             }
         }
-        public List(ICommon.ListTypes type, params Text[] textEntries)
+        public List(ImpartCommon.ListTypes type, params Text[] textEntries)
         {
             switch (type)
             {
-                case ICommon.ListTypes.Unordered:
+                case ImpartCommon.ListTypes.Unordered:
                     this.type = "ul";
                     break;
-                case ICommon.ListTypes.Ordered:
+                case ImpartCommon.ListTypes.Ordered:
                     this.type = "ol";
                     break;
                 default:

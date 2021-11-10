@@ -7,7 +7,7 @@ namespace Impart
         internal string cssCache;
         private string id;
         internal string divID;
-        public Scrollbar(ICommon.Axis axis, string id, ICommon.IDType type, int width, Color color, Color colorThumb, int? rounded = null)
+        public Scrollbar(ImpartCommon.Axis axis, string id, ImpartCommon.IDType type, int width, Color color, Color colorThumb, int? rounded = null)
         {
             if (String.IsNullOrEmpty(id))
             {
@@ -15,11 +15,11 @@ namespace Impart
             }
             switch (type)
             {
-                case ICommon.IDType.ID:
+                case ImpartCommon.IDType.ID:
                     this.id = $"#{id.Str()}";
                     divID = $" id=\"{id.Str()}\"";
                     break;
-                case ICommon.IDType.Class:
+                case ImpartCommon.IDType.Class:
                     this.id = $".{id.Str()}";
                     divID = $" class=\"{id.Str()}\"";
                     break;
@@ -27,10 +27,10 @@ namespace Impart
             cssCache = $"%^{this.id} {{%^";
             switch (axis)
             {
-                case ICommon.Axis.X:
+                case ImpartCommon.Axis.X:
                     cssCache += "    overflow-x: auto;%^}%^";
                     break;
-                case ICommon.Axis.Y:
+                case ImpartCommon.Axis.Y:
                     cssCache += "    overflow-y: auto;%^}%^";
                     break;
                 default:
