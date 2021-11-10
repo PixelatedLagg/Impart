@@ -40,7 +40,7 @@ namespace Impart
             string namespaceName;
             try 
             {
-                namespaceName = Assembly.GetExecutingAssembly().GetTypes().Select(t => t.Namespace).Where(t => !t.Contains("Impart")).Distinct().FirstOrDefault();
+                namespaceName = Assembly.GetEntryAssembly().GetTypes().Select(t => t.Namespace).Where(t => !t.Contains("Impart")).Distinct().FirstOrDefault();
             }
             catch 
             {
