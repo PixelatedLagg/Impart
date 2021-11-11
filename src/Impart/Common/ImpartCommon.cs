@@ -8,7 +8,7 @@ namespace Impart
 {
     public class ImpartCommon
     {
-        static ImpartCommon()
+        internal static void Config()
         {
             string fullName = "";
             Type declaringType;

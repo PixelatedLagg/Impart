@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace Impart
 {
@@ -11,11 +13,40 @@ namespace Impart
         public WebPage(string path, string cssPath)
         {
             Timer.StartTimer();
+            if (Debug.TimesConfig == null)
+            {
+                string fullName = "";
+                Type declaringType;
+                int skipFrames = 1;
+                do
+                {
+                    MethodBase method = new StackFrame(skipFrames, false).GetMethod();
+                    declaringType = method.DeclaringType;
+                    if (declaringType == null)
+                    {
+                        if (Type.GetType(method.Name)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance) != null)
+                        {
+                            Debug.ObjectEvent += (Action<Log>)Delegate.CreateDelegate(typeof(Action<Log>), null, Type.GetType(method.Name).GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance));
+                        }
+                        ImpartConfig.Initialize();
+                        return;
+                    }
+                    skipFrames++;
+                    fullName = declaringType.FullName;
+                }
+                while (declaringType.Module.Name.Equals("mscorlib.dll", StringComparison.OrdinalIgnoreCase));
+                if (Type.GetType(fullName)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance) != null)
+                {
+                    Debug.ObjectEvent += (Action<Log>)Delegate.CreateDelegate(typeof(Action<Log>), null, Type.GetType(fullName)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance));
+                }
+                ImpartConfig.Initialize();
+                Debug.TimesConfig = 1;
+            }
             this.path = path;
             textCache = "";
             this.cssPath = cssPath;
             styleCache = $"body {{%^    padding: 0;%^    margin: 0;%^}}";
-            Debug.CallObjectEvent("[cswebobj] created cswebobj");
+            Debug.CallObjectEvent("[webpage] created cswebobj");
         }
         public void AddStyle(Style style)
         {
@@ -28,7 +59,7 @@ namespace Impart
             {
                 styleCache += $"%^{style.Render()}";
             }
-            Debug.CallObjectEvent("[cswebobj] added style");
+            Debug.CallObjectEvent("[webpage] added style");
         }
         public void AddText(Text text)
         {
@@ -41,7 +72,7 @@ namespace Impart
             {
                 textCache += $"%^    <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>";
             }
-            Debug.CallObjectEvent("[cswebobj] added text element");
+            Debug.CallObjectEvent("[webpage] added text element");
         }
         public void SetTitle(string title)
         {
@@ -51,7 +82,7 @@ namespace Impart
                 throw new WebPageError("Title cannot be null or empty!", this);
             }
             textCache += $"%^    <title>{title}</title>";
-            Debug.CallObjectEvent("[cswebobj] set title");
+            Debug.CallObjectEvent("[webpage] set title");
         }
         public void AddImage(Image image)
         {
@@ -64,7 +95,7 @@ namespace Impart
             {
                 textCache += $"%^    <img src=\"{image.path}\" id=\"{image.id}\"{image.attributes}{image.style}>";
             }
-            Debug.CallObjectEvent("[cswebobj] added image element");
+            Debug.CallObjectEvent("[webpage] added image element");
         }
         public void AddHeader(Header header)
         {
@@ -77,7 +108,7 @@ namespace Impart
             {
                 textCache += $"%^    <h{header.num} id=\"{header.id}\"{header.attributes}{header.style}>{header.text}</h{header.num}>";
             }
-            Debug.CallObjectEvent("[cswebobj] added header");
+            Debug.CallObjectEvent("[webpage] added header");
         }
         public void AddLink(Link link)
         {
@@ -145,7 +176,7 @@ namespace Impart
                         {
                             tempCache += $"%^        </tr>"; 
                             textCache += $"%^    </table>";
-                            Debug.CallObjectEvent("[cswebobj] added table");
+                            Debug.CallObjectEvent("[webpage] added table");
                             return;
                         }
                         tempCache += $"%^            <td>{obj[rowNum + _currentobj]}</td>";
@@ -166,7 +197,7 @@ namespace Impart
                 tempCache += $"%^        </tr>"; 
             }
             textCache += $"{tempCache}%^    </table>";
-            Debug.CallObjectEvent("[cswebobj] added table");
+            Debug.CallObjectEvent("[webpage] added table");
         }
         public void AddDivision(Division div)
         {
@@ -189,7 +220,7 @@ namespace Impart
                 Common.Change(path, Common.GetAllText(path).Replace("    ", ""));
                 Common.Change(cssPath, Common.GetAllText(cssPath).Replace("    ", ""));
             }
-            Debug.CallObjectEvent("[cswebobj] rendered cswebobj");
+            Debug.CallObjectEvent("[webpage] rendered webpage");
         }
     }
 }

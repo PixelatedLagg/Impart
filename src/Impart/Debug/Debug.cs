@@ -5,6 +5,7 @@ namespace Impart
 {
     public static class Debug
     {
+        internal static int? TimesConfig = null;
         internal static event Action<Log> ObjectEvent;
         internal static bool FileLogging;
         internal static bool Formatting;
