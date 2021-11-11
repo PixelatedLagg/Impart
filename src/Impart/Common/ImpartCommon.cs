@@ -1,8 +1,6 @@
 using System;
 using System.Reflection;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Impart
 {
@@ -83,9 +81,9 @@ namespace Impart
         {
             return new List(type, id);
         }
-        public static Scrollbar Scrollbar(Axis axis, string id, IDType type, int width, Color color, Color colorThumb, int? rounded = null)
+        public static Scrollbar Scrollbar(Axis axis, int width, Color color, Color colorThumb, Division division = null, int? rounded = null)
         {
-            return new Scrollbar(axis, id, type, width, color, colorThumb, rounded);
+            return new Scrollbar(axis, width, color, colorThumb, division, rounded);
         }
         public enum ListTypes
         {

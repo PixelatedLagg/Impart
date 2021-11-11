@@ -11,6 +11,7 @@ namespace Impart
         private string attributeCache;
         internal string cssCache;
         internal string id;
+        internal string scrollId;
         internal string textCache 
         {
             get 
@@ -27,6 +28,7 @@ namespace Impart
             if (String.IsNullOrEmpty(id))
             {
                 id = null;
+                scrollId = null;
             }
             switch (type, id)
             {
@@ -34,10 +36,12 @@ namespace Impart
                     if (type == ImpartCommon.IDType.ID)
                     {
                         this.id = $" id=\"{id}\"";
+                        scrollId = $"#{id}";
                     }
                     else
                     {
                         this.id = $" class=\"{id}\"";
+                        scrollId = $".{id}";
                     }
                     break;
                 case (ImpartCommon.IDType, string) b when b.type == null && b.id != null:
