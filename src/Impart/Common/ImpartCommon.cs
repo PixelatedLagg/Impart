@@ -1,18 +1,43 @@
 using System;
+using System.Reflection;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
+
 namespace Impart
 {
     public class ImpartCommon
     {
-        public ImpartCommon()
+        static ImpartCommon()
         {
-            if (ImpartConfig.CommonInitialization == 0)
+            string fullName = "";
+            Type declaringType;
+            int skipFrames = 2;
+            do
             {
-                ImpartConfig.Initialize();
+                MethodBase method = new StackFrame(skipFrames, false).GetMethod();
+                declaringType = method.DeclaringType;
+                if (declaringType == null)
+                {
+                    if (Type.GetType(method.Name)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance) != null)
+                    {
+                        Debug.ObjectEvent += (Action<Log>)Delegate.CreateDelegate(typeof(Action<Log>), null, Type.GetType(method.Name).GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance));
+                    }
+                    ImpartConfig.Initialize();
+                    return;
+                }
+                skipFrames++;
+                fullName = declaringType.FullName;
             }
-            else
+            while (declaringType.Module.Name.Equals("mscorlib.dll", StringComparison.OrdinalIgnoreCase));
+            if (Type.GetType(fullName)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance) != null)
             {
-                throw new ConfigError("Cannot initialize ImpartCommon more than once!");
+                Debug.ObjectEvent += (Action<Log>)Delegate.CreateDelegate(typeof(Action<Log>), null, Type.GetType(fullName)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance));
             }
+            ImpartConfig.Initialize();
+        }
+        public static void Test()
+        {
         }
         public static Text Text(string text, string id = null)
         {

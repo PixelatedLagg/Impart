@@ -9,11 +9,9 @@ namespace Impart
 {
     internal static class ImpartConfig
     {
-        internal static int CommonInitialization;
         internal static void Initialize()
         {
             Timer.StartTimer();
-            CommonInitialization++;
             if (Directory.GetFiles(Environment.CurrentDirectory, "*.config").Length == 0)
             {
                 using (StreamWriter writer = new StreamWriter("app.config"))
@@ -36,20 +34,6 @@ namespace Impart
                 {
                     throw new ConfigError("All key values must be \"true\" or \"false\"!");
                 }
-            }
-            string namespaceName;
-            try 
-            {
-                namespaceName = Assembly.GetEntryAssembly().GetTypes().Select(t => t.Namespace).Where(t => !t.Contains("Impart")).Distinct().FirstOrDefault();
-            }
-            catch 
-            {
-                Debug.CallObjectEvent("[impart] finished initialization");
-                return;
-            }
-            if (Type.GetType($"{namespaceName}.Program")?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance) != null)
-            {
-                Debug.ObjectEvent += (Action<Log>)Delegate.CreateDelegate(typeof(Action<Log>), null, Type.GetType($"{namespaceName}.Program")?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance));
             }
             Debug.CallObjectEvent("[impart] finished initialization");
         }
