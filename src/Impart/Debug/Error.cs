@@ -61,4 +61,8 @@ namespace Impart
     {
         internal ScrollbarError(string error, Scrollbar scrollbar) : base($"{{ Error: ({error}) Trace: ({scrollbar}) }}") {}
     }
+    internal class FormError : Exception
+    {
+        internal FormError(string error, FormElement formelement) : base($"{{ Error: ({error}) Trace: ({formelement}) }}") {}
+    }
 }
