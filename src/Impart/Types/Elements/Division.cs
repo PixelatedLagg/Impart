@@ -28,6 +28,7 @@ namespace Impart
         /// <summary>Constructor for the division class.</summary>
         public Division(ImpartCommon.IDType? type = null, string id = null)
         {
+            Timer.StartTimer();
             if (String.IsNullOrEmpty(id))
             {
                 id = null;
@@ -57,6 +58,7 @@ namespace Impart
             size = (null, null);
             cssCache = "";
             attributeCache = "";
+            Debug.CallObjectEvent("[division] initialized division");
         }
 
         /// <summary>Method for adding text to the division.</summary>
@@ -71,7 +73,7 @@ namespace Impart
             {
                 elementCache += $"%^        <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>";
             }
-            Debug.CallObjectEvent("[division] added text element");
+            Debug.CallObjectEvent("[division] added text");
         }
 
         /// <summary>Method for adding an image to the division.</summary>
@@ -86,12 +88,13 @@ namespace Impart
             {
                 elementCache += $"%^        <img src=\"{image.path}\" id=\"{image.id}\"{image.attributes}{image.style}>";
             }
-            Debug.CallObjectEvent("[division] added image element");
+            Debug.CallObjectEvent("[division] added image");
         }
 
         /// <summary>Method for setting the division color.</summary>
         public Division SetColor(Color color)
         {
+            Timer.StartTimer();
             if (colorCheck > 1)
             {
                 throw new DivisionError("Cannot set color more than once!", this);
@@ -111,7 +114,7 @@ namespace Impart
                     styleCache += $" background-color: #{hex.hex};";
                     break;
             }
-            colorCheck++;
+            Debug.CallObjectEvent("[division] set color");
             return this;
         }
 
@@ -149,6 +152,7 @@ namespace Impart
         /// <summary>Method for setting the division to follow the scroll.</summary>
         public Division SetFollowScroll(bool obj)
         {
+            Timer.StartTimer();
             if (obj)
             {
                 styleCache += " position: fixed;";
@@ -157,12 +161,14 @@ namespace Impart
             {
                 throw new DivisionError("Default value for follow scroll is false!", this);
             }
+            Debug.CallObjectEvent("[division] set follow scroll");
             return this;
         }
 
         /// <summary>Method for setting the division margin.</summary>
         public Division SetMargin(int pixels)
         {
+            Timer.StartTimer();
             if (pixels == 0)
             {
                 throw new DivisionError("Border thickness is default 0 pixels!", this);
@@ -172,12 +178,14 @@ namespace Impart
                 throw new DivisionError("Margin thickness must be above 0!", this);
             }
             styleCache += $" margin: {pixels}px;";
+            Debug.CallObjectEvent("[division] set margin");
             return this;
         }
 
         /// <summary>Method for setting the division size.</summary>
         public Division SetSize(int? x, int? y)
         {
+            Timer.StartTimer();
             if (y < 0 || x < 0)
             {
                 throw new DivisionError("Invalid size values!", this);
@@ -190,12 +198,14 @@ namespace Impart
             {
                 styleCache += $" max-height: {y}px;";
             }
+            Debug.CallObjectEvent("[division] set size");
             return this;
         }
 
         /// <summary>Method for setting the division scrollbar.</summary>
         public Division SetScrollBar(Scrollbar scrollbar)
         {
+            Timer.StartTimer();
             if (scrollbar.divID != id && id != null)
             {
                 throw new ScrollbarError("ID of division must either be null or match the ID inputted to the scrollbar!", scrollbar);
@@ -205,6 +215,7 @@ namespace Impart
                 id = scrollbar.divID;
             }
             cssCache += scrollbar.cssCache;
+            Debug.CallObjectEvent("[division] set scrollbar");
             return this;
         }
 

@@ -131,6 +131,7 @@ namespace Impart
         /// <summary>Method for adding a link to the webpage.</summary>
         public void AddLink(Link link)
         {
+            Timer.StartTimer();
             if (link.image != null)
             {
                 switch (link.id, link.image.id)
@@ -167,6 +168,7 @@ namespace Impart
                         break;
                 }
             }
+            Debug.CallObjectEvent("[webpage] added link");
         }
 
         /// <summary>Method for adding a table to the webpage.</summary>
@@ -224,37 +226,62 @@ namespace Impart
         /// <summary>Method for adding a division to the webpage.</summary>
         public void AddDivision(Division div)
         {
+            Timer.StartTimer();
             textCache += div.textCache;
             styleCache += div.cssCache;
+            Debug.CallObjectEvent("[webpage] added division");
         }
 
         /// <summary>Method for adding a list to the webpage.</summary>
         public void AddList(List list)
         {
+            Timer.StartTimer();
             textCache += list.Render();
+            Debug.CallObjectEvent("[webpage] added division");
         }
 
         /// <summary>Method for setting the webpage scrollbar.</summary>
         public void SetScrollBar(Scrollbar scrollbar)
         {
+            Timer.StartTimer();
             bodyStyle += scrollbar.bodyCache;
             styleCache += scrollbar.cssCache;
+            Debug.CallObjectEvent("[webpage] set scrollbar");
         }
 
         /// <summary>Method for adding a form to the webpage.</summary>
         public void AddForm(Form form)
         {
+            Timer.StartTimer();
             textCache += form.Render();
+            Debug.CallObjectEvent("[webpage] added form");
+        }
+
+        /// <summary>Method for adding a button to the webpage.</summary>
+        public void AddButton(Button button)
+        {
+            Timer.StartTimer();
+            if (button.id == null)
+            {
+                textCache += $"%^    <button{button.attributes}{button.style}>{button.text}</button>";
+            }
+            else
+            {
+                textCache += $"%^    <button id=\"{button.id}\"{button.attributes}{button.style}>{button.text}</button>";
+            }
+            Debug.CallObjectEvent("[webpage] added button");
         }
 
         /// <summary>Method for setting the webpage scrollbar.</summary>
         public void SetDefaultMargin(int pixels)
         {
+            Timer.StartTimer();
             if (pixels <= 0)
             {
                 throw new WebPageError("Margin pixel value must be above 0!", this);
             }
             defaultMargin = pixels;
+            Debug.CallObjectEvent("[webpage] set default margin");
         }
 
         /// <summary>Method for rendering the webpage.</summary>

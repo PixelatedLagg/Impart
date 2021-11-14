@@ -28,14 +28,14 @@ namespace Impart
                 return $" style=\"{_style}\"".Replace("\" ", "\"");
             }
         }
-        public string text 
+        internal string text 
         {
             get 
             {
                 return _text;
             }
         }
-        public string id 
+        internal string id 
         {
             get 
             {
