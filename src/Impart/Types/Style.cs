@@ -2,11 +2,14 @@ using System;
 
 namespace Impart
 {
+    /// <summary>Class that represents ID/class styling in html.</summary>
     public class Style
     {
+        private bool[] setProperties;
         private string textCache;
         private string id;
-        private int colorCheck;
+
+        /// <summary>Constructor for the style class.</summary>
         public Style(ImpartCommon.StyleType style, string id)
         {
             Timer.StartTimer();
@@ -27,68 +30,76 @@ namespace Impart
                     break;
             }
             this.id = id;
-            colorCheck = 0;
+            setProperties = new bool[] {false, false, false};
             Debug.CallObjectEvent("[style] created idstyle");
         }
-        public Style AddColor(System.Drawing.Color color)
+
+        /// <summary>Method for setting the style color.</summary>
+        public Style SetColor(Color color)
         {
             Timer.StartTimer();
-            colorCheck++;
-            textCache += $"    color: {color.ToKnownColor()};%^";
-            Debug.CallObjectEvent("[style] added color");
-            return this;
-        }
-        public Style AddColor(string hex)
-        {
-            Timer.StartTimer();
-            colorCheck++;
-            if (hex.Length != 6)
+            if (setProperties[0])
             {
-                throw new StyleError("Invalid hex value!", this);
+                throw new StyleError("Cannot set properties twice!", this);
             }
-            textCache += $"    color: #{hex};%^";
-            Debug.CallObjectEvent("[style] added color");
+            setProperties[0] = true;
+            switch (color.GetType().FullName)
+            {
+                case "Impart.Rgb":
+                    Rgb rgb = (Rgb)color;
+                    textCache += $"    color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^";
+                    break;
+                case "Impart.Hsl":
+                    Hsl hsl = (Hsl)color;
+                    textCache += $"    color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^";
+                    break;
+                case "Impart.Hex":
+                    Hex hex = (Hex)color;
+                    textCache += $"    color: #{hex.hex};%^";
+                    break;
+            }
+            Debug.CallObjectEvent("[style] set color");
             return this;
         }
-        public Style AddColor(int x, int y, int z)
+
+        /// <summary>Method for setting the style align.</summary>
+        public Style SetAlign(string alignment)
         {
             Timer.StartTimer();
-            colorCheck++;
-            if (!(x >= 0 && y >= 0 && z >= 0 && x <= 255 && y <= 255 && z <= 255))
+            if (setProperties[1])
             {
-                throw new StyleError("Invalid RGB value!", this);
+                throw new StyleError("Cannot set properties twice!", this);
             }
-            textCache += $"    color: rgb({x}, {y}, {z});%^";
-            Debug.CallObjectEvent("[style] added color");
-            return this;
-        }
-        public Style AddAlign(string alignment)
-        {
+            setProperties[1] = true;
             Timer.StartTimer();
             if (!Alignment.Any(alignment))
             {
                 throw new StyleError("Invalid alignment value!", this);
             }
             textCache += $"    text-align: {alignment};%^";
-            Debug.CallObjectEvent("[style] added alignment");
+            Debug.CallObjectEvent("[style] set alignment");
             return this;
         }
+
+        /// <summary>Method for setting the style margin.</summary>
         public Style SetMargin(int pixels)
         {
+            Timer.StartTimer();
+            if (setProperties[2])
+            {
+                throw new StyleError("Cannot set properties twice!", this);
+            }
+            setProperties[2] = true;
             if (pixels < 0)
             {
                 throw new StyleError("Invalid margin value!", this);
             }
             textCache += $"    margin: {pixels}px;%^";
-            Debug.CallObjectEvent("[style] added margin");
+            Debug.CallObjectEvent("[style] set margin");
             return this;
         }
         internal string Render()
         {
-            if (colorCheck > 1)
-            {
-                throw new StyleError("Cannot assign multiple color instances!", this);
-            }
             return $"{textCache}}}".Replace("%^", Environment.NewLine);
         }
     }

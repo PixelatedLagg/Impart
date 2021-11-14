@@ -34,56 +34,73 @@ namespace Impart
             }
             ImpartConfig.Initialize();
         }
-        public static void Test()
-        {
-        }
-        public static Text Text(string text, string id = null)
+        public static Text text(string text, string id = null)
         {
             return new Text(text, id);
         }
-        public static Image Image(string path, string id = null)
+        public static Image image(string path, string id = null)
         {
             return new Image(path, id);
         }
-        public static Header Header(int num, string text, string id = null)
+        public static Header header(int num, string text, string id = null)
         {
             return new Header(num, text, id);
         }
-        public static Link Link(Text text, string path, string id = null)
+        public static Link link(Text text, string path, string id = null)
         {
             return new Link(text, path, id);
         }
-        public static Link Link(Image image, string path, string id = null)
+        public static Link link(Image image, string path, string id = null)
         {
             return new Link(image, path, id);
         }
-        public static Style Style(StyleType style, string id)
+        public static Style style(StyleType style, string id)
         {
             return new Style(style, id);
         }
-        public static Division Division(IDType? type = null, string id = null)
+        public static Division division(IDType? type = null, string id = null)
         {
             return new Division(type, id);
         }
-        public static Rgb Rgb(int r, int g, int b)
+        public static Rgb rgb(int r, int g, int b)
         {
             return new Rgb(r, g, b);
         }
-        public static Hsl Hsl(float h, float s, float l)
+        public static Hsl hsl(float h, float s, float l)
         {
             return new Hsl(h, s, l);
         }
-        public static Hex Hex(string hex)
+        public static Hex hex(string hex)
         {
             return new Hex(hex);
         }
-        public static List List(int type, string id = null)
+        public static List list(int type, string id = null)
         {
             return new List(type, id);
         }
-        public static Scrollbar Scrollbar(Axis axis, int width, Color color, Color colorThumb, Division division = null, int? rounded = null)
+        public static Scrollbar scrollbar(Axis axis, int width, Color color, Color colorThumb, Division division = null, int? rounded = null)
         {
             return new Scrollbar(axis, width, color, colorThumb, division, rounded);
+        }
+        public static Form form()
+        {
+            return new Form();
+        }
+        public static TextField textField(string text, string inputid)
+        {
+            return new TextField(text, inputid);
+        }
+        public static TextField textField(Text text, string inputid, string id = null)
+        {
+            return new TextField(text, inputid, id);
+        }
+        public static CheckField checkField(string text, string inputid)
+        {
+            return new CheckField(text, inputid);
+        }
+        public static CheckField checkField(Text text, string inputid, string id = null)
+        {
+            return new CheckField(text, inputid, id);
         }
         public enum ListTypes
         {
