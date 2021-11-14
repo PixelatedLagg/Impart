@@ -7,7 +7,6 @@ namespace Impart
 {
     public class WebPage
     {
-        public string testtest;
         internal string path;
         internal string textCache;
         internal string cssPath;

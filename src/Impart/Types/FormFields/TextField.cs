@@ -20,11 +20,11 @@ namespace Impart
             }
             if (text.id == null)
             {
-                textCache = $"%^        <label for=\"{inputid}\" id=\"{id}\">%^            <p{text.attributes}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
+                textCache = $"%^        <label for=\"{inputid}\">%^            <p{text.attributes}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
             }
             else
             {
-                textCache = $"%^        <label for=\"{inputid}\" id=\"{id}\">%^            <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
+                textCache = $"%^        <label for=\"{inputid}\">%^            <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
             }
         }
     }

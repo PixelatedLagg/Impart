@@ -12,6 +12,11 @@ namespace Impart
             textCache += textField.textCache;
             return this;
         }
+        public Form AddCheckField(CheckField checkField)
+        {
+            textCache += checkField.textCache;
+            return this;
+        }
         internal string Render()
         {
             return $"{textCache}%^    </form>";
