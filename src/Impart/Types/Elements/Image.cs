@@ -1,9 +1,9 @@
-using System.Drawing;
 using System;
 using System.IO;
 
 namespace Impart
 {
+    /// <summary>Class that represents an image.</summary>
     public class Image : Element
     {
         private string _path;
@@ -42,6 +42,8 @@ namespace Impart
                 return _id;
             }
         }
+
+        /// <summary>Constructor for the image class.</summary>
         public Image(string path, string id = null)
         {
             if (String.IsNullOrEmpty(path)) 
@@ -68,6 +70,8 @@ namespace Impart
             _style = "";
             _attributes = "";
         }
+
+        /// <summary>Method for setting the image size.</summary>
         public Image SetSize(int x, int y)
         {
             if (x < 0 || y < 0)
@@ -77,7 +81,9 @@ namespace Impart
             _attributes += $" width=\"{x}\" height=\"{y}\"";
             return this;
         }
-        public Image SetBorder(int pixels, string border, System.Drawing.Color color)
+
+        /// <summary>Method for setting the image border.</summary>
+        public Image SetBorder(int pixels, string border, Color color)
         {
             if (pixels < 0)
             {
@@ -87,7 +93,21 @@ namespace Impart
             {
                 throw new ImageError("Invalid border value!", this);
             }
-            _style += $" border: {pixels}px {border} {color.ToKnownColor()};";
+            switch (color.GetType().FullName)
+            {
+                case "Impart.Rgb":
+                    Rgb rgb = (Rgb)color;
+                    _style += $" border: {pixels}px {border} rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+                    break;
+                case "Impart.Hsl":
+                    Hsl hsl = (Hsl)color;
+                    _style += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+                    break;
+                case "Impart.Hex":
+                    Hex hex = (Hex)color;
+                    _style += $" border: {pixels}px {border} #{hex.hex};";
+                    break;
+            }
             return this;
         }
     } 

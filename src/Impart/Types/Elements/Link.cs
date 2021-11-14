@@ -2,6 +2,7 @@ using System;
 
 namespace Impart
 {
+    /// <summary>Class that represents a link.</summary>
     public class Link : Element
     {
         private Text _text;
@@ -36,6 +37,8 @@ namespace Impart
                 return _id;
             }
         }
+
+        /// <summary>Constructor for the link class.</summary>
         public Link(Text text, string path, string id = null)
         {
             if (text == null)
@@ -51,6 +54,8 @@ namespace Impart
             this._path = path;
             this._image = null;
         }
+
+        /// <summary>Constructor for the link class.</summary>
         public Link(Image image, string path, string id = null)
         {
             if (image == null)

@@ -2,6 +2,7 @@ using System;
 
 namespace Impart
 {
+    /// <summary>Class that represents a header.</summary>
     public class Header : Element
     {
         private string _text;
@@ -42,6 +43,8 @@ namespace Impart
                 return _id;
             }
         }
+
+        /// <summary>Constructor for the header class.</summary>
         public Header(int num, string text, string id = null)
         {
             if (num > 5 || num < 1)
@@ -57,6 +60,8 @@ namespace Impart
             this.num = num;
             _style = "";
         }
+
+        /// <summary>Method for setting the header color.</summary>
         public Header SetColor(Color color)
         {
             if (colorCheck > 1)
@@ -81,6 +86,8 @@ namespace Impart
             colorCheck++;
             return this;
         }
+
+        /// <summary>Method for setting the header hover message.</summary>
         public Header SetHoverMessage(string message)
         {
             if (String.IsNullOrEmpty(message))
@@ -90,6 +97,8 @@ namespace Impart
             _attributes += $" title=\"{message}\"";
             return this;
         }
+
+        /// <summary>Method for setting the header font size.</summary>
         public Header SetFontSize(int pixels)
         {
             if (pixels < 0)

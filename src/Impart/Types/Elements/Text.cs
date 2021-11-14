@@ -2,6 +2,7 @@ using System;
 
 namespace Impart
 {
+    /// <summary>Class that represents text.</summary>
     public class Text : Element
     {
         private string _text;
@@ -41,6 +42,8 @@ namespace Impart
                 return _id;
             }
         }
+
+        /// <summary>Constructor for the text class.</summary>
         public Text(string text, string id = null)
         {
             if (String.IsNullOrEmpty(text))
@@ -53,6 +56,8 @@ namespace Impart
             _attributes = "";
             colorCheck = 0;
         }
+
+        /// <summary>Method for setting the text color.</summary>
         public Text SetColor(Color color)
         {
             if (colorCheck > 1)
@@ -77,6 +82,8 @@ namespace Impart
             colorCheck++;
             return this;
         }
+
+        /// <summary>Method for setting the text margin.</summary>
         public Text SetMargin(int pixels)
         {
             if (pixels < 0)
@@ -86,6 +93,8 @@ namespace Impart
             _style += $" margin: {pixels}px;";
             return this;
         }
+
+        /// <summary>Method for setting the text hover message.</summary>
         public Text SetHoverMessage(string message)
         {
             if (String.IsNullOrEmpty(message))
@@ -95,6 +104,8 @@ namespace Impart
             _attributes += $" title=\"{message.Str()}\"";
             return this;
         }
+
+        /// <summary>Method for setting the text font size.</summary>
         public Text SetFontSize(int pixels)
         {
             if (pixels < 0)
@@ -104,5 +115,5 @@ namespace Impart
             _style += $" font-size: {pixels}px;";
             return this;
         }
-    } 
+    }
 }

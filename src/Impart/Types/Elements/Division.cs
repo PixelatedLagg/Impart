@@ -2,6 +2,7 @@ using System;
 
 namespace Impart
 {
+    /// <summary>Class that represents a division.</summary>
     public class Division : Element, IDisposable
     {
         public (int? x, int? y) size;
@@ -23,6 +24,8 @@ namespace Impart
                 return $"%^    <div{id}{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
             }
         }
+
+        /// <summary>Constructor for the division class.</summary>
         public Division(ImpartCommon.IDType? type = null, string id = null)
         {
             if (String.IsNullOrEmpty(id))
@@ -55,6 +58,8 @@ namespace Impart
             cssCache = "";
             attributeCache = "";
         }
+
+        /// <summary>Method for adding text to the division.</summary>
         public void AddText(Text text)
         {
             Timer.StartTimer();
@@ -68,6 +73,8 @@ namespace Impart
             }
             Debug.CallObjectEvent("[division] added text element");
         }
+
+        /// <summary>Method for adding an image to the division.</summary>
         public void AddImage(Image image)
         {
             Timer.StartTimer();
@@ -81,6 +88,8 @@ namespace Impart
             }
             Debug.CallObjectEvent("[division] added image element");
         }
+
+        /// <summary>Method for setting the division color.</summary>
         public Division SetColor(Color color)
         {
             if (colorCheck > 1)
@@ -105,51 +114,39 @@ namespace Impart
             colorCheck++;
             return this;
         }
-        public Division SetBorder(int pixels, string border, Hex hex, int roundedPixels = 0)
+
+        /// <summary>Method for setting the division border.</summary>
+        public Division SetBorder(int pixels, string border, Color color, int roundedPixels = 0)
         {
             Timer.StartTimer();
             if (!Border.Any(border))
             {
                 throw new DivisionError("Invalid border value!", this);
             }
-            styleCache += $" border: {pixels}px {border} #{hex};";
+            switch (color.GetType().FullName)
+            {
+                case "Impart.Rgb":
+                    Rgb rgb = (Rgb)color;
+                    styleCache += $" border: {pixels}px {border} rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
+                    break;
+                case "Impart.Hsl":
+                    Hsl hsl = (Hsl)color;
+                    styleCache += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
+                    break;
+                case "Impart.Hex":
+                    Hex hex = (Hex)color;
+                    styleCache += $" border: {pixels}px {border} #{hex};";
+                    break;
+            }
             if (roundedPixels > 0)
             {
                 styleCache += $" border-radius: {roundedPixels}px;";
             }
-            Debug.CallObjectEvent("[division] added border");
+            Debug.CallObjectEvent("[division] set border");
             return this;
         }
-        public Division SetBorder(int pixels, string border, Hsl hsl, int roundedPixels = 0)
-        {
-            Timer.StartTimer();
-            if (!Border.Any(border))
-            {
-                throw new DivisionError("Invalid border value!", this);
-            }
-            styleCache += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
-            if (roundedPixels > 0)
-            {
-                styleCache += $" border-radius: {roundedPixels}px;";
-            }
-            Debug.CallObjectEvent("[division] added border");
-            return this;
-        }
-        public Division SetBorder(int pixels, string border, Rgb rgb, int roundedPixels = 0)
-        {
-            Timer.StartTimer();
-            if (!Border.Any(border))
-            {
-                throw new DivisionError("Invalid border value!", this);
-            }
-            styleCache += $" border: {pixels}px {border} rgb({rgb.rgb.r}, {rgb.rgb.g}, {rgb.rgb.b});";
-            if (roundedPixels > 0)
-            {
-                styleCache += $" border-radius: {roundedPixels}px;";
-            }
-            Debug.CallObjectEvent("[division] added border");
-            return this;
-        }
+
+        /// <summary>Method for setting the division to follow the scroll.</summary>
         public Division SetFollowScroll(bool obj)
         {
             if (obj)
@@ -162,6 +159,8 @@ namespace Impart
             }
             return this;
         }
+
+        /// <summary>Method for setting the division margin.</summary>
         public Division SetMargin(int pixels)
         {
             if (pixels == 0)
@@ -175,6 +174,8 @@ namespace Impart
             styleCache += $" margin: {pixels}px;";
             return this;
         }
+
+        /// <summary>Method for setting the division size.</summary>
         public Division SetSize(int? x, int? y)
         {
             if (y < 0 || x < 0)
@@ -191,6 +192,8 @@ namespace Impart
             }
             return this;
         }
+
+        /// <summary>Method for setting the division scrollbar.</summary>
         public Division SetScrollBar(Scrollbar scrollbar)
         {
             if (scrollbar.divID != id && id != null)
@@ -204,6 +207,8 @@ namespace Impart
             cssCache += scrollbar.cssCache;
             return this;
         }
+
+        /// <summary>Method for adding a text break in the division.</summary>
         public void Break()
         {
             elementCache += $"%^        <br>";

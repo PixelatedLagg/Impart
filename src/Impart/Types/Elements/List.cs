@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Impart
 {
+    /// <summary>Class that represents a list.</summary>
     public class List : Element
     {
         private Dictionary<int, Text> _entries;
@@ -18,6 +19,8 @@ namespace Impart
                 return _entries;
             }
         }
+
+        /// <summary>Constructor for the list class.</summary>
         public List(ImpartCommon.ListTypes type, params Text[] textEntries)
         {
             switch (type)
@@ -48,6 +51,8 @@ namespace Impart
             style = "";
             attributes = "";
         }
+
+        /// <summary>Constructor for the list class.</summary>
         public List(int type, string id, params Text[] textEntries)
         {
             switch (type)

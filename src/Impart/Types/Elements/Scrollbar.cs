@@ -1,14 +1,14 @@
-using System;
-
 namespace Impart
 {
+    /// <summary>Class that represents a division scrollbar.</summary>
     public class Scrollbar : Element
     {
         internal string cssCache;
         internal string divID;
         internal string bodyCache;
-
         private string id;
+
+        /// <summary>Constructor for the scrollbar class.</summary>
         public Scrollbar(ImpartCommon.Axis axis, int width, Color color, Color colorThumb, Division division = null, int? rounded = null)
         {
             if (division != null && division.scrollId == null)

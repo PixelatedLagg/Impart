@@ -1,10 +1,10 @@
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 
 namespace Impart
 {
+    /// <summary>Class that represents the html page.</summary>
     public class WebPage
     {
         internal string path;
@@ -13,6 +13,8 @@ namespace Impart
         internal string bodyStyle;
         private string styleCache;
         private int defaultMargin;
+
+        /// <summary>Constructor for the webpage class.</summary>
         public WebPage(string path, string cssPath)
         {
             Timer.StartTimer();
@@ -53,6 +55,8 @@ namespace Impart
             defaultMargin = 0;
             Debug.CallObjectEvent("[webpage] created cswebobj");
         }
+
+        /// <summary>Method for adding a style to the webpage.</summary>
         public void AddStyle(Style style)
         {
             Timer.StartTimer();
@@ -66,6 +70,8 @@ namespace Impart
             }
             Debug.CallObjectEvent("[webpage] added style");
         }
+
+        /// <summary>Method for adding text to the webpage.</summary>
         public void AddText(Text text)
         {
             Timer.StartTimer();
@@ -79,6 +85,8 @@ namespace Impart
             }
             Debug.CallObjectEvent("[webpage] added text element");
         }
+
+        /// <summary>Method for setting the webpage title.</summary>
         public void SetTitle(string title)
         {
             Timer.StartTimer();
@@ -89,6 +97,8 @@ namespace Impart
             textCache += $"%^    <title>{title}</title>";
             Debug.CallObjectEvent("[webpage] set title");
         }
+
+        /// <summary>Method for adding an image to the webpage.</summary>
         public void AddImage(Image image)
         {
             Timer.StartTimer();
@@ -102,6 +112,8 @@ namespace Impart
             }
             Debug.CallObjectEvent("[webpage] added image element");
         }
+
+        /// <summary>Method for adding a header to the webpage.</summary>
         public void AddHeader(Header header)
         {
             Timer.StartTimer();
@@ -115,6 +127,8 @@ namespace Impart
             }
             Debug.CallObjectEvent("[webpage] added header");
         }
+
+        /// <summary>Method for adding a link to the webpage.</summary>
         public void AddLink(Link link)
         {
             if (link.image != null)
@@ -154,6 +168,8 @@ namespace Impart
                 }
             }
         }
+
+        /// <summary>Method for adding a table to the webpage.</summary>
         public void AddTable(int rowNum, params string[] obj)
         {
             Timer.StartTimer();
@@ -204,24 +220,34 @@ namespace Impart
             textCache += $"{tempCache}%^    </table>";
             Debug.CallObjectEvent("[webpage] added table");
         }
+
+        /// <summary>Method for adding a division to the webpage.</summary>
         public void AddDivision(Division div)
         {
             textCache += div.textCache;
             styleCache += div.cssCache;
         }
+
+        /// <summary>Method for adding a list to the webpage.</summary>
         public void AddList(List list)
         {
             textCache += list.Render();
         }
+
+        /// <summary>Method for setting the webpage scrollbar.</summary>
         public void SetScrollBar(Scrollbar scrollbar)
         {
             bodyStyle += scrollbar.bodyCache;
             styleCache += scrollbar.cssCache;
         }
+
+        /// <summary>Method for adding a form to the webpage.</summary>
         public void AddForm(Form form)
         {
             textCache += form.Render();
         }
+
+        /// <summary>Method for setting the webpage scrollbar.</summary>
         public void SetDefaultMargin(int pixels)
         {
             if (pixels <= 0)
@@ -230,6 +256,8 @@ namespace Impart
             }
             defaultMargin = pixels;
         }
+
+        /// <summary>Method for rendering the webpage.</summary>
         public void Render()
         {
             Timer.StartTimer();
