@@ -6,7 +6,7 @@ namespace Impart
     public class Division : Element, IDisposable
     {
         public (int? x, int? y) size;
-        private int colorCheck;
+        private bool[] setProperties;
         private string elementCache;
         private string styleCache;
         private string attributeCache;
@@ -53,11 +53,11 @@ namespace Impart
                 case (ImpartCommon.IDType, string) c when c.type != null && c.id == null:
                     throw new DivisionError("Type and ID must both be null or not null!", this);
             }
-            colorCheck = 0;
             styleCache = " margin: 0px;";
             size = (null, null);
             cssCache = "";
             attributeCache = "";
+            setProperties = new bool[] {false, false, false, false, false, false};
             Debug.CallObjectEvent("[division] initialized division");
         }
 
@@ -95,10 +95,11 @@ namespace Impart
         public Division SetColor(Color color)
         {
             Timer.StartTimer();
-            if (colorCheck > 1)
+            if (setProperties[0])
             {
-                throw new DivisionError("Cannot set color more than once!", this);
+                throw new DivisionError("Cannot set properties twice!", this);
             }
+            setProperties[0] = true;
             switch (color.GetType().FullName)
             {
                 case "Impart.Rgb":
@@ -122,6 +123,11 @@ namespace Impart
         public Division SetBorder(int pixels, string border, Color color, int roundedPixels = 0)
         {
             Timer.StartTimer();
+            if (setProperties[1])
+            {
+                throw new DivisionError("Cannot set properties twice!", this);
+            }
+            setProperties[1] = true;
             if (!Border.Any(border))
             {
                 throw new DivisionError("Invalid border value!", this);
@@ -153,6 +159,11 @@ namespace Impart
         public Division SetFollowScroll(bool obj)
         {
             Timer.StartTimer();
+            if (setProperties[2])
+            {
+                throw new DivisionError("Cannot set properties twice!", this);
+            }
+            setProperties[2] = true;
             if (obj)
             {
                 styleCache += " position: fixed;";
@@ -169,6 +180,11 @@ namespace Impart
         public Division SetMargin(int pixels)
         {
             Timer.StartTimer();
+            if (setProperties[3])
+            {
+                throw new DivisionError("Cannot set properties twice!", this);
+            }
+            setProperties[3] = true;
             if (pixels == 0)
             {
                 throw new DivisionError("Border thickness is default 0 pixels!", this);
@@ -186,6 +202,11 @@ namespace Impart
         public Division SetSize(int? x, int? y)
         {
             Timer.StartTimer();
+            if (setProperties[4])
+            {
+                throw new DivisionError("Cannot set properties twice!", this);
+            }
+            setProperties[4] = true;
             if (y < 0 || x < 0)
             {
                 throw new DivisionError("Invalid size values!", this);
@@ -206,6 +227,11 @@ namespace Impart
         public Division SetScrollBar(Scrollbar scrollbar)
         {
             Timer.StartTimer();
+            if (setProperties[5])
+            {
+                throw new DivisionError("Cannot set properties twice!", this);
+            }
+            setProperties[5] = true;
             if (scrollbar.divID != id && id != null)
             {
                 throw new ScrollbarError("ID of division must either be null or match the ID inputted to the scrollbar!", scrollbar);

@@ -9,6 +9,7 @@ namespace Impart
         private string _id;
         private string _style;
         private string _attributes;
+        private bool[] setProperties;
         internal string attributes 
         {
             get
@@ -53,6 +54,7 @@ namespace Impart
             this._id = id;
             _style = "";
             _attributes = "";
+            setProperties = new bool[] {false, false, false, false, false, false};
         }
 
         /// <summary>Constructor for the button class.</summary>
@@ -76,11 +78,17 @@ namespace Impart
             }
             _style = "";
             _attributes = "";
+            setProperties = new bool[] {false, false, false, false, false, false};
         }
 
         /// <summary>Method for setting the button text color.</summary>
         public Button SetTextColor(Color color)
         {
+            if (setProperties[0])
+            {
+                throw new ButtonError("Cannot set properties twice!", this);
+            }
+            setProperties[0] = true;
             switch (color.GetType().FullName)
             {
                 case "Impart.Rgb":
@@ -102,6 +110,11 @@ namespace Impart
         /// <summary>Method for setting the button background color.</summary>
         public Button SetBGColor(Color color)
         {
+            if (setProperties[1])
+            {
+                throw new ButtonError("Cannot set properties twice!", this);
+            }
+            setProperties[1] = true;
             switch (color.GetType().FullName)
             {
                 case "Impart.Rgb":
@@ -123,6 +136,11 @@ namespace Impart
         /// <summary>Method for setting the button margin.</summary>
         public Button SetMargin(int pixels)
         {
+            if (setProperties[2])
+            {
+                throw new ButtonError("Cannot set properties twice!", this);
+            }
+            setProperties[2] = true;
             if (pixels < 0)
             {
                 throw new ButtonError("Invalid margin value!", this);
@@ -134,6 +152,11 @@ namespace Impart
         /// <summary>Method for setting the button hover message.</summary>
         public Button SetHoverMessage(string message)
         {
+            if (setProperties[3])
+            {
+                throw new ButtonError("Cannot set properties twice!", this);
+            }
+            setProperties[3] = true;
             if (String.IsNullOrEmpty(message))
             {
                 throw new ButtonError("Hover message cannot be empty or null!", this);
@@ -145,6 +168,11 @@ namespace Impart
         /// <summary>Method for setting the button font size.</summary>
         public Button SetFontSize(int pixels)
         {
+            if (setProperties[4])
+            {
+                throw new ButtonError("Cannot set properties twice!", this);
+            }
+            setProperties[4] = true;
             if (pixels < 0)
             {
                 throw new ButtonError("Invalid font size!", this);
@@ -156,7 +184,11 @@ namespace Impart
         /// <summary>Method for setting the division border.</summary>
         public Button SetBorder(int pixels, string border, Color color, int roundedPixels = 0)
         {
-            Timer.StartTimer();
+            if (setProperties[5])
+            {
+                throw new ButtonError("Cannot set properties twice!", this);
+            }
+            setProperties[5] = true;
             if (!Border.Any(border))
             {
                 throw new ButtonError("Invalid border value!", this);
@@ -173,7 +205,7 @@ namespace Impart
                     break;
                 case "Impart.Hex":
                     Hex hex = (Hex)color;
-                    _style += $" border: {pixels}px {border} #{hex};";
+                    _style += $" border: {pixels}px {border} #{hex.hex};";
                     break;
             }
             if (roundedPixels > 0)

@@ -10,7 +10,7 @@ namespace Impart
         private string _style;
         private string _attributes;
         internal int num;
-        private int colorCheck;
+        private bool[] setProperties;
         internal string attributes 
         {
             get
@@ -59,15 +59,17 @@ namespace Impart
             this._id = id;
             this.num = num;
             _style = "";
+            setProperties = new bool[] {false, false, false};
         }
 
         /// <summary>Method for setting the header color.</summary>
         public Header SetColor(Color color)
         {
-            if (colorCheck > 1)
+            if (setProperties[0])
             {
-                throw new HeaderError("Cannot set color more than once!", this);
+                throw new HeaderError("Cannot set properties twice!", this);
             }
+            setProperties[0] = true;
             switch (color.GetType().FullName)
             {
                 case "Impart.Rgb":
@@ -83,13 +85,17 @@ namespace Impart
                     _style += $" color: #{hex.hex};";
                     break;
             }
-            colorCheck++;
             return this;
         }
 
         /// <summary>Method for setting the header hover message.</summary>
         public Header SetHoverMessage(string message)
         {
+            if (setProperties[1])
+            {
+                throw new HeaderError("Cannot set properties twice!", this);
+            }
+            setProperties[1] = true;
             if (String.IsNullOrEmpty(message))
             {
                 throw new HeaderError("Hover message cannot be empty or null!", this);
@@ -101,6 +107,11 @@ namespace Impart
         /// <summary>Method for setting the header font size.</summary>
         public Header SetFontSize(int pixels)
         {
+            if (setProperties[2])
+            {
+                throw new HeaderError("Cannot set properties twice!", this);
+            }
+            setProperties[2] = true;
             if (pixels < 0)
             {
                 throw new HeaderError("Invalid font size!", this);

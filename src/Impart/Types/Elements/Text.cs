@@ -5,6 +5,7 @@ namespace Impart
     /// <summary>Class that represents text.</summary>
     public class Text : Element
     {
+        private bool[] setProperties;
         private string _text;
         private string _id;
         private string _style;
@@ -54,16 +55,17 @@ namespace Impart
             this._id = id;
             _style = "";
             _attributes = "";
-            colorCheck = 0;
+            setProperties = new bool[] {false, false, false, false};
         }
 
         /// <summary>Method for setting the text color.</summary>
         public Text SetColor(Color color)
         {
-            if (colorCheck > 1)
+            if (setProperties[0])
             {
-                throw new TextError("Cannot set color more than once!", this);
+                throw new TextError("Cannot set properties twice!", this);
             }
+            setProperties[0] = true;
             switch (color.GetType().FullName)
             {
                 case "Impart.Rgb":
@@ -86,6 +88,11 @@ namespace Impart
         /// <summary>Method for setting the text margin.</summary>
         public Text SetMargin(int pixels)
         {
+            if (setProperties[1])
+            {
+                throw new TextError("Cannot set properties twice!", this);
+            }
+            setProperties[1] = true;
             if (pixels < 0)
             {
                 throw new TextError("Invalid margin value!", this);
@@ -97,6 +104,11 @@ namespace Impart
         /// <summary>Method for setting the text hover message.</summary>
         public Text SetHoverMessage(string message)
         {
+            if (setProperties[2])
+            {
+                throw new TextError("Cannot set properties twice!", this);
+            }
+            setProperties[2] = true;
             if (String.IsNullOrEmpty(message))
             {
                 throw new TextError("Hover message cannot be empty or null!", this);
@@ -108,6 +120,11 @@ namespace Impart
         /// <summary>Method for setting the text font size.</summary>
         public Text SetFontSize(int pixels)
         {
+            if (setProperties[3])
+            {
+                throw new TextError("Cannot set properties twice!", this);
+            }
+            setProperties[3] = true;
             if (pixels < 0)
             {
                 throw new TextError("Invalid font size!", this);

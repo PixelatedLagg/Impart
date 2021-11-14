@@ -10,6 +10,7 @@ namespace Impart
         private string _id;
         private string _style;
         private string _attributes;
+        private bool[] setProperties;
         internal string attributes 
         {
             get
@@ -69,11 +70,17 @@ namespace Impart
             this._path = path;
             _style = "";
             _attributes = "";
+            setProperties= new bool[] {false, false};
         }
 
         /// <summary>Method for setting the image size.</summary>
         public Image SetSize(int x, int y)
         {
+            if (setProperties[0])
+            {
+                throw new ImageError("Cannot set properties twice!", this);
+            }
+            setProperties[0] = true;
             if (x < 0 || y < 0)
             {
                 throw new ImageError("Width and height values must be positive!", this);
@@ -85,6 +92,11 @@ namespace Impart
         /// <summary>Method for setting the image border.</summary>
         public Image SetBorder(int pixels, string border, Color color)
         {
+            if (setProperties[1])
+            {
+                throw new ImageError("Cannot set properties twice!", this);
+            }
+            setProperties[1] = true;
             if (pixels < 0)
             {
                 throw new ImageError("Border thickness must be above 0!", this);

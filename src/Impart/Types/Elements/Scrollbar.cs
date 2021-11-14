@@ -7,7 +7,7 @@ namespace Impart
         internal string divID;
         internal string bodyCache;
         private string id;
-
+        
         /// <summary>Constructor for the scrollbar class.</summary>
         public Scrollbar(ImpartCommon.Axis axis, int width, Color color, Color colorThumb, Division division = null, int? rounded = null)
         {
