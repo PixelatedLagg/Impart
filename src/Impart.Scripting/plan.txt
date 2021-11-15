@@ -1,0 +1,7 @@
+*plan for executing code in browser*
+
+1. Generate code to .wasm module.
+
+2. Generate javascript code to load and invoke each .wasm module.
+
+3. Enjoy not needing to use stupid languages to make a competent web page :>
