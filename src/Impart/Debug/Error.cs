@@ -5,11 +5,11 @@ namespace Impart
 {
     internal class WebPageError : Exception
     {
-        internal WebPageError(string error, WebPage obj) : base($"{{ Error: ({error}) Trace: ({obj.path}, {obj.cssPath}) }}") {}
+        internal WebPageError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class StyleError : Exception
     {
-        internal StyleError(string error, Style style) : base($"{{ Error: ({error}) Trace: ({style}) }}") {}
+        internal StyleError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class TemplateError : Exception
     {
@@ -17,37 +17,35 @@ namespace Impart
     }
     internal class ConfigError : Exception
     {
-        internal ConfigError(string error) : base($"{{ Error: ({error}) Trace: (config.csweb) }}") {}
+        internal ConfigError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class TextError : Exception
     {
-        internal TextError(string error, Text text) : base($"{{ Error: ({error}) Trace: ({text}) }}") {}
+        internal TextError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class ImageError : Exception
     {
-        internal ImageError(string error, Image image) : base($"{{ Error: ({error}) Trace: ({image}) }}") {}
+        internal ImageError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class LinkError : Exception
     {
-        internal LinkError(string error, Link link) : base($"{{ Error: ({error}) Trace: ({link}) }}") {}
+        internal LinkError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class HeaderError : Exception
     {
-        internal HeaderError(string error, Header header) : base($"{{ Error: ({error}) Trace: ({header}) }}") {}
+        internal HeaderError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class DivisionError : Exception
     {
-        internal DivisionError(string error, Division division) : base($"{{ Error: ({error}) Trace: ({division}) }}") {}
+        internal DivisionError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class ButtonError : Exception
     {
-        internal ButtonError(string error, Button button) : base($"{{ Error: ({error}) Trace: ({button}) }}") {}
+        internal ButtonError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class ColorError : Exception
     {
-        internal ColorError(string error, Rgb color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
-        internal ColorError(string error, Hsl color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
-        internal ColorError(string error, Hex color) : base($"{{ Error: ({error}) Trace: ({color}) }}") {}
+        internal ColorError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class ConversionError : Exception
     {
@@ -55,14 +53,18 @@ namespace Impart
     }
     internal class ListError : Exception
     {
-        internal ListError(string error, List list) : base($"{{ Error: ({error}) Trace: ({list}) }}") {}
+        internal ListError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class ScrollbarError : Exception
     {
-        internal ScrollbarError(string error, Scrollbar scrollbar) : base($"{{ Error: ({error}) Trace: ({scrollbar}) }}") {}
+        internal ScrollbarError(string error) : base($"{{ Error: ({error}) }}") {}
     }
     internal class FormError : Exception
     {
-        internal FormError(string error, FormElement formelement) : base($"{{ Error: ({error}) Trace: ({formelement}) }}") {}
+        internal FormError(string error) : base($"{{ Error: ({error}) }}") {}
+    }
+    internal class SizeError : Exception
+    {
+        internal SizeError(string error) : base($"{{ Error: ({error}) }}") {}
     }
 }

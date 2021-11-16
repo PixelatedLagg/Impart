@@ -32,7 +32,7 @@ namespace Impart
                     this.type = "ol";
                     break;
                 default:
-                    throw new ListError("Invalid list type!", this);
+                    throw new ListError("Invalid list type!");
             }
             _entries = new Dictionary<int, Text>();
             foreach (Text text in textEntries)
@@ -64,11 +64,11 @@ namespace Impart
                     this.type = "ol";
                     break;
                 default:
-                    throw new ListError("Invalid list type!", this);
+                    throw new ListError("Invalid list type!");
             }
             if (String.IsNullOrEmpty(id))
             {
-                throw new ListError("Specified ID cannot be null or empty!", this);
+                throw new ListError("Specified ID cannot be null or empty!");
             }
             else
             {

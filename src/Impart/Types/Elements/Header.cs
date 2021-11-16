@@ -49,11 +49,11 @@ namespace Impart
         {
             if (num > 5 || num < 1)
             {
-                throw new HeaderError("Number must be between 1-5!", this);
+                throw new HeaderError("Number must be between 1-5!");
             }
             if (String.IsNullOrEmpty(text))
             {
-                throw new HeaderError("Text cannot be null or empty!", null);
+                throw new HeaderError("Text cannot be null or empty!");
             }
             this._text = text;
             this._id = id;
@@ -67,7 +67,7 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new HeaderError("Cannot set properties twice!", this);
+                throw new HeaderError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             switch (color.GetType().FullName)
@@ -93,12 +93,12 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new HeaderError("Cannot set properties twice!", this);
+                throw new HeaderError("Cannot set properties twice!");
             }
             setProperties[1] = true;
             if (String.IsNullOrEmpty(message))
             {
-                throw new HeaderError("Hover message cannot be empty or null!", this);
+                throw new HeaderError("Hover message cannot be empty or null!");
             }
             _attributes += $" title=\"{message}\"";
             return this;
@@ -109,12 +109,12 @@ namespace Impart
         {
             if (setProperties[2])
             {
-                throw new HeaderError("Cannot set properties twice!", this);
+                throw new HeaderError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (pixels < 0)
             {
-                throw new HeaderError("Invalid font size!", this);
+                throw new HeaderError("Invalid font size!");
             }
             _style += $" font-size: {pixels}px;";
             return this;

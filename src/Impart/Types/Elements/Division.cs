@@ -49,9 +49,9 @@ namespace Impart
                     }
                     break;
                 case (ImpartCommon.IDType, string) b when b.type == null && b.id != null:
-                    throw new DivisionError("Type and ID must both be null or not null!", this);
+                    throw new DivisionError("Type and ID must both be null or not null!");
                 case (ImpartCommon.IDType, string) c when c.type != null && c.id == null:
-                    throw new DivisionError("Type and ID must both be null or not null!", this);
+                    throw new DivisionError("Type and ID must both be null or not null!");
             }
             styleCache = " margin: 0px;";
             size = (null, null);
@@ -97,7 +97,7 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[0])
             {
-                throw new DivisionError("Cannot set properties twice!", this);
+                throw new DivisionError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             switch (color.GetType().FullName)
@@ -125,12 +125,12 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[1])
             {
-                throw new DivisionError("Cannot set properties twice!", this);
+                throw new DivisionError("Cannot set properties twice!");
             }
             setProperties[1] = true;
             if (!Border.Any(border))
             {
-                throw new DivisionError("Invalid border value!", this);
+                throw new DivisionError("Invalid border value!");
             }
             switch (color.GetType().FullName)
             {
@@ -161,7 +161,7 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[2])
             {
-                throw new DivisionError("Cannot set properties twice!", this);
+                throw new DivisionError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (obj)
@@ -170,7 +170,7 @@ namespace Impart
             }
             else
             {
-                throw new DivisionError("Default value for follow scroll is false!", this);
+                throw new DivisionError("Default value for follow scroll is false!");
             }
             Debug.CallObjectEvent("[division] set follow scroll");
             return this;
@@ -182,16 +182,16 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[3])
             {
-                throw new DivisionError("Cannot set properties twice!", this);
+                throw new DivisionError("Cannot set properties twice!");
             }
             setProperties[3] = true;
             if (pixels == 0)
             {
-                throw new DivisionError("Border thickness is default 0 pixels!", this);
+                throw new DivisionError("Border thickness is default 0 pixels!");
             }
             if (pixels < 0)
             {
-                throw new DivisionError("Margin thickness must be above 0!", this);
+                throw new DivisionError("Margin thickness must be above 0!");
             }
             styleCache += $" margin: {pixels}px;";
             Debug.CallObjectEvent("[division] set margin");
@@ -204,12 +204,12 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[4])
             {
-                throw new DivisionError("Cannot set properties twice!", this);
+                throw new DivisionError("Cannot set properties twice!");
             }
             setProperties[4] = true;
             if (y < 0 || x < 0)
             {
-                throw new DivisionError("Invalid size values!", this);
+                throw new DivisionError("Invalid size values!");
             }
             if (x != null)
             {
@@ -229,12 +229,12 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[5])
             {
-                throw new DivisionError("Cannot set properties twice!", this);
+                throw new DivisionError("Cannot set properties twice!");
             }
             setProperties[5] = true;
             if (scrollbar.divID != id && id != null)
             {
-                throw new ScrollbarError("ID of division must either be null or match the ID inputted to the scrollbar!", scrollbar);
+                throw new ScrollbarError("ID of division must either be null or match the ID inputted to the scrollbar!");
             }
             if (id == null)
             {

@@ -49,7 +49,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(text))
             {
-                throw new TextError("Text cannot be null or empty!", null);
+                throw new TextError("Text cannot be null or empty!");
             }
             this._text = text.Str();
             this._id = id;
@@ -63,7 +63,7 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new TextError("Cannot set properties twice!", this);
+                throw new TextError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             switch (color.GetType().FullName)
@@ -86,18 +86,22 @@ namespace Impart
         }
 
         /// <summary>Method for setting the text margin.</summary>
-        public Text SetMargin(int pixels)
+        public Text SetMargin(Measurement measurement)
         {
             if (setProperties[1])
             {
-                throw new TextError("Cannot set properties twice!", this);
+                throw new TextError("Cannot set properties twice!");
             }
             setProperties[1] = true;
-            if (pixels < 0)
+            switch (measurement.GetType().FullName)
             {
-                throw new TextError("Invalid margin value!", this);
+                case "Impart.Percent":
+                    _style += $" margin: {measurement.Pct().percent}%;";
+                    break;
+                case "Impart.Pixels":
+                    _style += $" margin: {measurement.Px().pixels}px;";
+                    break;
             }
-            _style += $" margin: {pixels}px;";
             return this;
         }
 
@@ -106,30 +110,34 @@ namespace Impart
         {
             if (setProperties[2])
             {
-                throw new TextError("Cannot set properties twice!", this);
+                throw new TextError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (String.IsNullOrEmpty(message))
             {
-                throw new TextError("Hover message cannot be empty or null!", this);
+                throw new TextError("Hover message cannot be empty or null!");
             }
             _attributes += $" title=\"{message.Str()}\"";
             return this;
         }
 
         /// <summary>Method for setting the text font size.</summary>
-        public Text SetFontSize(int pixels)
+        public Text SetFontSize(Measurement measurement)
         {
             if (setProperties[3])
             {
-                throw new TextError("Cannot set properties twice!", this);
+                throw new TextError("Cannot set properties twice!");
             }
             setProperties[3] = true;
-            if (pixels < 0)
+            switch (measurement.GetType().FullName)
             {
-                throw new TextError("Invalid font size!", this);
+                case "Impart.Percent":
+                    _style += $" font-size: {measurement.Pct().percent}%;";
+                    break;
+                case "Impart.Pixels":
+                    _style += $" font-size: {measurement.Px().pixels}px;";
+                    break;
             }
-            _style += $" font-size: {pixels}px;";
             return this;
         }
     }

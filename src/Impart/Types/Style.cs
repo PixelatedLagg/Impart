@@ -15,7 +15,7 @@ namespace Impart
             Timer.StartTimer();
             if (String.IsNullOrEmpty(id))
             {
-                throw new StyleError("ID/Class/Element cannot be null!", this);
+                throw new StyleError("ID/Class/Element cannot be null!");
             }
             switch (style)
             {
@@ -40,7 +40,7 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[0])
             {
-                throw new StyleError("Cannot set properties twice!", this);
+                throw new StyleError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             switch (color.GetType().FullName)
@@ -68,13 +68,13 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[1])
             {
-                throw new StyleError("Cannot set properties twice!", this);
+                throw new StyleError("Cannot set properties twice!");
             }
             setProperties[1] = true;
             Timer.StartTimer();
             if (!Alignment.Any(alignment))
             {
-                throw new StyleError("Invalid alignment value!", this);
+                throw new StyleError("Invalid alignment value!");
             }
             textCache += $"    text-align: {alignment};%^";
             Debug.CallObjectEvent("[style] set alignment");
@@ -87,12 +87,12 @@ namespace Impart
             Timer.StartTimer();
             if (setProperties[2])
             {
-                throw new StyleError("Cannot set properties twice!", this);
+                throw new StyleError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (pixels < 0)
             {
-                throw new StyleError("Invalid margin value!", this);
+                throw new StyleError("Invalid margin value!");
             }
             textCache += $"    margin: {pixels}px;%^";
             Debug.CallObjectEvent("[style] set margin");

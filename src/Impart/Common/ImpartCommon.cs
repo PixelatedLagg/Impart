@@ -78,7 +78,7 @@ namespace Impart
         {
             return new List(type, id);
         }
-        public static Scrollbar scrollbar(Axis axis, int width, Color color, Color colorThumb, Division division = null, int? rounded = null)
+        public static Scrollbar scrollbar(Axis axis, Measurement width, Color color, Color colorThumb, Division division = null, Measurement rounded = null)
         {
             return new Scrollbar(axis, width, color, colorThumb, division, rounded);
         }

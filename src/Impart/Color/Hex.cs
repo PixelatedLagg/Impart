@@ -8,7 +8,7 @@ namespace Impart
             this.hex = hex;
             if (hex.Length != 6)
             {
-                throw new ColorError("Invalid hex value!", this);
+                throw new ColorError("Invalid hex value!");
             }
             try
             {
@@ -16,7 +16,7 @@ namespace Impart
             }
             catch
             {
-                throw new ColorError("Invalid hex value!", this);
+                throw new ColorError("Invalid hex value!");
             }
         }
         public static bool operator ==(Hex hex1, Hex hex2)

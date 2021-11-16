@@ -9,11 +9,11 @@ namespace Impart
         private string id;
         
         /// <summary>Constructor for the scrollbar class.</summary>
-        public Scrollbar(ImpartCommon.Axis axis, int width, Color color, Color colorThumb, Division division = null, int? rounded = null)
+        public Scrollbar(ImpartCommon.Axis axis, Measurement width, Color color, Color colorThumb, Division division = null, Measurement rounded = null)
         {
             if (division != null && division.scrollId == null)
             {
-                throw new ScrollbarError("ID for division must be defined!", this);
+                throw new ScrollbarError("ID for division must be defined!");
             }
             bodyCache = "";
             if (division != null)
@@ -29,13 +29,17 @@ namespace Impart
                         cssCache += "    overflow-y: auto;%^}%^";
                         break;
                     default:
-                        throw new ScrollbarError("Invalid axis!", this);
+                        throw new ScrollbarError("Invalid axis!");
                 }
-                if (width <= 0)
+                switch (width.GetType().FullName)
                 {
-                    throw new ScrollbarError("Scrollbar width cannot be less than or equal to 0!", this);
+                    case "Impart.Percent":
+                        cssCache += $"%^{this.id}::-webkit-scrollbar {{%^    width: {width.Pct().percent}%;%^    background-color: #808080; %^}}%^{this.id}::-webkit-scrollbar-track {{%^";
+                        break;
+                    case "Impart.Pixels":
+                        cssCache += $"%^{this.id}::-webkit-scrollbar {{%^    width: {width.Px().pixels}px;%^    background-color: #808080; %^}}%^{this.id}::-webkit-scrollbar-track {{%^";
+                        break;
                 }
-                cssCache += $"%^{this.id}::-webkit-scrollbar {{%^    width: {width}px;%^    background-color: #808080; %^}}%^{this.id}::-webkit-scrollbar-track {{%^";
                 switch (color.GetType().FullName)
                 {
                     case "Impart.Rgb":
@@ -69,11 +73,15 @@ namespace Impart
                 }
                 if (rounded != null)
                 {
-                    if (rounded < 0)
+                    switch (rounded.GetType().FullName)
                     {
-                        throw new ScrollbarError("Rounded value cannot be below 0!", this);
+                        case "Impart.Percent":
+                            cssCache += $"    border-radius: {rounded.Pct().percent}%;%^}}";
+                            break;
+                        case "Impart.Pixels":
+                            cssCache += $"    border-radius: {rounded.Px().pixels}px;%^}}";
+                            break;
                     }
-                    cssCache += $"    border-radius: {rounded}px;%^}}";
                 }
                 else
                 {
@@ -92,13 +100,17 @@ namespace Impart
                         bodyCache += "    overflow-y: auto;%^";
                         break;
                     default:
-                        throw new ScrollbarError("Invalid axis!", this);
+                        throw new ScrollbarError("Invalid axis!");
                 }
-                if (width <= 0)
+                switch (width.GetType().FullName)
                 {
-                    throw new ScrollbarError("Scrollbar width cannot be less than or equal to 0!", this);
+                    case "Impart.Percent":
+                        cssCache += $"%^::-webkit-scrollbar {{%^    width: {width.Pct().percent}%;%^    background-color: #808080; %^}}%^::-webkit-scrollbar-track {{%^";
+                        break;
+                    case "Impart.Pixels":
+                        cssCache += $"%^::-webkit-scrollbar {{%^    width: {width.Px().pixels}px;%^    background-color: #808080; %^}}%^::-webkit-scrollbar-track {{%^";
+                        break;
                 }
-                cssCache += $"%^::-webkit-scrollbar {{%^    width: {width}px;%^    background-color: #808080; %^}}%^::-webkit-scrollbar-track {{%^";
                 switch (color.GetType().FullName)
                 {
                     case "Impart.Rgb":
@@ -132,11 +144,15 @@ namespace Impart
                 }
                 if (rounded != null)
                 {
-                    if (rounded < 0)
+                    switch (rounded.GetType().FullName)
                     {
-                        throw new ScrollbarError("Rounded value cannot be below 0!", this);
+                        case "Impart.Percent":
+                            cssCache += $"    border-radius: {rounded.Pct().percent}%;%^}}";
+                            break;
+                        case "Impart.Pixels":
+                            cssCache += $"    border-radius: {rounded.Px().pixels}px;%^}}";
+                            break;
                     }
-                    cssCache += $"    border-radius: {rounded}px;%^}}";
                 }
                 else
                 {

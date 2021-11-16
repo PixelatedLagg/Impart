@@ -136,7 +136,7 @@ namespace Impart
             Timer.StartTimer();
             if (String.IsNullOrEmpty(title))
             {
-                throw new WebPageError("Title cannot be null or empty!", this);
+                throw new WebPageError("Title cannot be null or empty!");
             }
             textCache += $"%^    <title>{title}</title>";
             Debug.CallObjectEvent("[webpage] set title");
@@ -221,7 +221,7 @@ namespace Impart
             Timer.StartTimer();
             if (rowNum > obj.Length)
             {
-                throw new WebPageError("Number of table rows cannot be bigger than number of table entries!", this);
+                throw new WebPageError("Number of table rows cannot be bigger than number of table entries!");
             }
             string tempCache = "%^    <table>";
             tempCache += $"%^        <tr>";
@@ -322,7 +322,7 @@ namespace Impart
             Timer.StartTimer();
             if (pixels <= 0)
             {
-                throw new WebPageError("Margin pixel value must be above 0!", this);
+                throw new WebPageError("Margin pixel value must be above 0!");
             }
             defaultMargin = pixels;
             Debug.CallObjectEvent("[webpage] set default margin");

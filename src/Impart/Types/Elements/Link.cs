@@ -43,11 +43,11 @@ namespace Impart
         {
             if (text == null)
             {
-                throw new LinkError("Text cannot be null!", null);
+                throw new LinkError("Text cannot be null!");
             }
             if (String.IsNullOrEmpty(path))
             {
-                throw new LinkError("Path cannot be null or empty!", null);
+                throw new LinkError("Path cannot be null or empty!");
             }
             this._text = text;
             this._id = id;
@@ -60,11 +60,11 @@ namespace Impart
         {
             if (image == null)
             {
-                throw new LinkError("Image cannot be null!", null);
+                throw new LinkError("Image cannot be null!");
             }
             if (String.IsNullOrEmpty(path))
             {
-                throw new LinkError("Path cannot be null or empty!", null);
+                throw new LinkError("Path cannot be null or empty!");
             }
             this._text = null;
             this._id = id;

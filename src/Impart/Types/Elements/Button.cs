@@ -48,7 +48,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(text))
             {
-                throw new ButtonError("Text cannot be null or empty!", null);
+                throw new ButtonError("Text cannot be null or empty!");
             }
             this._text = text.Str();
             this._id = id;
@@ -86,7 +86,7 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new ButtonError("Cannot set properties twice!", this);
+                throw new ButtonError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             switch (color.GetType().FullName)
@@ -112,7 +112,7 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new ButtonError("Cannot set properties twice!", this);
+                throw new ButtonError("Cannot set properties twice!");
             }
             setProperties[1] = true;
             switch (color.GetType().FullName)
@@ -138,12 +138,12 @@ namespace Impart
         {
             if (setProperties[2])
             {
-                throw new ButtonError("Cannot set properties twice!", this);
+                throw new ButtonError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (pixels < 0)
             {
-                throw new ButtonError("Invalid margin value!", this);
+                throw new ButtonError("Invalid margin value!");
             }
             _style += $" margin: {pixels}px;";
             return this;
@@ -154,12 +154,12 @@ namespace Impart
         {
             if (setProperties[3])
             {
-                throw new ButtonError("Cannot set properties twice!", this);
+                throw new ButtonError("Cannot set properties twice!");
             }
             setProperties[3] = true;
             if (String.IsNullOrEmpty(message))
             {
-                throw new ButtonError("Hover message cannot be empty or null!", this);
+                throw new ButtonError("Hover message cannot be empty or null!");
             }
             _attributes += $" title=\"{message.Str()}\"";
             return this;
@@ -170,12 +170,12 @@ namespace Impart
         {
             if (setProperties[4])
             {
-                throw new ButtonError("Cannot set properties twice!", this);
+                throw new ButtonError("Cannot set properties twice!");
             }
             setProperties[4] = true;
             if (pixels < 0)
             {
-                throw new ButtonError("Invalid font size!", this);
+                throw new ButtonError("Invalid font size!");
             }
             _style += $" font-size: {pixels}px;";
             return this;
@@ -186,12 +186,12 @@ namespace Impart
         {
             if (setProperties[5])
             {
-                throw new ButtonError("Cannot set properties twice!", this);
+                throw new ButtonError("Cannot set properties twice!");
             }
             setProperties[5] = true;
             if (!Border.Any(border))
             {
-                throw new ButtonError("Invalid border value!", this);
+                throw new ButtonError("Invalid border value!");
             }
             switch (color.GetType().FullName)
             {

@@ -49,15 +49,15 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(path)) 
             {
-                throw new ImageError("Path cannot be empty or null!", this);
+                throw new ImageError("Path cannot be empty or null!");
             }
             if (!File.Exists(path))
             {
-                throw new ImageError("Image file not found!", this);
+                throw new ImageError("Image file not found!");
             }
             if (!Common.IsImage(Path.GetExtension(path)))
             {
-                throw new ImageError("Unsupported file extension!", this);
+                throw new ImageError("Unsupported file extension!");
             }
             if (String.IsNullOrEmpty(id))
             {
@@ -78,12 +78,12 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new ImageError("Cannot set properties twice!", this);
+                throw new ImageError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             if (x < 0 || y < 0)
             {
-                throw new ImageError("Width and height values must be positive!", this);
+                throw new ImageError("Width and height values must be positive!");
             }
             _attributes += $" width=\"{x}\" height=\"{y}\"";
             return this;
@@ -94,16 +94,16 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new ImageError("Cannot set properties twice!", this);
+                throw new ImageError("Cannot set properties twice!");
             }
             setProperties[1] = true;
             if (pixels < 0)
             {
-                throw new ImageError("Border thickness must be above 0!", this);
+                throw new ImageError("Border thickness must be above 0!");
             }
             if (!Border.Any(border))
             {
-                throw new ImageError("Invalid border value!", this);
+                throw new ImageError("Invalid border value!");
             }
             switch (color.GetType().FullName)
             {
