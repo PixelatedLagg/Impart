@@ -88,6 +88,10 @@ namespace Impart
             {
                 throw new ButtonError("Cannot set properties twice!");
             }
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
+            }
             setProperties[0] = true;
             switch (color.GetType().FullName)
             {
@@ -113,6 +117,10 @@ namespace Impart
             if (setProperties[1])
             {
                 throw new ButtonError("Cannot set properties twice!");
+            }
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
             }
             setProperties[1] = true;
             switch (color.GetType().FullName)
@@ -187,6 +195,10 @@ namespace Impart
             if (setProperties[5])
             {
                 throw new ButtonError("Cannot set properties twice!");
+            }
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
             }
             setProperties[5] = true;
             if (!Border.Any(border))

@@ -65,6 +65,10 @@ namespace Impart
             {
                 throw new TextError("Cannot set properties twice!");
             }
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
+            }
             setProperties[0] = true;
             switch (color.GetType().FullName)
             {

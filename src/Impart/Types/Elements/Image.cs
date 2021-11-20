@@ -96,6 +96,10 @@ namespace Impart
             {
                 throw new ImageError("Cannot set properties twice!");
             }
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
+            }
             setProperties[1] = true;
             if (pixels < 0)
             {

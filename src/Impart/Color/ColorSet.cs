@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Collections.Generic;
-using System;
 
 namespace Impart
 {
@@ -12,6 +11,10 @@ namespace Impart
             this.colors = new List<Color>();
             foreach (Color c in colors)
             {
+                if (c == null)
+                {
+                    throw new ColorError("Color cannot be null!");
+                }
                 this.colors.Add(c);
             }
         }

@@ -115,13 +115,26 @@ namespace Impart
         }
         static public Rgb ToRgb(this Color color)
         {
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
+            }
             return (Rgb)color;
-        }static public Hsl ToHsl(this Color color)
+        }
+        static public Hsl ToHsl(this Color color)
         {
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
+            }
             return (Hsl)color;
         }
         static public Hex ToHex(this Color color)
         {
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
+            }
             return (Hex)color;
         }
     }

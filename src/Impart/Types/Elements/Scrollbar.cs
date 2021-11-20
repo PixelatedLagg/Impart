@@ -15,6 +15,10 @@ namespace Impart
             {
                 throw new ScrollbarError("ID for division must be defined!");
             }
+            if (color == null)
+            {
+                throw new ColorError("Color cannot be null!");
+            }
             bodyCache = "";
             if (division != null)
             {
