@@ -4,7 +4,7 @@ namespace Impart
 {
     static public class ConvertColor
     {
-        static public Hsl RgbToHsl(Rgb rgb)
+        static public Hsl ToHsl(this Rgb rgb)
         {
             Hsl hsl = new Hsl(1, 1, 1);
             float r = (rgb.rgb.r / 255.0f);
@@ -50,12 +50,12 @@ namespace Impart
             hsl.hsl.l *= 100;
             return hsl;
         }
-        static public Hex RgbToHex(Rgb rgb)
+        static public Hex ToHex(this Rgb rgb)
         {
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(rgb.rgb.r, rgb.rgb.g, rgb.rgb.b);
             return new Hex(myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2"));
         }
-        public static Rgb HslToRgb(Hsl hsl)
+        public static Rgb ToRgb(this Hsl hsl)
         {
             (float h, float s, float l) temphsl = hsl.hsl;
             temphsl.s /= 100;
@@ -80,13 +80,11 @@ namespace Impart
             Console.WriteLine($"{r}.{g}.{b}");
             return new Rgb((int)r, (int)g, (int)b);
         }
-        public static Hex HslToHex(Hsl hsl)
+        public static Hex ToHex(this Hsl hsl)
         {
-            Rgb rgb = ConvertColor.HslToRgb(hsl);
-            Console.WriteLine(rgb.rgb);
-            return ConvertColor.RgbToHex(rgb);
+            return hsl.ToRgb().ToHex();
         }
-        static public Rgb HexToRgb(Hex hex)
+        static public Rgb ToRgb(this Hex hex)
         {
             char[] temp = hex.hex.ToCharArray();
             return new Rgb(System.Convert.ToInt32($"{temp[0]}{temp[1]}", 16), System.Convert.ToInt32($"{temp[2]}{temp[3]}", 16), System.Convert.ToInt32($"{temp[4]}{temp[5]}", 16));
@@ -114,6 +112,17 @@ namespace Impart
                 return v1 + (v2 - v1) * ((2.0f / 3) - vH) * 6;
             }
             return v1;
+        }
+        static public Rgb ToRgb(this Color color)
+        {
+            return (Rgb)color;
+        }static public Hsl ToHsl(this Color color)
+        {
+            return (Hsl)color;
+        }
+        static public Hex ToHex(this Color color)
+        {
+            return (Hex)color;
         }
     }
 }

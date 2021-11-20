@@ -17,7 +17,7 @@ namespace Impart.Tests
         [Fact]
         public void RgbToHex()
         {
-            Assert.Equal("ABC123", ConvertColor.RgbToHex(new Rgb(171, 193, 35)).hex);
+            Assert.Equal("ABC123", new Rgb(171, 193, 35).ToHex().hex);
         }
         [Fact]
         public void Hex()
@@ -27,7 +27,7 @@ namespace Impart.Tests
         [Fact]
         public void HexToRgb()
         {
-            Assert.Equal((1, 2, 3), ConvertColor.HexToRgb(new Hex("010203")).rgb);
+            Assert.Equal((1, 2, 3), new Hex("010203").ToRgb().rgb);
         }
         [Fact]
         public void Hsl()
