@@ -24,6 +24,13 @@ namespace Impart
             textCache += checkField.textCache;
             return this;
         }
+
+        /// <summary>Method for adding a submit field to the form.</summary>
+        public Form AddSubmitField(SubmitField submitField)
+        {
+            textCache += submitField.Render();
+            return this;
+        }
         internal string Render()
         {
             return $"{textCache}%^    </form>";

@@ -1,10 +1,12 @@
 namespace Impart
 {
-    /// <summary>Class that represents a division scrollbar.</summary>
+    /// <summary>Class that represents a scrollbar.</summary>
     public class Scrollbar : Element
     {
         internal string cssCache;
+        #pragma warning disable
         internal string divID;
+        #pragma warning restore
         internal string bodyCache;
         private string id;
         
@@ -19,6 +21,7 @@ namespace Impart
             {
                 throw new ColorError("Color cannot be null!");
             }
+            divID = "";
             bodyCache = "";
             if (division != null)
             {
