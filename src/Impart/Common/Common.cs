@@ -60,7 +60,7 @@ namespace Impart
         }
         static internal string Str(this string str)
         {
-            return str.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&#39;");
+            return str.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&#39;").Replace("%^", "&#37;^");
         }
     }
 }

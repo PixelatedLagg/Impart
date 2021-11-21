@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>Class that represents a button.</summary>
-    public class Button : Element
+    public struct Button : Element
     {
         private string _text;
         private string _id;
@@ -60,6 +60,8 @@ namespace Impart
         /// <summary>Constructor for the button class.</summary>
         public Button(Text text, string id = null)
         {
+            _id = "";
+            _text = "";
             if (text.id == null)
             {
                 _text += $"%^    <p{text.attributes}{text.style}>{text.text}</p>%^";

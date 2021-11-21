@@ -176,7 +176,7 @@ namespace Impart
         public void AddLink(Link link)
         {
             Timer.StartTimer();
-            if (link.image != null)
+            if (link.linkType == typeof(Image))
             {
                 switch (link.id, link.image.id)
                 {

@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>Class that represents a header.</summary>
-    public class Header : Element
+    public struct Header : Element
     {
         private string _text;
         private string _id;
@@ -59,6 +59,7 @@ namespace Impart
             this._id = id;
             this.num = num;
             _style = "";
+            _attributes = "";
             setProperties = new bool[] {false, false, false};
         }
 

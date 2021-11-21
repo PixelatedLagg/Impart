@@ -4,7 +4,7 @@ using System.IO;
 namespace Impart
 {
     /// <summary>Class that represents an image.</summary>
-    public class Image : Element
+    public struct Image : Element
     {
         private string _path;
         private string _id;

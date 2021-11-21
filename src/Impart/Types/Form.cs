@@ -12,17 +12,23 @@ namespace Impart
         }
 
         /// <summary>Method for adding a text field to the form.</summary>
-        public Form AddTextField(TextField textField)
+        public Form AddTextField(params TextField[] textFields)
         {
-            textCache += textField.textCache;
+            foreach (TextField tf in textFields)
+            {
+                textCache += tf.textCache;
+            }
             return this;
         }
 
         /// <summary>Method for adding a check field to the form.</summary>
-        public Form AddCheckField(CheckField checkField)
+        public Form AddCheckField(params CheckField[] checkFields)
         {
-            textCache += checkField.textCache;
-            return this;
+            foreach (CheckField cf in checkFields)
+            {
+                textCache += cf.textCache;
+            }
+            return this;;;;;;
         }
 
         /// <summary>Method for adding a submit field to the form.</summary>

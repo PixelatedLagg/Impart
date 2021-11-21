@@ -3,14 +3,13 @@ using System;
 namespace Impart
 {
     /// <summary>Class that represents text.</summary>
-    public class Text : Element
+    public struct Text : Element
     {
         private bool[] setProperties;
         private string _text;
         private string _id;
         private string _style;
         private string _attributes;
-        private int colorCheck;
         internal string attributes 
         {
             get
@@ -85,7 +84,6 @@ namespace Impart
                     _style += $" color: #{hex.hex};";
                     break;
             }
-            colorCheck++;
             return this;
         }
 

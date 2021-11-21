@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>Class that represents a division.</summary>
-    public class Division : Element, IDisposable
+    public struct Division : Element, IDisposable
     {
         public (int? x, int? y) size;
         private bool[] setProperties;
@@ -29,6 +29,8 @@ namespace Impart
         public Division(ImpartCommon.IDType? type = null, string id = null)
         {
             Timer.StartTimer();
+            this.id = "";
+            scrollId = "";
             if (String.IsNullOrEmpty(id))
             {
                 id = null;
@@ -58,6 +60,7 @@ namespace Impart
             cssCache = "";
             attributeCache = "";
             setProperties = new bool[] {false, false, false, false, false, false};
+            elementCache = "";
             Debug.CallObjectEvent("[division] initialized division");
         }
 

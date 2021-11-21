@@ -24,7 +24,7 @@ namespace Impart.Templates
                         break;
                     case "CSWeb.Link":
                         Link link = (Link)e;
-                        if (link.image != null)
+                        if (link.linkType == typeof(Image))
                         {
                             switch (link.id, link.image.id)
                             {
