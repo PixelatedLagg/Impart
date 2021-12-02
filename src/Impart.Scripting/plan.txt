@@ -13,3 +13,5 @@
 2. Detect any code in the class containing the method that is used in the html.
 
 3. Write the class code to the .razor file.
+
+4. Create classes of methods for live DOM manipulation. (text editing, style editing, etc)
