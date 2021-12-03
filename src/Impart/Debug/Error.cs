@@ -67,4 +67,8 @@ namespace Impart
     {
         internal SizeError(string error) : base($"{{ Error: ({error}) }}") {}
     }
+    internal class ScriptingError : Exception
+    {
+        internal ScriptingError(string error) : base($"{{ Error: ({error}) }}") {}
+    }
 }
