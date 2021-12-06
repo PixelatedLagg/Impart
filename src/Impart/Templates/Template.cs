@@ -16,7 +16,7 @@ namespace Impart.Templates
             {
                 throw new TemplateError("Template does not exist!");
             }
-            obj.textCache += $"{CustomTemplates[name]}";
+            obj.textCache += CustomTemplates[name];
             Debug.CallObjectEvent("[cswebobj] added custom template");
         }
     }
