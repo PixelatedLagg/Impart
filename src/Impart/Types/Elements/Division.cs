@@ -28,7 +28,6 @@ namespace Impart
         /// <summary>Constructor for the division class.</summary>
         public Division(ImpartCommon.IDType? type = null, string id = null)
         {
-            Timer.StartTimer();
             this.id = "";
             scrollId = "";
             if (String.IsNullOrEmpty(id))
@@ -61,13 +60,11 @@ namespace Impart
             attributeCache = "";
             setProperties = new bool[] {false, false, false, false, false, false};
             elementCache = "";
-            Debug.CallObjectEvent("[division] initialized division");
         }
 
         /// <summary>Method for adding text to the division.</summary>
         public void AddText(Text text)
         {
-            Timer.StartTimer();
             if (text.id == null)
             {
                 elementCache += $"%^        <p{text.attributes}{text.style}>{text.text}</p>";
@@ -76,13 +73,11 @@ namespace Impart
             {
                 elementCache += $"%^        <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>";
             }
-            Debug.CallObjectEvent("[division] added text");
         }
 
         /// <summary>Method for adding an image to the division.</summary>
         public void AddImage(Image image)
         {
-            Timer.StartTimer();
             if (image.id == null)
             {
                 elementCache += $"%^        <img src=\"{image.path}\"{image.attributes}{image.style}>";
@@ -91,13 +86,11 @@ namespace Impart
             {
                 elementCache += $"%^        <img src=\"{image.path}\" id=\"{image.id}\"{image.attributes}{image.style}>";
             }
-            Debug.CallObjectEvent("[division] added image");
         }
 
         /// <summary>Method for setting the division color.</summary>
         public Division SetColor(Color color)
         {
-            Timer.StartTimer();
             if (setProperties[0])
             {
                 throw new DivisionError("Cannot set properties twice!");
@@ -122,14 +115,12 @@ namespace Impart
                     styleCache += $" background-color: #{hex.hex};";
                     break;
             }
-            Debug.CallObjectEvent("[division] set color");
             return this;
         }
 
         /// <summary>Method for setting the division border.</summary>
         public Division SetBorder(int pixels, string border, Color color, int roundedPixels = 0)
         {
-            Timer.StartTimer();
             if (setProperties[1])
             {
                 throw new DivisionError("Cannot set properties twice!");
@@ -158,14 +149,12 @@ namespace Impart
             {
                 styleCache += $" border-radius: {roundedPixels}px;";
             }
-            Debug.CallObjectEvent("[division] set border");
             return this;
         }
 
         /// <summary>Method for setting the division to follow the scroll.</summary>
         public Division SetFollowScroll(bool obj)
         {
-            Timer.StartTimer();
             if (setProperties[2])
             {
                 throw new DivisionError("Cannot set properties twice!");
@@ -179,14 +168,12 @@ namespace Impart
             {
                 throw new DivisionError("Default value for follow scroll is false!");
             }
-            Debug.CallObjectEvent("[division] set follow scroll");
             return this;
         }
 
         /// <summary>Method for setting the division margin.</summary>
         public Division SetMargin(int pixels)
         {
-            Timer.StartTimer();
             if (setProperties[3])
             {
                 throw new DivisionError("Cannot set properties twice!");
@@ -201,14 +188,12 @@ namespace Impart
                 throw new DivisionError("Margin thickness must be above 0!");
             }
             styleCache += $" margin: {pixels}px;";
-            Debug.CallObjectEvent("[division] set margin");
             return this;
         }
 
         /// <summary>Method for setting the division size.</summary>
         public Division SetSize(int? x, int? y)
         {
-            Timer.StartTimer();
             if (setProperties[4])
             {
                 throw new DivisionError("Cannot set properties twice!");
@@ -226,14 +211,12 @@ namespace Impart
             {
                 styleCache += $" max-height: {y}px;";
             }
-            Debug.CallObjectEvent("[division] set size");
             return this;
         }
 
         /// <summary>Method for setting the division scrollbar.</summary>
         public Division SetScrollBar(Scrollbar scrollbar)
         {
-            Timer.StartTimer();
             if (setProperties[5])
             {
                 throw new DivisionError("Cannot set properties twice!");
@@ -248,7 +231,6 @@ namespace Impart
                 id = scrollbar.divID;
             }
             cssCache += scrollbar.cssCache;
-            Debug.CallObjectEvent("[division] set scrollbar");
             return this;
         }
 

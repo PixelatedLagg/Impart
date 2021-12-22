@@ -4,7 +4,6 @@ namespace Impart.Templates
     {
         public static void AddFooterTemplate(this WebPage obj, params Element[] args)
         {
-            Timer.StartTimer();
             string textCache = $"%^    <div style=\"bottom: 0; position: fixed; column-count: {args.Length}; margin-left: 40%; margin-right: 40%;\">%^";
             foreach (Element e in args)
             {
@@ -67,7 +66,6 @@ namespace Impart.Templates
                 textCache += $"        </div>%^";
             }
             obj.textCache += $"{textCache}%^    </div>".Replace("%^    </div>", "    </div>");
-            Debug.CallObjectEvent("[cswebobj] added footer template");
         }
     }
 }

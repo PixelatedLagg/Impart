@@ -7,34 +7,6 @@ namespace Impart
 {
     public class ImpartCommon
     {
-        internal static void Config()
-        {
-            string fullName = "";
-            Type declaringType;
-            int skipFrames = 2;
-            do
-            {
-                MethodBase method = new StackFrame(skipFrames, false).GetMethod();
-                declaringType = method.DeclaringType;
-                if (declaringType == null)
-                {
-                    if (Type.GetType(method.Name)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance) != null)
-                    {
-                        Debug.ObjectEvent += (Action<Log>)Delegate.CreateDelegate(typeof(Action<Log>), null, Type.GetType(method.Name).GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance));
-                    }
-                    ImpartConfig.Initialize();
-                    return;
-                }
-                skipFrames++;
-                fullName = declaringType.FullName;
-            }
-            while (declaringType.Module.Name.Equals("mscorlib.dll", StringComparison.OrdinalIgnoreCase));
-            if (Type.GetType(fullName)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance) != null)
-            {
-                Debug.ObjectEvent += (Action<Log>)Delegate.CreateDelegate(typeof(Action<Log>), null, Type.GetType(fullName)?.GetMethod("Event", BindingFlags.NonPublic | BindingFlags.Instance));
-            }
-            ImpartConfig.Initialize();
-        }
         public static Text text(string text, string id = null)
         {
             return new Text(text, id);

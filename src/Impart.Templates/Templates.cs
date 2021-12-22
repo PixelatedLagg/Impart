@@ -11,13 +11,11 @@ namespace Impart.Templates
         }
         public static void AddCustomTemplate(this WebPage obj, string name)
         {
-            Timer.StartTimer();
             if (!CustomTemplates.ContainsKey(name))
             {
                 throw new TemplateError("Template does not exist!");
             }
             obj.textCache += CustomTemplates[name];
-            Debug.CallObjectEvent("[cswebobj] added custom template");
         }
     }
 }

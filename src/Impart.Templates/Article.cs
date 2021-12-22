@@ -4,7 +4,6 @@ namespace Impart.Templates
     {
         public static void AddArticleTemplate(this WebPage obj, params Element[] args)
         {
-            Timer.StartTimer();
             string textCache = "%^";
             foreach (Element e in args)
             {
@@ -37,7 +36,6 @@ namespace Impart.Templates
                 }
             }
             obj.textCache += $"{textCache}<>".Replace("%^<>", "");
-            Debug.CallObjectEvent("[cswebobj] added article template");
         }
     }
 }

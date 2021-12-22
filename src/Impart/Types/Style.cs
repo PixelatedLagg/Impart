@@ -12,7 +12,6 @@ namespace Impart
         /// <summary>Constructor for the style class.</summary>
         public Style(ImpartCommon.StyleType style, string id)
         {
-            Timer.StartTimer();
             if (String.IsNullOrEmpty(id))
             {
                 throw new StyleError("ID/Class/Element cannot be null!");
@@ -31,13 +30,11 @@ namespace Impart
             }
             this.id = id;
             setProperties = new bool[] {false, false, false};
-            Debug.CallObjectEvent("[style] created idstyle");
         }
 
         /// <summary>Method for setting the style color.</summary>
         public Style SetColor(Color color)
         {
-            Timer.StartTimer();
             if (setProperties[0])
             {
                 throw new StyleError("Cannot set properties twice!");
@@ -58,33 +55,28 @@ namespace Impart
                     textCache += $"    color: #{hex.hex};%^";
                     break;
             }
-            Debug.CallObjectEvent("[style] set color");
             return this;
         }
 
         /// <summary>Method for setting the style align.</summary>
         public Style SetAlign(string alignment)
         {
-            Timer.StartTimer();
             if (setProperties[1])
             {
                 throw new StyleError("Cannot set properties twice!");
             }
             setProperties[1] = true;
-            Timer.StartTimer();
             if (!Alignment.Any(alignment))
             {
                 throw new StyleError("Invalid alignment value!");
             }
             textCache += $"    text-align: {alignment};%^";
-            Debug.CallObjectEvent("[style] set alignment");
             return this;
         }
 
         /// <summary>Method for setting the style margin.</summary>
         public Style SetMargin(int pixels)
         {
-            Timer.StartTimer();
             if (setProperties[2])
             {
                 throw new StyleError("Cannot set properties twice!");
@@ -95,7 +87,6 @@ namespace Impart
                 throw new StyleError("Invalid margin value!");
             }
             textCache += $"    margin: {pixels}px;%^";
-            Debug.CallObjectEvent("[style] set margin");
             return this;
         }
         internal string Render()
