@@ -24,6 +24,24 @@ namespace Impart.Scripting
             }
             File.WriteAllText(webpage.path, contents);
         }
+        public static void DeleteByClass(this WebPage webpage, string cls)
+        {
+            CheckRazor(webpage);
+            List<string> elements = new List<string>();
+            string contents = webpage.RenderRazor();
+            foreach (string s in File.ReadLines(webpage.razorPath).ToArray())
+            {
+                if (s.Contains($"class=\"{cls}\""))
+                {
+                    elements.Add(s);
+                }
+            }
+            foreach (string s in elements)
+            {
+                contents.Replace(s, "");
+            }
+            File.WriteAllText(webpage.path, contents);
+        }
         private static void CheckRazor(WebPage webpage)
         {
             if (webpage.path != null)
