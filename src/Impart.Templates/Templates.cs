@@ -7,7 +7,7 @@ namespace Impart.Templates
         internal static Dictionary<string, string> CustomTemplates = new Dictionary<string, string>();
         public static void AddCustomTemplate(string name, WebPage obj)
         {
-            CustomTemplates.Add(name, obj.textCache);
+            CustomTemplates.Add(name, obj.textBuilder.ToString());
         }
         public static void AddCustomTemplate(this WebPage obj, string name)
         {
@@ -15,7 +15,7 @@ namespace Impart.Templates
             {
                 throw new TemplateError("Template does not exist!");
             }
-            obj.textCache += CustomTemplates[name];
+            obj.WriteText(CustomTemplates[name]);
         }
     }
 }

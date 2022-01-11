@@ -9,7 +9,6 @@ namespace Impart
         private static DateTime timer;
         public static event Action<Log> ObjectEvent;
         internal static bool FileLogging;
-        internal static bool Formatting;
         private static string tempCache = "";
         public static void StartTimer()
         {
@@ -44,20 +43,16 @@ namespace Impart
             {
                 using (StreamWriter writer = new StreamWriter("app.config"))
                 {
-                    writer.WriteLine(($"<?xml version=\"1.0\" encoding=\"utf-8\" ?>%<configuration>%    " + 
-                    "<appSettings>%        <add key=\"DebugFile\" value=\"false\" />" + 
-                    "%        <add key=\"Formatting\" value=\"true\" />%    </appSettings>%</configuration>").Replace("%", Environment.NewLine));
+                    writer.WriteLine(($"<?xml version=\"1.0\" encoding=\"utf-8\" ?>%<configuration>%    <appSettings>%        <add key=\"DebugFile\" value=\"false\" />%    </appSettings>%</configuration>").Replace("%", Environment.NewLine));
                     writer.Close();
                 }
                 FileLogging = false;
-                Formatting = true;
             }
             else 
             {
                 try
                 {
                     FileLogging = Convert.ToBoolean(ConfigurationManager.AppSettings["DebugFile"]);
-                    Formatting = Convert.ToBoolean(ConfigurationManager.AppSettings["Formatting"]);
                 }
                 catch
                 {

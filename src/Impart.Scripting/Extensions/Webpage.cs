@@ -6,11 +6,10 @@ namespace Impart.Scripting
 {
     public static class WebPageExtensions
     {
-        public static void DeleteByID(this WebPage webpage, string id)
+        /*public static void DeleteByID(this WebPage webpage, string id)
         {
             CheckRazor(webpage);
             List<string> elements = new List<string>();
-            string contents = webpage.RenderRazor();
             foreach (string s in File.ReadLines(webpage.razorPath).ToArray())
             {
                 if (s.Contains($"id=\"{id}\""))
@@ -28,7 +27,6 @@ namespace Impart.Scripting
         {
             CheckRazor(webpage);
             List<string> elements = new List<string>();
-            string contents = webpage.RenderRazor();
             foreach (string s in File.ReadLines(webpage.razorPath).ToArray())
             {
                 if (s.Contains($"class=\"{cls}\""))
@@ -52,6 +50,6 @@ namespace Impart.Scripting
             {
                 throw new ScriptingError("You must render the page to edit it!");
             }
-        }
+        }*/
     }
 }

@@ -24,7 +24,7 @@ namespace Impart.Templates
                 }
             }
             result += "%^</div>";
-            obj.textCache += result;
+            obj.WriteText(result);
         }
     }
 }

@@ -65,7 +65,7 @@ namespace Impart.Templates
                 }
                 textCache += $"        </div>%^";
             }
-            obj.textCache += $"{textCache}%^    </div>".Replace("%^    </div>", "    </div>");
+            obj.WriteText($"{textCache}%^    </div>".Replace("%^    </div>", "    </div>"));
         }
     }
 }

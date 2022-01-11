@@ -35,7 +35,7 @@ namespace Impart.Templates
                         throw new TemplateError("Article element invalid!");
                 }
             }
-            obj.textCache += $"{textCache}<>".Replace("%^<>", "");
+            obj.WriteText($"{textCache}<>".Replace("%^<>", ""));
         }
     }
 }
