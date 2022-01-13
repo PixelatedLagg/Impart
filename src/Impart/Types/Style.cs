@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>Class that represents ID/class styling in html.</summary>
-    public class Style
+    public class Style : IDisposable
     {
         private bool[] setProperties;
         private string textCache;
@@ -40,18 +40,15 @@ namespace Impart
                 throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[0] = true;
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     textCache += $"    color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     textCache += $"    color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     textCache += $"    color: #{hex.hex};%^";
                     break;
             }
@@ -92,6 +89,13 @@ namespace Impart
         internal string Render()
         {
             return $"{textCache}}}".Replace("%^", Environment.NewLine);
+        }
+
+        public void Dispose()
+        {
+            textCache = "";
+            id = "";
+            setProperties = null;
         }
     }
 }
