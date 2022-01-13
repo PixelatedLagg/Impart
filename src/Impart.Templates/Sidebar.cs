@@ -9,7 +9,7 @@ namespace Impart.Templates
             string result = "";
             if (!Alignment.Any(alignment) || alignment == "justify")
             {
-                throw new TemplateError("Enter a valid alignment value!");
+                throw new ImpartError("Enter a valid alignment value!");
             }
             result += $"<div style=\"float: {alignment}; padding: 20px;\">";
             foreach (Text t in args)

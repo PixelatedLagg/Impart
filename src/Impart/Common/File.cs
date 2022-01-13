@@ -1,14 +1,13 @@
-using System;
 using System.IO;
+using System.Text;
 
 namespace Impart
 {
-    static internal class Common
+    static internal class File
     {
-        static internal string GetAllText(string path) => File.ReadAllText(path);
         static internal void Change(string path, string text)
         {
-            File.WriteAllText(path, "");
+            System.IO.File.WriteAllText(path, "");
             using (StreamWriter _streamWriter = new StreamWriter(path))
             {
                 _streamWriter.Write(text);
@@ -60,7 +59,7 @@ namespace Impart
         }
         static internal string Str(this string str)
         {
-            return str.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&#39;").Replace("%^", "&#37;^");
+            return new StringBuilder(str, str.Length * 3).Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&#39;").Replace("%^", "&#37;^").ToString();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(inputid))
             {
-                throw new FormError("Input ID cannot be empty or null!");
+                throw new ImpartError("Input ID cannot be empty or null!");
             }
             textCache = $"%^        <label for=\"{inputid}\">{text}</label>%^        <input type=\"checkbox\" name=\"{inputid}\">";
         }
@@ -22,7 +22,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(inputid))
             {
-                throw new FormError("Input ID cannot be empty or null!");
+                throw new ImpartError("Input ID cannot be empty or null!");
             }
             if (text.id == null)
             {

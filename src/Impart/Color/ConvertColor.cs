@@ -117,7 +117,7 @@ namespace Impart
         {
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             return (Rgb)color;
         }
@@ -125,7 +125,7 @@ namespace Impart
         {
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             return (Hsl)color;
         }
@@ -133,7 +133,7 @@ namespace Impart
         {
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             return (Hex)color;
         }

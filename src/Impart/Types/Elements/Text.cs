@@ -48,7 +48,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(text))
             {
-                throw new TextError("Text cannot be null or empty!");
+                throw new ImpartError("Text cannot be null or empty!");
             }
             this._text = text.Str();
             this._id = id;
@@ -62,25 +62,22 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new TextError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             setProperties[0] = true;
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     _style += $" color: #{hex.hex};";
                     break;
             }
@@ -92,15 +89,15 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new TextError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[1] = true;
-            switch (measurement.GetType().FullName)
+            switch (measurement)
             {
-                case "Impart.Percent":
+                case Percent pct:
                     _style += $" margin: {measurement.Pct().percent}%;";
                     break;
-                case "Impart.Pixels":
+                case Pixels pxls:
                     _style += $" margin: {measurement.Px().pixels}px;";
                     break;
             }
@@ -112,12 +109,12 @@ namespace Impart
         {
             if (setProperties[2])
             {
-                throw new TextError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (String.IsNullOrEmpty(message))
             {
-                throw new TextError("Hover message cannot be empty or null!");
+                throw new ImpartError("Hover message cannot be empty or null!");
             }
             _attributes += $" title=\"{message.Str()}\"";
             return this;
@@ -128,15 +125,15 @@ namespace Impart
         {
             if (setProperties[3])
             {
-                throw new TextError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[3] = true;
-            switch (measurement.GetType().FullName)
+            switch (measurement)
             {
-                case "Impart.Percent":
+                case Percent pct:
                     _style += $" font-size: {measurement.Pct().percent}%;";
                     break;
-                case "Impart.Pixels":
+                case Pixels pxls:
                     _style += $" font-size: {measurement.Px().pixels}px;";
                     break;
             }

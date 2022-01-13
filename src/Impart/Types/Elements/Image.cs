@@ -49,15 +49,15 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(path)) 
             {
-                throw new ImageError("Path cannot be empty or null!");
+                throw new ImpartError("Path cannot be empty or null!");
             }
-            if (!File.Exists(path))
+            if (!System.IO.File.Exists(path))
             {
-                throw new ImageError("Image file not found!");
+                throw new ImpartError("Image file not found!");
             }
-            if (!Common.IsImage(Path.GetExtension(path)))
+            if (!File.IsImage(Path.GetExtension(path)))
             {
-                throw new ImageError("Unsupported file extension!");
+                throw new ImpartError("Unsupported file extension!");
             }
             if (String.IsNullOrEmpty(id))
             {
@@ -78,12 +78,12 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new ImageError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             if (x < 0 || y < 0)
             {
-                throw new ImageError("Width and height values must be positive!");
+                throw new ImpartError("Width and height values must be positive!");
             }
             _attributes += $" width=\"{x}\" height=\"{y}\"";
             return this;
@@ -94,33 +94,30 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new ImageError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             setProperties[1] = true;
             if (pixels < 0)
             {
-                throw new ImageError("Border thickness must be above 0!");
+                throw new ImpartError("Border thickness must be above 0!");
             }
             if (!Border.Any(border))
             {
-                throw new ImageError("Invalid border value!");
+                throw new ImpartError("Invalid border value!");
             }
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     _style += $" border: {pixels}px {border} rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     _style += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     _style += $" border: {pixels}px {border} #{hex.hex};";
                     break;
             }

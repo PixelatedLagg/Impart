@@ -19,18 +19,15 @@ namespace Impart
         /// <summary>Method for setting the button background color.</summary>
         public SubmitField SetBGColor(Color color)
         {
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     style += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     style += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     style += $"    background-color: #{hex.hex};%^}}";
                     break;
             }

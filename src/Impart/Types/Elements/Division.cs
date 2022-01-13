@@ -50,9 +50,9 @@ namespace Impart
                     }
                     break;
                 case (ImpartCommon.IDType, string) b when b.type == null && b.id != null:
-                    throw new DivisionError("Type and ID must both be null or not null!");
+                    throw new ImpartError("Type and ID must both be null or not null!");
                 case (ImpartCommon.IDType, string) c when c.type != null && c.id == null:
-                    throw new DivisionError("Type and ID must both be null or not null!");
+                    throw new ImpartError("Type and ID must both be null or not null!");
             }
             styleCache = " margin: 0px;";
             size = (null, null);
@@ -93,25 +93,22 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new DivisionError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             setProperties[0] = true;
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     styleCache += $" background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     styleCache += $" background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     styleCache += $" background-color: #{hex.hex};";
                     break;
             }
@@ -123,25 +120,22 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new DivisionError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[1] = true;
             if (!Border.Any(border))
             {
-                throw new DivisionError("Invalid border value!");
+                throw new ImpartError("Invalid border value!");
             }
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     styleCache += $" border: {pixels}px {border} rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     styleCache += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     styleCache += $" border: {pixels}px {border} #{hex};";
                     break;
             }
@@ -157,7 +151,7 @@ namespace Impart
         {
             if (setProperties[2])
             {
-                throw new DivisionError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (obj)
@@ -166,7 +160,7 @@ namespace Impart
             }
             else
             {
-                throw new DivisionError("Default value for follow scroll is false!");
+                throw new ImpartError("Default value for follow scroll is false!");
             }
             return this;
         }
@@ -176,16 +170,16 @@ namespace Impart
         {
             if (setProperties[3])
             {
-                throw new DivisionError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[3] = true;
             if (pixels == 0)
             {
-                throw new DivisionError("Border thickness is default 0 pixels!");
+                throw new ImpartError("Border thickness is default 0 pixels!");
             }
             if (pixels < 0)
             {
-                throw new DivisionError("Margin thickness must be above 0!");
+                throw new ImpartError("Margin thickness must be above 0!");
             }
             styleCache += $" margin: {pixels}px;";
             return this;
@@ -196,12 +190,12 @@ namespace Impart
         {
             if (setProperties[4])
             {
-                throw new DivisionError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[4] = true;
             if (y < 0 || x < 0)
             {
-                throw new DivisionError("Invalid size values!");
+                throw new ImpartError("Invalid size values!");
             }
             if (x != null)
             {
@@ -219,12 +213,12 @@ namespace Impart
         {
             if (setProperties[5])
             {
-                throw new DivisionError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[5] = true;
             if (scrollbar.divID != id && id != null)
             {
-                throw new ScrollbarError("ID of division must either be null or match the ID inputted to the scrollbar!");
+                throw new ImpartError("ID of division must either be null or match the ID inputted to the scrollbar!");
             }
             if (id == null)
             {

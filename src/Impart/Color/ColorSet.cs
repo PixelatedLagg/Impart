@@ -13,7 +13,7 @@ namespace Impart
             {
                 if (c == null)
                 {
-                    throw new ColorError("Color cannot be null!");
+                    throw new ImpartError("Color cannot be null!");
                 }
                 this.colors.Add(c);
             }

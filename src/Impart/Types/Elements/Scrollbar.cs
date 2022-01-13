@@ -15,11 +15,11 @@ namespace Impart
         {
             if (division.scrollId == null)
             {
-                throw new ScrollbarError("ID for division must be defined!");
+                throw new ImpartError("ID for division must be defined!");
             }
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             divID = "";
             bodyCache = "";
@@ -35,56 +35,50 @@ namespace Impart
                     cssCache += "    overflow-y: auto;%^}%^";
                     break;
                 default:
-                    throw new ScrollbarError("Invalid axis!");
+                    throw new ImpartError("Invalid axis!");
             }
-            switch (width.GetType().FullName)
+            switch (width)
             {
-                case "Impart.Percent":
+                case Percent pct:
                     cssCache += $"%^{this.id}::-webkit-scrollbar {{%^    width: {width.Pct().percent}%;%^    background-color: #808080; %^}}%^{this.id}::-webkit-scrollbar-track {{%^";
                     break;
-                case "Impart.Pixels":
+                case Pixels pxls:
                     cssCache += $"%^{this.id}::-webkit-scrollbar {{%^    width: {width.Px().pixels}px;%^    background-color: #808080; %^}}%^{this.id}::-webkit-scrollbar-track {{%^";
                     break;
             }
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     cssCache += $"    background-color: #{hex.hex};%^}}";
                     break;
             }
             cssCache += $"%^{this.id}::-webkit-scrollbar-thumb {{%^";
-            switch (colorThumb.GetType().FullName)
+            switch (colorThumb)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)colorThumb;
+                case Rgb rgb:
                     cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)colorThumb;
+                case Hsl hsl:
                     cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)colorThumb;
+                case Hex hex:
                     cssCache += $"    background-color: #{hex.hex};%^";
                     break;
             }
             if (rounded != null)
             {
-                switch (rounded.GetType().FullName)
+                switch (rounded)
                 {
-                    case "Impart.Percent":
+                    case Percent pct:
                         cssCache += $"    border-radius: {rounded.Pct().percent}%;%^}}";
                         break;
-                    case "Impart.Pixels":
+                    case Pixels pxls:
                         cssCache += $"    border-radius: {rounded.Px().pixels}px;%^}}";
                         break;
                 }
@@ -100,7 +94,7 @@ namespace Impart
         {
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             divID = "";
             bodyCache = "";
@@ -115,56 +109,50 @@ namespace Impart
                     bodyCache += "    overflow-y: auto;%^";
                     break;
                 default:
-                    throw new ScrollbarError("Invalid axis!");
+                    throw new ImpartError("Invalid axis!");
             }
-            switch (width.GetType().FullName)
+            switch (width)
             {
-                case "Impart.Percent":
+                case Percent pct:
                     cssCache += $"%^::-webkit-scrollbar {{%^    width: {width.Pct().percent}%;%^    background-color: #808080; %^}}%^::-webkit-scrollbar-track {{%^";
                     break;
-                case "Impart.Pixels":
+                case Pixels pxls:
                     cssCache += $"%^::-webkit-scrollbar {{%^    width: {width.Px().pixels}px;%^    background-color: #808080; %^}}%^::-webkit-scrollbar-track {{%^";
                     break;
             }
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     cssCache += $"    background-color: #{hex.hex};%^}}";
                     break;
             }
             cssCache += $"%^::-webkit-scrollbar-thumb {{%^";
-            switch (colorThumb.GetType().FullName)
+            switch (colorThumb)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)colorThumb;
+                case Rgb rgb:
                     cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)colorThumb;
+                case Hsl hsl:
                     cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)colorThumb;
+                case Hex hex:
                     cssCache += $"    background-color: #{hex.hex};%^";
                     break;
             }
             if (rounded != null)
             {
-                switch (rounded.GetType().FullName)
+                switch (rounded)
                 {
-                    case "Impart.Percent":
+                    case Percent pct:
                         cssCache += $"    border-radius: {rounded.Pct().percent}%;%^}}";
                         break;
-                    case "Impart.Pixels":
+                    case Pixels pxls:
                         cssCache += $"    border-radius: {rounded.Px().pixels}px;%^}}";
                         break;
                 }

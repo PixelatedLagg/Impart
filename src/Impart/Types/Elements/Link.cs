@@ -44,7 +44,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(path))
             {
-                throw new LinkError("Path cannot be null or empty!");
+                throw new ImpartError("Path cannot be null or empty!");
             }
             this._text = text;
             this._id = id;
@@ -58,7 +58,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(path))
             {
-                throw new LinkError("Path cannot be null or empty!");
+                throw new ImpartError("Path cannot be null or empty!");
             }
             this._text = new Text();
             this._id = id;

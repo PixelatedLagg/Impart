@@ -8,7 +8,7 @@ namespace Impart
         {
             if (percent > 100 || percent < 0)
             {
-                throw new SizeError("Percent must be between 0-100!");
+                throw new ImpartError("Percent must be between 0-100!");
             }
             this.percent = percent;
         }
@@ -20,7 +20,7 @@ namespace Impart
         {
             if (pixels < 0)
             {
-                throw new SizeError("Pixel number must be positive!");
+                throw new ImpartError("Pixel number must be positive!");
             }
             this.pixels = pixels;
         }

@@ -61,7 +61,7 @@ namespace Impart.Templates
                         }
                         break;
                     default:
-                        throw new TemplateError("Footer element invalid!");
+                        throw new ImpartError("Footer element invalid!");
                 }
                 textCache += $"        </div>%^";
             }

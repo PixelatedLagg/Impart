@@ -14,7 +14,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(id))
             {
-                throw new StyleError("ID/Class/Element cannot be null!");
+                throw new ImpartError("ID/Class/Element cannot be null!");
             }
             switch (style)
             {
@@ -37,7 +37,7 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new StyleError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[0] = true;
             switch (color.GetType().FullName)
@@ -63,12 +63,12 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new StyleError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[1] = true;
             if (!Alignment.Any(alignment))
             {
-                throw new StyleError("Invalid alignment value!");
+                throw new ImpartError("Invalid alignment value!");
             }
             textCache += $"    text-align: {alignment};%^";
             return this;
@@ -79,12 +79,12 @@ namespace Impart
         {
             if (setProperties[2])
             {
-                throw new StyleError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (pixels < 0)
             {
-                throw new StyleError("Invalid margin value!");
+                throw new ImpartError("Invalid margin value!");
             }
             textCache += $"    margin: {pixels}px;%^";
             return this;

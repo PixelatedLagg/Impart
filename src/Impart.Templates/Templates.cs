@@ -13,7 +13,7 @@ namespace Impart.Templates
         {
             if (!CustomTemplates.ContainsKey(name))
             {
-                throw new TemplateError("Template does not exist!");
+                throw new ImpartError("Template does not exist!");
             }
             obj.WriteText(CustomTemplates[name]);
         }

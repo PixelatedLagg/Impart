@@ -48,7 +48,7 @@ namespace Impart
         {
             if (String.IsNullOrEmpty(text))
             {
-                throw new ButtonError("Text cannot be null or empty!");
+                throw new ImpartError("Text cannot be null or empty!");
             }
             this._text = text.Str();
             this._id = id;
@@ -88,25 +88,22 @@ namespace Impart
         {
             if (setProperties[0])
             {
-                throw new ButtonError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             setProperties[0] = true;
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     _style += $" color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     _style += $" color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     _style += $" color: #{hex.hex};";
                     break;
             }
@@ -118,25 +115,22 @@ namespace Impart
         {
             if (setProperties[1])
             {
-                throw new ButtonError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             setProperties[1] = true;
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     _style += $" background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     _style += $" background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     _style += $" background-color: #{hex.hex};";
                     break;
             }
@@ -148,12 +142,12 @@ namespace Impart
         {
             if (setProperties[2])
             {
-                throw new ButtonError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[2] = true;
             if (pixels < 0)
             {
-                throw new ButtonError("Invalid margin value!");
+                throw new ImpartError("Invalid margin value!");
             }
             _style += $" margin: {pixels}px;";
             return this;
@@ -164,12 +158,12 @@ namespace Impart
         {
             if (setProperties[3])
             {
-                throw new ButtonError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[3] = true;
             if (String.IsNullOrEmpty(message))
             {
-                throw new ButtonError("Hover message cannot be empty or null!");
+                throw new ImpartError("Hover message cannot be empty or null!");
             }
             _attributes += $" title=\"{message.Str()}\"";
             return this;
@@ -180,12 +174,12 @@ namespace Impart
         {
             if (setProperties[4])
             {
-                throw new ButtonError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             setProperties[4] = true;
             if (pixels < 0)
             {
-                throw new ButtonError("Invalid font size!");
+                throw new ImpartError("Invalid font size!");
             }
             _style += $" font-size: {pixels}px;";
             return this;
@@ -196,29 +190,26 @@ namespace Impart
         {
             if (setProperties[5])
             {
-                throw new ButtonError("Cannot set properties twice!");
+                throw new ImpartError("Cannot set properties twice!");
             }
             if (color == null)
             {
-                throw new ColorError("Color cannot be null!");
+                throw new ImpartError("Color cannot be null!");
             }
             setProperties[5] = true;
             if (!Border.Any(border))
             {
-                throw new ButtonError("Invalid border value!");
+                throw new ImpartError("Invalid border value!");
             }
-            switch (color.GetType().FullName)
+            switch (color)
             {
-                case "Impart.Rgb":
-                    Rgb rgb = (Rgb)color;
+                case Rgb rgb:
                     _style += $" border: {pixels}px {border} rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
-                case "Impart.Hsl":
-                    Hsl hsl = (Hsl)color;
+                case Hsl hsl:
                     _style += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
-                case "Impart.Hex":
-                    Hex hex = (Hex)color;
+                case Hex hex:
                     _style += $" border: {pixels}px {border} #{hex.hex};";
                     break;
             }

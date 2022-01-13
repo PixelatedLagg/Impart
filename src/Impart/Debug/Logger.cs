@@ -18,20 +18,20 @@ namespace Impart
         {
             if (FileLogging)
             {
-                if (!Common.ValidPath("DEBUG.txt", ""))
+                if (!File.ValidPath("DEBUG.txt", ""))
                 {
-                    File.Create("DEBUG.txt");
+                    System.IO.File.Create("DEBUG.txt");
                 }
                 if (tempCache == "")
                 {
                     tempCache = $"-- DEBUG FILE --{Environment.NewLine}{log ?? "No Event Provided"} [{(DateTime.Now - timer).TotalMilliseconds}ms]";
-                    Common.Write("DEBUG.txt", tempCache);
+                    File.Write("DEBUG.txt", tempCache);
                     return;
                 }
                 else
                 {
                     tempCache += $"{Environment.NewLine}{log ?? "No Event Provided"} [{(DateTime.Now - timer).TotalMilliseconds}ms]";
-                    Common.Write("DEBUG.txt", tempCache);
+                    File.Write("DEBUG.txt", tempCache);
                     return;
                 }
             }
@@ -56,7 +56,7 @@ namespace Impart
                 }
                 catch
                 {
-                    throw new ConfigError("All key values must be \"true\" or \"false\"!");
+                    throw new ImpartError("All key values must be \"true\" or \"false\"!");
                 }
             }
         }

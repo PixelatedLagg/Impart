@@ -10,15 +10,15 @@ namespace Impart
             hsl = (h, s, l);
             if (h > 360 || h < 0)
             {
-                throw new ColorError("Invalid hue value!");
+                throw new ImpartError("Invalid hue value!");
             }
             if (s > 100 || s < 0)
             {
-                throw new ColorError("Invalid saturation value!");
+                throw new ImpartError("Invalid saturation value!");
             }
             if (l > 100 || l < 0)
             {
-                throw new ColorError("Invalid luminosity value!");
+                throw new ImpartError("Invalid luminosity value!");
             }
         }
         public static bool operator ==(Hsl hsl1, Hsl hsl2)

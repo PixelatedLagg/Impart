@@ -32,7 +32,7 @@ namespace Impart.Templates
                         }
                         break;
                     default:
-                        throw new TemplateError("Article element invalid!");
+                        throw new ImpartError("Article element invalid!");
                 }
             }
             obj.WriteText($"{textCache}<>".Replace("%^<>", ""));
