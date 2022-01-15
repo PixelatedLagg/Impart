@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Impart
 {
@@ -6,6 +7,7 @@ namespace Impart
     public class Style : IDisposable
     {
         private bool[] setProperties;
+        private StringBuilder textBuilder;
         private string textCache;
         private string id;
 
@@ -16,22 +18,31 @@ namespace Impart
             {
                 throw new ImpartError("ID/Class/Element cannot be null!");
             }
+            textBuilder = new StringBuilder(1000);
             switch (style)
             {
                 case ImpartCommon.StyleType.IDStyle:
-                    textCache = $"#{id} {{%^";
+                    textBuilder.Append($"#{id} {{%^");
                     break;
                 case ImpartCommon.StyleType.EStyle:
-                    textCache = $"{id} {{%^";
+                    textBuilder.Append($"{id} {{%^");
                     break;
                 case ImpartCommon.StyleType.ClassStyle:
-                    textCache = $".{id} {{%^";
+                    textBuilder.Append($".{id} {{%^");
                     break;
             }
             this.id = id;
             setProperties = new bool[] {false, false, false};
         }
 
+        internal void Write(string text)
+        {
+            if (textBuilder.Length + text.Length > textBuilder.Length)
+            {
+                textBuilder.Capacity += 1000;
+            }
+            textBuilder.Append(text);
+        }
         /// <summary>Method for setting the style color.</summary>
         public Style SetColor(Color color)
         {
@@ -43,13 +54,13 @@ namespace Impart
             switch (color)
             {
                 case Rgb rgb:
-                    textCache += $"    color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^";
+                    Write($"    color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^");
                     break;
                 case Hsl hsl:
-                    textCache += $"    color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^";
+                    Write($"    color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^");
                     break;
                 case Hex hex:
-                    textCache += $"    color: #{hex.hex};%^";
+                    Write($"    color: #{hex.hex};%^");
                     break;
             }
             return this;
@@ -67,7 +78,7 @@ namespace Impart
             {
                 throw new ImpartError("Invalid alignment value!");
             }
-            textCache += $"    text-align: {alignment};%^";
+            Write($"    text-align: {alignment};%^");
             return this;
         }
 
@@ -83,12 +94,12 @@ namespace Impart
             {
                 throw new ImpartError("Invalid margin value!");
             }
-            textCache += $"    margin: {pixels}px;%^";
+            Write($"    margin: {pixels}px;%^");
             return this;
         }
         internal string Render()
         {
-            return $"{textCache}}}".Replace("%^", Environment.NewLine);
+            return $"{textBuilder.Replace("%^", Environment.NewLine).ToString()}}}";
         }
 
         public void Dispose()
