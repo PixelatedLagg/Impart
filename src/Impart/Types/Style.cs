@@ -8,7 +8,6 @@ namespace Impart
     {
         private bool[] setProperties;
         private StringBuilder textBuilder;
-        private string textCache;
         private string id;
 
         /// <summary>Constructor for the style class.</summary>
@@ -104,9 +103,9 @@ namespace Impart
 
         public void Dispose()
         {
-            textCache = "";
             id = "";
             setProperties = null;
+            textBuilder.Clear();
         }
     }
 }

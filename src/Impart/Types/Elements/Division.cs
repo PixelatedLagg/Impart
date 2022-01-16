@@ -6,7 +6,6 @@ namespace Impart
     public struct Division : Element, IDisposable
     {
         public (int? x, int? y) size;
-        private bool[] setProperties;
         private string elementCache;
         private string styleCache;
         private string attributeCache;
@@ -58,7 +57,6 @@ namespace Impart
             size = (null, null);
             cssCache = "";
             attributeCache = "";
-            setProperties = new bool[] {false, false, false, false, false, false};
             elementCache = "";
         }
 
@@ -91,15 +89,10 @@ namespace Impart
         /// <summary>Method for setting the division color.</summary>
         public Division SetColor(Color color)
         {
-            if (setProperties[0])
-            {
-                throw new ImpartError("Cannot set properties twice!");
-            }
             if (color == null)
             {
                 throw new ImpartError("Color cannot be null!");
             }
-            setProperties[0] = true;
             switch (color)
             {
                 case Rgb rgb:
@@ -118,11 +111,6 @@ namespace Impart
         /// <summary>Method for setting the division border.</summary>
         public Division SetBorder(int pixels, string border, Color color, int roundedPixels = 0)
         {
-            if (setProperties[1])
-            {
-                throw new ImpartError("Cannot set properties twice!");
-            }
-            setProperties[1] = true;
             if (!Border.Any(border))
             {
                 throw new ImpartError("Invalid border value!");
@@ -149,11 +137,6 @@ namespace Impart
         /// <summary>Method for setting the division to follow the scroll.</summary>
         public Division SetFollowScroll(bool obj)
         {
-            if (setProperties[2])
-            {
-                throw new ImpartError("Cannot set properties twice!");
-            }
-            setProperties[2] = true;
             if (obj)
             {
                 styleCache += " position: fixed;";
@@ -168,11 +151,6 @@ namespace Impart
         /// <summary>Method for setting the division margin.</summary>
         public Division SetMargin(int pixels)
         {
-            if (setProperties[3])
-            {
-                throw new ImpartError("Cannot set properties twice!");
-            }
-            setProperties[3] = true;
             if (pixels == 0)
             {
                 throw new ImpartError("Border thickness is default 0 pixels!");
@@ -188,11 +166,6 @@ namespace Impart
         /// <summary>Method for setting the division size.</summary>
         public Division SetSize(int? x, int? y)
         {
-            if (setProperties[4])
-            {
-                throw new ImpartError("Cannot set properties twice!");
-            }
-            setProperties[4] = true;
             if (y < 0 || x < 0)
             {
                 throw new ImpartError("Invalid size values!");
@@ -211,11 +184,6 @@ namespace Impart
         /// <summary>Method for setting the division scrollbar.</summary>
         public Division SetScrollBar(Scrollbar scrollbar)
         {
-            if (setProperties[5])
-            {
-                throw new ImpartError("Cannot set properties twice!");
-            }
-            setProperties[5] = true;
             if (scrollbar.divID != id && id != null)
             {
                 throw new ImpartError("ID of division must either be null or match the ID inputted to the scrollbar!");

@@ -1,4 +1,4 @@
-using System;
+using System.Text;
 
 namespace Impart
 {
@@ -6,14 +6,23 @@ namespace Impart
     public class SubmitField : FormElement
     {
         private string attributes;
-        private string style;
+        private StringBuilder styleBuilder;
         internal string textCache;
 
         /// <summary>Constructor for the submit field class.</summary>
         public SubmitField()
         {
-            style = "";
+            styleBuilder = new StringBuilder(1000);
             attributes = "";
+        }
+
+        private void WriteStyle(string text)
+        {
+            if (styleBuilder.Length + text.Length > styleBuilder.Capacity)
+            {
+                styleBuilder.Capacity += 1000;
+            }
+            styleBuilder.Append(text);
         }
 
         /// <summary>Method for setting the button background color.</summary>
@@ -22,26 +31,26 @@ namespace Impart
             switch (color)
             {
                 case Rgb rgb:
-                    style += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}";
+                    WriteStyle($"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}");
                     break;
                 case Hsl hsl:
-                    style += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}";
+                    WriteStyle($"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}");
                     break;
                 case Hex hex:
-                    style += $"    background-color: #{hex.hex};%^}}";
+                    WriteStyle($"    background-color: #{hex.hex};%^}}");
                     break;
             }
             return this;
         }
         internal string Render()
         {
-            if (style == "")
+            if (styleBuilder.Length == 0)
             {
                 return $"%^        <input type=\"submit\"{attributes}>";
             }
             else
             {
-                return $"%^        <input type=\"submit\" style=\"{style}\"{attributes}>";
+                return $"%^        <input type=\"submit\" style=\"{styleBuilder.ToString()}\"{attributes}>";
             }
         }
     }
