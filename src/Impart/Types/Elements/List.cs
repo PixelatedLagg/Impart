@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Impart
 {
@@ -12,6 +13,7 @@ namespace Impart
         private string attributes;
         private string type;
         internal string textCache;
+        internal StringBuilder textBuilder;
         public Dictionary<int, Text> entries 
         {
             get 
@@ -24,6 +26,7 @@ namespace Impart
         public List(ImpartCommon.ListTypes type, params Text[] textEntries)
         {
             textCache = "";
+            textBuilder = new StringBuilder(1000);
             switch (type)
             {
                 case ImpartCommon.ListTypes.Unordered:
@@ -57,6 +60,7 @@ namespace Impart
         public List(int type, string id, params Text[] textEntries)
         {
             textCache = "";
+            textBuilder = new StringBuilder(1000);
             switch (type)
             {
                 case 0:
