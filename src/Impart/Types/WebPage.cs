@@ -4,22 +4,38 @@ using Impart.Scripting;
 
 namespace Impart
 {
-    /// <summary>Class that represents the html page.</summary>
+    /// <summary>Generate HTML and CSS with some Javascript functionality soon to be added.</summary>
+    /// <remarks>This is the main class used in Impart.</remarks>
     public class WebPage
     {
         internal string path;
         internal string cssPath;
-        private int defaultMargin;
+        private string defaultMargin;
         internal StringBuilder textBuilder;
         internal StringBuilder styleBuilder;
         internal StringBuilder bodyBuilder;
 
-        /// <summary>Constructor for the WebPage class.</summary>
+        /// <summary>Creates a WebPage instance with <paramref name="path"/> as the HTML path and <paramref name="cssPath"/> as the CSS path.</summary>
+        /// See <see cref="WebPage.Render()"/> to render the WebPage.
+        /// <returns>A WebPage instance.</returns>
+        /// <example>
+        /// <code>
+        /// public class Example : WebPage
+        /// {
+        ///     public Example() : base("example.html", "example.css")
+        ///     {
+        ///         
+        ///     }
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="path">The HTML file path.</param>
+        /// <param name="cssPath">The CSS file path.</param>
         protected WebPage(string path, string cssPath)
         {
             this.path = path;
             this.cssPath = cssPath;
-            defaultMargin = 0;
+            defaultMargin = "0px";
             textBuilder = new StringBuilder(1000);
             styleBuilder = new StringBuilder(1000);
             bodyBuilder = new StringBuilder(1000);
@@ -50,7 +66,14 @@ namespace Impart
             bodyBuilder.Append(text);
         }
 
-        /// <summary>Add a style to the webpage.</summary>
+        /// <summary>Add <paramref name="style"/> to the WebPage.</summary>
+        /// See <see cref="Style.Style(ImpartCommon.StyleType, string)"/> to create a Style instance.
+        /// <example>
+        /// <code>
+        /// AddStyle(style);
+        /// </code>
+        /// </example>
+        /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
         {
             if (styleBuilder.ToString() == "")
@@ -63,7 +86,14 @@ namespace Impart
             }
         }
 
-        /// <summary>Add text to the webpage.</summary>
+        /// <summary>Add <paramref name="text"/> to the WebPage.</summary>
+        /// See <see cref="Text.Text(string, string)"/> to create a Text instance.
+        /// <example>
+        /// <code>
+        /// AddText(text);
+        /// </code>
+        /// </example>
+        /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
             if (text.id == null)
@@ -77,7 +107,13 @@ namespace Impart
             }
         }
 
-        /// <summary>Set the webpage title.</summary>
+        /// <summary>Set the WebPage title to <paramref name="title"/>.</summary>
+        /// <example>
+        /// <code>
+        /// SetTitle(title);
+        /// </code>
+        /// </example>
+        /// <param name="title">The string to set the title to.</param>
         protected void SetTitle(string title)
         {
             if (String.IsNullOrEmpty(title))
@@ -87,7 +123,14 @@ namespace Impart
             WriteText($"%^    <title>{title}</title>");
         }
 
-        /// <summary>Add an image to the webpage.</summary>
+        /// <summary>Add <paramref name="image"/> to the WebPage.</summary>
+        /// See <see cref="Image.Image(string, string)"/> to create an Image instance.
+        /// <example>
+        /// <code>
+        /// AddImage(image);
+        /// </code>
+        /// </example>
+        /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
             if (image.id == null)
@@ -100,7 +143,14 @@ namespace Impart
             }
         }
 
-        /// <summary>Add a header to the webpage.</summary>
+        /// <summary>Add <paramref name="header"/> to the WebPage.</summary>
+        /// See <see cref="Header.Header(int, string, string)"/> to create a Header instance.
+        /// <example>
+        /// <code>
+        /// AddHeader(header);
+        /// </code>
+        /// </example>
+        /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
             if (header.id == null)
@@ -113,7 +163,15 @@ namespace Impart
             }
         }
 
-        /// <summary>Add a link to the webpage.</summary>
+        /// <summary>Add <paramref name="link"/> to the WebPage.</summary>
+        /// See <see cref="Link.Link(Image, string, string)"/> to create a Link instance with an image.
+        /// See <see cref="Link.Link(Text, string, string)"/> to create a Link instance with text.
+        /// <example>
+        /// <code>
+        /// AddLink(link);
+        /// </code>
+        /// </example>
+        /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
             if (link.linkType == typeof(Image))
@@ -154,7 +212,14 @@ namespace Impart
             }
         }
 
-        /// <summary>Add a table to the webpage.</summary>
+        /// <summary>Add a table to the WebPage with <paramref name="rowNum"/> as the number of rows and a string[] as the entries.</summary>
+        /// <example>
+        /// <code>
+        /// AddTable(number, entry, entry, entry ...);
+        /// </code>
+        /// </example>
+        /// <param name="rowNum">The number of rows.</param>
+        /// <param name="obj">An array of strings to add as entries.</param>
         protected void AddTable(int rowNum, params string[] obj)
         {
             if (rowNum > obj.Length)
@@ -209,33 +274,70 @@ namespace Impart
             WriteText($"{tempBuilder.ToString()}%^    </table>");
         }
 
-        /// <summary>Add a division to the webpage.</summary>
+        /// <summary>Add <paramref name="div"/> to the WebPage.</summary>
+        /// See <see cref="Division.Division(ImpartCommon.IDType?, string)"/> to create a Division instance.
+        /// <example>
+        /// <code>
+        /// AddDivision(div);
+        /// </code>
+        /// </example>
+        /// <param name="div">The Division instance to add.</param>
         protected void AddDivision(Division div)
         {
             WriteText(div.textCache);
             WriteStyle(div.cssCache);
         }
 
-        /// <summary>Add a list to the webpage.</summary>
+        /// <summary>Add <paramref name="list"/> to the WebPage.</summary>
+        /// See <see cref="List.List(int, string, Text[])"/> to create a List instance.
+        /// <example>
+        /// <code>
+        /// AddList(list);
+        /// </code>
+        /// </example>
+        /// <param name="list">The List instance to add.</param>
         protected void AddList(List list)
         {
             WriteText(list.Render());
         }
 
-        /// <summary>Set the webpage scrollbar.</summary>
+        /// <summary>Add <paramref name="scrollbar"/> to the WebPage.</summary>
+        /// See <see cref="Scrollbar.Scrollbar(ImpartCommon.Axis, Measurement, Color, Color, Division, Measurement)"/> to create a Scrollbar instance for a division.
+        /// See <see cref="Scrollbar.Scrollbar(ImpartCommon.Axis, Measurement, Color, Color, Measurement)"/> to create a Scrollbar instance for a WebPage.
+        /// <example>
+        /// <code>
+        /// SetScrollBar(scrollbar);
+        /// </code>
+        /// </example>
+        /// <param name="scrollbar">The Scrollbar instance to add.</param>
         protected void SetScrollBar(Scrollbar scrollbar)
         {
             WriteBody(scrollbar.bodyCache);
             WriteStyle(scrollbar.cssCache);
         }
 
-        /// <summary>Add a form to the webpage.</summary>
+        /// <summary>Add <paramref name="form"/> to the WebPage.</summary>
+        /// See <see cref="Form.Form()"/> to create a Form instance.
+        /// <example>
+        /// <code>
+        /// AddForm(form);
+        /// </code>
+        /// </example>
+        /// <param name="form">The Form instance to add.</param>
         protected void AddForm(Form form)
         {
             WriteText(form.Render());
         }
 
-        /// <summary>Add a button to the webpage.</summary>
+        /// <summary>Add <paramref name="button"/> to the WebPage.</summary>
+        /// See <see cref="Button.Button(Text, string)"/> to create a Button instance with a Text instance.
+        /// See <see cref="Button.Button(string, string)"/> to create a Button instance with default text.
+        /// <example>
+        /// <code>
+        /// AddButton(button);
+        /// </code>
+        /// </example>
+        /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
             if (button.id == null)
@@ -248,22 +350,39 @@ namespace Impart
             }
         }
 
-        /// <summary>Set the webpage scrollbar.</summary>
-        protected void SetDefaultMargin(int pixels)
+        /// <summary>Set the default margin of the WebPage to <paramref name="size"/>.</summary>
+        /// See <see cref="Pixels.Pixels(int)"/> to create a Pixels instance.
+        /// See <see cref="Percent.Percent(int)"/> to create a Percent instance.
+        /// <example>
+        /// <code>
+        /// SetDefaultMargin(size);
+        /// </code>
+        /// </example>
+        /// <param name="size">The Measurement instance to add.</param>
+        protected void SetDefaultMargin(Measurement size)
         {
-            if (pixels <= 0)
+            switch (size)
             {
-                throw new ImpartError("Margin pixel value must be above 0!");
+                case Pixels pixels:
+                    defaultMargin = $"{pixels.pixels}px";
+                    break;
+                case Percent percent:
+                    defaultMargin = $"{percent.percent}%";
+                    break;
             }
-            defaultMargin = pixels;
         }
 
-        /// <summary>Render the webpage.</summary>
+        /// <summary>Render the WebPage.</summary>
+        /// <example>
+        /// <code>
+        /// Render();
+        /// </code>
+        /// </example>
         protected void Render()
         {
             if (styleBuilder.ToString() != "")
             {
-                WriteStyle($"%^* {{%^    padding: 0;%^    margin: {defaultMargin}px;%^{bodyBuilder.ToString()}}}");
+                WriteStyle($"%^* {{%^    padding: 0;%^    margin: {defaultMargin};%^{bodyBuilder.ToString()}}}");
             }
             File.Change(path, $"<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart -->{Environment.NewLine}<!DOCTYPE html>{Environment.NewLine}<html xmlns=\"http://www.w3.org/1999/xhtml\">{Environment.NewLine}    <link rel=\"stylesheet\" href=\"{cssPath}\">{Environment.NewLine}    <body>{textBuilder.Replace("%^", $"{Environment.NewLine}    ").ToString()}{Environment.NewLine}    </body>{Environment.NewLine}</html>");
             File.Change(cssPath, styleBuilder.Replace("%^", Environment.NewLine).ToString());
