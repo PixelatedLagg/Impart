@@ -1,6 +1,5 @@
 using System.Text;
 using System;
-using Impart.Scripting;
 
 namespace Impart
 {
@@ -14,6 +13,24 @@ namespace Impart
         internal StringBuilder textBuilder;
         internal StringBuilder styleBuilder;
         internal StringBuilder bodyBuilder;
+
+        /// <value>The HTML path of the WebPage.</value>
+        public string HTMLPath
+        {
+            get
+            {
+                return path;
+            }
+        }
+
+        /// <value>The CSS path of the WebPage.</value>
+        public string CSSPATH
+        {
+            get
+            {
+                return cssPath;
+            }
+        }
 
         /// <summary>Creates a WebPage instance with <paramref name="path"/> as the HTML path and <paramref name="cssPath"/> as the CSS path.</summary>
         /// See <see cref="WebPage.Render()"/> to render the WebPage.

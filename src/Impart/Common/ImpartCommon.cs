@@ -79,12 +79,6 @@ namespace Impart
             Unordered = 0,
             Ordered = 1
         }
-        public enum StyleType
-        {
-            IDStyle = 0,
-            EStyle = 1,
-            ClassStyle = 2
-        }
         public enum IDType
         {
             ID = 1,
