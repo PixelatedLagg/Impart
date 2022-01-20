@@ -1,17 +1,32 @@
 namespace Impart
 {
-    /// <summary>Class that represents the form tag in html.</summary>
+    /// <summary>The main input class in Impart.</summary>
     public class Form
     {
         private string textCache;
 
-        /// <summary>Constructor for the form class.</summary>
+        /// <summary>Creates a Form instance.</summary>
+        /// <returns>A Form instance.</returns>
+        /// <example>
+        /// <code>
+        /// Form form = new Form();
+        /// </code>
+        /// </example>
         public Form()
         {
             textCache = "%^    <form>";
         }
 
-        /// <summary>Method for adding a text field to the form.</summary>
+        /// <summary>Add <paramref name="textFields"/> to the Form.</summary>
+        /// See <see cref="TextField.TextField(Text, string, string)"/> to create a TextField instance using Text.
+        /// See <see cref="TextField.TextField(string, string)"/> to create a TextField instance using default text.
+        /// <returns>A Form instance.</returns>
+        /// <example>
+        /// <code>
+        /// form.AddTextField(textFieldArray);
+        /// </code>
+        /// </example>
+        /// <param name="textFields">The TextField array to add.</param>
         public Form AddTextField(params TextField[] textFields)
         {
             foreach (TextField tf in textFields)
@@ -21,17 +36,34 @@ namespace Impart
             return this;
         }
 
-        /// <summary>Method for adding a check field to the form.</summary>
+        /// <summary>Add <paramref name="checkFields"/> to the Form.</summary>
+        /// See <see cref="CheckField.CheckField(Text, string, string)"/> to create a CheckField instance using Text.
+        /// See <see cref="CheckField.CheckField(string, string)"/> to create a CheckField instance using default text.
+        /// <returns>A Form instance.</returns>
+        /// <example>
+        /// <code>
+        /// form.AddCheckField(checkFieldArray);
+        /// </code>
+        /// </example>
+        /// <param name="checkFields">The CheckField array to add.</param>
         public Form AddCheckField(params CheckField[] checkFields)
         {
             foreach (CheckField cf in checkFields)
             {
                 textCache += cf.textCache;
             }
-            return this;;;;;;
+            return this;
         }
 
-        /// <summary>Method for adding a submit field to the form.</summary>
+        /// <summary>Add <paramref name="submitField"/> to the Form.</summary>
+        /// See <see cref="SubmitField.SubmitField()"/> to create a SubmitField instance.
+        /// <returns>A Form instance.</returns>
+        /// <example>
+        /// <code>
+        /// form.AddSubmitField(submitButton);
+        /// </code>
+        /// </example>
+        /// <param name="submitField">The SubmitField to add.</param>
         public Form AddSubmitField(SubmitField submitField)
         {
             textCache += submitField.Render();

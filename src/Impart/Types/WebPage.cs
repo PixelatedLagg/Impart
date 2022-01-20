@@ -232,7 +232,7 @@ namespace Impart
         /// <summary>Add a table to the WebPage with <paramref name="rowNum"/> as the number of rows and a string[] as the entries.</summary>
         /// <example>
         /// <code>
-        /// AddTable(number, entry, entry, entry ...);
+        /// AddTable(number, entryArray);
         /// </code>
         /// </example>
         /// <param name="rowNum">The number of rows.</param>

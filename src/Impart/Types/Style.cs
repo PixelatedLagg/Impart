@@ -10,6 +10,15 @@ namespace Impart
         private StringBuilder textBuilder;
         private string id;
 
+        /// <value>The ID value of the Style.</value>
+        public string ID
+        {
+            get
+            {
+                return id;
+            }
+        }
+
         /// <summary>Creates a Style instance with <paramref name="path"/> as the style type and <paramref name="id"/> as the ID/element/class..</summary>
         /// See <see cref="Style.Dispose()"/> to dispose the Style.
         /// <returns>A Style instance.</returns>
