@@ -9,7 +9,14 @@ namespace Impart
         private StringBuilder styleBuilder;
         internal string textCache;
 
-        /// <summary>Constructor for the submit field class.</summary>
+        /// <summary>Creates a SubmitField instance.</summary>
+        /// See <see cref="Form.AddSubmitField(SubmitField)"/> to add the SubmitField.
+        /// <returns>A SubmitField instance.</returns>
+        /// <example>
+        /// <code>
+        /// SubmitField submitField = new SubmitField();
+        /// </code>
+        /// </example>
         public SubmitField()
         {
             styleBuilder = new StringBuilder(1000);
@@ -25,7 +32,14 @@ namespace Impart
             styleBuilder.Append(text);
         }
 
-        /// <summary>Method for setting the button background color.</summary>
+        /// <summary>Set the background color to <paramref name="color"/>.</summary>
+        /// <returns>A SubmitField instance.</returns>
+        /// <example>
+        /// <code>
+        /// submitField.SetBGColor(color);
+        /// </code>
+        /// </example>
+        /// <param name="color">The Color to set to.</param>
         public SubmitField SetBGColor(Color color)
         {
             switch (color)
