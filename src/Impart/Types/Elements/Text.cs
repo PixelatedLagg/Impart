@@ -3,13 +3,23 @@ using System.Text;
 
 namespace Impart
 {
-    /// <summary>Class that represents text.</summary>
+    /// <summary>
+    /// Represents the base of a WebSocket-based Discord client.
+    /// </summary>
     public struct Text : Element
     {
         private string _text;
         private string _id;
         private StringBuilder attributeBuilder;
         private StringBuilder styleBuilder;
+        private TextType _type;
+        public TextType type
+        {
+            get
+            {
+                return _type;
+            }
+        }
         internal string attributes 
         {
             get
@@ -28,14 +38,14 @@ namespace Impart
                 return $" style=\"{styleBuilder.ToString()}\"".Replace("\" ", "\"");
             }
         }
-        internal string text 
+        public string text 
         {
             get 
             {
                 return _text;
             }
         }
-        internal string id 
+        public string id 
         {
             get 
             {
@@ -54,6 +64,20 @@ namespace Impart
             _id = id;
             styleBuilder = new StringBuilder(1000);
             attributeBuilder = new StringBuilder(1000);
+            _type = TextType.Regular;
+        }
+
+        public Text(string text, TextType type, string id = null)
+        {
+            if (String.IsNullOrEmpty(text))
+            {
+                throw new ImpartError("Text cannot be null or empty!");
+            }
+            _text = text.Str();
+            _id = id;
+            styleBuilder = new StringBuilder(1000);
+            attributeBuilder = new StringBuilder(1000);
+            _type = type;
         }
 
         private void WriteStyle(string text)

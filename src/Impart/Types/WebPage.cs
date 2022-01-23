@@ -113,14 +113,118 @@ namespace Impart
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
-            if (text.id == null)
+            switch (text.type)
             {
-                Console.WriteLine($"%^    <p{text.attributes}{text.style}>{text.text}</p>");
-                WriteText($"%^    <p{text.attributes}{text.style}>{text.text}</p>");
-            }
-            else
-            {
-                WriteText($"%^    <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>");
+                case TextType.Regular:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <p{text.attributes}{text.style}>{text.text}</p>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>");
+                    }
+                    break;
+                case TextType.Bold:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <b{text.attributes}{text.style}>{text.text}</b>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <b id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</b>");
+                    }
+                    break;
+                case TextType.Delete:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <del{text.attributes}{text.style}>{text.text}</del>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <del id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</del>");
+                    }
+                    break;
+                case TextType.Emphasize:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <em{text.attributes}{text.style}>{text.text}</em>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <em id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</em>");
+                    }
+                    break;
+                case TextType.Important:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <strong{text.attributes}{text.style}>{text.text}</strong>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <strong id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</strong>");
+                    }
+                    break;
+                case TextType.Insert:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <ins{text.attributes}{text.style}>{text.text}</ins>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <ins id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</ins>");
+                    }
+                    break;
+                case TextType.Italic:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <i{text.attributes}{text.style}>{text.text}</i>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <i id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</i>");
+                    }
+                    break;
+                case TextType.Mark:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <mark{text.attributes}{text.style}>{text.text}</mark>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <mark id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</mark>");
+                    }
+                    break;
+                case TextType.Small:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <small{text.attributes}{text.style}>{text.text}</small>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <small id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</small>");
+                    }
+                    break;
+                case TextType.Subscript:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <sub{text.attributes}{text.style}>{text.text}</sub>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <sub id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</sub>");
+                    }
+                    break;
+                case TextType.Superscript:
+                    if (text.id == null)
+                    {
+                        WriteText($"%^    <sup{text.attributes}{text.style}>{text.text}</sup>");
+                    }
+                    else
+                    {
+                        WriteText($"%^    <sup id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</sup>");
+                    }
+                    break;
             }
         }
 
