@@ -57,9 +57,5 @@ namespace Impart
                     return false;
             }
         }
-        static internal string Str(this string str)
-        {
-            return new StringBuilder(str, str.Length * 3).Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&#39;").Replace("%^", "&#37;^").ToString();
-        }
     }
 }

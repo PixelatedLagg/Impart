@@ -65,11 +65,11 @@ namespace Impart
         {
             if (text.id == null)
             {
-                elementCache += $"%^        <p{text.attributes}{text.style}>{text.text}</p>";
+                elementCache += $"%^        <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>";
             }
             else
             {
-                elementCache += $"%^        <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>";
+                elementCache += $"%^        <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>";
             }
         }
 

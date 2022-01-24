@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Impart.Templates
 {
     public static class Sidebar
@@ -16,15 +14,15 @@ namespace Impart.Templates
             {
                 if (t.id == null)
                 {
-                    result += $"%^    <p{t.attributes}{t.style}>{t.text}</p>";
+                    result += $"%^    <p{t.attributeBuilder.ToString()}{t.style}>{t.text}</p>";
                 }
                 else
                 {
-                    result += $"%^    <p id=\"{t.id}\"{t.attributes}{t.style}>{t.text}</p>";
+                    result += $"%^    <p id=\"{t.id}\"{t.attributeBuilder.ToString()}{t.style}>{t.text}</p>";
                 }
             }
             result += "%^</div>";
-            obj.WriteText(result);
+            obj.textBuilder.Append(result);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Impart
 {
-    /// <summary>Class that represents the submit button for the form.</summary>
+    /// <summary>Class that represents the submit button for Form.</summary>
     public class SubmitField : FormElement
     {
         private string attributes;
@@ -10,13 +10,7 @@ namespace Impart
         internal string textCache;
 
         /// <summary>Creates a SubmitField instance.</summary>
-        /// See <see cref="Form.AddSubmitField(SubmitField)"/> to add the SubmitField.
         /// <returns>A SubmitField instance.</returns>
-        /// <example>
-        /// <code>
-        /// SubmitField submitField = new SubmitField();
-        /// </code>
-        /// </example>
         public SubmitField()
         {
             styleBuilder = new StringBuilder(1000);
@@ -34,11 +28,6 @@ namespace Impart
 
         /// <summary>Set the background color to <paramref name="color"/>.</summary>
         /// <returns>A SubmitField instance.</returns>
-        /// <example>
-        /// <code>
-        /// submitField.SetBGColor(color);
-        /// </code>
-        /// </example>
         /// <param name="color">The Color to set to.</param>
         public SubmitField SetBGColor(Color color)
         {

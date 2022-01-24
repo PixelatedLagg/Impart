@@ -14,11 +14,11 @@ namespace Impart.Templates
                         Text text = (Text)e;
                         if (text.id == null)
                         {
-                            textCache += $"            <p{text.attributes}{text.style.Replace(";\"", "; ")}justify-content: center; display: inline;\">{text.text}</p>%^";
+                            textCache += $"            <p{text.attributeBuilder.ToString()}{text.style.Replace(";\"", "; ")}justify-content: center; display: inline;\">{text.text}</p>%^";
                         }
                         else
                         {
-                            textCache += $"            <p id=\"{text.id}\"{text.attributes}{text.style.Replace(";\"", "; ")}justify-content: center; display: inline;\">{text.text}</p>%^";
+                            textCache += $"            <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style.Replace(";\"", "; ")}justify-content: center; display: inline;\">{text.text}</p>%^";
                         }
                         break;
                     case "CSWeb.Link":
@@ -65,7 +65,7 @@ namespace Impart.Templates
                 }
                 textCache += $"        </div>%^";
             }
-            obj.WriteText($"{textCache}%^    </div>".Replace("%^    </div>", "    </div>"));
+            obj.textBuilder.Append($"{textCache}%^    </div>".Replace("%^    </div>", "    </div>"));
         }
     }
 }

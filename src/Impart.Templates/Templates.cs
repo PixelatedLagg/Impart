@@ -15,7 +15,7 @@ namespace Impart.Templates
             {
                 throw new ImpartError("Template does not exist!");
             }
-            obj.WriteText(CustomTemplates[name]);
+            obj.textBuilder.Append(CustomTemplates[name]);
         }
     }
 }

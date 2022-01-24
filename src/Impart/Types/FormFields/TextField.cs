@@ -2,19 +2,13 @@ using System;
 
 namespace Impart
 {
-    /// <summary>Text field in form.</summary>
+    /// <summary>Text field in Form.</summary>
     public class TextField : FormElement
     {
         internal string textCache;
 
         /// <summary>Creates a TextField instance with <paramref name="text"/> as the text and <paramref name="inputid"/> as the ID.</summary>
-        /// See <see cref="Form.AddTextField(TextField[])"/> to add the TextField.
         /// <returns>A TextField instance.</returns>
-        /// <example>
-        /// <code>
-        /// TextField textField = new TextField("example", "exampleID");
-        /// </code>
-        /// </example>
         /// <param name="text">The TextField text.</param>
         /// <param name="inputid">The TextField ID.</param>
         public TextField(string text, string inputid)
@@ -27,13 +21,7 @@ namespace Impart
         }
 
         /// <summary>Creates a TextField instance with <paramref name="text"/> as the text and <paramref name="inputid"/> as the ID.</summary>
-        /// See <see cref="Form.AddTextField(TextField[])"/> to add the TextField.
         /// <returns>A TextField instance.</returns>
-        /// <example>
-        /// <code>
-        /// TextField textField = new TextField("example", "exampleID");
-        /// </code>
-        /// </example>
         /// <param name="text">The TextField text.</param>
         /// <param name="inputid">The TextField ID.</param>
         /// <param name="inputid">The TextField style ID.</param>
@@ -45,11 +33,11 @@ namespace Impart
             }
             if (text.id == null)
             {
-                textCache = $"%^        <label for=\"{inputid}\">%^            <p{text.attributes}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
+                textCache = $"%^        <label for=\"{inputid}\">%^            <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
             }
             else
             {
-                textCache = $"%^        <label for=\"{inputid}\">%^            <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
+                textCache = $"%^        <label for=\"{inputid}\">%^            <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"text\" name=\"{inputid}\" id=\"{id}\">";
             }
         }
     }

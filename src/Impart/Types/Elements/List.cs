@@ -43,11 +43,11 @@ namespace Impart
             {
                 if (text.id == null)
                 {
-                    textCache += $"        <li>%^            <p{text.attributes}{text.style}>{text.text}</p>%^        </li>%^";
+                    textCache += $"        <li>%^            <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        </li>%^";
                 }
                 else
                 {
-                    textCache += $"        <li>%^            <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^        <li>%^";
+                    textCache += $"        <li>%^            <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        <li>%^";
                 }
                 _entries.Add(_entries.Count + 1, text);
             }
@@ -85,11 +85,11 @@ namespace Impart
             {
                 if (text.id == null)
                 {
-                    textCache += $"        <li>%^            <p{text.attributes}{text.style}>{text.text}</p>%^        </li>%^";
+                    textCache += $"        <li>%^            <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        </li>%^";
                 }
                 else
                 {
-                    textCache += $"        <li>%^            <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^        <li>%^";
+                    textCache += $"        <li>%^            <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        <li>%^";
                 }
                 _entries.Add(_entries.Count + 1, text);
             }

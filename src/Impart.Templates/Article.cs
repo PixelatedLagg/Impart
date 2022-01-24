@@ -13,11 +13,11 @@ namespace Impart.Templates
                         Text text = (Text)e;
                         if (text.id == null)
                         {
-                            textCache += $"    <p{text.attributes}{text.style}>{text.text}</p>%^";
+                            textCache += $"    <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^";
                         }
                         else
                         {
-                            textCache += $"    <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^";
+                            textCache += $"    <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^";
                         }
                         break;
                     case "CSWeb.Header":
@@ -35,7 +35,7 @@ namespace Impart.Templates
                         throw new ImpartError("Article element invalid!");
                 }
             }
-            obj.WriteText($"{textCache}<>".Replace("%^<>", ""));
+            obj.textBuilder.Append($"{textCache}<>".Replace("%^<>", ""));
         }
     }
 }

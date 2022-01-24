@@ -9,11 +9,11 @@ namespace Impart
             {
                 if (t.id == null)
                 {
-                    result += $"%^    <p{t.attributes}{t.style}>{t.text}</p>".Length;
+                    result += $"%^    <p{t.attributeBuilder.ToString()}{t.style}>{t.text}</p>".Length;
                 }
                 else
                 {
-                    result += $"%^    <p id=\"{t.id}\"{t.attributes}{t.style}>{t.text}</p>".Length;
+                    result += $"%^    <p id=\"{t.id}\"{t.attributeBuilder.ToString()}{t.style}>{t.text}</p>".Length;
                 }
             }
             return result;

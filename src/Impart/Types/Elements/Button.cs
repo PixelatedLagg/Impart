@@ -50,7 +50,7 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null or empty!");
             }
-            this._text = text.Str();
+            this._text = text;
             this._id = id;
             _style = "";
             _attributes = "";
@@ -64,11 +64,11 @@ namespace Impart
             _text = "";
             if (text.id == null)
             {
-                _text += $"%^    <p{text.attributes}{text.style}>{text.text}</p>%^";
+                _text += $"%^    <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^";
             }
             else
             {
-                _text += $"%^    <p id=\"{text.id}\"{text.attributes}{text.style}>{text.text}</p>%^";
+                _text += $"%^    <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^";
             }
             if (String.IsNullOrEmpty(id))
             {
@@ -165,7 +165,7 @@ namespace Impart
             {
                 throw new ImpartError("Hover message cannot be empty or null!");
             }
-            _attributes += $" title=\"{message.Str()}\"";
+            _attributes += $" title=\"{message}\"";
             return this;
         }
 
