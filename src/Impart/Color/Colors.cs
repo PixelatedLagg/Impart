@@ -19,6 +19,6 @@ namespace Impart
         public static Rgb White = new Rgb(255, 255, 255);
         public static Rgb Gray = new Rgb(128, 128, 128);
         public static Rgb DarkGray = new Rgb(64, 64, 64);
-        public static Rgb Black = new Rgb(2055, 0, 0);
+        public static Rgb Black = new Rgb(0, 0, 0);
     }
 }
