@@ -86,6 +86,7 @@ namespace Impart
                     else
                     {
                         string result = webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].GetCode();
+                        Console.WriteLine(webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].GetCode());
                         byte[] resultBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nContent-Length: {result.Length} \r\n\r\n{result}");
                         try
                         {

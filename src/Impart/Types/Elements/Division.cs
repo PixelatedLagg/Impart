@@ -18,9 +18,9 @@ namespace Impart
             {
                 if (styleCache == "")
                 {
-                    return $"%^    <div{id}{attributeCache}>{elementCache}%^    </div>";
+                    return $"    <div{id}{attributeCache}>{elementCache}    </div>";
                 }
-                return $"%^    <div{id}{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}%^    </div>";
+                return $"    <div{id}{attributeCache} style=\"{$"\"{styleCache}".Replace("\" ", "")}\">{elementCache}    </div>";
             }
         }
 
@@ -65,11 +65,11 @@ namespace Impart
         {
             if (text.id == null)
             {
-                elementCache += $"%^        <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>";
+                elementCache += $"        <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>";
             }
             else
             {
-                elementCache += $"%^        <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>";
+                elementCache += $"        <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>";
             }
         }
 
@@ -78,60 +78,12 @@ namespace Impart
         {
             if (image.id == null)
             {
-                elementCache += $"%^        <img src=\"{image.path}\"{image.attributes}{image.style}>";
+                elementCache += $"        <img src=\"{image.path}\"{image.attributes}{image.style}>";
             }
             else
             {
-                elementCache += $"%^        <img src=\"{image.path}\" id=\"{image.id}\"{image.attributes}{image.style}>";
+                elementCache += $"        <img src=\"{image.path}\" id=\"{image.id}\"{image.attributes}{image.style}>";
             }
-        }
-
-        /// <summary>Method for setting the division color.</summary>
-        public Division SetColor(Color color)
-        {
-            if (color == null)
-            {
-                throw new ImpartError("Color cannot be null!");
-            }
-            switch (color)
-            {
-                case Rgb rgb:
-                    styleCache += $" background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
-                    break;
-                case Hsl hsl:
-                    styleCache += $" background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
-                    break;
-                case Hex hex:
-                    styleCache += $" background-color: #{hex.hex};";
-                    break;
-            }
-            return this;
-        }
-
-        /// <summary>Method for setting the division border.</summary>
-        public Division SetBorder(int pixels, string border, Color color, int roundedPixels = 0)
-        {
-            if (!Border.Any(border))
-            {
-                throw new ImpartError("Invalid border value!");
-            }
-            switch (color)
-            {
-                case Rgb rgb:
-                    styleCache += $" border: {pixels}px {border} rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
-                    break;
-                case Hsl hsl:
-                    styleCache += $" border: {pixels}px {border} hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
-                    break;
-                case Hex hex:
-                    styleCache += $" border: {pixels}px {border} #{hex};";
-                    break;
-            }
-            if (roundedPixels > 0)
-            {
-                styleCache += $" border-radius: {roundedPixels}px;";
-            }
-            return this;
         }
 
         /// <summary>Method for setting the division to follow the scroll.</summary>
@@ -144,39 +96,6 @@ namespace Impart
             else
             {
                 throw new ImpartError("Default value for follow scroll is false!");
-            }
-            return this;
-        }
-
-        /// <summary>Method for setting the division margin.</summary>
-        public Division SetMargin(int pixels)
-        {
-            if (pixels == 0)
-            {
-                throw new ImpartError("Border thickness is default 0 pixels!");
-            }
-            if (pixels < 0)
-            {
-                throw new ImpartError("Margin thickness must be above 0!");
-            }
-            styleCache += $" margin: {pixels}px;";
-            return this;
-        }
-
-        /// <summary>Method for setting the division size.</summary>
-        public Division SetSize(int? x, int? y)
-        {
-            if (y < 0 || x < 0)
-            {
-                throw new ImpartError("Invalid size values!");
-            }
-            if (x != null)
-            {
-                styleCache += $" max-width: {x}px;";
-            }
-            if (y != null)
-            {
-                styleCache += $" max-height: {y}px;";
             }
             return this;
         }
@@ -199,7 +118,7 @@ namespace Impart
         /// <summary>Method for adding a text break in the division.</summary>
         public void Break()
         {
-            elementCache += $"%^        <br>";
+            elementCache += $"        <br>";
         }
         public void Dispose() {}
     } 

@@ -2,14 +2,12 @@ using System;
 
 namespace Impart
 {
-    /// <summary>Class that represents a link.</summary>
+    /// <summary>Link element.</summary>
     public struct Link : Element
     {
         private Text _text;
-        private Image _image;
-        private string _path;
-        private string _id;
-        internal Type linkType;
+
+        /// <value>The Text value of the Link.</value>
         public Text text 
         {
             get 
@@ -17,6 +15,9 @@ namespace Impart
                 return _text;
             }
         }
+        private Image _image;
+
+        /// <value>The Image value of the Link.</value>
         public Image image 
         {
             get 
@@ -24,13 +25,9 @@ namespace Impart
                 return _image;
             }
         }
-        public string path 
-        {
-            get 
-            {
-                return _path;
-            }
-        }
+        private string _id;
+
+        /// <value>The ID value of the Link.</value>
         public string id 
         {
             get 
@@ -38,8 +35,23 @@ namespace Impart
                 return _id;
             }
         }
+        private string _path;
 
-        /// <summary>Constructor for the link class.</summary>
+        /// <value>The path value of the Link.</value>
+        public string path 
+        {
+            get 
+            {
+                return _path;
+            }
+        }
+        internal Type linkType;
+
+        /// <summary>Creates a Link instance with <paramref name="text"/> as the Link text, and <paramref name="path"/> as the Link path.</summary>
+        /// <returns>A Link instance.</returns>
+        /// <param name="text">The Link text.</param>
+        /// <param name="path">The Link path.</param>
+        /// <param name="id">The Link ID.</param>
         public Link(Text text, string path, string id = null)
         {
             if (String.IsNullOrEmpty(path))
@@ -53,7 +65,11 @@ namespace Impart
             linkType = typeof(Text);
         }
 
-        /// <summary>Constructor for the link class.</summary>
+        /// <summary>Creates a Link instance with <paramref name="image"/> as the Link image, and <paramref name="path"/> as the Link path.</summary>
+        /// <returns>A Link instance.</returns>
+        /// <param name="image">The Link image.</param>
+        /// <param name="path">The Link path.</param>
+        /// <param name="id">The Link ID.</param>
         public Link(Image image, string path, string id = null)
         {
             if (String.IsNullOrEmpty(path))

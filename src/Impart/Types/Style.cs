@@ -53,55 +53,7 @@ namespace Impart
             textBuilder.Append(text);
         }
 
-        /// <summary>Set the Style color to <paramref name="color"/>.</summary>
-        /// <returns>A Style instance.</returns>
-        /// <param name="color">The Color instance to set to.</param>
-        public Style SetColor(Color color)
-        {
-            switch (color)
-            {
-                case Rgb rgb:
-                    Write($"color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});");
-                    break;
-                case Hsl hsl:
-                    Write($"color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);");
-                    break;
-                case Hex hex:
-                    Write($"color: #{hex.hex};");
-                    break;
-            }
-            return this;
-        }
-
-        /// <summary>Set the Style alignment to <paramref name="alignment"/>.</summary>
-        /// <returns>A Style instance.</returns>
-        /// <param name="alignment">The Alignment instance to set to.</param>
-        public Style SetAlign(string alignment)
-        {
-            if (!Alignment.Any(alignment))
-            {
-                throw new ImpartError("Invalid alignment value!");
-            }
-            Write($"text-align: {alignment};");
-            return this;
-        }
-
-        /// <summary>Set the Style margin to <paramref name="size"/>.</summary>
-        /// <returns>A Style instance.</returns>
-        /// <param name="size">The Measurement instance to set to.</param>
-        public Style SetMargin(Measurement size)
-        {
-            switch (size)
-            {
-                case Pixels pixels:
-                    Write($"margin: {pixels.pixels}px;");
-                    break;
-                case Percent percent:
-                    Write($"margin: {percent.percent}%;");
-                    break;
-            }
-            return this;
-        }
+        
         internal string Render()
         {
             return $"{textBuilder.ToString()}}}";
