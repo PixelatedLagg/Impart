@@ -9,7 +9,7 @@ namespace Impart
         /// <returns>A Form instance.</returns>
         public Form()
         {
-            textCache = "%^    <form>";
+            textCache = "<form>";
         }
 
         /// <summary>Add <paramref name="textFields"/> to the Form.</summary>
@@ -46,7 +46,7 @@ namespace Impart
         }
         internal string Render()
         {
-            return $"{textCache}%^    </form>";
+            return $"{textCache}</form>";
         }
     }
 

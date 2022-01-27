@@ -25,14 +25,14 @@ namespace Impart
             bodyCache = "";
             cssCache = "";
             id = division.scrollId;
-            cssCache = $"%^{this.id} {{%^";
+            cssCache = $"{this.id} {{";
             switch (axis)
             {
                 case ImpartCommon.Axis.X:
-                    cssCache += "    overflow-x: auto;%^}%^";
+                    cssCache += "overflow-x: auto;}";
                     break;
                 case ImpartCommon.Axis.Y:
-                    cssCache += "    overflow-y: auto;%^}%^";
+                    cssCache += "overflow-y: auto;}";
                     break;
                 default:
                     throw new ImpartError("Invalid axis!");
@@ -40,35 +40,35 @@ namespace Impart
             switch (width)
             {
                 case Percent pct:
-                    cssCache += $"%^{this.id}::-webkit-scrollbar {{%^    width: {width.Pct().percent}%;%^    background-color: #808080; %^}}%^{this.id}::-webkit-scrollbar-track {{%^";
+                    cssCache += $"{this.id}::-webkit-scrollbar {{    width: {width.Pct().percent}%;    background-color: #808080; }}{this.id}::-webkit-scrollbar-track {{";
                     break;
                 case Pixels pxls:
-                    cssCache += $"%^{this.id}::-webkit-scrollbar {{%^    width: {width.Px().pixels}px;%^    background-color: #808080; %^}}%^{this.id}::-webkit-scrollbar-track {{%^";
+                    cssCache += $"{this.id}::-webkit-scrollbar {{    width: {width.Px().pixels}px;    background-color: #808080; }}{this.id}::-webkit-scrollbar-track {{";
                     break;
             }
             switch (color)
             {
                 case Rgb rgb:
-                    cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}";
+                    cssCache += $"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});}}";
                     break;
                 case Hsl hsl:
-                    cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}";
+                    cssCache += $"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);}}";
                     break;
                 case Hex hex:
-                    cssCache += $"    background-color: #{hex.hex};%^}}";
+                    cssCache += $"background-color: #{hex.hex};}}";
                     break;
             }
-            cssCache += $"%^{this.id}::-webkit-scrollbar-thumb {{%^";
+            cssCache += $"{this.id}::-webkit-scrollbar-thumb {{";
             switch (colorThumb)
             {
                 case Rgb rgb:
-                    cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^";
+                    cssCache += $"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
                 case Hsl hsl:
-                    cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^";
+                    cssCache += $"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
                 case Hex hex:
-                    cssCache += $"    background-color: #{hex.hex};%^";
+                    cssCache += $"background-color: #{hex.hex};";
                     break;
             }
             if (rounded != null)
@@ -76,10 +76,10 @@ namespace Impart
                 switch (rounded)
                 {
                     case Percent pct:
-                        cssCache += $"    border-radius: {rounded.Pct().percent}%;%^}}";
+                        cssCache += $"border-radius: {rounded.Pct().percent}%;}}";
                         break;
                     case Pixels pxls:
-                        cssCache += $"    border-radius: {rounded.Px().pixels}px;%^}}";
+                        cssCache += $"border-radius: {rounded.Px().pixels}px;}}";
                         break;
                 }
             }
@@ -103,10 +103,10 @@ namespace Impart
             switch (axis)
             {
                 case ImpartCommon.Axis.X:
-                    bodyCache += "    overflow-x: auto;%^";
+                    bodyCache += "overflow-x: auto;";
                     break;
                 case ImpartCommon.Axis.Y:
-                    bodyCache += "    overflow-y: auto;%^";
+                    bodyCache += "overflow-y: auto;";
                     break;
                 default:
                     throw new ImpartError("Invalid axis!");
@@ -114,35 +114,35 @@ namespace Impart
             switch (width)
             {
                 case Percent pct:
-                    cssCache += $"%^::-webkit-scrollbar {{%^    width: {width.Pct().percent}%;%^    background-color: #808080; %^}}%^::-webkit-scrollbar-track {{%^";
+                    cssCache += $"::-webkit-scrollbar {{    width: {width.Pct().percent}%;    background-color: #808080; }}::-webkit-scrollbar-track {{";
                     break;
                 case Pixels pxls:
-                    cssCache += $"%^::-webkit-scrollbar {{%^    width: {width.Px().pixels}px;%^    background-color: #808080; %^}}%^::-webkit-scrollbar-track {{%^";
+                    cssCache += $"::-webkit-scrollbar {{    width: {width.Px().pixels}px;    background-color: #808080; }}::-webkit-scrollbar-track {{";
                     break;
             }
             switch (color)
             {
                 case Rgb rgb:
-                    cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}";
+                    cssCache += $"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});}}";
                     break;
                 case Hsl hsl:
-                    cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}";
+                    cssCache += $"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);}}";
                     break;
                 case Hex hex:
-                    cssCache += $"    background-color: #{hex.hex};%^}}";
+                    cssCache += $"background-color: #{hex.hex};}}";
                     break;
             }
-            cssCache += $"%^::-webkit-scrollbar-thumb {{%^";
+            cssCache += $"::-webkit-scrollbar-thumb {{";
             switch (colorThumb)
             {
                 case Rgb rgb:
-                    cssCache += $"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^";
+                    cssCache += $"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});";
                     break;
                 case Hsl hsl:
-                    cssCache += $"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^";
+                    cssCache += $"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);";
                     break;
                 case Hex hex:
-                    cssCache += $"    background-color: #{hex.hex};%^";
+                    cssCache += $"background-color: #{hex.hex};";
                     break;
             }
             if (rounded != null)
@@ -150,10 +150,10 @@ namespace Impart
                 switch (rounded)
                 {
                     case Percent pct:
-                        cssCache += $"    border-radius: {rounded.Pct().percent}%;%^}}";
+                        cssCache += $"border-radius: {rounded.Pct().percent}%;}}";
                         break;
                     case Pixels pxls:
-                        cssCache += $"    border-radius: {rounded.Px().pixels}px;%^}}";
+                        cssCache += $"border-radius: {rounded.Px().pixels}px;}}";
                         break;
                 }
             }

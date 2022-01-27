@@ -34,13 +34,13 @@ namespace Impart
             switch (color)
             {
                 case Rgb rgb:
-                    WriteStyle($"    background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}");
+                    WriteStyle($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^}}");
                     break;
                 case Hsl hsl:
-                    WriteStyle($"    background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}");
+                    WriteStyle($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^}}");
                     break;
                 case Hex hex:
-                    WriteStyle($"    background-color: #{hex.hex};%^}}");
+                    WriteStyle($"background-color: #{hex.hex};%^}}");
                     break;
             }
             return this;
@@ -49,11 +49,11 @@ namespace Impart
         {
             if (styleBuilder.Length == 0)
             {
-                return $"%^        <input type=\"submit\"{attributes}>";
+                return $"<input type=\"submit\"{attributes}>";
             }
             else
             {
-                return $"%^        <input type=\"submit\" style=\"{styleBuilder.ToString()}\"{attributes}>";
+                return $"<input type=\"submit\" style=\"{styleBuilder.ToString()}\"{attributes}>";
             }
         }
     }

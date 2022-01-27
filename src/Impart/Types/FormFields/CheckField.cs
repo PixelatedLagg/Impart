@@ -17,7 +17,7 @@ namespace Impart
             {
                 throw new ImpartError("Input ID cannot be empty or null!");
             }
-            textCache = $"%^        <label for=\"{inputid}\">{text}</label>%^        <input type=\"checkbox\" name=\"{inputid}\">";
+            textCache = $"<label for=\"{inputid}\">{text}</label><input type=\"checkbox\" name=\"{inputid}\">";
         }
 
         /// <summary>Creates a CheckField instance with <paramref name="text"/> as the text and <paramref name="inputid"/> as the ID.</summary>
@@ -33,11 +33,11 @@ namespace Impart
             }
             if (text.id == null)
             {
-                textCache = $"%^        <label for=\"{inputid}\">%^            <p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"checkbox\" name=\"{inputid}\" id=\"{id}\">";
+                textCache = $"<label for=\"{inputid}\"><p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p></label><input type=\"checkbox\" name=\"{inputid}\" id=\"{id}\">";
             }
             else
             {
-                textCache = $"%^        <label for=\"{inputid}\">%^            <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^        </label>%^        <input type=\"checkbox\" name=\"{inputid}\" id=\"{id}\">";
+                textCache = $"<label for=\"{inputid}\"><p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p></label><input type=\"checkbox\" name=\"{inputid}\" id=\"{id}\">";
             }
         }
     }

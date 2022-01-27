@@ -52,6 +52,7 @@ namespace Impart
                 case ".png":
                 case ".svg":
                 case ".webp":
+                case ".jpg":
                     return true;
                 default:
                     return false;

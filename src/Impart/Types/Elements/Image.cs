@@ -51,11 +51,7 @@ namespace Impart
             {
                 throw new ImpartError("Path cannot be empty or null!");
             }
-            if (!System.IO.File.Exists(path))
-            {
-                throw new ImpartError("Image file not found!");
-            }
-            if (!File.IsImage(Path.GetExtension(path)))
+            if (!File.IsImage(Path.GetExtension(path).ToLower()))
             {
                 throw new ImpartError("Unsupported file extension!");
             }

@@ -32,13 +32,13 @@ namespace Impart
             switch (style)
             {
                 case StyleType.IDStyle:
-                    textBuilder.Append($"#{id} {{%^");
+                    textBuilder.Append($"#{id} {{");
                     break;
                 case StyleType.EStyle:
-                    textBuilder.Append($"{id} {{%^");
+                    textBuilder.Append($"{id} {{");
                     break;
                 case StyleType.ClassStyle:
-                    textBuilder.Append($".{id} {{%^");
+                    textBuilder.Append($".{id} {{");
                     break;
             }
             this.id = id;
@@ -61,13 +61,13 @@ namespace Impart
             switch (color)
             {
                 case Rgb rgb:
-                    Write($"    color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});%^");
+                    Write($"color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});");
                     break;
                 case Hsl hsl:
-                    Write($"    color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);%^");
+                    Write($"color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);");
                     break;
                 case Hex hex:
-                    Write($"    color: #{hex.hex};%^");
+                    Write($"color: #{hex.hex};");
                     break;
             }
             return this;
@@ -82,7 +82,7 @@ namespace Impart
             {
                 throw new ImpartError("Invalid alignment value!");
             }
-            Write($"    text-align: {alignment};%^");
+            Write($"text-align: {alignment};");
             return this;
         }
 
@@ -94,17 +94,17 @@ namespace Impart
             switch (size)
             {
                 case Pixels pixels:
-                    Write($"    margin: {pixels.pixels}px;%^");
+                    Write($"margin: {pixels.pixels}px;");
                     break;
                 case Percent percent:
-                    Write($"    margin: {percent.percent}%;%^");
+                    Write($"margin: {percent.percent}%;");
                     break;
             }
             return this;
         }
         internal string Render()
         {
-            return $"{textBuilder.Replace("%^", Environment.NewLine).ToString()}}}";
+            return $"{textBuilder.ToString()}}}";
         }
 
         /// <summary>Dispose of all the associated variables in the Style instance. Included to support using() statements.</summary>
