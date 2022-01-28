@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Impart
 {
-    /// <summary>Class that represents a list.</summary>
+    /// <summary>List element.</summary>
     public struct List : Element
     {
         private string _id;
@@ -79,13 +79,13 @@ namespace Impart
             {
                 listType = "ul";
             }
-            if (id == null)
+            if (id != null)
             {
-                _id = "";
+                attributeBuilder = new StringBuilder($"id=\"{id}\"");
             }
             else
             {
-                _id = id;
+                attributeBuilder = new StringBuilder();
             }
             foreach (Text text in textEntries)
             {
@@ -102,7 +102,7 @@ namespace Impart
             _type = type;
             _attributes = new List<Attribute>();
             _style = new StringBuilder();
-            attributeBuilder = new StringBuilder();
+            _id = id;
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>

@@ -71,12 +71,19 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null or empty!");
             }
+            if (id != null)
+            {
+                attributeBuilder = new StringBuilder($"id=\"{id}\"");
+            }
+            else
+            {
+                attributeBuilder = new StringBuilder();
+            }
             _text = text;
             _id = id;
             _type = TextType.Regular;
             _attributes = new List<Attribute>();
-            _style = new StringBuilder(1000);
-            attributeBuilder = new StringBuilder(1000);
+            _style = new StringBuilder();
         }
 
         /// <summary>Creates a Text instance with <paramref name="text"/> as the text and <paramref name="type"> as the Text type.</summary>
@@ -94,8 +101,8 @@ namespace Impart
             _id = id;
             _type = type;
             _attributes = new List<Attribute>();
-            _style = new StringBuilder(1000);
-            attributeBuilder = new StringBuilder(1000);
+            _style = new StringBuilder();
+            attributeBuilder = new StringBuilder();
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>

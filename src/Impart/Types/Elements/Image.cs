@@ -67,18 +67,18 @@ namespace Impart
             {
                 throw new ImpartError("Unsupported file extension!");
             }
-            if (String.IsNullOrEmpty(id))
+            if (id != null)
             {
-                _id = null;
+                attributeBuilder = new StringBuilder($" id=\"{id}\"");
             }
             else
             {
-                _id = id;
+                attributeBuilder = new StringBuilder();
             }
             _path = path;
             _style = new StringBuilder();
             _attributes = new List<Attribute>();
-            attributeBuilder = new StringBuilder();
+            _id = id;
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>

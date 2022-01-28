@@ -1,6 +1,6 @@
 namespace Impart
 {
-    /// <summary>Class that represents a scrollbar.</summary>
+    /// <summary>Scrollbar element.</summary>
     public struct Scrollbar : Element
     {
         internal string cssCache;
@@ -40,10 +40,10 @@ namespace Impart
             switch (width)
             {
                 case Percent pct:
-                    cssCache += $"{this.id}::-webkit-scrollbar {{    width: {width.Pct().percent}%;    background-color: #808080; }}{this.id}::-webkit-scrollbar-track {{";
+                    cssCache += $"{this.id}::-webkit-scrollbar {{width: {width.Pct().percent}%;background-color: #808080; }}{this.id}::-webkit-scrollbar-track {{";
                     break;
                 case Pixels pxls:
-                    cssCache += $"{this.id}::-webkit-scrollbar {{    width: {width.Px().pixels}px;    background-color: #808080; }}{this.id}::-webkit-scrollbar-track {{";
+                    cssCache += $"{this.id}::-webkit-scrollbar {{width: {width.Px().pixels}px;background-color: #808080; }}{this.id}::-webkit-scrollbar-track {{";
                     break;
             }
             switch (color)
@@ -114,10 +114,10 @@ namespace Impart
             switch (width)
             {
                 case Percent pct:
-                    cssCache += $"::-webkit-scrollbar {{    width: {width.Pct().percent}%;    background-color: #808080; }}::-webkit-scrollbar-track {{";
+                    cssCache += $"::-webkit-scrollbar {{width: {width.Pct().percent}%;background-color: #808080; }}::-webkit-scrollbar-track {{";
                     break;
                 case Pixels pxls:
-                    cssCache += $"::-webkit-scrollbar {{    width: {width.Px().pixels}px;    background-color: #808080; }}::-webkit-scrollbar-track {{";
+                    cssCache += $"::-webkit-scrollbar {{width: {width.Px().pixels}px;background-color: #808080; }}::-webkit-scrollbar-track {{";
                     break;
             }
             switch (color)

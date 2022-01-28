@@ -163,28 +163,14 @@ namespace Impart
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
-            if (image.id == null)
-            {
-                textBuilder.Append($"<img src=\"{image.path}\"{image.attributeBuilder.ToString()}{image.style}>");
-            }
-            else
-            {
-                textBuilder.Append($"<img src=\"{image.path}\" id=\"{image.id}\"{image.attributeBuilder.ToString()}{image.style}>");
-            }
+            textBuilder.Append($"<img src=\"{image.path}\"{image.attributeBuilder.ToString()}{image.style}>");
         }
 
         /// <summary>Add <paramref name="header"/> to the WebPage.</summary>
         /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
-            if (header.id == null)
-            {
-                textBuilder.Append($"<h{header.num}{header.attributes}{header.style}>{header.text}</h{header.num}>");
-            }
-            else
-            {
-                textBuilder.Append($"<h{header.num} id=\"{header.id}\"{header.attributes}{header.style}>{header.text}</h{header.num}>");
-            }
+            textBuilder.Append($"<h{header.number}{header.attributes}{header.style}>{header.text}</h{header.number}>");
         }
 
         /// <summary>Add <paramref name="link"/> to the WebPage.
@@ -320,14 +306,7 @@ namespace Impart
         /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
-            if (button.id == null)
-            {
-                textBuilder.Append($"<button{button.attributes}{button.style}>{button.text}</button>");
-            }
-            else
-            {
-                textBuilder.Append($"<button id=\"{button.id}\"{button.attributes}{button.style}>{button.text}</button>");
-            }
+            textBuilder.Append(button.Render());
         }
 
         /// <summary>Set the default margin of the WebPage to <paramref name="size"/>.</summary>
