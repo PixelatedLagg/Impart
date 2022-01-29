@@ -1,6 +1,5 @@
 namespace Impart
 {
-    public interface Measurement {}
     public struct Percent : Measurement
     {
         internal int percent;

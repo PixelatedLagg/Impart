@@ -63,10 +63,6 @@ namespace Impart
             {
                 throw new ImpartError("Path cannot be empty or null!");
             }
-            if (!File.IsImage(Path.GetExtension(path).ToLower()))
-            {
-                throw new ImpartError("Unsupported file extension!");
-            }
             if (id != null)
             {
                 attributeBuilder = new StringBuilder($" id=\"{id}\"");

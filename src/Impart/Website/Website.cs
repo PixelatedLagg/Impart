@@ -14,7 +14,7 @@ namespace Impart
         private WebPage errorPage;
         Dictionary<string, WebPage> webPages;
         Thread thread;
-        //maybe use CancellationTokenSource
+        CancellationTokenSource cancelToken;
         public Website(WebPage webPage, int port = 5050, string rootDirectory = "")
         {
             webPages = new Dictionary<string, WebPage>();
@@ -28,6 +28,7 @@ namespace Impart
             {
                 listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], port);
                 listener.Start();
+                cancelToken = new CancellationTokenSource();
                 thread = new Thread(new ThreadStart(StartListen));
                 thread.Start();
                 Console.WriteLine($"Website hosted on localhost:{port}");
@@ -39,7 +40,8 @@ namespace Impart
         }
         public void Stop()
         {
-            //stop website (todo)
+            //cancelToken.Cancel();
+            Environment.Exit(0); //exit all threads for now
         }
         public void AddPage(WebPage webPage, string directory)
         {
