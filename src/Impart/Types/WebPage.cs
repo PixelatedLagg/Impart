@@ -17,9 +17,9 @@ namespace Impart
         protected WebPage()
         {
             defaultMargin = "0px";
-            textBuilder = new StringBuilder(1000);
-            styleBuilder = new StringBuilder(1000);
-            bodyBuilder = new StringBuilder(1000);
+            textBuilder = new StringBuilder();
+            styleBuilder = new StringBuilder("overflow-x: auto; overflow-y: auto;");
+            bodyBuilder = new StringBuilder();
         }
 
         /// <summary>Add <paramref name="style"/> to the WebPage.</summary>
@@ -272,12 +272,12 @@ namespace Impart
             textBuilder.Append($"{tempBuilder.ToString()}</table>");
         }
 
-        /// <summary>Add <paramref name="div"/> to the WebPage.</summary>
-        /// <param name="div">The Division instance to add.</param>
-        protected void AddDivision(Division div)
+        /// <summary>Add <paramref name="division"/> to the WebPage.</summary>
+        /// <param name="division">The Division instance to add.</param>
+        protected void AddDivision(Division division)
         {
-            textBuilder.Append(div.textCache);
-            styleBuilder.Append(div.cssCache);
+            textBuilder.Append(division.Render());
+            styleBuilder.Append(division.webPageStyleBuilder.ToString());
         }
 
         /// <summary>Add <paramref name="list"/> to the WebPage.</summary>
@@ -291,8 +291,67 @@ namespace Impart
         /// <param name="scrollbar">The Scrollbar instance to add.</param>
         protected void SetScrollBar(Scrollbar scrollbar)
         {
-            bodyBuilder.Append(scrollbar.bodyCache);
-            styleBuilder.Append(scrollbar.cssCache);
+            switch (scrollbar.axis)
+            {
+                case Axis.X:
+                    styleBuilder.Append(" overflow-x: auto;");
+                    break;
+                case Axis.Y:
+                    styleBuilder.Append(" overflow-y: auto;");
+                    break;
+                default:
+                    throw new ImpartError("Invalid axis!");
+            }
+            switch (scrollbar.width)
+            {
+                case Percent pct:
+                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width.Pct().percent}%;background-color: #808080; }}::-webkit-scrollbar-track {{");
+                    break;
+                case Pixels pxls:
+                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width.Px().pixels}px;background-color: #808080; }}::-webkit-scrollbar-track {{");
+                    break;
+            }
+            switch (scrollbar.bgColor)
+            {
+                case Rgb rgb:
+                    styleBuilder.Append($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});}}");
+                    break;
+                case Hsl hsl:
+                    styleBuilder.Append($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);}}");
+                    break;
+                case Hex hex:
+                    styleBuilder.Append($"background-color: #{hex.hex};}}");
+                    break;
+            }
+            styleBuilder.Append($"::-webkit-scrollbar-thumb {{");
+            switch (scrollbar.fgColor)
+            {
+                case Rgb rgb:
+                    styleBuilder.Append($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});");
+                    break;
+                case Hsl hsl:
+                    styleBuilder.Append($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);");
+                    break;
+                case Hex hex:
+                    styleBuilder.Append($"background-color: #{hex.hex};");
+                    break;
+            }
+            if (scrollbar.radius != null)
+            {
+                switch (scrollbar.radius)
+                {
+                    case Percent pct:
+                        styleBuilder.Append($"border-radius: {scrollbar.radius.Pct().percent}%;}}");
+                        break;
+                    case Pixels pxls:
+                        styleBuilder.Append($"border-radius: {scrollbar.radius.Px().pixels}px;}}");
+                        break;
+                }
+            }
+            else
+            {
+                styleBuilder.Append("}");
+            }
         }
 
         /// <summary>Add <paramref name="form"/> to the WebPage.</summary>

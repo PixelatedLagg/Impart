@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>The Text element.</summary>
+    /// <summary>Text element.</summary>
     public struct Text : Element
     {
         private string _text;
