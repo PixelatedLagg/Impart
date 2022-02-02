@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Collections.Generic;
+using Impart.Scripting;
 
 namespace Impart
 {
@@ -15,6 +16,7 @@ namespace Impart
         Dictionary<string, WebPage> webPages;
         Thread thread;
         CancellationTokenSource cancelToken;
+        public Action<WebsiteEventArgs> OnVisit;
         public Website(WebPage webPage, int port = 5050, string rootDirectory = "")
         {
             webPages = new Dictionary<string, WebPage>();
@@ -31,7 +33,11 @@ namespace Impart
                 cancelToken = new CancellationTokenSource();
                 thread = new Thread(new ThreadStart(StartListen));
                 thread.Start();
-                Console.WriteLine($"Website hosted on localhost:{port}");
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine($" Website hosted on localhost:{port} ");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             catch
             {
@@ -55,7 +61,7 @@ namespace Impart
         {
             errorPage = webPage;
         }
-        private void StartListen()  
+        private void StartListen()
         {
             while (true)
             {
@@ -63,7 +69,7 @@ namespace Impart
                 if (mySocket.Connected)  
                 {
                     Byte[] bReceive = new Byte[1024];
-                    mySocket.Receive(bReceive,bReceive.Length,0);
+                    mySocket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
                     Console.WriteLine(sBuffer);
                     if (sBuffer.Substring(0, 3) != "GET")  
@@ -100,6 +106,16 @@ namespace Impart
                         }
                         mySocket.Close();  
                     }
+                    /*if (!String.IsNullOrWhiteSpace(OnVisit?.Method.ToString())) start parsing out platform and browser values
+                    {
+                        string temp = sBuffer.Split("sec-ch-ua: \"")[1];
+                        bool reading = true;
+                        foreach (char c in temp)
+                        {
+                            
+                        }
+                    }*/
+                    Events.ParseRequest(sBuffer);
                 }
             }  
         }
