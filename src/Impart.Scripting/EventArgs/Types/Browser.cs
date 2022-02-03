@@ -1,8 +1,9 @@
-namespace Impart
+namespace Impart.Scripting
 {
     public enum Browser
     {
         Chrome,
+        Chromium,
         Opera,
         Safari,
         Firefox,
@@ -12,6 +13,7 @@ namespace Impart
         Brave,
         Vivaldi,
         Torch,
-        Maxthon
+        Maxthon,
+        NotBrand
     }
 }

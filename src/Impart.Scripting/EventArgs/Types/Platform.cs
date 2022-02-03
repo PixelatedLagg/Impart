@@ -1,4 +1,4 @@
-namespace Impart
+namespace Impart.Scripting
 {
     public enum Platform
     {

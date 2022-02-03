@@ -80,7 +80,7 @@ namespace Impart
                     if (!webPages.ContainsKey(sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")))
                     {
                         string errorResult = errorPage?.GetCode() ?? "";
-                        byte[] errorBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nContent-Length: {"<div><p>aids<i>help</i></p></div>".Length} \r\n\r\n<div><p>aids<i>help</i></p></div>");
+                        byte[] errorBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nContent-Length: {errorResult.Length} \r\n\r\n{errorResult}");
                         try  
                         {
                             mySocket.Send(errorBytes, errorBytes.Length, 0);
@@ -106,18 +106,39 @@ namespace Impart
                         }
                         mySocket.Close();  
                     }
-                    /*if (!String.IsNullOrWhiteSpace(OnVisit?.Method.ToString())) start parsing out platform and browser values
+                    if (!String.IsNullOrWhiteSpace(OnVisit?.Method.ToString()))
                     {
-                        string temp = sBuffer.Split("sec-ch-ua: \"")[1];
-                        bool reading = true;
-                        foreach (char c in temp)
+                        string[] browsers = sBuffer.Split("sec-ch-ua:")[1].Split("\"");
+                        Console.WriteLine($"{browsers[3]} {browsers[7]} {browsers[11]}");
+                        List<(Browser, int)> browserList = new List<(Browser, int)>();
+                        if (browsers[1].Contains("Brand"))
                         {
-                            
+                            browsers[1] = "Not A Brand";
                         }
-                    }*/
+                        if (browsers[5].Contains("Brand"))
+                        {
+                            browsers[5] = "Not A Brand";
+                        }
+                        if (browsers[9].Contains("Brand"))
+                        {
+                            browsers[9] = "Not A Brand";
+                        }
+                        switch (browsers[1])
+                        {
+                            case string a when a.Contains("Brand"):
+                                browserList.Add((Browser.NotBrand, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Opera":
+                                browserList.Add((Browser.Opera, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Chromium":
+                                browserList.Add((Browser.Chromium, Convert.ToInt32(browsers[3])));
+                                break;
+                        }
+                    }
                     Events.ParseRequest(sBuffer);
                 }
-            }  
+            }
         }
     }
 }
