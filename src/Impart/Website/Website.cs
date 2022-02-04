@@ -109,8 +109,9 @@ namespace Impart
                     if (!String.IsNullOrWhiteSpace(OnVisit?.Method.ToString()))
                     {
                         string[] browsers = sBuffer.Split("sec-ch-ua:")[1].Split("\"");
-                        Console.WriteLine($"{browsers[3]} {browsers[7]} {browsers[11]}");
                         List<(Browser, int)> browserList = new List<(Browser, int)>();
+                        bool mobileResult;
+                        Platform platformResult;
                         if (browsers[1].Contains("Brand"))
                         {
                             browsers[1] = "Not A Brand";
@@ -125,7 +126,7 @@ namespace Impart
                         }
                         switch (browsers[1])
                         {
-                            case string a when a.Contains("Brand"):
+                            case "Not A Brand":
                                 browserList.Add((Browser.NotBrand, Convert.ToInt32(browsers[3])));
                                 break;
                             case "Opera":
@@ -134,9 +135,147 @@ namespace Impart
                             case "Chromium":
                                 browserList.Add((Browser.Chromium, Convert.ToInt32(browsers[3])));
                                 break;
+                            case "Google Chrome":
+                                browserList.Add((Browser.Chrome, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Safari":
+                                browserList.Add((Browser.Safari, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Maxthon":
+                                browserList.Add((Browser.Maxthon, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Edge":
+                                browserList.Add((Browser.Edge, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Firefox":
+                                browserList.Add((Browser.Firefox, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Brave":
+                                browserList.Add((Browser.Brave, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Vivaldi":
+                                browserList.Add((Browser.Vivaldi, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Torch":
+                                browserList.Add((Browser.Torch, Convert.ToInt32(browsers[3])));
+                                break;
+                            case "Netscape":
+                                browserList.Add((Browser.Netscape, Convert.ToInt32(browsers[3])));
+                                break;
                         }
+                        switch (browsers[5])
+                        {
+                            case "Not A Brand":
+                                browserList.Add((Browser.NotBrand, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Opera":
+                                browserList.Add((Browser.Opera, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Chromium":
+                                browserList.Add((Browser.Chromium, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Google Chrome":
+                                browserList.Add((Browser.Chrome, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Safari":
+                                browserList.Add((Browser.Safari, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Maxthon":
+                                browserList.Add((Browser.Maxthon, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Edge":
+                                browserList.Add((Browser.Edge, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Firefox":
+                                browserList.Add((Browser.Firefox, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Brave":
+                                browserList.Add((Browser.Brave, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Vivaldi":
+                                browserList.Add((Browser.Vivaldi, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Torch":
+                                browserList.Add((Browser.Torch, Convert.ToInt32(browsers[7])));
+                                break;
+                            case "Netscape":
+                                browserList.Add((Browser.Netscape, Convert.ToInt32(browsers[7])));
+                                break;
+                        }
+                        switch (browsers[9])
+                        {
+                            case "Not A Brand":
+                                browserList.Add((Browser.NotBrand, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Opera":
+                                browserList.Add((Browser.Opera, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Chromium":
+                                browserList.Add((Browser.Chromium, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Google Chrome":
+                                browserList.Add((Browser.Chrome, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Safari":
+                                browserList.Add((Browser.Safari, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Maxthon":
+                                browserList.Add((Browser.Maxthon, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Edge":
+                                browserList.Add((Browser.Edge, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Firefox":
+                                browserList.Add((Browser.Firefox, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Brave":
+                                browserList.Add((Browser.Brave, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Vivaldi":
+                                browserList.Add((Browser.Vivaldi, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Torch":
+                                browserList.Add((Browser.Torch, Convert.ToInt32(browsers[11])));
+                                break;
+                            case "Netscape":
+                                browserList.Add((Browser.Netscape, Convert.ToInt32(browsers[11])));
+                                break;
+                        }
+                        if (browsers[12].Contains("?0"))
+                        {
+                            mobileResult = false;
+                        }
+                        else
+                        {
+                            mobileResult = true;
+                        }
+                        platformResult = Platform.Windows;
+                        switch (browsers[13])
+                        {
+                            case "Windows":
+                                platformResult = Platform.Windows;
+                                break;
+                            case "Linux":
+                                platformResult = Platform.Linux;
+                                break;
+                            case "macOS":
+                                platformResult = Platform.Mac;
+                                break;
+                            case "Android":
+                                platformResult = Platform.Android;
+                                break;
+                            case "iOS":
+                                platformResult = Platform.IOS;
+                                break;
+                            case "Chrome OS":
+                                platformResult = Platform.Chrome;
+                                break;
+                            case "Unknown":
+                                platformResult = Platform.Unknown;
+                                break;
+                        }
+                        OnVisit?.Invoke(new WebsiteEventArgs(platformResult, browserList, mobileResult));
                     }
-                    Events.ParseRequest(sBuffer);
                 }
             }
         }

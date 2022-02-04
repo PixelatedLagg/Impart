@@ -5,8 +5,9 @@ namespace Impart.Scripting
         Windows,
         Linux,
         Mac,
-        Android,
+        Chrome,
         IOS,
-        WindowsPhone
+        Android,
+        Unknown
     }
 }
