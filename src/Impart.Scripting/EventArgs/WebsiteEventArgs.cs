@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Impart.Scripting
@@ -8,7 +7,6 @@ namespace Impart.Scripting
         public Platform platform;
         public bool mobile;
         public List<(Browser browser, int version)> browsers;
-
         public WebsiteEventArgs(Platform platform, List<(Browser browser, int version)> browsers, bool mobile)
         {
             this.platform = platform;
