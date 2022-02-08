@@ -1,5 +1,6 @@
 namespace Impart
 {
+    /// <summary>All the attribute types.</summary>
     public enum AttributeType
     {
         BackgroundColor,
