@@ -1,5 +1,6 @@
 namespace Impart
 {
+    /// <summary>All font families.</summary>
     public enum FontFamily
     {
         Arial,

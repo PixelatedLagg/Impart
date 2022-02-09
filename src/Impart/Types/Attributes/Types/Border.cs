@@ -1,5 +1,6 @@
 namespace Impart
 {
+    /// <summary>All border types.</summary>
     public enum Border
     {
         Normal,
