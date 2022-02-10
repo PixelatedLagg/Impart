@@ -25,6 +25,7 @@ namespace Impart.Data
         }
 
         /// <summary>Generate a number in a specific range.</summary>
+        /// <returns>A randomly generated long between a range.</returns>
         /// <param name="min">The minimum number to generate.</param>
         /// <param name="max">The maximum number to generate.</param>
         public static long Range(long min, long max)
@@ -33,6 +34,7 @@ namespace Impart.Data
         }
 
         /// <summary>Generate a number with the specified length.</summary>
+        /// <returns>A randomly generated long with the specified length.</returns>
         /// <param name="length">The length of the number to generate.</param>
         public static long Length(int length)
         {

@@ -1,5 +1,6 @@
 namespace Impart.Scripting
 {
+    /// <summary>All browser types.</summary>
     public enum Browser
     {
         Chrome,

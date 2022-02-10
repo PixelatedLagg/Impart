@@ -1,5 +1,6 @@
 namespace Impart.Scripting
 {
+    /// <summary>All key types.</summary>
     public enum Key
     {
         a,

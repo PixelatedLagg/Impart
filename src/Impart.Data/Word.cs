@@ -6,6 +6,7 @@ namespace Impart.Data
     public static class Word
     {
         /// <summary>Generate a word with the specified length.</summary>
+        /// <returns>A randomly generated word with the specified.</returns>
         /// <param name="length">The length of the word to generate.</param>
         /// <param name="type">The type of letters to include in the word. (Default is every letter.)</param>
         public static string Length(int length, Letter.Types type = Letter.Types.Any)
