@@ -18,7 +18,7 @@ namespace Impart.Scripting
         /// <returns>A WebsiteEventArgs instance.</returns>
         /// <param name="platform">The platform type.</param>
         /// <param name="browsers">List of all browsers.</param>
-        /// <param name="platform">Bool representing if the user is on a mobile device.</param>
+        /// <param name="mobile">Bool representing if the user is on a mobile device.</param>
         public WebsiteEventArgs(Platform platform, List<(Browser browser, int version)> browsers, bool mobile)
         {
             this.platform = platform;

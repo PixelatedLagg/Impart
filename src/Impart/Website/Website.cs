@@ -15,6 +15,7 @@ namespace Impart
         private WebPage errorPage;
         Dictionary<string, WebPage> webPages;
         Thread thread;
+        CancellationTokenSource cancelToken;
         public Action<WebsiteEventArgs> OnVisit;
         public Website(WebPage webPage, int port = 5050, string rootDirectory = "")
         {
@@ -42,6 +43,11 @@ namespace Impart
             {
                 throw new ImpartError("Error in starting the website.");
             }
+        }
+        public void Stop()
+        {
+            //cancelToken.Cancel();
+            Environment.Exit(0); //exit all threads for now
         }
         public void AddPage(WebPage webPage, string directory)
         {
