@@ -52,6 +52,17 @@ namespace Impart
         }
         internal StringBuilder attributeBuilder;
 
+        /// <summary>Creates an empty Image instance.</summary>
+        /// <returns>An Image instance.</returns>
+        public Image()
+        {
+            attributeBuilder = new StringBuilder();
+            _path = "";
+            _style = new StringBuilder();
+            _attributes = new List<Attribute>();
+            _id = null;
+        }
+        
         /// <summary>Creates an Image instance with <paramref name="path"/> as the Image path.</summary>
         /// <returns>An Image instance.</returns>
         /// <param name="path">The Image path.</param>

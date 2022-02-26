@@ -47,6 +47,17 @@ namespace Impart
         }
         internal Type linkType;
 
+        /// <summary>Creates an empty Link instance.</summary>
+        /// <returns>A Link instance.</returns>
+        public Link()
+        {
+            _text = new Text();
+            _id = null;
+            _path = "";
+            _image = new Image();
+            linkType = typeof(Text);
+        }
+
         /// <summary>Creates a Link instance with <paramref name="text"/> as the Link text, and <paramref name="path"/> as the Link path.</summary>
         /// <returns>A Link instance.</returns>
         /// <param name="text">The Link text.</param>
@@ -58,10 +69,10 @@ namespace Impart
             {
                 throw new ImpartError("Path cannot be null or empty!");
             }
-            this._text = text;
-            this._id = id;
-            this._path = path;
-            this._image = new Image();
+            _text = text;
+            _id = id;
+            _path = path;
+            _image = new Image();
             linkType = typeof(Text);
         }
 

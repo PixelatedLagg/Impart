@@ -61,6 +61,18 @@ namespace Impart
         }
         internal StringBuilder attributeBuilder;
 
+        /// <summary>Creates an empty Header instance.</summary>
+        /// <returns>An Header instance.</returns>
+        public Header()
+        {
+            attributeBuilder = new StringBuilder();
+            _text = "";
+            _id = null;
+            _attributes = new List<Attribute>();
+            _style = new StringBuilder();
+            _number = 1;   
+        }
+
         /// <summary>Creates a Header instance with <paramref name="text"/> as the text and <paramref name="number"> as the Header number.</summary>
         /// <returns>A Header instance.</returns>
         /// <param name="text">The Header text.</param>

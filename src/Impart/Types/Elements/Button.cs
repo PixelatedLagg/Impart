@@ -42,7 +42,21 @@ namespace Impart
         internal StringBuilder attributeBuilder;
         internal StringBuilder textBuilder;
 
-        /// <summary>Constructor for the button class.</summary>
+        /// <summary>Creates an empty Button instance.</summary>
+        /// <returns>An Button instance.</returns>
+        public Button()
+        {
+            textBuilder = new StringBuilder();
+            _id = null;
+            _style = new StringBuilder();
+            _attributes = new List<Attribute>();
+            attributeBuilder = new StringBuilder(" type=\"button\">");
+        }
+
+        /// <summary>Creates a Button instance with <paramref name="text"/> as the Button text.</summary>
+        /// <returns>A Button instance.</returns>
+        /// <param name="text">The Button text.</param>
+        /// <param name="id">The Button ID.</param>
         public Button(Text text, string id = null)
         {
             textBuilder = new StringBuilder();

@@ -61,6 +61,18 @@ namespace Impart
         }
         internal StringBuilder attributeBuilder;
 
+        /// <summary>Creates an empty Text instance.</summary>
+        /// <returns>A Text instance.</returns>
+        public Text()
+        {
+            attributeBuilder = new StringBuilder();
+            _text = "";
+            _id = null;
+            _type = TextType.Regular;
+            _attributes = new List<Attribute>();
+            _style = new StringBuilder();
+        }
+
         /// <summary>Creates a Text instance with <paramref name="text"/> as the text.</summary>
         /// <returns>A Text instance.</returns>
         /// <param name="text">The Text text.</param>
