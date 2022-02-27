@@ -12,6 +12,7 @@ namespace Impart
         Padding,
         HoverMessage,
         Size,
-        Border
+        Border,
+        ID
     }
 }

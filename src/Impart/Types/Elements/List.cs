@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -60,6 +61,7 @@ namespace Impart
         }
         internal StringBuilder attributeBuilder;
         internal StringBuilder textBuilder;
+        internal Type elementType = typeof(List);
         private string listType;
 
         /// <summary>Creates a List instance with <paramref name="text"/> as the List type, and Text[] as the entries.</summary>
@@ -71,6 +73,10 @@ namespace Impart
         {
             textBuilder = new StringBuilder(1000);
             _entries = new Dictionary<int, Text>();
+            _type = type;
+            _attributes = new List<Attribute>();
+            _style = new StringBuilder();
+            _id = id;
             if (type == ListType.Ordered)
             {
                 listType = "ol";
@@ -81,7 +87,8 @@ namespace Impart
             }
             if (id != null)
             {
-                attributeBuilder = new StringBuilder($"id=\"{id}\"");
+                _attributes.Add(new Attribute(AttributeType.ID, id));
+                attributeBuilder = new StringBuilder($" id=\"{id}\"");
             }
             else
             {
@@ -89,20 +96,9 @@ namespace Impart
             }
             foreach (Text text in textEntries)
             {
-                if (text.id == null)
-                {
-                    textBuilder.Append($"<li><p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p></li>");
-                }
-                else
-                {
-                    textBuilder.Append($"<li><p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p><li>");
-                }
-                _entries.Add(_entries.Count + 1, text);
+                textBuilder.Append($"<li><p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p></li>");
+                _entries.Add(_entries.Count, text);
             }
-            _type = type;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            _id = id;
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
@@ -514,14 +510,15 @@ namespace Impart
         }
         internal string Render()
         {
-            if (attributeBuilder.ToString() == "")
-            {
-                return $"<{listType}{id}{style}>{textBuilder.ToString()}</{listType}>";
-            }
-            else
-            {
-                return $"<{listType}{id}{attributeBuilder.ToString()}\"{style}>{textBuilder.ToString()}</{listType}>";
-            }
+            return $"<{listType}{attributeBuilder.ToString()}{style}>{textBuilder.ToString()}</{listType}>";
+        }
+        internal string First()
+        {
+            return $"<{listType}{attributeBuilder.ToString()}{style}>";
+        }
+        internal string Last()
+        {
+            return $"</{listType}>";
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Text element.</summary>
-    public struct Text : Element
+    public struct Text : Element, Nested
     {
         private string _text;
 
@@ -60,18 +60,11 @@ namespace Impart
             }
         }
         internal StringBuilder attributeBuilder;
+        internal string textType;
 
         /// <summary>Creates an empty Text instance.</summary>
         /// <returns>A Text instance.</returns>
-        public Text()
-        {
-            attributeBuilder = new StringBuilder();
-            _text = "";
-            _id = null;
-            _type = TextType.Regular;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-        }
+        public Text() : this("") {}
 
         /// <summary>Creates a Text instance with <paramref name="text"/> as the text.</summary>
         /// <returns>A Text instance.</returns>
@@ -79,23 +72,25 @@ namespace Impart
         /// <param name="id">The Text ID.</param>
         public Text(string text, string id = null)
         {
-            if (String.IsNullOrEmpty(text))
+            if (text == null)
             {
-                throw new ImpartError("Text cannot be null or empty!");
-            }
-            if (id != null)
-            {
-                attributeBuilder = new StringBuilder($"id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder();
+                throw new ImpartError("Text cannot be null!");
             }
             _text = text;
             _id = id;
             _type = TextType.Regular;
             _attributes = new List<Attribute>();
             _style = new StringBuilder();
+            textType = "p";
+            if (id != null)
+            {
+                _attributes.Add(new Attribute(AttributeType.ID, id));
+                attributeBuilder = new StringBuilder($" id=\"{id}\"");
+            }
+            else
+            {
+                attributeBuilder = new StringBuilder();
+            }
         }
 
         /// <summary>Creates a Text instance with <paramref name="text"/> as the text and <paramref name="type"> as the Text type.</summary>
@@ -105,16 +100,63 @@ namespace Impart
         /// <param name="id">The Text ID.</param>
         public Text(string text, TextType type, string id = null)
         {
-            if (String.IsNullOrEmpty(text))
+            if (text == null)
             {
-                throw new ImpartError("Text cannot be null or empty!");
+                throw new ImpartError("Text cannot be null!");
             }
             _text = text;
             _id = id;
             _type = type;
             _attributes = new List<Attribute>();
             _style = new StringBuilder();
-            attributeBuilder = new StringBuilder();
+            switch (type)
+            {
+                case TextType.Regular:
+                    textType = "p";
+                    break;
+                case TextType.Bold:
+                    textType = "b";
+                    break;
+                case TextType.Delete:
+                    textType = "del";
+                    break;
+                case TextType.Emphasize:
+                    textType = "em";
+                    break;
+                case TextType.Important:
+                    textType = "strong";
+                    break;
+                case TextType.Insert:
+                    textType = "ins";
+                    break;
+                case TextType.Italic:
+                    textType = "i";
+                    break;
+                case TextType.Mark:
+                    textType = "mark";
+                    break;
+                case TextType.Small:
+                    textType = "small";
+                    break;
+                case TextType.Subscript:
+                    textType = "sub";
+                    break;
+                case TextType.Superscript:
+                    textType = "sup";
+                    break;
+                default:
+                    textType = "";
+                    break;
+            }
+            if (id != null)
+            {
+                _attributes.Add(new Attribute(AttributeType.ID, id));
+                attributeBuilder = new StringBuilder($" id=\"{id}\"");
+            }
+            else
+            {
+                attributeBuilder = new StringBuilder();
+            }
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
@@ -523,6 +565,14 @@ namespace Impart
                     throw new ImpartError("Invalid attribute parameters.");
             }
             return this;
+        }
+        string Nested.First()
+        {
+            return $"<{textType}{attributeBuilder.ToString()}{style}>";
+        }
+        string Nested.Last()
+        {
+            return $"</{textType}>";
         }
     }
 }

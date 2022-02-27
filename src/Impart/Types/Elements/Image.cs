@@ -51,6 +51,7 @@ namespace Impart
             }
         }
         internal StringBuilder attributeBuilder;
+        internal Type elementType = typeof(Image);
 
         /// <summary>Creates an empty Image instance.</summary>
         /// <returns>An Image instance.</returns>

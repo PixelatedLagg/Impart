@@ -1,3 +1,5 @@
+using System;
+
 namespace Impart
 {
     /// <summary>Scrollbar element.</summary>
@@ -24,6 +26,10 @@ namespace Impart
             this.bgColor = bgColor;
             this.fgColor = fgColor;
             this.radius = radius;
+        }
+        public new Type GetType()
+        {
+            return typeof(Scrollbar);
         }
     } 
 }

@@ -7,9 +7,9 @@ namespace Impart.Templates
             string textCache = "%^";
             foreach (Element e in args)
             {
-                switch (e.GetType().FullName)
+                switch (e)
                 {
-                    case "CSWeb.Text":
+                    case Text:
                         Text text = (Text)e;
                         if (text.id == null)
                         {
@@ -20,7 +20,7 @@ namespace Impart.Templates
                             textCache += $"    <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>%^";
                         }
                         break;
-                    case "CSWeb.Header":
+                    case Header:
                         Header header = (Header)e;
                         if (header.id == null)
                         {

@@ -60,6 +60,7 @@ namespace Impart
             }
         }
         internal StringBuilder attributeBuilder;
+        internal Type elementType = typeof(Header);
 
         /// <summary>Creates an empty Header instance.</summary>
         /// <returns>An Header instance.</returns>

@@ -42,6 +42,7 @@ namespace Impart
         internal StringBuilder attributeBuilder;
         internal StringBuilder textBuilder;
         internal StringBuilder webPageStyleBuilder;
+        internal Type elementType = typeof(Division);
 
         /// <summary>Creates a Division instance.</summary>
         /// <returns>A Division instance.</returns>

@@ -1,71 +1,66 @@
+using System.Text;
+
 namespace Impart.Templates
 {
     public static class Footer
     {
         public static void AddFooterTemplate(this WebPage obj, params Element[] args)
         {
-            string textCache = $"%^    <div style=\"bottom: 0; position: fixed; column-count: {args.Length}; margin-left: 40%; margin-right: 40%;\">%^";
+            StringBuilder textBuilder = new StringBuilder($"<div style=\"bottom: 0; position: fixed; column-count: {args.Length}; margin-left: 40%; margin-right: 40%;\">");
             foreach (Element e in args)
             {
-                textCache += $"        <div>%^";
-                switch (e.GetType().FullName)
+                switch (e)
                 {
-                    case "CSWeb.Text":
+                    case Text:
                         Text text = (Text)e;
-                        if (text.id == null)
-                        {
-                            textCache += $"            <p{text.attributeBuilder.ToString()}{text.style.Replace(";\"", "; ")}justify-content: center; display: inline;\">{text.text}</p>%^";
-                        }
-                        else
-                        {
-                            textCache += $"            <p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style.Replace(";\"", "; ")}justify-content: center; display: inline;\">{text.text}</p>%^";
-                        }
+                        textBuilder.Append($"<p{text.attributeBuilder.ToString()}{text.style.Replace(";\"", ";")}justify-content: center; display: inline;\">{text.text}</p>");
                         break;
-                    case "CSWeb.Link":
+                    case Link:
                         Link link = (Link)e;
                         if (link.linkType == typeof(Image))
                         {
-                            switch (link.id, link.image.id)
+                            if (link.style == "")
                             {
-                                case (null, null):
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\">%^                <img src=\"{link.image.path}\" {link.image.style.Replace(";\"", "; ")} display: inline;\">%^            </a>%^";
-                                    break;
-                                case (string, string) a when a.Item1 != null && a.Item2 != null:
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\" id=\"{link.id}\">%^                <img src=\"{link.image.path}\" id=\"{link.image.id}\" {link.image.style.Replace(";\"", "; ")} display: inline;\">%^            </a>%^";
-                                    break;
-                                case (string, string) b when b.Item1 == null && b.Item2 != null:
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\">%^                <img src=\"{link.image.path}\" id=\"{link.image.id}\" {link.image.style.Replace(";\"", "; ")} display: inline;\">%^            </a>%^";
-                                    break;
-                                case (string, string) c when c.Item1 != null && c.Item2 == null:
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\" id=\"{link.id}\">%^                <img src=\"{link.image.path}\" {link.image.style.Replace(";\"", "; ")} display: inline;\">%^            </a>%^";
-                                    break;
+                                textBuilder.Append($"<a {link.attributeBuilder.ToString()}style=\"justify-content: center; display: inline;\" href=\"{link.path}\">");
+                            }
+                            else
+                            {
+                                textBuilder.Append($"<a {link.attributeBuilder.ToString()}{link.style.Replace(";\"", "; ")}justify-content: center; display: inline;\" href=\"{link.path}\">");
+                            }
+                            if (link.image.style == "")
+                            {
+                                textBuilder.Append($"<img {link.image.attributeBuilder.ToString()}src=\"{link.image.path}\" style=\"display: inline;\"></a>");
+                            }
+                            else
+                            {
+                                textBuilder.Append($"<img {link.image.attributeBuilder.ToString()}src=\"{link.image.path}\" {link.image.style.Replace(";\"", ";")}display: inline;\"></a>");
                             }
                         }
                         else
                         {
-                            switch (link.id, link.text.id)
+                            if (link.style == "")
                             {
-                                case (null, null):
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\">%^                <p style=\"display: inline;\">{link.text.text}</p>%^            </a>%^";
-                                    break;
-                                case (string, string) a when a.Item1 != null && a.Item2 != null:
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\" id=\"{link.id}\">%^                <p style=\"display: inline;\" id=\"{link.image.id}\">{link.text.text}</p>%^            </a>%^";
-                                    break;
-                                case (string, string) b when b.Item1 == null && b.Item2 != null:
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\">%^                <p style=\"display: inline;\" id=\"{link.image.id}\">{link.text.text}</p>%^            </a>%^";
-                                    break;
-                                case (string, string) c when c.Item1 != null && c.Item2 == null:
-                                    textCache += $"            <a style=\"justify-content: center; display: inline;\" href=\"{link.path}\" id=\"{link.id}\">%^                <p style=\"display: inline;\">{link.text.text}</p>%^            </a>%^";
-                                    break;
+                                textBuilder.Append($"<a {link.attributeBuilder.ToString()}style=\"justify-content: center; display: inline;\" href=\"{link.path}\">");
+                            }
+                            else
+                            {
+                                textBuilder.Append($"<a {link.attributeBuilder.ToString()}{link.style.Replace(";\"", "; ")}justify-content: center; display: inline;\" href=\"{link.path}\">");
+                            }
+                            if (link.text.style == "")
+                            {
+                                textBuilder.Append($"<{link.text.textType} {link.text.attributeBuilder.ToString()}style=\"display: inline;\"></a>");
+                            }
+                            else
+                            {
+                                textBuilder.Append($"<{link.text.textType} {link.text.attributeBuilder.ToString()}{link.text.style.Replace(";\"", ";")}display: inline;\"></a>");
                             }
                         }
                         break;
                     default:
                         throw new ImpartError("Footer element invalid!");
                 }
-                textCache += $"        </div>%^";
             }
-            obj.textBuilder.Append($"{textCache}%^    </div>".Replace("%^    </div>", "    </div>"));
+            obj.textBuilder.Append($"{textBuilder.ToString()}</div>");
         }
     }
 }

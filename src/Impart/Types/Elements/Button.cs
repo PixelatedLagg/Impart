@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Collections.Generic;
 
@@ -41,6 +42,7 @@ namespace Impart
         }
         internal StringBuilder attributeBuilder;
         internal StringBuilder textBuilder;
+        internal Type elementType = typeof(Button);
 
         /// <summary>Creates an empty Button instance.</summary>
         /// <returns>An Button instance.</returns>
@@ -495,6 +497,18 @@ namespace Impart
                 return $"<button{attributeBuilder.ToString()}>{textBuilder.ToString()}</button>";
             }   
             return $"<button{attributeBuilder.ToString()}{_style.ToString()}\">{textBuilder.ToString()}</button>";
+        }
+        internal string First()
+        {
+            if (_style.ToString() == "")
+            {
+                return $"<button{attributeBuilder.ToString()}>";
+            }   
+            return $"<button{attributeBuilder.ToString()}{_style.ToString()}\">";
+        }
+        internal string Last()
+        {
+            return "</button>";
         }
     }
 }
