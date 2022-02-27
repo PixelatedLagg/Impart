@@ -27,9 +27,5 @@ namespace Impart
             this.fgColor = fgColor;
             this.radius = radius;
         }
-        public new Type GetType()
-        {
-            return typeof(Scrollbar);
-        }
     } 
 }

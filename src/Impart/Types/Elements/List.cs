@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>List element.</summary>
-    public struct List : Element
+    public struct List : Element, Nested
     {
         private string _id;
 
@@ -61,7 +61,6 @@ namespace Impart
         }
         internal StringBuilder attributeBuilder;
         internal StringBuilder textBuilder;
-        internal Type elementType = typeof(List);
         private string listType;
 
         /// <summary>Creates a List instance with <paramref name="text"/> as the List type, and Text[] as the entries.</summary>
@@ -512,11 +511,11 @@ namespace Impart
         {
             return $"<{listType}{attributeBuilder.ToString()}{style}>{textBuilder.ToString()}</{listType}>";
         }
-        internal string First()
+        string Nested.First()
         {
-            return $"<{listType}{attributeBuilder.ToString()}{style}>";
+            return $"<{listType}{attributeBuilder.ToString()}{style}>{textBuilder.ToString()}";
         }
-        internal string Last()
+        string Nested.Last()
         {
             return $"</{listType}>";
         }

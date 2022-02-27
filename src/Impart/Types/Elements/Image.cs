@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Image element.</summary>
-    public struct Image : Element
+    public struct Image : Element, Nested
     {
         private StringBuilder _style;
         internal string style 
@@ -494,6 +494,14 @@ namespace Impart
                     throw new ImpartError("Invalid attribute parameters.");
             }
             return this;
+        }
+        string Nested.First()
+        {
+            return $"<img src=\"{path}\"{attributeBuilder.ToString()}{style}>";
+        }
+        string Nested.Last()
+        {
+            return "</img>";
         }
     } 
 }

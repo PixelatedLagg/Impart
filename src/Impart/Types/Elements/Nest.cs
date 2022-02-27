@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 namespace Impart
 {
+    /// <summary>A nest of Elements.</summary>
     public struct Nest : Element
     {
-        private List<Nested> _nested;
         private List<Element> _elements;
+
+        /// <value>All of the Elements included in the Nest.</value>
         public Element[] elements
         {
             get
@@ -16,11 +18,19 @@ namespace Impart
             }
         }
         internal Type elementType = typeof(Nest);
+        private List<Nested> _nested;
+
+        /// <summary>Creates an empty Nest instance.</summary>
+        /// <returns>A Nest instance.</returns>
         public Nest()
         {
             _nested = new List<Nested>();
             _elements = new List<Element>();
         }
+
+        /// <summary>Creates a Nest instance with <paramref name="elements"/> as the Elements nested.</summary>
+        /// <returns>A Nest instance.</returns>
+        /// <param name="elements">The Elements to add to the Nest.</param>
         public Nest(params Element[] elements)
         {
             _nested = new List<Nested>();
@@ -40,6 +50,10 @@ namespace Impart
                 }
             }
         }
+
+        /// <summary>Adds <paramref name="elements"> to the Nest.</summary>
+        /// <returns>A Nest instance.</returns>
+        /// <param name="elements">The Elements to add to the Nest.</param>
         public Nest Add(params Element[] elements)
         {
             _elements.AddRange(elements);
@@ -61,10 +75,6 @@ namespace Impart
         internal string Render()
         {
             StringBuilder result = new StringBuilder();
-            foreach (Nested n in _nested)
-            {
-                Console.WriteLine(n);
-            }
             for (int i = 0; i < _nested.Count; i++)
             {
                 result.Append(_nested[i].First());
@@ -73,7 +83,6 @@ namespace Impart
             {
                 result.Append(_nested[i].Last());
             }
-            Console.WriteLine(result.ToString());
             return result.ToString();
         }
     }

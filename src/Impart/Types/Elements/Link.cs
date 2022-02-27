@@ -6,7 +6,7 @@ using System.Text;
 namespace Impart
 {
     /// <summary>Link element.</summary>
-    public struct Link : Element
+    public struct Link : Element, Nested
     {
         private Text _text;
 
@@ -71,7 +71,6 @@ namespace Impart
             }
         }
         internal StringBuilder attributeBuilder;
-        internal Type elementType = typeof(Link);
         internal Type linkType;
 
         /// <summary>Creates an empty Link instance.</summary>
@@ -542,6 +541,39 @@ namespace Impart
                     throw new ImpartError("Invalid attribute parameters.");
             }
             return this;
+        }
+        internal string Render()
+        {
+            if (linkType == typeof(Image))
+            {
+                return $"<a href=\"{path}\"><img src=\"{image.path}\" {image.attributeBuilder.ToString()}{image.style}></a>";
+            }
+            else
+            {
+                return $"<a href=\"{path}\"><{text.textType}{text.attributeBuilder.ToString()}{text.style}>{text.text}</{text.textType}></a>";
+            }
+        }
+        string Nested.First()
+        {
+            if (linkType == typeof(Image))
+            {
+                return $"<a href=\"{path}\"><img src=\"{image.path}\" {image.attributeBuilder.ToString()}{image.style}>";
+            }
+            else
+            {
+                return $"<a href=\"{path}\"><{text.textType}{text.attributeBuilder.ToString()}{text.style}>{text.text}";
+            }
+        }
+        string Nested.Last()
+        {
+            if (linkType == typeof(Image))
+            {
+                return "</img></a>";
+            }
+            else
+            {
+                return $"</{text.textType}></a>";
+            }
         }
     }
 }

@@ -568,7 +568,7 @@ namespace Impart
         }
         string Nested.First()
         {
-            return $"<{textType}{attributeBuilder.ToString()}{style}>";
+            return $"<{textType}{attributeBuilder.ToString()}{style}>{text}";
         }
         string Nested.Last()
         {

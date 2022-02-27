@@ -33,119 +33,7 @@ namespace Impart
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
-            switch (text.type)
-            {
-                case TextType.Regular:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>");
-                    }
-                    break;
-                case TextType.Bold:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<b{text.attributeBuilder.ToString()}{text.style}>{text.text}</b>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<b id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</b>");
-                    }
-                    break;
-                case TextType.Delete:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<del{text.attributeBuilder.ToString()}{text.style}>{text.text}</del>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<del id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</del>");
-                    }
-                    break;
-                case TextType.Emphasize:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<em{text.attributeBuilder.ToString()}{text.style}>{text.text}</em>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<em id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</em>");
-                    }
-                    break;
-                case TextType.Important:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<strong{text.attributeBuilder.ToString()}{text.style}>{text.text}</strong>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<strong id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</strong>");
-                    }
-                    break;
-                case TextType.Insert:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<ins{text.attributeBuilder.ToString()}{text.style}>{text.text}</ins>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<ins id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</ins>");
-                    }
-                    break;
-                case TextType.Italic:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<i{text.attributeBuilder.ToString()}{text.style}>{text.text}</i>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<i id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</i>");
-                    }
-                    break;
-                case TextType.Mark:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<mark{text.attributeBuilder.ToString()}{text.style}>{text.text}</mark>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<mark id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</mark>");
-                    }
-                    break;
-                case TextType.Small:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<small{text.attributeBuilder.ToString()}{text.style}>{text.text}</small>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<small id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</small>");
-                    }
-                    break;
-                case TextType.Subscript:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<sub{text.attributeBuilder.ToString()}{text.style}>{text.text}</sub>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<sub id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</sub>");
-                    }
-                    break;
-                case TextType.Superscript:
-                    if (text.id == null)
-                    {
-                        textBuilder.Append($"<sup{text.attributeBuilder.ToString()}{text.style}>{text.text}</sup>");
-                    }
-                    else
-                    {
-                        textBuilder.Append($"<sup id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</sup>");
-                    }
-                    break;
-            }
+            textBuilder.Append($"<{text.textType}{text.attributeBuilder.ToString()}{text.style}>{text.text}</{text.textType}>");
         }
 
         /// <summary>Set the WebPage title to <paramref name="title"/>.</summary>
@@ -177,42 +65,7 @@ namespace Impart
         /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
-            if (link.linkType == typeof(Image))
-            {
-                switch (link.id, link.image.id)
-                {
-                    case (null, null):
-                        textBuilder.Append($"<a href=\"{link.path}\"><img src=\"{link.image.path}\" {link.image.style}></a>");
-                        break;
-                    case (string, string) a when a.Item1 != null && a.Item2 != null:
-                        textBuilder.Append($"<a href=\"{link.path}\" id=\"{link.id}\"><img src=\"{link.image.path}\" id=\"{link.image.id}\" {link.image.style}></a>");
-                        break;
-                    case (string, string) b when b.Item1 == null && b.Item2 != null:
-                        textBuilder.Append($"<a href=\"{link.path}\"><img src=\"{link.image.path}\" id=\"{link.image.id}\" {link.image.style}></a>");
-                        break;
-                    case (string, string) c when c.Item1 != null && c.Item2 == null:
-                        textBuilder.Append($"<a href=\"{link.path}\" id=\"{link.id}\"><img src=\"{link.image.path}\" {link.image.style}></a>");
-                        break;
-                }
-            }
-            else
-            {
-                switch (link.id, link.text.id)
-                {
-                    case (null, null):
-                        textBuilder.Append($"<a href=\"{link.path}\"><p>{link.text.text}</p></a>");
-                        break;
-                    case (string, string) a when a.Item1 != null && a.Item2 != null:
-                        textBuilder.Append($"<a href=\"{link.path}\" id=\"{link.id}\"><p id=\"{link.image.id}\">{link.text.text}</p></a>");
-                        break;
-                    case (string, string) b when b.Item1 == null && b.Item2 != null:
-                        textBuilder.Append($"<a href=\"{link.path}\"><p id=\"{link.image.id}\">{link.text.text}</p></a>");
-                        break;
-                    case (string, string) c when c.Item1 != null && c.Item2 == null:
-                        textBuilder.Append($"<a href=\"{link.path}\" id=\"{link.id}\"><p>{link.text.text}</p></a>");
-                        break;
-                }
-            }
+            textBuilder.Append(link.Render());
         }
 
         /// <summary>Add a table to the WebPage with <paramref name="rowNum"/> as the number of rows and a string[] as the entries.</summary>
@@ -368,6 +221,13 @@ namespace Impart
             textBuilder.Append(button.Render());
         }
 
+        /// <summary>Add <paramref name="nest"/> to the WebPage.</summary>
+        /// <param name="nest">The Nest instance to add.</param>
+        protected void AddNest(Nest nest)
+        {
+            textBuilder.Append(nest.Render());
+        }
+
         /// <summary>Set the default margin of the WebPage to <paramref name="size"/>.</summary>
         /// <param name="size">The Measurement instance to add.</param>
         protected void SetDefaultMargin(Measurement size)
@@ -382,10 +242,8 @@ namespace Impart
                     break;
             }
         }
-
         internal string GetCode()
         {
-            styleBuilder.Replace($"* {{padding: 0;margin: {defaultMargin};}}", "");
             styleBuilder.Append($"* {{padding: 0;margin: {defaultMargin};}}");
             return $"<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart --><!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\"><style>{styleBuilder.ToString()}</style><body>{textBuilder.ToString()}</body></html>";
         }

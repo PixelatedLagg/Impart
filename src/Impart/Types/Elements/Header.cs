@@ -5,7 +5,7 @@ using System;
 namespace Impart
 {
     /// <summary>Header element.</summary>
-    public struct Header : Element
+    public struct Header : Element, Nested
     {
         private string _text;
 
@@ -510,6 +510,14 @@ namespace Impart
                     throw new ImpartError("Invalid attribute parameters.");
             }
             return this;
+        }
+        string Nested.First()
+        {
+            return $"<h{number}{attributes}{style}>{text}";
+        }
+        string Nested.Last()
+        {
+            return $"</h{number}>";
         }
     } 
 }

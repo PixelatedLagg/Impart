@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Button element.</summary>
-    public struct Button : Element
+    public struct Button : Element, Nested
     {
         private List<Attribute> _attributes;
 
@@ -492,21 +492,13 @@ namespace Impart
         }
         internal string Render()
         {
-            if (_style.ToString() == "")
-            {
-                return $"<button{attributeBuilder.ToString()}>{textBuilder.ToString()}</button>";
-            }   
-            return $"<button{attributeBuilder.ToString()}{_style.ToString()}\">{textBuilder.ToString()}</button>";
+            return $"<button{attributeBuilder.ToString()}{style.ToString()}\">{textBuilder.ToString()}</button>";
         }
-        internal string First()
+        string Nested.First()
         {
-            if (_style.ToString() == "")
-            {
-                return $"<button{attributeBuilder.ToString()}>";
-            }   
-            return $"<button{attributeBuilder.ToString()}{_style.ToString()}\">";
+            return $"<button{attributeBuilder.ToString()}{style.ToString()}\">{textBuilder.ToString()}";
         }
-        internal string Last()
+        string Nested.Last()
         {
             return "</button>";
         }
