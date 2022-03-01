@@ -17,6 +17,12 @@ namespace Impart
         Thread thread;
         CancellationTokenSource cancelToken;
         public Action<WebsiteEventArgs> OnVisit;
+
+        /// <summary>Creates a Website instance with <paramref name="webPage"/>.</summary>
+        /// <returns>A Website instance.</returns>
+        /// <param name="webPage">The default WebPage.</param>
+        /// <param name="port">The local port to host it on.</param>
+        /// <param name="rootDirectory">The subdomain for the default WebPage.</param>
         public Website(WebPage webPage, int port = 5050, string rootDirectory = "")
         {
             webPages = new Dictionary<string, WebPage>();
@@ -71,7 +77,6 @@ namespace Impart
                     Byte[] bReceive = new Byte[1024];
                     mySocket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
-                    Console.WriteLine(sBuffer);
                     if (sBuffer.Substring(0, 3) != "GET")  
                     {
                         mySocket.Close();
@@ -94,7 +99,6 @@ namespace Impart
                     else
                     {
                         string result = webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].GetCode();
-                        Console.WriteLine(webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].GetCode());
                         byte[] resultBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nContent-Length: {result.Length} \r\n\r\n{result}");
                         try
                         {
