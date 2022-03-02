@@ -10,13 +10,12 @@ namespace Impart
 {
     public sealed class Website
     {
+        public Action<WebsiteEventArgs> OnVisit;
         private TcpListener listener;
         private int port;
         private WebPage errorPage;
-        Dictionary<string, WebPage> webPages;
-        Thread thread;
-        CancellationTokenSource cancelToken;
-        public Action<WebsiteEventArgs> OnVisit;
+        private Dictionary<string, WebPage> webPages;
+        private Thread thread;
 
         /// <summary>Creates a Website instance with <paramref name="webPage"/>.</summary>
         /// <returns>A Website instance.</returns>
@@ -30,13 +29,14 @@ namespace Impart
             this.port = port;
             errorPage = null;
         }
+
+        /// <summary>Start the Website.</summary>
         public void Start()
         {
             try  
             {
                 listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], port);
                 listener.Start();
-                cancelToken = new CancellationTokenSource();
                 thread = new Thread(new ThreadStart(StartListen));
                 thread.Start();
                 Console.BackgroundColor = ConsoleColor.Green;
@@ -50,19 +50,38 @@ namespace Impart
                 throw new ImpartError("Error in starting the website.");
             }
         }
+
+        /// <summary>Stop the Website.</summary>
         public void Stop()
         {
-            //cancelToken.Cancel();
-            Environment.Exit(0); //exit all threads for now
+            Environment.Exit(0);
         }
+
+        /// <summary>Add <paramref name="webPage"/> to the Website with <paramref name="directory"/> as the subdomain.</summary>
+        /// <param name="webPage">The WebPage to add.</param>
+        /// <param name="directory">The subdomain of the WebPage.</param>
         public void AddPage(WebPage webPage, string directory)
         {
             if (webPages.ContainsKey(directory))
             {
-                throw new ImpartError("Each webpage directory must be different!");
+                throw new ImpartError("Each webpage subdomain must be different!");
             }
             webPages.Add(directory, webPage);
         }
+
+        /// <summary>Remove the subdomain <param name="directory">, and the WebPage that goes along with it.</summary>
+        /// <param name="directory">The subdomain of the Website.</param>
+        public void RemovePage(string directory)
+        {
+            if (!webPages.ContainsKey(directory))
+            {
+                throw new ImpartError("The website does not contain this subdomain!");
+            }
+            webPages.Remove(directory);
+        }
+
+        /// <summary>Set <param name="webPage"> as the 404 page.</summary>
+        /// <param name="webPage">The WebPage to set as the 404 page.</param>
         public void Set404Page(WebPage webPage)
         {
             errorPage = webPage;
