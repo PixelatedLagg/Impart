@@ -1,4 +1,9 @@
-# Oct 31st (1.1.2) Total Downloads: 324
-## Happy Halloween! First post in the changelog. Added color types and parameters to reflect them. Starting to shape CSWeb into the library I want it to be. 
-# Nov 9th (1.1.3 - 1.1.4) Total Downloads: 531
-## Streamlining the common class to reflect a class akin to MonoBehavior. Additionally, I renamed CSWeb to Impart and changed the debug void to not require method-action<> hooking, in a Unity-like fashion.
+# March 12th (2.0.1) Total Downloads: 519
+At this point, Impart is really taking shape and I am looming closer to finishing HTML/CSS generation. Scripting events is still being researched, as I need to find the quickest way to transfer the events directly to the server with only C#. Website hosting is complete and the developer is able to easily host a webserver and switch between webpages.
+
+Added:
+<ul>
+  <li>Website hosting</li>
+  <li>Website events</li>
+  <li>No more developer HTML/CSS interaction</li>
+</ul>
