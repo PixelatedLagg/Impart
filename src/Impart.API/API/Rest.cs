@@ -6,24 +6,15 @@ using System.Net.Sockets;
 
 namespace Impart.API
 {
-    public class Rest
+    public class Rest : API
     {
         public Action<APIEventArgs, APIContext> OnRequest;
-        private ResponseType responseType;
-        public ResponseType ResponseType
-        {
-            get
-            {
-                return responseType;
-            }
-        }
         private int port;
         private TcpListener listener;
         private Thread thread;
         
-        public Rest(ResponseType responseType, int port = 8080)
+        public Rest(int port = 8080)
         {
-            this.responseType = responseType;
             this.port = port;
         }
         public void Start()
