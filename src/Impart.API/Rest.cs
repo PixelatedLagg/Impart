@@ -8,7 +8,7 @@ namespace Impart.API
 {
     public class Rest
     {
-        public Action<APIEventArgs> OnVisit;
+        public Action<APIEventArgs, APIContext> OnRequest;
         private ResponseType responseType;
         public ResponseType ResponseType
         {
@@ -78,8 +78,11 @@ namespace Impart.API
                         case "PATCH":
                             request = Request.Patch;
                             break;
+                        default:
+                            request = Request.Get;
+                            break;
                     }
-                    
+                    OnRequest?.Invoke(new APIEventArgs(request), new APIContext(mySocket));
                 }
             }
         }
