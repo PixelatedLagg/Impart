@@ -5,13 +5,13 @@
 #### To use a specific version:
 `dotnet add package Impart --version (version number)`
 ### For .csproj Files:
-```
+```xml
 <ItemGroup>
     <PackageReference Include="Impart" />
 </ItemGroup>
 ```
 #### To use a specific version:
-```
+```xml
 <ItemGroup>
     <PackageReference Include="Impart" Version="(version number)" />
 </ItemGroup>
