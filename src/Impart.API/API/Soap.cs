@@ -6,14 +6,14 @@ using System.Net.Sockets;
 
 namespace Impart.API
 {
-    public class Rest : API
+    public class Soap : API
     {
-        public Action<APIEventArgs, RestContext> OnRequest;
+        public Action<APIEventArgs, SoapContext> OnRequest;
         private int port;
         private TcpListener listener;
         private Thread thread;
         
-        public Rest(int port = 8080)
+        public Soap(int port = 7070)
         {
             this.port = port;
         }
@@ -23,9 +23,9 @@ namespace Impart.API
             listener.Start();
             thread = new Thread(new ThreadStart(StartListen));
             thread.Start();
-            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.BackgroundColor = ConsoleColor.DarkMagenta;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine($" REST API hosted on localhost:{port} ");
+            Console.WriteLine($" SOAP API hosted on localhost:{port} ");
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Gray;
         }
@@ -73,7 +73,7 @@ namespace Impart.API
                             request = Request.Get;
                             break;
                     }
-                    OnRequest?.Invoke(new APIEventArgs(request), new RestContext(mySocket));
+                    OnRequest?.Invoke(new APIEventArgs(request), new SoapContext(mySocket));
                 }
             }
         }

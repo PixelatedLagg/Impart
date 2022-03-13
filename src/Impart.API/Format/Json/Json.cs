@@ -1,11 +1,12 @@
+using System;
+using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Impart.API
 {
     public struct Json : Format
     {
-        private StringBuilder builder;
-        private string title;
         private int _length;
         public int length
         {
@@ -14,52 +15,149 @@ namespace Impart.API
                 return _length;
             }
         }
+        private StringBuilder builder;
+        private List<JsonSet> sets;
+        private List<JsonArray> arrays;
+        private string title;
         public Json(string title, params (object, object)[] entries)
         {
-            builder = new StringBuilder();
             this.title = title;
+            builder = new StringBuilder();
             _length = 0;
-            for (int i = 0; i < entries.Length; i++)
+            sets = new List<JsonSet>();
+            arrays = new List<JsonArray>();
+            foreach ((object, object) entry in entries)
             {
-                if (i == 0)
-                {
-                    builder.Append($"\"{entries[i].Item1}\" : \"{entries[i].Item2}\"");
-                }
-                else
-                {
-                    builder.Append($", \"{entries[i].Item1}\" : \"{entries[i].Item2}\"");
-                }
+                sets.Add(new JsonSet(entry.Item1, entry.Item2));
                 _length++;
             }
         }
-        public Json AddSet(object name, object value)
+        public Json AddSet(object key, object value)
         {
-            if (builder.Length == 0)
-            {
-                builder.Append($"\"{name}\" : \"{value}\"");
-            }
-            else
-            {
-                builder.Append($", \"{name}\" : \"{value}\"");
-            }
+            sets.Add(new JsonSet(key, value));
             _length++;
+            return this;
+        }
+        public Json AddSets(params (object, object)[] entries)
+        {
+            foreach ((object, object) entry in entries)
+            {
+                sets.Add(new JsonSet(entry.Item1, entry.Item2));
+                _length++;
+            }
             return this;
         }
         public Json AddArray(JsonArray array)
         {
-            if (builder.Length == 0)
+            arrays.Add(array);
+            _length++;
+            return this;
+        }
+        public Json AddArrays(params JsonArray[] arrays)
+        {
+            foreach (JsonArray array in arrays)
             {
-                builder.Append(array.Render());
-            }
-            else
-            {
-                builder.Append($", {array.Render()}");
+                this.arrays.Add(array);
             }
             _length++;
             return this;
         }
+        public Json RemoveSet(object key)
+        {
+            foreach (JsonSet set in sets)
+            {
+                if (set.key == key)
+                {
+                    sets.Remove(set);
+                }
+            }
+            return this;
+        }
+        public Json RemoveSets(params object[] keys)
+        {
+            foreach (object key in keys)
+            {
+                foreach (JsonSet set in sets)
+                {
+                    if (set.key == key)
+                    {
+                        sets.Remove(set);
+                    }
+                }
+            }
+            return this;
+        }
+        public Json RemoveArray(object key)
+        {
+            foreach (JsonArray array in arrays)
+            {
+                if (array.key == key)
+                {
+                    arrays.Remove(array);
+                }
+            }
+            return this;
+        }
+        public Json RemoveArrays(params object[] keys)
+        {
+            foreach (object key in keys)
+            {
+                foreach (JsonArray array in arrays)
+                {
+                    if (array.key == key)
+                    {
+                        arrays.Remove(array);
+                    }
+                }
+            }
+            return this;
+        }
+        public JsonSet? GetSet(object key)
+        {
+            foreach (JsonSet set in sets)
+            {
+                if (set.key == key)
+                {
+                    return set;
+                }
+            }
+            return null;
+        }
+        public JsonArray? GetArray(object key)
+        {
+            foreach (JsonArray array in arrays)
+            {
+                if (array.key == key)
+                {
+                    return array;
+                }
+            }
+            return null;
+        }
         internal string Render()
         {
+            foreach (JsonSet set in sets)
+            {
+                if (_length == 0)
+                {
+                    builder.Append($"\"{set.key}\" : \"{set.value}\"");
+                }
+                else
+                {
+                    builder.Append($", \"{set.key}\" : \"{set.value}\"");
+                }
+            }
+            foreach (JsonArray array in arrays)
+            {
+                if (_length == 0)
+                {
+                    builder.Append(array.Render());
+                }
+                else
+                {
+                    builder.Append($", {array.Render()}");
+                }
+            }
             return $"{{ \"{title}\" : {{ {builder.ToString()} }} }}";
         }
     }
