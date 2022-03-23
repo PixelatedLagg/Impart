@@ -1,14 +1,18 @@
 using System;
 using System.Net;
+using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Reflection;
 using System.Net.Sockets;
+using System.Collections.Generic;
 
 namespace Impart.API
 {
     public class Rest : API
     {
-        public Action<APIEventArgs, RestContext> OnRequest;
+        private Dictionary<string, MethodInfo> routes;
+        public Action<APIEventArgs, ErrorContext> ErrorPage;
         private int port;
         private TcpListener listener;
         private Thread thread;
@@ -19,6 +23,9 @@ namespace Impart.API
         }
         public void Start()
         {
+            routes = Assembly.GetExecutingAssembly().GetTypes().SelectMany(x => x.GetMethods())
+                .Where(y => y.GetCustomAttributes().OfType<RestRequest>().Any())
+                .ToDictionary(z => z.GetCustomAttribute<RestRequest>().Route);
             listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], port);
             listener.Start();
             thread = new Thread(new ThreadStart(StartListen));
@@ -39,6 +46,8 @@ namespace Impart.API
                     Byte[] bReceive = new Byte[1024];
                     mySocket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
+                    Console.WriteLine(sBuffer);
+                    string[] contents = sBuffer.Split(' ');
                     Request request;
                     switch (sBuffer.Split(" ")[0])
                     {
@@ -73,9 +82,34 @@ namespace Impart.API
                             request = Request.Get;
                             break;
                     }
-                    OnRequest?.Invoke(new APIEventArgs(request), new RestContext(mySocket));
+                    if (contents[1] == "/" && routes.ContainsKey("*"))
+                    {
+                        routes["*"].Invoke(Activator.CreateInstance(routes["*"].DeclaringType), new object[] {new APIEventArgs(request), new RestContext(mySocket)});
+                    }
+                    if (!routes.ContainsKey(contents[1]))
+                    {
+                        ErrorPage?.Invoke(new APIEventArgs(request), new ErrorContext(mySocket, ErrorType.NotFound));
+                    }
+                    else
+                    {
+                        routes[contents[1]].Invoke(Activator.CreateInstance(routes[contents[1]].DeclaringType), new object[] {new APIEventArgs(request), new RestContext(mySocket)});
+                    }
                 }
             }
+        }
+        protected void Stop()
+        {
+            listener.Stop();
+        }
+
+        [AttributeUsage(AttributeTargets.Method)]
+        protected class RestRequest : System.Attribute
+        {
+            public RestRequest(string Route)
+            {
+                this.Route = Route;
+            }
+            public string Route {get; set;}
         }
     }
 }

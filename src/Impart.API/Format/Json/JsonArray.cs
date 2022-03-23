@@ -144,7 +144,7 @@ namespace Impart.API
         {
             foreach (JsonSet set in sets)
             {
-                if (_length == 0)
+                if (builder.Length == 0)
                 {
                     builder.Append($"\"{set.key}\" : \"{set.value}\"");
                 }
@@ -155,7 +155,7 @@ namespace Impart.API
             }
             foreach (JsonArray array in arrays)
             {
-                if (_length == 0)
+                if (builder.Length == 0)
                 {
                     builder.Append(array.Render());
                 }
