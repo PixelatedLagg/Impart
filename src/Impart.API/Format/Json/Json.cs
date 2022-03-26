@@ -1,163 +1,251 @@
 using System;
+using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
 namespace Impart.API
 {
-    public struct Json : Format
+    public struct Json : Format //TODO add count property, maybe change types to 'nodes'
     {
-        private int _length;
-        public int length
+        private int _Count;
+        public int Count
         {
             get
             {
-                return _length;
+                return _Count;
             }
         }
-        private StringBuilder builder;
-        private List<JsonSet> sets;
-        private List<JsonArray> arrays;
-        private string title;
-        public Json(string title, params (object, object)[] entries)
+        private string _Title;
+        public string Title
         {
-            this.title = title;
-            builder = new StringBuilder();
-            _length = 0;
-            sets = new List<JsonSet>();
-            arrays = new List<JsonArray>();
-            foreach ((object, object) entry in entries)
+            get
             {
-                sets.Add(new JsonSet(entry.Item1, entry.Item2));
-                _length++;
+                return _Title;
             }
         }
-        public Json AddSet(object key, object value)
+        private Dictionary<string, JsonNode> _Nodes;
+        public Json(string title = null)
         {
-            sets.Add(new JsonSet(key, value));
-            _length++;
-            return this;
+            _Title = title;
+            _Count = 0;
+            _Nodes = new Dictionary<string, JsonNode>();
         }
-        public Json AddSets(params (object, object)[] entries)
+        public Json Add(params (string, object)[] nodes)
         {
-            foreach ((object, object) entry in entries)
+            List<JsonNode> result = new List<JsonNode>();
+            foreach ((string, object) node in nodes)
             {
-                sets.Add(new JsonSet(entry.Item1, entry.Item2));
-                _length++;
+                result.Add(new JsonNode(node.Item1, node.Item2));
+            }
+            return Add(result.ToArray());
+        }
+        public Json Add(params JsonNode[] nodes)
+        {
+            foreach (JsonNode node in nodes)
+            {
+                Console.WriteLine(node.Key);
+                Console.WriteLine(node.Value);
+                Console.WriteLine(new JsonNode("hepatitis", 1));
+                _Nodes.Add("hepatitis", new JsonNode("hepatitis", 1));
+                _Nodes.Add(node.Key, node);
+                _Count++;
             }
             return this;
         }
-        public Json AddArray(JsonArray array)
+        public Json Remove(JsonNode node) => Remove(node.Key);
+        public Json Remove(string key)
         {
-            arrays.Add(array);
-            _length++;
-            return this;
-        }
-        public Json AddArrays(params JsonArray[] arrays)
-        {
-            foreach (JsonArray array in arrays)
+            if (!_Nodes.ContainsKey(key))
             {
-                this.arrays.Add(array);
+                throw new ImpartError($"Node with key: '{key}' not found!");
             }
-            _length++;
+            _Nodes.Remove(key);
+            _Count--;
             return this;
         }
-        public Json RemoveSet(object key)
+        public JsonNode this[string key]
         {
-            foreach (JsonSet set in sets)
+            get
             {
-                if (set.key == key)
+                if (!_Nodes.ContainsKey(key))
                 {
-                    sets.Remove(set);
+                    throw new ImpartError($"Node with key: '{key}' not found!");
                 }
+                return _Nodes[key];
             }
-            return this;
-        }
-        public Json RemoveSets(params object[] keys)
-        {
-            foreach (object key in keys)
-            {
-                foreach (JsonSet set in sets)
-                {
-                    if (set.key == key)
-                    {
-                        sets.Remove(set);
-                    }
-                }
-            }
-            return this;
-        }
-        public Json RemoveArray(object key)
-        {
-            foreach (JsonArray array in arrays)
-            {
-                if (array.key == key)
-                {
-                    arrays.Remove(array);
-                }
-            }
-            return this;
-        }
-        public Json RemoveArrays(params object[] keys)
-        {
-            foreach (object key in keys)
-            {
-                foreach (JsonArray array in arrays)
-                {
-                    if (array.key == key)
-                    {
-                        arrays.Remove(array);
-                    }
-                }
-            }
-            return this;
-        }
-        public JsonSet? GetSet(object key)
-        {
-            foreach (JsonSet set in sets)
-            {
-                if (set.key == key)
-                {
-                    return set;
-                }
-            }
-            return null;
-        }
-        public JsonArray? GetArray(object key)
-        {
-            foreach (JsonArray array in arrays)
-            {
-                if (array.key == key)
-                {
-                    return array;
-                }
-            }
-            return null;
         }
         internal string Render()
         {
-            foreach (JsonSet set in sets)
+            StringBuilder result = new StringBuilder();
+            foreach (JsonNode node in _Nodes.Values)
             {
-                if (builder.Length == 0)
+                if (result.Length == 0)
                 {
-                    builder.Append($"\"{set.key}\" : \"{set.value}\"");
+                    result.Append(node.Render());
                 }
                 else
                 {
-                    builder.Append($", \"{set.key}\" : \"{set.value}\"");
+                    result.Append($", {node.Render()}");
                 }
             }
-            foreach (JsonArray array in arrays)
+            if (_Title == null)
             {
-                if (builder.Length == 0)
-                {
-                    builder.Append(array.Render());
-                }
-                else
-                {
-                    builder.Append($", {array.Render()}");
-                }
+                return $"{{ {result.ToString()} }}";
             }
-            return $"{{ \"{title}\" : {{ {builder.ToString()} }} }}";
+            return $"{{ \"{_Title}\" : {{ {result.ToString()} }} }}";
+        }
+        public static Json Parse(string file) //TODO json file parsing
+        {
+            /*int i = 0;
+            bool quote = false;
+            string json = File.ReadAllText(file);
+            Json result = new Json();
+            while (i < json.Length)
+            {
+                switch (json[i])
+                {
+                    case '{':
+                        if (quote)
+                        {
+                            Token.Append(aJSON[i]);
+                            break;
+                        }
+                        stack.Push(new JSONObject());
+                        if (ctx != null)
+                        {
+                            ctx.Add(TokenName, stack.Peek());
+                        }
+                        TokenName = "";
+                        Token.Length = 0;
+                        ctx = stack.Peek();
+                        HasNewlineChar = false;
+                        break;
+                    case '[':
+                        if (quote)
+                        {
+                            Token.Append(aJSON[i]);
+                            break;
+                        }
+                        stack.Push(new JSONArray());
+                        if (ctx != null)
+                        {
+                            ctx.Add(TokenName, stack.Peek());
+                        }
+                        TokenName = "";
+                        Token.Length = 0;
+                        ctx = stack.Peek();
+                        HasNewlineChar = false;
+                        break;
+                    case '}':
+                    case ']':
+                        if (quote)
+                        {
+                            Token.Append(aJSON[i]);
+                            break;
+                        }
+                        if (stack.Count == 0)
+                        {
+                            throw new ImpartError($"An error occured while parsing {file}.");
+                        }
+                        stack.Pop();
+                        if (Token.Length > 0 || TokenIsQuoted)
+                            ctx.Add(TokenName, ParseElement(Token.ToString(), TokenIsQuoted));
+                        if (ctx != null)
+                            ctx.Inline = !HasNewlineChar;
+                        TokenIsQuoted = false;
+                        TokenName = "";
+                        Token.Length = 0;
+                        if (stack.Count > 0)
+                            ctx = stack.Peek();
+                        break;
+                    case ':':
+                        if (quote)
+                        {
+                            Token.Append(aJSON[i]);
+                            break;
+                        }
+                        TokenName = Token.ToString();
+                        Token.Length = 0;
+                        TokenIsQuoted = false;
+                        break;
+                    case '"':
+                        quote ^= true;
+                        TokenIsQuoted |= QuoteMode;
+                        break;
+                    case ',':
+                        if (quote)
+                        {
+                            Token.Append(aJSON[i]);
+                            break;
+                        }
+                        if (Token.Length > 0 || TokenIsQuoted)
+                            ctx.Add(TokenName, ParseElement(Token.ToString(), TokenIsQuoted));
+                        TokenIsQuoted = false;
+                        TokenName = "";
+                        Token.Length = 0;
+                        TokenIsQuoted = false;
+                        break;
+                    case '\r':
+                    case '\n':
+                        HasNewlineChar = true;
+                        break;
+                    case ' ':
+                    case '\t':
+                        if (quote)
+                            Token.Append(aJSON[i]);
+                        break;
+                    case '\\':
+                        ++i;
+                        if (quote)
+                        {
+                            char C = aJSON[i];
+                            switch (C)
+                            {
+                                case 't':
+                                    Token.Append('\t');
+                                    break;
+                                case 'r':
+                                    Token.Append('\r');
+                                    break;
+                                case 'n':
+                                    Token.Append('\n');
+                                    break;
+                                case 'b':
+                                    Token.Append('\b');
+                                    break;
+                                case 'f':
+                                    Token.Append('\f');
+                                    break;
+                                case 'u':
+                                    {
+                                        string s = aJSON.Substring(i + 1, 4);
+                                        Token.Append((char)int.Parse(
+                                            s,
+                                            System.Globalization.NumberStyles.AllowHexSpecifier));
+                                        i += 4;
+                                        break;
+                                    }
+                                default:
+                                    Token.Append(C);
+                                    break;
+                            }
+                        }
+                        break;
+                    case '\uFEFF':
+                        break;
+                    default:
+                        Token.Append(aJSON[i]);
+                        break;
+                }
+                ++i;
+            }*/
+            //return result;
+            return new Json();
+        }
+        public static Json Parse(Xml xml) //TODO json xml parsing
+        {
+            
+            return new Json();
         }
     }
 }

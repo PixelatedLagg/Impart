@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Impart.API
 {
-    public static class ConvertFormat //TODO finish json-file converter
+    public static class ConvertFormat
     {
         public static Json ToJson(string file)
         {
