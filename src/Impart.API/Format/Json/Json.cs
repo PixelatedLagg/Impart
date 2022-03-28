@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Impart.API
 {
-    public struct Json : Format //TODO add count property, maybe change types to 'nodes'
+    public class Json
     {
         private int _Count;
         public int Count
@@ -24,7 +24,13 @@ namespace Impart.API
             }
         }
         private Dictionary<string, JsonNode> _Nodes;
-        public Json(string title = null)
+        public Json()
+        {
+            _Title = null;
+            _Count = 0;
+            _Nodes = new Dictionary<string, JsonNode>();
+        }
+        public Json(string title)
         {
             _Title = title;
             _Count = 0;
@@ -43,10 +49,6 @@ namespace Impart.API
         {
             foreach (JsonNode node in nodes)
             {
-                Console.WriteLine(node.Key);
-                Console.WriteLine(node.Value);
-                Console.WriteLine(new JsonNode("hepatitis", 1));
-                _Nodes.Add("hepatitis", new JsonNode("hepatitis", 1));
                 _Nodes.Add(node.Key, node);
                 _Count++;
             }
@@ -94,18 +96,86 @@ namespace Impart.API
             }
             return $"{{ \"{_Title}\" : {{ {result.ToString()} }} }}";
         }
-        public static Json Parse(string file) //TODO json file parsing
+        internal static string Escape(string aText)
         {
-            /*int i = 0;
-            bool quote = false;
-            string json = File.ReadAllText(file);
-            Json result = new Json();
-            while (i < json.Length)
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in aText)
             {
-                switch (json[i])
+                switch (c)
+                {
+                    case '\\':
+                        sb.Append("\\\\");
+                        break;
+                    case '\"':
+                        sb.Append("\\\"");
+                        break;
+                    case '\n':
+                        sb.Append("\\n");
+                        break;
+                    case '\r':
+                        sb.Append("\\r");
+                        break;
+                    case '\t':
+                        sb.Append("\\t");
+                        break;
+                    case '\b':
+                        sb.Append("\\b");
+                        break;
+                    case '\f':
+                        sb.Append("\\f");
+                        break;
+                    default:
+                        if (c < ' ' || c > 127)
+                        {
+                            ushort val = c;
+                            sb.Append("\\u").Append(val.ToString("X4"));
+                        }
+                        else
+                        {
+                            sb.Append(c);
+                        }
+                        break;
+                }
+            }
+            return sb.ToString();
+        }
+        public static Json ParseFile(string file) => Parse(File.ReadAllText(file));
+        public static Json Parse(string aJSON)
+        {
+            
+            Json result = null;
+            JsonNode current = null;
+            Stack<JsonNode> stack = new Stack<JsonNode>();
+            int i = 0;
+            StringBuilder Token = new StringBuilder();
+            string key = null;
+            string value = null;
+            string TokenName = "";
+            bool QuoteMode = false;
+            bool TokenIsQuoted = false;
+            bool HasNewlineChar = false;
+            while (i < aJSON.Length)
+            {
+                switch (aJSON[i])
                 {
                     case '{':
-                        if (quote)
+                        if (QuoteMode)
+                        {
+                            Token.Append(aJSON[i]);
+                            break;
+                        }
+                        stack.Push(new JsonNode())
+                        if (current != null)
+                        {
+                            current.Add(TokenName, stack.Peek());
+                        }
+                        TokenName = "";
+                        Token.Length = 0;
+                        ctx = stack.Peek();
+                        HasNewlineChar = false;
+                        break;
+                    /*
+                        if (QuoteMode)
                         {
                             Token.Append(aJSON[i]);
                             break;
@@ -119,9 +189,9 @@ namespace Impart.API
                         Token.Length = 0;
                         ctx = stack.Peek();
                         HasNewlineChar = false;
-                        break;
+                    */
                     case '[':
-                        if (quote)
+                        if (QuoteMode)
                         {
                             Token.Append(aJSON[i]);
                             break;
@@ -138,51 +208,59 @@ namespace Impart.API
                         break;
                     case '}':
                     case ']':
-                        if (quote)
+                        if (QuoteMode)
                         {
                             Token.Append(aJSON[i]);
                             break;
                         }
                         if (stack.Count == 0)
                         {
-                            throw new ImpartError($"An error occured while parsing {file}.");
+                            throw new ImpartError("Syntax error in JSON file!");
                         }
                         stack.Pop();
                         if (Token.Length > 0 || TokenIsQuoted)
+                        {
                             ctx.Add(TokenName, ParseElement(Token.ToString(), TokenIsQuoted));
+                        }
                         if (ctx != null)
+                        {
                             ctx.Inline = !HasNewlineChar;
+                        }   
                         TokenIsQuoted = false;
                         TokenName = "";
                         Token.Length = 0;
                         if (stack.Count > 0)
-                            ctx = stack.Peek();
+                        {
+                            ctx = stack.Peek().AsJsonNode();
+                        }
                         break;
                     case ':':
-                        if (quote)
+                        if (QuoteMode)
                         {
                             Token.Append(aJSON[i]);
                             break;
                         }
                         TokenName = Token.ToString();
-                        Token.Length = 0;
+                        Token.Clear();
                         TokenIsQuoted = false;
                         break;
                     case '"':
-                        quote ^= true;
+                        QuoteMode ^= true;
                         TokenIsQuoted |= QuoteMode;
                         break;
                     case ',':
-                        if (quote)
+                        if (QuoteMode)
                         {
                             Token.Append(aJSON[i]);
                             break;
                         }
                         if (Token.Length > 0 || TokenIsQuoted)
-                            ctx.Add(TokenName, ParseElement(Token.ToString(), TokenIsQuoted));
+                        {
+                            stack.Push(new JsonNode(TokenName, Token.ToString()));
+                        }
                         TokenIsQuoted = false;
                         TokenName = "";
-                        Token.Length = 0;
+                        Token.Clear();
                         TokenIsQuoted = false;
                         break;
                     case '\r':
@@ -191,12 +269,14 @@ namespace Impart.API
                         break;
                     case ' ':
                     case '\t':
-                        if (quote)
+                        if (QuoteMode)
+                        {
                             Token.Append(aJSON[i]);
+                        }
                         break;
                     case '\\':
                         ++i;
-                        if (quote)
+                        if (QuoteMode)
                         {
                             char C = aJSON[i];
                             switch (C)
@@ -217,19 +297,23 @@ namespace Impart.API
                                     Token.Append('\f');
                                     break;
                                 case 'u':
-                                    {
-                                        string s = aJSON.Substring(i + 1, 4);
-                                        Token.Append((char)int.Parse(
-                                            s,
-                                            System.Globalization.NumberStyles.AllowHexSpecifier));
-                                        i += 4;
-                                        break;
-                                    }
+                                    string s = aJSON.Substring(i + 1, 4);
+                                    Token.Append((char)int.Parse(s, System.Globalization.NumberStyles.AllowHexSpecifier));
+                                    i += 4;
+                                    break;
                                 default:
                                     Token.Append(C);
                                     break;
                             }
                         }
+                        break;
+                    case '/':
+                        if (!QuoteMode && i + 1 < aJSON.Length && aJSON[i + 1] == '/')
+                        {
+                            while (++i < aJSON.Length && aJSON[i] != '\n' && aJSON[i] != '\r');
+                            break;
+                        }
+                        Token.Append(aJSON[i]);
                         break;
                     case '\uFEFF':
                         break;
@@ -238,13 +322,15 @@ namespace Impart.API
                         break;
                 }
                 ++i;
-            }*/
-            //return result;
-            return new Json();
+            }
+            if (QuoteMode)
+            {
+                throw new ImpartError("Syntax error in JSON file!");
+            }
+            return result;
         }
-        public static Json Parse(Xml xml) //TODO json xml parsing
+        public static Json Parse(Xml xml)
         {
-            
             return new Json();
         }
     }

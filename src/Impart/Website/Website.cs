@@ -1,10 +1,10 @@
 using System;
 using System.Net;
-using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Collections.Generic;
 using Impart.Scripting;
+using System.Net.Sockets;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -16,6 +16,7 @@ namespace Impart
         private WebPage errorPage;
         private Dictionary<string, WebPage> webPages;
         private Thread thread;
+        private Socket socket;
 
         /// <summary>Creates a Website instance with <paramref name="webPage"/>.</summary>
         /// <returns>A Website instance.</returns>
@@ -90,44 +91,44 @@ namespace Impart
         {
             while (true)
             {
-                Socket mySocket = listener.AcceptSocket();
-                if (mySocket.Connected)  
+                socket = listener.AcceptSocket();
+                if (socket.Connected) //socket.Connected
                 {
                     Byte[] bReceive = new Byte[1024];
-                    mySocket.Receive(bReceive, bReceive.Length, 0);
+                    socket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
                     if (sBuffer.Substring(0, 3) != "GET")  
                     {
-                        mySocket.Close();
+                        socket.Close();
                         return;
                     }
                     if (!webPages.ContainsKey(sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")))
                     {
                         string errorResult = errorPage?.GetCode() ?? "";
-                        byte[] errorBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nContent-Length: {errorResult.Length} \r\n\r\n{errorResult}");
+                        byte[] errorBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {errorResult.Length} \r\n\r\n{errorResult}");
                         try  
                         {
-                            mySocket.Send(errorBytes, errorBytes.Length, 0);
+                            socket.Send(errorBytes, errorBytes.Length, 0);
                         }
                         catch
                         {
                             throw new ImpartError("Error in sending packets to browser.");
                         }
-                        mySocket.Close();
+                        socket.Close();
                     }
                     else
                     {
                         string result = webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].GetCode();
-                        byte[] resultBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nContent-Length: {result.Length} \r\n\r\n{result}");
+                        byte[] resultBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {result.Length} \r\n\r\n{result}");
                         try
                         {
-                            mySocket.Send(resultBytes, resultBytes.Length, 0);
+                            socket.Send(resultBytes, resultBytes.Length, 0);
                         }
                         catch
                         {
                             throw new ImpartError("Error in sending packets to browser.");
                         }
-                        mySocket.Close();  
+                        socket.Close();  
                     }
                     if (!String.IsNullOrWhiteSpace(OnVisit?.Method.ToString()))
                     {
@@ -272,31 +273,16 @@ namespace Impart
                         {
                             mobileResult = true;
                         }
-                        platformResult = Platform.Windows;
-                        switch (browsers[13])
+                        platformResult = browsers[13] switch 
                         {
-                            case "Windows":
-                                platformResult = Platform.Windows;
-                                break;
-                            case "Linux":
-                                platformResult = Platform.Linux;
-                                break;
-                            case "macOS":
-                                platformResult = Platform.Mac;
-                                break;
-                            case "Android":
-                                platformResult = Platform.Android;
-                                break;
-                            case "iOS":
-                                platformResult = Platform.IOS;
-                                break;
-                            case "Chrome OS":
-                                platformResult = Platform.Chrome;
-                                break;
-                            case "Unknown":
-                                platformResult = Platform.Unknown;
-                                break;
-                        }
+                            "Windows" => Platform.Windows,
+                            "Linux" => Platform.Linux,
+                            "macOS" => Platform.Mac,
+                            "Android" => Platform.Android,
+                            "iOS" => Platform.IOS,
+                            "Chrome OS" => Platform.Chrome,
+                            _ => Platform.Unknown
+                        };
                         OnVisit?.Invoke(new WebsiteEventArgs(platformResult, browserList, mobileResult));
                     }
                 }

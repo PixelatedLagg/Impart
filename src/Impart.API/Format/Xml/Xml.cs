@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Impart.API
 {
-    public struct Xml : Format
+    public struct Xml
     {
         private int _length;
         public int length

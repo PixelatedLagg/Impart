@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Impart.API
 {
-    public struct JsonNode
+    public class JsonNode
     {
         private bool _IsArray;
         public bool IsArray
