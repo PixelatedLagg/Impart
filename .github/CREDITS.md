@@ -8,3 +8,6 @@ https://github.com/Bunny83/SimpleJSON
 
 Some additional logic was through this even simpler JSON parser by zanders3:
 https://github.com/zanders3/json
+
+A lot of encapsulation and structures were heavily influenced by this great library by gregsdennis:
+https://github.com/gregsdennis/Manatee.Json

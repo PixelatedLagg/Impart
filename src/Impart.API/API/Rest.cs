@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Net.Sockets;
 using System.Collections.Generic;
 
-namespace Impart.API
+namespace Impart.Api
 {
     public class Rest : API
     {

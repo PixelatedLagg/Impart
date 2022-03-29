@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Net.Sockets;
 
-namespace Impart.API
+namespace Impart.Api
 {
     public class Soap : API
     {

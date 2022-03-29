@@ -1,7 +1,8 @@
 using System.Text;
+using Impart.Format;
 using System.Net.Sockets;
 
-namespace Impart.API
+namespace Impart.Api
 {
     public class SoapContext : Context
     {

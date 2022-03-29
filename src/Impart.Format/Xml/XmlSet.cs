@@ -1,4 +1,4 @@
-namespace Impart.API
+namespace Impart.Format
 {
     public struct XmlSet
     {

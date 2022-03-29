@@ -1,6 +1,6 @@
 using System;
 
-namespace Impart.API
+namespace Impart.Api
 {
     public struct APIEventArgs
     {

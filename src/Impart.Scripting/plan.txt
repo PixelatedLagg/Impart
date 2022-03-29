@@ -1,2 +1,0 @@
-1. host webserver to recieve GET reguests and respond with sending back an HTML page
-2. (still debating best idea) on website interactions, send web request to server which will respond with the new HTML page, influenced by the interaction

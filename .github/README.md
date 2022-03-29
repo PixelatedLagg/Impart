@@ -1,17 +1,17 @@
-<img src="Images/full.png"></img>
+<img src="Images/main.png"></img>
 ## How to Use:
 ### For Dotnet CLI:
 `dotnet add package Impart`
 #### To use a specific version:
 `dotnet add package Impart --version (version number)`
 ### For .csproj Files:
-```xml
+```
 <ItemGroup>
     <PackageReference Include="Impart" />
 </ItemGroup>
 ```
 #### To use a specific version:
-```xml
+```
 <ItemGroup>
     <PackageReference Include="Impart" Version="(version number)" />
 </ItemGroup>

@@ -1,7 +1,8 @@
 using System.Text;
+using Impart.Format;
 using System.Net.Sockets;
 
-namespace Impart.API
+namespace Impart.Api
 {
     public class RestContext : Context
     {
@@ -10,9 +11,9 @@ namespace Impart.API
         {
             this.socket = socket;
         }
-        public void Respond(Json response)
+        public void Respond(JsonObject response)
         {
-            string str = response.Render();
+            string str = response.ToString();
             byte[] bytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/json\r\nAccept-Ranges: bytes\r\nContent-Length: {str.Length} \r\n\r\n{str}");
             try  
             {

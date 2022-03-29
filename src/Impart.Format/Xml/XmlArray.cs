@@ -1,7 +1,7 @@
 using System.Text;
 using System.Collections.Generic;
 
-namespace Impart.API
+namespace Impart.Format
 {
     public struct XmlArray
     {
