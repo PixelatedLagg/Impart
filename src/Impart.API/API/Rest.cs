@@ -9,44 +9,72 @@ using System.Collections.Generic;
 
 namespace Impart.Api
 {
+    /// <summary>The class for hosting a REST API.</summary>
     public class Rest : API
     {
-        private Dictionary<string, MethodInfo> routes;
-        public Action<APIEventArgs, ErrorContext> ErrorPage;
-        private int port;
-        private TcpListener listener;
-        private Thread thread;
+        /// <value>The method to be called in the event of an error.</value>
+        public Action<APIEventArgs, ErrorContext> Error;
+        private Dictionary<string, MethodInfo> Routes;
+        private int Port;
+        private TcpListener Listener;
+        private Thread Thread;
         
+        /// <summary>Creates a Rest instance with <paramref name="port"/> as the port.</summary>
+        /// <returns>A Rest instance.</returns>
+        /// <param name="port">The port to host on. (Default is 8080)</param>
         public Rest(int port = 8080)
         {
-            this.port = port;
-        }
-        public void Start()
-        {
-            routes = Assembly.GetExecutingAssembly().GetTypes().SelectMany(x => x.GetMethods())
+            Port = port;
+            Routes = Assembly.GetExecutingAssembly().GetTypes().SelectMany(x => x.GetMethods())
                 .Where(y => y.GetCustomAttributes().OfType<RestRequest>().Any())
                 .ToDictionary(z => z.GetCustomAttribute<RestRequest>().Route);
-            listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], port);
-            listener.Start();
-            thread = new Thread(new ThreadStart(StartListen));
-            thread.Start();
+        }
+
+        /// <summary>Start the Rest API.</summary>
+        public void Start()
+        {
+            Listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], Port);
+            Listener.Start();
+            Thread = new Thread(new ThreadStart(StartListen));
+            Thread.Start();
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine($" REST API hosted on localhost:{port} ");
+            Console.WriteLine($" REST API hosted on localhost:{Port} ");
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        /// <summary>Stop the Rest API.</summary>
+        public void Stop()
+        {
+            Listener.Stop();
+        }
+
+        /// <summary>Attribute to hook Rest routes to methods.</summary>
+        [AttributeUsage(AttributeTargets.Method)]
+        protected class RestRequest : System.Attribute
+        {
+            /// <summary>Creates a RestRequest instance with <paramref name="route"/> as the route.</summary>
+            /// <returns>A RestRequest instance.</returns>
+            /// <param name="route">The route to hook the method to.</param>
+            public RestRequest(string route)
+            {
+                Route = route;
+            }
+
+            /// <value>The Rest route.</value>
+            public string Route {get; set;}
         }
         private void StartListen()
         {
             while (true)
             {
-                Socket mySocket = listener.AcceptSocket();
+                Socket mySocket = Listener.AcceptSocket();
                 if (mySocket.Connected)  
                 {
                     Byte[] bReceive = new Byte[1024];
                     mySocket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
-                    Console.WriteLine(sBuffer);
                     string[] contents = sBuffer.Split(' ');
                     Request request;
                     switch (sBuffer.Split(" ")[0])
@@ -82,34 +110,20 @@ namespace Impart.Api
                             request = Request.Get;
                             break;
                     }
-                    if (contents[1] == "/" && routes.ContainsKey("*"))
+                    if (contents[1] == "/" && Routes.ContainsKey("*"))
                     {
-                        routes["*"].Invoke(Activator.CreateInstance(routes["*"].DeclaringType), new object[] {new APIEventArgs(request), new RestContext(mySocket)});
+                        Routes["*"].Invoke(Activator.CreateInstance(Routes["*"].DeclaringType), new object[] {new APIEventArgs(request), new RestContext(mySocket)});
                     }
-                    if (!routes.ContainsKey(contents[1]))
+                    if (!Routes.ContainsKey(contents[1]))
                     {
-                        ErrorPage?.Invoke(new APIEventArgs(request), new ErrorContext(mySocket, ErrorType.NotFound));
+                        Error?.Invoke(new APIEventArgs(request), new ErrorContext(mySocket, ErrorType.NotFound));
                     }
                     else
                     {
-                        routes[contents[1]].Invoke(Activator.CreateInstance(routes[contents[1]].DeclaringType), new object[] {new APIEventArgs(request), new RestContext(mySocket)});
+                        Routes[contents[1]].Invoke(Activator.CreateInstance(Routes[contents[1]].DeclaringType), new object[] {new APIEventArgs(request), new RestContext(mySocket)});
                     }
                 }
             }
-        }
-        protected void Stop()
-        {
-            listener.Stop();
-        }
-
-        [AttributeUsage(AttributeTargets.Method)]
-        protected class RestRequest : System.Attribute
-        {
-            public RestRequest(string Route)
-            {
-                this.Route = Route;
-            }
-            public string Route {get; set;}
         }
     }
 }

@@ -8,8 +8,10 @@ using System.Collections.Generic;
 
 namespace Impart
 {
+    /// <summary>The class responsible for hosting webpages.</summary>
     public sealed class Website
     {
+        /// <value>The method to be called when a client connects to the website.</value>
         public Action<WebsiteEventArgs> OnVisit;
         private TcpListener listener;
         private int port;
@@ -18,7 +20,7 @@ namespace Impart
         private Thread thread;
         private Socket socket;
 
-        /// <summary>Creates a Website instance with <paramref name="webPage"/>.</summary>
+        /// <summary>Creates a Website instance with <paramref name="webPage"/> as the first WebPage.</summary>
         /// <returns>A Website instance.</returns>
         /// <param name="webPage">The default WebPage.</param>
         /// <param name="port">The local port to host it on.</param>

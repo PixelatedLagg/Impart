@@ -32,8 +32,7 @@ namespace Impart.Format
         }
         public DuplicateOptions DuplicateOptions = DuplicateOptions.Allow;
         public JsonObject() {}
-        public JsonObject(IDictionary<string, JsonValue> collection)
-			: base(collection.ToDictionary(kvp => kvp.Key, kvp => kvp.Value ?? JsonValue.Null)) {}
+        public JsonObject(IDictionary<string, JsonValue> collection) : base(collection.ToDictionary(kvp => kvp.Key, kvp => kvp.Value ?? JsonValue.Null)) {}
         public new void Add(string key, JsonValue value)
 		{
             if (base.ContainsKey(key))
