@@ -1,7 +1,7 @@
 namespace Impart
 {
     /// <summary>The main input class in Impart.</summary>
-    public class Form
+    public sealed class Form
     {
         private string textCache;
 

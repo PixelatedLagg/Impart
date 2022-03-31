@@ -1,6 +1,7 @@
 namespace Impart.Api
 {
-    public enum Request
+    /// <summary>All of the request types.</summary>
+    public enum RequestType
     {
         Get,
         Push,

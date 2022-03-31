@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>Text field in Form.</summary>
-    public class TextField : FormElement
+    public sealed class TextField : FormElement
     {
         internal string textCache;
 

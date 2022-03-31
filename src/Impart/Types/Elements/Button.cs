@@ -338,10 +338,10 @@ namespace Impart
                     switch (value[0])
                     {
                         case Percent pct:
-                            _style.Append($" font-size: {pct.percent}%;");
+                            _style.Append($" font-size: {pct}%;");
                             break;
                         case Pixels pxls:
-                            _style.Append($" font-size: {pxls.pixels}px;");
+                            _style.Append($" font-size: {pxls}px;");
                             break;
                         default:
                             throw new ImpartError("Invalid attribute parameters.");
@@ -356,10 +356,10 @@ namespace Impart
                     switch (value[0])
                     {
                         case Percent pct:
-                            _style.Append($" margin: {pct.percent}%;");
+                            _style.Append($" margin: {pct}%;");
                             break;
                         case Pixels pxls:
-                            _style.Append($" margin: {pxls.pixels}px;");
+                            _style.Append($" margin: {pxls}px;");
                             break;
                         default:
                             throw new ImpartError("Invalid attribute parameters.");
@@ -374,10 +374,10 @@ namespace Impart
                     switch (value[0])
                     {
                         case Percent pct:
-                            _style.Append($" padding: {pct.percent}%;");
+                            _style.Append($" padding: {pct}%;");
                             break;
                         case Pixels pxls:
-                            _style.Append($" padding: {pxls.pixels}px;");
+                            _style.Append($" padding: {pxls}px;");
                             break;
                         default:
                             throw new ImpartError("Invalid attribute parameters.");
@@ -407,10 +407,10 @@ namespace Impart
                     switch (value[0])
                     {
                         case Percent pct:
-                            _style.Append($" width: {pct.percent}%;");
+                            _style.Append($" width: {pct}%;");
                             break;
                         case Pixels pxls:
-                            _style.Append($" width: {pxls.pixels}px;");
+                            _style.Append($" width: {pxls}px;");
                             break;
                         case null:
                             break;
@@ -420,10 +420,10 @@ namespace Impart
                     switch (value[1])
                     {
                         case Percent pct:
-                            _style.Append($" height: {pct.percent}%;");
+                            _style.Append($" height: {pct}%;");
                             break;
                         case Pixels pxls:
-                            _style.Append($" height: {pxls.pixels}px;");
+                            _style.Append($" height: {pxls}px;");
                             break;
                         case null:
                             break;
@@ -440,10 +440,10 @@ namespace Impart
                     switch (value[0])
                     {
                         case Percent pct:
-                            _style.Append($" border: {pct.percent}%");
+                            _style.Append($" border: {pct}%");
                             break;
                         case Pixels pxls:
-                            _style.Append($" border: {pxls.pixels}px");
+                            _style.Append($" border: {pxls}px");
                             break;
                         default:
                             throw new ImpartError("Invalid attribute parameters.");

@@ -5,7 +5,7 @@ using System.Net.Sockets;
 namespace Impart.Api
 {
     /// <summary>Information about an error from an API.</summary>
-    public class ErrorContext : Context
+    public sealed class ErrorContext
     {
         /// <value>The error type.</value>
         public ErrorType Type

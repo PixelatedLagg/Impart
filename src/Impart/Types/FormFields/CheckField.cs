@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>Class that represents checkbox input for Form.</summary>
-    public class CheckField : FormElement
+    public sealed class CheckField : FormElement
     {
         internal string textCache;
 

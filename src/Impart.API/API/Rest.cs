@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace Impart.Api
 {
     /// <summary>The class for hosting a REST API.</summary>
-    public class Rest : API
+    public class Rest
     {
         /// <value>The method to be called in the event of an error.</value>
         public Action<APIEventArgs, ErrorContext> Error;
@@ -76,38 +76,38 @@ namespace Impart.Api
                     mySocket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
                     string[] contents = sBuffer.Split(' ');
-                    Request request;
+                    RequestType request;
                     switch (sBuffer.Split(" ")[0])
                     {
                         case "GET":
-                            request = Request.Get;
+                            request = RequestType.Get;
                             break;
                         case "PUSH":
-                            request = Request.Push;
+                            request = RequestType.Push;
                             break;
                         case "PUT":
-                            request = Request.Put;
+                            request = RequestType.Put;
                             break;
                         case "DELETE":
-                            request = Request.Delete;
+                            request = RequestType.Delete;
                             break;
                         case "HEAD":
-                            request = Request.Head;
+                            request = RequestType.Head;
                             break;
                         case "CONNECT":
-                            request = Request.Connect;
+                            request = RequestType.Connect;
                             break;
                         case "OPTIONS":
-                            request = Request.Options;
+                            request = RequestType.Options;
                             break;
                         case "TRACE":
-                            request = Request.Trace;
+                            request = RequestType.Trace;
                             break;
                         case "PATCH":
-                            request = Request.Patch;
+                            request = RequestType.Patch;
                             break;
                         default:
-                            request = Request.Get;
+                            request = RequestType.Get;
                             break;
                     }
                     if (contents[1] == "/" && Routes.ContainsKey("*"))

@@ -4,7 +4,7 @@ using System.Text;
 namespace Impart
 {
     /// <summary>Style an ID, element, or class.</summary>
-    public class Style : IDisposable
+    public sealed class Style : IDisposable
     {
         private StringBuilder textBuilder;
         private string id;

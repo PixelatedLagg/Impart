@@ -2,16 +2,17 @@ using System;
 
 namespace Impart
 {
-    static public class ConvertColor
+    /// <summary>The class for managing Color conversions.</summary>
+    public static class ConvertColor
     {
-        static public Hsl ToHsl(this Rgb rgb)
+        /// <summary>Converts a Rgb instance to Hsl.</summary>
+        /// <returns>A Hsl instance.</returns>
+        /// <param name="rgb">The Rgb value to convert.</param>
+        public static Hsl ToHsl(this Rgb rgb)
         {
             Hsl hsl = new Hsl(1, 1, 1);
-            float r = (rgb.rgb.r / 255.0f);
-            float g = (rgb.rgb.g / 255.0f);
-            float b = (rgb.rgb.b / 255.0f);
-            float min = Math.Min(Math.Min(r, g), b);
-            float max = Math.Max(Math.Max(r, g), b);
+            float r = (rgb.rgb.r / 255.0f), g = (rgb.rgb.g / 255.0f), b = (rgb.rgb.b / 255.0f);
+            float min = Math.Min(Math.Min(r, g), b), max = Math.Max(Math.Max(r, g), b);
             float delta = max - min;
             hsl.hsl.l = (max + min) / 2;
             if (delta == 0)
@@ -46,15 +47,22 @@ namespace Impart
                 hsl.hsl.h = (int)(hue * 360);
             }
             hsl.hsl.s *= 100;
-            //hsl.hsl.l = (int)Math.Round(hsl.hsl.l *= 100, MidpointRounding.ToZero);
             hsl.hsl.l *= 100;
             return hsl;
         }
-        static public Hex ToHex(this Rgb rgb)
+
+        /// <summary>Converts a Rgb instance to Hex.</summary>
+        /// <returns>A Hex instance.</returns>
+        /// <param name="rgb">The Rgb value to convert.</param>
+        public static Hex ToHex(this Rgb rgb)
         {
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(rgb.rgb.r, rgb.rgb.g, rgb.rgb.b);
             return new Hex(myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2"));
         }
+
+        /// <summary>Converts a Hsl instance to Rgb.</summary>
+        /// <returns>A Rgb instance.</returns>
+        /// <param name="hsl">The Hsl value to convert.</param>
         public static Rgb ToRgb(this Hsl hsl)
         {
             (float h, float s, float l) temphsl = hsl.hsl;
@@ -77,17 +85,60 @@ namespace Impart
                 g = 255 * HueToRgb(v1, v2, hue);
                 b = 255 * HueToRgb(v1, v2, hue - (1.0f / 3));
             }
-            Console.WriteLine($"{r}.{g}.{b}");
             return new Rgb((int)r, (int)g, (int)b);
         }
+
+        /// <summary>Converts a Hsl instance to Hex.</summary>
+        /// <returns>A Hex instance.</returns>
+        /// <param name="hsl">The Hsl value to convert.</param>
         public static Hex ToHex(this Hsl hsl)
         {
             return hsl.ToRgb().ToHex();
         }
-        static public Rgb ToRgb(this Hex hex)
+
+        /// <summary>Converts a Hex instance to Rgb.</summary>
+        /// <returns>A Rgb instance.</returns>
+        /// <param name="hex">The Hex value to convert.</param>
+        public static Rgb ToRgb(this Hex hex)
         {
             char[] temp = hex.hex.ToCharArray();
             return new Rgb(System.Convert.ToInt32($"{temp[0]}{temp[1]}", 16), System.Convert.ToInt32($"{temp[2]}{temp[3]}", 16), System.Convert.ToInt32($"{temp[4]}{temp[5]}", 16));
+        }
+
+        /// <summary>Converts a Color instance to Rgb.</summary>
+        /// <returns>A Rgb instance.</returns>
+        /// <param name="color">The Color value to convert.</param>
+        public static Rgb ToRgb(this Color color)
+        {
+            if (color == null)
+            {
+                throw new ImpartError("Color cannot be null!");
+            }
+            return (Rgb)color;
+        }
+
+        /// <summary>Converts a Color instance to Hsl.</summary>
+        /// <returns>A Hsl instance.</returns>
+        /// <param name="color">The Color value to convert.</param>
+        public static Hsl ToHsl(this Color color)
+        {
+            if (color == null)
+            {
+                throw new ImpartError("Color cannot be null!");
+            }
+            return (Hsl)color;
+        }
+        
+        /// <summary>Converts a Color instance to Hex.</summary>
+        /// <returns>A Hex instance.</returns>
+        /// <param name="color">The Color value to convert.</param>
+        public static Hex ToHex(this Color color)
+        {
+            if (color == null)
+            {
+                throw new ImpartError("Color cannot be null!");
+            }
+            return (Hex)color;
         }
         private static float HueToRgb(float v1, float v2, float vH)
         {
@@ -112,30 +163,6 @@ namespace Impart
                 return v1 + (v2 - v1) * ((2.0f / 3) - vH) * 6;
             }
             return v1;
-        }
-        static public Rgb ToRgb(this Color color)
-        {
-            if (color == null)
-            {
-                throw new ImpartError("Color cannot be null!");
-            }
-            return (Rgb)color;
-        }
-        static public Hsl ToHsl(this Color color)
-        {
-            if (color == null)
-            {
-                throw new ImpartError("Color cannot be null!");
-            }
-            return (Hsl)color;
-        }
-        static public Hex ToHex(this Color color)
-        {
-            if (color == null)
-            {
-                throw new ImpartError("Color cannot be null!");
-            }
-            return (Hex)color;
         }
     }
 }

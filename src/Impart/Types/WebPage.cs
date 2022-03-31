@@ -90,7 +90,7 @@ namespace Impart
                 tempBuilder.Append($"<th>{obj[x]}</th>");
             }
             tempBuilder.Append($"</tr>"); 
-            int vertRowNum = (int)Math.Round(System.Convert.ToDouble(((double)obj.Length - (double)rowNum) / (double)rowNum), MidpointRounding.AwayFromZero);
+            int vertRowNum = (int)Math.Round(Convert.ToDouble(((double)obj.Length - (double)rowNum) / (double)rowNum), MidpointRounding.AwayFromZero);
             if ((obj.Length - rowNum) % rowNum > 0)
             {
                 int _currentobj = 0;
@@ -158,10 +158,10 @@ namespace Impart
             switch (scrollbar.width)
             {
                 case Percent pct:
-                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width.Pct().percent}%;background-color: #808080; }}::-webkit-scrollbar-track {{");
+                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width}%;background-color: #808080; }}::-webkit-scrollbar-track {{");
                     break;
                 case Pixels pxls:
-                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width.Px().pixels}px;background-color: #808080; }}::-webkit-scrollbar-track {{");
+                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width}px;background-color: #808080; }}::-webkit-scrollbar-track {{");
                     break;
             }
             switch (scrollbar.bgColor)
@@ -194,10 +194,10 @@ namespace Impart
                 switch (scrollbar.radius)
                 {
                     case Percent pct:
-                        styleBuilder.Append($"border-radius: {scrollbar.radius.Pct().percent}%;}}");
+                        styleBuilder.Append($"border-radius: {scrollbar.radius}%;}}");
                         break;
                     case Pixels pxls:
-                        styleBuilder.Append($"border-radius: {scrollbar.radius.Px().pixels}px;}}");
+                        styleBuilder.Append($"border-radius: {scrollbar.radius}px;}}");
                         break;
                 }
             }
@@ -235,10 +235,10 @@ namespace Impart
             switch (size)
             {
                 case Pixels pixels:
-                    defaultMargin = $"{pixels.pixels}px";
+                    defaultMargin = $"{pixels}px";
                     break;
                 case Percent percent:
-                    defaultMargin = $"{percent.percent}%";
+                    defaultMargin = $"{percent}%";
                     break;
             }
         }

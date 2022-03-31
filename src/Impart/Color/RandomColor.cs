@@ -3,15 +3,23 @@ using System.Linq;
 
 namespace Impart
 {
-    static public class RandomColor
+    /// <summary>The class for generating random colors.</summary>
+    public static class RandomColor
     {
-        static private Random rnd = new Random();
+        private static Random rnd = new Random();
         private const string chars = "ABCDEF1234567890";
-        static public Rgb Rgb()
+
+        /// <summary>Generates a random Rgb value.</summary>
+        /// <returns>A Rgb instance.</returns>
+        public static Rgb Rgb()
         {
             return new Rgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
         }
-        static public Rgb[] Rgbs(int number)
+
+        /// <summary>Generates a random Rgb value array with <paramref name="number"/> as the number of elements in the array.</summary>
+        /// <returns>A Rgb[] instance.</returns>
+        /// <param name="number">The number of elements in the array.</param>
+        public static Rgb[] Rgbs(int number)
         {
             Rgb[] result = new Rgb[number];
             for (int x = 0; x < number; x++)
@@ -20,11 +28,18 @@ namespace Impart
             }
             return result;
         }
-        static public Hsl Hsl()
+
+        /// <summary>Generates a random Hsl value.</summary>
+        /// <returns>A Hsl instance.</returns>
+        public static Hsl Hsl()
         {
             return new Hsl(rnd.Next(0, 361), rnd.Next(0, 101), rnd.Next(0, 101));
         }
-        static public Hsl[] Hsls(int number)
+
+        /// <summary>Generates a random Hsl value array with <paramref name="number"/> as the number of elements in the array.</summary>
+        /// <returns>A Hsl[] instance.</returns>
+        /// <param name="number">The number of elements in the array.</param>
+        public static Hsl[] Hsls(int number)
         {
             Hsl[] result = new Hsl[number];
             for (int x = 0; x < number; x++)
@@ -33,11 +48,18 @@ namespace Impart
             }
             return result;
         }
-        static public Hex Hex()
+
+        /// <summary>Generates a random Hex value.</summary>
+        /// <returns>A Hex instance.</returns>
+        public static Hex Hex()
         {
             return new Hex(new string(Enumerable.Repeat(chars, 6).Select(s => s[rnd.Next(s.Length)]).ToArray()));
         }
-        static public Hex[] Hexes(int number)
+
+        /// <summary>Generates a random Hex value array with <paramref name="number"/> as the number of elements in the array.</summary>
+        /// <returns>A Hex[] instance.</returns>
+        /// <param name="number">The number of elements in the array.</param>
+        public static Hex[] Hexes(int number)
         {
             Hex[] result = new Hex[number];
             for (int x = 0; x < number; x++)

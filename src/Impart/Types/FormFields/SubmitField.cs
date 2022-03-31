@@ -3,7 +3,7 @@ using System.Text;
 namespace Impart
 {
     /// <summary>Class that represents the submit button for Form.</summary>
-    public class SubmitField : FormElement
+    public sealed class SubmitField : FormElement
     {
         private string attributes;
         private StringBuilder styleBuilder;

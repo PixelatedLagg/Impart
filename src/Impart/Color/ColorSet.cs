@@ -3,9 +3,14 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    public class ColorSet
+    /// <summary>The class for a set of Colors.</summary>
+    public sealed class ColorSet
     {
-        List<Color> colors;
+        private List<Color> colors;
+
+        /// <summary>Creates a ColorSet instance with Color[] as the entries.</summary>
+        /// <returns>A ColorSet instance.</returns>
+        /// <param name="colors">The Colors to add.</param>
         public ColorSet(params Color[] colors)
         {
             this.colors = new List<Color>();
@@ -18,6 +23,11 @@ namespace Impart
                 this.colors.Add(c);
             }
         }
+
+        /// <summary>Temporarily sorts the ColorSet and returns the value at the index of <paramref name="i"/>.</summary>
+        /// <returns>A Color instance.</returns>
+        /// <param name="sort">The ColorSort sorting pattern.</param>
+        /// <param name="i">The index value to return.</param>
         public Color Sort(ColorSort sort, int i)
         {
             switch (sort)
@@ -60,6 +70,16 @@ namespace Impart
             }
             return null;
         }
+        /// <summary>Return the value at the index of <paramref name="i"/>.</summary>
+        /// <returns>A Color instance.</returns>
+        /// <param name="i">The index value to return.</param>
+        public Color this[int i]
+        {
+            get
+            {
+                return colors[i];
+            }
+        }
         private List<Rgb> ToRgbs(List<Color> colors)
         {
             List<Rgb> rgbs = new List<Rgb>();
@@ -100,20 +120,5 @@ namespace Impart
             }
             return hsls;
         }
-        public Color this[int i]
-        {
-            get
-            {
-                return colors[i];
-            }
-        }
-    }
-    public enum ColorSort
-    {
-        Light = 0,
-        Dark = 1,
-        Red = 2,
-        Blue = 3,
-        Green = 4
     }
 }

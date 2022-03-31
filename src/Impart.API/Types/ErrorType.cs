@@ -1,5 +1,6 @@
 namespace Impart.Api
 {
+    /// <summary>All of the API error types.</summary>
     public enum ErrorType
     {
         BadRequest = 400,
