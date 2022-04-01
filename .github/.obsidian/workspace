@@ -1,0 +1,93 @@
+{
+  "main": {
+    "id": "3bb4a755fa7311ab",
+    "type": "split",
+    "children": [
+      {
+        "id": "34077f0b6e5a4162",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "changelog.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d1b59e65d5c78baa",
+    "type": "split",
+    "children": [
+      {
+        "id": "be61dc09e5c95580",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4d5b018c67a78bc7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "af7b5f4de4347f72",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "f865011e12cbe503",
+    "type": "split",
+    "children": [
+      {
+        "id": "cadf70a22c6208cd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "97e7700de746f530",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "changelog.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "34077f0b6e5a4162",
+  "lastOpenFiles": [
+    "changelog.md"
+  ]
+}

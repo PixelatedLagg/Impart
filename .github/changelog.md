@@ -7,3 +7,14 @@ Added:
   <li>Website events</li>
   <li>No more developer HTML/CSS interaction</li>
 </ul>
+
+# March 31th (2.0.2) Total Downloads: 572
+Impart is expanding to API and networking along with general formatting now. Website functionality is put on hold as I further develop the networking portion of Impart. Everything is sanitized with the exception of attributes, but I will eventually find a way to fix that. More juicy updates to come as I include more and more features to make Impart a fair contender with the existing ASP.NET.
+
+Added:
+<ul>
+	<li>JSON format</li>
+	<li>REST api hosting</li>
+	<li>SOAP api hosting</li>
+	<li>Nested element</li>
+</ul>
