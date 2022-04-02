@@ -106,7 +106,7 @@ namespace Impart
                     }
                     if (!webPages.ContainsKey(sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")))
                     {
-                        string errorResult = errorPage?.GetCode() ?? "";
+                        string errorResult = errorPage?.ToString() ?? "";
                         byte[] errorBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {errorResult.Length} \r\n\r\n{errorResult}");
                         try  
                         {
@@ -120,7 +120,7 @@ namespace Impart
                     }
                     else
                     {
-                        string result = webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].GetCode();
+                        string result = webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].ToString();
                         byte[] resultBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {result.Length} \r\n\r\n{result}");
                         try
                         {

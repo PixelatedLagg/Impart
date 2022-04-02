@@ -1,6 +1,6 @@
 namespace Impart.Format
 {
-    public enum JsonValueType
+    public enum ValueType
     {
         Number,
 		String,

@@ -2,14 +2,14 @@ using System;
 
 namespace Impart.Format
 {
-    public class JsonValue : IEquatable<JsonValue>
+    public class XmlValue : IEquatable<XmlValue>
     {
         private readonly bool boolValue = default!;
 		private readonly string stringValue = default!;
 		private readonly double numberValue = default!;
-		private readonly JsonObject objectValue = default!;
-		private readonly JsonArray arrayValue = default!;
-        public static readonly JsonValue Null = new JsonValue();
+		private readonly XmlObject objectValue = default!;
+		private readonly XmlArray arrayValue = default!;
+        public static readonly XmlValue Null = new XmlValue();
         public bool Bool
         {
             get
@@ -31,14 +31,14 @@ namespace Impart.Format
 				return numberValue;
             }
         }
-        public JsonObject JsonObject
+        public XmlObject XmlObject
         {
             get
             {
 				return objectValue;
             }
         }
-        public JsonArray JsonArray
+        public XmlArray XmlArray
         {
             get
             {
@@ -46,35 +46,35 @@ namespace Impart.Format
             }
         }
         public ValueType Type { get; }
-        public JsonValue()
+        public XmlValue()
         {
             Type = ValueType.Null;
         }
-        public JsonValue(bool b)
+        public XmlValue(bool b)
 		{
 			boolValue = b;
 			Type = ValueType.Boolean;
 		}
-        public JsonValue(string s)
+        public XmlValue(string s)
 		{
 			stringValue = s ?? throw new ImpartError("String assigned to JsonValue cannot be null!");
 			Type = ValueType.String;
 		}
-        public JsonValue(double n)
+        public XmlValue(double n)
 		{
 			numberValue = n;
 			Type = ValueType.Number;
 		}
-        public JsonValue(JsonArray a)
+        public XmlValue(XmlArray a)
 		{
-			arrayValue = a ?? throw new ImpartError("JsonArray assigned to JsonValue cannot be null!");;
+			arrayValue = a ?? throw new ImpartError("XmlArray assigned to XmlValue cannot be null!");;
 			Type = ValueType.Array;
 		}
-        public JsonValue(JsonValue other)
+        public XmlValue(XmlValue other)
         {
             if (other == null)
             {
-                throw new ImpartError("JsonValue to copy from must not be null!");
+                throw new ImpartError("XmlValue to copy from must not be null!");
             }
             arrayValue = other.arrayValue;
 			objectValue = other.objectValue;
@@ -95,11 +95,11 @@ namespace Impart.Format
             }
             switch (o)
             {
-                case JsonValue jv:
-                    return ReferenceEquals(this, jv);
-                case JsonArray a:
+                case XmlValue xv:
+                    return ReferenceEquals(this, xv);
+                case XmlArray a:
                     return arrayValue.Equals(a);
-                case JsonObject obj:
+                case XmlObject obj:
                     return objectValue.Equals(obj);
                 case bool b:
                     return boolValue.Equals(b);
@@ -119,7 +119,7 @@ namespace Impart.Format
 			o is short || o is ushort || o is byte || o is long ||
 			o is ulong;
 		}
-        public bool Equals(JsonValue other)
+        public bool Equals(XmlValue other)
         {
 			if (other.Type != Type || ReferenceEquals(other, null))
             {
@@ -161,31 +161,31 @@ namespace Impart.Format
 			}
 			return base.GetHashCode();
 		}
-        public static implicit operator JsonValue(bool b)
+        public static implicit operator XmlValue(bool b)
 		{
-			return new JsonValue(b);
+			return new XmlValue(b);
 		}
-        public static implicit operator JsonValue(string s)
+        public static implicit operator XmlValue(string s)
 		{
-			return s is null ? null : new JsonValue(s);
+			return s is null ? null : new XmlValue(s);
 		}
-        public static implicit operator JsonValue(double n)
+        public static implicit operator XmlValue(double n)
 		{
-			return new JsonValue(n);
+			return new XmlValue(n);
 		}
-        public static implicit operator JsonValue(JsonObject o)
+        public static implicit operator XmlValue(XmlObject o)
 		{
-			return o is null ? null : new JsonValue(o);
+			return o is null ? null : new XmlValue(o);
 		}
-        public static implicit operator JsonValue(JsonArray a)
+        public static implicit operator XmlValue(XmlArray a)
 		{
-			return a is null ? null : new JsonValue(a);
+			return a is null ? null : new XmlValue(a);
 		}
-        public static bool operator ==(JsonValue a, JsonValue b)
+        public static bool operator ==(XmlValue a, XmlValue b)
 		{
 			return ReferenceEquals(a, b) || (a != null && a.Equals(b));
 		}
-        public static bool operator !=(JsonValue a, JsonValue b)
+        public static bool operator !=(XmlValue a, XmlValue b)
 		{
 			return !Equals(a, b);
 		}
