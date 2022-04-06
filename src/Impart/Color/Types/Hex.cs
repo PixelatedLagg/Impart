@@ -80,5 +80,12 @@ namespace Impart
         {
             return base.GetHashCode();
         }
+
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
+        {
+            return $"#{hex}";
+        }
     }
 }

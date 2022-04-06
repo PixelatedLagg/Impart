@@ -169,26 +169,26 @@ namespace Impart
             switch (scrollbar.bgColor)
             {
                 case Rgb rgb:
-                    styleBuilder.Append($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});}}");
+                    styleBuilder.Append($"background-color: {rgb};}}");
                     break;
                 case Hsl hsl:
-                    styleBuilder.Append($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);}}");
+                    styleBuilder.Append($"background-color: {hsl};}}");
                     break;
                 case Hex hex:
-                    styleBuilder.Append($"background-color: #{hex.hex};}}");
+                    styleBuilder.Append($"background-color: {hex};}}");
                     break;
             }
             styleBuilder.Append($"::-webkit-scrollbar-thumb {{");
             switch (scrollbar.fgColor)
             {
                 case Rgb rgb:
-                    styleBuilder.Append($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});");
+                    styleBuilder.Append($"background-color: {rgb};");
                     break;
                 case Hsl hsl:
-                    styleBuilder.Append($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);");
+                    styleBuilder.Append($"background-color: {hsl};");
                     break;
                 case Hex hex:
-                    styleBuilder.Append($"background-color: #{hex.hex};");
+                    styleBuilder.Append($"background-color: {hex};");
                     break;
             }
             if (scrollbar.radius != null)

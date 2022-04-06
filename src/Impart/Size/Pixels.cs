@@ -20,7 +20,7 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return Value.ToString();
+            return $"{Value}px";
         }
 
         /// <summary>Convert the Pixels instance to an Int.</summary>

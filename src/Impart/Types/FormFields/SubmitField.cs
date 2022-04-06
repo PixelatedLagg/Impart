@@ -34,13 +34,13 @@ namespace Impart
             switch (color)
             {
                 case Rgb rgb:
-                    WriteStyle($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});}}");
+                    WriteStyle($"background-color: {rgb};}}");
                     break;
                 case Hsl hsl:
-                    WriteStyle($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);}}");
+                    WriteStyle($"background-color: {hsl};}}");
                     break;
                 case Hex hex:
-                    WriteStyle($"background-color: #{hex.hex};}}");
+                    WriteStyle($"background-color: {hex};}}");
                     break;
             }
             return this;

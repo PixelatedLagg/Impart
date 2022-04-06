@@ -21,7 +21,7 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return Value.ToString();
+            return $"{Value}%";
         }
 
         /// <summary>Convert the Percent instance to a Float.</summary>
