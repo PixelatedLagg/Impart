@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using System.Collections.Generic;
 
@@ -8,7 +7,6 @@ namespace Impart
     public struct Attribute
     {
         private AttributeType _type;
-        private object[] _value;
 
         /// <value>The attribute type.</value>
         public AttributeType type
@@ -18,6 +16,7 @@ namespace Impart
                 return _type;
             }
         }
+        private object[] _value;
 
         /// <value>The attribute value(s).</value>
         public object[] value
@@ -285,7 +284,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    switch (Measurement.Convert(value[0]))
                     {
                         case Percent pct:
                             style.Append($" font-size: {pct};");
@@ -293,8 +292,6 @@ namespace Impart
                         case Pixels pxls:
                             style.Append($" font-size: {pxls};");
                             break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
                     attributeList.Add(new Attribute(AttributeType.FontFamily, value[0]));
                     break;
@@ -303,7 +300,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    switch (Measurement.Convert(value[0]))
                     {
                         case Percent pct:
                             style.Append($" margin: {pct};");
@@ -311,8 +308,6 @@ namespace Impart
                         case Pixels pxls:
                             style.Append($" margin: {pxls};");
                             break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
                     attributeList.Add(new Attribute(AttributeType.Margin, value[0]));
                     break;
@@ -321,7 +316,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    switch (Measurement.Convert(value[0]))
                     {
                         case Percent pct:
                             style.Append($" padding: {pct};");
@@ -329,8 +324,6 @@ namespace Impart
                         case Pixels pxls:
                             style.Append($" padding: {pxls};");
                             break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
                     attributeList.Add(new Attribute(AttributeType.Padding, value[0]));
                     break;
@@ -354,7 +347,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    switch (Measurement.Convert(value[0]))
                     {
                         case Percent pct:
                             style.Append($" width: {pct};");
@@ -362,12 +355,8 @@ namespace Impart
                         case Pixels pxls:
                             style.Append($" width: {pxls};");
                             break;
-                        case null:
-                            break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[1])
+                    switch (Measurement.Convert(value[1]))
                     {
                         case Percent pct:
                             style.Append($" height: {pct};");
@@ -375,10 +364,6 @@ namespace Impart
                         case Pixels pxls:
                             style.Append($" height: {pxls};");
                             break;
-                        case null:
-                            break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
                     attributeList.Add(new Attribute(AttributeType.Size, value[0], value[1]));
                     break;
@@ -387,7 +372,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    switch (Measurement.Convert(value[0]))
                     {
                         case Percent pct:
                             style.Append($" border: {pct}");
@@ -395,8 +380,6 @@ namespace Impart
                         case Pixels pxls:
                             style.Append($" border: {pxls}");
                             break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
                     switch (value[1])
                     {

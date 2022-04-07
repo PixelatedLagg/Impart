@@ -151,7 +151,10 @@ namespace Impart
         {
             //only implemented to allow easy scope management for the dev
         }
-        internal string Render()
+
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
         {
             return $"<div{attributeBuilder.ToString()}{style}>{textBuilder.ToString()}</div>";
         }

@@ -144,7 +144,10 @@ namespace Impart
             Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
             return this;
         }
-        internal string Render()
+
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
         {
             if (linkType == typeof(Image))
             {

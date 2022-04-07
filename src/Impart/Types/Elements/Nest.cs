@@ -72,7 +72,10 @@ namespace Impart
             }
             return this;
         }
-        internal string Render()
+
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
         {
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < _nested.Count; i++)

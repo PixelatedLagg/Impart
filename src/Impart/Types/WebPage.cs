@@ -35,7 +35,7 @@ namespace Impart
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
-            textBuilder.Append($"<{text.textType}{text.attributeBuilder.ToString()}{text.style}>{text.text}</{text.textType}>");
+            textBuilder.Append(text);
         }
 
         /// <summary>Set the WebPage title to <paramref name="title"/>.</summary>
@@ -53,21 +53,21 @@ namespace Impart
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
-            textBuilder.Append($"<img src=\"{image.path}\"{image.attributeBuilder.ToString()}{image.style}>");
+            textBuilder.Append(image);
         }
 
         /// <summary>Add <paramref name="header"/> to the WebPage.</summary>
         /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
-            textBuilder.Append($"<h{header.number}{header.attributes}{header.style}>{header.text}</h{header.number}>");
+            textBuilder.Append(header);
         }
 
         /// <summary>Add <paramref name="link"/> to the WebPage.
         /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
-            textBuilder.Append(link.Render());
+            textBuilder.Append(link);
         }
 
         /// <summary>Add a table to the WebPage with <paramref name="rowNum"/> as the number of rows and a string[] as the entries.</summary>
@@ -131,7 +131,7 @@ namespace Impart
         /// <param name="division">The Division instance to add.</param>
         protected void AddDivision(Division division)
         {
-            textBuilder.Append(division.Render());
+            textBuilder.Append(division);
             styleBuilder.Append(division.webPageStyleBuilder.ToString());
         }
 
@@ -139,7 +139,7 @@ namespace Impart
         /// <param name="list">The List instance to add.</param>
         protected void AddList(List list)
         {
-            textBuilder.Append(list.Render());
+            textBuilder.Append(list);
         }
 
         /// <summary>Add <paramref name="scrollbar"/> to the WebPage.</summary>
@@ -220,14 +220,14 @@ namespace Impart
         /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
-            textBuilder.Append(button.Render());
+            textBuilder.Append(button);
         }
 
         /// <summary>Add <paramref name="nest"/> to the WebPage.</summary>
         /// <param name="nest">The Nest instance to add.</param>
         protected void AddNest(Nest nest)
         {
-            textBuilder.Append(nest.Render());
+            textBuilder.Append(nest);
         }
 
         /// <summary>Add an external css document to the WebPage.</summary>

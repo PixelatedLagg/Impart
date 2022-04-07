@@ -12,5 +12,21 @@ namespace Impart
         /// <returns>A Measurement instance.</returns>
         /// <param name="i">The integer to convert.</param>
         public static implicit operator Measurement(int i) => new Pixels(i);
+
+        /// <summary>Converts <paramref name="o"/> into a Measurement instance.</summary>
+        /// <returns>A Measurement instance.</returns>
+        /// <param name="o">The object to convert.</param>
+        public static Measurement Convert(object o)
+        {
+            if (o is int)
+            {
+                return new Pixels((int)o);
+            }
+            if (o is float)
+            {
+                return new Percent((float)o);
+            }
+            throw new ImpartError("Invalid type to convert!");
+        }
     }
 }

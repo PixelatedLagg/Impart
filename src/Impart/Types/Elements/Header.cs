@@ -113,6 +113,13 @@ namespace Impart
             Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
             return this;
         }
+
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
+        {
+            return $"<h{number}{attributes}{style}>{text}</h{number}>";
+        }
         string Nested.First()
         {
             return $"<h{number}{attributes}{style}>{text}";

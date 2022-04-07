@@ -97,6 +97,13 @@ namespace Impart
             Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
             return this;
         }
+
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
+        {
+            return $"<img src=\"{path}\"{attributeBuilder.ToString()}{style}>";
+        }
         string Nested.First()
         {
             return $"<img src=\"{path}\"{attributeBuilder.ToString()}{style}>";
