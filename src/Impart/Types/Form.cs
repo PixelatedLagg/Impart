@@ -44,7 +44,9 @@ namespace Impart
             textCache += submitField.Render();
             return this;
         }
-        internal string Render()
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
         {
             return $"{textCache}</form>";
         }

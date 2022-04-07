@@ -10,19 +10,20 @@ namespace Impart
         /// <param name="rgb">The Rgb value to convert.</param>
         public static Hsl ToHsl(this Rgb rgb)
         {
-            Hsl hsl = new Hsl(1, 1, 1);
-            float r = (rgb.rgb.r / 255.0f), g = (rgb.rgb.g / 255.0f), b = (rgb.rgb.b / 255.0f);
+            (int r, int g, int b) tempRgb = (((int r, int g, int b))rgb);
+            float h, s, l;
+            float r = (tempRgb.r / 255.0f), g = (tempRgb.g / 255.0f), b = (tempRgb.b / 255.0f);
             float min = Math.Min(Math.Min(r, g), b), max = Math.Max(Math.Max(r, g), b);
             float delta = max - min;
-            hsl.hsl.l = (max + min) / 2;
+            l = (max + min) / 2;
             if (delta == 0)
             {
-                hsl.hsl.h = 0;
-                hsl.hsl.s = 0.0f;
+                h = 0;
+                s = 0.0f;
             }
             else
             {
-                hsl.hsl.s = (hsl.hsl.l <= 0.5) ? (delta / (max + min)) : (delta / (2 - max - min));
+                s = (l <= 0.5) ? (delta / (max + min)) : (delta / (2 - max - min));
                 float hue;
                 if (r == max)
                 {
@@ -44,11 +45,11 @@ namespace Impart
                 {
                     hue -= 1;
                 }
-                hsl.hsl.h = (int)(hue * 360);
+                h = (int)(hue * 360);
             }
-            hsl.hsl.s *= 100;
-            hsl.hsl.l *= 100;
-            return hsl;
+            s *= 100;
+            l *= 100;
+            return new Hsl(h, s, l);
         }
 
         /// <summary>Converts a Rgb instance to Hex.</summary>
@@ -56,7 +57,8 @@ namespace Impart
         /// <param name="rgb">The Rgb value to convert.</param>
         public static Hex ToHex(this Rgb rgb)
         {
-            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(rgb.rgb.r, rgb.rgb.g, rgb.rgb.b);
+            (int r, int g, int b) tempRgb = (((int r, int g, int b))rgb);
+            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(tempRgb.r, tempRgb.g, tempRgb.b);
             return new Hex(myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2"));
         }
 
@@ -65,7 +67,7 @@ namespace Impart
         /// <param name="hsl">The Hsl value to convert.</param>
         public static Rgb ToRgb(this Hsl hsl)
         {
-            (float h, float s, float l) temphsl = hsl.hsl;
+            (float h, float s, float l) temphsl = (((float h, float s, float l))hsl);
             temphsl.s /= 100;
             temphsl.l /= 100;
             float r = 0;
@@ -101,7 +103,7 @@ namespace Impart
         /// <param name="hex">The Hex value to convert.</param>
         public static Rgb ToRgb(this Hex hex)
         {
-            char[] temp = hex.hex.ToCharArray();
+            char[] temp = hex.ToString().ToCharArray();
             return new Rgb(System.Convert.ToInt32($"{temp[0]}{temp[1]}", 16), System.Convert.ToInt32($"{temp[2]}{temp[3]}", 16), System.Convert.ToInt32($"{temp[4]}{temp[5]}", 16));
         }
 

@@ -213,7 +213,7 @@ namespace Impart
         /// <param name="form">The Form instance to add.</param>
         protected void AddForm(Form form)
         {
-            textBuilder.Append(form.Render());
+            textBuilder.Append(form);
         }
 
         /// <summary>Add <paramref name="button"/> to the WebPage.</summary>

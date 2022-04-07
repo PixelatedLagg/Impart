@@ -6,16 +6,15 @@ namespace Impart
     public struct Hsl : Color
     {
         /// <value>The HSL value.</value>
-        public (float h, float s, float l) hsl;
+        private static (float h, float s, float l) Value;
 
         /// <summary>Creates a Hsl instance with <paramref name="h"/>, <paramref name="s"/>, <paramref name="l"/> as the HSL value.</summary>
         /// <returns>A Hsl instance.</returns>
-        /// <param name="h">The h value.</param>
-        /// <param name="s">The s value.</param>
-        /// <param name="l">The l value.</param>
+        /// <param name="h">The H value.</param>
+        /// <param name="s">The S value.</param>
+        /// <param name="l">The L value.</param>
         public Hsl(float h, float s, float l)
         {
-            hsl = (h, s, l);
             if (h > 360 || h < 0)
             {
                 throw new ImpartError("Invalid hue value!");
@@ -28,6 +27,27 @@ namespace Impart
             {
                 throw new ImpartError("Invalid luminosity value!");
             }
+            Value = (h, s, l);
+        }
+
+        /// <summary>Creates a Hsl instance with <paramref name="hsl"/> as the HSL value.</summary>
+        /// <returns>A Hsl instance.</returns>
+        /// <param name="hsl">The HSL value.</param>
+        public Hsl((float h, float s, float l) hsl)
+        {
+            if (hsl.h > 360 || hsl.h < 0)
+            {
+                throw new ImpartError("Invalid hue value!");
+            }
+            if (hsl.s > 100 || hsl.s < 0)
+            {
+                throw new ImpartError("Invalid saturation value!");
+            }
+            if (hsl.l > 100 || hsl.l < 0)
+            {
+                throw new ImpartError("Invalid luminosity value!");
+            }
+            Value = hsl;
         }
 
         /// <summary>Compares the equality of two Hsl values.</summary>
@@ -36,7 +56,7 @@ namespace Impart
         /// <param name="hsl2">The second Hsl value to compare.</param>
         public static bool operator ==(Hsl hsl1, Hsl hsl2)
         {
-            return (hsl1.hsl.h == hsl2.hsl.h && hsl1.hsl.s == hsl2.hsl.s && hsl1.hsl.l == hsl2.hsl.l);
+            return (((float, float, float))hsl1 == ((float, float, float))hsl2);
         }
 
         /// <summary>Compares the inequality of two Hsl values.</summary>
@@ -45,53 +65,29 @@ namespace Impart
         /// <param name="hsl2">The second Hsl value to compare.</param>
         public static bool operator !=(Hsl hsl1, Hsl hsl2)
         {
-            return !(hsl1.hsl.h == hsl2.hsl.h && hsl1.hsl.s == hsl2.hsl.s && hsl1.hsl.l == hsl2.hsl.l);
-        }
-
-        /// <summary>Compares the equality of two Hsl values.</summary>
-        /// <returns>A Bool instance.</returns>
-        /// <param name="hsl1">The first Hsl value to compare.</param>
-        /// <param name="hsl2">The second Hsl value to compare.</param>
-        public static bool operator ==(Hsl hsl1, (float h, float s, float l) hsl2)
-        {
-            return (hsl1.hsl.h == hsl2.h && hsl1.hsl.s == hsl2.s && hsl1.hsl.l == hsl2.l);
-        }
-
-        /// <summary>Compares the inequality of two Hsl values.</summary>
-        /// <returns>A Bool instance.</returns>
-        /// <param name="hsl1">The first Hsl value to compare.</param>
-        /// <param name="hsl2">The second Hsl value to compare.</param>
-        public static bool operator !=(Hsl hsl1, (float h, float s, float l) hsl2)
-        {
-            return !(hsl1.hsl.h == hsl2.h && hsl1.hsl.s == hsl2.s && hsl1.hsl.l == hsl2.l);
-        }
-
-        /// <summary>Compares the equality of two Hsl values.</summary>
-        /// <returns>A Bool instance.</returns>
-        /// <param name="hsl1">The first Hsl value to compare.</param>
-        /// <param name="hsl2">The second Hsl value to compare.</param>
-        public static bool operator ==(Hsl hsl1, Tuple<float, float, float> hsl2)
-        {
-            return (hsl1.hsl.h == hsl2.Item1 && hsl1.hsl.s == hsl2.Item2 && hsl1.hsl.l == hsl2.Item3);
-        }
-
-        /// <summary>Compares the inequality of two Hsl values.</summary>
-        /// <returns>A Bool instance.</returns>
-        /// <param name="hsl1">The first Hsl value to compare.</param>
-        /// <param name="hsl2">The second Hsl value to compare.</param>
-        public static bool operator !=(Hsl hsl1, Tuple<float, float, float> hsl2)
-        {
-            return !(hsl1.hsl.h == hsl2.Item1 && hsl1.hsl.s == hsl2.Item2 && hsl1.hsl.l == hsl2.Item3);
+            return !(((float, float, float))hsl1 == ((float, float, float))hsl2);
         }
 
         /// <summary>Compares the equality of this Hsl instance and an Object value.</summary>
         /// <returns>A Bool instance.</returns>
-        /// <param name="obj">The object to compare.</param>
+        /// <param name="obj">The Object to compare.</param>
         public override bool Equals(object obj)
         {
-            if (this == obj as Hsl? || this == obj as Tuple<float, float, float>)
+            if (obj is Hsl)
             {
-                return true;
+                if (((float, float, float))((Hsl)obj) == Value)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else if (obj is (float, float, float))
+            {
+                if (((float, float, float))obj == Value)
+                {
+                    return true;
+                }
+                return false;
             }
             return false;
         }
@@ -100,14 +96,24 @@ namespace Impart
         /// <returns>An Int instance.</returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Value.GetHashCode();
         }
 
         /// <summary>Returns the instance as a String.</summary>
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"hsl({hsl.h}, {hsl.s}%, {hsl.l}%)";
+            return $"hsl({Value.h}, {Value.s}%, {Value.l}%)";
         }
+
+        /// <summary>Convert the Hsl instance to a (float, float, float).</summary>
+        /// <returns>A (float, float, float) instance.</returns>
+        /// <param name="h">The Hsl to convert.</param>
+        public static explicit operator (float h, float s, float l)(Hsl h) => Value;
+
+        /// <summary>Convert the (float, float, float) instance to Hsl.</summary>
+        /// <returns>A Hsl instance.</returns>
+        /// <param name="s">The (float, float, float) to convert.</param>
+        public static implicit operator Hsl((float, float, float) h) => new Hsl(h);
     }
 }

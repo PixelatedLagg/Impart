@@ -19,9 +19,42 @@ namespace Impart
         /// <param name="change">The change to take place.</param>
         public Frame(Percent position, ChangeType changeType, object change)
         {
+            switch (changeType)
+            {
+                case ChangeType.BackgroundColor:
+
+                    break;
+                case ChangeType.ForegroundColor:
+                    break;
+                case ChangeType.Width:
+                    break;
+                case ChangeType.Height:
+                    break;
+                case ChangeType.Position:
+                    break;
+            }
             Position = position;
             ChangeType = changeType;
             Change = change;
+        }
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
+        {
+            switch (ChangeType)
+            {
+                case ChangeType.BackgroundColor:
+                    return $"{Position} {{  }}";
+                case ChangeType.ForegroundColor:
+                    break;
+                case ChangeType.Width:
+                    break;
+                case ChangeType.Height:
+                    break;
+                case ChangeType.Position:
+                    break;
+            }
+            return "";
         }
     }
 }

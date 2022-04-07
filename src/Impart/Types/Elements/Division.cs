@@ -105,26 +105,26 @@ namespace Impart
             switch (scrollbar.bgColor)
             {
                 case Rgb rgb:
-                    webPageStyleBuilder.Append($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});}}");
+                    webPageStyleBuilder.Append($"background-color: {rgb};}}");
                     break;
                 case Hsl hsl:
-                    webPageStyleBuilder.Append($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);}}");
+                    webPageStyleBuilder.Append($"background-color: {hsl};}}");
                     break;
                 case Hex hex:
-                    webPageStyleBuilder.Append($"background-color: #{hex.hex};}}");
+                    webPageStyleBuilder.Append($"background-color: {hex};}}");
                     break;
             }
             webPageStyleBuilder.Append($"{this.id}::-webkit-scrollbar-thumb {{");
             switch (scrollbar.fgColor)
             {
                 case Rgb rgb:
-                    webPageStyleBuilder.Append($"background-color: rgb({rgb.rgb.r},{rgb.rgb.g},{rgb.rgb.b});");
+                    webPageStyleBuilder.Append($"background-color: {rgb};");
                     break;
                 case Hsl hsl:
-                    webPageStyleBuilder.Append($"background-color: hsl({hsl.hsl.h}, {hsl.hsl.s}%, {hsl.hsl.l}%);");
+                    webPageStyleBuilder.Append($"background-color: {hsl};");
                     break;
                 case Hex hex:
-                    webPageStyleBuilder.Append($"background-color: #{hex.hex};");
+                    webPageStyleBuilder.Append($"background-color: {hex};");
                     break;
             }
             if (scrollbar.radius != null)

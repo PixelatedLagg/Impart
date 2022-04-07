@@ -36,35 +36,35 @@ namespace Impart
                     var tempHslsLight = new List<(float, Hsl)>();
                     foreach (Hsl hsl in ToHsls(colors))
                     {
-                        tempHslsLight.Add((hsl.hsl.l, hsl));
+                        tempHslsLight.Add(((((float h, float s, float l))hsl).l, hsl));
                     }
                     return (Color)(tempHslsLight.OrderBy(x => x.Item1).ToList()[i].Item2);
                 case ColorSort.Dark:
                     var tempHslsDark = new List<(float, Hsl)>();
                     foreach (Hsl hsl in ToHsls(colors))
                     {
-                        tempHslsDark.Add((hsl.hsl.l, hsl));
+                        tempHslsDark.Add(((((float h, float s, float l))hsl).l, hsl));
                     }
                     return (Color)(tempHslsDark.OrderByDescending(x => x.Item1).ToList()[i].Item2);
                 case ColorSort.Red:
                     var tempRgbsRed = new List<(int, Rgb)>();
                     foreach (Rgb rgb in ToRgbs(colors))
                     {
-                        tempRgbsRed.Add((rgb.rgb.r, rgb));
+                        tempRgbsRed.Add(((((int r, int g, int b))rgb).r, rgb));
                     }
                     return (Color)(tempRgbsRed.OrderByDescending(x => x.Item1).ToList()[i].Item2);
                 case ColorSort.Green:
                     var tempRgbsGreen = new List<(int, Rgb)>();
                     foreach (Rgb rgb in ToRgbs(colors))
                     {
-                        tempRgbsGreen.Add((rgb.rgb.g, rgb));
+                        tempRgbsGreen.Add(((((int r, int g, int b))rgb).g, rgb));
                     }
                     return (Color)(tempRgbsGreen.OrderByDescending(x => x.Item1).ToList()[i].Item2);
                 case ColorSort.Blue:
                     var tempRgbsBlue = new List<(int, Rgb)>();
                     foreach (Rgb rgb in ToRgbs(colors))
                     {
-                        tempRgbsBlue.Add((rgb.rgb.b, rgb));
+                        tempRgbsBlue.Add(((((int r, int g, int b))rgb).b, rgb));
                     }
                     return (Color)(tempRgbsBlue.OrderByDescending(x => x.Item1).ToList()[i].Item2);
             }
