@@ -45,7 +45,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    switch (Color.Convert(value[0]))
                     {
                         case Rgb rgb:
                             style.Append($" background-color: {rgb};");
@@ -56,8 +56,6 @@ namespace Impart
                         case Hex hex:
                             style.Append($" background-color: {hex};");
                             break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
                     attributeList.Add(new Attribute(AttributeType.BackgroundColor, value[0]));
                     break;
@@ -66,7 +64,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    switch (Color.Convert(value[0]))
                     {
                         case Rgb rgb:
                             style.Append($" color: {rgb};");
@@ -77,8 +75,6 @@ namespace Impart
                         case Hex hex:
                             style.Append($" color: {hex};");
                             break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
                     }
                     attributeList.Add(new Attribute(AttributeType.ForegroundColor, value[0]));
                     break;
@@ -404,7 +400,7 @@ namespace Impart
                         default:
                             throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[2])
+                    switch (Color.Convert(value[2]))
                     {
                         case Rgb rgb:
                             style.Append($" {rgb};");

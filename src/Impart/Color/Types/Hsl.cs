@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>The class for a HSL color.</summary>
-    public struct Hsl : Color
+    public class Hsl : Color
     {
         /// <value>The HSL value.</value>
         private static (float h, float s, float l) Value;

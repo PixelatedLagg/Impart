@@ -1,3 +1,5 @@
+using System;
+
 namespace Impart
 {
     /// <summary>The measurement class for a percent value.</summary>

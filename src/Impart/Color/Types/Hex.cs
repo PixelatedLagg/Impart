@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>The class for a HEX color.</summary>
-    public struct Hex : Color
+    public class Hex : Color
     {
         /// <value>The HEX value.</value>
         private static string Value;

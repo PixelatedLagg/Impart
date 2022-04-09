@@ -3,7 +3,7 @@ using System;
 namespace Impart
 {
     /// <summary>The class for a RGB color.</summary>
-    public struct Rgb : Color
+    public class Rgb : Color
     {
         /// <value>The RGB value.</value>
         private static (int r, int g, int b) Value;
