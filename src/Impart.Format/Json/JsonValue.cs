@@ -85,7 +85,20 @@ namespace Impart.Format
         }
         public override string ToString()
         {
-            return "";
+            switch (Type)
+			{
+				case ValueType.Number:
+					return numberValue.ToString();
+				case ValueType.String:
+					return $"\"{stringValue}\"";
+				case ValueType.Boolean:
+					return boolValue.ToString();
+				case ValueType.Object:
+					return objectValue.ToString();
+				case ValueType.Array:
+					return arrayValue.ToString();
+			}
+            return "\"\"";
         }
         public override bool Equals(object o)
         {

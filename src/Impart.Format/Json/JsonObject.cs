@@ -42,8 +42,6 @@ namespace Impart.Format
                     case DuplicateOptions.Allow:
                         base.Add(key, value ?? JsonValue.Null);
                         break;
-                    case DuplicateOptions.Ignore:
-                        break;
                     case DuplicateOptions.Overwrite:
                         this[key] = value ?? JsonValue.Null;
                         break;
@@ -56,7 +54,13 @@ namespace Impart.Format
 		}
         public override string ToString()
         {
-            return "";
+            StringBuilder result = new StringBuilder("{");
+            foreach (KeyValuePair<string, JsonValue> kvp in this)
+            {
+                result.Append($"{kvp.Key} : {kvp.Value},");
+            }
+            result.Remove(result.Length - 1, 1);
+            return result.Append("}").ToString();
         }
         public new bool Equals(object o)
         {

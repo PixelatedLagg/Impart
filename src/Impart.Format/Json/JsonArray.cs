@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using System.Collections.Generic;
 
 namespace Impart.Format
@@ -19,7 +20,13 @@ namespace Impart.Format
 		}
         public override string ToString()
         {
-            return "";
+            StringBuilder result = new StringBuilder("[");
+            foreach (JsonValue v in this)
+            {
+                result.Append($"{v},");
+            }
+            result.Remove(result.Length - 1, 1);
+            return result.Append("]").ToString();
         }
         public override bool Equals(object o)
         {
