@@ -1,4 +1,4 @@
-<img src="Images/full.png"></img>
+<img src=".github/Images/full.png"></img>
 ## How to Use:
 ### For Dotnet CLI:
 `dotnet add package Impart`
