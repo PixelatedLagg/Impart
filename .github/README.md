@@ -1,4 +1,5 @@
 <img src="Images/full.png"></img>
+### Hey! We have a Discord server now: [Join Here](https://discord.gg/tSc35kjHMG)!
 ## How to Use:
 ### For Dotnet CLI:
 `dotnet add package Impart`
