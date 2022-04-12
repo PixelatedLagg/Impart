@@ -1,6 +1,6 @@
-<img src="https://shields.io/nuget/v/impart?style=for-the-badge&logo=appveyor&color=blue"></img>
-<img src="https://shields.io/nuget/dt/impart?style=for-the-badge&logo=appveyor&color=blue"></img>
-<img src="https://shields.io/discord/962888590113792061?style=for-the-badge&logo=appveyor&color=blue"></img>
+![Version](https://shields.io/nuget/v/impart?style=for-the-badge&logo=appveyor&color=blue)
+![Downloads](https://shields.io/nuget/dt/impart?style=for-the-badge&logo=appveyor&color=blue)
+![Discord](https://shields.io/discord/962888590113792061?style=for-the-badge&logo=appveyor&color=blue)
 
 <img src=".github/Images/full.png"></img>
 ## How to Use:
