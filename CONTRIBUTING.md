@@ -32,7 +32,7 @@ namespace Impart
 ### 2. Report secuity vulnerabilities responsibly
 Message me on Discord (Pixelated_Lagg#8321) or email me (michiganmii2@gmail.com). ***DO NOT*** open an issue if you think the related bug compromises security.
 
-### 3. Assure there is no merge conflicts
+### 3. Assure there are no merge conflicts
 Make sure that your branch has no merge conflicts when eventually merging into the main branch.
 
 ### 4. Be nice
