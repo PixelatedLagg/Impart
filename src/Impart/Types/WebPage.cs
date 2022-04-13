@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 using System;
 
@@ -12,6 +13,7 @@ namespace Impart
         internal StringBuilder styleBuilder;
         internal StringBuilder bodyBuilder;
         internal StringBuilder includeBuilder;
+        private Dictionary<string, Element> elements = new Dictionary<string, Element>();
 
         /// <summary>Creates a WebPage instance.</summary>
         /// <returns>A WebPage instance.</returns>
