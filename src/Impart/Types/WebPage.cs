@@ -8,29 +8,39 @@ namespace Impart
     /// <remarks>This is the main class used in Impart.</remarks>
     public class WebPage
     {
-        private string defaultMargin;
-        internal StringBuilder textBuilder;
-        internal StringBuilder styleBuilder;
-        internal StringBuilder bodyBuilder;
-        internal StringBuilder includeBuilder;
-        private Dictionary<string, Element> elements = new Dictionary<string, Element>();
+        private string DefaultMargin = "0px";
+        private List<Element> Elements = new List<Element>();
+        private bool Changed;
+        private string Render;
+        internal StringBuilder textBuilder = new StringBuilder();
+        internal StringBuilder styleBuilder = new StringBuilder("overflow-x: auto; overflow-y: auto;");
+        internal StringBuilder bodyBuilder = new StringBuilder();
+        internal StringBuilder includeBuilder = new StringBuilder();
+
+        private string _Title;
+        public string Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                _Title = value;
+                Changed = true;
+            }
+        }
 
         /// <summary>Creates a WebPage instance.</summary>
         /// <returns>A WebPage instance.</returns>
-        protected WebPage()
-        {
-            defaultMargin = "0px";
-            textBuilder = new StringBuilder();
-            styleBuilder = new StringBuilder("overflow-x: auto; overflow-y: auto;");
-            bodyBuilder = new StringBuilder();
-            includeBuilder = new StringBuilder();
-        }
+        protected WebPage() { }
 
         /// <summary>Add <paramref name="style"/> to the WebPage.</summary>
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
         {
             styleBuilder.Append(style.Render());
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="text"/> to the WebPage.</summary>
@@ -38,6 +48,7 @@ namespace Impart
         protected void AddText(Text text)
         {
             textBuilder.Append(text);
+            Changed = true;
         }
 
         /// <summary>Set the WebPage title to <paramref name="title"/>.</summary>
@@ -49,13 +60,15 @@ namespace Impart
                 throw new ImpartError("Title cannot be null or empty!");
             }
             textBuilder.Append($"<title>{title}</title>");
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="image"/> to the WebPage.</summary>
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
-            textBuilder.Append(image);
+            Elements.Add(image);
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="header"/> to the WebPage.</summary>
@@ -63,6 +76,7 @@ namespace Impart
         protected void AddHeader(Header header)
         {
             textBuilder.Append(header);
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="link"/> to the WebPage.
@@ -70,6 +84,7 @@ namespace Impart
         protected void AddLink(Link link)
         {
             textBuilder.Append(link);
+            Changed = true;
         }
 
         /// <summary>Add a table to the WebPage with <paramref name="rowNum"/> as the number of rows and a string[] as the entries.</summary>
@@ -127,6 +142,7 @@ namespace Impart
                 tempBuilder.Append($"</tr>");
             }
             textBuilder.Append($"{tempBuilder.ToString()}</table>");
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="division"/> to the WebPage.</summary>
@@ -135,6 +151,7 @@ namespace Impart
         {
             textBuilder.Append(division);
             styleBuilder.Append(division.webPageStyleBuilder.ToString());
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="list"/> to the WebPage.</summary>
@@ -142,6 +159,7 @@ namespace Impart
         protected void AddList(List list)
         {
             textBuilder.Append(list);
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="scrollbar"/> to the WebPage.</summary>
@@ -209,6 +227,7 @@ namespace Impart
             {
                 styleBuilder.Append("}");
             }
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="form"/> to the WebPage.</summary>
@@ -216,6 +235,7 @@ namespace Impart
         protected void AddForm(Form form)
         {
             textBuilder.Append(form);
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="button"/> to the WebPage.</summary>
@@ -223,6 +243,7 @@ namespace Impart
         protected void AddButton(Button button)
         {
             textBuilder.Append(button);
+            Changed = true;
         }
 
         /// <summary>Add <paramref name="nest"/> to the WebPage.</summary>
@@ -230,6 +251,7 @@ namespace Impart
         protected void AddNest(Nest nest)
         {
             textBuilder.Append(nest);
+            Changed = true;
         }
 
         /// <summary>Add an external css document to the WebPage.</summary>
@@ -237,6 +259,7 @@ namespace Impart
         protected void AddExternalStyle(string url)
         {
             includeBuilder.Append($"<link rel=\"stylesheet\" href=\"{url}\">");
+            Changed = true;
         }
 
         /// <summary>Set the default margin of the WebPage to <paramref name="size"/>.</summary>
@@ -246,20 +269,27 @@ namespace Impart
             switch (size)
             {
                 case Pixels pixels:
-                    defaultMargin = $"{pixels}px";
+                    DefaultMargin = $"{pixels}px";
                     break;
                 case Percent percent:
-                    defaultMargin = $"{percent}%";
+                    DefaultMargin = $"{percent}%";
                     break;
             }
+            Changed = true;
         }
 
         /// <summary>Returns the String equivalent of this WebPage instance.</summary>
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            styleBuilder.Append($"* {{padding: 0;margin: {defaultMargin};}}");
-            return $"<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart --><!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\">{includeBuilder.ToString()}<style>{styleBuilder.ToString()}</style><body>{textBuilder.ToString()}</body></html>";
+            if (!Changed) //add render logic (soon, this is broken until then)
+            {
+                return Render;
+            }
+            Changed = false;
+            styleBuilder.Append($"* {{padding: 0;margin: {DefaultMargin};}}");
+            Render = $"<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart --><!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\">{includeBuilder.ToString()}<style>{styleBuilder.ToString()}</style><body>{textBuilder.ToString()}</body></html>";
+            return Render;
         }
     }
 }
