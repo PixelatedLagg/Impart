@@ -44,17 +44,9 @@ namespace Impart
             this.id = id;
         }
 
-        internal void Write(string text)
-        {
-            if (textBuilder.Length + text.Length > textBuilder.Length)
-            {
-                textBuilder.Capacity += 1000;
-            }
-            textBuilder.Append(text);
-        }
-
-        
-        internal string Render()
+        /// <summary>Returns the instance as a String.</summary>
+        /// <returns>A String instance.</returns>
+        public override string ToString()
         {
             return $"{textBuilder.ToString()}}}";
         }

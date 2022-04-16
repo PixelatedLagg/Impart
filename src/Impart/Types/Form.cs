@@ -3,6 +3,16 @@ namespace Impart
     /// <summary>The main input class in Impart.</summary>
     public sealed class Form : Element
     {
+        private string _id;
+
+        /// <value>The ID value of the List.</value>
+        public string id 
+        {
+            get 
+            {
+                return _id;
+            }
+        }
         private string textCache;
 
         /// <summary>Creates a Form instance.</summary>
@@ -44,6 +54,7 @@ namespace Impart
             textCache += submitField.Render();
             return this;
         }
+        
         /// <summary>Returns the instance as a String.</summary>
         /// <returns>A String instance.</returns>
         public override string ToString()

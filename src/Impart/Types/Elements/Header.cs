@@ -60,7 +60,6 @@ namespace Impart
             }
         }
         internal StringBuilder attributeBuilder;
-        internal Type elementType = typeof(Header);
 
         /// <summary>Creates an empty Header instance.</summary>
         /// <returns>An Header instance.</returns>
@@ -118,11 +117,11 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"<h{number}{attributes}{style}>{text}</h{number}>";
+            return $"<h{number}{attributeBuilder.ToString()}{style}>{text}</h{number}>";
         }
         string Nested.First()
         {
-            return $"<h{number}{attributes}{style}>{text}";
+            return $"<h{number}{attributeBuilder.ToString()}{style}>{text}";
         }
         string Nested.Last()
         {
