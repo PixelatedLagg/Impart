@@ -7,67 +7,55 @@ namespace Impart
     /// <summary>Text element.</summary>
     public struct Text : Element, Nested
     {
-        private string _text;
+        private string _Text;
 
         /// <value>The text value of the Text.</value>
-        public string text 
+        public string TextValue
         {
             get 
             {
-                return _text;
+                return _Text;
             }
         }
-        private string _id;
+        private string _ID;
 
         /// <value>The ID value of the Text.</value>
-        public string id 
+        public string ID 
         {
             get 
             {
-                return _id;
+                return _ID;
             }
         }
-        private TextType _type;
+        private TextType _Type;
 
         /// <value>The type value of the Text.</value>
-        public TextType type
+        public TextType Type
         {
             get
             {
-                return _type;
+                return _Type;
             }
         }
-        private List<Attribute> _attributes;
+        private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The attribute values of the Text.</value>
-        public List<Attribute> attributes
+        public List<Attribute> Attributes
         {
             get 
             {
-                return _attributes;
+                return _Attributes;
             }
         }
-        private StringBuilder _style;
-        internal string style 
-        {
-            get
-            {
-                if (_style.Length == 0)
-                {
-                    return "";
-                }
-                return $" style=\"{_style.ToString()}\"";
-            }
-        }
-        internal StringBuilder attributeBuilder;
-        internal string textType;
+        private string _TextType;
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates an empty Text instance.</summary>
-        /// <returns>A Text instance.</returns>
         public Text() : this("") {}
 
-        /// <summary>Creates a Text instance with <paramref name="text"/> as the text.</summary>
-        /// <returns>A Text instance.</returns>
+        /// <summary>Creates a Text instance.</summary>
         /// <param name="text">The Text text.</param>
         /// <param name="id">The Text ID.</param>
         public Text(string text, string id = null)
@@ -76,20 +64,13 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null!");
             }
-            _text = text;
-            _id = id;
-            _type = TextType.Regular;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            textType = "p";
+            _Text = text;
+            _ID = id;
+            _Type = Impart.TextType.Regular;
+            _TextType = "p";
             if (id != null)
             {
-                _attributes.Add(new Attribute(AttributeType.ID, id));
-                attributeBuilder = new StringBuilder($" id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder();
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
         }
 
@@ -104,58 +85,27 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null!");
             }
-            _text = text;
-            _id = id;
-            _type = type;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            switch (type)
+            _Text = text;
+            _ID = id;
+            _Type = type;
+            _TextType = type switch
             {
-                case TextType.Regular:
-                    textType = "p";
-                    break;
-                case TextType.Bold:
-                    textType = "b";
-                    break;
-                case TextType.Delete:
-                    textType = "del";
-                    break;
-                case TextType.Emphasize:
-                    textType = "em";
-                    break;
-                case TextType.Important:
-                    textType = "strong";
-                    break;
-                case TextType.Insert:
-                    textType = "ins";
-                    break;
-                case TextType.Italic:
-                    textType = "i";
-                    break;
-                case TextType.Mark:
-                    textType = "mark";
-                    break;
-                case TextType.Small:
-                    textType = "small";
-                    break;
-                case TextType.Subscript:
-                    textType = "sub";
-                    break;
-                case TextType.Superscript:
-                    textType = "sup";
-                    break;
-                default:
-                    textType = "";
-                    break;
-            }
+                TextType.Regular => "p",
+                TextType.Bold => "b",
+                TextType.Delete => "del",
+                TextType.Emphasize => "em",
+                TextType.Important => "strong",
+                TextType.Insert => "ins",
+                TextType.Italic => "i",
+                TextType.Mark => "mark",
+                TextType.Small => "small",
+                TextType.Subscript => "sub",
+                TextType.Superscript => "sup",
+                _ => ""
+            };
             if (id != null)
             {
-                _attributes.Add(new Attribute(AttributeType.ID, id));
-                attributeBuilder = new StringBuilder($" id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder();
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
         }
 
@@ -165,7 +115,8 @@ namespace Impart
         /// <param name="value">The Attribute value(s).</param>
         public Text SetAttribute(AttributeType type, params object[] value)
         {
-            Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
+            _Attributes.Add(new Attribute(type, value));
+            Changed = true;
             return this;
         }
 
@@ -173,15 +124,43 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"<{textType}{attributeBuilder.ToString()}{style}>{text}</{textType}>";
+            if (!Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            StringBuilder result = new StringBuilder();
+            if (_Attributes.Count != 0)
+            {
+                result.Append($"<{_TextType} style\")");
+                foreach (Attribute attribute in _Attributes)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+                foreach (ExtAttribute extAttribute in _ExtAttributes)
+                {
+                    result.Append(extAttribute);
+                }
+                Render = result.Append($">{_Text}</{_TextType}>").ToString();
+                return Render;
+            }
+            result.Append($"<{_TextType}");
+            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            {
+                result.Append(extAttribute);
+            }
+            Render = result.Append($">{_Text}</{_TextType}>").ToString();
+            return Render;
         }
         string Nested.First()
         {
-            return $"<{textType}{attributeBuilder.ToString()}{style}>{text}";
+            string result = ToString();
+            return result.Remove(result.Length - ($"</{_TextType}>".Length) - 1);
         }
         string Nested.Last()
         {
-            return $"</{textType}>";
+            return $"</{_TextType}>";
         }
     }
 }

@@ -4,18 +4,10 @@ using System;
 
 namespace Impart
 {
-    /// <summary>Generate HTML and CSS with some Javascript functionality soon to be added.</summary>
-    /// <remarks>This is the main class used in Impart.</remarks>
+    /// <summary>Generate a webpage for the Website</summary>
+    /// <remarks>This is the root class of Impart.</remarks>
     public class WebPage
     {
-        private List<(string id, Element element)> Elements = new List<(string id, Element element)>();
-        private Dictionary<string, string> Styles = new Dictionary<string, string>();
-        private List<string> Includes = new List<string>();
-        private bool Changed;
-        private string Render;
-        internal StringBuilder textBuilder = new StringBuilder();
-        internal StringBuilder styleBuilder = new StringBuilder("overflow-x: auto; overflow-y: auto;");
-
         private string _Title;
         public string Title
         {
@@ -52,12 +44,17 @@ namespace Impart
                 return _DefaultPadding;
             }
         }
+        private List<(string id, Element element)> Elements = new List<(string id, Element element)>();
+        private Dictionary<string, string> Styles = new Dictionary<string, string>();
+        private List<string> Includes = new List<string>();
+        private StringBuilder ScrollbarCache = new StringBuilder();
+        private bool Changed = true;
+        private string Render;
 
         /// <summary>Creates a WebPage instance.</summary>
-        /// <returns>A WebPage instance.</returns>
         protected WebPage() { }
 
-        /// <summary>Add <paramref name="style"/> to the WebPage.</summary>
+        /// <summary>Add a Style.</summary>
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
         {
@@ -65,15 +62,15 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="text"/> to the WebPage.</summary>
+        /// <summary>Add a Text.</summary>
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
-            Elements.Add((text.id, text));
+            Elements.Add((text.ID, text));
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="image"/> to the WebPage.</summary>
+        /// <summary>Add an Image.</summary>
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
@@ -81,15 +78,15 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="header"/> to the WebPage.</summary>
+        /// <summary>Add a Header.</summary>
         /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
-            Elements.Add((header.id, header));
+            Elements.Add((header.ID, header));
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="link"/> to the WebPage.
+        /// <summary>Add a Link.</summary>
         /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
@@ -97,7 +94,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a table to the WebPage with <paramref name="rowNum"/> as the number of rows and a string[] as the entries.</summary>
+        /// <summary>Add a Table.</summary>
         /// <param name="rowNum">The number of rows.</param>
         /// <param name="obj">An array of strings to add as entries.</param>
         protected void AddTable(int rowNum, params string[] obj)
@@ -155,90 +152,49 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="division"/> to the WebPage.</summary>
+        /// <summary>Add a Division.</summary>
         /// <param name="division">The Division instance to add.</param>
         protected void AddDivision(Division division)
         {
-            if (division.id != null)
+            if (division.ID != null)
             {
-                Styles.Add(division.id, division.webPageStyleBuilder.ToString());
+                Styles.Add(division.ID, division.webPageStyleBuilder.ToString());
             }
-            Elements.Add((division.id, division));
+            Elements.Add((division.ID, division));
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="list"/> to the WebPage.</summary>
+        /// <summary>Add a List.</summary>
         /// <param name="list">The List instance to add.</param>
         protected void AddList(List list)
         {
-            Elements.Add((list.id, list));
+            Elements.Add((list.ID, list));
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="scrollbar"/> to the WebPage.</summary>
+        /// <summary>Add a Scrollbar.</summary>
         /// <param name="scrollbar">The Scrollbar instance to add.</param>
         protected void SetScrollBar(Scrollbar scrollbar)
         {
             switch (scrollbar.axis)
             {
                 case Axis.X:
-                    styleBuilder.Append(" overflow-x: auto;");
+                    ScrollbarCache.Append(" overflow-x: auto;");
                     break;
                 case Axis.Y:
-                    styleBuilder.Append(" overflow-y: auto;");
+                    ScrollbarCache.Append(" overflow-y: auto;");
                     break;
                 default:
                     throw new ImpartError("Invalid axis!");
             }
-            switch (scrollbar.width)
-            {
-                case Percent pct:
-                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width}%;background-color: #808080; }}::-webkit-scrollbar-track {{");
-                    break;
-                case Pixels pxls:
-                    styleBuilder.Append($"::-webkit-scrollbar {{width: {scrollbar.width}px;background-color: #808080; }}::-webkit-scrollbar-track {{");
-                    break;
-            }
-            switch (scrollbar.bgColor)
-            {
-                case Rgb rgb:
-                    styleBuilder.Append($"background-color: {rgb};}}");
-                    break;
-                case Hsl hsl:
-                    styleBuilder.Append($"background-color: {hsl};}}");
-                    break;
-                case Hex hex:
-                    styleBuilder.Append($"background-color: {hex};}}");
-                    break;
-            }
-            styleBuilder.Append($"::-webkit-scrollbar-thumb {{");
-            switch (scrollbar.fgColor)
-            {
-                case Rgb rgb:
-                    styleBuilder.Append($"background-color: {rgb};");
-                    break;
-                case Hsl hsl:
-                    styleBuilder.Append($"background-color: {hsl};");
-                    break;
-                case Hex hex:
-                    styleBuilder.Append($"background-color: {hex};");
-                    break;
-            }
+            ScrollbarCache.Append($"::-webkit-scrollbar {{width: {scrollbar.width};background-color: #808080; }}::-webkit-scrollbar-track{{background-color: {scrollbar.bgColor};}}::-webkit-scrollbar-thumb {{background-color: {scrollbar.fgColor};");
             if (scrollbar.radius != null)
             {
-                switch (scrollbar.radius)
-                {
-                    case Percent pct:
-                        styleBuilder.Append($"border-radius: {scrollbar.radius}%;}}");
-                        break;
-                    case Pixels pxls:
-                        styleBuilder.Append($"border-radius: {scrollbar.radius}px;}}");
-                        break;
-                }
+                ScrollbarCache.Append($"border-radius: {scrollbar.radius}%;}}");
             }
             else
             {
-                styleBuilder.Append("}");
+                ScrollbarCache.Append('}');
             }
             Changed = true;
         }
@@ -247,7 +203,7 @@ namespace Impart
         /// <param name="form">The Form instance to add.</param>
         protected void AddForm(Form form)
         {
-            Elements.Add((form.id, form));
+            Elements.Add((form.ID, form));
             Changed = true;
         }
 
@@ -255,7 +211,7 @@ namespace Impart
         /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
-            Elements.Add((button.id, button));
+            Elements.Add((button.ID, button));
             Changed = true;
         }
 
@@ -276,7 +232,6 @@ namespace Impart
         }
 
         /// <summary>Returns the String equivalent of this WebPage instance.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             if (!Changed)

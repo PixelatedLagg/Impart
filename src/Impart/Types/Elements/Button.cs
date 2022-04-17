@@ -18,38 +18,25 @@ namespace Impart
             }
         }
 
-        private string _id;
+        private string _ID;
 
         /// <value>The ID value of the Button.</value>
-        public string id 
+        public string ID 
         {
             get 
             {
-                return _id;
-            }
-        }
-        private StringBuilder _style;
-        internal string style 
-        {
-            get
-            {
-                if (_style.ToString() == "")
-                {
-                    return "";
-                }
-                return $" style=\"{_style.ToString()}\"";
+                return _ID;
             }
         }
         internal StringBuilder attributeBuilder;
         internal StringBuilder textBuilder;
-        internal Type elementType = typeof(Button);
 
         /// <summary>Creates an empty Button instance.</summary>
         /// <returns>An Button instance.</returns>
         public Button()
         {
             textBuilder = new StringBuilder();
-            _id = null;
+            _ID = null;
             _style = new StringBuilder();
             _attributes = new List<Attribute>();
             attributeBuilder = new StringBuilder(" type=\"button\">");
@@ -89,7 +76,7 @@ namespace Impart
         /// <param name="value">The Attribute value(s).</param>
         public Button SetAttribute(AttributeType type, params object[] value)
         {
-            Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
+            _attributes.Add(new Attribute(type, value));
             return this;
         }
 
@@ -97,11 +84,25 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"<button{attributeBuilder.ToString()}{style.ToString()}\">{textBuilder.ToString()}</button>";
+            if (_attributes.Count != 0)
+            {
+                StringBuilder style = new StringBuilder();
+                foreach (Attribute attribute in _attributes)
+                {
+                    style.Append(attribute);
+                }
+                return $"<button style=\"{style.ToString()}\">{textBuilder.ToString()}</button>";
+            }
+            return $"<button>{textBuilder.ToString()}</button>";
         }
         string Nested.First()
         {
-            return $"<button{attributeBuilder.ToString()}{style.ToString()}\">{textBuilder.ToString()}";
+            StringBuilder style = new StringBuilder();
+            foreach (Attribute attribute in _attributes)
+            {
+                style.Append(attribute);
+            }
+            return $"<button style=\"{style.ToString()}\">{textBuilder.ToString()}</button>";
         }
         string Nested.Last()
         {

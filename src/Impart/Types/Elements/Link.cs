@@ -1,84 +1,72 @@
-using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
+using System;
 
 namespace Impart
 {
     /// <summary>Link element.</summary>
     public struct Link : Element, Nested
     {
-        private Text _text;
+        private Text _Text = new Text();
 
         /// <value>The Text value of the Link.</value>
-        public Text text 
+        public Text Text 
         {
             get 
             {
-                return _text;
+                return _Text;
             }
         }
-        private Image _image;
+        private Image _Image = new Image();
 
         /// <value>The Image value of the Link.</value>
-        public Image image 
-        {
-            get 
-            {
-                return _image;
-            }
-        }
-        private string _id;
-
-        /// <value>The ID value of the Link.</value>
-        public string id 
-        {
-            get 
-            {
-                return _id;
-            }
-        }
-        private string _path;
-
-        /// <value>The path value of the Link.</value>
-        public string path 
-        {
-            get 
-            {
-                return _path;
-            }
-        }
-        private List<Attribute> _attributes;
-
-        /// <value>The attribute values of the Text.</value>
-        public List<Attribute> attributes
-        {
-            get 
-            {
-                return _attributes;
-            }
-        }
-        private StringBuilder _style;
-        internal string style 
+        public Image Image 
         {
             get
             {
-                if (_style.Length == 0)
-                {
-                    return "";
-                }
-                return $" style=\"{_style.ToString()}\"";
+                return _Image;
             }
         }
-        internal StringBuilder attributeBuilder;
-        internal Type linkType;
+        private string _ID;
+
+        /// <value>The ID value of the Link.</value>
+        public string ID
+        {
+            get 
+            {
+                return _ID;
+            }
+        }
+        private string _Path;
+
+        /// <value>The path value of the Link.</value>
+        public string Path 
+        {
+            get 
+            {
+                return _Path;
+            }
+        }
+        private List<Attribute> _Attributes = new List<Attribute>();
+
+        /// <value>The attribute values of the Link.</value>
+        public List<Attribute> Attributes
+        {
+            get 
+            {
+                return _Attributes;
+            }
+        }
+        internal Type _LinkType;
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates an empty Link instance.</summary>
-        /// <returns>A Link instance.</returns>
         public Link() : this(new Text(), Directory.GetCurrentDirectory()) {}
 
-        /// <summary>Creates a Link instance with <paramref name="text"/> as the Link text, and <paramref name="path"/> as the Link path.</summary>
-        /// <returns>A Link instance.</returns>
+        /// <summary>Creates a Link instance.</summary>
         /// <param name="text">The Link text.</param>
         /// <param name="path">The Link path.</param>
         /// <param name="id">The Link ID.</param>
@@ -88,26 +76,17 @@ namespace Impart
             {
                 throw new ImpartError("Path cannot be null or empty!");
             }
-            _text = text;
-            _id = id;
-            _path = path;
-            _image = new Image();
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            linkType = typeof(Text);
-            if (id == null)
+            _Text = text;
+            _ID = id;
+            _Path = path;
+            _LinkType = typeof(Text);
+            if (id != null)
             {
-                _attributes.Add(new Attribute(AttributeType.ID, id));
-                attributeBuilder = new StringBuilder($" id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder();
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
         }
 
-        /// <summary>Creates a Link instance with <paramref name="image"/> as the Link image, and <paramref name="path"/> as the Link path.</summary>
-        /// <returns>A Link instance.</returns>
+        /// <summary>Creates a Link instance.</summary>
         /// <param name="image">The Link image.</param>
         /// <param name="path">The Link path.</param>
         /// <param name="id">The Link ID.</param>
@@ -117,67 +96,80 @@ namespace Impart
             {
                 throw new ImpartError("Path cannot be null or empty!");
             }
-            _text = new Text();
-            _id = id;
-            _path = path;
-            _image = image;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            linkType = typeof(Image);
-            if (id == null)
+            _ID = id;
+            _Path = path;
+            _Image = image;
+            _LinkType = typeof(Image);
+            if (id != null)
             {
-                _attributes.Add(new Attribute(AttributeType.ID, id));
-                attributeBuilder = new StringBuilder($" id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder();
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
-        /// <returns>A Link instance.</returns>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public Link SetAttribute(AttributeType type, params object[] value)
         {
-            Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
+            _Attributes.Add(new Attribute(type, value));
+            Changed = true;
             return this;
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            if (linkType == typeof(Image))
+            if (!Changed)
             {
-                return $"<a href=\"{path}\"><img src=\"{image.path}\" {image.attributeBuilder.ToString()}{image.style}></a>";
+                return Render;
+            }
+            Changed = false;
+            StringBuilder result = new StringBuilder($"<a href=\"{_Path}\"");
+            if (_Attributes.Count != 0)
+            {
+                result.Append("style=\"");
+                foreach (Attribute attribute in _Attributes)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            {
+                result.Append(extAttribute);
+            }
+            if (_LinkType == typeof(Image))
+            {
+                result.Append($">{_Image}</a>");
             }
             else
             {
-                return $"<a href=\"{path}\"><{text.textType}{text.attributeBuilder.ToString()}{text.style}>{text.text}</{text.textType}></a>";
+                result.Append($">{_Text}</a>");
             }
+            Render = result.ToString();
+            return Render;
         }
         string Nested.First()
         {
-            if (linkType == typeof(Image))
+            string result = ToString();
+            if (_LinkType == typeof(Image))
             {
-                return $"<a href=\"{path}\"><img src=\"{image.path}\" {image.attributeBuilder.ToString()}{image.style}>";
+                return result.Remove(result.Length - ("</img></a>".Length) - 1);
             }
             else
             {
-                return $"<a href=\"{path}\"><{text.textType}{text.attributeBuilder.ToString()}{text.style}>{text.text}";
+                return result.Remove(result.Length - ($"{((Nested)_Text).Last()}</a>".Length) - 1);
             }
         }
         string Nested.Last()
         {
-            if (linkType == typeof(Image))
+            if (_LinkType == typeof(Image))
             {
                 return "</img></a>";
             }
             else
             {
-                return $"</{text.textType}></a>";
+                return $"{((Nested)_Text).Last()}</a>";
             }
         }
     }

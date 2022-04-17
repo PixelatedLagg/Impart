@@ -10,9 +10,8 @@ namespace Impart
         FontSize,
         Margin,
         Padding,
-        HoverMessage,
-        Size,
-        Border,
-        ID
+        Width,
+        Height,
+        Border
     }
 }

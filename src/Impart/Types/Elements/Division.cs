@@ -7,60 +7,39 @@ namespace Impart
     /// <summary>Division element.</summary>
     public struct Division : Element, IDisposable
     {
-        private string _id;
+        private string _ID;
 
         /// <value>The ID value of the List.</value>
-        public string id 
-        {
-            get 
-            {
-                return _id;
-            }
-        }
-        private List<Attribute> _attributes;
-
-        /// <value>The attribute values of the List.</value>
-        public List<Attribute> attributes
-        {
-            get 
-            {
-                return _attributes;
-            }
-        }
-        private StringBuilder _style;
-        internal string style 
+        public string ID
         {
             get
             {
-                if (_style.Length == 0)
-                {
-                    return "";
-                }
-                return $" style=\"{_style.ToString()}\"";
+                return _ID;
             }
         }
-        internal StringBuilder attributeBuilder;
-        internal StringBuilder textBuilder;
-        internal StringBuilder webPageStyleBuilder;
-        internal Type elementType = typeof(Division);
+        private List<Attribute> _Attributes = new List<Attribute>();
+
+        /// <value>The attribute values of the List.</value>
+        public List<Attribute> Attributes
+        {
+            get
+            {
+                return _Attributes;
+            }
+        }
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates a Division instance.</summary>
         /// <returns>A Division instance.</returns>
         public Division(string id = null)
         {
-            if (id == null)
+            if (id != null)
             {
-                attributeBuilder = new StringBuilder();
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
-            else
-            {
-                attributeBuilder = new StringBuilder($" id=\"{id}\"");
-            }
-            _id = id;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder("overflow-x: auto; overflow-y: auto;");
-            textBuilder = new StringBuilder();
-            webPageStyleBuilder = new StringBuilder();
+            _ID = id;
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
@@ -69,7 +48,8 @@ namespace Impart
         /// <param name="value">The Attribute value(s).</param>
         public Division SetAttribute(AttributeType type, params object[] value)
         {
-            Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
+            _Attributes.Add(new Attribute(type, value));
+            Changed = true;
             return this;
         }
 
@@ -78,9 +58,9 @@ namespace Impart
         /// <param name="scrollbar">The scrollbar to add.</param>
         public Division AddScrollbar(Scrollbar scrollbar)
         {
-            if (id == null)
+            if (_ID == null)
             {
-                throw new ImpartError("To add scrollbar, division must have an ID set.");
+                throw new ImpartError("To add scrollbar, division must have an ID.");
             }
             switch (scrollbar.axis)
             {
@@ -147,10 +127,7 @@ namespace Impart
         }
 
         /// <summary>Dispose of the Division instance.</summary>
-        public void Dispose()
-        {
-            //only implemented to allow easy scope management for the dev
-        }
+        public void Dispose() { }
 
         /// <summary>Returns the instance as a String.</summary>
         /// <returns>A String instance.</returns>

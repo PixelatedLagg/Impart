@@ -1,26 +1,28 @@
+using System.Collections.Generic;
+using System.Text;
+
 namespace Impart
 {
     /// <summary>The main input class in Impart.</summary>
     public sealed class Form : Element
     {
-        private string _id;
+        private string _ID;
 
-        /// <value>The ID value of the List.</value>
-        public string id 
+        /// <value>The ID value of the Form.</value>
+        public string ID 
         {
             get 
             {
-                return _id;
+                return _ID;
             }
         }
-        private string textCache;
+        private List<FormElement> Elements = new List<FormElement>();
+        private bool Changed;
+        private string Render;
 
         /// <summary>Creates a Form instance.</summary>
         /// <returns>A Form instance.</returns>
-        public Form()
-        {
-            textCache = "<form>";
-        }
+        public Form() { }
 
         /// <summary>Add <paramref name="textFields"/> to the Form.</summary>
         /// <param name="textFields">The TextField array to add.</param>
@@ -28,8 +30,9 @@ namespace Impart
         {
             foreach (TextField tf in textFields)
             {
-                textCache += tf.textCache;
+                Elements.Add(tf);
             }
+            Changed = true;
             return this;
         }
 
@@ -40,8 +43,9 @@ namespace Impart
         {
             foreach (CheckField cf in checkFields)
             {
-                textCache += cf.textCache;
+                Elements.Add(cf);
             }
+            Changed = true;
             return this;
         }
 
@@ -51,7 +55,8 @@ namespace Impart
         /// <param name="submitField">The SubmitField to add.</param>
         public Form AddSubmitField(SubmitField submitField)
         {
-            textCache += submitField.Render();
+            Elements.Add(submitField);
+            Changed = true;
             return this;
         }
         
@@ -59,7 +64,18 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"{textCache}</form>";
+            if (!Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            StringBuilder result = new StringBuilder("<form>");
+            foreach (FormElement element in Elements)
+            {
+                result.Append(element);
+            }
+            Render = result.Append("</form>").ToString();
+            return Render;
         }
     }
 

@@ -7,74 +7,58 @@ namespace Impart
     /// <summary>Header element.</summary>
     public struct Header : Element, Nested
     {
-        private string _text;
+        private string _Text = "";
 
-        /// <value>The text value of the Text.</value>
-        public string text 
+        /// <value>The text value of the Header.</value>
+        public string TextValue 
         {
             get 
             {
-                return _text;
+                return _Text;
             }
         }
-        private string _id;
+        private string _ID = null;
 
-        /// <value>The ID value of the Text.</value>
-        public string id 
+        /// <value>The ID value of the Header.</value>
+        public string ID 
         {
             get 
             {
-                return _id;
+                return _ID;
             }
         }
-        private List<Attribute> _attributes;
+        private List<Attribute> _Attributes = new List<Attribute>();
 
-        /// <value>The attribute values of the Text.</value>
-        public List<Attribute> attributes
+        /// <value>The Attribute values of the Head.</value>
+        public List<Attribute> Attributes
         {
             get 
             {
-                return _attributes;
+                return _Attributes;
             }
         }
-        private int _number;
+        private int _Number = 1;
 
         /// <value>The Header number value of the Header.</value>
-        public int number 
+        public int Number 
         {
             get 
             {
-                return _number;
+                return _Number;
             }
-        }
-        private StringBuilder _style;
-        internal string style 
-        {
-            get
+            set
             {
-                if (_style.Length == 0)
-                {
-                    return "";
-                }
-                return $" style=\"{_style.ToString()}\"";
+                Changed = true;
+                _Number = value;
             }
         }
-        internal StringBuilder attributeBuilder;
+        private bool Changed = false;
+        private string Render;
 
         /// <summary>Creates an empty Header instance.</summary>
-        /// <returns>An Header instance.</returns>
-        public Header()
-        {
-            attributeBuilder = new StringBuilder();
-            _text = "";
-            _id = null;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            _number = 1;   
-        }
+        public Header() : this("") { }
 
-        /// <summary>Creates a Header instance with <paramref name="text"/> as the text and <paramref name="number"> as the Header number.</summary>
-        /// <returns>A Header instance.</returns>
+        /// <summary>Creates a Header instance.</summary>
         /// <param name="text">The Header text.</param>
         /// <param name="number">The Header type.</param>
         /// <param name="id">The Header ID.</param>
@@ -88,44 +72,32 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null or empty.");
             }
-            if (id != null)
-            {
-                attributeBuilder = new StringBuilder($"id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder();
-            }
-            _text = text;
-            _id = id;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            _number = number;
+            _Text = text;
+            _ID = id;
+            _Number = number;
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
-        /// <returns>A Header instance.</returns>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public Header SetAttribute(AttributeType type, params object[] value)
         {
-            Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
+            _Attributes.Add(new Attribute(type, value));
             return this;
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"<h{number}{attributeBuilder.ToString()}{style}>{text}</h{number}>";
+            return $"<h{_Number}{attributeBuilder.ToString()}{style}>{text}</h{number}>";
         }
         string Nested.First()
         {
-            return $"<h{number}{attributeBuilder.ToString()}{style}>{text}";
+            return $"<h{_Number}{attributeBuilder.ToString()}{style}>{text}";
         }
         string Nested.Last()
         {
-            return $"</h{number}>";
+            return $"</h{_Number}>";
         }
     } 
 }

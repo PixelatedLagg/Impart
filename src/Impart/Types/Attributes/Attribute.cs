@@ -1,419 +1,206 @@
 using System.Text;
-using System.Collections.Generic;
 
 namespace Impart
 {
     /// <summary>An element attribute.</summary>
     public struct Attribute
     {
-        private AttributeType _type;
+        private AttributeType _Type;
 
-        /// <value>The attribute type.</value>
-        public AttributeType type
+        /// <Value>The attribute Type.</Value>
+        public AttributeType Type
         {
             get
             {
-                return _type;
+                return _Type;
             }
         }
-        private object[] _value;
+        private object[] _Value;
 
-        /// <value>The attribute value(s).</value>
-        public object[] value
+        /// <Value>The attribute Value(s).</Value>
+        public object[] Value
         {
             get
             {
-                return _value;
+                return _Value;
             }
         }
 
-        /// <summary>Creates the attribute with the type and value(s).</summary>
+        /// <summary>Creates the attribute with the Type and Value(s).</summary>
         /// <returns>An Attribute instance.</returns>
-        /// <param name="type">The attribute type.</param>
-        /// <param name="value">The attribute value.</param>
+        /// <param name="Type">The attribute Type.</param>
+        /// <param name="Value">The attribute Value.</param>
         public Attribute(AttributeType type, params object[] value)
         {
-            _type = type;
-            _value = value;
+            _Type = type;
+            _Value = value;
         }
-        internal static void AddAttribute(ref StringBuilder attributes, ref StringBuilder style, ref List<Attribute> attributeList, AttributeType type, params object[] value)
+        
+        public override string ToString()
         {
-            switch (type)
+            switch (Type)
             {
                 case AttributeType.BackgroundColor:
-                    if (value.Length != 1)
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (Color.Convert(value[0]))
+                    return Color.Convert(Value[0]) switch
                     {
-                        case Rgb rgb:
-                            style.Append($" background-color: {rgb};");
-                            break;
-                        case Hsl hsl:
-                            style.Append($" background-color: {hsl};");
-                            break;
-                        case Hex hex:
-                            style.Append($" background-color: {hex};");
-                            break;
-                    }
-                    attributeList.Add(new Attribute(AttributeType.BackgroundColor, value[0]));
-                    break;
+                        Rgb rgb => $" background-color: {rgb};",
+                        Hsl hsl => $" background-color: {hsl};",
+                        Hex hex => $" background-color: {hex};",
+                        _ => throw new ImpartError("Invalid attribute parameters.")
+                    };
                 case AttributeType.ForegroundColor:
-                    if (value.Length != 1)
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (Color.Convert(value[0]))
+                    return Color.Convert(Value[0]) switch
                     {
-                        case Rgb rgb:
-                            style.Append($" color: {rgb};");
-                            break;
-                        case Hsl hsl:
-                            style.Append($" color: {hsl};");
-                            break;
-                        case Hex hex:
-                            style.Append($" color: {hex};");
-                            break;
-                    }
-                    attributeList.Add(new Attribute(AttributeType.ForegroundColor, value[0]));
-                    break;
+                        Rgb rgb => $" color: {rgb};",
+                        Hsl hsl => $" color: {hsl};",
+                        Hex hex => $" color: {hex};",
+                        _ => throw new ImpartError("Invalid attribute parameters.")
+                    };
                 case AttributeType.Alignment:
-                    if (value.Length != 1)
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    return Value[0] switch
                     {
-                        case Alignment.Center:
-                            style.Append(" align: center;");
-                            break;
-                        case Alignment.Justify:
-                            style.Append(" align: justify;");
-                            break;
-                        case Alignment.Left:
-                            style.Append(" align: left;");
-                            break;
-                        case Alignment.Right:
-                            style.Append(" align: right;");
-                            break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
-                    }
-                    break;
+                        Alignment.Center => " align: center;",
+                        Alignment.Justify => " align: justify;",
+                        Alignment.Left => " align: left;",
+                        Alignment.Right => " align: right;",
+                        _ => throw new ImpartError("Invalid attribute parameters.")
+                    };
                 case AttributeType.FontFamily:
-                    if (value.Length != 1)
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (value[0])
+                    return Value[0] switch
                     {
-                        case FontFamily.AndaleMono:
-                            style.Append(" font-family: Andale Mono;");
-                            break;
-                        case FontFamily.AppleChancery:
-                            style.Append(" font-family: Apple Chancery;");
-                            break;
-                        case FontFamily.Arial:
-                            style.Append(" font-family: Arial;");
-                            break;
-                        case FontFamily.AvantaGarde:
-                            style.Append(" font-family: Avanta Garde;");
-                            break;
-                        case FontFamily.Baskerville:
-                            style.Append(" font-family: Baskerville;");
-                            break;
-                        case FontFamily.BigCaslon:
-                            style.Append(" font-family: Big Caslon;");
-                            break;
-                        case FontFamily.BodoniMT:
-                            style.Append(" font-family: Bodoni MT;");
-                            break;
-                        case FontFamily.BookAntiqua:
-                            style.Append(" font-family: Book Antiqua;");
-                            break;
-                        case FontFamily.Bookman:
-                            style.Append(" font-family: Bookman;");
-                            break;
-                        case FontFamily.BradleyHand:
-                            style.Append(" font-family: Bradley Hand;");
-                            break;
-                        case FontFamily.BrushScriptMT:
-                            style.Append(" font-family: Brush Script MT;");
-                            break;
-                        case FontFamily.BrushScriptStd:
-                            style.Append(" font-family: Brush Script Std;");
-                            break;
-                        case FontFamily.Calibri:
-                            style.Append(" font-family: Calibri;");
-                            break;
-                        case FontFamily.CalistoMT:
-                            style.Append(" font-family: Calisto MT;");
-                            break;
-                        case FontFamily.Cambria:
-                            style.Append(" font-family: Cambria;");
-                            break;
-                        case FontFamily.Candara:
-                            style.Append(" font-family: Candara;");
-                            break;
-                        case FontFamily.CenturyGothic:
-                            style.Append(" font-family: Century Gothic;");
-                            break;
-                        case FontFamily.ComicSans:
-                            style.Append(" font-family: Comic Sans;");
-                            break;
-                        case FontFamily.ComicSansMS:
-                            style.Append(" font-family: Comic Sans MS;");
-                            break;
-                        case FontFamily.Consolas:
-                            style.Append(" font-family: Consolas;");
-                            break;
-                        case FontFamily.Coronetscript:
-                            style.Append(" font-family: Coronet script;");
-                            break;
-                        case FontFamily.Courier:
-                            style.Append(" font-family: Courier;");
-                            break;
-                        case FontFamily.CourierNew:
-                            style.Append(" font-family: Courier New;");
-                            break;
-                        case FontFamily.Didot:
-                            style.Append(" font-family: Didot;");
-                            break;
-                        case FontFamily.Florence:
-                            style.Append(" font-family: Florence;");
-                            break;
-                        case FontFamily.FranklinGothicMedium:
-                            style.Append(" font-family: Franklin Gothic Medium;");
-                            break;
-                        case FontFamily.Futara:
-                            style.Append(" font-family: Futara;");
-                            break;
-                        case FontFamily.Garamond:
-                            style.Append(" font-family: Garamond;");
-                            break;
-                        case FontFamily.Geneva:
-                            style.Append(" font-family: Geneva;");
-                            break;
-                        case FontFamily.Georgia:
-                            style.Append(" font-family: Georgia;");
-                            break;
-                        case FontFamily.GillSans:
-                            style.Append(" font-family: Gill Sans;");
-                            break;
-                        case FontFamily.GoudyOldStyle:
-                            style.Append(" font-family: Goudy Old Style;");
-                            break;
-                        case FontFamily.Helvetica:
-                            style.Append(" font-family: Helvetica;");
-                            break;
-                        case FontFamily.HoeflerText:
-                            style.Append(" font-family: Hoefler Text;");
-                            break;
-                        case FontFamily.LucidaBright:
-                            style.Append(" font-family: Lucida Bright;");
-                            break;
-                        case FontFamily.LucidaConsole:
-                            style.Append(" font-family: Lucida Console;");
-                            break;
-                        case FontFamily.LucidaSans:
-                            style.Append(" font-family: Lucida Sans;");
-                            break;
-                        case FontFamily.LucidaSansTypewriter:
-                            style.Append(" font-family: Lucida Sans Typewriter;");
-                            break;
-                        case FontFamily.Monaco:
-                            style.Append(" font-family: Monaco;");
-                            break;
-                        case FontFamily.NewCenturySchoolbook:
-                            style.Append(" font-family: New Century Schoolbook;");
-                            break;
-                        case FontFamily.Noto:
-                            style.Append(" font-family: Noto;");
-                            break;
-                        case FontFamily.Optima:
-                            style.Append(" font-family: Optima;");
-                            break;
-                        case FontFamily.Palatino:
-                            style.Append(" font-family: Palatino;");
-                            break;
-                        case FontFamily.Parkavenue:
-                            style.Append(" font-family: Parkavenue;");
-                            break;
-                        case FontFamily.Perpetua:
-                            style.Append(" font-family: Perpetua;");
-                            break;
-                        case FontFamily.Rockwell:
-                            style.Append(" font-family: Rockwell;");
-                            break;
-                        case FontFamily.RockwellExtraBold:
-                            style.Append(" font-family: Rockwell Extra Bold;");
-                            break;
-                        case FontFamily.SegoeUI:
-                            style.Append(" font-family: Segoe UI;");
-                            break;
-                        case FontFamily.SnellRoundhan:
-                            style.Append(" font-family: Snell Roundhan;");
-                            break;
-                        case FontFamily.TimesNewRoman:
-                            style.Append(" font-family: Times New Roman;");
-                            break;
-                        case FontFamily.TrebuchetMS:
-                            style.Append(" font-family: Trebuchet MS;");
-                            break;
-                        case FontFamily.URWChancery:
-                            style.Append(" font-family: URW Chancery;");
-                            break;
-                        case FontFamily.Verdana:
-                            style.Append(" font-family: Verdana;");
-                            break;
-                        case FontFamily.ZapfChancery:
-                            style.Append(" font-family: Zapf Chancery;");
-                            break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
-                    }
-                    attributeList.Add(new Attribute(AttributeType.FontFamily, value[0]));
-                    break;
+                        FontFamily.AndaleMono => " font-family: Andale Mono;",
+                        FontFamily.AppleChancery => " font-family: Apple Chancery;",
+                        FontFamily.Arial => " font-family: Arial;",
+                        FontFamily.AvantaGarde => " font-family: Avanta Garde;",
+                        FontFamily.Baskerville => " font-family: Baskerville;",
+                        FontFamily.BigCaslon => " font-family: Big Caslon;",
+                        FontFamily.BodoniMT => " font-family: Bodoni MT;",
+                        FontFamily.BookAntiqua => " font-family: Book Antiqua;",
+                        FontFamily.Bookman => " font-family Book Antiqua;",
+                        FontFamily.BradleyHand => " font-family: Bradley Hand;",
+                        FontFamily.BrushScriptMT => " font-family: Brush Script MT;",
+                        FontFamily.BrushScriptStd => " font-family: Brush Script Std;",
+                        FontFamily.Calibri => " font-family: Calibri;",
+                        FontFamily.CalistoMT => " font-family: Calisto MT;",
+                        FontFamily.Cambria => " font-family: Cambria;",
+                        FontFamily.Candara => " font-family: Candara;",
+                        FontFamily.CenturyGothic => " font-family: Century Gothic;",
+                        FontFamily.ComicSans => " font-family: Comic Sans;",
+                        FontFamily.ComicSansMS => " font-family: Comic Sans MS;",
+                        FontFamily.Consolas => " font-family: Consolas;",
+                        FontFamily.Coronetscript => " font-family: Coronet script;",
+                        FontFamily.Courier => " font-family: Courier;",
+                        FontFamily.CourierNew => " font-family: Courier New;",
+                        FontFamily.Didot => " font-family: Didot;",
+                        FontFamily.Florence => " font-family: Florence;",
+                        FontFamily.FranklinGothicMedium => " font-family: Franklin Gothic Medium;",
+                        FontFamily.Futara => " font-family: Futara;",
+                        FontFamily.Garamond => " font-family: Garamond;",
+                        FontFamily.Geneva => " font-family: Geneva;",
+                        FontFamily.Georgia => " font-family: Georgia;",
+                        FontFamily.GillSans => " font-family: Gill Sans;",
+                        FontFamily.GoudyOldStyle => " font-family: Goudy Old Style;",
+                        FontFamily.Helvetica => " font-family: Helvetica;",
+                        FontFamily.HoeflerText => " font-family: Hoefler Text;",
+                        FontFamily.LucidaBright => " font-family: Lucida Bright;",
+                        FontFamily.LucidaConsole => " font-family: Lucida Console;",
+                        FontFamily.LucidaSans => " font-family: Lucida Sans;",
+                        FontFamily.LucidaSansTypewriter => " font-family: Lucida Sans Typewriter;",
+                        FontFamily.Monaco => " font-family: Monaco;",
+                        FontFamily.NewCenturySchoolbook => " font-family: New Century Schoolbook;",
+                        FontFamily.Noto => " font-family: Noto;",
+                        FontFamily.Optima => " font-family: Optima;",
+                        FontFamily.Palatino => " font-family: Palatino;",
+                        FontFamily.Parkavenue => " font-family: Parkavenue;",
+                        FontFamily.Perpetua => " font-family: Perpetua;",
+                        FontFamily.Rockwell => " font-family: Rockwell;",
+                        FontFamily.RockwellExtraBold => " font-family: Rockwell Extra Bold;",
+                        FontFamily.SegoeUI => " font-family: Segoe UI;",
+                        FontFamily.SnellRoundhan => " font-family: Snell Roundhan;",
+                        FontFamily.TimesNewRoman => " font-family: Times New Roman;",
+                        FontFamily.TrebuchetMS => " font-family: Trebuchet MS;",
+                        FontFamily.URWChancery => " font-family: URW Chancery;",
+                        FontFamily.Verdana => " font-family: Verdana;",
+                        FontFamily.ZapfChancery => " font-family: Zapf Chancery;",
+                        _ => throw new ImpartError("Invalid attribute parameters.")
+                    };
                 case AttributeType.FontSize:
-                    if (value.Length != 1)
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (Measurement.Convert(value[0]))
-                    {
-                        case Percent pct:
-                            style.Append($" font-size: {pct};");
-                            break;
-                        case Pixels pxls:
-                            style.Append($" font-size: {pxls};");
-                            break;
-                    }
-                    attributeList.Add(new Attribute(AttributeType.FontFamily, value[0]));
-                    break;
+                    return $" font-size: {Measurement.Convert(Value[0])}";
                 case AttributeType.Margin:
-                    if (value.Length != 1)
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (Measurement.Convert(value[0]))
-                    {
-                        case Percent pct:
-                            style.Append($" margin: {pct};");
-                            break;
-                        case Pixels pxls:
-                            style.Append($" margin: {pxls};");
-                            break;
-                    }
-                    attributeList.Add(new Attribute(AttributeType.Margin, value[0]));
-                    break;
+                    return $" margin: {Measurement.Convert(Value[0])}";
                 case AttributeType.Padding:
-                    if (value.Length != 1)
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (Measurement.Convert(value[0]))
-                    {
-                        case Percent pct:
-                            style.Append($" padding: {pct};");
-                            break;
-                        case Pixels pxls:
-                            style.Append($" padding: {pxls};");
-                            break;
-                    }
-                    attributeList.Add(new Attribute(AttributeType.Padding, value[0]));
-                    break;
-                case AttributeType.HoverMessage:
-                    if (value.Length != 1)
+                    return $" padding: {Measurement.Convert(Value[0])}";
+                case AttributeType.Width:
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    if (value[0] as string != null)
-                    {
-                        attributes.Append($" title=\"{value[0]}\"");
-                        attributeList.Add(new Attribute(AttributeType.HoverMessage, value[0]));
-                    }
-                    else
+                    return $" width: {Measurement.Convert(Value[0])}";
+                case AttributeType.Height:
+                    if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    break;
-                case AttributeType.Size:
-                    if (value.Length != 2)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
-                    switch (Measurement.Convert(value[0]))
-                    {
-                        case Percent pct:
-                            style.Append($" width: {pct};");
-                            break;
-                        case Pixels pxls:
-                            style.Append($" width: {pxls};");
-                            break;
-                    }
-                    switch (Measurement.Convert(value[1]))
-                    {
-                        case Percent pct:
-                            style.Append($" height: {pct};");
-                            break;
-                        case Pixels pxls:
-                            style.Append($" height: {pxls};");
-                            break;
-                    }
-                    attributeList.Add(new Attribute(AttributeType.Size, value[0], value[1]));
-                    break;
+                    return $" height: {Measurement.Convert(Value[0])}";
                 case AttributeType.Border:
-                    if (value.Length != 3)
+                    if (Value.Length != 3)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (Measurement.Convert(value[0]))
-                    {
-                        case Percent pct:
-                            style.Append($" border: {pct}");
-                            break;
-                        case Pixels pxls:
-                            style.Append($" border: {pxls}");
-                            break;
-                    }
-                    switch (value[1])
+                    StringBuilder result = new StringBuilder();
+                    result.Append($" border: {Measurement.Convert(Value[0])}");
+                    switch (Value[1])
                     {
                         case Border.Dashed:
-                            style.Append($" dashed");
+                            result.Append($" dashed");
                             break;
                         case Border.Dotted:
-                            style.Append($" dotted");
+                            result.Append($" dotted");
                             break;
                         case Border.Double:
-                            style.Append($" double");
+                            result.Append($" double");
                             break;
                         case Border.In3D:
-                            style.Append($" inset");
+                            result.Append($" inset");
                             break;
                         case Border.Normal:
-                            style.Append($" solid");
+                            result.Append($" solid");
                             break;
                         case Border.Out3D:
-                            style.Append($" outset");
+                            result.Append($" outset");
                             break;
                         default:
                             throw new ImpartError("Invalid attribute parameters.");
                     }
-                    switch (Color.Convert(value[2]))
-                    {
-                        case Rgb rgb:
-                            style.Append($" {rgb};");
-                            break;
-                        case Hsl hsl:
-                            style.Append($" {hsl};");
-                            break;
-                        case Hex hex:
-                            style.Append($" {hex};");
-                            break;
-                    }
-                    attributeList.Add(new Attribute(AttributeType.Border, value[0], value[1], value[2]));
-                    break;
+                    return result.Append($" {Color.Convert(Value[2])}").ToString();
                 default:
                     throw new ImpartError("Invalid attribute parameters.");
             }

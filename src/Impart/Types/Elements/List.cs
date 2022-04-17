@@ -7,61 +7,50 @@ namespace Impart
     /// <summary>List element.</summary>
     public struct List : Element, Nested
     {
-        private string _id;
+        private string _ID;
 
         /// <value>The ID value of the List.</value>
-        public string id 
+        public string ID 
         {
             get 
             {
-                return _id;
+                return _ID;
             }
         }
-        private Dictionary<int, Text> _entries;
+        private List<Text> _Entries = new List<Text>();
 
         /// <value>The entry values of the List.</value>
-        public Dictionary<int, Text> entries 
+        public List<Text> Entries 
         {
             get 
             {
-                return _entries;
+                return _Entries;
             }
         }
-        private ListType _type;
+        private ListType _Type;
 
         /// <value>The type value of the List.</value>
-        public ListType type
+        public ListType Type
         {
             get
             {
-                return _type;
+                return _Type;
             }
         }
-        private List<Attribute> _attributes;
+        private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The attribute values of the List.</value>
-        public List<Attribute> attributes
+        public List<Attribute> Attributes
         {
             get 
             {
-                return _attributes;
+                return _Attributes;
             }
         }
-        private StringBuilder _style;
-        internal string style 
-        {
-            get
-            {
-                if (_style.Length == 0)
-                {
-                    return "";
-                }
-                return $" style=\"{_style.ToString()}\"";
-            }
-        }
-        internal StringBuilder attributeBuilder;
-        internal StringBuilder textBuilder;
-        private string listType;
+        private string _ListType;
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates a List instance with <paramref name="text"/> as the List type, and Text[] as the entries.</summary>
         /// <returns>A Text instance.</returns>
@@ -70,34 +59,48 @@ namespace Impart
         /// <param name="textEntries">The List entries.</param>
         public List(ListType type, string id = null, params Text[] textEntries)
         {
-            textBuilder = new StringBuilder(1000);
-            _entries = new Dictionary<int, Text>();
-            _type = type;
-            _attributes = new List<Attribute>();
-            _style = new StringBuilder();
-            _id = id;
+            _Type = type;
+            _ID = id;
             if (type == ListType.Ordered)
             {
-                listType = "ol";
+                _ListType = "ol";
             }
             else
             {
-                listType = "ul";
+                _ListType = "ul";
             }
             if (id != null)
             {
-                _attributes.Add(new Attribute(AttributeType.ID, id));
-                attributeBuilder = new StringBuilder($" id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder();
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
             foreach (Text text in textEntries)
             {
-                textBuilder.Append($"<li><p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p></li>");
-                _entries.Add(_entries.Count, text);
+                _Entries.Add(text);
             }
+        }
+
+        public List Add(params Text[] textEntries)
+        {
+            foreach (Text text in textEntries)
+            {
+                _Entries.Add(text);
+            }
+            Changed = true;
+            return this;
+        }
+
+        public List Remove(params Text[] textEntries)
+        {
+            foreach (Text text in textEntries)
+            {
+                if (!_Entries.Contains(text))
+                {
+                    throw new ImpartError("List does not contain this Text!");
+                }
+                _Entries.Remove(text);
+            }
+            Changed = true;
+            return this;
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
@@ -106,7 +109,8 @@ namespace Impart
         /// <param name="value">The Attribute value(s).</param>
         public List SetAttribute(AttributeType type, params object[] value)
         {
-            Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
+            _Attributes.Add(new Attribute(type, value));
+            Changed = true;
             return this;
         }
 
@@ -114,15 +118,52 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"<{listType}{attributeBuilder.ToString()}{style}>{textBuilder.ToString()}</{listType}>";
+            if (!Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            StringBuilder result = new StringBuilder($"<{_ListType}");
+            if (_Attributes.Count != 0)
+            {
+                result.Append("style=\"");
+                foreach (Attribute attribute in _Attributes)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+                foreach (ExtAttribute extAttribute in _ExtAttributes)
+                {
+                    result.Append(extAttribute);
+                }
+                result.Append('>');
+                foreach (Text text in _Entries)
+                {
+                    result.Append($"<li>{text}</li>");
+                }
+                Render = result.Append($"</{_ListType}>").ToString();
+                return Render;
+            }
+            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            {
+                result.Append(extAttribute);
+            }
+            result.Append('>');
+            foreach (Text text in _Entries)
+            {
+                result.Append($"<li>{text}</li>");
+            }
+            Render = result.Append($"</{_ListType}>").ToString();
+            return Render;
         }
         string Nested.First()
         {
-            return $"<{listType}{attributeBuilder.ToString()}{style}>{textBuilder.ToString()}";
+            string result = ToString();
+            return result.Remove(result.Length - ($"</{_ListType}>".Length) - 1);
         }
         string Nested.Last()
         {
-            return $"</{listType}>";
+            return $"</{_ListType}>";
         }
     }
 }
