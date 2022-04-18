@@ -1,6 +1,5 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Impart
 {
@@ -39,7 +38,7 @@ namespace Impart
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
-        /// <value>The attribute values of the Text.</value>
+        /// <value>The Attribute values of the Text.</value>
         public List<Attribute> Attributes
         {
             get 
@@ -74,8 +73,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Creates a Text instance with <paramref name="text"/> as the text and <paramref name="type"> as the Text type.</summary>
-        /// <returns>A Text instance.</returns>
+        /// <summary>Creates a Text instance.</summary>
         /// <param name="text">The Text text.</param>
         /// <param name="type">The Text type.</param>
         /// <param name="id">The Text ID.</param>
@@ -110,7 +108,6 @@ namespace Impart
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
-        /// <returns>A Text instance.</returns>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public Text SetAttribute(AttributeType type, params object[] value)
@@ -121,7 +118,6 @@ namespace Impart
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             if (!Changed)
@@ -129,23 +125,17 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new StringBuilder($"<{_TextType}");
             if (_Attributes.Count != 0)
             {
-                result.Append($"<{_TextType} style\")");
+                result.Append("style\")");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);
                 }
                 result.Append('"');
-                foreach (ExtAttribute extAttribute in _ExtAttributes)
-                {
-                    result.Append(extAttribute);
-                }
-                Render = result.Append($">{_Text}</{_TextType}>").ToString();
                 return Render;
             }
-            result.Append($"<{_TextType}");
             foreach (ExtAttribute extAttribute in _ExtAttributes)
             {
                 result.Append(extAttribute);

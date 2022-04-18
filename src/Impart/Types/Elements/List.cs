@@ -39,7 +39,7 @@ namespace Impart
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
-        /// <value>The attribute values of the List.</value>
+        /// <value>The Attribute values of the List.</value>
         public List<Attribute> Attributes
         {
             get 
@@ -52,8 +52,7 @@ namespace Impart
         private bool Changed = true;
         private string Render = "";
 
-        /// <summary>Creates a List instance with <paramref name="text"/> as the List type, and Text[] as the entries.</summary>
-        /// <returns>A Text instance.</returns>
+        /// <summary>Creates a List instance.</summary>
         /// <param name="type">The List type.</param>
         /// <param name="id">The List ID.</param>
         /// <param name="textEntries">The List entries.</param>
@@ -104,7 +103,6 @@ namespace Impart
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
-        /// <returns>A List instance.</returns>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public List SetAttribute(AttributeType type, params object[] value)
@@ -115,7 +113,6 @@ namespace Impart
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             if (!Changed)

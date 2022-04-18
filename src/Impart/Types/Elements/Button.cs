@@ -7,14 +7,19 @@ namespace Impart
     /// <summary>Button element.</summary>
     public struct Button : Element, Nested
     {
-        private List<Attribute> _attributes;
+        private Text _Text;
 
-        /// <value>The attribute values of the Button.</value>
-        public List<Attribute> attributes
+        /// <value>The Text value of the Button.</value>
+        public Text Text 
         {
             get 
             {
-                return _attributes;
+                return _Text;
+            }
+            set
+            {
+                Changed = true;
+                _Text = value;
             }
         }
 
@@ -27,82 +32,81 @@ namespace Impart
             {
                 return _ID;
             }
+            set
+            {
+                Changed = true;
+                _ID = value;
+            }
         }
-        internal StringBuilder attributeBuilder;
-        internal StringBuilder textBuilder;
+        private List<Attribute> _Attributes = new List<Attribute>();
+
+        /// <value>The attribute values of the Button.</value>
+        public List<Attribute> Attributes
+        {
+            get 
+            {
+                return _Attributes;
+            }
+        }
+
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates an empty Button instance.</summary>
-        /// <returns>An Button instance.</returns>
-        public Button()
-        {
-            textBuilder = new StringBuilder();
-            _ID = null;
-            _style = new StringBuilder();
-            _attributes = new List<Attribute>();
-            attributeBuilder = new StringBuilder(" type=\"button\">");
-        }
+        public Button() : this(new Text("")) { }
 
-        /// <summary>Creates a Button instance with <paramref name="text"/> as the Button text.</summary>
-        /// <returns>A Button instance.</returns>
+        /// <summary>Creates a Button instance.</summary>
         /// <param name="text">The Button text.</param>
         /// <param name="id">The Button ID.</param>
         public Button(Text text, string id = null)
         {
-            textBuilder = new StringBuilder();
-            if (text.id == null)
-            {
-                textBuilder.Append($"<p{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>");
-            }
-            else
-            {
-                textBuilder.Append($"<p id=\"{text.id}\"{text.attributeBuilder.ToString()}{text.style}>{text.text}</p>");
-            }
-            _id = id;
-            _style = new StringBuilder();
-            _attributes = new List<Attribute>();
+            _Text = text;
+            _ID = id;
             if (id != null)
             {
-                attributeBuilder = new StringBuilder($" type=\"button\"> id=\"{id}\"");
-            }
-            else
-            {
-                attributeBuilder = new StringBuilder(" type=\"button\">");
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
-        /// <returns>A Button instance.</returns>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public Button SetAttribute(AttributeType type, params object[] value)
         {
-            _attributes.Add(new Attribute(type, value));
+            _Attributes.Add(new Attribute(type, value));
             return this;
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            if (_attributes.Count != 0)
+            if (!Changed)
             {
-                StringBuilder style = new StringBuilder();
-                foreach (Attribute attribute in _attributes)
-                {
-                    style.Append(attribute);
-                }
-                return $"<button style=\"{style.ToString()}\">{textBuilder.ToString()}</button>";
+                return Render;
             }
-            return $"<button>{textBuilder.ToString()}</button>";
+            Changed = false;
+            StringBuilder result = new StringBuilder("<button");
+            if (_Attributes.Count != 0)
+            {
+                result.Append(" style\"");
+                foreach (Attribute attribute in _Attributes)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            {
+                result.Append(extAttribute);
+            }
+            Render = result.Append($">{_Text}</button>").ToString();
+            return Render;
         }
         string Nested.First()
         {
-            StringBuilder style = new StringBuilder();
-            foreach (Attribute attribute in _attributes)
-            {
-                style.Append(attribute);
-            }
-            return $"<button style=\"{style.ToString()}\">{textBuilder.ToString()}</button>";
+            string result = ToString();
+            return result.Remove(result.Length - ("</{button}>".Length) - 1);
         }
         string Nested.Last()
         {

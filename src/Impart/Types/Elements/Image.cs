@@ -1,71 +1,58 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
+using System;
 
 namespace Impart
 {
     /// <summary>Image element.</summary>
     public struct Image : Element, Nested
     {
-        private StringBuilder _style;
-        internal string style 
-        {
-            get
-            {
-                if (_style.ToString() == "")
-                {
-                    return "";
-                }
-                return $" style=\"{_style.ToString()}\"";
-            }
-        }
-        private string _path;
+        private string _Path;
 
         /// <value>The path value of the Image.</value>
-        public string path 
+        public string Path 
         {
             get 
             {
-                return _path;
+                return _Path;
             }
         }
 
-        private List<Attribute> _attributes;
-
-        /// <value>The attribute values of the List.</value>
-        public List<Attribute> attributes
-        {
-            get 
-            {
-                return _attributes;
-            }
-        }
-        private string _id;
+        private string _ID;
 
         /// <value>The ID value of the Image.</value>
-        public string id 
+        public string ID
         {
             get 
             {
-                return _id;
+                return _ID;
+            }
+            set
+            {
+                Changed = true;
+                _ID = value;
             }
         }
-        internal StringBuilder attributeBuilder;
-        internal Type elementType = typeof(Image);
+        
+        private List<Attribute> _Attributes = new List<Attribute>();
+
+        /// <value>The Attribute values of the Image.</value>
+        public List<Attribute> Attributes
+        {
+            get 
+            {
+                return _Attributes;
+            }
+        }
+
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates an empty Image instance.</summary>
-        /// <returns>An Image instance.</returns>
-        public Image()
-        {
-            attributeBuilder = new StringBuilder();
-            _path = "";
-            _style = new StringBuilder();
-            _attributes = new List<Attribute>();
-            _id = null;
-        }
+        public Image() : this("") { }
         
-        /// <summary>Creates an Image instance with <paramref name="path"/> as the Image path.</summary>
-        /// <returns>An Image instance.</returns>
+        /// <summary>Creates an Image instance.</summary>
         /// <param name="path">The Image path.</param>
         /// <param name="id">The Image ID.</param>
         public Image(string path, string id = null)
@@ -76,37 +63,51 @@ namespace Impart
             }
             if (id != null)
             {
-                attributeBuilder = new StringBuilder($" id=\"{id}\"");
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
-            else
-            {
-                attributeBuilder = new StringBuilder();
-            }
-            _path = path;
-            _style = new StringBuilder();
-            _attributes = new List<Attribute>();
-            _id = id;
+            _Path = path;
+            _ID = id;
         }
 
         /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
-        /// <returns>An Image instance.</returns>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public Image SetAttribute(AttributeType type, params object[] value)
         {
-            Attribute.AddAttribute(ref attributeBuilder, ref _style, ref _attributes, type, value);
+            _Attributes.Add(new Attribute(type, value));
+            Changed = true;
             return this;
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            return $"<img src=\"{path}\"{attributeBuilder.ToString()}{style}>";
+            if (!Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            StringBuilder result = new StringBuilder($"<img src=\"{_Path}\"");
+            if (_Attributes.Count != 0)
+            {
+                result.Append($"style=\"");
+                foreach (Attribute attribute in _Attributes)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+                return Render;
+            }
+            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            {
+                result.Append(extAttribute);
+            }
+            Render = result.Append('>').ToString();
+            return Render;
         }
         string Nested.First()
         {
-            return $"<img src=\"{path}\"{attributeBuilder.ToString()}{style}>";
+            return ToString();
         }
         string Nested.Last()
         {

@@ -50,7 +50,7 @@ namespace Impart
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
-        /// <value>The attribute values of the Link.</value>
+        /// <value>The Attribute values of the Link.</value>
         public List<Attribute> Attributes
         {
             get 

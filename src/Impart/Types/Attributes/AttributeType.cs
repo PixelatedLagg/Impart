@@ -12,6 +12,8 @@ namespace Impart
         Padding,
         Width,
         Height,
-        Border
+        Border,
+        OverflowX,
+        OverflowY
     }
 }

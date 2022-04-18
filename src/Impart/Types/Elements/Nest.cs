@@ -21,15 +21,13 @@ namespace Impart
         private List<Nested> _nested;
 
         /// <summary>Creates an empty Nest instance.</summary>
-        /// <returns>A Nest instance.</returns>
         public Nest()
         {
             _nested = new List<Nested>();
             _elements = new List<Element>();
         }
 
-        /// <summary>Creates a Nest instance with <paramref name="elements"/> as the Elements nested.</summary>
-        /// <returns>A Nest instance.</returns>
+        /// <summary>Creates a Nest instance.</summary>
         /// <param name="elements">The Elements to add to the Nest.</param>
         public Nest(params Element[] elements)
         {
@@ -52,7 +50,6 @@ namespace Impart
         }
 
         /// <summary>Adds <paramref name="elements"> to the Nest.</summary>
-        /// <returns>A Nest instance.</returns>
         /// <param name="elements">The Elements to add to the Nest.</param>
         public Nest Add(params Element[] elements)
         {
@@ -74,7 +71,6 @@ namespace Impart
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();

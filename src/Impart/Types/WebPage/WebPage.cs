@@ -44,10 +44,22 @@ namespace Impart
                 return _DefaultPadding;
             }
         }
-        private List<(string id, Element element)> Elements = new List<(string id, Element element)>();
-        private Dictionary<string, string> Styles = new Dictionary<string, string>();
-        private List<string> Includes = new List<string>();
-        private StringBuilder ScrollbarCache = new StringBuilder();
+
+        private List<Attribute> _Attributes = new List<Attribute>();
+
+        /// <value>The Attribute values of the WebPage.</value>
+        public List<Attribute> Attributes
+        {
+            get 
+            {
+                return _Attributes;
+            }
+        }
+
+        private List<(string id, Element element)> _Elements = new List<(string id, Element element)>();
+        private Dictionary<string, string> _Styles = new Dictionary<string, string>();
+        private List<string> _Includes = new List<string>();
+        private StringBuilder _ScrollbarCache = new StringBuilder();
         private bool Changed = true;
         private string Render;
 
@@ -58,7 +70,7 @@ namespace Impart
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
         {
-            Styles.Add(style.ID, style.ToString());
+            _Styles.Add(style.ID, style.ToString());
             Changed = true;
         }
 
@@ -66,7 +78,7 @@ namespace Impart
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
-            Elements.Add((text.ID, text));
+            _Elements.Add((text.ID, text));
             Changed = true;
         }
 
@@ -74,7 +86,7 @@ namespace Impart
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
-            Elements.Add((image.id, image));
+            _Elements.Add((image.ID, image));
             Changed = true;
         }
 
@@ -82,7 +94,7 @@ namespace Impart
         /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
-            Elements.Add((header.ID, header));
+            _Elements.Add((header.ID, header));
             Changed = true;
         }
 
@@ -90,7 +102,7 @@ namespace Impart
         /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
-            Elements.Add((link.id, link));
+            _Elements.Add((link.ID, link));
             Changed = true;
         }
 
@@ -99,7 +111,7 @@ namespace Impart
         /// <param name="obj">An array of strings to add as entries.</param>
         protected void AddTable(int rowNum, params string[] obj)
         {
-            if (rowNum > obj.Length)
+            /*if (rowNum > obj.Length)
             {
                 throw new ImpartError("Number of table rows cannot be bigger than number of table entries!");
             }
@@ -149,7 +161,7 @@ namespace Impart
                 tempBuilder.Append($"</tr>");
             }
             textBuilder.Append($"{tempBuilder.ToString()}</table>");
-            Changed = true;
+            Changed = true;*/
         }
 
         /// <summary>Add a Division.</summary>
@@ -158,9 +170,9 @@ namespace Impart
         {
             if (division.ID != null)
             {
-                Styles.Add(division.ID, division.webPageStyleBuilder.ToString());
+                _Styles.Add(division.ID, division._ScrollbarCache.ToString());
             }
-            Elements.Add((division.ID, division));
+            _Elements.Add((division.ID, division));
             Changed = true;
         }
 
@@ -168,7 +180,7 @@ namespace Impart
         /// <param name="list">The List instance to add.</param>
         protected void AddList(List list)
         {
-            Elements.Add((list.ID, list));
+            _Elements.Add((list.ID, list));
             Changed = true;
         }
 
@@ -176,25 +188,26 @@ namespace Impart
         /// <param name="scrollbar">The Scrollbar instance to add.</param>
         protected void SetScrollBar(Scrollbar scrollbar)
         {
+            _ScrollbarCache.Clear();
             switch (scrollbar.axis)
             {
                 case Axis.X:
-                    ScrollbarCache.Append(" overflow-x: auto;");
+                    _Attributes.Add(new Attribute(AttributeType.OverflowX, true));
                     break;
                 case Axis.Y:
-                    ScrollbarCache.Append(" overflow-y: auto;");
+                    _Attributes.Add(new Attribute(AttributeType.OverflowY, true));
                     break;
                 default:
                     throw new ImpartError("Invalid axis!");
             }
-            ScrollbarCache.Append($"::-webkit-scrollbar {{width: {scrollbar.width};background-color: #808080; }}::-webkit-scrollbar-track{{background-color: {scrollbar.bgColor};}}::-webkit-scrollbar-thumb {{background-color: {scrollbar.fgColor};");
+            _ScrollbarCache.Append($"::-webkit-scrollbar {{width: {scrollbar.width};background-color: #808080; }}::-webkit-scrollbar-track{{background-color: {scrollbar.bgColor};}}::-webkit-scrollbar-thumb {{background-color: {scrollbar.fgColor};");
             if (scrollbar.radius != null)
             {
-                ScrollbarCache.Append($"border-radius: {scrollbar.radius}%;}}");
+                _ScrollbarCache.Append($"border-radius: {scrollbar.radius};}}");
             }
             else
             {
-                ScrollbarCache.Append('}');
+                _ScrollbarCache.Append('}');
             }
             Changed = true;
         }
@@ -203,7 +216,7 @@ namespace Impart
         /// <param name="form">The Form instance to add.</param>
         protected void AddForm(Form form)
         {
-            Elements.Add((form.ID, form));
+            _Elements.Add((form.ID, form));
             Changed = true;
         }
 
@@ -211,7 +224,7 @@ namespace Impart
         /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
-            Elements.Add((button.ID, button));
+            _Elements.Add((button.ID, button));
             Changed = true;
         }
 
@@ -219,7 +232,7 @@ namespace Impart
         /// <param name="nest">The Nest instance to add.</param>
         protected void AddNest(Nest nest)
         {
-            Elements.Add((null, nest));
+            _Elements.Add((null, nest));
             Changed = true;
         }
 
@@ -227,7 +240,7 @@ namespace Impart
         /// <param name="url">The url of the document to add.</param>
         protected void AddExternalStyle(string url)
         {
-            Includes.Add(url);
+            _Includes.Add(url);
             Changed = true;
         }
 
@@ -239,23 +252,27 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder main = new StringBuilder("<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart --><!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\">");
-            foreach (string i in Includes)
+            StringBuilder result = new StringBuilder("<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart --><!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\">");
+            foreach (string i in _Includes)
             {
-                main.Append($"<link rel=\"stylesheet\" href=\"{i}\">");
+                result.Append($"<link rel=\"stylesheet\" href=\"{i}\">");
             }
-            main.Append("<style>");
-            foreach (KeyValuePair<string, string> s in Styles)
+            result.Append($"<style>{_ScrollbarCache.ToString()}");
+            foreach (KeyValuePair<string, string> s in _Styles)
             {
-                main.Append(s.Value);
+                result.Append(s.Value);
             }
-            main.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style><body>");
-            foreach ((string id, Element element) e in Elements)
+            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style><body");
+            foreach (Attribute attribute in _Attributes)
             {
-                main.Append(e.element);
+                result.Append(attribute);
             }
-            main.Append("</body></html>");
-            Render = main.ToString();
+            result.Append('>');
+            foreach ((string id, Element element) e in _Elements)
+            {
+                result.Append(e.element);
+            }
+            Render = result.Append("</body></html>").ToString();
             return Render;
         }
     }

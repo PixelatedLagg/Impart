@@ -201,6 +201,26 @@ namespace Impart
                             throw new ImpartError("Invalid attribute parameters.");
                     }
                     return result.Append($" {Color.Convert(Value[2])}").ToString();
+                case AttributeType.OverflowX:
+                    if (Value.Length != 1)
+                    {
+                        throw new ImpartError("Invalid attribute parameters.");
+                    }
+                    if ((bool)Value[0])
+                    {
+                        return " overflow-x: auto";
+                    }
+                    return " overflow-x: hidden";
+                case AttributeType.OverflowY:
+                    if (Value.Length != 1)
+                    {
+                        throw new ImpartError("Invalid attribute parameters.");
+                    }
+                    if ((bool)Value[0])
+                    {
+                        return " overflow-y: auto";
+                    }
+                    return " overflow-y: hidden";
                 default:
                     throw new ImpartError("Invalid attribute parameters.");
             }
