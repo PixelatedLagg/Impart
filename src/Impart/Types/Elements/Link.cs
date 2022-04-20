@@ -149,6 +149,7 @@ namespace Impart
             Render = result.ToString();
             return Render;
         }
+        
         string Nested.First()
         {
             string result = ToString();
@@ -161,6 +162,7 @@ namespace Impart
                 return result.Remove(result.Length - ($"{((Nested)_Text).Last()}</a>".Length) - 1);
             }
         }
+
         string Nested.Last()
         {
             if (_LinkType == typeof(Image))

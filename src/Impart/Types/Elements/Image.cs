@@ -105,10 +105,12 @@ namespace Impart
             Render = result.Append('>').ToString();
             return Render;
         }
+
         string Nested.First()
         {
             return ToString();
         }
+        
         string Nested.Last()
         {
             return "</img>";

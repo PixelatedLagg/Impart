@@ -143,11 +143,13 @@ namespace Impart
             Render = result.Append($">{_Text}</{_TextType}>").ToString();
             return Render;
         }
+
         string Nested.First()
         {
             string result = ToString();
             return result.Remove(result.Length - ($"</{_TextType}>".Length) - 1);
         }
+        
         string Nested.Last()
         {
             return $"</{_TextType}>";

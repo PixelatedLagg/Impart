@@ -66,6 +66,40 @@ namespace Impart
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
 
+        protected Element GetElement(string id)
+        {
+            foreach ((string _id, Element _e) element in _Elements)
+            {
+                if (element._id == id)
+                {
+                    return element._e;
+                }
+            }
+            return null;
+        }
+
+        protected void RemoveElement(string id)
+        {
+            foreach ((string _id, Element _e) element in _Elements)
+            {
+                if (element._id == id)
+                {
+                    _Elements.Remove(element);
+                }
+            }
+        }
+
+        protected void RemoveElement(Element e)
+        {
+            foreach ((string _id, Element _e) element in _Elements)
+            {
+                if (element._e == e)
+                {
+                    _Elements.Remove(element);
+                }
+            }
+        }
+
         /// <summary>Add a Style.</summary>
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
@@ -210,6 +244,11 @@ namespace Impart
                 _ScrollbarCache.Append('}');
             }
             Changed = true;
+        }
+
+        protected void RemoveScrollBar()
+        {
+            _ScrollbarCache.Clear();
         }
 
         /// <summary>Add <paramref name="form"/> to the WebPage.</summary>

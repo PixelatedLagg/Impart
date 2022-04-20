@@ -103,11 +103,13 @@ namespace Impart
             Render = result.Append($">{_Text}</button>").ToString();
             return Render;
         }
+        
         string Nested.First()
         {
             string result = ToString();
             return result.Remove(result.Length - ("</{button}>".Length) - 1);
         }
+
         string Nested.Last()
         {
             return "</button>";
