@@ -1,6 +1,6 @@
 namespace Impart
 {
-    internal static class IOID
+    internal static class Ioid
     {
         private static int Count = 0;
         internal static int Generate()

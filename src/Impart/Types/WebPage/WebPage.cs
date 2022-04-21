@@ -100,6 +100,17 @@ namespace Impart
             }
         }
 
+        protected void ChangeElement(Element element)
+        {
+            foreach ((string _id, Element _e) e in _Elements)
+            {
+                if (e._e)
+                {
+                    _Elements[_Elements.IndexOf(e)] = (null, null);
+                }
+            }
+        }
+
         /// <summary>Add a Style.</summary>
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
@@ -283,7 +294,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Returns the String equivalent of this WebPage instance.</summary>
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
             if (!Changed)

@@ -50,6 +50,15 @@ namespace Impart
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
+        private int IOIDValue = Ioid.Generate();
+        int Element.IOID
+        {
+            get
+            {
+                return IOIDValue;
+            }
+            set { }
+        }
 
         /// <summary>Creates an empty Text instance.</summary>
         public Text() : this("") {}
