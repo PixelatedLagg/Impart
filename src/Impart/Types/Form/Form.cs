@@ -15,10 +15,23 @@ namespace Impart
             {
                 return _ID;
             }
+            set
+            {
+                Changed = true;
+                _ID = value;
+            }
         }
         private List<FormElement> Elements = new List<FormElement>();
         private bool Changed;
         private string Render;
+        private int IOIDValue = Ioid.Generate();
+        int Element.IOID
+        {
+            get
+            {
+                return IOIDValue;
+            }
+        }
 
         /// <summary>Creates a Form instance.</summary>
         /// <returns>A Form instance.</returns>

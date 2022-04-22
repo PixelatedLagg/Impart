@@ -15,6 +15,11 @@ namespace Impart
             {
                 return _Text;
             }
+            set
+            {
+                Changed = true;
+                _Text = value;
+            }
         }
         private string _ID;
 
@@ -24,6 +29,11 @@ namespace Impart
             get 
             {
                 return _ID;
+            }
+            set
+            {
+                Changed = true;
+                _ID = value;
             }
         }
         private TextType _Type;
@@ -57,7 +67,6 @@ namespace Impart
             {
                 return IOIDValue;
             }
-            set { }
         }
 
         /// <summary>Creates an empty Text instance.</summary>

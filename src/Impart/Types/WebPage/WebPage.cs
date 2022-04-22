@@ -17,8 +17,8 @@ namespace Impart
             }
             set
             {
-                _Title = value;
                 Changed = true;
+                _Title = value;
             }
         }
 
@@ -31,8 +31,8 @@ namespace Impart
             }
             set
             {
-                _DefaultMargin = value;
                 Changed = true;
+                _DefaultMargin = value;
             }
         }
 
@@ -42,6 +42,11 @@ namespace Impart
             get
             {
                 return _DefaultPadding;
+            }
+            set
+            {
+                Changed = true;
+                _DefaultPadding = value;
             }
         }
 
@@ -56,7 +61,7 @@ namespace Impart
             }
         }
 
-        private List<(string id, Element element)> _Elements = new List<(string id, Element element)>();
+        private List<Element> _Elements = new List<Element>();
         private Dictionary<string, string> _Styles = new Dictionary<string, string>();
         private List<string> _Includes = new List<string>();
         private StringBuilder _ScrollbarCache = new StringBuilder();
@@ -66,47 +71,74 @@ namespace Impart
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
 
-        protected Element GetElement(string id)
+        protected bool ElementExists(Element element)
         {
-            foreach ((string _id, Element _e) element in _Elements)
+            foreach (Element entry in _Elements)
             {
-                if (element._id == id)
+                if (entry.IOID == element.IOID)
                 {
-                    return element._e;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected bool ElementExistsByID(string id)
+        {
+            foreach (Element entry in _Elements)
+            {
+                if (entry.ID == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected Element GetElementByID(string id)
+        {
+            foreach (Element entry in _Elements)
+            {
+                if (entry.ID == id)
+                {
+                    return entry;
                 }
             }
             return null;
         }
 
-        protected void RemoveElement(string id)
+        protected void RemoveElementByID(string id)
         {
-            foreach ((string _id, Element _e) element in _Elements)
+            foreach (Element entry in _Elements.ToArray())
             {
-                if (element._id == id)
+                if (entry.ID == id)
                 {
-                    _Elements.Remove(element);
+                    Changed = true;
+                    _Elements.Remove(entry);
                 }
             }
         }
 
-        protected void RemoveElement(Element e)
+        protected void RemoveElement(Element element)
         {
-            foreach ((string _id, Element _e) element in _Elements)
+            foreach (Element entry in _Elements.ToArray())
             {
-                if (element._e == e)
+                if (entry.IOID == element.IOID)
                 {
-                    _Elements.Remove(element);
+                    Changed = true;
+                    _Elements.Remove(entry);
                 }
             }
         }
 
         protected void ChangeElement(Element element)
         {
-            foreach ((string _id, Element _e) e in _Elements)
+            foreach (Element entry in _Elements.ToArray())
             {
-                if (e._e)
+                if (entry.IOID == element.IOID)
                 {
-                    _Elements[_Elements.IndexOf(e)] = (null, null);
+                    Changed = true;
+                    _Elements[_Elements.IndexOf(entry)] = element;
                 }
             }
         }
@@ -123,7 +155,7 @@ namespace Impart
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
-            _Elements.Add((text.ID, text));
+            _Elements.Add(text);
             Changed = true;
         }
 
@@ -131,7 +163,7 @@ namespace Impart
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
-            _Elements.Add((image.ID, image));
+            _Elements.Add(image);
             Changed = true;
         }
 
@@ -139,7 +171,7 @@ namespace Impart
         /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
-            _Elements.Add((header.ID, header));
+            _Elements.Add(header);
             Changed = true;
         }
 
@@ -147,7 +179,7 @@ namespace Impart
         /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
-            _Elements.Add((link.ID, link));
+            _Elements.Add(link);
             Changed = true;
         }
 
@@ -217,7 +249,7 @@ namespace Impart
             {
                 _Styles.Add(division.ID, division._ScrollbarCache.ToString());
             }
-            _Elements.Add((division.ID, division));
+            _Elements.Add(division);
             Changed = true;
         }
 
@@ -225,7 +257,7 @@ namespace Impart
         /// <param name="list">The List instance to add.</param>
         protected void AddList(List list)
         {
-            _Elements.Add((list.ID, list));
+            _Elements.Add(list);
             Changed = true;
         }
 
@@ -266,7 +298,7 @@ namespace Impart
         /// <param name="form">The Form instance to add.</param>
         protected void AddForm(Form form)
         {
-            _Elements.Add((form.ID, form));
+            _Elements.Add(form);
             Changed = true;
         }
 
@@ -274,7 +306,7 @@ namespace Impart
         /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
-            _Elements.Add((button.ID, button));
+            _Elements.Add(button);
             Changed = true;
         }
 
@@ -282,7 +314,7 @@ namespace Impart
         /// <param name="nest">The Nest instance to add.</param>
         protected void AddNest(Nest nest)
         {
-            _Elements.Add((null, nest));
+            _Elements.Add(nest);
             Changed = true;
         }
 
@@ -318,9 +350,9 @@ namespace Impart
                 result.Append(attribute);
             }
             result.Append('>');
-            foreach ((string id, Element element) e in _Elements)
+            foreach (Element entry in _Elements)
             {
-                result.Append(e.element);
+                result.Append(entry);
             }
             Render = result.Append("</body></html>").ToString();
             return Render;

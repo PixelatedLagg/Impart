@@ -1,11 +1,10 @@
-using System;
-
 namespace Impart
 {
     /// <summary>Element interface.</summary>
     public interface Element 
     {
-        int IOID { get; set; }
+        public int IOID { get; }
+        public string ID { get; set; }
     }
 
     internal interface Nested 

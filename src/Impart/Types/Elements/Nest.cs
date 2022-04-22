@@ -19,6 +19,22 @@ namespace Impart
         }
         internal Type elementType = typeof(Nest);
         private List<Nested> _nested;
+        string Element.ID
+        {
+            get
+            {
+                return null;
+            }
+            set { }
+        }
+        private int IOIDValue = Ioid.Generate();
+        int Element.IOID
+        {
+            get
+            {
+                return IOIDValue;
+            }
+        }
 
         /// <summary>Creates an empty Nest instance.</summary>
         public Nest()

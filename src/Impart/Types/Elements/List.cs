@@ -16,6 +16,11 @@ namespace Impart
             {
                 return _ID;
             }
+            set
+            {
+                Changed = true;
+                _ID = value;
+            }
         }
         private List<Text> _Entries = new List<Text>();
 
@@ -51,6 +56,14 @@ namespace Impart
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
+        private int IOIDValue = Ioid.Generate();
+        int Element.IOID
+        {
+            get
+            {
+                return IOIDValue;
+            }
+        }
 
         /// <summary>Creates a List instance.</summary>
         /// <param name="type">The List type.</param>

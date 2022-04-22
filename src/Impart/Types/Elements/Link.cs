@@ -37,6 +37,11 @@ namespace Impart
             {
                 return _ID;
             }
+            set
+            {
+                Changed = true;
+                _ID = value;
+            }
         }
         private string _Path;
 
@@ -62,6 +67,14 @@ namespace Impart
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
+        private int IOIDValue = Ioid.Generate();
+        int Element.IOID
+        {
+            get
+            {
+                return IOIDValue;
+            }
+        }
 
         /// <summary>Creates an empty Link instance.</summary>
         public Link() : this(new Text(), Directory.GetCurrentDirectory()) {}

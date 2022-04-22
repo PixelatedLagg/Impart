@@ -16,6 +16,11 @@ namespace Impart
             {
                 return _ID;
             }
+            set
+            {
+                Changed = true;
+                _ID = value;
+            }
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
@@ -32,6 +37,14 @@ namespace Impart
         internal StringBuilder _ScrollbarCache = new StringBuilder();
         private bool Changed = true;
         private string Render = "";
+        private int IOIDValue = Ioid.Generate();
+        int Element.IOID
+        {
+            get
+            {
+                return IOIDValue;
+            }
+        }
 
         /// <summary>Creates a Division instance.</summary>
         public Division(string id = null)
