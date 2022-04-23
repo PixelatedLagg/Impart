@@ -1,35 +1,16 @@
-using System;
-
 namespace Impart
 {
     /// <summary>Scrollbar element.</summary>
-    public struct Scrollbar : Element
+    public struct Scrollbar
     {
         internal Axis axis;
         internal Measurement width;
         internal Color bgColor;
         internal Color fgColor;
         internal Measurement radius = null;
-        private int IOIDValue = Ioid.Generate();
-        string Element.ID
-        {
-            get
-            {
-                return null;
-            }
-            set { }
-        }
-        int Element.IOID
-        {
-            get
-            {
-                return IOIDValue;
-            }
-        }
         
         /// <summary>Creates a Division instance with <paramref name="axis"> as the axis, <paramref name="width"> as the width, 
         /// <paramref name="bgColor"> as the background color, <paramref name="fgColor"> as the foreground color, and <paramref name="radius"> as the optional radius of the top and bottom of the thumb.</summary>
-        /// <returns>A Scrollbar instance.</returns>
         /// <param name="axis">The axis of the scrollbar.</param>
         /// <param name="width">The width of the scrollbar.</param>
         /// <param name="bgColor">The background color of the scrollbar.</param>

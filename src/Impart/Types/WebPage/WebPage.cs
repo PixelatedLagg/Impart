@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Text;
-using System;
+using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -61,6 +61,7 @@ namespace Impart
             }
         }
 
+        internal Script _Script = new Script("");
         private List<Element> _Elements = new List<Element>();
         private Dictionary<string, string> _Styles = new Dictionary<string, string>();
         private List<string> _Includes = new List<string>();
