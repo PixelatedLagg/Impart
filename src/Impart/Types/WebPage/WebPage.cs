@@ -355,7 +355,7 @@ namespace Impart
             {
                 result.Append(entry);
             }
-            Render = result.Append("</body></html>").ToString();
+            Render = result.Append($"</body>{_Script}</html>").ToString();
             return Render;
         }
     }
