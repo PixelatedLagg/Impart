@@ -18,10 +18,9 @@ namespace Impart.Api
         private ErrorType _Type;
         private Socket Socket;
 
-        /// <summary>Creates an ErrorContext instance with <paramref name="socket"/> as the socket, and <paramref name="type"/> as the error type.</summary>
-        /// <returns>An ErrorContext instance.</returns>
-        /// <param name="socket">The socket handling the API.</param>
-        /// <param name="type">The error type.</param>
+        /// <summary>Creates an ErrorContext instance.</summary>
+        /// <param name="socket">The Socket handling the API.</param>
+        /// <param name="type">The ErrorType.</param>
         public ErrorContext(Socket socket, ErrorType type)
         {
             Socket = socket;

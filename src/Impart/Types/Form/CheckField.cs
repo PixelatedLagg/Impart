@@ -8,7 +8,6 @@ namespace Impart
         private string Render;
 
         /// <summary>Creates a CheckField instance with <paramref name="text"/> as the text and <paramref name="inputid"/> as the ID.</summary>
-        /// <returns>A CheckField instance.</returns>
         /// <param name="text">The CheckField text.</param>
         /// <param name="inputid">The CheckField ID.</param>
         public CheckField(string text, string inputid)
@@ -21,7 +20,6 @@ namespace Impart
         }
 
         /// <summary>Creates a CheckField instance with <paramref name="text"/> as the text and <paramref name="inputid"/> as the ID.</summary>
-        /// <returns>A CheckField instance.</returns>
         /// <param name="text">The CheckField text.</param>
         /// <param name="inputid">The CheckField ID.</param>
         /// <param name="inputid">The CheckField style ID.</param>

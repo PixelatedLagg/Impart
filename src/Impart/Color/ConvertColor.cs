@@ -6,7 +6,6 @@ namespace Impart
     public static class ConvertColor
     {
         /// <summary>Converts a Rgb instance to Hsl.</summary>
-        /// <returns>A Hsl instance.</returns>
         /// <param name="rgb">The Rgb value to convert.</param>
         public static Hsl ToHsl(this Rgb rgb)
         {
@@ -53,7 +52,6 @@ namespace Impart
         }
 
         /// <summary>Converts a Rgb instance to Hex.</summary>
-        /// <returns>A Hex instance.</returns>
         /// <param name="rgb">The Rgb value to convert.</param>
         public static Hex ToHex(this Rgb rgb)
         {
@@ -63,7 +61,6 @@ namespace Impart
         }
 
         /// <summary>Converts a Hsl instance to Rgb.</summary>
-        /// <returns>A Rgb instance.</returns>
         /// <param name="hsl">The Hsl value to convert.</param>
         public static Rgb ToRgb(this Hsl hsl)
         {
@@ -91,7 +88,6 @@ namespace Impart
         }
 
         /// <summary>Converts a Hsl instance to Hex.</summary>
-        /// <returns>A Hex instance.</returns>
         /// <param name="hsl">The Hsl value to convert.</param>
         public static Hex ToHex(this Hsl hsl)
         {
@@ -99,7 +95,6 @@ namespace Impart
         }
 
         /// <summary>Converts a Hex instance to Rgb.</summary>
-        /// <returns>A Rgb instance.</returns>
         /// <param name="hex">The Hex value to convert.</param>
         public static Rgb ToRgb(this Hex hex)
         {
@@ -108,7 +103,6 @@ namespace Impart
         }
 
         /// <summary>Converts a Color instance to Rgb.</summary>
-        /// <returns>A Rgb instance.</returns>
         /// <param name="color">The Color value to convert.</param>
         public static Rgb ToRgb(this Color color)
         {
@@ -120,7 +114,6 @@ namespace Impart
         }
 
         /// <summary>Converts a Color instance to Hsl.</summary>
-        /// <returns>A Hsl instance.</returns>
         /// <param name="color">The Color value to convert.</param>
         public static Hsl ToHsl(this Color color)
         {
@@ -132,7 +125,6 @@ namespace Impart
         }
         
         /// <summary>Converts a Color instance to Hex.</summary>
-        /// <returns>A Hex instance.</returns>
         /// <param name="color">The Color value to convert.</param>
         public static Hex ToHex(this Color color)
         {

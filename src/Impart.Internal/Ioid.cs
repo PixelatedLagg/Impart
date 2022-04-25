@@ -1,9 +1,9 @@
-namespace Impart
+namespace Impart.Internal
 {
-    internal static class Ioid
+    public static class Ioid
     {
         private static int Count = 0;
-        internal static int Generate()
+        public static int Generate()
         {
             Count++;
             return Count;

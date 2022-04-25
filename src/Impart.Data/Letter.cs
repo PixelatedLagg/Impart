@@ -4,7 +4,6 @@ namespace Impart.Data
     public static class Letter
     {
         /// <summary>Randomly generate an alphabetical character.</summary>
-        /// <returns>A randomly generated alphabetical char.</returns>
         /// <param name="type">Whether to generate an uppercase or lowercase letter. (Default is set to generate both uppercase and lowercase.)</param>
         public static char Alphabet(bool? type = null)
         {
@@ -23,21 +22,18 @@ namespace Impart.Data
         }
 
         /// <summary>Randomly generate an numerical character.</summary>
-        /// <returns>A randomly generated numerical char.</returns>
         public static char Number()
         {
             return Data.Number.Range(0, 9).ToString()[0];
         }
 
         /// <summary>Randomly generate a special character.</summary>
-        /// <returns>A randomly generated special char.</returns>
         public static char Special()
         {
             return @"\|!#$%&/()=?»«@£§€{}.-;'<>_,"[(int)Data.Number.Range(0, 27)];
         }
 
-        /// <summary>Randomly generate any character.</summary>\
-        /// <returns>A randomly generated char.</returns>
+        /// <summary>Randomly generate any character.</summary>
         public static char Any()
         {
             return @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\|!#$%&/()=?»«@£§€{}.-;'<>_,"[(int)Data.Number.Range(0, 89)];

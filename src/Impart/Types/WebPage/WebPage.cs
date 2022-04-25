@@ -9,6 +9,8 @@ namespace Impart
     public class WebPage
     {
         private string _Title;
+
+        /// <value>The title value of the WebPage.</value>
         public string Title
         {
             get
@@ -23,6 +25,8 @@ namespace Impart
         }
 
         private Measurement _DefaultMargin = 0;
+
+        /// <value>The default margin value.</value>
         public Measurement DefaultMargin
         {
             get
@@ -37,6 +41,8 @@ namespace Impart
         }
 
         private Measurement _DefaultPadding = 0;
+
+        /// <value>The default padding value.</value>
         public Measurement DefaultPadding
         {
             get
@@ -72,6 +78,8 @@ namespace Impart
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
 
+        /// <summary>Check if an Element exists.</summary>
+        /// <param name="element">The Element instance to check.</param>
         protected bool ElementExists(Element element)
         {
             foreach (Element entry in _Elements)
@@ -84,6 +92,8 @@ namespace Impart
             return false;
         }
 
+        /// <summary>Check if an Element exists by ID.</summary>
+        /// <param name="id">The ID to check.</param>
         protected bool ElementExistsByID(string id)
         {
             foreach (Element entry in _Elements)
@@ -96,6 +106,8 @@ namespace Impart
             return false;
         }
 
+        /// <summary>Get the Element by ID.</summary>
+        /// <param name="id">The Element's ID.</param>
         protected Element GetElementByID(string id)
         {
             foreach (Element entry in _Elements)
@@ -108,6 +120,8 @@ namespace Impart
             return null;
         }
 
+        /// <summary>Remove the Element by ID.</summary>
+        /// <param name="id">The Element's ID.</param>
         protected void RemoveElementByID(string id)
         {
             foreach (Element entry in _Elements.ToArray())
@@ -120,6 +134,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Remove the Element.</summary>
+        /// <param name="element">The Element's instance.</param>
         protected void RemoveElement(Element element)
         {
             foreach (Element entry in _Elements.ToArray())
@@ -132,6 +148,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Change the Element.</summary>
+        /// <param name="element">The Element's instance.</param>
         protected void ChangeElement(Element element)
         {
             foreach (Element entry in _Elements.ToArray())
@@ -144,7 +162,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Add a Style.</summary>
+        /// <summary>Add a Style to the WebPage.</summary>
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
         {
@@ -152,7 +170,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Text.</summary>
+        /// <summary>Add a Text to the WebPage.</summary>
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
@@ -160,7 +178,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add an Image.</summary>
+        /// <summary>Add an Image to the WebPage.</summary>
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
@@ -168,7 +186,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Header.</summary>
+        /// <summary>Add a Header to the WebPage.</summary>
         /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
@@ -176,7 +194,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Link.</summary>
+        /// <summary>Add a Link to the WebPage.</summary>
         /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
@@ -184,7 +202,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Table.</summary>
+        /// <summary>Add a Table to the WebPage.</summary>
         /// <param name="rowNum">The number of rows.</param>
         /// <param name="obj">An array of strings to add as entries.</param>
         protected void AddTable(int rowNum, params string[] obj)
@@ -242,7 +260,7 @@ namespace Impart
             Changed = true;*/
         }
 
-        /// <summary>Add a Division.</summary>
+        /// <summary>Add a Division to the WebPage.</summary>
         /// <param name="division">The Division instance to add.</param>
         protected void AddDivision(Division division)
         {
@@ -254,7 +272,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a List.</summary>
+        /// <summary>Add a List to the WebPage.</summary>
         /// <param name="list">The List instance to add.</param>
         protected void AddList(List list)
         {
@@ -290,12 +308,13 @@ namespace Impart
             Changed = true;
         }
 
+        //
         protected void RemoveScrollBar()
         {
             _ScrollbarCache.Clear();
         }
 
-        /// <summary>Add <paramref name="form"/> to the WebPage.</summary>
+        /// <summary>Add a Form to the WebPage.</summary>
         /// <param name="form">The Form instance to add.</param>
         protected void AddForm(Form form)
         {
@@ -303,7 +322,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="button"/> to the WebPage.</summary>
+        /// <summary>Add a Button to the WebPage.</summary>
         /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
@@ -311,7 +330,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add <paramref name="nest"/> to the WebPage.</summary>
+        /// <summary>Add a Nest to the WebPage.</summary>
         /// <param name="nest">The Nest instance to add.</param>
         protected void AddNest(Nest nest)
         {
@@ -319,8 +338,8 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add an external css document to the WebPage.</summary>
-        /// <param name="url">The url of the document to add.</param>
+        /// <summary>Add an external CSS document to the WebPage.</summary>
+        /// <param name="url">The URL of the document to add.</param>
         protected void AddExternalStyle(string url)
         {
             _Includes.Add(url);

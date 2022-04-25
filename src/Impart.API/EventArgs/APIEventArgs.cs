@@ -12,7 +12,6 @@ namespace Impart.Api
         public readonly DateTime Time;
 
         /// <summary>Creates an APIEventArgs instance with <paramref name="request"/> as the request type.</summary>
-        /// <returns>An APIEventArgs instance.</returns>
         /// <param name="request">The request type.</param>
         public APIEventArgs(RequestType request)
         {

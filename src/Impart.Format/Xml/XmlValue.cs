@@ -1,15 +1,12 @@
 using System;
+using Impart.Internal;
 
 namespace Impart.Format
 {
     public class XmlValue : IEquatable<XmlValue>
     {
         private readonly bool boolValue = default!;
-		private readonly string stringValue = default!;
-		private readonly double numberValue = default!;
-		private readonly XmlObject objectValue = default!;
-		private readonly XmlArray arrayValue = default!;
-        public static readonly XmlValue Null = new XmlValue();
+
         public bool Bool
         {
             get
@@ -17,6 +14,9 @@ namespace Impart.Format
 				return boolValue;
             }
         }
+
+		private readonly string stringValue = default!;
+
         public string String
         {
             get
@@ -24,6 +24,8 @@ namespace Impart.Format
 				return stringValue;
             }
         }
+		private readonly double numberValue = default!;
+
         public double Number
         {
             get
@@ -31,6 +33,8 @@ namespace Impart.Format
 				return numberValue;
             }
         }
+		private readonly XmlObject objectValue = default!;
+
         public XmlObject XmlObject
         {
             get
@@ -38,6 +42,8 @@ namespace Impart.Format
 				return objectValue;
             }
         }
+		private readonly XmlArray arrayValue = default!;
+
         public XmlArray XmlArray
         {
             get
@@ -45,31 +51,40 @@ namespace Impart.Format
 				return arrayValue;
             }
         }
+
+        public static readonly XmlValue Null = new XmlValue();
+
         public ValueType Type { get; }
+
         public XmlValue()
         {
             Type = ValueType.Null;
         }
+
         public XmlValue(bool b)
 		{
 			boolValue = b;
 			Type = ValueType.Boolean;
 		}
+
         public XmlValue(string s)
 		{
 			stringValue = s ?? throw new ImpartError("String assigned to JsonValue cannot be null!");
 			Type = ValueType.String;
 		}
+
         public XmlValue(double n)
 		{
 			numberValue = n;
 			Type = ValueType.Number;
 		}
+
         public XmlValue(XmlArray a)
 		{
 			arrayValue = a ?? throw new ImpartError("XmlArray assigned to XmlValue cannot be null!");;
 			Type = ValueType.Array;
 		}
+
         public XmlValue(XmlValue other)
         {
             if (other == null)
@@ -83,10 +98,12 @@ namespace Impart.Format
 			boolValue = other.boolValue;
             Type = other.Type;
         }
+
         public override string ToString()
         {
             return "";
         }
+
         public override bool Equals(object o)
         {
             if (o == null)
@@ -106,19 +123,14 @@ namespace Impart.Format
                 case string s:
                     return stringValue.Equals(s);
                 default:
-                    if (IsNumber(o))
+                    if (Impart.Internal.Number.IsNumber(o))
                     {
                         return numberValue.Equals(Convert.ToDouble(o));
                     }
                     return false;
             }
         }
-        private bool IsNumber(object o)
-		{
-			return o is double || o is float || o is int || o is uint ||
-			o is short || o is ushort || o is byte || o is long ||
-			o is ulong;
-		}
+
         public bool Equals(XmlValue other)
         {
 			if (other.Type != Type || ReferenceEquals(other, null))
@@ -142,6 +154,7 @@ namespace Impart.Format
 			}
 			return false;
         }
+
         public override int GetHashCode()
 		{
 			switch (Type)
@@ -161,30 +174,37 @@ namespace Impart.Format
 			}
 			return base.GetHashCode();
 		}
+
         public static implicit operator XmlValue(bool b)
 		{
 			return new XmlValue(b);
 		}
+
         public static implicit operator XmlValue(string s)
 		{
 			return s is null ? null : new XmlValue(s);
 		}
+
         public static implicit operator XmlValue(double n)
 		{
 			return new XmlValue(n);
 		}
+        
         public static implicit operator XmlValue(XmlObject o)
 		{
 			return o is null ? null : new XmlValue(o);
 		}
+
         public static implicit operator XmlValue(XmlArray a)
 		{
 			return a is null ? null : new XmlValue(a);
 		}
+
         public static bool operator ==(XmlValue a, XmlValue b)
 		{
 			return ReferenceEquals(a, b) || (a != null && a.Equals(b));
 		}
+
         public static bool operator !=(XmlValue a, XmlValue b)
 		{
 			return !Equals(a, b);

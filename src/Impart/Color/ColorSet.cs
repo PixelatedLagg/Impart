@@ -9,7 +9,6 @@ namespace Impart
         private List<Color> colors;
 
         /// <summary>Creates a ColorSet instance with Color[] as the entries.</summary>
-        /// <returns>A ColorSet instance.</returns>
         /// <param name="colors">The Colors to add.</param>
         public ColorSet(params Color[] colors)
         {
@@ -24,8 +23,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Temporarily sorts the ColorSet and returns the value at the index of <paramref name="i"/>.</summary>
-        /// <returns>A Color instance.</returns>
+        /// <summary>Temporarily sorts the ColorSet and returns the value at an index.</summary>
         /// <param name="sort">The ColorSort sorting pattern.</param>
         /// <param name="i">The index value to return.</param>
         public Color Sort(ColorSort sort, int i)
@@ -70,8 +68,7 @@ namespace Impart
             }
             return null;
         }
-        /// <summary>Return the value at the index of <paramref name="i"/>.</summary>
-        /// <returns>A Color instance.</returns>
+        /// <summary>Return the value at an index.</summary>
         /// <param name="i">The index value to return.</param>
         public Color this[int i]
         {

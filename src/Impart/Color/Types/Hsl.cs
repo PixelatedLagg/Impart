@@ -8,8 +8,7 @@ namespace Impart
         /// <value>The HSL value.</value>
         private static (float h, float s, float l) Value;
 
-        /// <summary>Creates a Hsl instance with <paramref name="h"/>, <paramref name="s"/>, <paramref name="l"/> as the HSL value.</summary>
-        /// <returns>A Hsl instance.</returns>
+        /// <summary>Creates a Hsl instance.</summary>
         /// <param name="h">The H value.</param>
         /// <param name="s">The S value.</param>
         /// <param name="l">The L value.</param>
@@ -30,8 +29,7 @@ namespace Impart
             Value = (h, s, l);
         }
 
-        /// <summary>Creates a Hsl instance with <paramref name="hsl"/> as the HSL value.</summary>
-        /// <returns>A Hsl instance.</returns>
+        /// <summary>Creates a Hsl instance.</summary>
         /// <param name="hsl">The HSL value.</param>
         public Hsl((float h, float s, float l) hsl)
         {
@@ -51,7 +49,6 @@ namespace Impart
         }
 
         /// <summary>Compares the equality of two Hsl values.</summary>
-        /// <returns>A Bool instance.</returns>
         /// <param name="hsl1">The first Hsl value to compare.</param>
         /// <param name="hsl2">The second Hsl value to compare.</param>
         public static bool operator ==(Hsl hsl1, Hsl hsl2)
@@ -60,7 +57,6 @@ namespace Impart
         }
 
         /// <summary>Compares the inequality of two Hsl values.</summary>
-        /// <returns>A Bool instance.</returns>
         /// <param name="hsl1">The first Hsl value to compare.</param>
         /// <param name="hsl2">The second Hsl value to compare.</param>
         public static bool operator !=(Hsl hsl1, Hsl hsl2)
@@ -69,7 +65,6 @@ namespace Impart
         }
 
         /// <summary>Compares the equality of this Hsl instance and an Object value.</summary>
-        /// <returns>A Bool instance.</returns>
         /// <param name="obj">The Object to compare.</param>
         public override bool Equals(object obj)
         {
@@ -93,26 +88,22 @@ namespace Impart
         }
 
         /// <summary>Returns a hash code for the current instance.</summary>
-        /// <returns>An Int instance.</returns>
         public override int GetHashCode()
         {
             return Value.GetHashCode();
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             return $"hsl({Value.h}, {Value.s}%, {Value.l}%)";
         }
 
         /// <summary>Convert the Hsl instance to a (float, float, float).</summary>
-        /// <returns>A (float, float, float) instance.</returns>
         /// <param name="h">The Hsl to convert.</param>
         public static explicit operator (float h, float s, float l)(Hsl h) => Value;
 
         /// <summary>Convert the (float, float, float) instance to Hsl.</summary>
-        /// <returns>A Hsl instance.</returns>
         /// <param name="s">The (float, float, float) to convert.</param>
         public static implicit operator Hsl((float, float, float) h) => new Hsl(h);
     }

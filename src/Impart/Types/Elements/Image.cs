@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Impart.Internal;
 using System.Collections.Generic;
 
 namespace Impart
@@ -77,7 +78,7 @@ namespace Impart
             _ID = id;
         }
 
-        /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
+        /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public Image SetAttribute(AttributeType type, params object[] value)

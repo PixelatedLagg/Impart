@@ -1,6 +1,6 @@
 namespace Impart
 {
-    /// <summary>The class for a single Frame part of Animation.</summary>
+    /// <summary>The class for a single Frame in an Animation.</summary>
     public struct Frame
     {
         /// <value>The position of the Frame.</value>
@@ -14,7 +14,6 @@ namespace Impart
         private string Render;
 
         /// <summary>Creates a Frame instance.</summary>
-        /// <returns>A Frame instance.</returns>
         /// <param name="position">The position value.</param>
         /// <param name="changeType">The type of Change.</param>
         /// <param name="change">The change to take place.</param>
@@ -61,7 +60,6 @@ namespace Impart
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString() => Render;
     }
 }

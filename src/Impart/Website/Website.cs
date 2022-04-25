@@ -8,29 +8,39 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>The class responsible for hosting webpages.</summary>
+    /// <summary>The class responsible for hosting WebPages.</summary>
     public sealed class Website
     {
-        /// <value>The method to be called when a client connects to the website.</value>
-        public Action<WebsiteEventArgs> OnVisit;
-        private TcpListener listener;
-        private int port;
-        private WebPage errorPage;
-        private Dictionary<string, WebPage> webPages;
-        private Thread thread;
-        private Socket socket;
+        private int _Port;
 
-        /// <summary>Creates a Website instance with <paramref name="webPage"/> as the first WebPage.</summary>
-        /// <returns>A Website instance.</returns>
+        /// <value>The value of the localhost port the Website is being hosted on.</value>
+        public int Port
+        {
+            get
+            {
+                return _Port;
+            }
+        }
+
+        /// <value>The method to be called when a client connects to the Website.</value>
+        public Action<WebsiteEventArgs> OnVisit;
+
+        private TcpListener _Listener;
+        private WebPage _ErrorPage;
+        private Dictionary<string, WebPage> _WebPages;
+        private Thread _Thread;
+        private Socket _Socket;
+
+        /// <summary>Creates a Website instance.</summary>
         /// <param name="webPage">The default WebPage.</param>
-        /// <param name="port">The local port to host it on.</param>
+        /// <param name="port">The local port to use. (Default is 5050)</param>
         /// <param name="rootDirectory">The subdomain for the default WebPage.</param>
         public Website(WebPage webPage, int port = 5050, string rootDirectory = "")
         {
-            webPages = new Dictionary<string, WebPage>();
-            webPages.Add(rootDirectory, webPage);
-            this.port = port;
-            errorPage = null;
+            _WebPages = new Dictionary<string, WebPage>();
+            _WebPages.Add(rootDirectory, webPage);
+            _Port = port;
+            _ErrorPage = null;
         }
 
         /// <summary>Start the Website.</summary>
@@ -38,99 +48,96 @@ namespace Impart
         {
             try  
             {
-                listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], port);
-                listener.Start();
-                thread = new Thread(new ThreadStart(StartListen));
-                thread.Start();
+                _Listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], _Port);
+                _Listener.Start();
+                _Thread = new Thread(new ThreadStart(StartListen));
+                _Thread.Start();
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine($" Website hosted on localhost:{port} ");
+                Console.WriteLine($" Website hosted on localhost:{_Port} ");
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
             catch
             {
-                throw new ImpartError("Error in starting the website.");
+                throw new ImpartError("Error in starting the Website.");
             }
         }
 
         /// <summary>Stop the Website.</summary>
-        public void Stop()
-        {
-            Environment.Exit(0);
-        }
+        public void Stop() => _Listener.Stop();
 
         /// <summary>Add <paramref name="webPage"/> to the Website with <paramref name="directory"/> as the subdomain.</summary>
         /// <param name="webPage">The WebPage to add.</param>
         /// <param name="directory">The subdomain of the WebPage.</param>
         public void AddPage(WebPage webPage, string directory)
         {
-            if (webPages.ContainsKey(directory))
+            if (_WebPages.ContainsKey(directory))
             {
                 throw new ImpartError("Each webpage subdomain must be different!");
             }
-            webPages.Add(directory, webPage);
+            _WebPages.Add(directory, webPage);
         }
 
         /// <summary>Remove the subdomain <param name="directory">, and the WebPage that goes along with it.</summary>
         /// <param name="directory">The subdomain of the Website.</param>
         public void RemovePage(string directory)
         {
-            if (!webPages.ContainsKey(directory))
+            if (!_WebPages.ContainsKey(directory))
             {
                 throw new ImpartError("The website does not contain this subdomain!");
             }
-            webPages.Remove(directory);
+            _WebPages.Remove(directory);
         }
 
         /// <summary>Set <param name="webPage"> as the 404 page.</summary>
         /// <param name="webPage">The WebPage to set as the 404 page.</param>
         public void Set404Page(WebPage webPage)
         {
-            errorPage = webPage;
+            _ErrorPage = webPage;
         }
         private void StartListen()
         {
             while (true)
             {
-                socket = listener.AcceptSocket();
-                if (socket.Connected) //socket.Connected
+                _Socket = _Listener.AcceptSocket();
+                if (_Socket.Connected) //socket.Connected
                 {
                     Byte[] bReceive = new Byte[1024];
-                    socket.Receive(bReceive, bReceive.Length, 0);
+                    _Socket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
                     if (sBuffer.Substring(0, 3) != "GET")  
                     {
-                        socket.Close();
+                        _Socket.Close();
                         return;
                     }
-                    if (!webPages.ContainsKey(sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")))
+                    if (!_WebPages.ContainsKey(sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")))
                     {
-                        string errorResult = errorPage?.ToString() ?? "";
+                        string errorResult = _ErrorPage?.ToString() ?? "";
                         byte[] errorBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {errorResult.Length} \r\n\r\n{errorResult}");
                         try  
                         {
-                            socket.Send(errorBytes, errorBytes.Length, 0);
+                            _Socket.Send(errorBytes, errorBytes.Length, 0);
                         }
                         catch
                         {
                             throw new ImpartError("Error in sending packets to browser.");
                         }
-                        socket.Close();
+                        _Socket.Close();
                     }
                     else
                     {
-                        string result = webPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].ToString();
+                        string result = _WebPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].ToString();
                         byte[] resultBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {result.Length} \r\n\r\n{result}");
                         try
                         {
-                            socket.Send(resultBytes, resultBytes.Length, 0);
+                            _Socket.Send(resultBytes, resultBytes.Length, 0);
                         }
                         catch
                         {
                             throw new ImpartError("Error in sending packets to browser.");
                         }
-                        socket.Close();  
+                        _Socket.Close();  
                     }
                     if (!String.IsNullOrWhiteSpace(OnVisit?.Method.ToString()))
                     {

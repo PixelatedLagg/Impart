@@ -21,7 +21,6 @@ namespace Impart
         }
 
         /// <summary>Creates an Animation instance with <paramref name="name"/> as the name.</summary>
-        /// <returns>An Animation instance.</returns>
         /// <param name="name">The name of the Animation.</param>
         public Animation(string name)
         {
@@ -30,16 +29,17 @@ namespace Impart
         }
 
         /// <summary>Add a Frame to the Animation.</summary>
-        /// <returns>An Animation instance.</returns>
-        /// <param name="frame">The Frame to add.</param>
-        public Animation AddFrame(Frame frame)
+        /// <param name="frames">The Frame(s) to add.</param>
+        public Animation AddFrame(params Frame[] frames)
         {
-            _Frames.Add(frame);
+            foreach (Frame frame in frames)
+            {
+                _Frames.Add(frame);
+            }
             return this;
         }
 
         /// <summary>Add a Frame to the Animation.</summary>
-        /// <returns>An Animation instance.</returns>
         /// <param name="position">The position of the Frame to add.</param>
         /// <param name="changeType">The ChangeType of the Frame to add.</param>
         /// <param name="change">The change of the Frame to add.</param>
@@ -50,7 +50,6 @@ namespace Impart
         }
 
         /// <summary>Remove a Frame from the Animation.</summary>
-        /// <returns>An Animation instance.</returns>
         /// <param name="position">The position of the Frame to remove.</param>
         public Animation RemoveFrame(Percent position)
         {
@@ -66,7 +65,6 @@ namespace Impart
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             StringBuilder result = new StringBuilder($"@keyframes {Name} {{");

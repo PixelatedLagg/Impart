@@ -8,8 +8,7 @@ namespace Impart
         /// <value>The RGB value.</value>
         private static (int r, int g, int b) Value;
 
-        /// <summary>Creates a Rgb instance with <paramref name="r"/>, <paramref name="g"/>, <paramref name="b"/> as the RGB value.</summary>
-        /// <returns>A Rgb instance.</returns>
+        /// <summary>Creates a Rgb instance.</summary>
         /// <param name="r">The R value.</param>
         /// <param name="g">The G value.</param>
         /// <param name="b">The B value.</param>
@@ -22,8 +21,7 @@ namespace Impart
             Value = (r, g, b);
         }
 
-        /// <summary>Creates a Rgb instance with <paramref name="rgb"/> as the RGB value.</summary>
-        /// <returns>A Rgb instance.</returns>
+        /// <summary>Creates a Rgb instance.</summary>
         /// <param name="rgb">The RGB value.</param>
         public Rgb((int r, int g, int b) rgb)
         {
@@ -35,7 +33,6 @@ namespace Impart
         }
 
         /// <summary>Compares the equality of two Rgb values.</summary>
-        /// <returns>A Bool instance.</returns>
         /// <param name="rgb1">The first Rgb value to compare.</param>
         /// <param name="rgb2">The second Rgb value to compare.</param>
         public static bool operator ==(Rgb rgb1, Rgb rgb2)
@@ -44,7 +41,6 @@ namespace Impart
         }
 
         /// <summary>Compares the inequality of two Rgb values.</summary>
-        /// <returns>A Bool instance.</returns>
         /// <param name="rgb1">The first Rgb value to compare.</param>
         /// <param name="rgb2">The second Rgb value to compare.</param>
         public static bool operator !=(Rgb rgb1, Rgb rgb2)
@@ -53,7 +49,6 @@ namespace Impart
         }
 
         /// <summary>Compares the equality of this Rgb instance and an Object value.</summary>
-        /// <returns>A Bool instance.</returns>
         /// <param name="obj">The object to compare.</param>
         public override bool Equals(object obj)
         {
@@ -77,26 +72,22 @@ namespace Impart
         }
 
         /// <summary>Returns a hash code for the current instance.</summary>
-        /// <returns>An Int instance.</returns>
         public override int GetHashCode()
         {
             return Value.GetHashCode();
         }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             return $"rgb({Value.r}, {Value.g}, {Value.b})";
         }
 
         /// <summary>Convert the Rgb instance to a (int, int, int).</summary>
-        /// <returns>A (int, int, int) instance.</returns>
         /// <param name="r">The Rgb to convert.</param>
         public static explicit operator (int r, int g, int b)(Rgb r) => Value;
 
         /// <summary>Convert the (int, int, int) instance to Rgb.</summary>
-        /// <returns>A Rgb instance.</returns>
         /// <param name="s">The (int, int, int) to convert.</param>
         public static implicit operator Rgb((int, int, int) r) => new Rgb(r);
     }

@@ -7,7 +7,7 @@ namespace Impart
     {
         private AttributeType _Type;
 
-        /// <Value>The attribute Type.</Value>
+        /// <Value>The Attribute Type.</Value>
         public AttributeType Type
         {
             get
@@ -17,7 +17,7 @@ namespace Impart
         }
         private object[] _Value;
 
-        /// <Value>The attribute Value(s).</Value>
+        /// <Value>The Attribute Value(s).</Value>
         public object[] Value
         {
             get
@@ -26,8 +26,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Creates the attribute with the Type and Value(s).</summary>
-        /// <returns>An Attribute instance.</returns>
+        /// <summary>Creates an Attribute instance.</summary>
         /// <param name="Type">The attribute Type.</param>
         /// <param name="Value">The attribute Value.</param>
         public Attribute(AttributeType type, params object[] value)
@@ -35,7 +34,8 @@ namespace Impart
             _Type = type;
             _Value = value;
         }
-        
+
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
             switch (Type)

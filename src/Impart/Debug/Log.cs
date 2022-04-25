@@ -9,8 +9,7 @@ namespace Impart
         /// <value>The Log message.</value>
         public readonly string Message;
 
-        /// <summary>Creates a Log instance with <paramref name="message"/> as the message, and <paramref name="milliseconds"/> as the duration.</summary>
-        /// <returns>A Log instance.</returns>
+        /// <summary>Creates a Log instance.</summary>
         /// <param name="message">The Log message</param>
         /// <param name="milliseconds">The duration of the action in milliseconds.</param>
         public Log(string message, double milliseconds)

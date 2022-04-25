@@ -1,4 +1,5 @@
 using System.Text;
+using Impart.Internal;
 using System.Collections.Generic;
 
 namespace Impart
@@ -90,6 +91,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Add a Text to the List.</summary>
+        /// <param name="textEntries">The Text(s) to add.</param>
         public List Add(params Text[] textEntries)
         {
             foreach (Text text in textEntries)
@@ -100,6 +103,8 @@ namespace Impart
             return this;
         }
 
+        /// <summary>Remove a Text from the List.</summary>
+        /// <param name="textEntries">The Text(s) to remove.</param>
         public List Remove(params Text[] textEntries)
         {
             foreach (Text text in textEntries)
@@ -114,7 +119,7 @@ namespace Impart
             return this;
         }
 
-        /// <summary>Sets <paramref name="type"> with the value(s) in object[].</summary>
+        /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
         public List SetAttribute(AttributeType type, params object[] value)

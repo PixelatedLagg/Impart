@@ -4,14 +4,13 @@ using System.Net.Sockets;
 
 namespace Impart.Api
 {
-    /// <summary>Information about a REST context.</summary>
+    /// <summary>Information about a RestContext.</summary>
     public sealed class RestContext
     {
         private Socket Socket;
 
         /// <summary>Creates an RestContext instance with <paramref name="socket"/> as the socket.</summary>
-        /// <returns>An RestContext instance.</returns>
-        /// <param name="socket">The socket handling the API.</param>
+        /// <param name="socket">The Socket handling the API.</param>
         public RestContext(Socket socket)
         {
             Socket = socket;

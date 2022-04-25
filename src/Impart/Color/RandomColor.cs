@@ -10,14 +10,12 @@ namespace Impart
         private const string chars = "ABCDEF1234567890";
 
         /// <summary>Generates a random Rgb value.</summary>
-        /// <returns>A Rgb instance.</returns>
         public static Rgb Rgb()
         {
             return new Rgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
         }
 
         /// <summary>Generates a random Rgb value array with <paramref name="number"/> as the number of elements in the array.</summary>
-        /// <returns>A Rgb[] instance.</returns>
         /// <param name="number">The number of elements in the array.</param>
         public static Rgb[] Rgbs(int number)
         {
@@ -30,14 +28,12 @@ namespace Impart
         }
 
         /// <summary>Generates a random Hsl value.</summary>
-        /// <returns>A Hsl instance.</returns>
         public static Hsl Hsl()
         {
             return new Hsl(rnd.Next(0, 361), rnd.Next(0, 101), rnd.Next(0, 101));
         }
 
         /// <summary>Generates a random Hsl value array with <paramref name="number"/> as the number of elements in the array.</summary>
-        /// <returns>A Hsl[] instance.</returns>
         /// <param name="number">The number of elements in the array.</param>
         public static Hsl[] Hsls(int number)
         {
@@ -50,14 +46,12 @@ namespace Impart
         }
 
         /// <summary>Generates a random Hex value.</summary>
-        /// <returns>A Hex instance.</returns>
         public static Hex Hex()
         {
             return new Hex(new string(Enumerable.Repeat(chars, 6).Select(s => s[rnd.Next(s.Length)]).ToArray()));
         }
 
         /// <summary>Generates a random Hex value array with <paramref name="number"/> as the number of elements in the array.</summary>
-        /// <returns>A Hex[] instance.</returns>
         /// <param name="number">The number of elements in the array.</param>
         public static Hex[] Hexes(int number)
         {

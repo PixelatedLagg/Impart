@@ -1,4 +1,5 @@
 using System.Text;
+using Impart.Internal;
 using System.Collections.Generic;
 
 namespace Impart
