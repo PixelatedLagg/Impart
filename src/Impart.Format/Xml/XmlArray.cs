@@ -1,42 +1,56 @@
-using System;
+using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace Impart.Format
 {
+    /// <summary>Store an array of XmlValues.</summary>
     public class XmlArray : List<XmlValue>
     {
-        public XmlArray() {}
-        public XmlArray(IEnumerable<XmlValue> collection)
-			: base(collection.Select(jv => jv ?? XmlValue.Null)) {}
-        public new void Add(XmlValue item)
+        /// <summary>Creates a XmlArray instance.</summary>      
+        public XmlArray() { }
+
+        /// <summary>Creates a XmlArray instance containing all the entries of a IEnumerable.</summary>
+        /// <param name="collection">The IEnumerable to copy the entries from.</param>
+        public XmlArray(IEnumerable<XmlValue> collection) : base(collection.Select(v => v ?? XmlValue.Null)) { }
+        
+        /// <summary>Adds a XmlValue to the XmlArray.</summary>
+        /// <param name="value">The XmlValue to add.</param>
+        public new void Add(XmlValue value)
 		{
-			base.Add(item ?? XmlValue.Null);
+			base.Add(value ?? XmlValue.Null);
 		}
+
+        /// <summary>Adds all of the entries of an IEnumerable.</summary>
+        /// <param name="collection">The IEnumerable to copy the entries from.</param>
         public new void AddRange(IEnumerable<XmlValue> collection)
 		{
 			base.AddRange(collection.Select(v => v ?? XmlValue.Null));
 		}
+
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            return "";
-        }
-        public override bool Equals(object o)
-        {
-            if (!(o is XmlArray a))
+            StringBuilder result = new StringBuilder();
+            foreach (XmlValue value in this)
             {
-                return false;
+                result.Append(value);
             }
-            if (!a.ToArray().Equals(base.ToArray()))
-            {
-                return false;
-            }
-            return true;
+            return result.ToString();
         }
 
-        public override int GetHashCode()
+        /// <summary>Compares the equality of this instance and an Object.</summary>
+        /// <param name="o">The Object to compare.</param>
+        public override bool Equals(object o)
         {
-            return base.GetHashCode();
+            if (o is XmlArray a)
+            {
+                return a.ToArray().Equals(base.ToArray());
+            }
+            return false;
         }
+
+        /// <summary>Get the hashcode of the current instance.</summary>
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

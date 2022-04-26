@@ -1,213 +1,256 @@
 using System;
-using Impart.Internal;
 
 namespace Impart.Format
 {
+    /// <summary>Store the value of an Xml node.</summary>
     public class XmlValue : IEquatable<XmlValue>
     {
-        private readonly bool boolValue = default!;
+        private readonly bool _Bool = default!;
 
+        /// <value>The Bool value of the XmlValue. (If any)</value>
         public bool Bool
         {
             get
             {
-				return boolValue;
+				return _Bool;
             }
         }
 
-		private readonly string stringValue = default!;
+		private readonly string _String = default!;
 
+        /// <value>The String value of the XmlValue. (If any)</value>
         public string String
         {
             get
             {
-				return stringValue;
+				return _String;
             }
         }
-		private readonly double numberValue = default!;
+		private readonly double _Double = default!;
 
-        public double Number
+        /// <value>The Double value of the XmlValue. (If any)</value>
+        public double Double
         {
             get
             {
-				return numberValue;
+				return _Double;
             }
         }
-		private readonly XmlObject objectValue = default!;
+		private readonly XmlObject _XmlObject = default!;
 
+        /// <value>The XmlObject value of the XmlValue. (If any)</value>
         public XmlObject XmlObject
         {
             get
             {
-				return objectValue;
+				return _XmlObject;
             }
         }
-		private readonly XmlArray arrayValue = default!;
+		private readonly XmlArray _XmlArray = default!;
 
+        /// <value>The XmlArray value of the XmlValue. (If any)</value>
         public XmlArray XmlArray
         {
             get
             {
-				return arrayValue;
+				return _XmlArray;
             }
         }
 
+        /// <value>A null instance of XmlValue.</value>
         public static readonly XmlValue Null = new XmlValue();
 
-        public ValueType Type { get; }
+        /// <value>The ValueType of the value the XmlValue instance is holding.</value>
+        public readonly ValueType Type;
 
+        /// <summary>Creates a null-based XmlValue instance.</summary>
         public XmlValue()
         {
             Type = ValueType.Null;
         }
 
-        public XmlValue(bool b)
+        /// <summary>Creates a Bool-based XmlValue instance.</summary>
+        /// <param name="value">The Bool value to use.</param>
+        public XmlValue(bool value)
 		{
-			boolValue = b;
+			_Bool = value;
 			Type = ValueType.Boolean;
 		}
 
-        public XmlValue(string s)
+        /// <summary>Creates a String-based XmlValue instance.</summary>
+        /// <param name="value">The String value to use.</param>
+        public XmlValue(String value)
 		{
-			stringValue = s ?? throw new ImpartError("String assigned to JsonValue cannot be null!");
+			_String = value ?? throw new ImpartError("String assigned to JsonValue cannot be null!");
 			Type = ValueType.String;
 		}
 
-        public XmlValue(double n)
+        /// <summary>Creates a Double-based XmlValue instance.</summary>
+        /// <param name="value">The Double value to use.</param>
+        public XmlValue(Double value)
 		{
-			numberValue = n;
-			Type = ValueType.Number;
+			_Double = value;
+			Type = ValueType.Double;
 		}
 
-        public XmlValue(XmlArray a)
+        /// <summary>Creates a XmlArray-based XmlValue instance.</summary>
+        /// <param name="value">The XmlArray value to use.</param>
+        public XmlValue(XmlArray value)
 		{
-			arrayValue = a ?? throw new ImpartError("XmlArray assigned to XmlValue cannot be null!");;
+			_XmlArray = value ?? throw new ImpartError("XmlArray assigned to XmlValue cannot be null!");;
 			Type = ValueType.Array;
 		}
 
-        public XmlValue(XmlValue other)
+        /// <summary>Creates a XmlValue-based XmlValue instance.</summary>
+        /// <param name="value">The XmlValue value to use.</param>
+        public XmlValue(XmlValue value)
         {
-            if (other == null)
+            if (value == null)
             {
                 throw new ImpartError("XmlValue to copy from must not be null!");
             }
-            arrayValue = other.arrayValue;
-			objectValue = other.objectValue;
-			numberValue = other.numberValue;
-			stringValue = other.stringValue;
-			boolValue = other.boolValue;
-            Type = other.Type;
+            _XmlArray = value._XmlArray;
+			_XmlObject = value._XmlObject;
+			_Double = value._Double;
+			_String = value._String;
+			_Bool = value._Bool;
+            Type = value.Type;
         }
 
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            return "";
+            return Type switch
+            {
+                ValueType.Array => _XmlArray.ToString(),
+                ValueType.Boolean => _Bool.ToString(),
+                ValueType.Double => _Double.ToString(),
+                ValueType.Object => _XmlObject.ToString(),
+                ValueType.String => _String,
+                _ => ""
+            };
         }
 
+        /// <summary>Compares the equality of this instance and an Object.</summary>
+        /// <param name="o">The Object to compare.</param>
         public override bool Equals(object o)
         {
-            if (o == null)
+            return o switch
             {
-                return false;
-            }
-            switch (o)
-            {
-                case XmlValue xv:
-                    return ReferenceEquals(this, xv);
-                case XmlArray a:
-                    return arrayValue.Equals(a);
-                case XmlObject obj:
-                    return objectValue.Equals(obj);
-                case bool b:
-                    return boolValue.Equals(b);
-                case string s:
-                    return stringValue.Equals(s);
-                default:
-                    if (Impart.Internal.Number.IsNumber(o))
-                    {
-                        return numberValue.Equals(Convert.ToDouble(o));
-                    }
-                    return false;
-            }
+                null => false,
+                XmlValue v => ReferenceEquals(this, v),
+                XmlArray a => _XmlArray.Equals(a),
+                XmlObject obj => _XmlArray.Equals(obj),
+                bool b => _XmlArray.Equals(b),
+                string s => _XmlArray.Equals(s),
+                _ => EqualsExtension(o)
+            };
         }
 
-        public bool Equals(XmlValue other)
+        /// <summary>Compares the equality of this instance and a XmlValue.</summary>
+        /// <param name="value">The XmlValue to compare.</param>
+        public bool Equals(XmlValue value)
         {
-			if (other.Type != Type || ReferenceEquals(other, null))
+			if (value.Type != Type || ReferenceEquals(value, null))
             {
                 return false;
             }
 			switch (Type)
 			{
-				case ValueType.Number:
-					return numberValue.Equals(other.Number);
+				case ValueType.Double:
+					return _Double.Equals(value._Double);
 				case ValueType.String:
-					return stringValue.Equals(other.String);
+					return _String.Equals(value.String);
 				case ValueType.Boolean:
-					return boolValue.Equals(other.Bool);
+					return _Bool.Equals(value.Bool);
 				case ValueType.Object:
-					return objectValue.Equals(other.objectValue);
+					return _XmlObject.Equals(value._XmlObject);
 				case ValueType.Array:
-					return arrayValue.Equals(other.arrayValue);
+					return _XmlArray.Equals(value._XmlArray);
 				case ValueType.Null:
 					return true;
 			}
 			return false;
         }
 
+        /// <summary>Get the hashcode of the current instance.</summary>
         public override int GetHashCode()
 		{
 			switch (Type)
 			{
-				case ValueType.Number:
-					return numberValue.GetHashCode();
+				case ValueType.Double:
+					return _Double.GetHashCode();
 				case ValueType.String:
-					return stringValue.GetHashCode();
+					return _String.GetHashCode();
 				case ValueType.Boolean:
-					return boolValue.GetHashCode();
+					return _Bool.GetHashCode();
 				case ValueType.Object:
-					return objectValue.GetHashCode();
+					return _XmlObject.GetHashCode();
 				case ValueType.Array:
-					return arrayValue.GetHashCode();
+					return _XmlArray.GetHashCode();
 				case ValueType.Null:
 					return ValueType.Null.GetHashCode();
 			}
 			return base.GetHashCode();
 		}
 
-        public static implicit operator XmlValue(bool b)
+        /// <summary>Creates a Bool-based XmlValue instance.</summary>
+        /// <param name="value">The Bool value to use.</param>
+        public static implicit operator XmlValue(bool value)
 		{
-			return new XmlValue(b);
+			return new XmlValue(value);
 		}
 
-        public static implicit operator XmlValue(string s)
+        /// <summary>Creates a String-based XmlValue instance.</summary>
+        /// <param name="value">The String value to use.</param>
+        public static implicit operator XmlValue(string value)
 		{
-			return s is null ? null : new XmlValue(s);
+			return value is null ? null : new XmlValue(value);
 		}
 
-        public static implicit operator XmlValue(double n)
+        /// <summary>Creates a Double-based XmlValue instance.</summary>
+        /// <param name="value">The Double value to use.</param>
+        public static implicit operator XmlValue(double value)
 		{
-			return new XmlValue(n);
+			return new XmlValue(value);
 		}
         
-        public static implicit operator XmlValue(XmlObject o)
+        /// <summary>Creates a XmlObject-based XmlValue instance.</summary>
+        /// <param name="value">The XmlObject value to use.</param>
+        public static implicit operator XmlValue(XmlObject value)
 		{
-			return o is null ? null : new XmlValue(o);
+			return value is null ? null : new XmlValue(value);
 		}
 
-        public static implicit operator XmlValue(XmlArray a)
+        /// <summary>Creates a XmlValue-based XmlValue instance.</summary>
+        /// <param name="value">The XmlValue value to use.</param>
+        public static implicit operator XmlValue(XmlArray value)
 		{
-			return a is null ? null : new XmlValue(a);
+			return value is null ? null : new XmlValue(value);
 		}
 
+        /// <summary>Compares the equality of two XmlValues.</summary>
+        /// <param name="a">The first XmlValue to compare.</param>
+        /// <param name="b">The second XmlValue to compare.</param>
         public static bool operator ==(XmlValue a, XmlValue b)
 		{
 			return ReferenceEquals(a, b) || (a != null && a.Equals(b));
 		}
 
+        /// <summary>Compares the inequality of two XmlValues.</summary>
+        /// <param name="a">The first XmlValue to compare.</param>
+        /// <param name="b">The second XmlValue to compare.</param>
         public static bool operator !=(XmlValue a, XmlValue b)
 		{
 			return !Equals(a, b);
 		}
+        private bool EqualsExtension(object o)
+        {
+            if (Impart.Internal.Number.IsNumber(o))
+            {
+                return _Double.Equals(Convert.ToDouble(o));
+            }
+            return false;
+        }
     }
 }

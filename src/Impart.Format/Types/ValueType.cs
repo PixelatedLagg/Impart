@@ -2,7 +2,7 @@ namespace Impart.Format
 {
     public enum ValueType
     {
-        Number,
+        Double,
 		String,
 		Boolean,
 		Object,

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>Generate a webpage for the Website</summary>
+    /// <summary>Generate a webpage for a Website.</summary>
     /// <remarks>This is the root class of Impart.</remarks>
     public class WebPage
     {

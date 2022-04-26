@@ -63,7 +63,7 @@ namespace Impart.Format
         public JsonValue(double n)
 		{
 			numberValue = n;
-			Type = ValueType.Number;
+			Type = ValueType.Double;
 		}
         public JsonValue(JsonArray a)
 		{
@@ -87,7 +87,7 @@ namespace Impart.Format
         {
             switch (Type)
 			{
-				case ValueType.Number:
+				case ValueType.Double:
 					return numberValue.ToString();
 				case ValueType.String:
 					return $"\"{stringValue}\"";
@@ -140,7 +140,7 @@ namespace Impart.Format
             }
 			switch (Type)
 			{
-				case ValueType.Number:
+				case ValueType.Double:
 					return numberValue.Equals(other.Number);
 				case ValueType.String:
 					return stringValue.Equals(other.String);
@@ -159,7 +159,7 @@ namespace Impart.Format
 		{
 			switch (Type)
 			{
-				case ValueType.Number:
+				case ValueType.Double:
 					return numberValue.GetHashCode();
 				case ValueType.String:
 					return stringValue.GetHashCode();
