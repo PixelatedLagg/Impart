@@ -2,202 +2,238 @@ using System;
 
 namespace Impart.Format
 {
+	/// <summary>Store the value of a Json node.</summary>
     public class JsonValue : IEquatable<JsonValue>
     {
-        private readonly bool boolValue = default!;
-		private readonly string stringValue = default!;
-		private readonly double numberValue = default!;
-		private readonly JsonObject objectValue = default!;
-		private readonly JsonArray arrayValue = default!;
-        public static readonly JsonValue Null = new JsonValue();
+        private readonly bool _Bool = default!;
+
+        /// <value>The Bool value of the JsonValue. (If any)</value>
         public bool Bool
         {
             get
             {
-				return boolValue;
+				return _Bool;
             }
         }
+
+		private readonly string _String = default!;
+
+        /// <value>The String value of the JsonValue. (If any)</value>
         public string String
         {
             get
             {
-				return stringValue;
+				return _String;
             }
         }
-        public double Number
+		private readonly double _Double = default!;
+
+        /// <value>The Double value of the JsonValue. (If any)</value>
+        public double Double
         {
             get
             {
-				return numberValue;
+				return _Double;
             }
         }
+		private readonly JsonObject _JsonObject = default!;
+
+        /// <value>The JsonObject value of the JsonValue. (If any)</value>
         public JsonObject JsonObject
         {
             get
             {
-				return objectValue;
+				return _JsonObject;
             }
         }
+		private readonly JsonArray _JsonArray = default!;
+
+        /// <value>The JsonArray value of the JsonValue. (If any)</value>
         public JsonArray JsonArray
         {
             get
             {
-				return arrayValue;
+				return _JsonArray;
             }
         }
-        public ValueType Type { get; }
+
+        /// <value>A null instance of JsonValue.</value>
+        public static readonly JsonValue Null = new JsonValue();
+
+        /// <value>The ValueType of the value the JsonValue instance is holding.</value>
+        public readonly ValueType Type;
+
+		/// <summary>Creates a null-based JsonValue instance.</summary>
         public JsonValue()
         {
             Type = ValueType.Null;
         }
-        public JsonValue(bool b)
+
+        /// <summary>Creates a Bool-based JsonValue instance.</summary>
+        /// <param name="value">The Bool value to use.</param>
+        public JsonValue(bool value)
 		{
-			boolValue = b;
+			_Bool = value;
 			Type = ValueType.Boolean;
 		}
-        public JsonValue(string s)
+
+        /// <summary>Creates a String-based JsonValue instance.</summary>
+        /// <param name="value">The String value to use.</param>
+        public JsonValue(String value)
 		{
-			stringValue = s ?? throw new ImpartError("String assigned to JsonValue cannot be null!");
+			_String = value ?? throw new ImpartError("String assigned to JsonValue cannot be null!");
 			Type = ValueType.String;
 		}
-        public JsonValue(double n)
+
+        /// <summary>Creates a Double-based JsonValue instance.</summary>
+        /// <param name="value">The Double value to use.</param>
+        public JsonValue(Double value)
 		{
-			numberValue = n;
+			_Double = value;
 			Type = ValueType.Double;
 		}
-        public JsonValue(JsonArray a)
+
+        /// <summary>Creates a JsonArray-based JsonValue instance.</summary>
+        /// <param name="value">The JsonArray value to use.</param>
+        public JsonValue(JsonArray value)
 		{
-			arrayValue = a ?? throw new ImpartError("JsonArray assigned to JsonValue cannot be null!");;
+			_JsonArray = value ?? throw new ImpartError("JsonArray assigned to JsonValue cannot be null!");;
 			Type = ValueType.Array;
 		}
-        public JsonValue(JsonValue other)
+
+        /// <summary>Creates a JsonValue-based JsonValue instance.</summary>
+        /// <param name="value">The JsonValue value to use.</param>
+        public JsonValue(JsonValue value)
         {
-            if (other == null)
+            if (value == null)
             {
                 throw new ImpartError("JsonValue to copy from must not be null!");
             }
-            arrayValue = other.arrayValue;
-			objectValue = other.objectValue;
-			numberValue = other.numberValue;
-			stringValue = other.stringValue;
-			boolValue = other.boolValue;
-            Type = other.Type;
+            _JsonArray = value._JsonArray;
+			_JsonObject = value._JsonObject;
+			_Double = value._Double;
+			_String = value._String;
+			_Bool = value._Bool;
+            Type = value.Type;
         }
+
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            switch (Type)
-			{
-				case ValueType.Double:
-					return numberValue.ToString();
-				case ValueType.String:
-					return $"\"{stringValue}\"";
-				case ValueType.Boolean:
-					return boolValue.ToString();
-				case ValueType.Object:
-					return objectValue.ToString();
-				case ValueType.Array:
-					return arrayValue.ToString();
-			}
-            return "\"\"";
+            return Type switch
+            {
+                ValueType.Array => _JsonArray.ToString(),
+                ValueType.Boolean => _Bool.ToString(),
+                ValueType.Double => _Double.ToString(),
+                ValueType.Object => _JsonObject.ToString(),
+                ValueType.String => _String,
+                _ => ""
+            };
         }
+
+        /// <summary>Compares the equality of this instance and an Object.</summary>
+        /// <param name="o">The Object to compare.</param>
         public override bool Equals(object o)
         {
-            if (o == null)
+            return o switch
             {
-                return false;
-            }
-            switch (o)
-            {
-                case JsonValue jv:
-                    return ReferenceEquals(this, jv);
-                case JsonArray a:
-                    return arrayValue.Equals(a);
-                case JsonObject obj:
-                    return objectValue.Equals(obj);
-                case bool b:
-                    return boolValue.Equals(b);
-                case string s:
-                    return stringValue.Equals(s);
-                default:
-                    if (IsNumber(o))
-                    {
-                        return numberValue.Equals(Convert.ToDouble(o));
-                    }
-                    return false;
-            }
+                null => false,
+                JsonValue v => ReferenceEquals(this, v),
+                JsonArray a => _JsonArray.Equals(a),
+                JsonObject obj => _JsonArray.Equals(obj),
+                bool b => _JsonArray.Equals(b),
+                string s => _JsonArray.Equals(s),
+                _ => EqualsExtension(o)
+            };
         }
-        private bool IsNumber(object o)
-		{
-			return o is double || o is float || o is int || o is uint ||
-			o is short || o is ushort || o is byte || o is long ||
-			o is ulong;
-		}
-        public bool Equals(JsonValue other)
+		private bool EqualsExtension(object o)
         {
-			if (other.Type != Type || ReferenceEquals(other, null))
+            if (Impart.Internal.Number.IsNumber(o))
+            {
+                return _Double.Equals(Convert.ToDouble(o));
+            }
+            return false;
+        }
+
+        /// <summary>Compares the equality of this instance and a JsonValue.</summary>
+        /// <param name="value">The JsonValue to compare.</param>
+        public bool Equals(JsonValue value)
+        {
+			if (value.Type != Type || ReferenceEquals(value, null))
             {
                 return false;
             }
-			switch (Type)
+			return Type switch
 			{
-				case ValueType.Double:
-					return numberValue.Equals(other.Number);
-				case ValueType.String:
-					return stringValue.Equals(other.String);
-				case ValueType.Boolean:
-					return boolValue.Equals(other.Bool);
-				case ValueType.Object:
-					return objectValue.Equals(other.objectValue);
-				case ValueType.Array:
-					return arrayValue.Equals(other.arrayValue);
-				case ValueType.Null:
-					return true;
-			}
-			return false;
+				ValueType.Array => _JsonArray.Equals(value._JsonArray),
+				ValueType.Boolean => _Bool.Equals(value._Bool),
+				ValueType.Double => _Double.Equals(value._Double),
+				ValueType.Object => _JsonObject.Equals(value._JsonObject),
+				ValueType.String => _String.Equals(value._String),
+				_ => false
+			};
         }
+
+        /// <summary>Get the hashcode of the current instance.</summary>
         public override int GetHashCode()
 		{
-			switch (Type)
-			{
-				case ValueType.Double:
-					return numberValue.GetHashCode();
-				case ValueType.String:
-					return stringValue.GetHashCode();
-				case ValueType.Boolean:
-					return boolValue.GetHashCode();
-				case ValueType.Object:
-					return objectValue.GetHashCode();
-				case ValueType.Array:
-					return arrayValue.GetHashCode();
-				case ValueType.Null:
-					return ValueType.Null.GetHashCode();
-			}
-			return base.GetHashCode();
+			return Type switch
+            {
+                ValueType.Array => _JsonArray.GetHashCode(),
+                ValueType.Boolean => _Bool.GetHashCode(),
+                ValueType.Double => _Double.GetHashCode(),
+                ValueType.Null => Null.GetHashCode(),
+                ValueType.Object => _JsonObject.GetHashCode(),
+                ValueType.String => _String.GetHashCode(),
+                _ => base.GetHashCode()
+            };
 		}
-        public static implicit operator JsonValue(bool b)
+        /// <summary>Creates a Bool-based JsonValue instance.</summary>
+        /// <param name="value">The Bool value to use.</param>
+        public static implicit operator JsonValue(bool value)
 		{
-			return new JsonValue(b);
+			return new JsonValue(value);
 		}
-        public static implicit operator JsonValue(string s)
+
+        /// <summary>Creates a String-based JsonValue instance.</summary>
+        /// <param name="value">The String value to use.</param>
+        public static implicit operator JsonValue(string value)
 		{
-			return s is null ? null : new JsonValue(s);
+			return value is null ? null : new JsonValue(value);
 		}
-        public static implicit operator JsonValue(double n)
+
+        /// <summary>Creates a Double-based JsonValue instance.</summary>
+        /// <param name="value">The Double value to use.</param>
+        public static implicit operator JsonValue(double value)
 		{
-			return new JsonValue(n);
+			return new JsonValue(value);
 		}
-        public static implicit operator JsonValue(JsonObject o)
+        
+        /// <summary>Creates a JsonObject-based JsonValue instance.</summary>
+        /// <param name="value">The JsonObject value to use.</param>
+        public static implicit operator JsonValue(JsonObject value)
 		{
-			return o is null ? null : new JsonValue(o);
+			return value is null ? null : new JsonValue(value);
 		}
-        public static implicit operator JsonValue(JsonArray a)
+
+        /// <summary>Creates a JsonArray-based JsonValue instance.</summary>
+        /// <param name="value">The JsonArray value to use.</param>
+        public static implicit operator JsonValue(JsonArray value)
 		{
-			return a is null ? null : new JsonValue(a);
+			return value is null ? null : new JsonValue(value);
 		}
+
+        /// <summary>Compares the equality of two JsonValues.</summary>
+        /// <param name="a">The first JsonValue to compare.</param>
+        /// <param name="b">The second JsonValue to compare.</param>
         public static bool operator ==(JsonValue a, JsonValue b)
 		{
 			return ReferenceEquals(a, b) || (a != null && a.Equals(b));
 		}
+
+        /// <summary>Compares the inequality of two JsonValues.</summary>
+        /// <param name="a">The first JsonValue to compare.</param>
+        /// <param name="b">The second JsonValue to compare.</param>
         public static bool operator !=(JsonValue a, JsonValue b)
 		{
 			return !Equals(a, b);

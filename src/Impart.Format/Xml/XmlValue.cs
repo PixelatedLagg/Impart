@@ -2,7 +2,7 @@ using System;
 
 namespace Impart.Format
 {
-    /// <summary>Store the value of an Xml node.</summary>
+    /// <summary>Store the value of a Xml node.</summary>
     public class XmlValue : IEquatable<XmlValue>
     {
         private readonly bool _Bool = default!;
@@ -81,7 +81,7 @@ namespace Impart.Format
         /// <param name="value">The String value to use.</param>
         public XmlValue(String value)
 		{
-			_String = value ?? throw new ImpartError("String assigned to JsonValue cannot be null!");
+			_String = value ?? throw new ImpartError("String assigned to XmlValue cannot be null!");
 			Type = ValueType.String;
 		}
 
@@ -146,6 +146,14 @@ namespace Impart.Format
                 _ => EqualsExtension(o)
             };
         }
+        private bool EqualsExtension(object o)
+        {
+            if (Impart.Internal.Number.IsNumber(o))
+            {
+                return _Double.Equals(Convert.ToDouble(o));
+            }
+            return false;
+        }
 
         /// <summary>Compares the equality of this instance and a XmlValue.</summary>
         /// <param name="value">The XmlValue to compare.</param>
@@ -155,43 +163,30 @@ namespace Impart.Format
             {
                 return false;
             }
-			switch (Type)
+			return Type switch
 			{
-				case ValueType.Double:
-					return _Double.Equals(value._Double);
-				case ValueType.String:
-					return _String.Equals(value.String);
-				case ValueType.Boolean:
-					return _Bool.Equals(value.Bool);
-				case ValueType.Object:
-					return _XmlObject.Equals(value._XmlObject);
-				case ValueType.Array:
-					return _XmlArray.Equals(value._XmlArray);
-				case ValueType.Null:
-					return true;
-			}
-			return false;
+				ValueType.Array => _XmlArray.Equals(value._XmlArray),
+				ValueType.Boolean => _Bool.Equals(value._Bool),
+				ValueType.Double => _Double.Equals(value._Double),
+				ValueType.Object => _XmlObject.Equals(value._XmlObject),
+				ValueType.String => _String.Equals(value._String),
+				_ => false
+			};
         }
 
         /// <summary>Get the hashcode of the current instance.</summary>
         public override int GetHashCode()
 		{
-			switch (Type)
-			{
-				case ValueType.Double:
-					return _Double.GetHashCode();
-				case ValueType.String:
-					return _String.GetHashCode();
-				case ValueType.Boolean:
-					return _Bool.GetHashCode();
-				case ValueType.Object:
-					return _XmlObject.GetHashCode();
-				case ValueType.Array:
-					return _XmlArray.GetHashCode();
-				case ValueType.Null:
-					return ValueType.Null.GetHashCode();
-			}
-			return base.GetHashCode();
+            return Type switch
+            {
+                ValueType.Array => _XmlArray.GetHashCode(),
+                ValueType.Boolean => _Bool.GetHashCode(),
+                ValueType.Double => _Double.GetHashCode(),
+                ValueType.Null => Null.GetHashCode(),
+                ValueType.Object => _XmlObject.GetHashCode(),
+                ValueType.String => _String.GetHashCode(),
+                _ => base.GetHashCode()
+            };
 		}
 
         /// <summary>Creates a Bool-based XmlValue instance.</summary>
@@ -222,8 +217,8 @@ namespace Impart.Format
 			return value is null ? null : new XmlValue(value);
 		}
 
-        /// <summary>Creates a XmlValue-based XmlValue instance.</summary>
-        /// <param name="value">The XmlValue value to use.</param>
+        /// <summary>Creates a XmlArray-based XmlValue instance.</summary>
+        /// <param name="value">The XmlArray value to use.</param>
         public static implicit operator XmlValue(XmlArray value)
 		{
 			return value is null ? null : new XmlValue(value);
@@ -244,13 +239,5 @@ namespace Impart.Format
 		{
 			return !Equals(a, b);
 		}
-        private bool EqualsExtension(object o)
-        {
-            if (Impart.Internal.Number.IsNumber(o))
-            {
-                return _Double.Equals(Convert.ToDouble(o));
-            }
-            return false;
-        }
     }
 }
