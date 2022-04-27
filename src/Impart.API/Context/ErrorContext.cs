@@ -27,9 +27,25 @@ namespace Impart.Api
             _Type = type;
         }
 
-        /// <summary>Respond to the context with <paramref name="response"/> as the response.</summary>
-        /// <param name="response">The response.</param>
+        /// <summary>Respond to the context.</summary>
+        /// <param name="response">The JSON response.</param>
         public void Respond(JsonObject response)
+        {
+            string str = response.ToString();
+            byte[] bytes = Encoding.ASCII.GetBytes($"HTTP/1.1 {((int)_Type)}\r\nServer: cx1193719-b\r\nContent-Type: text/json\r\nAccept-Ranges: bytes\r\nContent-Length: {str.Length} \r\n\r\n{str}");
+            try  
+            {
+                Socket.Send(bytes, bytes.Length, 0);
+            }
+            catch
+            {
+                throw new ImpartError("Error in sending packets.");
+            }
+        }
+        
+        /// <summary>Respond to the context.</summary>
+        /// <param name="response">The XML response.</param>
+        public void Respond(XmlObject response)
         {
             string str = response.ToString();
             byte[] bytes = Encoding.ASCII.GetBytes($"HTTP/1.1 {((int)_Type)}\r\nServer: cx1193719-b\r\nContent-Type: text/json\r\nAccept-Ranges: bytes\r\nContent-Length: {str.Length} \r\n\r\n{str}");

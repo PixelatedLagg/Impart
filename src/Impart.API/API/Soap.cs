@@ -31,7 +31,7 @@ namespace Impart.Api
         private Thread _Thread;
         private Socket _Socket;
         
-        /// <summary>Creates a Soap instance with <paramref name="port"/> as the port.</summary>
+        /// <summary>Creates a Soap instance.</summary>
         /// <param name="port">The port to host on. (Default is 7070)</param>
         public Soap(int port = 7070)
         {
@@ -89,39 +89,19 @@ namespace Impart.Api
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
                     string[] contents = sBuffer.Split(' ');
                     RequestType request;
-                    switch (sBuffer.Split(" ")[0])
+                    request = sBuffer.Split(" ")[0] switch
                     {
-                        case "GET":
-                            request = RequestType.Get;
-                            break;
-                        case "PUSH":
-                            request = RequestType.Push;
-                            break;
-                        case "PUT":
-                            request = RequestType.Put;
-                            break;
-                        case "DELETE":
-                            request = RequestType.Delete;
-                            break;
-                        case "HEAD":
-                            request = RequestType.Head;
-                            break;
-                        case "CONNECT":
-                            request = RequestType.Connect;
-                            break;
-                        case "OPTIONS":
-                            request = RequestType.Options;
-                            break;
-                        case "TRACE":
-                            request = RequestType.Trace;
-                            break;
-                        case "PATCH":
-                            request = RequestType.Patch;
-                            break;
-                        default:
-                            request = RequestType.Get;
-                            break;
-                    }
+                        "GET" => RequestType.Get,
+                        "PUSH" => RequestType.Push,
+                        "PUT" => RequestType.Put,
+                        "DELETE" => RequestType.Delete,
+                        "HEAD" => RequestType.Head,
+                        "CONNECT" => RequestType.Connect,
+                        "OPTIONS" => RequestType.Options,
+                        "TRACE" => RequestType.Trace,
+                        "PATCH" => RequestType.Patch,
+                        _ => RequestType.Get
+                    };
                     if (contents[1] == "/" && _Routes.ContainsKey("*"))
                     {
                         _Routes["*"].Invoke(Activator.CreateInstance(_Routes["*"].DeclaringType), new object[] {new APIEventArgs(request), new SoapContext(_Socket)});

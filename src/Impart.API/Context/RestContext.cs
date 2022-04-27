@@ -9,15 +9,15 @@ namespace Impart.Api
     {
         private Socket Socket;
 
-        /// <summary>Creates an RestContext instance with <paramref name="socket"/> as the socket.</summary>
+        /// <summary>Creates an RestContext instance.</summary>
         /// <param name="socket">The Socket handling the API.</param>
         public RestContext(Socket socket)
         {
             Socket = socket;
         }
 
-        /// <summary>Respond to the context with <paramref name="response"/> as the response.</summary>
-        /// <param name="response">The response.</param>
+        /// <summary>Respond to the context.</summary>
+        /// <param name="response">The JSON response.</param>
         public void Respond(JsonObject response)
         {
             string str = response.ToString();

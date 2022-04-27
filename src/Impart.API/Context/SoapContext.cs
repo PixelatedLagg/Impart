@@ -1,4 +1,5 @@
 using System.Text;
+using Impart.Format;
 using System.Net.Sockets;
 
 namespace Impart.Api
@@ -16,10 +17,10 @@ namespace Impart.Api
         }
 
         /// <summary>Respond to the context.</summary>
-        /// <param name="response">The response.</param>
-        public void Respond(string response)
+        /// <param name="response">The XML response.</param>
+        public void Respond(XmlObject response)
         {
-            string str = response;
+            string str = response.ToString();
             byte[] bytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/xml\r\nAccept-Ranges: bytes\r\nContent-Length: {str.Length} \r\n\r\n{str}");
             try  
             {
