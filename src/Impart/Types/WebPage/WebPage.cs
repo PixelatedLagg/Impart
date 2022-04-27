@@ -308,7 +308,7 @@ namespace Impart
             Changed = true;
         }
 
-        //
+        /// <summary>Remove the Scrollbar from the WebPage.</summary>
         protected void RemoveScrollBar()
         {
             _ScrollbarCache.Clear();
