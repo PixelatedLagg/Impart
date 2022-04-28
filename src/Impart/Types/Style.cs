@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -15,6 +17,18 @@ namespace Impart
                 return _ID;
             }
         }
+        private List<Attribute> _Attributes = new List<Attribute>();
+
+        /// <value>The attribute values of the Style.</value>
+        public List<Attribute> Attributes
+        {
+            get
+            {
+                return _Attributes;
+            }
+        }
+        private bool Changed = false;
+        private string Render = "";
 
         /// <summary>Creates a Style instance.</summary>
         /// <param name="id">The ID.</param>
@@ -27,10 +41,30 @@ namespace Impart
             _ID = id;
         }
 
+        /// <summary>Sets an Attribute of the instance.</summary>
+        /// <param name="type">The Attribute type.</param>
+        /// <param name="value">The Attribute value(s).</param>
+        public Style SetAttribute(AttributeType type, params object[] value)
+        {
+            _Attributes.Add(new Attribute(type, value));
+            Changed = true;
+            return this;
+        }
+
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            return "";
+            if (!Changed)
+            {
+                return Render;
+            }
+            StringBuilder result = new StringBuilder($"{_ID} {{");
+            foreach (Attribute attribute in _Attributes)
+            {
+                result.Append(attribute);
+            }
+            Render = result.Append('}').ToString();
+            return Render;
         }
 
         /// <summary>Dispose of the Style instance.</summary>
