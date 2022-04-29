@@ -31,7 +31,13 @@ namespace Impart
             {
                 return new Hsl(((float, float, float))o);
             }
-            throw new ImpartError("Invalid type to convert!");
+            return o switch
+            {
+                Rgb r => (Rgb)o,
+                Hsl h => (Hsl)o,
+                Hex he => (Hex)o,
+                _ => throw new ImpartError("Invalid type to convert!")
+            };
         }
     }
 }

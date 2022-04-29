@@ -8,18 +8,17 @@ namespace Impart
     /// <summary>A nest of Elements.</summary>
     public struct Nest : Element
     {
-        private List<Element> _elements;
+        private List<Element> _Elements = new List<Element>();
 
         /// <value>All of the Elements included in the Nest.</value>
-        public Element[] elements
+        public Element[] Elements
         {
             get
             {
-                return _elements.ToArray();
+                return _Elements.ToArray();
             }
         }
-        internal Type elementType = typeof(Nest);
-        private List<Nested> _nested;
+        private List<Nested> _Nested = new List<Nested>();
         string Element.ID
         {
             get
@@ -38,19 +37,13 @@ namespace Impart
         }
 
         /// <summary>Creates an empty Nest instance.</summary>
-        public Nest()
-        {
-            _nested = new List<Nested>();
-            _elements = new List<Element>();
-        }
+        public Nest() { }
 
         /// <summary>Creates a Nest instance.</summary>
         /// <param name="elements">The Elements to add to the Nest.</param>
         public Nest(params Element[] elements)
         {
-            _nested = new List<Nested>();
-            _elements = new List<Element>();
-            _elements.AddRange(elements);
+            _Elements.AddRange(elements);
             Nested current;
             foreach (Element e in elements)
             {
@@ -61,7 +54,7 @@ namespace Impart
                 }
                 else
                 {
-                    _nested.Add(current);
+                    _Nested.Add(current);
                 }
             }
         }
@@ -70,7 +63,7 @@ namespace Impart
         /// <param name="elements">The Elements to add to the Nest.</param>
         public Nest Add(params Element[] elements)
         {
-            _elements.AddRange(elements);
+            _Elements.AddRange(elements);
             Nested current;
             foreach (Element e in elements)
             {
@@ -81,7 +74,7 @@ namespace Impart
                 }
                 else
                 {
-                    _nested.Add(current);
+                    _Nested.Add(current);
                 }
             }
             return this;
@@ -91,13 +84,13 @@ namespace Impart
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();
-            for (int i = 0; i < _nested.Count; i++)
+            for (int i = 0; i < _Nested.Count; i++)
             {
-                result.Append(_nested[i].First());
+                result.Append(_Nested[i].First());
             }
-            for (int i = _nested.Count - 1; i >= 0; i--)
+            for (int i = _Nested.Count - 1; i >= 0; i--)
             {
-                result.Append(_nested[i].Last());
+                result.Append(_Nested[i].Last());
             }
             return result.ToString();
         }

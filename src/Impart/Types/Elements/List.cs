@@ -137,7 +137,7 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder($"<{_ListType}");
+            StringBuilder result = new StringBuilder($"<{_ListType} ");
             if (_Attributes.Count != 0)
             {
                 result.Append("style=\"");

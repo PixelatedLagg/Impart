@@ -23,7 +23,7 @@ namespace Impart
             }
         }
         private List<FormElement> Elements = new List<FormElement>();
-        private bool Changed;
+        private bool Changed = true;
         private string Render;
         private int IOIDValue = Ioid.Generate();
         int Element.IOID

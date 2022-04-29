@@ -27,7 +27,7 @@ namespace Impart
                 return _Attributes;
             }
         }
-        private bool Changed = false;
+        private bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates a Style instance.</summary>

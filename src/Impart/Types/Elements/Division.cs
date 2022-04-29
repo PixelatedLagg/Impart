@@ -193,7 +193,7 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder("<div");
+            StringBuilder result = new StringBuilder("<div ");
             if (_Attributes.Count != 0)
             {
                 result.Append(" style=\"");

@@ -1,13 +1,11 @@
-using System;
 using System.Text;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace Impart
 {
-    public class Table
+    public struct TableRow
     {
-        private string _ID;
+        private string _ID = null;
         
         public string ID
         {
@@ -21,13 +19,13 @@ namespace Impart
                 _ID = value;
             }
         }
-        private List<TableRow> _Rows = new List<TableRow>();
+        private List<TableEntry> _Entries = new List<TableEntry>();
 
-        public List<TableRow> Rows
+        public List<TableEntry> Entries
         {
             get
             {
-                return _Rows;
+                return _Entries;
             }
         }
         private List<Attribute> _Attributes = new List<Attribute>();
@@ -43,17 +41,17 @@ namespace Impart
         private bool Changed = true;
         private string Render = "";
 
-        public Table(params TableRow[] rows)
+        public TableRow(params TableEntry[] entries)
         {
-            _Rows.AddRange(rows);
+            _Entries.AddRange(entries);
         }
-        public Table AddRow(params TableRow[] rows)
+        public TableRow AddRow(params TableEntry[] entries)
         {
-            _Rows.AddRange(rows);
+            _Entries.AddRange(entries);
             Changed = true;
             return this;
         }
-        public Table SetAttribute(AttributeType type, params object[] value)
+        public TableRow SetAttribute(AttributeType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;
@@ -65,10 +63,21 @@ namespace Impart
             {
                 return Render;
             }
+            Changed = false;
             StringBuilder result = new StringBuilder("<table>");
-            foreach (TableRow row in _Rows)
+            if (_Attributes.Count != 0)
             {
-                result.Append(row);
+                result.Append("style\")");
+                foreach (Attribute attribute in _Attributes)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+                return Render;
+            }
+            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            {
+                result.Append(extAttribute);
             }
             Render = result.Append("</table>").ToString();
             return Render;

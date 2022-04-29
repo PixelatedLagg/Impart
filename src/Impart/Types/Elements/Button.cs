@@ -94,7 +94,7 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder("<button");
+            StringBuilder result = new StringBuilder("<button ");
             if (_Attributes.Count != 0)
             {
                 result.Append(" style\"");
