@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using Impart.Internal;
 using System.Collections.Generic;
@@ -48,7 +47,7 @@ namespace Impart
             foreach (Element e in elements)
             {
                 current = e as Nested;
-                if (current != null)
+                if (current == null)
                 {
                     throw new ImpartError("Cannot add this element to a nest!");
                 }

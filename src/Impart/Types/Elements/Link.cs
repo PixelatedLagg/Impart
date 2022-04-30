@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Text;
 using Impart.Internal;
 using System.Collections.Generic;
@@ -53,6 +52,11 @@ namespace Impart
             {
                 return _Path;
             }
+            set
+            {
+                Changed = true;
+                _Path = value;
+            }
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
@@ -64,7 +68,25 @@ namespace Impart
                 return _Attributes;
             }
         }
-        internal Type _LinkType;
+        private Type _LinkType;
+
+        /// <value>The Type of Link.</value>
+        public Type LinkType
+        {
+            get
+            {
+                return _LinkType;
+            }
+            set
+            {
+                if (value != typeof(Text) && value != typeof(Image))
+                {
+                    throw new ImpartError("Link Type must be Text or Image!");
+                }
+                Changed = true;
+                _LinkType = value;
+            }
+        }
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
@@ -78,7 +100,7 @@ namespace Impart
         }
 
         /// <summary>Creates an empty Link instance.</summary>
-        public Link() : this(new Text(), Directory.GetCurrentDirectory()) {}
+        public Link() : this(new Text(), "/") {}
 
         /// <summary>Creates a Link instance.</summary>
         /// <param name="text">The Link text.</param>
@@ -86,9 +108,9 @@ namespace Impart
         /// <param name="id">The Link ID.</param>
         public Link(Text text, string path, string id = null)
         {
-            if (String.IsNullOrEmpty(path))
+            if (path == null)
             {
-                throw new ImpartError("Path cannot be null or empty!");
+                throw new ImpartError("Path cannot be null!");
             }
             _Text = text;
             _ID = id;
@@ -106,9 +128,9 @@ namespace Impart
         /// <param name="id">The Link ID.</param>
         public Link(Image image, string path, string id = null)
         {
-            if (String.IsNullOrEmpty(path))
+            if (path == null)
             {
-                throw new ImpartError("Path cannot be null or empty!");
+                throw new ImpartError("Path cannot be null!");
             }
             _ID = id;
             _Path = path;
@@ -141,7 +163,7 @@ namespace Impart
             StringBuilder result = new StringBuilder($"<a href=\"{_Path}\"");
             if (_Attributes.Count != 0)
             {
-                result.Append("style=\"");
+                result.Append(" style=\"");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);
@@ -169,11 +191,11 @@ namespace Impart
             string result = ToString();
             if (_LinkType == typeof(Image))
             {
-                return result.Remove(result.Length - ("</img></a>".Length) - 1);
+                return result.Remove(result.Length - 10);
             }
             else
             {
-                return result.Remove(result.Length - ($"{((Nested)_Text).Last()}</a>".Length) - 1);
+                return result.Remove(result.Length - ($"{((Nested)_Text).Last()}</a>".Length));
             }
         }
 

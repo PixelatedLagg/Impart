@@ -123,16 +123,15 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder($"<h{_Number} ");
+            StringBuilder result = new StringBuilder($"<h{_Number}");
             if (_Attributes.Count != 0)
             {
-                result.Append("style=\"");
+                result.Append(" style=\"");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);
                 }
                 result.Append('"');
-                return Render;
             }
             foreach (ExtAttribute extAttribute in _ExtAttributes)
             {
@@ -145,7 +144,7 @@ namespace Impart
         string Nested.First()
         {
             string result = ToString();
-            return result.Remove(result.Length - ($"</h1>".Length) - 1);
+            return result.Remove(result.Length - 5);
         }
         
         string Nested.Last()

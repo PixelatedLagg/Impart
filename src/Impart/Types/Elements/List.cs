@@ -137,26 +137,15 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder($"<{_ListType} ");
+            StringBuilder result = new StringBuilder($"<{_ListType}");
             if (_Attributes.Count != 0)
             {
-                result.Append("style=\"");
+                result.Append(" style=\"");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);
                 }
                 result.Append('"');
-                foreach (ExtAttribute extAttribute in _ExtAttributes)
-                {
-                    result.Append(extAttribute);
-                }
-                result.Append('>');
-                foreach (Text text in _Entries)
-                {
-                    result.Append($"<li>{text}</li>");
-                }
-                Render = result.Append($"</{_ListType}>").ToString();
-                return Render;
             }
             foreach (ExtAttribute extAttribute in _ExtAttributes)
             {
@@ -174,7 +163,7 @@ namespace Impart
         string Nested.First()
         {
             string result = ToString();
-            return result.Remove(result.Length - ($"</{_ListType}>".Length) - 1);
+            return result.Remove(result.Length - ($"</{_ListType}>".Length));
         }
 
         string Nested.Last()

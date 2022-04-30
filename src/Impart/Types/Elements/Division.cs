@@ -219,7 +219,7 @@ namespace Impart
         string Nested.First()
         {
             string result = ToString();
-            return result.Remove(result.Length - ("</div>".Length) - 1);
+            return result.Remove(result.Length - 6);
         }
 
         string Nested.Last()

@@ -94,7 +94,7 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder("<button ");
+            StringBuilder result = new StringBuilder("<button");
             if (_Attributes.Count != 0)
             {
                 result.Append(" style\"");
@@ -115,7 +115,7 @@ namespace Impart
         string Nested.First()
         {
             string result = ToString();
-            return result.Remove(result.Length - ("</{button}>".Length) - 1);
+            return result.Remove(result.Length - 9);
         }
 
         string Nested.Last()

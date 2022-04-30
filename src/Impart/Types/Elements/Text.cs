@@ -1,5 +1,3 @@
-
-using System;
 using System.Text;
 using Impart.Internal;
 using System.Collections.Generic;
@@ -133,13 +131,7 @@ namespace Impart
         /// <param name="value">The Attribute value(s).</param>
         public Text SetAttribute(AttributeType type, params object[] value)
         {
-            Console.WriteLine("before assigned");
             _Attributes.Add(new Attribute(type, value));
-            Console.WriteLine("after assigned");
-            foreach (Attribute a in _Attributes)
-            {
-                Console.WriteLine(a);
-            }
             Changed = true;
             return this;
         }
@@ -152,10 +144,10 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder($"<{_TextType} ");
+            StringBuilder result = new StringBuilder($"<{_TextType}");
             if (_Attributes.Count != 0)
             {
-                result.Append("style=\"");
+                result.Append(" style=\"");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);
@@ -173,7 +165,7 @@ namespace Impart
         string Nested.First()
         {
             string result = ToString();
-            return result.Remove(result.Length - ($"</{_TextType}>".Length) - 1);
+            return result.Remove(result.Length - ($"</{_TextType}>".Length));
         }
         
         string Nested.Last()

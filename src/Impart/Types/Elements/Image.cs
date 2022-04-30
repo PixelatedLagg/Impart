@@ -59,16 +59,16 @@ namespace Impart
         }
 
         /// <summary>Creates an empty Image instance.</summary>
-        public Image() : this("") { }
+        public Image() : this("/") { }
         
         /// <summary>Creates an Image instance.</summary>
         /// <param name="path">The Image path.</param>
         /// <param name="id">The Image ID.</param>
         public Image(string path, string id = null)
         {
-            if (String.IsNullOrEmpty(path)) 
+            if (path == null) 
             {
-                throw new ImpartError("Path cannot be empty or null!");
+                throw new ImpartError("Path cannot be null!");
             }
             if (id != null)
             {
@@ -99,13 +99,12 @@ namespace Impart
             StringBuilder result = new StringBuilder($"<img src=\"{_Path}\"");
             if (_Attributes.Count != 0)
             {
-                result.Append($"style=\"");
+                result.Append($" style=\"");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);
                 }
                 result.Append('"');
-                return Render;
             }
             foreach (ExtAttribute extAttribute in _ExtAttributes)
             {
