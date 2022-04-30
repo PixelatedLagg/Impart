@@ -3,10 +3,12 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    public struct TableRow
+    /// <summary>A row of a Table.</summary>
+    public class TableRow
     {
         private string _ID = null;
         
+        /// <value>The ID value of the TableRow.</value>
         public string ID
         {
             get
@@ -19,44 +21,57 @@ namespace Impart
                 _ID = value;
             }
         }
-        private List<TableEntry> _Entries = new List<TableEntry>();
+        private List<Element> _Elements = new List<Element>();
 
-        public List<TableEntry> Entries
+        /// <value>The Element values of the TableRow.</value>
+        public Element[] Elements
         {
             get
             {
-                return _Entries;
+                return _Elements.ToArray();
             }
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
-        public List<Attribute> Attributes
+        /// <value>The Attribute values of the TableRow.</value>
+        public Attribute[] Attributes
         {
             get 
             {
-                return _Attributes;
+                return _Attributes.ToArray();
             }
         }
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
 
-        public TableRow(params TableEntry[] entries)
+        /// <summary>Creates a TableRow instance.</summary>
+        /// <param name="elements">The Elements to add.</param>
+        public TableRow(params Element[] elements)
         {
-            _Entries.AddRange(entries);
+            _Elements.AddRange(elements);
         }
-        public TableRow AddRow(params TableEntry[] entries)
+
+        /// <summary>Add Elements to the TableRow.</summary>
+        /// <param name="elements">The Elements to add.</param>
+        public TableRow AddRow(params Element[] elements)
         {
-            _Entries.AddRange(entries);
+            _Elements.AddRange(elements);
             Changed = true;
             return this;
         }
+
+        /// <summary>Sets an Attribute of the instance.</summary>
+        /// <param name="type">The Attribute type.</param>
+        /// <param name="value">The Attribute value(s).</param>
         public TableRow SetAttribute(AttributeType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;
             return this;
         }
+
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
             if (!Changed)
@@ -64,22 +79,26 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder("<table>");
+            StringBuilder result = new StringBuilder("<tr");
             if (_Attributes.Count != 0)
             {
-                result.Append("style\")");
+                result.Append(" style=\"");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);
                 }
                 result.Append('"');
-                return Render;
             }
             foreach (ExtAttribute extAttribute in _ExtAttributes)
             {
                 result.Append(extAttribute);
             }
-            Render = result.Append("</table>").ToString();
+            result.Append('>');
+            foreach (Element element in _Elements)
+            {
+                result.Append($"<td>{element}</td>");
+            }
+            Render = result.Append("</tr>").ToString();
             return Render;
         }
     }

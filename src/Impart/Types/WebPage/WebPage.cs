@@ -5,7 +5,6 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Generate a webpage for a Website.</summary>
-    /// <remarks>This is the root class of Impart.</remarks>
     public class WebPage
     {
         private string _Title;
@@ -59,11 +58,11 @@ namespace Impart
         private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The Attribute values of the WebPage.</value>
-        public List<Attribute> Attributes
+        public Attribute[] Attributes
         {
             get 
             {
-                return _Attributes;
+                return _Attributes.ToArray();
             }
         }
 
@@ -203,61 +202,11 @@ namespace Impart
         }
 
         /// <summary>Add a Table to the WebPage.</summary>
-        /// <param name="rowNum">The number of rows.</param>
-        /// <param name="obj">An array of strings to add as entries.</param>
-        protected void AddTable(int rowNum, params string[] obj)
+        /// <param name="table">The Table instance to add.</param>
+        protected void AddTable(Table table)
         {
-            /*if (rowNum > obj.Length)
-            {
-                throw new ImpartError("Number of table rows cannot be bigger than number of table entries!");
-            }
-            int length = 0;
-            foreach (string s in obj)
-            {
-                length += s.Length;
-            }
-            StringBuilder tempBuilder = new StringBuilder(length * (rowNum + 10));
-            tempBuilder.Append("<table>");
-            tempBuilder.Append($"<tr>");
-            for (int x = 0; x < rowNum; x++)
-            {
-                tempBuilder.Append($"<th>{obj[x]}</th>");
-            }
-            tempBuilder.Append($"</tr>"); 
-            int vertRowNum = (int)Math.Round(Convert.ToDouble(((double)obj.Length - (double)rowNum) / (double)rowNum), MidpointRounding.AwayFromZero);
-            if ((obj.Length - rowNum) % rowNum > 0)
-            {
-                int _currentobj = 0;
-                for (int a = 0; a < vertRowNum + 1; a++)
-                {
-                    tempBuilder.Append($"<tr>");
-                    for (int x = 0; x < rowNum; x++)
-                    {
-                        if (obj.Length <= rowNum + _currentobj)
-                        {
-                            tempBuilder.Append($"</tr>");
-                            textBuilder.Append($"</table>");
-                            return;
-                        }
-                        tempBuilder.Append($"<td>{obj[rowNum + _currentobj]}</td>");
-                        _currentobj++;
-                    }
-                    tempBuilder.Append($"</tr>");
-                }
-            }
-            int currentObj = 0;
-            for (int a = 0; a < vertRowNum; a++)
-            {
-                tempBuilder.Append($"<tr>");
-                for (int x = 0; x < rowNum; x++)
-                {
-                    tempBuilder.Append($"<td>{obj[rowNum + currentObj]}</td>");
-                    currentObj++;
-                }
-                tempBuilder.Append($"</tr>");
-            }
-            textBuilder.Append($"{tempBuilder.ToString()}</table>");
-            Changed = true;*/
+            _Elements.Add(table);
+            Changed = true;
         }
 
         /// <summary>Add a Division to the WebPage.</summary>

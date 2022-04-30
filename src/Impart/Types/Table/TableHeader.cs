@@ -1,16 +1,15 @@
 using System.Text;
-using Impart.Internal;
 using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>Table element.</summary>
-    public class Table : Element
+    /// <summary>A header row of a Table.</summary>
+    public class TableHeader : TableRow
     {
-        private string _ID;
-
-        /// <value>The ID value of the Table.</value>
-        public string ID
+        private string _ID = null;
+        
+        /// <value>The ID value of the TableHeader.</value>
+        public new string ID
         {
             get
             {
@@ -22,20 +21,20 @@ namespace Impart
                 _ID = value;
             }
         }
-        private List<TableRow> _Rows = new List<TableRow>();
+        private List<Element> _Elements = new List<Element>();
 
-        /// <value>The TableRow values of the Table.</value>
-        public TableRow[] Rows
+        /// <value>The Element values of the TableHeader.</value>
+        public new Element[] Elements
         {
             get
             {
-                return _Rows.ToArray();
+                return _Elements.ToArray();
             }
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
-        /// <value>The Attribute values of the Table.</value>
-        public Attribute[] Attributes
+        /// <value>The Attribute values of the TableHeader.</value>
+        public new Attribute[] Attributes
         {
             get 
             {
@@ -44,28 +43,20 @@ namespace Impart
         }
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
-        private string Render;
-        private int IOIDValue = Ioid.Generate();
-        int Element.IOID
+        private string Render = "";
+
+        /// <summary>Creates a TableHeader instance.</summary>
+        /// <param name="elements">The Elements to add.</param>
+        public TableHeader(params Element[] elements)
         {
-            get
-            {
-                return IOIDValue;
-            }
+            _Elements.AddRange(elements);
         }
 
-        /// <summary>Creates a Table instance.</summary>
-        /// <param name="rows">The TableRows to add.</param>
-        public Table(params TableRow[] rows)
+        /// <summary>Add Elements to the TableHeader.</summary>
+        /// <param name="elements">The Elements to add.</param>
+        public new TableHeader AddRow(params Element[] elements)
         {
-            _Rows.AddRange(rows);
-        }
-
-        /// <summary>Add TableRows to the Table.</summary>
-        /// <param name="rows">The TableRows to add.</param>
-        public Table AddRow(params TableRow[] rows)
-        {
-            _Rows.AddRange(rows);
+            _Elements.AddRange(elements);
             Changed = true;
             return this;
         }
@@ -73,7 +64,7 @@ namespace Impart
         /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
-        public Table SetAttribute(AttributeType type, params object[] value)
+        public new TableHeader SetAttribute(AttributeType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;
@@ -88,7 +79,7 @@ namespace Impart
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder("<table");
+            StringBuilder result = new StringBuilder("<tr");
             if (_Attributes.Count != 0)
             {
                 result.Append(" style=\"");
@@ -103,11 +94,11 @@ namespace Impart
                 result.Append(extAttribute);
             }
             result.Append('>');
-            foreach (TableRow row in _Rows)
+            foreach (Element element in _Elements)
             {
-                result.Append(row);
+                result.Append($"<th>{element}</th>");
             }
-            Render = result.Append("</table>").ToString();
+            Render = result.Append("</tr>").ToString();
             return Render;
         }
     }

@@ -94,6 +94,15 @@ namespace Impart
             return this;
         }
 
+        /// <summary>Add a Table to the Division.</summary>
+        /// <param name="table">The Table instance to add.</param>
+        public Division AddTable(Table table)
+        {
+            _Elements.Add(table);
+            Changed = true;
+            return this;
+        }
+
         /// <summary>Add a Division to the Division.</summary>
         /// <param name="division">The Division instance to add.</param>
         public Division AddDivision(Division division)
