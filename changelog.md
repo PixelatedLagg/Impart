@@ -18,3 +18,17 @@ Added:
 	<li>SOAP api hosting</li>
 	<li>Nested element</li>
 </ul>
+
+# April 30th (2.0.3) Total Downloads: 722
+Impart has started to embrace a production-ready state. Lots of bug fixes and some big additions to the codebase are only the beginning. Additionally, I have drastically shortened the load times of WebPages with a simple, yet powerful caching system.
+
+Added:
+<ul>
+	<li>Table element</li>
+	<li>Standardised documentation</li>
+	<li>Massive overhaul to element rendering</li>
+	<li>Cache system in each rendered object</li>
+	<li>Animation and framing system</li>
+	<li>Attribute system for styling</li>
+	<li>External attribute system for HTML attributes</li>
+</ul>
