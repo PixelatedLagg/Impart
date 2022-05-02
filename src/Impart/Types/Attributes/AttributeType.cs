@@ -14,6 +14,7 @@ namespace Impart
         Height,
         Border,
         OverflowX,
-        OverflowY
+        OverflowY,
+        AlignText
     }
 }

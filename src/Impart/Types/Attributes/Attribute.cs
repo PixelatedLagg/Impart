@@ -221,6 +221,19 @@ namespace Impart
                         return " overflow-y: auto;";
                     }
                     return " overflow-y: hidden;";
+                case AttributeType.AlignText:
+                    if (Value.Length != 1)
+                    {
+                        throw new ImpartError("Invalid attribute parameters.");
+                    }
+                    return Value[0] switch
+                    {
+                        Alignment.Center => " text-align: center;",
+                        Alignment.Justify => " text-align: justify;",
+                        Alignment.Left => " text-align: left;",
+                        Alignment.Right => " text-align: right;",
+                        _ => throw new ImpartError("Invalid attribute parameters.")
+                    };
                 default:
                     throw new ImpartError("Invalid attribute parameters.");
             }
