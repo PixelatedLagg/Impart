@@ -162,6 +162,13 @@ namespace Impart
             return Render;
         }
 
+        /// <summary>Convert the String instance to a Text.</summary>
+        /// <param name="text">The String to convert.</param>
+        public static implicit operator Text(string text)
+        {
+            return new Text(text);
+        }
+
         string Nested.First()
         {
             string result = ToString();

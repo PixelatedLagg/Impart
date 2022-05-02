@@ -1,10 +1,11 @@
+using Impart;
 using System;
 using System.Linq;
 
-namespace Impart
+namespace Impart.Data
 {
     /// <summary>The class for generating random colors.</summary>
-    public static class RandomColor
+    public static class Color
     {
         private static Random rnd = new Random();
         private const string chars = "ABCDEF1234567890";
