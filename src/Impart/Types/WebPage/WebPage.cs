@@ -89,6 +89,13 @@ namespace Impart
                     return true;
                 }
             }
+            foreach (Element entry in _CSSElements)
+            {
+                if (entry.IOID == element.IOID)
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -146,6 +153,14 @@ namespace Impart
                     _Elements.Remove(entry);
                 }
             }
+            foreach (Element entry in _CSSElements.ToArray())
+            {
+                if (entry.IOID == element.IOID)
+                {
+                    Changed = true;
+                    _CSSElements.Remove(entry);
+                }
+            }
         }
 
         /// <summary>Change the Element.</summary>
@@ -158,6 +173,14 @@ namespace Impart
                 {
                     Changed = true;
                     _Elements[_Elements.IndexOf(entry)] = element;
+                }
+            }
+            foreach (Element entry in _CSSElements.ToArray())
+            {
+                if (entry.IOID == element.IOID)
+                {
+                    Changed = true;
+                    _CSSElements[_CSSElements.IndexOf(entry)] = element;
                 }
             }
         }
@@ -317,7 +340,7 @@ namespace Impart
             {
                 result.Append($"<link rel=\"stylesheet\" href=\"{i}\">");
             }
-            result.Append($"<style>{_ScrollbarCache.ToString()}");
+            result.Append($"<meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style>{_ScrollbarCache.ToString()}");
             foreach (KeyValuePair<string, string> s in _Styles)
             {
                 result.Append(s.Value);
@@ -334,11 +357,6 @@ namespace Impart
             result.Append('>');
             foreach (Element entry in _Elements)
             {
-                if (entry.GetType() == typeof(Animation))
-                {
-
-                    continue;
-                }
                 result.Append(entry);
             }
             Render = result.Append($"</body>{_Script}</html>").ToString();
