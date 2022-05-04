@@ -52,18 +52,20 @@ namespace Impart
                 return _Attributes;
             }
         }
-        private string _ListType;
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
-        private bool Changed = true;
-        private string Render = "";
-        private int IOIDValue = Ioid.Generate();
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
         int Element.IOID
         {
             get
             {
-                return IOIDValue;
+                return _IOID;
             }
         }
+        private string _ListType;
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates a List instance.</summary>
         /// <param name="type">The List type.</param>

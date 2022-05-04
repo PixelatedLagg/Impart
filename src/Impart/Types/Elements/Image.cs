@@ -18,7 +18,6 @@ namespace Impart
                 return _Path;
             }
         }
-
         private string _ID;
 
         /// <value>The ID value of the Image.</value>
@@ -34,7 +33,6 @@ namespace Impart
                 _ID = value;
             }
         }
-        
         private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The Attribute values of the Image.</value>
@@ -45,18 +43,20 @@ namespace Impart
                 return _Attributes;
             }
         }
+        private int _IOID = Ioid.Generate();
 
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
-        private bool Changed = true;
-        private string Render = "";
-        private int IOIDValue = Ioid.Generate();
+        /// <value>The internal ID of the instance.</value>
         int Element.IOID
         {
             get
             {
-                return IOIDValue;
+                return _IOID;
             }
         }
+
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates an empty Image instance.</summary>
         public Image() : this("/") { }
@@ -70,12 +70,12 @@ namespace Impart
             {
                 throw new ImpartError("Path cannot be null!");
             }
+            _Path = path;
+            _ID = id;
             if (id != null)
             {
                 _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
-            _Path = path;
-            _ID = id;
         }
 
         /// <summary>Sets an Attribute of the instance.</summary>

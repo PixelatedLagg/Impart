@@ -48,18 +48,20 @@ namespace Impart
                 return _Attributes;
             }
         }
+        private int _IOID = Ioid.Generate();
 
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
-        private bool Changed = true;
-        private string Render = "";
-        private int IOIDValue = Ioid.Generate();
+        /// <value>The internal ID of the instance.</value>
         int Element.IOID
         {
             get
             {
-                return IOIDValue;
+                return _IOID;
             }
         }
+
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates an empty Button instance.</summary>
         public Button() : this(new Text("")) { }

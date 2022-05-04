@@ -1,10 +1,11 @@
 using System.Text;
+using Impart.Internal;
 using System.Collections.Generic;
 
 namespace Impart
 {
     /// <summary>The class for an animation.</summary>
-    public struct Animation
+    public struct Animation : Element
     {
         /// <value>The name of the Animation.</value>
         public readonly string Name;
@@ -17,6 +18,26 @@ namespace Impart
             get
             {
                 return _Frames;
+            }
+        }
+        
+        /// <value>Animation ID will always return null, added for uniformity throughout all Elements.</value>
+        string Element.ID
+        {
+            get
+            {
+                return null;
+            }
+            set { }
+        }
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
+        int Element.IOID
+        {
+            get
+            {
+                return _IOID;
             }
         }
 
@@ -72,8 +93,7 @@ namespace Impart
             {
                 result.Append(f);
             }
-            result.Append("}");
-            return result.ToString();
+            return result.Append("}").ToString();
         }
     }
 }

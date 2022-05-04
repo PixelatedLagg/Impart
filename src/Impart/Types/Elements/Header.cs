@@ -67,17 +67,19 @@ namespace Impart
                 _Number = value;
             }
         }
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
-        private bool Changed = true;
-        private string Render = "";
-        private int IOIDValue = Ioid.Generate();
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
         int Element.IOID
         {
             get
             {
-                return IOIDValue;
+                return _IOID;
             }
         }
+        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private bool Changed = true;
+        private string Render = "";
 
         /// <summary>Creates an empty Header instance.</summary>
         public Header() : this("") { }
@@ -96,13 +98,13 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null or empty.");
             }
+            _Text = text;
+            _ID = id;
+            _Number = number;
             if (id != null)
             {
                 _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
             }
-            _Text = text;
-            _ID = id;
-            _Number = number;
         }
 
         /// <summary>Sets an Attribute of the instance.</summary>

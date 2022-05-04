@@ -68,6 +68,7 @@ namespace Impart
 
         internal Script _Script = new Script("");
         private List<Element> _Elements = new List<Element>();
+        private List<Element> _CSSElements = new List<Element>();
         private Dictionary<string, string> _Styles = new Dictionary<string, string>();
         private List<string> _Includes = new List<string>();
         private StringBuilder _ScrollbarCache = new StringBuilder();
@@ -295,6 +296,14 @@ namespace Impart
             Changed = true;
         }
 
+        /// <summary>Add an Animation to the WebPage.</summary>
+        /// <param name="animation">The Animation to add.</param>
+        protected void AddAnimation(Animation animation)
+        {
+            _CSSElements.Add(animation);
+            Changed = true;
+        }
+
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
@@ -313,6 +322,10 @@ namespace Impart
             {
                 result.Append(s.Value);
             }
+            foreach (Element element in _CSSElements)
+            {
+                result.Append(element);
+            }
             result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style><body");
             foreach (Attribute attribute in _Attributes)
             {
@@ -321,6 +334,11 @@ namespace Impart
             result.Append('>');
             foreach (Element entry in _Elements)
             {
+                if (entry.GetType() == typeof(Animation))
+                {
+
+                    continue;
+                }
                 result.Append(entry);
             }
             Render = result.Append($"</body>{_Script}</html>").ToString();

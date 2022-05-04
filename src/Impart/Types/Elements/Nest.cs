@@ -17,7 +17,18 @@ namespace Impart
                 return _Elements.ToArray();
             }
         }
-        private List<Nested> _Nested = new List<Nested>();
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
+        int Element.IOID
+        {
+            get
+            {
+                return _IOID;
+            }
+        }
+        
+        /// <value>The ID value of the Nest.</value>
         string Element.ID
         {
             get
@@ -26,14 +37,7 @@ namespace Impart
             }
             set { }
         }
-        private int IOIDValue = Ioid.Generate();
-        int Element.IOID
-        {
-            get
-            {
-                return IOIDValue;
-            }
-        }
+        private List<Nested> _Nested = new List<Nested>();
 
         /// <summary>Creates an empty Nest instance.</summary>
         public Nest() { }

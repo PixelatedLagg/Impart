@@ -33,18 +33,26 @@ namespace Impart
                 return _Attributes;
             }
         }
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
+        int Element.IOID
+        {
+            get
+            {
+                return _IOID;
+            }
+        }
         internal StringBuilder _ScrollbarCache = new StringBuilder();
         private List<Element> _Elements = new List<Element>();
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
-        private int IOIDValue = Ioid.Generate();
-        int Element.IOID
+
+        /// <summary>Creates a Division instance.</summary>
+        public Division()
         {
-            get
-            {
-                return IOIDValue;
-            }
+            _ID = null;
         }
 
         /// <summary>Creates a Division instance.</summary>
