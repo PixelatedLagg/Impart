@@ -23,3 +23,6 @@
 #### *For .csproj files, it is recommended to specify the version, considering different versions of Nuget either use the latest or earliest version of the package when unspecified.*
 ### You don't use Dotnet CLI or .csproj files? (I highly recommend them)
 #### Find the instructions for use with your package manager on the [Impart Nuget page](https://www.nuget.org/packages/Impart/).
+
+## Other links
+![Discord](https://discord.gg/tSc35kjHMG )
