@@ -25,4 +25,4 @@
 #### Find the instructions for use with your package manager on the [Impart Nuget page](https://www.nuget.org/packages/Impart/).
 
 ## Other links
-![Discord](https://discord.gg/tSc35kjHMG )
+[Discord](https://discord.gg/tSc35kjHMG)
