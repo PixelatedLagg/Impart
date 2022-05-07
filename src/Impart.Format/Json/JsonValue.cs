@@ -1,4 +1,5 @@
 using System;
+using Impart.Internal;
 
 namespace Impart.Format
 {
@@ -148,7 +149,7 @@ namespace Impart.Format
         }
 		private bool EqualsExtension(object o)
         {
-            if (Impart.Internal.Number.IsNumber(o))
+            if (o.IsNumber())
             {
                 return _Double.Equals(Convert.ToDouble(o));
             }

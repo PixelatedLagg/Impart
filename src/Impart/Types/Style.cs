@@ -1,11 +1,12 @@
 using System;
 using System.Text;
+using Impart.Internal;
 using System.Collections.Generic;
 
 namespace Impart
 {
     /// <summary>Style Elements with a certain ID.</summary>
-    public sealed class Style : IDisposable
+    public sealed class Style : IDisposable, StyleElement
     {
         private string _ID;
 
@@ -16,6 +17,11 @@ namespace Impart
             {
                 return _ID;
             }
+            set
+            {
+                Changed = true;
+                _ID = value;
+            }
         }
         private List<Attribute> _Attributes = new List<Attribute>();
 
@@ -25,6 +31,16 @@ namespace Impart
             get
             {
                 return _Attributes;
+            }
+        }
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
+        int StyleElement.IOID
+        {
+            get
+            {
+                return _IOID;
             }
         }
         private bool Changed = true;

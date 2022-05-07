@@ -28,7 +28,7 @@ namespace Impart
             }
         }
         
-        /// <value>The ID value of the Nest.</value>
+        /// <value>The ID value of the Nest. (always returns null)</value>
         string Element.ID
         {
             get

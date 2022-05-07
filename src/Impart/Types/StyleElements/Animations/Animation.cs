@@ -4,13 +4,10 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>The class for an animation.</summary>
-    public struct Animation : Element
+    /// <summary>Animation style element.</summary>
+    public class Animation : StyleElement
     {
-        /// <value>The name of the Animation.</value>
-        public readonly string Name;
-
-        private List<Frame> _Frames;
+        private List<Frame> _Frames = new List<Frame>();
 
         /// <value>A list of Frames included in the Animation.</value>
         public List<Frame> Frames
@@ -21,32 +18,38 @@ namespace Impart
             }
         }
         
-        /// <value>Animation ID will always return null, added for uniformity throughout all Elements.</value>
-        string Element.ID
+        /// <value>The ID value of the Animation. (acts as the name of the Animation)</value>
+        string StyleElement.ID
         {
             get
             {
-                return null;
+                return _Name;
             }
-            set { }
+            set 
+            {
+                Changed = true;
+                _Name = value;
+            }
         }
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int StyleElement.IOID
         {
             get
             {
                 return _IOID;
             }
         }
+        private string _Name;
+        private bool Changed = false;
+        private string Render;
 
-        /// <summary>Creates an Animation instance with <paramref name="name"/> as the name.</summary>
+        /// <summary>Creates an Animation instance.</summary>
         /// <param name="name">The name of the Animation.</param>
         public Animation(string name)
         {
-            Name = name;
-            _Frames = new List<Frame>();
+            _Name = name;
         }
 
         /// <summary>Add a Frame to the Animation.</summary>
@@ -88,12 +91,17 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder($"@keyframes {Name} {{");
-            foreach (Frame f in _Frames)
+            if (!Changed)
             {
-                result.Append(f);
+                return Render;
             }
-            return result.Append("}").ToString();
+            StringBuilder result = new StringBuilder($"@keyframes {_Name} {{");
+            foreach (Frame frame in _Frames)
+            {
+                result.Append(frame);
+            }
+            Render = result.Append("}").ToString();
+            return Render;
         }
     }
 }

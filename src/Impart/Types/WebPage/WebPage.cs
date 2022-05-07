@@ -68,7 +68,7 @@ namespace Impart
 
         internal Script _Script = new Script("");
         private List<Element> _Elements = new List<Element>();
-        private List<Element> _CSSElements = new List<Element>();
+        private List<StyleElement> _StyleElements = new List<StyleElement>();
         private Dictionary<string, string> _Styles = new Dictionary<string, string>();
         private List<string> _Includes = new List<string>();
         private StringBuilder _ScrollbarCache = new StringBuilder();
@@ -79,7 +79,7 @@ namespace Impart
         protected WebPage() { }
 
         /// <summary>Check if an Element exists.</summary>
-        /// <param name="element">The Element instance to check.</param>
+        /// <param name="element">The Element's instance.</param>
         protected bool ElementExists(Element element)
         {
             foreach (Element entry in _Elements)
@@ -89,7 +89,14 @@ namespace Impart
                     return true;
                 }
             }
-            foreach (Element entry in _CSSElements)
+            return false;
+        }
+
+        /// <summary>Check if a StyleElement exists.</summary>
+        /// <param name="element">The StyleElement's instance.</param>
+        protected bool StyleElementExists(StyleElement element)
+        {
+            foreach (StyleElement entry in _StyleElements)
             {
                 if (entry.IOID == element.IOID)
                 {
@@ -153,12 +160,18 @@ namespace Impart
                     _Elements.Remove(entry);
                 }
             }
-            foreach (Element entry in _CSSElements.ToArray())
+        }
+
+        /// <summary>Remove the StyleElement.</summary>
+        /// <param name="element">The StyleElement's instance.</param>
+        protected void RemoveStyleElement(StyleElement element)
+        {
+            foreach (StyleElement entry in _Elements.ToArray())
             {
                 if (entry.IOID == element.IOID)
                 {
                     Changed = true;
-                    _CSSElements.Remove(entry);
+                    _StyleElements.Remove(entry);
                 }
             }
         }
@@ -175,12 +188,18 @@ namespace Impart
                     _Elements[_Elements.IndexOf(entry)] = element;
                 }
             }
-            foreach (Element entry in _CSSElements.ToArray())
+        }
+
+        /// <summary>Change the StyleElement.</summary>
+        /// <param name="element">The StyleElement's instance.</param>
+        protected void ChangeStyleElement(StyleElement element)
+        {
+            foreach (StyleElement entry in _StyleElements.ToArray())
             {
                 if (entry.IOID == element.IOID)
                 {
                     Changed = true;
-                    _CSSElements[_CSSElements.IndexOf(entry)] = element;
+                    _StyleElements[_StyleElements.IndexOf(entry)] = element;
                 }
             }
         }
@@ -257,8 +276,7 @@ namespace Impart
         /// <param name="scrollbar">The Scrollbar instance to add.</param>
         protected void SetScrollBar(Scrollbar scrollbar)
         {
-            _ScrollbarCache.Clear();
-            switch (scrollbar.axis)
+            switch (scrollbar.Axis)
             {
                 case Axis.X:
                     _Attributes.Add(new Attribute(AttributeType.OverflowX, true));
@@ -269,15 +287,7 @@ namespace Impart
                 default:
                     throw new ImpartError("Invalid axis!");
             }
-            _ScrollbarCache.Append($"::-webkit-scrollbar {{width: {scrollbar.width};background-color: #808080; }}::-webkit-scrollbar-track{{background-color: {scrollbar.bgColor};}}::-webkit-scrollbar-thumb {{background-color: {scrollbar.fgColor};");
-            if (scrollbar.radius != null)
-            {
-                _ScrollbarCache.Append($"border-radius: {scrollbar.radius};}}");
-            }
-            else
-            {
-                _ScrollbarCache.Append('}');
-            }
+            _StyleElements.Add(scrollbar);
             Changed = true;
         }
 
@@ -323,7 +333,7 @@ namespace Impart
         /// <param name="animation">The Animation to add.</param>
         protected void AddAnimation(Animation animation)
         {
-            _CSSElements.Add(animation);
+            _StyleElements.Add(animation);
             Changed = true;
         }
 
@@ -345,7 +355,7 @@ namespace Impart
             {
                 result.Append(s.Value);
             }
-            foreach (Element element in _CSSElements)
+            foreach (Element element in _StyleElements)
             {
                 result.Append(element);
             }

@@ -43,8 +43,8 @@ namespace Impart
                 return _IOID;
             }
         }
-        internal StringBuilder _ScrollbarCache = new StringBuilder();
         private List<Element> _Elements = new List<Element>();
+        private List<StyleElement> _StyleElements = new List<StyleElement>();
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
@@ -151,7 +151,10 @@ namespace Impart
         /// <param name="style">The Style instance to use.</param>
         public Division SetStyle(Style style)
         {
-            /*foreach statement to iterate over each attribute in style (have yet to implement style)*/
+            foreach (Attribute attribute in style.Attributes)
+            {
+                _Attributes.Add(attribute);
+            }
             Changed = true;
             return this;
         }
@@ -174,8 +177,7 @@ namespace Impart
             {
                 throw new ImpartError("To add scrollbar, division must have an ID.");
             }
-            _ScrollbarCache.Clear();
-            switch (scrollbar.axis)
+            switch (scrollbar.Axis)
             {
                 case Axis.X:
                     _Attributes.Add(new Attribute(AttributeType.OverflowX, true));
@@ -186,16 +188,15 @@ namespace Impart
                 default:
                     throw new ImpartError("Invalid axis!");
             }
-            _ScrollbarCache.Append($"#{_ID}::-webkit-scrollbar {{width: {scrollbar.width};background-color: #808080; }}#{_ID}::-webkit-scrollbar-track{{background-color: {scrollbar.bgColor};}}#{_ID}::-webkit-scrollbar-thumb {{background-color: {scrollbar.fgColor};");
-            if (scrollbar.radius != null)
-            {
-                _ScrollbarCache.Append($"border-radius: {scrollbar.radius};}}");
-            }
-            else
-            {
-                _ScrollbarCache.Append('}');
-            }
+            _StyleElements.Add(new DivisionScrollbar(scrollbar, _ID, ((StyleElement)(scrollbar)).IOID));
             Changed = true;
+            return this;
+        }
+
+        //
+        public Division AddAnimation(Animation animation)
+        {
+            _StyleElements.Add(animation);
             return this;
         }
 
