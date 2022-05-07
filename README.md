@@ -2,7 +2,7 @@
 ![Downloads](https://shields.io/nuget/dt/impart?style=for-the-badge&logo=appveyor&color=blue)
 ![Discord](https://shields.io/discord/962888590113792061?style=for-the-badge&logo=appveyor&color=blue)
 
-<img src=".github/Images/Logo.png"></img>
+<img src=".github/Images/logo.png"></img>
 ## How to Use:
 ### For Dotnet CLI:
 `dotnet add package Impart`
