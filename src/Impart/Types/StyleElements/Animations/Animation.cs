@@ -95,6 +95,7 @@ namespace Impart
             {
                 return Render;
             }
+            Changed = false;
             StringBuilder result = new StringBuilder($"@keyframes {_Name} {{");
             foreach (Frame frame in _Frames)
             {

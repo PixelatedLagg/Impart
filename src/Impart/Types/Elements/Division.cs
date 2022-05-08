@@ -43,8 +43,8 @@ namespace Impart
                 return _IOID;
             }
         }
+        internal List<StyleElement> _StyleElements = new List<StyleElement>();
         private List<Element> _Elements = new List<Element>();
-        private List<StyleElement> _StyleElements = new List<StyleElement>();
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render = "";
@@ -60,10 +60,6 @@ namespace Impart
         public Division(string id = null)
         {
             _ID = id;
-            if (id != null)
-            {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
-            }
         }
 
         /// <summary>Add a Text to the Division.</summary>
@@ -211,10 +207,14 @@ namespace Impart
                 return Render;
             }
             Changed = false;
+            if (_ID != null)
+            {
+                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, _ID));
+            }
             StringBuilder result = new StringBuilder("<div ");
             if (_Attributes.Count != 0)
             {
-                result.Append(" style=\"");
+                result.Append("style=\"");
                 foreach (Attribute attribute in _Attributes)
                 {
                     result.Append(attribute);

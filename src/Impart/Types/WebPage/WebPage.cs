@@ -71,7 +71,6 @@ namespace Impart
         private List<StyleElement> _StyleElements = new List<StyleElement>();
         private Dictionary<string, string> _Styles = new Dictionary<string, string>();
         private List<string> _Includes = new List<string>();
-        private StringBuilder _ScrollbarCache = new StringBuilder();
         private bool Changed = true;
         private string Render;
 
@@ -256,11 +255,11 @@ namespace Impart
         /// <param name="division">The Division instance to add.</param>
         protected void AddDivision(Division division)
         {
-            if (division.ID != null)
-            {
-                _Styles.Add(division.ID, division._ScrollbarCache.ToString());
-            }
             _Elements.Add(division);
+            foreach (StyleElement element in division._StyleElements)
+            {
+                _StyleElements.Add(element);
+            }
             Changed = true;
         }
 
@@ -289,12 +288,6 @@ namespace Impart
             }
             _StyleElements.Add(scrollbar);
             Changed = true;
-        }
-
-        /// <summary>Remove the Scrollbar from the WebPage.</summary>
-        protected void RemoveScrollBar()
-        {
-            _ScrollbarCache.Clear();
         }
 
         /// <summary>Add a Form to the WebPage.</summary>
@@ -350,21 +343,21 @@ namespace Impart
             {
                 result.Append($"<link rel=\"stylesheet\" href=\"{i}\">");
             }
-            result.Append($"<meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style>{_ScrollbarCache.ToString()}");
+            result.Append($"<meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style>");
             foreach (KeyValuePair<string, string> s in _Styles)
             {
                 result.Append(s.Value);
             }
-            foreach (Element element in _StyleElements)
+            foreach (StyleElement element in _StyleElements)
             {
                 result.Append(element);
             }
-            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style><body");
+            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style><body style=\"");
             foreach (Attribute attribute in _Attributes)
             {
                 result.Append(attribute);
             }
-            result.Append('>');
+            result.Append("\">");
             foreach (Element entry in _Elements)
             {
                 result.Append(entry);
