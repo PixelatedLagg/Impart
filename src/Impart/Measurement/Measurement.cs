@@ -12,7 +12,7 @@ namespace Impart
         public static implicit operator Measurement(int i) => new Pixels(i);
 
         /// <summary>Converts an Object into a Measurement instance.</summary>
-        /// <param name="o">The object to convert.</param>
+        /// <param name="o">The Object to convert.</param>
         public static Measurement Convert(object o)
         {
             if (o is int)

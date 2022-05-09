@@ -15,6 +15,7 @@ namespace Impart
         Border,
         OverflowX,
         OverflowY,
-        AlignText
+        AlignText,
+        Animation
     }
 }

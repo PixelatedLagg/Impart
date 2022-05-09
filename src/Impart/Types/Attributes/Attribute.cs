@@ -234,6 +234,12 @@ namespace Impart
                         Alignment.Right => " text-align: right;",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
+                case AttributeType.Animation:
+                    if (Value.Length != 1)
+                    {
+                        throw new ImpartError("Invalid attribute parameters.");
+                    }
+                    break;
                 default:
                     throw new ImpartError("Invalid attribute parameters.");
             }
