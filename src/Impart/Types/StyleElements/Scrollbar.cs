@@ -7,10 +7,10 @@ namespace Impart
     public class Scrollbar : StyleElement
     {
         internal Axis Axis;
-        internal Measurement Width;
+        internal Length Width;
         internal Color BackgroundColor;
         internal Color ForegroundColor;
-        internal Measurement Radius = null;
+        internal Length Radius = null;
 
         /// <value>The ID value of the Scrollbar. (always returns null)</value>
         string StyleElement.ID
@@ -38,7 +38,7 @@ namespace Impart
         /// <param name="bgColor">The background color of the scrollbar.</param>
         /// <param name="fgColor">The foreground color of the scrollbar.</param>
         /// <param name="radius">The radius of the top and bottom of the scrollbar thumb, if rounded.</param>
-        public Scrollbar(Axis axis, Measurement width, Color backgroundColor, Color foregroundColor, Measurement radius = null)
+        public Scrollbar(Axis axis, Length width, Color backgroundColor, Color foregroundColor, Length radius = null)
         {
             Axis = axis;
             Width = width;

@@ -1,11 +1,9 @@
-using System;
-
 namespace Impart
 {
-    /// <summary>The measurement class for a percent value.</summary>
-    public class Percent : Measurement
+    /// <summary>Store a percent value.</summary>
+    public class Percent : Length
     {
-        private static float Value;
+        private float Value;
 
         /// <summary>Creates a Percent instance.</summary>
         /// <param name="percent">The percent value.</param>
@@ -26,7 +24,7 @@ namespace Impart
 
         /// <summary>Convert the Percent instance to a Float.</summary>
         /// <param name="p">The Percent to convert.</param>
-        public static implicit operator float(Percent p) => Value;
+        public static implicit operator float(Percent p) => p.Value;
 
         /// <summary>Convert the Float instance to Percent.</summary>
         /// <param name="f">The Float to convert.</param>

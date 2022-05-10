@@ -1,8 +1,9 @@
 namespace Impart
 {
-    public class Pixels : Measurement
+    /// <summary>Store a pixel value.</summary>
+    public class Pixels : Length
     {
-        private static int Value;
+        private int Value;
 
         /// <summary>Creates a Pixels instance.</summary>
         /// <param name="pixels">The pixels value.</param>
@@ -23,7 +24,7 @@ namespace Impart
 
         /// <summary>Convert the Pixels instance to an Int.</summary>
         /// <param name="p">The Pixels to convert.</param>
-        public static implicit operator int(Pixels p) => Value;
+        public static implicit operator int(Pixels p) => p.Value;
 
         /// <summary>Convert the Int instance to Pixels.</summary>
         /// <param name="i">The Int to convert.</param>

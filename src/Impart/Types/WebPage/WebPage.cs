@@ -23,10 +23,10 @@ namespace Impart
             }
         }
 
-        private Measurement _DefaultMargin = 0;
+        private Length _DefaultMargin = 0;
 
         /// <value>The default margin value.</value>
-        public Measurement DefaultMargin
+        public Length DefaultMargin
         {
             get
             {
@@ -39,10 +39,10 @@ namespace Impart
             }
         }
 
-        private Measurement _DefaultPadding = 0;
+        private Length _DefaultPadding = 0;
 
         /// <value>The default padding value.</value>
-        public Measurement DefaultPadding
+        public Length DefaultPadding
         {
             get
             {
@@ -352,12 +352,20 @@ namespace Impart
             {
                 result.Append(element);
             }
-            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style><body style=\"");
-            foreach (Attribute attribute in _Attributes)
+            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style>");
+            if (_Attributes.Count != 0)
             {
-                result.Append(attribute);
+                result.Append("<body style=\"");
+                foreach (Attribute attribute in _Attributes)
+                {
+                    result.Append(attribute);
+                }
+                result.Append("\">");
             }
-            result.Append("\">");
+            else
+            {
+                result.Append("<body>");
+            }
             foreach (Element entry in _Elements)
             {
                 result.Append(entry);

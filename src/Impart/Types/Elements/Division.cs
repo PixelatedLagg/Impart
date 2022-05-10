@@ -189,13 +189,6 @@ namespace Impart
             return this;
         }
 
-        //
-        public Division AddAnimation(Animation animation)
-        {
-            _StyleElements.Add(animation);
-            return this;
-        }
-
         /// <summary>Dispose of the Division instance.</summary>
         public void Dispose() { }
 

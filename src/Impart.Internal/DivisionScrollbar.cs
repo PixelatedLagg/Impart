@@ -5,10 +5,10 @@ namespace Impart.Internal
     public class DivisionScrollbar : StyleElement
     {
         private Axis Axis;
-        private Measurement Width;
+        private Length Width;
         private Color BackgroundColor;
         private Color ForegroundColor;
-        private Measurement Radius = null;
+        private Length Radius = null;
         private string ID;
 
         /// <value>The ID value of the DivisionScrollbar. (always returns null)</value>

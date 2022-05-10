@@ -42,7 +42,7 @@ namespace Impart
             }
         }
         private string _Name;
-        private bool Changed = false;
+        private bool Changed = true;
         private string Render;
 
         /// <summary>Creates an Animation instance.</summary>

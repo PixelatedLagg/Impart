@@ -145,38 +145,38 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    return $"font-size: {Measurement.Convert(Value[0])};";
+                    return $"font-size: {Length.Convert(Value[0])};";
                 case AttributeType.Margin:
                     if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    return $"margin: {Measurement.Convert(Value[0])};";
+                    return $"margin: {Length.Convert(Value[0])};";
                 case AttributeType.Padding:
                     if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    return $"padding: {Measurement.Convert(Value[0])};";
+                    return $"padding: {Length.Convert(Value[0])};";
                 case AttributeType.Width:
                     if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    return $"width: {Measurement.Convert(Value[0])};";
+                    return $"width: {Length.Convert(Value[0])};";
                 case AttributeType.Height:
                     if (Value.Length != 1)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    return $"height: {Measurement.Convert(Value[0])};";
+                    return $"height: {Length.Convert(Value[0])};";
                 case AttributeType.Border:
                     if (Value.Length != 3)
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
                     StringBuilder result = new StringBuilder();
-                    result.Append($"border: {Measurement.Convert(Value[0])}");
+                    result.Append($"border: {Length.Convert(Value[0])}");
                     switch (Value[1])
                     {
                         case Border.Dashed:
@@ -239,7 +239,7 @@ namespace Impart
                     {
                         throw new ImpartError("Invalid attribute parameters.");
                     }
-                    break;
+                    return (Value[0] as AnimationArgs ?? throw new ImpartError("Invalid attribute parameters.")).ToString();
                 default:
                     throw new ImpartError("Invalid attribute parameters.");
             }

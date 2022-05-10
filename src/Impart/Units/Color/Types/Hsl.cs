@@ -5,8 +5,7 @@ namespace Impart
     /// <summary>The class for a HSL color.</summary>
     public class Hsl : Color
     {
-        /// <value>The HSL value.</value>
-        private static (float h, float s, float l) Value;
+        private (float h, float s, float l) Value;
 
         /// <summary>Creates a Hsl instance.</summary>
         /// <param name="h">The H value.</param>
@@ -101,7 +100,7 @@ namespace Impart
 
         /// <summary>Convert the Hsl instance to a (float, float, float).</summary>
         /// <param name="h">The Hsl to convert.</param>
-        public static explicit operator (float h, float s, float l)(Hsl h) => Value;
+        public static explicit operator (float h, float s, float l)(Hsl h) => h.Value;
 
         /// <summary>Convert the (float, float, float) instance to Hsl.</summary>
         /// <param name="s">The (float, float, float) to convert.</param>

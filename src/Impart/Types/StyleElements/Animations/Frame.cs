@@ -30,22 +30,22 @@ namespace Impart
                     Render = $"{position} {{ foreground-color: {Change}; }}";
                     break;
                 case ChangeType.Width:
-                    Change = Measurement.Convert(change);
+                    Change = Length.Convert(change);
                     Render = $"{position} {{ width: {Change}; }}";
                     break;
                 case ChangeType.Height:
-                    Change = Measurement.Convert(change);
+                    Change = Length.Convert(change);
                     Render = $"{position} {{ height: {Change}; }}";
                     break;
                 case ChangeType.Position:
                     (object x, object y) posChange = ((object, object))change;
-                    Measurement x = Measurement.Convert(posChange.x), y = Measurement.Convert(posChange.y);
+                    Length x = Length.Convert(posChange.x), y = Length.Convert(posChange.y);
                     Change = (x, y);
                     Render = $"{position} {{ left: {x}; top: {y}; }}";
                     break;
                 case ChangeType.Size:
                     (object x, object y) sizeChange = ((object, object))change;
-                    Measurement sx = Measurement.Convert(sizeChange.x), sy = Measurement.Convert(sizeChange.y);
+                    Length sx = Length.Convert(sizeChange.x), sy = Length.Convert(sizeChange.y);
                     Change = (sx, sy);
                     Render = $"{position} {{ width: {sx}; height: {sy}; }}";
                     break;

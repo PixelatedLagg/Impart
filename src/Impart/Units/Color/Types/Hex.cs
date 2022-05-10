@@ -5,8 +5,7 @@ namespace Impart
     /// <summary>The class for a HEX color.</summary>
     public class Hex : Color
     {
-        /// <value>The HEX value.</value>
-        private static string Value;
+        private string Value;
 
         /// <summary>Creates a Hex instance.</summary>
         /// <param name="hex">The HEX value.</param>
@@ -80,7 +79,7 @@ namespace Impart
 
         /// <summary>Convert the Hex instance to a String.</summary>
         /// <param name="h">The Hex to convert.</param>
-        public static explicit operator string(Hex h) => Value;
+        public static explicit operator string(Hex h) => h.Value;
 
         /// <summary>Convert the String instance to Hex.</summary>
         /// <param name="s">The String to convert.</param>
