@@ -187,6 +187,38 @@ namespace Impart
             Render = result.ToString();
             return Render;
         }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        Element Element.Clone()
+        {
+            Link result = new Link();
+            result._Image = _Image;
+            result._LinkType = _LinkType;
+            result._Attributes = _Attributes;
+            result._ExtAttributes = _ExtAttributes;
+            result._ID = _ID;
+            result._IOID = _IOID;
+            result._Text = _Text;
+            result.Changed = Changed;
+            result.Render = Render;
+            return result;
+        }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        public Element Clone()
+        {
+            Link result = new Link();
+            result._Image = _Image;
+            result._LinkType = _LinkType;
+            result._Attributes = _Attributes;
+            result._ExtAttributes = _ExtAttributes;
+            result._ID = _ID;
+            result._IOID = _IOID;
+            result._Text = _Text;
+            result.Changed = Changed;
+            result.Render = Render;
+            return result;
+        }
         
         string Nested.First()
         {

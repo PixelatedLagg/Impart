@@ -35,7 +35,6 @@ namespace Impart
         }
 
         /// <summary>Creates a Form instance.</summary>
-        /// <returns>A Form instance.</returns>
         public Form() { }
 
         /// <summary>Add <paramref name="textFields"/> to the Form.</summary>
@@ -51,7 +50,6 @@ namespace Impart
         }
 
         /// <summary>Add <paramref name="checkFields"/> to the Form.</summary>
-        /// <returns>A Form instance.</returns>
         /// <param name="checkFields">The CheckField array to add.</param>
         public Form AddCheckField(params CheckField[] checkFields)
         {
@@ -64,8 +62,6 @@ namespace Impart
         }
 
         /// <summary>Add <paramref name="submitField"/> to the Form.</summary>
-        /// <returns>A Form instance.</returns>
-        /// <example>
         /// <param name="submitField">The SubmitField to add.</param>
         public Form AddSubmitField(SubmitField submitField)
         {
@@ -75,7 +71,6 @@ namespace Impart
         }
         
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             if (!Changed)
@@ -90,6 +85,30 @@ namespace Impart
             }
             Render = result.Append("</form>").ToString();
             return Render;
+        }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        Element Element.Clone()
+        {
+            Form result = new Form();
+            result._ID = _ID;
+            result.Changed = Changed;
+            result.Elements = Elements;
+            result.IOIDValue = IOIDValue;
+            result.Render = Render;
+            return result;
+        }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        public Element Clone()
+        {
+            Form result = new Form();
+            result._ID = _ID;
+            result.Changed = Changed;
+            result.Elements = Elements;
+            result.IOIDValue = IOIDValue;
+            result.Render = Render;
+            return result;
         }
     }
 

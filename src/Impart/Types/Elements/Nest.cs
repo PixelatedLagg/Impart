@@ -97,5 +97,25 @@ namespace Impart
             }
             return result.ToString();
         }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        Element Element.Clone()
+        {
+            Nest result = new Nest();
+            result._Elements = _Elements;
+            result._IOID = _IOID;
+            result._Nested = _Nested;
+            return result;
+        }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        Element Clone()
+        {
+            Nest result = new Nest();
+            result._Elements = _Elements;
+            result._IOID = _IOID;
+            result._Nested = _Nested;
+            return result;
+        }
     }
 }

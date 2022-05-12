@@ -45,12 +45,14 @@ namespace Impart
         private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
         private bool Changed = true;
         private string Render;
-        private int IOIDValue = Ioid.Generate();
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
         int Element.IOID
         {
             get
             {
-                return IOIDValue;
+                return _IOID;
             }
         }
 
@@ -109,6 +111,34 @@ namespace Impart
             }
             Render = result.Append("</table>").ToString();
             return Render;
+        }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        Element Element.Clone()
+        {
+            Table result = new Table();
+            result._Attributes = _Attributes;
+            result._ExtAttributes = _ExtAttributes;
+            result._ID = _ID;
+            result._IOID = _IOID;
+            result._Rows = _Rows;
+            result.Changed = Changed;
+            result.Render = Render;
+            return result;
+        }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        public Element Clone()
+        {
+            Table result = new Table();
+            result._Attributes = _Attributes;
+            result._ExtAttributes = _ExtAttributes;
+            result._ID = _ID;
+            result._IOID = _IOID;
+            result._Rows = _Rows;
+            result.Changed = Changed;
+            result.Render = Render;
+            return result;
         }
     }
 }

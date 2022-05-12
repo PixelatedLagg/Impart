@@ -5,5 +5,6 @@ namespace Impart
     {
         int IOID { get; }
         string ID { get; set; }
+        Element Clone();
     }
 }
