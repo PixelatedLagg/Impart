@@ -9,14 +9,10 @@ namespace Impart
         /// <param name="percent">The percent value.</param>
         public Percent(float percent)
         {
-            if (percent > 100 || percent < 0)
-            {
-                throw new ImpartError("Percent must be between 0-100!");
-            }
             Value = percent;
         }
 
-        /// <summary>Convert the Percent instance to a String.</summary>
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
             return $"{Value}%";

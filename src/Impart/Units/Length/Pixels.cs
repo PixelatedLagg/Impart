@@ -9,14 +9,10 @@ namespace Impart
         /// <param name="pixels">The pixels value.</param>
         public Pixels(int pixels)
         {
-            if (pixels < 0)
-            {
-                throw new ImpartError("Pixel number must be positive!");
-            }
             Value = pixels;
         }
 
-        /// <summary>Convert the Pixels instance to a String.</summary>
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
             return $"{Value}px";

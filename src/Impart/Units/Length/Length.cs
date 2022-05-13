@@ -15,15 +15,14 @@ namespace Impart
         /// <param name="o">The Object to convert.</param>
         public static Length Convert(object o)
         {
-            if (o is int)
+            return o switch
             {
-                return new Pixels((int)o);
-            }
-            if (o is float)
-            {
-                return new Percent((float)o);
-            }
-            throw new ImpartError("Invalid type to convert!");
+                int => new Pixels((int)o),
+                float => new Percent((float)o),
+                double => new ViewWidth((double)o),
+                decimal => new ViewHeight((decimal)o),
+                _ => throw new ImpartError("Invalid type to convert!")
+            };
         }
     }
 }
