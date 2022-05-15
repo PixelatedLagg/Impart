@@ -3,10 +3,10 @@ namespace Impart
     /// <summary>An element external attribute.</summary>
     public struct ExtAttribute
     {
-        private ExtAttributeType _Type;
+        private ExtAttrType _Type;
 
         /// <Value>The ExtAttribute Type.</Value>
-        public ExtAttributeType Type
+        public ExtAttrType Type
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Impart
         /// <summary>Creates an ExtAttribute instance.</summary>
         /// <param name="Type">The attribute Type.</param>
         /// <param name="Value">The attribute Value.</param>
-        public ExtAttribute(ExtAttributeType type, params object[] value)
+        public ExtAttribute(ExtAttrType type, params object[] value)
         {
             _Type = type;
             _Value = value;
@@ -38,9 +38,9 @@ namespace Impart
         {
             switch (Type)
             {
-                case ExtAttributeType.ID:
+                case ExtAttrType.ID:
                     return $" id=\"{_Value[0]}\"";
-                case ExtAttributeType.HoverMessage:
+                case ExtAttrType.HoverMessage:
                     return $" title=\"{_Value[0]}\"";
                 default:
                     throw new ImpartError("Invalid external attribute parameters.");

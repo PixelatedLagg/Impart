@@ -1,6 +1,6 @@
 namespace Impart
 {
-    public enum ExtAttributeType
+    public enum ExtAttrType
     {
         ID,
         HoverMessage

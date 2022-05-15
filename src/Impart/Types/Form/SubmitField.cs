@@ -23,7 +23,7 @@ namespace Impart
         /// <summary>Creates a SubmitField instance.</summary>
         public SubmitField() { }
 
-        public SubmitField SetAttribute(AttributeType type, params object[] value)
+        public SubmitField SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;

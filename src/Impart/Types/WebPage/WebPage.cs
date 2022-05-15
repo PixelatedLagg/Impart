@@ -278,10 +278,10 @@ namespace Impart
             switch (scrollbar.Axis)
             {
                 case Axis.X:
-                    _Attributes.Add(new Attribute(AttributeType.OverflowX, true));
+                    _Attributes.Add(new Attribute(AttrType.OverflowX, true));
                     break;
                 case Axis.Y:
-                    _Attributes.Add(new Attribute(AttributeType.OverflowY, true));
+                    _Attributes.Add(new Attribute(AttrType.OverflowY, true));
                     break;
                 default:
                     throw new ImpartError("Invalid axis!");

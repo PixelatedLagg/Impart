@@ -64,7 +64,7 @@ namespace Impart
         /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
-        public TableRow SetAttribute(AttributeType type, params object[] value)
+        public TableRow SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;

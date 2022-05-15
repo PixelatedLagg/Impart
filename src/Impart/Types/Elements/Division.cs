@@ -158,7 +158,7 @@ namespace Impart
         /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
-        public Division SetAttribute(AttributeType type, params object[] value)
+        public Division SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;
@@ -176,10 +176,10 @@ namespace Impart
             switch (scrollbar.Axis)
             {
                 case Axis.X:
-                    _Attributes.Add(new Attribute(AttributeType.OverflowX, true));
+                    _Attributes.Add(new Attribute(AttrType.OverflowX, true));
                     break;
                 case Axis.Y:
-                    _Attributes.Add(new Attribute(AttributeType.OverflowY, true));
+                    _Attributes.Add(new Attribute(AttrType.OverflowY, true));
                     break;
                 default:
                     throw new ImpartError("Invalid axis!");
@@ -202,7 +202,7 @@ namespace Impart
             Changed = false;
             if (_ID != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, _ID));
+                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, _ID));
             }
             StringBuilder result = new StringBuilder("<div ");
             if (_Attributes.Count != 0)

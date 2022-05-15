@@ -5,10 +5,10 @@ namespace Impart
     /// <summary>An element attribute.</summary>
     public struct Attribute
     {
-        private AttributeType _Type;
+        private AttrType _Type;
 
         /// <Value>The Attribute Type.</Value>
-        public AttributeType Type
+        public AttrType Type
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Impart
         /// <summary>Creates an Attribute instance.</summary>
         /// <param name="Type">The attribute Type.</param>
         /// <param name="Value">The attribute Value.</param>
-        public Attribute(AttributeType type, params object[] value)
+        public Attribute(AttrType type, params object[] value)
         {
             _Type = type;
             _Value = value;
@@ -40,11 +40,7 @@ namespace Impart
         {
             switch (Type)
             {
-                case AttributeType.BackgroundColor:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.BackgroundColor:
                     return Color.Convert(Value[0]) switch
                     {
                         Rgb rgb => $"background-color: {rgb};",
@@ -52,11 +48,7 @@ namespace Impart
                         Hex hex => $"background-color: {hex};",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
-                case AttributeType.ForegroundColor:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.ForegroundColor:
                     return Color.Convert(Value[0]) switch
                     {
                         Rgb rgb => $"color: {rgb};",
@@ -64,11 +56,7 @@ namespace Impart
                         Hex hex => $"color: {hex};",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
-                case AttributeType.Alignment:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.Alignment:
                     return Value[0] switch
                     {
                         Alignment.Center => "align: center;",
@@ -77,11 +65,7 @@ namespace Impart
                         Alignment.Right => "align: right;",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
-                case AttributeType.FontFamily:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.FontFamily:
                     return Value[0] switch
                     {
                         FontFamily.AndaleMono => "font-family: Andale Mono;",
@@ -140,41 +124,17 @@ namespace Impart
                         FontFamily.ZapfChancery => "font-family: Zapf Chancery;",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
-                case AttributeType.FontSize:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.FontSize:
                     return $"font-size: {Length.Convert(Value[0])};";
-                case AttributeType.Margin:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.Margin:
                     return $"margin: {Length.Convert(Value[0])};";
-                case AttributeType.Padding:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.Padding:
                     return $"padding: {Length.Convert(Value[0])};";
-                case AttributeType.Width:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.Width:
                     return $"width: {Length.Convert(Value[0])};";
-                case AttributeType.Height:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.Height:
                     return $"height: {Length.Convert(Value[0])};";
-                case AttributeType.Border:
-                    if (Value.Length != 3)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.Border:
                     StringBuilder result = new StringBuilder();
                     result.Append($"border: {Length.Convert(Value[0])}");
                     switch (Value[1])
@@ -201,31 +161,19 @@ namespace Impart
                             throw new ImpartError("Invalid attribute parameters.");
                     }
                     return result.Append($" {Color.Convert(Value[2])};").ToString();
-                case AttributeType.OverflowX:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.OverflowX:
                     if ((bool)Value[0])
                     {
                         return " overflow-x: auto;";
                     }
                     return " overflow-x: hidden;";
-                case AttributeType.OverflowY:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.OverflowY:
                     if ((bool)Value[0])
                     {
                         return " overflow-y: auto;";
                     }
                     return " overflow-y: hidden;";
-                case AttributeType.AlignText:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.AlignText:
                     return Value[0] switch
                     {
                         Alignment.Center => " text-align: center;",
@@ -234,12 +182,17 @@ namespace Impart
                         Alignment.Right => " text-align: right;",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
-                case AttributeType.Animation:
-                    if (Value.Length != 1)
-                    {
-                        throw new ImpartError("Invalid attribute parameters.");
-                    }
+                case AttrType.Animation:
                     return (Value[0] as AnimationArgs ?? throw new ImpartError("Invalid attribute parameters.")).ToString();
+                case AttrType.Background:
+                    BackgroundArgs args = (BackgroundArgs)Value[0];
+                    return args.Background switch
+                    {
+                        Background.Loop => $"background-image: url('{args.Image}');",
+                        Background.Single => $"background-repeat: no-repeat;background-image: url('{args.Image}');",
+                        Background.Stretch => $"background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-image: url('{args.Image}');",
+                        _ => throw new ImpartError("Invalid attribute parameters.")
+                    };
                 default:
                     throw new ImpartError("Invalid attribute parameters.");
             }

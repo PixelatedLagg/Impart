@@ -1,7 +1,7 @@
 namespace Impart
 {
-    /// <summary>All the attribute types.</summary>
-    public enum AttributeType
+    /// <summary>All the Attribute types.</summary>
+    public enum AttrType
     {
         BackgroundColor,
         ForegroundColor,
@@ -16,6 +16,7 @@ namespace Impart
         OverflowX,
         OverflowY,
         AlignText,
-        Animation
+        Animation,
+        Background
     }
 }

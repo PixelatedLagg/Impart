@@ -85,7 +85,7 @@ namespace Impart
             }
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
+                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
             }
             foreach (Text text in textEntries)
             {
@@ -124,7 +124,7 @@ namespace Impart
         /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
-        public List SetAttribute(AttributeType type, params object[] value)
+        public List SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;

@@ -75,14 +75,14 @@ namespace Impart
             _ID = id;
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
+                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
             }
         }
 
         /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
-        public Button SetAttribute(AttributeType type, params object[] value)
+        public Button SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             return this;

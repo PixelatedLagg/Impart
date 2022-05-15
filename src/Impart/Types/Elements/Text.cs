@@ -90,7 +90,7 @@ namespace Impart
             _TextType = "p";
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
+                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
             }
         }
 
@@ -124,14 +124,14 @@ namespace Impart
             };
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
+                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
             }
         }
 
         /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
-        public Text SetAttribute(AttributeType type, params object[] value)
+        public Text SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;

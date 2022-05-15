@@ -120,7 +120,7 @@ namespace Impart
             _LinkType = typeof(Text);
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
+                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
             }
         }
 
@@ -140,14 +140,14 @@ namespace Impart
             _LinkType = typeof(Image);
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttributeType.ID, id));
+                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
             }
         }
 
         /// <summary>Sets an Attribute of the instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The Attribute value(s).</param>
-        public Link SetAttribute(AttributeType type, params object[] value)
+        public Link SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
             Changed = true;
