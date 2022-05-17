@@ -1,5 +1,6 @@
 namespace Impart
 {
+    /// <summary>Store milliseconds as a Float.</summary>
     public class Milliseconds : Time
     {
         private float Value;

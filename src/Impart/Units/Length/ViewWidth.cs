@@ -19,11 +19,11 @@ namespace Impart
         }
 
         /// <summary>Convert the ViewWidth instance to a Double.</summary>
-        /// <param name="p">The ViewWidth to convert.</param>
+        /// <param name="v">The ViewWidth to convert.</param>
         public static implicit operator double(ViewWidth v) => v.Value;
 
         /// <summary>Convert the Double instance to ViewWidth.</summary>
-        /// <param name="i">The Double to convert.</param>
+        /// <param name="d">The Double to convert.</param>
         public static implicit operator ViewWidth(double d) => new ViewWidth(d);
     }
 }

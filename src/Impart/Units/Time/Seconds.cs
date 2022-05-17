@@ -1,5 +1,6 @@
 namespace Impart
 {
+    /// <summary>Store seconds as an Integer.</summary>
     public class Seconds : Time
     {
         private int Value;

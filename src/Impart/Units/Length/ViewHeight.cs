@@ -19,11 +19,11 @@ namespace Impart
         }
 
         /// <summary>Convert the ViewHeight instance to a Decimal.</summary>
-        /// <param name="p">The ViewHeight to convert.</param>
+        /// <param name="v">The ViewHeight to convert.</param>
         public static implicit operator decimal(ViewHeight v) => v.Value;
 
         /// <summary>Convert the Decimal instance to ViewHeight.</summary>
-        /// <param name="i">The Decimal to convert.</param>
+        /// <param name="d">The Decimal to convert.</param>
         public static implicit operator ViewHeight(decimal d) => new ViewHeight(d);
     }
 }

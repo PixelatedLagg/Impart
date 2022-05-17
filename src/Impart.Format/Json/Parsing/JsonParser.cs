@@ -3,9 +3,16 @@ using System.Text;
 
 namespace Impart.Format
 {
+    /*
+    /// <summary>Parse JSON files.</summary>
     public static class JsonParser
     {
+        /// <summary>Parse a JSON file.</summary>
+        /// <param name="file"></param>
         public static void ParseFile(string file) => Parse(File.ReadAllText(file));
+
+        /// <summary>Parse a JSON string.</summary>
+        /// <param name="source"></param>
         public static void Parse(string source)
         {
             StringBuilder cache = new StringBuilder();
@@ -41,4 +48,5 @@ namespace Impart.Format
             }
         }
     }
+    */
 }

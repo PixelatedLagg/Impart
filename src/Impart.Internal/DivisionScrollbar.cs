@@ -2,6 +2,7 @@ using System.Text;
 
 namespace Impart.Internal
 {
+    /// <summary>Scrollbar for Division that Impart automatically generates when using a Scrollbar with a Division.</summary>
     public class DivisionScrollbar : StyleElement
     {
         private Axis Axis;
@@ -30,7 +31,11 @@ namespace Impart.Internal
                 return _IOID;
             }
         }
-
+        
+        /// <summary>Creates a DivisionScrollbar instance.</summary>
+        /// <param name="scrollbar">The Scrollbar to use.</param>
+        /// <param name="id">The Division ID.</param>
+        /// <param name=" ioid">The Scrollbar IOID.</param>
         public DivisionScrollbar(Scrollbar scrollbar, string id, int ioid)
         {
             Axis = scrollbar.Axis;
@@ -42,6 +47,7 @@ namespace Impart.Internal
             _IOID = ioid;
         }
 
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();

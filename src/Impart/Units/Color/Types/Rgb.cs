@@ -87,7 +87,7 @@ namespace Impart
         public static explicit operator (int r, int g, int b)(Rgb r) => r.Value;
 
         /// <summary>Convert the (int, int, int) instance to Rgb.</summary>
-        /// <param name="s">The (int, int, int) to convert.</param>
+        /// <param name="r">The (int, int, int) to convert.</param>
         public static implicit operator Rgb((int, int, int) r) => new Rgb(r);
 
         /// <value>Red represented by Rgb.</value>

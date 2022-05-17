@@ -103,7 +103,7 @@ namespace Impart
         public static explicit operator (float h, float s, float l)(Hsl h) => h.Value;
 
         /// <summary>Convert the (float, float, float) instance to Hsl.</summary>
-        /// <param name="s">The (float, float, float) to convert.</param>
+        /// <param name="h">The (float, float, float) to convert.</param>
         public static implicit operator Hsl((float, float, float) h) => new Hsl(h);
     
         /// <value>Red represented by Hsl.</value>

@@ -79,7 +79,7 @@ namespace Impart
             _WebPages.Add(directory, webPage);
         }
 
-        /// <summary>Remove the subdomain <param name="directory">, and the WebPage that goes along with it.</summary>
+        /// <summary>Remove the subdomain and the WebPage that goes along with it.</summary>
         /// <param name="directory">The subdomain of the Website.</param>
         public void RemovePage(string directory)
         {
@@ -90,7 +90,7 @@ namespace Impart
             _WebPages.Remove(directory);
         }
 
-        /// <summary>Set <param name="webPage"> as the 404 page.</summary>
+        /// <summary>Set the 404 page.</summary>
         /// <param name="webPage">The WebPage to set as the 404 page.</param>
         public void Set404Page(WebPage webPage)
         {

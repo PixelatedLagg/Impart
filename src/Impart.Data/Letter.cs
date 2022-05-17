@@ -4,7 +4,7 @@ namespace Impart.Data
     public static class Letter
     {
         /// <summary>Randomly generate an alphabetical character.</summary>
-        /// <param name="type">Whether to generate an uppercase or lowercase letter. (Default is set to generate both uppercase and lowercase.)</param>
+        /// <param name="type">Whether to generate an uppercase or lowercase letter. Null: uppercase and lowercase</param>
         public static char Alphabet(bool? type = null)
         {
             if (type == null)
@@ -42,9 +42,16 @@ namespace Impart.Data
         /// <summary>All character types.</summary>
         public enum Types
         {
+            /// <value>Any character.</value>
             Any,
+
+            /// <value>Special character.</value>
             Special,
+
+            /// <value>Number character.</value>
             Number,
+
+            /// <value>Alphabet character.</value>
             Alphabet
         }
     }
