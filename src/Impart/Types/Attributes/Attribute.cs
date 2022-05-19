@@ -27,8 +27,8 @@ namespace Impart
         }
 
         /// <summary>Creates an Attribute instance.</summary>
-        /// <param name="Type">The attribute Type.</param>
-        /// <param name="Value">The attribute Value.</param>
+        /// <param name="type">The Attribute type.</param>
+        /// <param name="value">The value array.</param>
         public Attribute(AttrType type, params object[] value)
         {
             _Type = type;
