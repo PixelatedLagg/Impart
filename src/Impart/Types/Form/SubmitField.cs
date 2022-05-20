@@ -16,13 +16,16 @@ namespace Impart
                 return _Attributes;
             }
         }
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates a SubmitField instance.</summary>
         public SubmitField() { }
 
+        /// <summary>Sets an Attribute of the instance.</summary>
+        /// <param name="type">The Attribute type.</param>
+        /// <param name="value">The Attribute value(s).</param>
         public SubmitField SetAttribute(AttrType type, params object[] value)
         {
             _Attributes.Add(new Attribute(type, value));
@@ -48,16 +51,16 @@ namespace Impart
                     result.Append(attribute);
                 }
                 result.Append('"');
-                foreach (ExtAttribute extAttribute in _ExtAttributes)
+                foreach (ExtAttr ExtAttr in _ExtAttrs)
                 {
-                    result.Append(extAttribute);
+                    result.Append(ExtAttr);
                 }
                 Render = result.Append('>').ToString();
                 return Render;
             }
-            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
             {
-                result.Append(extAttribute);
+                result.Append(ExtAttr);
             }
             Render = result.Append('>').ToString();
             return Render;

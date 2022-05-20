@@ -97,7 +97,7 @@ namespace Impart
                 return _IOID;
             }
         }
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -120,7 +120,7 @@ namespace Impart
             _LinkType = typeof(Text);
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
+                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
             }
         }
 
@@ -140,7 +140,7 @@ namespace Impart
             _LinkType = typeof(Image);
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
+                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
             }
         }
 
@@ -172,9 +172,9 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
             {
-                result.Append(extAttribute);
+                result.Append(ExtAttr);
             }
             if (_LinkType == typeof(Image))
             {
@@ -195,7 +195,7 @@ namespace Impart
             result._Image = _Image;
             result._LinkType = _LinkType;
             result._Attributes = _Attributes;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._Text = _Text;
@@ -211,7 +211,7 @@ namespace Impart
             result._Image = _Image;
             result._LinkType = _LinkType;
             result._Attributes = _Attributes;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._Text = _Text;

@@ -1,5 +1,3 @@
-using Impart;
-
 namespace Impart.Scripting
 {
     /// <summary>Interactive scripting for WebPage.</summary>

@@ -42,7 +42,7 @@ namespace Impart
                 return _Attributes.ToArray();
             }
         }
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render;
         private int _IOID = Ioid.Generate();
@@ -100,9 +100,9 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
             {
-                result.Append(extAttribute);
+                result.Append(ExtAttr);
             }
             result.Append('>');
             foreach (TableRow row in _Rows)
@@ -118,7 +118,7 @@ namespace Impart
         {
             Table result = new Table();
             result._Attributes = _Attributes;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._Rows = _Rows;
@@ -132,7 +132,7 @@ namespace Impart
         {
             Table result = new Table();
             result._Attributes = _Attributes;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._Rows = _Rows;

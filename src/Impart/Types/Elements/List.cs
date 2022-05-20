@@ -63,7 +63,7 @@ namespace Impart
             }
         }
         private string _ListType;
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -85,7 +85,7 @@ namespace Impart
             }
             if (id != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, id));
+                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
             }
             foreach (Text text in textEntries)
             {
@@ -149,9 +149,9 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
             {
-                result.Append(extAttribute);
+                result.Append(ExtAttr);
             }
             result.Append('>');
             foreach (Text text in _Entries)
@@ -168,7 +168,7 @@ namespace Impart
             List result = new List();
             result._Attributes = _Attributes;
             result._Entries = _Entries;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._Type = _Type;
@@ -184,7 +184,7 @@ namespace Impart
             List result = new List();
             result._Attributes = _Attributes;
             result._Entries = _Entries;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._Type = _Type;

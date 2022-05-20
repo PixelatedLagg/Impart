@@ -62,7 +62,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds <paramref name="elements"> to the Nest.</summary>
+        /// <summary>Adds Element(s) to the Nest.</summary>
         /// <param name="elements">The Elements to add to the Nest.</param>
         public Nest Add(params Element[] elements)
         {

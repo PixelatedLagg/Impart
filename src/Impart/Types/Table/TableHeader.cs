@@ -41,7 +41,7 @@ namespace Impart
                 return _Attributes.ToArray();
             }
         }
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -89,9 +89,9 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
             {
-                result.Append(extAttribute);
+                result.Append(ExtAttr);
             }
             result.Append('>');
             foreach (Element element in _Elements)

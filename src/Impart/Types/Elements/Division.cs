@@ -45,7 +45,7 @@ namespace Impart
         }
         internal List<StyleElement> _StyleElements = new List<StyleElement>();
         private List<Element> _Elements = new List<Element>();
-        private List<ExtAttribute> _ExtAttributes = new List<ExtAttribute>();
+        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -165,7 +165,7 @@ namespace Impart
             return this;
         }
 
-        /// <summary>Add <paramref name="scrollbar"> to the Division.</summary>
+        /// <summary>Sets a Scrollbar to the Division.</summary>
         /// <param name="scrollbar">The scrollbar to add.</param>
         public Division SetScrollbar(Scrollbar scrollbar)
         {
@@ -202,7 +202,7 @@ namespace Impart
             Changed = false;
             if (_ID != null)
             {
-                _ExtAttributes.Add(new ExtAttribute(ExtAttrType.ID, _ID));
+                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, _ID));
             }
             StringBuilder result = new StringBuilder("<div ");
             if (_Attributes.Count != 0)
@@ -214,9 +214,9 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttribute extAttribute in _ExtAttributes)
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
             {
-                result.Append(extAttribute);
+                result.Append(ExtAttr);
             }
             result.Append('>');
             foreach (Element e in _Elements)
@@ -233,7 +233,7 @@ namespace Impart
             Division result = new Division();
             result._Attributes = _Attributes;
             result._Elements = _Elements;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._StyleElements = _StyleElements;
@@ -248,7 +248,7 @@ namespace Impart
             Division result = new Division();
             result._Attributes = _Attributes;
             result._Elements = _Elements;
-            result._ExtAttributes = _ExtAttributes;
+            result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
             result._StyleElements = _StyleElements;
