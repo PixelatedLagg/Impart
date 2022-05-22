@@ -35,8 +35,8 @@ namespace Impart
         /// <summary>Creates a Scrollbar instance.</summary>
         /// <param name="axis">The axis of the scrollbar.</param>
         /// <param name="width">The width of the scrollbar.</param>
-        /// <param name="bgColor">The background color of the scrollbar.</param>
-        /// <param name="fgColor">The foreground color of the scrollbar.</param>
+        /// <param name="backgroundColor">The background color of the scrollbar.</param>
+        /// <param name="foregroundColor">The foreground color of the scrollbar.</param>
         /// <param name="radius">The radius of the top and bottom of the scrollbar thumb, if rounded.</param>
         public Scrollbar(Axis axis, Length width, Color backgroundColor, Color foregroundColor, Length radius = null)
         {

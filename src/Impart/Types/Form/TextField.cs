@@ -7,7 +7,7 @@ namespace Impart
     {
         private string Render;
 
-        /// <summary>Creates a TextField instance with <paramref name="text"/> as the text and <paramref name="inputid"/> as the ID.</summary>
+        /// <summary>Creates a TextField instance.</summary>
         /// <param name="text">The TextField text.</param>
         /// <param name="inputid">The TextField ID.</param>
         public TextField(string text, string inputid)
@@ -19,7 +19,7 @@ namespace Impart
             Render = $"<label for=\"{inputid}\">{text}</label><input type=\"text\" name=\"{inputid}\">";
         }
 
-        /// <summary>Creates a TextField instance with <paramref name="text"/> as the text and <paramref name="inputid"/> as the ID.</summary>
+        /// <summary>Creates a TextField instance.</summary>
         /// <param name="text">The TextField text.</param>
         /// <param name="inputid">The TextField ID.</param>
         /// <param name="id">The TextField style ID.</param>
