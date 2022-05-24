@@ -1,10 +1,11 @@
 using System.Text;
+using Impart.Internal;
 using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>Class that represents the submit button for Form.</summary>
-    public sealed class SubmitField : FormElement
+    /// <summary>Submit button for Form.</summary>
+    public sealed class SubmitField : FormField
     {
         private List<Attribute> _Attributes = new List<Attribute>();
 

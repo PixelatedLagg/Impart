@@ -22,7 +22,7 @@ namespace Impart
                 _ID = value;
             }
         }
-        private List<FormElement> Elements = new List<FormElement>();
+        private List<FormField> Elements = new List<FormField>();
         private bool Changed = true;
         private string Render;
         private int IOIDValue = Ioid.Generate();
@@ -79,9 +79,9 @@ namespace Impart
             }
             Changed = false;
             StringBuilder result = new StringBuilder("<form>");
-            foreach (FormElement element in Elements)
+            foreach (FormField field in Elements)
             {
-                result.Append(element);
+                result.Append(field);
             }
             Render = result.Append("</form>").ToString();
             return Render;
@@ -111,7 +111,4 @@ namespace Impart
             return result;
         }
     }
-
-    /// <summary>Base class for all form-related elements.</summary>
-    public class FormElement {}
 }
