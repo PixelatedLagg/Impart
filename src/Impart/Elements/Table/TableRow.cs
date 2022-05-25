@@ -61,16 +61,6 @@ namespace Impart
             return this;
         }
 
-        /// <summary>Sets an Attribute of the instance.</summary>
-        /// <param name="type">The Attribute type.</param>
-        /// <param name="value">The Attribute value(s).</param>
-        public TableRow SetAttribute(AttrType type, params object[] value)
-        {
-            _Attributes.Add(new Attribute(type, value));
-            Changed = true;
-            return this;
-        }
-
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {

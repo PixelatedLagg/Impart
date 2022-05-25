@@ -24,16 +24,6 @@ namespace Impart
         /// <summary>Creates a SubmitField instance.</summary>
         public SubmitField() { }
 
-        /// <summary>Sets an Attribute of the instance.</summary>
-        /// <param name="type">The Attribute type.</param>
-        /// <param name="value">The Attribute value(s).</param>
-        public SubmitField SetAttribute(AttrType type, params object[] value)
-        {
-            _Attributes.Add(new Attribute(type, value));
-            Changed = true;
-            return this;
-        }
-
         /// <summary>Returns the instance as a String.</summary>
         /// <returns>A String instance.</returns>
         public override string ToString()

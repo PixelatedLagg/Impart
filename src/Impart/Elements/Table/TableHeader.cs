@@ -31,16 +31,9 @@ namespace Impart
                 return _Elements.ToArray();
             }
         }
-        private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The Attribute values of the TableHeader.</value>
-        public new Attribute[] Attributes
-        {
-            get 
-            {
-                return _Attributes.ToArray();
-            }
-        }
+        public new List<Attribute> Attributes = new List<Attribute>();
         private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
@@ -61,16 +54,6 @@ namespace Impart
             return this;
         }
 
-        /// <summary>Sets an Attribute of the instance.</summary>
-        /// <param name="type">The Attribute type.</param>
-        /// <param name="value">The Attribute value(s).</param>
-        public new TableHeader SetAttribute(AttrType type, params object[] value)
-        {
-            _Attributes.Add(new Attribute(type, value));
-            Changed = true;
-            return this;
-        }
-
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
@@ -80,10 +63,10 @@ namespace Impart
             }
             Changed = false;
             StringBuilder result = new StringBuilder("<tr");
-            if (_Attributes.Count != 0)
+            if (Attributes.Count != 0)
             {
                 result.Append(" style=\"");
-                foreach (Attribute attribute in _Attributes)
+                foreach (Attribute attribute in Attributes)
                 {
                     result.Append(attribute);
                 }

@@ -42,16 +42,9 @@ namespace Impart
                 return _Type;
             }
         }
-        private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The Attribute values of the List.</value>
-        public List<Attribute> Attributes
-        {
-            get 
-            {
-                return _Attributes;
-            }
-        }
+        public List<Attribute> Attributes = new List<Attribute>();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -121,16 +114,6 @@ namespace Impart
             return this;
         }
 
-        /// <summary>Sets an Attribute of the instance.</summary>
-        /// <param name="type">The Attribute type.</param>
-        /// <param name="value">The Attribute value(s).</param>
-        public List SetAttribute(AttrType type, params object[] value)
-        {
-            _Attributes.Add(new Attribute(type, value));
-            Changed = true;
-            return this;
-        }
-
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
@@ -140,10 +123,10 @@ namespace Impart
             }
             Changed = false;
             StringBuilder result = new StringBuilder($"<{_ListType}");
-            if (_Attributes.Count != 0)
+            if (Attributes.Count != 0)
             {
                 result.Append(" style=\"");
-                foreach (Attribute attribute in _Attributes)
+                foreach (Attribute attribute in Attributes)
                 {
                     result.Append(attribute);
                 }
@@ -166,7 +149,7 @@ namespace Impart
         Element Element.Clone()
         {
             List result = new List();
-            result._Attributes = _Attributes;
+            result.Attributes = Attributes;
             result._Entries = _Entries;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
@@ -182,7 +165,7 @@ namespace Impart
         public Element Clone()
         {
             List result = new List();
-            result._Attributes = _Attributes;
+            result.Attributes = Attributes;
             result._Entries = _Entries;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
