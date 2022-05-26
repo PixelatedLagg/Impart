@@ -31,18 +31,12 @@ namespace Impart
                 return _Elements.ToArray();
             }
         }
-        private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The Attribute values of the TableRow.</value>
-        public Attribute[] Attributes
-        {
-            get 
-            {
-                return _Attributes.ToArray();
-            }
-        }
+        public List<Attribute> Attributes = new List<Attribute>();
         private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
+        private int AttributeLength = 0;
         private string Render = "";
 
         /// <summary>Creates a TableRow instance.</summary>
@@ -64,16 +58,17 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && AttributeLength == Attributes.Count)
             {
                 return Render;
             }
             Changed = false;
+            AttributeLength = Attributes.Count;
             StringBuilder result = new StringBuilder("<tr");
-            if (_Attributes.Count != 0)
+            if (Attributes.Count != 0)
             {
                 result.Append(" style=\"");
-                foreach (Attribute attribute in _Attributes)
+                foreach (Attribute attribute in Attributes)
                 {
                     result.Append(attribute);
                 }

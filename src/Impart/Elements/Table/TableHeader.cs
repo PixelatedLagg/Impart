@@ -36,6 +36,7 @@ namespace Impart
         public new List<Attribute> Attributes = new List<Attribute>();
         private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
+        private int AttributeLength = 0;
         private string Render = "";
 
         /// <summary>Creates a TableHeader instance.</summary>
@@ -57,11 +58,12 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && AttributeLength == Attributes.Count)
             {
                 return Render;
             }
             Changed = false;
+            AttributeLength = Attributes.Count;
             StringBuilder result = new StringBuilder("<tr");
             if (Attributes.Count != 0)
             {

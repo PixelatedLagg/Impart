@@ -25,7 +25,7 @@ namespace Impart
         }
 
         /// <value>The attribute values of the Division.</value>
-        public List<Attribute> Attributes = new List<Attribute>();
+        public List<Attr> Attributes = new List<Attr>();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>

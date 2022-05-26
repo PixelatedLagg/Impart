@@ -3,7 +3,7 @@ using System.Text;
 namespace Impart
 {
     /// <summary>An element attribute.</summary>
-    public struct Attribute
+    public struct Attr
     {
         private AttrType _Type;
 
@@ -29,7 +29,7 @@ namespace Impart
         /// <summary>Creates an Attribute instance.</summary>
         /// <param name="type">The Attribute type.</param>
         /// <param name="value">The value array.</param>
-        public Attribute(AttrType type, params object[] value)
+        public Attr(AttrType type, params object[] value)
         {
             _Type = type;
             _Value = value;
