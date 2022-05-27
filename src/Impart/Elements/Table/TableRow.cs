@@ -33,10 +33,9 @@ namespace Impart
         }
 
         /// <value>The Attribute values of the TableRow.</value>
-        public List<Attribute> Attributes = new List<Attribute>();
+        public AttrList Attrs = new AttrList();
         private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
-        private int AttributeLength = 0;
         private string Render = "";
 
         /// <summary>Creates a TableRow instance.</summary>
@@ -58,17 +57,17 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && AttributeLength == Attributes.Count)
+            if (!Changed && !Attrs.Changed)
             {
                 return Render;
             }
             Changed = false;
-            AttributeLength = Attributes.Count;
+            Attrs.Changed = false;
             StringBuilder result = new StringBuilder("<tr");
-            if (Attributes.Count != 0)
+            if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
-                foreach (Attribute attribute in Attributes)
+                foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }

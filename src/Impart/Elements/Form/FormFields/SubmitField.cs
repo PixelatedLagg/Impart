@@ -7,16 +7,8 @@ namespace Impart
     /// <summary>Submit button for Form.</summary>
     public sealed class SubmitField : FormField
     {
-        private List<Attribute> _Attributes = new List<Attribute>();
-
         /// <value>The attribute values of the SubmitField.</value>
-        public List<Attribute> Attributes
-        {
-            get 
-            {
-                return _Attributes;
-            }
-        }
+        public AttrList Attrs = new AttrList();
         private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
@@ -25,7 +17,6 @@ namespace Impart
         public SubmitField() { }
 
         /// <summary>Returns the instance as a String.</summary>
-        /// <returns>A String instance.</returns>
         public override string ToString()
         {
             if (!Changed)
@@ -34,10 +25,10 @@ namespace Impart
             }
             Changed = false;
             StringBuilder result = new StringBuilder($"<input type=\"submit\"");
-            if (_Attributes.Count != 0)
+            if (Attrs.Count != 0)
             {
                 result.Append("style=\"");
-                foreach (Attribute attribute in _Attributes)
+                foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }

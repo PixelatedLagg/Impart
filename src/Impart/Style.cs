@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using Impart.Internal;
-using System.Collections.Generic;
 
 namespace Impart
 {
@@ -23,16 +22,9 @@ namespace Impart
                 _ID = value;
             }
         }
-        private List<Attribute> _Attributes = new List<Attribute>();
 
         /// <value>The attribute values of the Style.</value>
-        public List<Attribute> Attributes
-        {
-            get
-            {
-                return _Attributes;
-            }
-        }
+        public AttrList Attrs = new AttrList();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -57,16 +49,6 @@ namespace Impart
             _ID = id;
         }
 
-        /// <summary>Sets an Attribute of the instance.</summary>
-        /// <param name="type">The Attribute type.</param>
-        /// <param name="value">The Attribute value(s).</param>
-        public Style SetAttribute(AttrType type, params object[] value)
-        {
-            _Attributes.Add(new Attribute(type, value));
-            Changed = true;
-            return this;
-        }
-
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
@@ -75,7 +57,7 @@ namespace Impart
                 return Render;
             }
             StringBuilder result = new StringBuilder($"{_ID} {{");
-            foreach (Attribute attribute in _Attributes)
+            foreach (Attr attribute in Attrs)
             {
                 result.Append(attribute);
             }

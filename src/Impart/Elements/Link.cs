@@ -60,7 +60,7 @@ namespace Impart
         }
 
         /// <value>The Attribute values of the Link.</value>
-        public List<Attribute> Attributes = new List<Attribute>();
+        public AttrList Attrs = new AttrList();
         private Type _LinkType;
 
         /// <value>The Type of Link.</value>
@@ -140,16 +140,17 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && !Attrs.Changed)
             {
                 return Render;
             }
             Changed = false;
+            Attrs.Changed = false;
             StringBuilder result = new StringBuilder($"<a href=\"{_Path}\"");
-            if (Attributes.Count != 0)
+            if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
-                foreach (Attribute attribute in Attributes)
+                foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }
@@ -177,7 +178,7 @@ namespace Impart
             Link result = new Link();
             result._Image = _Image;
             result._LinkType = _LinkType;
-            result.Attributes = Attributes;
+            result.Attrs = Attrs;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;
@@ -193,7 +194,7 @@ namespace Impart
             Link result = new Link();
             result._Image = _Image;
             result._LinkType = _LinkType;
-            result.Attributes = Attributes;
+            result.Attrs = Attrs;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
             result._IOID = _IOID;

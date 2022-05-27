@@ -25,7 +25,7 @@ namespace Impart
         }
 
         /// <value>The attribute values of the Division.</value>
-        public List<Attr> Attributes = new List<Attr>();
+        public AttrList Attrs = new AttrList();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -140,9 +140,9 @@ namespace Impart
         /// <param name="style">The Style instance to use.</param>
         public Division SetStyle(Style style)
         {
-            foreach (Attribute attribute in style.Attributes)
+            foreach (Attr attribute in style.Attrs)
             {
-                Attributes.Add(attribute);
+                Attrs.Add(attribute);
             }
             Changed = true;
             return this;
@@ -159,10 +159,10 @@ namespace Impart
             switch (scrollbar.Axis)
             {
                 case Axis.X:
-                    Attributes.Add(new Attribute(AttrType.OverflowX, true));
+                    Attrs.Add(AttrType.OverflowX, true);
                     break;
                 case Axis.Y:
-                    Attributes.Add(new Attribute(AttrType.OverflowY, true));
+                    Attrs.Add(AttrType.OverflowY, true);
                     break;
                 default:
                     throw new ImpartError("Invalid axis!");
@@ -188,10 +188,10 @@ namespace Impart
                 _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, _ID));
             }
             StringBuilder result = new StringBuilder("<div ");
-            if (Attributes.Count != 0)
+            if (Attrs.Count != 0)
             {
                 result.Append("style=\"");
-                foreach (Attribute attribute in Attributes)
+                foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }
@@ -214,7 +214,7 @@ namespace Impart
         Element Element.Clone()
         {
             Division result = new Division();
-            result.Attributes = Attributes;
+            result.Attrs = Attrs;
             result._Elements = _Elements;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
@@ -229,7 +229,7 @@ namespace Impart
         public Element Clone()
         {
             Division result = new Division();
-            result.Attributes = Attributes;
+            result.Attrs = Attrs;
             result._Elements = _Elements;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;

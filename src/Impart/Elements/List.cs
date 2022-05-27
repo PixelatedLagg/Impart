@@ -44,7 +44,7 @@ namespace Impart
         }
 
         /// <value>The Attribute values of the List.</value>
-        public List<Attribute> Attributes = new List<Attribute>();
+        public AttrList Attrs = new AttrList();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -117,16 +117,17 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && !Attrs.Changed)
             {
                 return Render;
             }
             Changed = false;
+            Attrs.Changed = false;
             StringBuilder result = new StringBuilder($"<{_ListType}");
-            if (Attributes.Count != 0)
+            if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
-                foreach (Attribute attribute in Attributes)
+                foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }
@@ -149,7 +150,7 @@ namespace Impart
         Element Element.Clone()
         {
             List result = new List();
-            result.Attributes = Attributes;
+            result.Attrs = Attrs;
             result._Entries = _Entries;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
@@ -165,7 +166,7 @@ namespace Impart
         public Element Clone()
         {
             List result = new List();
-            result.Attributes = Attributes;
+            result.Attrs = Attrs;
             result._Entries = _Entries;
             result._ExtAttrs = _ExtAttrs;
             result._ID = _ID;
