@@ -7,21 +7,6 @@ namespace Impart
     /// <summary>List element.</summary>
     public struct List : Element, Nested
     {
-        private string _ID;
-
-        /// <value>The ID value of the List.</value>
-        public string ID 
-        {
-            get 
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
         private List<Text> _Entries = new List<Text>();
 
         /// <value>The entry values of the List.</value>
@@ -45,6 +30,7 @@ namespace Impart
 
         /// <value>The Attribute values of the List.</value>
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -56,18 +42,15 @@ namespace Impart
             }
         }
         private string _ListType;
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates a List instance.</summary>
         /// <param name="type">The List type.</param>
-        /// <param name="id">The List ID.</param>
         /// <param name="textEntries">The List entries.</param>
-        public List(ListType type, string id = null, params Text[] textEntries)
+        public List(ListType type, params Text[] textEntries)
         {
             _Type = type;
-            _ID = id;
             if (type == ListType.Ordered)
             {
                 _ListType = "ol";
@@ -75,10 +58,6 @@ namespace Impart
             else
             {
                 _ListType = "ul";
-            }
-            if (id != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
             }
             foreach (Text text in textEntries)
             {
@@ -117,12 +96,13 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<{_ListType}");
             if (Attrs.Count != 0)
             {
@@ -133,7 +113,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
@@ -152,8 +132,7 @@ namespace Impart
             List result = new List();
             result.Attrs = Attrs;
             result._Entries = _Entries;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Type = _Type;
             result.Changed = Changed;
@@ -168,8 +147,7 @@ namespace Impart
             List result = new List();
             result.Attrs = Attrs;
             result._Entries = _Entries;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Type = _Type;
             result.Changed = Changed;

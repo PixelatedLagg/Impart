@@ -7,21 +7,6 @@ namespace Impart
     /// <summary>Table element.</summary>
     public class Table : Element
     {
-        private string _ID;
-
-        /// <value>The ID value of the Table.</value>
-        public string ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
         private List<TableRow> _Rows = new List<TableRow>();
 
         /// <value>The TableRow values of the Table.</value>
@@ -35,7 +20,7 @@ namespace Impart
 
         /// <value>The Attribute values of the Table.</value>
         public AttrList Attrs = new AttrList();
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private bool Changed = true;
         private string Render;
         private int _IOID = Ioid.Generate();
@@ -68,12 +53,13 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<table");
             if (Attrs.Count != 0)
             {
@@ -84,7 +70,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
@@ -102,8 +88,7 @@ namespace Impart
         {
             Table result = new Table();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Rows = _Rows;
             result.Changed = Changed;
@@ -116,8 +101,7 @@ namespace Impart
         {
             Table result = new Table();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Rows = _Rows;
             result.Changed = Changed;

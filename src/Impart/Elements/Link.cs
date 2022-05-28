@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using Impart.Internal;
-using System.Collections.Generic;
 
 namespace Impart
 {
@@ -28,21 +27,6 @@ namespace Impart
                 return _Image;
             }
         }
-        private string _ID;
-
-        /// <value>The ID value of the Link.</value>
-        public string ID
-        {
-            get 
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
         private string _Path;
 
         /// <value>The path value of the Link.</value>
@@ -61,6 +45,7 @@ namespace Impart
 
         /// <value>The Attribute values of the Link.</value>
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private Type _LinkType;
 
         /// <value>The Type of Link.</value>
@@ -90,7 +75,6 @@ namespace Impart
                 return _IOID;
             }
         }
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -100,52 +84,41 @@ namespace Impart
         /// <summary>Creates a Link instance.</summary>
         /// <param name="text">The Link text.</param>
         /// <param name="path">The Link path.</param>
-        /// <param name="id">The Link ID.</param>
-        public Link(Text text, string path, string id = null)
+        public Link(Text text, string path)
         {
             if (path == null)
             {
                 throw new ImpartError("Path cannot be null!");
             }
             _Text = text;
-            _ID = id;
             _Path = path;
             _LinkType = typeof(Text);
-            if (id != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
-            }
         }
 
         /// <summary>Creates a Link instance.</summary>
         /// <param name="image">The Link image.</param>
         /// <param name="path">The Link path.</param>
-        /// <param name="id">The Link ID.</param>
-        public Link(Image image, string path, string id = null)
+        public Link(Image image, string path)
         {
             if (path == null)
             {
                 throw new ImpartError("Path cannot be null!");
             }
-            _ID = id;
             _Path = path;
             _Image = image;
             _LinkType = typeof(Image);
-            if (id != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
-            }
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<a href=\"{_Path}\"");
             if (Attrs.Count != 0)
             {
@@ -156,7 +129,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
@@ -179,8 +152,7 @@ namespace Impart
             result._Image = _Image;
             result._LinkType = _LinkType;
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Text = _Text;
             result.Changed = Changed;
@@ -195,8 +167,7 @@ namespace Impart
             result._Image = _Image;
             result._LinkType = _LinkType;
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Text = _Text;
             result.Changed = Changed;

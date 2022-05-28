@@ -6,21 +6,6 @@ namespace Impart
     /// <summary>A header row of a Table.</summary>
     public class TableHeader : TableRow
     {
-        private string _ID = null;
-        
-        /// <value>The ID value of the TableHeader.</value>
-        public new string ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
         private List<Element> _Elements = new List<Element>();
 
         /// <value>The Element values of the TableHeader.</value>
@@ -34,7 +19,7 @@ namespace Impart
 
         /// <value>The Attribute values of the TableHeader.</value>
         new public AttrList Attrs = new AttrList();
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
+        new public ExtAttrList ExtAttrs = new ExtAttrList();
         private bool Changed = true;
         private string Render = "";
 
@@ -57,12 +42,13 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<tr");
             if (Attrs.Count != 0)
             {
@@ -73,7 +59,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }

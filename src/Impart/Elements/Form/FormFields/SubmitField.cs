@@ -9,6 +9,7 @@ namespace Impart
     {
         /// <value>The attribute values of the SubmitField.</value>
         public AttrList Attrs = new AttrList();
+        internal double InputID;
         private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
@@ -19,11 +20,12 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && !Attrs.Changed)
             {
                 return Render;
             }
             Changed = false;
+            Attrs.Changed = false;
             StringBuilder result = new StringBuilder($"<input type=\"submit\"");
             if (Attrs.Count != 0)
             {
@@ -33,12 +35,6 @@ namespace Impart
                     result.Append(attribute);
                 }
                 result.Append('"');
-                foreach (ExtAttr ExtAttr in _ExtAttrs)
-                {
-                    result.Append(ExtAttr);
-                }
-                Render = result.Append('>').ToString();
-                return Render;
             }
             foreach (ExtAttr ExtAttr in _ExtAttrs)
             {

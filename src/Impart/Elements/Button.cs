@@ -1,6 +1,5 @@
 using System.Text;
 using Impart.Internal;
-using System.Collections.Generic;
 
 namespace Impart
 {
@@ -23,24 +22,9 @@ namespace Impart
             }
         }
 
-        private string _ID;
-
-        /// <value>The ID value of the Button.</value>
-        public string ID 
-        {
-            get 
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
-
         /// <value>The attribute values of the Button.</value>
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -52,7 +36,6 @@ namespace Impart
             }
         }
 
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -61,26 +44,21 @@ namespace Impart
 
         /// <summary>Creates a Button instance.</summary>
         /// <param name="text">The Button text.</param>
-        /// <param name="id">The Button ID.</param>
-        public Button(Text text, string id = null)
+        public Button(Text text)
         {
             _Text = text;
-            _ID = id;
-            if (id != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
-            }
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<button");
             if (Attrs.Count != 0)
             {
@@ -91,7 +69,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
@@ -104,8 +82,7 @@ namespace Impart
         {
             Button result = new Button();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Text = _Text;
             result.Changed = Changed;
@@ -118,8 +95,7 @@ namespace Impart
         {
             Button result = new Button();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Text = _Text;
             result.Changed = Changed;

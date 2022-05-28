@@ -1,3 +1,4 @@
+using System.Text;
 using Impart.Internal;
 
 namespace Impart
@@ -5,14 +6,16 @@ namespace Impart
     /// <summary>Checkbox input for Form.</summary>
     public sealed class CheckField : FormField
     {
-        internal int ID;
+        public AttrList Attrs = new AttrList();
+        internal double InputID;
+        private bool Changed = true;
         private string Render;
 
         /// <summary>Creates a CheckField instance.</summary>
         /// <param name="text">The CheckField text.</param>
         public CheckField(string text)
         {
-            Render = $"<label for=\"{ID}\">{text}</label><input type=\"checkbox\" name=\"{ID}\">";
+            Render = $"<label for=\"{InputID}\">{text}</label><input type=\"checkbox\" name=\"{InputID}\">";
         }
 
         /// <summary>Creates a CheckField instance.</summary>
@@ -20,11 +23,35 @@ namespace Impart
         /// <param name="id">The CheckField style ID.</param>
         public CheckField(Text text, string id = null)
         {
-            Render = $"<label for=\"{ID}\">{text}</label><input type=\"checkbox\" name=\"{ID}\" id=\"{id}\">";
+            Render = $"<label for=\"{InputID}\">{text}</label><input type=\"checkbox\" name=\"{InputID}\">";
         }
 
         /// <summary>Returns the instance as a String.</summary>
         /// <returns>A String instance.</returns>
-        public override string ToString() => Render;
+        public override string ToString()
+        {
+            if (!Changed && !Attrs.Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            Attrs.Changed = false;
+            StringBuilder result = new StringBuilder($"<input type=\"submit\"");
+            if (Attrs.Count != 0)
+            {
+                result.Append("style=\"");
+                foreach (Attr attribute in Attrs)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            {
+                result.Append(ExtAttr);
+            }
+            Render = result.Append('>').ToString();
+            return Render;
+        }
     }
 }

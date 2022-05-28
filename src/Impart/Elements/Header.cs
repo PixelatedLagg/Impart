@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using Impart.Internal;
-using System.Collections.Generic;
 
 namespace Impart
 {
@@ -23,24 +22,10 @@ namespace Impart
                 _Text = value;
             }
         }
-        private string _ID = null;
-
-        /// <value>The ID value of the Header.</value>
-        public string ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
 
         /// <value>The Attribute values of the Header.</value>
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private int _Number = 1;
 
         /// <value>The Header number value of the Header.</value>
@@ -70,7 +55,6 @@ namespace Impart
                 return _IOID;
             }
         }
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -80,8 +64,7 @@ namespace Impart
         /// <summary>Creates a Header instance.</summary>
         /// <param name="text">The Header text.</param>
         /// <param name="number">The Header type.</param>
-        /// <param name="id">The Header ID.</param>
-        public Header(string text, int number = 1, string id = null)
+        public Header(string text, int number = 1)
         {
             if (number > 5 || number < 1)
             {
@@ -92,23 +75,19 @@ namespace Impart
                 throw new ImpartError("Text cannot be null or empty.");
             }
             _Text = text;
-            _ID = id;
             _Number = number;
-            if (id != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
-            }
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<h{_Number}");
             if (Attrs.Count != 0)
             {
@@ -119,7 +98,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
@@ -132,8 +111,7 @@ namespace Impart
         {
             Header result = new Header();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Number = _Number;
             result._Text = _Text;
@@ -147,8 +125,7 @@ namespace Impart
         {
             Header result = new Header();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Number = _Number;
             result._Text = _Text;

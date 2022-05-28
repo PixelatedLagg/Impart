@@ -34,7 +34,7 @@ namespace Impart
 
         /// <value>The Attribute values of the TableRow.</value>
         public AttrList Attrs = new AttrList();
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private bool Changed = true;
         private string Render = "";
 
@@ -57,12 +57,13 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<tr");
             if (Attrs.Count != 0)
             {
@@ -73,7 +74,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }

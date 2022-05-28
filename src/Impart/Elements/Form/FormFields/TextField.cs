@@ -1,5 +1,6 @@
 using System.Text;
 using Impart.Internal;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -31,7 +32,9 @@ namespace Impart
                 _Text = value;
             }
         }
-        internal int FormID;
+        public AttrList Attrs = new AttrList();
+        internal double InputID;
+        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render;
 
@@ -46,14 +49,27 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && !Attrs.Changed)
             {
                 return Render;
             }
             Changed = false;
-            StringBuilder result = new StringBuilder("<label for=\"{FormID}\"");
-            
-            Render = $"<label for=\"{FormID}\">{Text}</label><input type=\"text\" name=\"{FormID}\">";
+            Attrs.Changed = false;
+            StringBuilder result = new StringBuilder($"<label for=\"{InputID}\"");
+            if (Attrs.Count != 0)
+            {
+                result.Append("style=\"");
+                foreach (Attr attribute in Attrs)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            {
+                result.Append(ExtAttr);
+            }
+            Render = result.Append($">{Text}</label><input type=\"text\" name=\"{InputID}\">").ToString();
             return Render;
         }
     }

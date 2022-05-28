@@ -28,15 +28,6 @@ namespace Impart
             }
         }
         
-        /// <value>The ID value of the Nest. (always returns null)</value>
-        string Element.ID
-        {
-            get
-            {
-                return null;
-            }
-            set { }
-        }
         private List<Nested> _Nested = new List<Nested>();
 
         /// <summary>Creates an empty Nest instance.</summary>

@@ -8,24 +8,9 @@ namespace Impart
     /// <summary>Division element.</summary>
     public struct Division : Element, IDisposable, Nested
     {
-        private string _ID;
-
-        /// <value>The ID value of the Division.</value>
-        public string ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
-
         /// <value>The attribute values of the Division.</value>
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -38,22 +23,11 @@ namespace Impart
         }
         internal List<StyleElement> _StyleElements = new List<StyleElement>();
         private List<Element> _Elements = new List<Element>();
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates a Division instance.</summary>
-        public Division()
-        {
-            _ID = null;
-        }
-
-        /// <summary>Creates a Division instance.</summary>
-        /// <param name="id">The optional ID for the Division.</param>
-        public Division(string id = null)
-        {
-            _ID = id;
-        }
+        public Division() { }
 
         /// <summary>Add a Text to the Division.</summary>
         /// <param name="text">The Text instance to add.</param>
@@ -152,10 +126,6 @@ namespace Impart
         /// <param name="scrollbar">The scrollbar to add.</param>
         public Division SetScrollbar(Scrollbar scrollbar)
         {
-            if (_ID == null)
-            {
-                throw new ImpartError("To add scrollbar, division must have an ID.");
-            }
             switch (scrollbar.Axis)
             {
                 case Axis.X:
@@ -167,7 +137,7 @@ namespace Impart
                 default:
                     throw new ImpartError("Invalid axis!");
             }
-            _StyleElements.Add(new DivisionScrollbar(scrollbar, _ID, ((StyleElement)(scrollbar)).IOID));
+            _StyleElements.Add(new DivisionScrollbar(scrollbar, _IOID.ToString(), ((StyleElement)(scrollbar)).IOID));
             Changed = true;
             return this;
         }
@@ -178,15 +148,13 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
-            if (_ID != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, _ID));
-            }
+            Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<div ");
             if (Attrs.Count != 0)
             {
@@ -197,7 +165,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
@@ -216,8 +184,7 @@ namespace Impart
             Division result = new Division();
             result.Attrs = Attrs;
             result._Elements = _Elements;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._StyleElements = _StyleElements;
             result.Changed = Changed;
@@ -231,8 +198,7 @@ namespace Impart
             Division result = new Division();
             result.Attrs = Attrs;
             result._Elements = _Elements;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._StyleElements = _StyleElements;
             result.Changed = Changed;

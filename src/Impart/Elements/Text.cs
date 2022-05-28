@@ -1,6 +1,5 @@
 using System.Text;
 using Impart.Internal;
-using System.Collections.Generic;
 
 namespace Impart
 {
@@ -22,21 +21,6 @@ namespace Impart
                 _Text = value;
             }
         }
-        private string _ID;
-
-        /// <value>The ID value of the Text.</value>
-        public string ID 
-        {
-            get 
-            {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
-            }
-        }
         private TextType _Type;
 
         /// <value>The type value of the Text.</value>
@@ -50,6 +34,7 @@ namespace Impart
 
         /// <value>The Attribute values of the Text.</value>
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -61,7 +46,6 @@ namespace Impart
             }
         }
         private string _TextType;
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render = "";
 
@@ -70,35 +54,27 @@ namespace Impart
 
         /// <summary>Creates a Text instance.</summary>
         /// <param name="text">The Text text.</param>
-        /// <param name="id">The Text ID.</param>
-        public Text(string text, string id = null)
+        public Text(string text)
         {
             if (text == null)
             {
                 throw new ImpartError("Text cannot be null!");
             }
             _Text = text;
-            _ID = id;
             _Type = TextType.Regular;
             _TextType = "p";
-            if (id != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
-            }
         }
 
         /// <summary>Creates a Text instance.</summary>
         /// <param name="text">The Text text.</param>
         /// <param name="type">The Text type.</param>
-        /// <param name="id">The Text ID.</param>
-        public Text(string text, TextType type, string id = null)
+        public Text(string text, TextType type)
         {
             if (text == null)
             {
                 throw new ImpartError("Text cannot be null!");
             }
             _Text = text;
-            _ID = id;
             _Type = type;
             _TextType = type switch
             {
@@ -115,21 +91,18 @@ namespace Impart
                 TextType.Superscript => "sup",
                 _ => ""
             };
-            if (id != null)
-            {
-                _ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, id));
-            }
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<{_TextType}");
             if (Attrs.Count != 0)
             {
@@ -140,7 +113,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
@@ -160,8 +133,7 @@ namespace Impart
         {
             Text result = new Text();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Text = _Text;
             result._TextType = _TextType;
@@ -176,8 +148,7 @@ namespace Impart
         {
             Text result = new Text();
             result.Attrs = Attrs;
-            result._ExtAttrs = _ExtAttrs;
-            result._ID = _ID;
+            result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Text = _Text;
             result._TextType = _TextType;
