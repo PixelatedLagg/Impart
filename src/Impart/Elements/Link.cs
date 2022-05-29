@@ -46,6 +46,13 @@ namespace Impart
         /// <value>The Attribute values of the Link.</value>
         public AttrList Attrs = new AttrList();
         public ExtAttrList ExtAttrs = new ExtAttrList();
+        ExtAttrList Element.ExtAttrs
+        {
+            get
+            {
+                return ExtAttrs;
+            }
+        }
         private Type _LinkType;
 
         /// <value>The Type of Link.</value>

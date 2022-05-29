@@ -26,6 +26,13 @@ namespace Impart
         /// <value>The Attribute values of the Header.</value>
         public AttrList Attrs = new AttrList();
         public ExtAttrList ExtAttrs = new ExtAttrList();
+        ExtAttrList Element.ExtAttrs
+        {
+            get
+            {
+                return ExtAttrs;
+            }
+        }
         private int _Number = 1;
 
         /// <value>The Header number value of the Header.</value>

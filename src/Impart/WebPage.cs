@@ -58,7 +58,6 @@ namespace Impart
 
         /// <value>The Attribute values of the WebPage.</value>
         public AttrList Attrs = new AttrList();
-
         internal Script _Script = new Script("");
         private List<Element> _Elements = new List<Element>();
         private List<StyleElement> _StyleElements = new List<StyleElement>();
@@ -104,7 +103,7 @@ namespace Impart
         {
             foreach (Element entry in _Elements)
             {
-                if (entry.ID == id)
+                if ((string)entry.ExtAttrs[ExtAttrType.ID] == id)
                 {
                     return true;
                 }
@@ -118,7 +117,7 @@ namespace Impart
         {
             foreach (Element entry in _Elements)
             {
-                if (entry.ID == id)
+                if ((string)entry.ExtAttrs[ExtAttrType.ID] == id)
                 {
                     return entry;
                 }
@@ -132,7 +131,7 @@ namespace Impart
         {
             foreach (Element entry in _Elements.ToArray())
             {
-                if (entry.ID == id)
+                if ((string)entry.ExtAttrs[ExtAttrType.ID] == id)
                 {
                     Changed = true;
                     _Elements.Remove(entry);

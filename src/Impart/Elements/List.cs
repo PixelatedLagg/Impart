@@ -41,6 +41,13 @@ namespace Impart
                 return _IOID;
             }
         }
+        ExtAttrList Element.ExtAttrs
+        {
+            get
+            {
+                return ExtAttrs;
+            }
+        }
         private string _ListType;
         private bool Changed = true;
         private string Render = "";

@@ -11,6 +11,13 @@ namespace Impart
         /// <value>The attribute values of the Division.</value>
         public AttrList Attrs = new AttrList();
         public ExtAttrList ExtAttrs = new ExtAttrList();
+        ExtAttrList Element.ExtAttrs
+        {
+            get
+            {
+                return ExtAttrs;
+            }
+        }
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>

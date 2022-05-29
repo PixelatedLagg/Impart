@@ -7,6 +7,7 @@ namespace Impart
     public sealed class CheckField : FormField
     {
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         internal double InputID;
         private bool Changed = true;
         private string Render;
@@ -30,12 +31,13 @@ namespace Impart
         /// <returns>A String instance.</returns>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<input type=\"submit\"");
             if (Attrs.Count != 0)
             {
@@ -46,7 +48,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }

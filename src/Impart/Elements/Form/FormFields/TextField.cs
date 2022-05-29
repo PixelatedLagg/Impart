@@ -33,8 +33,8 @@ namespace Impart
             }
         }
         public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
         internal double InputID;
-        private List<ExtAttr> _ExtAttrs = new List<ExtAttr>();
         private bool Changed = true;
         private string Render;
 
@@ -49,12 +49,13 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
             Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<label for=\"{InputID}\"");
             if (Attrs.Count != 0)
             {
@@ -65,7 +66,7 @@ namespace Impart
                 }
                 result.Append('"');
             }
-            foreach (ExtAttr ExtAttr in _ExtAttrs)
+            foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }

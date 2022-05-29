@@ -29,6 +29,13 @@ namespace Impart
         }
         
         private List<Nested> _Nested = new List<Nested>();
+        ExtAttrList Element.ExtAttrs
+        {
+            get
+            {
+                return null;
+            }
+        }
 
         /// <summary>Creates an empty Nest instance.</summary>
         public Nest() { }

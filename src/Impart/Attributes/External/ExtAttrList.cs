@@ -7,6 +7,20 @@ namespace Impart
     {
         internal bool Changed = true;
         public ExtAttrList() : base() { }
+        public object this[ExtAttrType type]
+        {
+            get
+            {
+                foreach (ExtAttr extattr in this)
+                {
+                    if (extattr.Type == type)
+                    {
+                        return extattr.Value;
+                    }
+                }
+                return null;
+            }
+        }
         new public void Add(ExtAttr attribute)
         {
             Changed = true;

@@ -7,19 +7,13 @@ namespace Impart
     /// <summary>The main input class in Impart.</summary>
     public sealed class Form : Element
     {
-        private string _ID;
-
-        /// <value>The ID value of the Form.</value>
-        public string ID 
+        public AttrList Attrs = new AttrList();
+        public ExtAttrList ExtAttrs = new ExtAttrList();
+        ExtAttrList Element.ExtAttrs
         {
-            get 
+            get
             {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
+                return ExtAttrs;
             }
         }
         private List<FormField> Elements = new List<FormField>();
@@ -43,6 +37,7 @@ namespace Impart
         {
             foreach (TextField tf in textFields)
             {
+                tf.InputID = Ioid.GenerateOtherUnique();
                 Elements.Add(tf);
             }
             Changed = true;
@@ -55,6 +50,7 @@ namespace Impart
         {
             foreach (CheckField cf in checkFields)
             {
+                cf.InputID = Ioid.GenerateOtherUnique();
                 Elements.Add(cf);
             }
             Changed = true;
@@ -65,6 +61,7 @@ namespace Impart
         /// <param name="submitField">The SubmitField to add.</param>
         public Form AddSubmitField(SubmitField submitField)
         {
+            submitField.InputID = Ioid.GenerateOtherUnique();
             Elements.Add(submitField);
             Changed = true;
             return this;
@@ -73,11 +70,13 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
                 return Render;
             }
             Changed = false;
+            Attrs.Changed = false;
+            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<form>");
             foreach (FormField field in Elements)
             {
@@ -91,9 +90,9 @@ namespace Impart
         Element Element.Clone()
         {
             Form result = new Form();
-            result._ID = _ID;
             result.Changed = Changed;
             result.Elements = Elements;
+            result.ExtAttrs = ExtAttrs;
             result.IOIDValue = IOIDValue;
             result.Render = Render;
             return result;
@@ -103,9 +102,9 @@ namespace Impart
         public Element Clone()
         {
             Form result = new Form();
-            result._ID = _ID;
             result.Changed = Changed;
             result.Elements = Elements;
+            result.ExtAttrs = ExtAttrs;
             result.IOIDValue = IOIDValue;
             result.Render = Render;
             return result;
