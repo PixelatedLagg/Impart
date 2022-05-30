@@ -28,8 +28,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attribute values of the List.</value>
+        /// <value>The Attr values of the List.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the List.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         private int _IOID = Ioid.Generate();
 

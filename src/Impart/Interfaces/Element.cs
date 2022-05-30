@@ -9,6 +9,7 @@ namespace Impart
         /// <summary>Clones the Element (including its IOID).</summary>
         Element Clone();
 
+        /// <summary>The external attributes of the Element.</summary>
         ExtAttrList ExtAttrs { get; }
     }
 }

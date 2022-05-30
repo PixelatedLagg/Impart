@@ -6,7 +6,10 @@ namespace Impart
     /// <summary>Checkbox input for Form.</summary>
     public sealed class CheckField : FormField
     {
+        /// <value>The Attr values of the SubmitField.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the SubmitField.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         internal double InputID;
         private bool Changed = true;

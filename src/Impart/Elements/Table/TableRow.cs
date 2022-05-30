@@ -32,8 +32,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attribute values of the TableRow.</value>
+        /// <value>The Attr values of the TableRow.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the TableRow.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         private bool Changed = true;
         private string Render = "";

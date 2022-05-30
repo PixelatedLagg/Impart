@@ -17,8 +17,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attribute values of the TableHeader.</value>
+        /// <value>The Attr values of the TableHeader.</value>
         new public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the TableHeader.</value>
         new public ExtAttrList ExtAttrs = new ExtAttrList();
         private bool Changed = true;
         private string Render = "";

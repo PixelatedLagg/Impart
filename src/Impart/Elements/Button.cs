@@ -22,8 +22,10 @@ namespace Impart
             }
         }
 
-        /// <value>The attribute values of the Button.</value>
+        /// <value>The Attr values of the Button.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the Button.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList Element.ExtAttrs
         {

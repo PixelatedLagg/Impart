@@ -18,8 +18,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attribute values of the Table.</value>
+        /// <value>The Attr values of the Table.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the Table.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList Element.ExtAttrs
         {

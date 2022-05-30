@@ -8,8 +8,10 @@ namespace Impart
     /// <summary>Division element.</summary>
     public struct Division : Element, IDisposable, Nested
     {
-        /// <value>The attribute values of the Division.</value>
+        /// <value>The Attr values of the Division.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the Division.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList Element.ExtAttrs
         {

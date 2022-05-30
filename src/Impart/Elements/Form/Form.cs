@@ -7,7 +7,10 @@ namespace Impart
     /// <summary>The main input class in Impart.</summary>
     public sealed class Form : Element
     {
+        /// <value>The Attr values of the Form.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the Form.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList Element.ExtAttrs
         {

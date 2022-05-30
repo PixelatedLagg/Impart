@@ -1,14 +1,15 @@
 using System.Text;
 using Impart.Internal;
-using System.Collections.Generic;
 
 namespace Impart
 {
     /// <summary>Submit button for Form.</summary>
     public sealed class SubmitField : FormField
     {
-        /// <value>The attribute values of the SubmitField.</value>
+        /// <value>The Attr values of the SubmitField.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the SubmitField.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         internal double InputID;
         private bool Changed = true;

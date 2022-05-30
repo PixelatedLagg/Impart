@@ -43,8 +43,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attribute values of the Link.</value>
+        /// <value>The Attr values of the Link.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the Link.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList Element.ExtAttrs
         {

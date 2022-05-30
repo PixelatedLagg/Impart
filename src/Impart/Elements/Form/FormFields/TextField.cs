@@ -1,26 +1,14 @@
 using System.Text;
 using Impart.Internal;
-using System.Collections.Generic;
 
 namespace Impart
 {
     /// <summary>Text field for Form.</summary>
     public sealed class TextField : FormField
     {
-        private string _ID;
-        public string ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
-
         private string _Text;
+
+        /// <value>The Text value of the TextField.</value>
         public string Text
         {
             get
@@ -29,10 +17,14 @@ namespace Impart
             }
             set
             {
+                Changed = true;
                 _Text = value;
             }
         }
+        /// <value>The Attr values of the SubmitField.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The ExtAttr values of the SubmitField.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         internal double InputID;
         private bool Changed = true;
@@ -43,7 +35,6 @@ namespace Impart
         public TextField(string text)
         {
             Text = text;
-            ID = null;
         }
 
         /// <summary>Returns the instance as a String.</summary>
