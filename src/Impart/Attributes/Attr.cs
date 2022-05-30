@@ -7,7 +7,7 @@ namespace Impart
     {
         private AttrType _Type;
 
-        /// <Value>The Attribute Type.</Value>
+        /// <Value>The AttrType.</Value>
         public AttrType Type
         {
             get
@@ -17,7 +17,7 @@ namespace Impart
         }
         private object[] _Value;
 
-        /// <Value>The Attribute Value(s).</Value>
+        /// <Value>The Attr value(s).</Value>
         public object[] Value
         {
             get
@@ -26,9 +26,9 @@ namespace Impart
             }
         }
 
-        /// <summary>Creates an Attribute instance.</summary>
-        /// <param name="type">The Attribute type.</param>
-        /// <param name="value">The value array.</param>
+        /// <summary>Creates an Attr instance.</summary>
+        /// <param name="type">The AttrType.</param>
+        /// <param name="value">The Attr value(s).</param>
         public Attr(AttrType type, params object[] value)
         {
             _Type = type;

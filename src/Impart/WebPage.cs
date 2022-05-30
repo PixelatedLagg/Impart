@@ -103,7 +103,7 @@ namespace Impart
         {
             foreach (Element entry in _Elements)
             {
-                if ((string)entry.ExtAttrs[ExtAttrType.ID] == id)
+                if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
                 {
                     return true;
                 }
@@ -117,7 +117,7 @@ namespace Impart
         {
             foreach (Element entry in _Elements)
             {
-                if ((string)entry.ExtAttrs[ExtAttrType.ID] == id)
+                if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
                 {
                     return entry;
                 }
@@ -131,7 +131,7 @@ namespace Impart
         {
             foreach (Element entry in _Elements.ToArray())
             {
-                if ((string)entry.ExtAttrs[ExtAttrType.ID] == id)
+                if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
                 {
                     Changed = true;
                     _Elements.Remove(entry);
