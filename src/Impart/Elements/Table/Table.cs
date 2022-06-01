@@ -23,6 +23,8 @@ namespace Impart
 
         /// <value>The ExtAttr values of the Table.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
+
+        /// <value>The ExtAttr values of the instance.</value>
         ExtAttrList Element.ExtAttrs
         {
             get
@@ -30,8 +32,6 @@ namespace Impart
                 return ExtAttrs;
             }
         }
-        private bool Changed = true;
-        private string Render;
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -42,6 +42,8 @@ namespace Impart
                 return _IOID;
             }
         }
+        private bool Changed = true;
+        private string Render;
 
         /// <summary>Creates a Table instance.</summary>
         /// <param name="rows">The TableRows to add.</param>

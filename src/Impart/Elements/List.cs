@@ -33,6 +33,15 @@ namespace Impart
 
         /// <value>The ExtAttr values of the List.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
+
+        /// <value>The ExtAttr values of the instance.</value>
+        ExtAttrList Element.ExtAttrs
+        {
+            get
+            {
+                return ExtAttrs;
+            }
+        }
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
@@ -41,13 +50,6 @@ namespace Impart
             get
             {
                 return _IOID;
-            }
-        }
-        ExtAttrList Element.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
             }
         }
         private string _ListType;

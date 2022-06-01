@@ -48,6 +48,8 @@ namespace Impart
 
         /// <value>The ExtAttr values of the Link.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
+
+        /// <value>The ExtAttr values of the instance.</value>
         ExtAttrList Element.ExtAttrs
         {
             get

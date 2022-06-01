@@ -17,7 +17,7 @@ namespace Impart.Internal
         /// <summary>Generate and return a new IOID for multiple uses with a single instance.</summary>
         public static double GenerateOtherUnique()
         {
-            OtherCount *= 0.1;
+            OtherCount += 0.0001;
             return OtherCount;
         }
     }

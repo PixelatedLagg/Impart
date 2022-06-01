@@ -1,7 +1,7 @@
 namespace Impart
 {
-    /// <summary>All border types.</summary>
-    public enum Border
+    /// <summary>All border line types.</summary>
+    public enum BorderType
     {
         /// <value>Normal border (solid line).</value>
         Normal,
@@ -15,10 +15,10 @@ namespace Impart
         /// <value>Double border.</value>
         Double,
 
-        /// <value>In 3D border.</value>
+        /// <value>Inward 3D border.</value>
         In3D,
 
-        /// <value>Out 3D border.</value>
+        /// <value>Outward 3D border.</value>
         Out3D
     }
 }

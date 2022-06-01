@@ -27,6 +27,8 @@ namespace Impart
 
         /// <value>The ExtAttr values of the Button.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
+
+        /// <value>The ExtAttr values of the instance.</value>
         ExtAttrList Element.ExtAttrs
         {
             get
@@ -44,7 +46,6 @@ namespace Impart
                 return _IOID;
             }
         }
-
         private bool Changed = true;
         private string Render = "";
 

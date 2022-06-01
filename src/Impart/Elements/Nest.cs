@@ -29,6 +29,8 @@ namespace Impart
         }
         
         private List<Nested> _Nested = new List<Nested>();
+
+        /// <value>The ExtAttr values of the instance (will always return null, as this is a group of Elements).</value>
         ExtAttrList Element.ExtAttrs
         {
             get

@@ -37,6 +37,8 @@ namespace Impart
 
         /// <value>The ExtAttr values of the Text.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
+
+        /// <value>The ExtAttr values of the instance.</value>
         ExtAttrList Element.ExtAttrs
         {
             get
@@ -54,7 +56,6 @@ namespace Impart
                 return _IOID;
             }
         }
-
         private string _TextType;
         private bool Changed = true;
         private string Render = "";

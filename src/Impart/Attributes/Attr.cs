@@ -135,32 +135,17 @@ namespace Impart
                 case AttrType.Height:
                     return $"height: {Length.Convert(Value[0])};";
                 case AttrType.Border:
-                    StringBuilder result = new StringBuilder();
-                    result.Append($"border: {Length.Convert(Value[0])}");
-                    switch (Value[1])
+                    BorderArgs borderArgs = (BorderArgs)Value[0];
+                    return borderArgs.Type switch
                     {
-                        case Border.Dashed:
-                            result.Append($" dashed");
-                            break;
-                        case Border.Dotted:
-                            result.Append($" dotted");
-                            break;
-                        case Border.Double:
-                            result.Append($" double");
-                            break;
-                        case Border.In3D:
-                            result.Append($" inset");
-                            break;
-                        case Border.Normal:
-                            result.Append($" solid");
-                            break;
-                        case Border.Out3D:
-                            result.Append($" outset");
-                            break;
-                        default:
-                            throw new ImpartError("Invalid attribute parameters.");
-                    }
-                    return result.Append($" {Color.Convert(Value[2])};").ToString();
+                        BorderType.Dashed => $"border: {borderArgs.Width} dashed {borderArgs.Color};",
+                        BorderType.Dotted => $"border: {borderArgs.Width} dotted {borderArgs.Color};",
+                        BorderType.Double => $"border: {borderArgs.Width} double {borderArgs.Color};",
+                        BorderType.In3D => $"border: {borderArgs.Width} inset {borderArgs.Color};",
+                        BorderType.Normal => $"border: {borderArgs.Width} solid {borderArgs.Color};",
+                        BorderType.Out3D => $"border: {borderArgs.Width} outset {borderArgs.Color};",
+                        _ => throw new ImpartError("Invalid attribute parameters.")
+                    };
                 case AttrType.OverflowX:
                     if ((bool)Value[0])
                     {
@@ -185,12 +170,12 @@ namespace Impart
                 case AttrType.Animation:
                     return (Value[0] as AnimationArgs ?? throw new ImpartError("Invalid attribute parameters.")).ToString();
                 case AttrType.Background:
-                    BackgroundArgs args = (BackgroundArgs)Value[0];
-                    return args.Background switch
+                    BackgroundArgs backgroundArgs = (BackgroundArgs)Value[0];
+                    return backgroundArgs.Background switch
                     {
-                        Background.Loop => $"background-image: url('{args.Image}');",
-                        Background.Single => $"background-repeat: no-repeat;background-image: url('{args.Image}');",
-                        Background.Stretch => $"background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-image: url('{args.Image}');",
+                        Background.Loop => $"background-image: url('{backgroundArgs.Image}');",
+                        Background.Single => $"background-repeat: no-repeat;background-image: url('{backgroundArgs.Image}');",
+                        Background.Stretch => $"background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-image: url('{backgroundArgs.Image}');",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
                 default:
