@@ -6,19 +6,19 @@ namespace Impart
     /// <summary>Text element.</summary>
     public struct Text : Element, Nested
     {
-        private string _Text;
+        private string _TextValue;
 
         /// <value>The text value of the Text.</value>
         public string TextValue
         {
             get 
             {
-                return _Text;
+                return _TextValue;
             }
             set
             {
                 Changed = true;
-                _Text = value;
+                _TextValue = value;
             }
         }
         private TextType _Type;
@@ -71,7 +71,7 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null!");
             }
-            _Text = text;
+            _TextValue = text;
             _Type = TextType.Regular;
             _TextType = "p";
         }
@@ -85,7 +85,7 @@ namespace Impart
             {
                 throw new ImpartError("Text cannot be null!");
             }
-            _Text = text;
+            _TextValue = text;
             _Type = type;
             _TextType = type switch
             {
@@ -128,7 +128,7 @@ namespace Impart
             {
                 result.Append(ExtAttr);
             }
-            Render = result.Append($">{_Text}</{_TextType}>").ToString();
+            Render = result.Append($">{_TextValue}</{_TextType}>").ToString();
             return Render;
         }
 
@@ -146,7 +146,7 @@ namespace Impart
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Text = _Text;
+            result._TextValue = _TextValue;
             result._TextType = _TextType;
             result._Type = _Type;
             result.Changed = Changed;
@@ -161,7 +161,7 @@ namespace Impart
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Text = _Text;
+            result._TextValue = _TextValue;
             result._TextType = _TextType;
             result._Type = _Type;
             result.Changed = Changed;
