@@ -3,9 +3,9 @@ At this point, Impart is really taking shape and I am looming closer to finishin
 
 Added:
 <ul>
-  <li>Website hosting</li>
-  <li>Website events</li>
-  <li>No more developer HTML/CSS interaction</li>
+  	<li>Website hosting</li>
+  	<li>Website events</li>
+  	<li>No more developer HTML/CSS interaction</li>
 </ul>
 
 # March 31th (2.0.2) Total Downloads: 572
@@ -31,4 +31,28 @@ Added:
 	<li>Animation and framing system</li>
 	<li>Attribute system for styling</li>
 	<li>External attribute system for HTML attributes</li>
+</ul>
+
+# May 31th (2.0.4) Total Downloads: 889
+Many quality-of-life features added. Impart is slowly making the decision for more developer freedom instead of better performance, although optimisations will definitely come later on. Overhauls galore, big changes possibly coming soon.
+
+Added:
+<ul>
+	<li>Integration of Animations</li>
+	<li>More implicit conversions</li>
+	<li>Text alignment attribute</li>
+	<li>Fixed many bugs</li>
+	<li>Parameterless contructors for Elements</li>
+	<li>Element cloning</li>
+	<li>Fixes to documentation</li>
+	<li>Time measurements</li>
+	<li>AnimationArgs</li>
+	<li>Constant color variables for HSL/HEX</li>
+	<li>ViewWidth and ViewHeight</li>
+	<li>BackgroundArgs</li>
+	<li>Changed the internal ID system for FormField Elements</li>
+	<li>BorderArgs</li>
+	<li>Overhaul to Attribute system</li>
+	<li>AttrList and ExtAttrList</li>
+	<li>Renamed longer names to shorter ones</li>
 </ul>
