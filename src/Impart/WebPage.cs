@@ -306,6 +306,12 @@ namespace Impart
             Changed = true;
         }
 
+        protected void AddVideo(Video video)
+        {
+            _Elements.Add(video);
+            Changed = true;
+        }
+
         /// <summary>Add an external CSS document to the WebPage.</summary>
         /// <param name="url">The URL of the document to add.</param>
         protected void AddExternalStyle(string url)
