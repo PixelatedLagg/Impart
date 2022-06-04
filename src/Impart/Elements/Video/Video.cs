@@ -3,9 +3,12 @@ using Impart.Internal;
 
 namespace Impart
 {
+    /// <summary>Video element.</summary>
     public struct Video : Element
     {
         private string _Source;
+
+        /// <value>The Video source file.</value>
         public string Source
         {
             get
@@ -19,6 +22,8 @@ namespace Impart
             }
         }
         private (Length Width, Length Height) _Size;
+
+        /// <value>The Video player size.</value>
         public (Length Width, Length Height) Size
         {
             get
@@ -32,6 +37,8 @@ namespace Impart
             }
         }
         private VideoOptions _Options;
+
+        /// <value>Options for the Video player.</value>
         public VideoOptions Options
         {
             get
@@ -56,10 +63,10 @@ namespace Impart
             }
         }
         
-        /// <value>The Attr values of the Text.</value>
+        /// <value>The Attr values of the Video.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Text.</value>
+        /// <value>The ExtAttr values of the Video.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -72,12 +79,20 @@ namespace Impart
         }
         private bool Changed = true;
         private string Render = "";
-        public Video(string url, Length width, Length height, VideoOptions options)
+
+        /// <summary>Creates a Video instance.</summary>
+        /// <param name="source">The Video source file.</param>
+        /// <param name="width">The Video player width.</param>
+        /// <param name="height">The Video player height.</param>
+        /// <param name="options">Options for the Video player.</param>
+        public Video(string source, Length width, Length height, VideoOptions options)
         {
-            _Source = url;
+            _Source = source;
             _Size = (width, height);
             _Options = options;
         }
+
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
             if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
@@ -104,7 +119,22 @@ namespace Impart
             Render = result.Append('>').ToString();
             return Render;
         }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
         Element Element.Clone()
+        {
+            Video result = new Video();
+            result._IOID = _IOID;
+            result._Options = _Options;
+            result._Size = _Size;
+            result._Source = _Source;
+            result.Attrs = Attrs;
+            result.ExtAttrs = ExtAttrs;
+            return result;
+        }
+
+        /// <summary>Clones the Element instance (including the internal ID).</summary>
+        Element Clone()
         {
             Video result = new Video();
             result._IOID = _IOID;

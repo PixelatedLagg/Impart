@@ -306,6 +306,8 @@ namespace Impart
             Changed = true;
         }
 
+        /// <summary>Add a Video to the WebPage.</summary>
+        /// <param name="video">The Video instance to add.</param>
         protected void AddVideo(Video video)
         {
             _Elements.Add(video);
