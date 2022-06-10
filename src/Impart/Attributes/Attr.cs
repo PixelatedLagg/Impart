@@ -178,6 +178,8 @@ namespace Impart
                         Background.Stretch => $"background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-image: url('{backgroundArgs.Image}');",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
+                case AttrType.CustomFont:
+                    return $"font-family: {Value[0]};";
                 default:
                     throw new ImpartError("Invalid attribute parameters.");
             }

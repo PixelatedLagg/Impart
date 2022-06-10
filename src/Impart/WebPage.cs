@@ -316,11 +316,15 @@ namespace Impart
 
         /// <summary>Add an external CSS document to the WebPage.</summary>
         /// <param name="url">The URL of the document to add.</param>
+        /// <param name="name">The nickname of the document to add.</param>
         protected void AddExternalStyle(string url, string name = null)
         {
-            _Includes.Add((null, url));
+            _Includes.Add((name, url));
             Changed = true;
         }
+
+        /// <summary>Remove an external CSS document from the WebPage.</summary>
+        /// <param name="name">The nickname of the document to remove.</param>
         protected void RemoveExternalStyle(string name)
         {
             foreach ((string, string) i in _Includes)
@@ -328,6 +332,7 @@ namespace Impart
                 if (i.Item1 == name)
                 {
                     _Includes.Remove(i);
+                    Changed = true;
                     return;
                 }
             }

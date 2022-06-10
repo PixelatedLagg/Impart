@@ -46,6 +46,9 @@ namespace Impart
         Animation,
 
         /// <value>Background attribute.</value>
-        Background
+        Background,
+
+        /// <value>Custom font attribute.</value>
+        CustomFont
     }
 }
