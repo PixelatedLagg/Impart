@@ -121,6 +121,15 @@ namespace Impart
             return this;
         }
 
+        /// <summary>Add a Video to the Division.</summary>
+        /// <param name="video">The Video instance to add.</param>
+        public Division AddVideo(Video video)
+        {
+            _Elements.Add(video);
+            Changed = true;
+            return this;
+        }
+
         /// <summary>Sets a Style to the Division.</summary>
         /// <param name="style">The Style instance to use.</param>
         public Division SetStyle(Style style)
