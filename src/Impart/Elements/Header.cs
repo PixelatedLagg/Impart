@@ -126,7 +126,6 @@ namespace Impart
             result._IOID = _IOID;
             result._Number = _Number;
             result._Text = _Text;
-            result.Changed = Changed;
             result.Render = Render;
             return result;
         }
@@ -140,7 +139,6 @@ namespace Impart
             result._IOID = _IOID;
             result._Number = _Number;
             result._Text = _Text;
-            result.Changed = Changed;
             result.Render = Render;
             return result;
         }

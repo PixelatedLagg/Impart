@@ -146,7 +146,6 @@ namespace Impart
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Type = _Type;
-            result.Changed = Changed;
             result.Render = Render;
             result._ListType = _ListType;
             return result;
@@ -161,7 +160,6 @@ namespace Impart
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Type = _Type;
-            result.Changed = Changed;
             result.Render = Render;
             result._ListType = _ListType;
             return result;

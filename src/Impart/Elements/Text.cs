@@ -149,7 +149,6 @@ namespace Impart
             result._TextValue = _TextValue;
             result._TextType = _TextType;
             result._Type = _Type;
-            result.Changed = Changed;
             result.Render = Render;
             return result;
         }
