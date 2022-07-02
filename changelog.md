@@ -56,3 +56,18 @@ Added:
 	<li>AttrList and ExtAttrList</li>
 	<li>Renamed longer names to shorter ones</li>
 </ul>
+
+# July 1st (2.0.5) Total Downloads: 1.2K
+For this update, I slowed down just a bit. I have random additions planned in the near future, but it is likely going to be more optimisations until I go ahead and add a giant new feature.
+
+Added:
+<ul>
+	<li>Video Playing</li>
+	<li>Custom fonts via Styles</li>
+	<li>Custom font Attribute</li>
+	<li>Global Styles</li>
+	<li>Global external Styles</li>
+	<li>Force WebPage rendering</li>
+	<li>Removing Style and external Style via index</li>
+	<li>Various documentation corrections</li>
+</ul>
