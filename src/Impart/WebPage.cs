@@ -61,8 +61,8 @@ namespace Impart
         internal Script _Script = new Script("");
         private List<Element> _Elements = new List<Element>();
         private List<StyleElement> _StyleElements = new List<StyleElement>();
-        private Dictionary<string, string> _Styles = new Dictionary<string, string>();
-        private List<(string, string)> _Includes = new List<(string, string)>();
+        private List<string> _Styles = new List<string>();
+        private List<string> _ExternalStyles = new List<string>();
         private bool Changed = true;
         private string Render;
 
@@ -70,7 +70,7 @@ namespace Impart
         protected WebPage() { }
 
         /// <summary>Check if an Element exists.</summary>
-        /// <param name="element">The Element's instance.</param>
+        /// <param name="element">The instance of the Element to check.</param>
         protected bool ElementExists(Element element)
         {
             foreach (Element entry in _Elements)
@@ -84,7 +84,7 @@ namespace Impart
         }
 
         /// <summary>Check if a StyleElement exists.</summary>
-        /// <param name="element">The StyleElement's instance.</param>
+        /// <param name="element">The instance of the StyleElement to check.</param>
         protected bool StyleElementExists(StyleElement element)
         {
             foreach (StyleElement entry in _StyleElements)
@@ -98,7 +98,7 @@ namespace Impart
         }
 
         /// <summary>Check if an Element exists by ID.</summary>
-        /// <param name="id">The ID to check.</param>
+        /// <param name="id">The ID of the Element to check.</param>
         protected bool ElementExistsByID(string id)
         {
             foreach (Element entry in _Elements)
@@ -111,8 +111,8 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Get the Element by ID.</summary>
-        /// <param name="id">The Element's ID.</param>
+        /// <summary>Get an Element by ID.</summary>
+        /// <param name="id">The ID of the Element to get.</param>
         protected Element GetElementByID(string id)
         {
             foreach (Element entry in _Elements)
@@ -125,8 +125,8 @@ namespace Impart
             return null;
         }
 
-        /// <summary>Remove the Element by ID.</summary>
-        /// <param name="id">The Element's ID.</param>
+        /// <summary>Remove an Element by ID.</summary>
+        /// <param name="id">The ID of the Element to remove.</param>
         protected void RemoveElementByID(string id)
         {
             foreach (Element entry in _Elements.ToArray())
@@ -139,8 +139,8 @@ namespace Impart
             }
         }
 
-        /// <summary>Remove the Element.</summary>
-        /// <param name="element">The Element's instance.</param>
+        /// <summary>Remove an Element.</summary>
+        /// <param name="element">The instance of the Element to remove.</param>
         protected void RemoveElement(Element element)
         {
             foreach (Element entry in _Elements.ToArray())
@@ -153,8 +153,8 @@ namespace Impart
             }
         }
 
-        /// <summary>Remove the StyleElement.</summary>
-        /// <param name="element">The StyleElement's instance.</param>
+        /// <summary>Remove a StyleElement.</summary>
+        /// <param name="element">The instance of the StyleElement to remove.</param>
         protected void RemoveStyleElement(StyleElement element)
         {
             foreach (StyleElement entry in _Elements.ToArray())
@@ -167,8 +167,8 @@ namespace Impart
             }
         }
 
-        /// <summary>Change the Element.</summary>
-        /// <param name="element">The Element's instance.</param>
+        /// <summary>Change an Element.</summary>
+        /// <param name="element">The instance of the Element to change.</param>
         protected void ChangeElement(Element element)
         {
             foreach (Element entry in _Elements.ToArray())
@@ -181,8 +181,8 @@ namespace Impart
             }
         }
 
-        /// <summary>Change the StyleElement.</summary>
-        /// <param name="element">The StyleElement's instance.</param>
+        /// <summary>Change a StyleElement.</summary>
+        /// <param name="element">The instance of the StyleElement to change.</param>
         protected void ChangeStyleElement(StyleElement element)
         {
             foreach (StyleElement entry in _StyleElements.ToArray())
@@ -195,11 +195,19 @@ namespace Impart
             }
         }
 
-        /// <summary>Add a Style to the WebPage.</summary>
+        /// <summary>Add a Style.</summary>
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
         {
-            _Styles.Add(style.ID, style.ToString());
+            _Styles.Add(style.ToString());
+            Changed = true;
+        }
+
+        /// <summary>Remove a Style.</summary>
+        /// <param name="index">The index of the Style to remove.</param>
+        protected void RemoveStyle(int index)
+        {
+            _Styles.RemoveAt(index);
             Changed = true;
         }
 
@@ -263,7 +271,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Scrollbar.</summary>
+        /// <summary>Add a Scrollbar to the WebPage.</summary>
         /// <param name="scrollbar">The Scrollbar instance to add.</param>
         protected void SetScrollBar(Scrollbar scrollbar)
         {
@@ -314,28 +322,20 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add an external CSS document to the WebPage.</summary>
-        /// <param name="url">The URL of the document to add.</param>
-        /// <param name="name">The nickname of the document to add.</param>
-        protected void AddExternalStyle(string url, string name = null)
+        /// <summary>Add an external Style to the WebPage.</summary>
+        /// <param name="url">The URL of the external Style to add.</param>
+        protected void AddExternalStyle(string url)
         {
-            _Includes.Add((name, url));
+            _ExternalStyles.Add(url);
             Changed = true;
         }
 
-        /// <summary>Remove an external CSS document from the WebPage.</summary>
-        /// <param name="name">The nickname of the document to remove.</param>
-        protected void RemoveExternalStyle(string name)
+        /// <summary>Remove an external Style from the WebPage.</summary>
+        /// <param name="index">The index of the URL of the external Style to remove.</param>
+        protected void RemoveExternalStyle(int index)
         {
-            foreach ((string, string) i in _Includes)
-            {
-                if (i.Item1 == name)
-                {
-                    _Includes.Remove(i);
-                    Changed = true;
-                    return;
-                }
-            }
+            _ExternalStyles.RemoveAt(index);
+            Changed = true;
         }
 
         /// <summary>Add an Animation to the WebPage.</summary>
@@ -343,6 +343,12 @@ namespace Impart
         protected void AddAnimation(Animation animation)
         {
             _StyleElements.Add(animation);
+            Changed = true;
+        }
+
+        /// <summary>Force the WebPage to be rendered again, regardless of any new changes.</summary>
+        protected void ForceRender()
+        {
             Changed = true;
         }
 
@@ -356,14 +362,18 @@ namespace Impart
             Changed = false;
             Attrs.Changed = false;
             StringBuilder result = new StringBuilder("<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart --><!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\">");
-            foreach ((string, string) i in _Includes)
+            foreach (string url in _ExternalStyles)
             {
-                result.Append($"<link rel=\"stylesheet\" href=\"{i.Item2}\">");
+                result.Append($"<link type=\"text/css\" rel=\"stylesheet\" href=\"{url}\">");
+            }
+            foreach (string url in GlobalStyles.ExternalStyles)
+            {
+                result.Append($"<link type=\"text/css\" rel=\"stylesheet\" href=\"{url}\">");
             }
             result.Append($"<meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style>");
-            foreach (KeyValuePair<string, string> s in _Styles)
+            foreach (string style in _Styles)
             {
-                result.Append(s.Value);
+                result.Append(style);
             }
             foreach (StyleElement element in _StyleElements)
             {
