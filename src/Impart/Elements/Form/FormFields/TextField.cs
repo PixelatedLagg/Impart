@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Text field for Form.</summary>
-    public sealed class TextField : FormField
+    public sealed class TextField : IFormField
     {
         private string _Text;
 

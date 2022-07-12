@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>A nest of Elements.</summary>
-    public struct Nest : Element
+    /// <summary>A nest of IElements.</summary>
+    public struct Nest : IElement
     {
-        private List<Element> _Elements = new List<Element>();
+        private List<IElement> _Elements = new List<IElement>();
 
-        /// <value>All of the Elements included in the Nest.</value>
-        public Element[] Elements
+        /// <value>All of the IElements included in the Nest.</value>
+        public IElement[] IElement
         {
             get
             {
@@ -20,7 +20,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
@@ -28,10 +28,10 @@ namespace Impart
             }
         }
         
-        private List<Nested> _Nested = new List<Nested>();
+        private List<INested> _Nested = new List<INested>();
 
-        /// <value>The ExtAttr values of the instance (will always return null, as this is a group of Elements).</value>
-        ExtAttrList Element.ExtAttrs
+        /// <value>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</value>
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
@@ -43,14 +43,14 @@ namespace Impart
         public Nest() { }
 
         /// <summary>Creates a Nest instance.</summary>
-        /// <param name="elements">The Elements to add to the Nest.</param>
-        public Nest(params Element[] elements)
+        /// <param name="elements">The IElements to add to the Nest.</param>
+        public Nest(params IElement[] elements)
         {
             _Elements.AddRange(elements);
-            Nested current;
-            foreach (Element e in elements)
+            INested current;
+            foreach (IElement e in elements)
             {
-                current = e as Nested;
+                current = e as INested;
                 if (current == null)
                 {
                     throw new ImpartError("Cannot add this element to a nest!");
@@ -62,15 +62,15 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds Element(s) to the Nest.</summary>
-        /// <param name="elements">The Elements to add to the Nest.</param>
-        public Nest Add(params Element[] elements)
+        /// <summary>Adds IElement(s) to the Nest.</summary>
+        /// <param name="elements">The IElements to add to the Nest.</param>
+        public Nest Add(params IElement[] elements)
         {
             _Elements.AddRange(elements);
-            Nested current;
-            foreach (Element e in elements)
+            INested current;
+            foreach (IElement e in elements)
             {
-                current = e as Nested;
+                current = e as INested;
                 if (current == null)
                 {
                     throw new ImpartError("Cannot add this element to a nest!");
@@ -98,8 +98,8 @@ namespace Impart
             return result.ToString();
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             Nest result = new Nest();
             result._Elements = _Elements;
@@ -108,8 +108,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement Clone()
         {
             Nest result = new Nest();
             result._Elements = _Elements;

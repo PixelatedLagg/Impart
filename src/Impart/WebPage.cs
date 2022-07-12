@@ -59,8 +59,8 @@ namespace Impart
         /// <value>The Attribute values of the WebPage.</value>
         public AttrList Attrs = new AttrList();
         internal Script _Script = new Script("");
-        private List<Element> _Elements = new List<Element>();
-        private List<StyleElement> _StyleElements = new List<StyleElement>();
+        private List<IElement> _Elements = new List<IElement>();
+        private List<IStyleElement> _StyleElements = new List<IStyleElement>();
         private List<string> _Styles = new List<string>();
         private List<string> _ExternalStyles = new List<string>();
         private bool Changed = true;
@@ -71,9 +71,9 @@ namespace Impart
 
         /// <summary>Check if an Element exists.</summary>
         /// <param name="element">The instance of the Element to check.</param>
-        protected bool ElementExists(Element element)
+        protected bool ElementExists(IElement element)
         {
-            foreach (Element entry in _Elements)
+            foreach (IElement entry in _Elements)
             {
                 if (entry.IOID == element.IOID)
                 {
@@ -83,11 +83,11 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Check if a StyleElement exists.</summary>
-        /// <param name="element">The instance of the StyleElement to check.</param>
-        protected bool StyleElementExists(StyleElement element)
+        /// <summary>Check if a IStyleElement exists.</summary>
+        /// <param name="element">The instance of the IStyleElement to check.</param>
+        protected bool StyleElementExists(IStyleElement element)
         {
-            foreach (StyleElement entry in _StyleElements)
+            foreach (IStyleElement entry in _StyleElements)
             {
                 if (entry.IOID == element.IOID)
                 {
@@ -97,11 +97,11 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Check if an Element exists by ID.</summary>
-        /// <param name="id">The ID of the Element to check.</param>
+        /// <summary>Check if an IElement exists by ID.</summary>
+        /// <param name="id">The ID of the IElement to check.</param>
         protected bool ElementExistsByID(string id)
         {
-            foreach (Element entry in _Elements)
+            foreach (IElement entry in _Elements)
             {
                 if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
                 {
@@ -111,11 +111,11 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Get an Element by ID.</summary>
-        /// <param name="id">The ID of the Element to get.</param>
-        protected Element GetElementByID(string id)
+        /// <summary>Get an IElement by ID.</summary>
+        /// <param name="id">The ID of the IElement to get.</param>
+        protected IElement GetElementByID(string id)
         {
-            foreach (Element entry in _Elements)
+            foreach (IElement entry in _Elements)
             {
                 if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
                 {
@@ -125,11 +125,11 @@ namespace Impart
             return null;
         }
 
-        /// <summary>Remove an Element by ID.</summary>
-        /// <param name="id">The ID of the Element to remove.</param>
+        /// <summary>Remove an IElement by ID.</summary>
+        /// <param name="id">The ID of the IElement to remove.</param>
         protected void RemoveElementByID(string id)
         {
-            foreach (Element entry in _Elements.ToArray())
+            foreach (IElement entry in _Elements.ToArray())
             {
                 if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
                 {
@@ -139,11 +139,11 @@ namespace Impart
             }
         }
 
-        /// <summary>Remove an Element.</summary>
-        /// <param name="element">The instance of the Element to remove.</param>
-        protected void RemoveElement(Element element)
+        /// <summary>Remove an IElement.</summary>
+        /// <param name="element">The instance of the IElement to remove.</param>
+        protected void RemoveElement(IElement element)
         {
-            foreach (Element entry in _Elements.ToArray())
+            foreach (IElement entry in _Elements.ToArray())
             {
                 if (entry.IOID == element.IOID)
                 {
@@ -153,11 +153,11 @@ namespace Impart
             }
         }
 
-        /// <summary>Remove a StyleElement.</summary>
-        /// <param name="element">The instance of the StyleElement to remove.</param>
-        protected void RemoveStyleElement(StyleElement element)
+        /// <summary>Remove a IStyleElement.</summary>
+        /// <param name="element">The instance of the IStyleElement to remove.</param>
+        protected void RemoveStyleElement(IStyleElement element)
         {
-            foreach (StyleElement entry in _Elements.ToArray())
+            foreach (IStyleElement entry in _Elements.ToArray())
             {
                 if (entry.IOID == element.IOID)
                 {
@@ -167,11 +167,11 @@ namespace Impart
             }
         }
 
-        /// <summary>Change an Element.</summary>
-        /// <param name="element">The instance of the Element to change.</param>
-        protected void ChangeElement(Element element)
+        /// <summary>Change an IElement.</summary>
+        /// <param name="element">The instance of the IElement to change.</param>
+        protected void ChangeElement(IElement element)
         {
-            foreach (Element entry in _Elements.ToArray())
+            foreach (IElement entry in _Elements.ToArray())
             {
                 if (entry.IOID == element.IOID)
                 {
@@ -181,11 +181,11 @@ namespace Impart
             }
         }
 
-        /// <summary>Change a StyleElement.</summary>
-        /// <param name="element">The instance of the StyleElement to change.</param>
-        protected void ChangeStyleElement(StyleElement element)
+        /// <summary>Change a IStyleElement.</summary>
+        /// <param name="element">The instance of the IStyleElement to change.</param>
+        protected void ChangeStyleElement(IStyleElement element)
         {
-            foreach (StyleElement entry in _StyleElements.ToArray())
+            foreach (IStyleElement entry in _StyleElements.ToArray())
             {
                 if (entry.IOID == element.IOID)
                 {
@@ -256,7 +256,7 @@ namespace Impart
         protected void AddDivision(Division division)
         {
             _Elements.Add(division);
-            foreach (StyleElement element in division._StyleElements)
+            foreach (IStyleElement element in division._StyleElements)
             {
                 _StyleElements.Add(element);
             }
@@ -375,7 +375,7 @@ namespace Impart
             {
                 result.Append(style);
             }
-            foreach (StyleElement element in _StyleElements)
+            foreach (IStyleElement element in _StyleElements)
             {
                 result.Append(element);
             }
@@ -393,7 +393,7 @@ namespace Impart
             {
                 result.Append("<body>");
             }
-            foreach (Element entry in _Elements)
+            foreach (IElement entry in _Elements)
             {
                 result.Append(entry);
             }

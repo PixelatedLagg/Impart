@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Video element.</summary>
-    public struct Video : Element
+    public struct Video : IElement
     {
         private string _Source;
 
@@ -55,7 +55,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
@@ -70,7 +70,7 @@ namespace Impart
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
-        ExtAttrList Element.ExtAttrs
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
@@ -120,8 +120,8 @@ namespace Impart
             return Render;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             Video result = new Video();
             result._IOID = _IOID;
@@ -133,8 +133,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement Clone()
         {
             Video result = new Video();
             result._IOID = _IOID;

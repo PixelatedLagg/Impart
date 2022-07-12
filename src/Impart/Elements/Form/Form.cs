@@ -5,25 +5,25 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>The main input class in Impart.</summary>
-    public sealed class Form : Element
+    public sealed class Form : IElement
     {
         /// <value>The Attr values of the Form.</value>
         public AttrList Attrs = new AttrList();
 
         /// <value>The ExtAttr values of the Form.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
-        ExtAttrList Element.ExtAttrs
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
                 return ExtAttrs;
             }
         }
-        private List<FormField> Elements = new List<FormField>();
+        private List<IFormField> Elements = new List<IFormField>();
         private bool Changed = true;
         private string Render;
         private int IOIDValue = Ioid.Generate();
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
@@ -81,7 +81,7 @@ namespace Impart
             Attrs.Changed = false;
             ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<form>");
-            foreach (FormField field in Elements)
+            foreach (IFormField field in Elements)
             {
                 result.Append(field);
             }
@@ -89,8 +89,8 @@ namespace Impart
             return Render;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             Form result = new Form();
             result.Changed = Changed;
@@ -101,8 +101,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        public Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        public IElement Clone()
         {
             Form result = new Form();
             result.Changed = Changed;

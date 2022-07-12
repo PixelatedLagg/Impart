@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Animation style element.</summary>
-    public class Animation : StyleElement
+    public class Animation : IStyleElement
     {
         private List<Frame> _Frames = new List<Frame>();
 
@@ -19,7 +19,7 @@ namespace Impart
         }
         
         /// <value>The ID value of the Animation. (acts as the name of the Animation)</value>
-        string StyleElement.ID
+        string IStyleElement.ID
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int StyleElement.IOID
+        int IStyleElement.IOID
         {
             get
             {

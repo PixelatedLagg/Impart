@@ -3,7 +3,7 @@ using System.Text;
 namespace Impart.Internal
 {
     /// <summary>Scrollbar for Division that Impart automatically generates when using a Scrollbar with a Division.</summary>
-    public class DivisionScrollbar : StyleElement
+    public class DivisionScrollbar : IStyleElement
     {
         private Axis Axis;
         private Length Width;
@@ -13,7 +13,7 @@ namespace Impart.Internal
         private string ID;
 
         /// <value>The ID value of the DivisionScrollbar. (always returns null)</value>
-        string StyleElement.ID
+        string IStyleElement.ID
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Impart.Internal
         private int _IOID;
 
         /// <value>The internal ID of the instance.</value>
-        int StyleElement.IOID
+        int IStyleElement.IOID
         {
             get
             {

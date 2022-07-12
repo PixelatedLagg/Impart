@@ -5,7 +5,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Style Elements with a certain ID.</summary>
-    public sealed class Style : IDisposable, StyleElement
+    public sealed class Style : IDisposable, IStyleElement
     {
         private string _ID;
 
@@ -28,7 +28,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int StyleElement.IOID
+        int IStyleElement.IOID
         {
             get
             {

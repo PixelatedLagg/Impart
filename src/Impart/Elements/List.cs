@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>List element.</summary>
-    public struct List : Element, Nested
+    public struct List : IElement, INested
     {
         private List<Text> _Entries = new List<Text>();
 
@@ -35,7 +35,7 @@ namespace Impart
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
-        ExtAttrList Element.ExtAttrs
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
@@ -137,8 +137,8 @@ namespace Impart
             return Render;
         }
         
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             List result = new List();
             result.Attrs = Attrs;
@@ -151,8 +151,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        public Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        public IElement Clone()
         {
             List result = new List();
             result.Attrs = Attrs;
@@ -165,13 +165,13 @@ namespace Impart
             return result;
         }
 
-        string Nested.First()
+        string INested.First()
         {
             string result = ToString();
             return result.Remove(result.Length - ($"</{_ListType}>".Length));
         }
 
-        string Nested.Last()
+        string INested.Last()
         {
             return $"</{_ListType}>";
         }

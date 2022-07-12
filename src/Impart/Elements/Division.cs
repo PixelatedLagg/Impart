@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Division element.</summary>
-    public struct Division : Element, IDisposable, Nested
+    public struct Division : IElement, IDisposable, INested
     {
         /// <value>The Attr values of the Division.</value>
         public AttrList Attrs = new AttrList();
@@ -15,7 +15,7 @@ namespace Impart
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
-        ExtAttrList Element.ExtAttrs
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
@@ -25,15 +25,15 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
                 return _IOID;
             }
         }
-        internal List<StyleElement> _StyleElements = new List<StyleElement>();
-        private List<Element> _Elements = new List<Element>();
+        internal List<IStyleElement> _StyleElements = new List<IStyleElement>();
+        private List<IElement> _Elements = new List<IElement>();
         private bool Changed = true;
         private string Render = "";
 
@@ -157,7 +157,7 @@ namespace Impart
                 default:
                     throw new ImpartError("Invalid axis!");
             }
-            _StyleElements.Add(new DivisionScrollbar(scrollbar, _IOID.ToString(), ((StyleElement)(scrollbar)).IOID));
+            _StyleElements.Add(new DivisionScrollbar(scrollbar, _IOID.ToString(), ((IStyleElement)(scrollbar)).IOID));
             Changed = true;
             return this;
         }
@@ -190,7 +190,7 @@ namespace Impart
                 result.Append(ExtAttr);
             }
             result.Append('>');
-            foreach (Element e in _Elements)
+            foreach (IElement e in _Elements)
             {
                 result.Append(e);
             }
@@ -198,8 +198,8 @@ namespace Impart
             return Render;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             Division result = new Division();
             result.Attrs = Attrs;
@@ -211,8 +211,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        public Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        public IElement Clone()
         {
             Division result = new Division();
             result.Attrs = Attrs;
@@ -224,13 +224,13 @@ namespace Impart
             return result;
         }
 
-        string Nested.First()
+        string INested.First()
         {
             string result = ToString();
             return result.Remove(result.Length - 6);
         }
 
-        string Nested.Last()
+        string INested.Last()
         {
             return "</div>";
         }

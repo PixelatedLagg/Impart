@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Scrollbar style element.</summary>
-    public class Scrollbar : StyleElement
+    public class Scrollbar : IStyleElement
     {
         internal Axis Axis;
         internal Length Width;
@@ -13,7 +13,7 @@ namespace Impart
         internal Length Radius = null;
 
         /// <value>The ID value of the Scrollbar. (always returns null)</value>
-        string StyleElement.ID
+        string IStyleElement.ID
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int StyleElement.IOID
+        int IStyleElement.IOID
         {
             get
             {

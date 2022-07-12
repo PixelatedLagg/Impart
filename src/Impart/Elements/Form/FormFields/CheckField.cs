@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Checkbox input for Form.</summary>
-    public sealed class CheckField : FormField
+    public sealed class CheckField : IFormField
     {
         /// <value>The Attr values of the SubmitField.</value>
         public AttrList Attrs = new AttrList();

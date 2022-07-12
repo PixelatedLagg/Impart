@@ -6,10 +6,10 @@ namespace Impart
     /// <summary>A header row of a Table.</summary>
     public class TableHeader : TableRow
     {
-        private List<Element> _Elements = new List<Element>();
+        private List<IElement> _Elements = new List<IElement>();
 
-        /// <value>The Element values of the TableHeader.</value>
-        public new Element[] Elements
+        /// <value>The IElement values of the TableHeader.</value>
+        public new IElement[] Elements
         {
             get
             {
@@ -26,15 +26,15 @@ namespace Impart
         private string Render = "";
 
         /// <summary>Creates a TableHeader instance.</summary>
-        /// <param name="elements">The Elements to add.</param>
-        public TableHeader(params Element[] elements)
+        /// <param name="elements">The IElements to add.</param>
+        public TableHeader(params IElement[] elements)
         {
             _Elements.AddRange(elements);
         }
 
-        /// <summary>Add Elements to the TableHeader.</summary>
-        /// <param name="elements">The Elements to add.</param>
-        public new TableHeader AddRow(params Element[] elements)
+        /// <summary>Add IElements to the TableHeader.</summary>
+        /// <param name="elements">The IElements to add.</param>
+        public new TableHeader AddRow(params IElement[] elements)
         {
             _Elements.AddRange(elements);
             Changed = true;
@@ -66,7 +66,7 @@ namespace Impart
                 result.Append(ExtAttr);
             }
             result.Append('>');
-            foreach (Element element in _Elements)
+            foreach (IElement element in _Elements)
             {
                 result.Append($"<th>{element}</th>");
             }

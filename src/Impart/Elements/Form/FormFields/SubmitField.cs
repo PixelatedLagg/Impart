@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Submit button for Form.</summary>
-    public sealed class SubmitField : FormField
+    public sealed class SubmitField : IFormField
     {
         /// <value>The Attr values of the SubmitField.</value>
         public AttrList Attrs = new AttrList();

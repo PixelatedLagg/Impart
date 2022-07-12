@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Table element.</summary>
-    public class Table : Element
+    public class Table : IElement
     {
         private List<TableRow> _Rows = new List<TableRow>();
 
@@ -25,7 +25,7 @@ namespace Impart
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
-        ExtAttrList Element.ExtAttrs
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
@@ -35,7 +35,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
@@ -94,8 +94,8 @@ namespace Impart
             return Render;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             Table result = new Table();
             result.Attrs = Attrs;
@@ -106,8 +106,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        public Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        public IElement Clone()
         {
             Table result = new Table();
             result.Attrs = Attrs;

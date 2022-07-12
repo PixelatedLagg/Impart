@@ -21,10 +21,10 @@ namespace Impart
                 _ID = value;
             }
         }
-        private List<Element> _Elements = new List<Element>();
+        private List<IElement> _Elements = new List<IElement>();
 
-        /// <value>The Element values of the TableRow.</value>
-        public Element[] Elements
+        /// <value>The IElements values of the TableRow.</value>
+        public IElement[] Elements
         {
             get
             {
@@ -41,15 +41,15 @@ namespace Impart
         private string Render = "";
 
         /// <summary>Creates a TableRow instance.</summary>
-        /// <param name="elements">The Elements to add.</param>
-        public TableRow(params Element[] elements)
+        /// <param name="elements">The IElements to add.</param>
+        public TableRow(params IElement[] elements)
         {
             _Elements.AddRange(elements);
         }
 
-        /// <summary>Add Elements to the TableRow.</summary>
-        /// <param name="elements">The Elements to add.</param>
-        public TableRow AddRow(params Element[] elements)
+        /// <summary>Add IElements to the TableRow.</summary>
+        /// <param name="elements">The IElements to add.</param>
+        public TableRow AddRow(params IElement[] elements)
         {
             _Elements.AddRange(elements);
             Changed = true;
@@ -81,7 +81,7 @@ namespace Impart
                 result.Append(ExtAttr);
             }
             result.Append('>');
-            foreach (Element element in _Elements)
+            foreach (IElement element in _Elements)
             {
                 result.Append($"<td>{element}</td>");
             }

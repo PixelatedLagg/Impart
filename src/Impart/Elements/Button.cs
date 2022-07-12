@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Button element.</summary>
-    public struct Button : Element, Nested
+    public struct Button : IElement, INested
     {
         private Text _Text;
 
@@ -29,7 +29,7 @@ namespace Impart
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
-        ExtAttrList Element.ExtAttrs
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
@@ -39,7 +39,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
@@ -87,8 +87,8 @@ namespace Impart
             return Render;
         }
         
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             Button result = new Button();
             result.Attrs = Attrs;
@@ -99,8 +99,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        public Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        public IElement Clone()
         {
             Button result = new Button();
             result.Attrs = Attrs;
@@ -111,13 +111,13 @@ namespace Impart
             return result;
         }
 
-        string Nested.First()
+        string INested.First()
         {
             string result = ToString();
             return result.Remove(result.Length - 9);
         }
 
-        string Nested.Last()
+        string INested.Last()
         {
             return "</button>";
         }

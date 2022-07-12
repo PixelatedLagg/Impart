@@ -5,7 +5,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Link element.</summary>
-    public struct Link : Element, Nested
+    public struct Link : IElement, INested
     {
         private Text _Text = new Text();
 
@@ -50,7 +50,7 @@ namespace Impart
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
-        ExtAttrList Element.ExtAttrs
+        ExtAttrList IElement.ExtAttrs
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Impart
         private int _IOID = Ioid.Generate();
 
         /// <value>The internal ID of the instance.</value>
-        int Element.IOID
+        int IElement.IOID
         {
             get
             {
@@ -156,8 +156,8 @@ namespace Impart
             return Render;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        Element Element.Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
             Link result = new Link();
             result._Image = _Image;
@@ -170,8 +170,8 @@ namespace Impart
             return result;
         }
 
-        /// <summary>Clones the Element instance (including the internal ID).</summary>
-        public Element Clone()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        public IElement Clone()
         {
             Link result = new Link();
             result._Image = _Image;
@@ -184,7 +184,7 @@ namespace Impart
             return result;
         }
         
-        string Nested.First()
+        string INested.First()
         {
             string result = ToString();
             if (_LinkType == typeof(Image))
@@ -193,11 +193,11 @@ namespace Impart
             }
             else
             {
-                return result.Remove(result.Length - ($"{((Nested)_Text).Last()}</a>".Length));
+                return result.Remove(result.Length - ($"{((INested)_Text).Last()}</a>".Length));
             }
         }
 
-        string Nested.Last()
+        string INested.Last()
         {
             if (_LinkType == typeof(Image))
             {
@@ -205,7 +205,7 @@ namespace Impart
             }
             else
             {
-                return $"{((Nested)_Text).Last()}</a>";
+                return $"{((INested)_Text).Last()}</a>";
             }
         }
     }
