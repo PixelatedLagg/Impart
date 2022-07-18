@@ -42,20 +42,18 @@ namespace Impart
         /// <param name="id">The ID.</param>
         public Style(string id)
         {
-            if (String.IsNullOrEmpty(id))
-            {
-                throw new ImpartError("ID cannot be null!");
-            }
             _ID = id;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed)
+            if (!Changed && !Attrs.Changed)
             {
                 return Render;
             }
+            Changed = false;
+            Attrs.Changed = false;
             StringBuilder result = new StringBuilder($"{_ID} {{");
             foreach (Attr attribute in Attrs)
             {
