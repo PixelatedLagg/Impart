@@ -58,6 +58,9 @@ namespace Impart
 
         /// <value>The Attribute values of the WebPage.</value>
         public AttrList Attrs = new AttrList();
+
+        /// <value>The Font values of the WebPage.</value>
+        public FontList Fonts = new FontList();
         internal Script _Script = new Script("");
         private List<IElement> _Elements = new List<IElement>();
         private List<IStyleElement> _StyleElements = new List<IStyleElement>();
@@ -371,6 +374,10 @@ namespace Impart
                 result.Append($"<link type=\"text/css\" rel=\"stylesheet\" href=\"{url}\">");
             }
             result.Append($"<meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style>");
+            foreach (Font font in Fonts)
+            {
+                result.Append($"@font-face {{{font}}}");
+            }
             foreach (string style in _Styles)
             {
                 result.Append(style);
