@@ -1,0 +1,2841 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Impart</name>
+    </assembly>
+    <members>
+        <member name="T:Impart.Api.Rest">
+            <summary>The class for hosting a REST API.</summary>
+        </member>
+        <member name="P:Impart.Api.Rest.Port">
+            <value>The value of the localhost port the API is being hosted on.</value>
+        </member>
+        <member name="F:Impart.Api.Rest.Error">
+            <value>The method to be called in the event of an error.</value>
+        </member>
+        <member name="M:Impart.Api.Rest.#ctor(System.Int32)">
+            <summary>Creates a Rest instance with <paramref name="port"/> as the port.</summary>
+            <param name="port">The port to host on. (Default is 8080)</param>
+        </member>
+        <member name="M:Impart.Api.Rest.Start">
+            <summary>Start the Rest API.</summary>
+        </member>
+        <member name="M:Impart.Api.Rest.Stop">
+            <summary>Stop the Rest API.</summary>
+        </member>
+        <member name="T:Impart.Api.Rest.RestRequest">
+            <summary>Attribute to hook Rest routes to methods.</summary>
+        </member>
+        <member name="P:Impart.Api.Rest.RestRequest.Route">
+            <value>The Rest route.</value>
+        </member>
+        <member name="M:Impart.Api.Rest.RestRequest.#ctor(System.String)">
+            <summary>Creates a RestRequest instance.</summary>
+            <param name="route">The route to hook the method to.</param>
+        </member>
+        <member name="T:Impart.Api.Soap">
+            <summary>The class for hosting a SOAP API.</summary>
+        </member>
+        <member name="P:Impart.Api.Soap.Port">
+            <value>The value of the localhost port the API is being hosted on.</value>
+        </member>
+        <member name="F:Impart.Api.Soap.Error">
+            <value>The method to be called in the event of an error.</value>
+        </member>
+        <member name="M:Impart.Api.Soap.#ctor(System.Int32)">
+            <summary>Creates a Soap instance.</summary>
+            <param name="port">The port to host on. (Default is 7070)</param>
+        </member>
+        <member name="M:Impart.Api.Soap.Start">
+            <summary>Start the Soap API.</summary>
+        </member>
+        <member name="M:Impart.Api.Soap.Stop">
+            <summary>Stop the Soap API.</summary>
+        </member>
+        <member name="T:Impart.Api.Soap.SoapRequest">
+            <summary>Attribute to hook Soap routes to methods.</summary>
+        </member>
+        <member name="P:Impart.Api.Soap.SoapRequest.Route">
+            <value>The Soap route.</value>
+        </member>
+        <member name="M:Impart.Api.Soap.SoapRequest.#ctor(System.String)">
+            <summary>Creates a SoapRequest instance.</summary>
+            <param name="route">The route to hook the method to.</param>
+        </member>
+        <member name="T:Impart.Api.ErrorContext">
+            <summary>Information about an error from an API.</summary>
+        </member>
+        <member name="P:Impart.Api.ErrorContext.Type">
+            <value>The error type.</value>
+        </member>
+        <member name="M:Impart.Api.ErrorContext.#ctor(System.Net.Sockets.Socket,Impart.Api.ErrorType)">
+            <summary>Creates an ErrorContext instance.</summary>
+            <param name="socket">The Socket handling the API.</param>
+            <param name="type">The ErrorType.</param>
+        </member>
+        <member name="M:Impart.Api.ErrorContext.Respond(System.String)">
+            <summary>Respond to the context.</summary>
+            <param name="response">The response.</param>
+        </member>
+        <member name="T:Impart.Api.RestContext">
+            <summary>Information about a RestContext.</summary>
+        </member>
+        <member name="M:Impart.Api.RestContext.#ctor(System.Net.Sockets.Socket)">
+            <summary>Creates an RestContext instance.</summary>
+            <param name="socket">The Socket handling the API.</param>
+        </member>
+        <member name="M:Impart.Api.RestContext.Respond(System.String)">
+            <summary>Respond to the context.</summary>
+            <param name="response">The JSON response.</param>
+        </member>
+        <member name="T:Impart.Api.SoapContext">
+            <summary>Information about a SoapContext.</summary>
+        </member>
+        <member name="M:Impart.Api.SoapContext.#ctor(System.Net.Sockets.Socket)">
+            <summary>Creates an SoapContext instance.</summary>
+            <param name="socket">The Socket handling the API.</param>
+        </member>
+        <member name="M:Impart.Api.SoapContext.Respond(System.String)">
+            <summary>Respond to the context.</summary>
+            <param name="response">The XML response.</param>
+        </member>
+        <member name="T:Impart.Api.APIEventArgs">
+            <summary>Information about current API event.</summary>
+        </member>
+        <member name="F:Impart.Api.APIEventArgs.Request">
+            <value>The type of request that was sent.</value>
+        </member>
+        <member name="F:Impart.Api.APIEventArgs.Time">
+            <value>The time the request was sent.</value>
+        </member>
+        <member name="M:Impart.Api.APIEventArgs.#ctor(Impart.Api.RequestType)">
+            <summary>Creates an APIEventArgs instance with <paramref name="request"/> as the request type.</summary>
+            <param name="request">The request type.</param>
+        </member>
+        <member name="T:Impart.Api.ErrorType">
+            <summary>All of the API server-side error types.</summary>
+        </member>
+        <member name="F:Impart.Api.ErrorType.BadRequest">
+            <value>BadRequest error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.Unauthorized">
+            <value>Unauthorized error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.PaymentRequired">
+            <value>PaymentRequired error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.Forbidden">
+            <value>Forbidden error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.NotFound">
+            <value>NotFound error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.MethodNotAllowed">
+            <value>MethodNotAllowed error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.NotAcceptable">
+            <value>NotAcceptable error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.ProxyAuthenticationRequired">
+            <value>ProxyAuthenticationRequired error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.RequestTimeout">
+            <value>RequestTimeout error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.Conflict">
+            <value>Conflict error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.Gone">
+            <value>Gone error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.LengthRequest">
+            <value>LengthRequest error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.PreconditionFailed">
+            <value>PreconditionFailed error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.PayloadTooLarge">
+            <value>PayloadTooLarge error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.URITooLong">
+            <value>URITooLong error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.UnsupportedMediaType">
+            <value>UnsupportedMediaType error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.RangeNotSatisfiable">
+            <value>RangeNotSatisfiable error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.ExpectationFailed">
+            <value>ExpectationFailed error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.MisdirectedRequest">
+            <value>MisdirectedRequest error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.UnprocessableEntity">
+            <value>UnprocessableEntity error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.Locked">
+            <value>Locked error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.FailedDependency">
+            <value>FailedDependency error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.TooEarly">
+            <value>TooEarly error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.UpgradeRequired">
+            <value>UpgradeRequired error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.PreconditionRequired">
+            <value>PreconditionRequired error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.TooManyRequests">
+            <value>TooManyRequests error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.RequestHeaderFieldsTooLarge">
+            <value>RequestHeaderFieldsTooLarge error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.UnavailableForLegalReasons">
+            <value>UnavailableForLegalReasons error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.InternalServerError">
+            <value>InternalServerError error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.NotImplemented">
+            <value>NotImplemented error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.BadGateway">
+            <value>BadGateway error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.ServiceUnavailable">
+            <value>ServiceUnavailable error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.GatewayTimeout">
+            <value>GatewayTimeout error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.HTTPVersionNotSupported">
+            <value>HTTPVersionNotSupported error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.VariantAlsoNegotiates">
+            <value>VariantAlsoNegotiates error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.InsufficientStorage">
+            <value>InsufficientStorage error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.LoopDetected">
+            <value>LoopDetected error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.NotExtended">
+            <value>NotExtended error.</value>
+        </member>
+        <member name="F:Impart.Api.ErrorType.NetworkAuthenticationRequired">
+            <value>NetworkAuthenticationRequired error.</value>
+        </member>
+        <member name="T:Impart.Api.RequestType">
+            <summary>All of the request types.</summary>
+        </member>
+        <member name="F:Impart.Api.RequestType.Get">
+            <value>GET HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Push">
+            <value>PUSH HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Put">
+            <value>PUT HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Delete">
+            <value>DELETE HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Head">
+            <value>HEAD HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Connect">
+            <value>CONNECT HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Options">
+            <value>OPTIONS HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Trace">
+            <value>TRACE HTTP request.</value>
+        </member>
+        <member name="F:Impart.Api.RequestType.Patch">
+            <value>PATCH HTTP request.</value>
+        </member>
+        <member name="T:Impart.Data.Color">
+            <summary>The class for generating random colors.</summary>
+        </member>
+        <member name="M:Impart.Data.Color.Rgb">
+            <summary>Generates a random Rgb value.</summary>
+        </member>
+        <member name="M:Impart.Data.Color.Rgbs(System.Int32)">
+            <summary>Generates a random Rgb value array with <paramref name="number"/> as the number of elements in the array.</summary>
+            <param name="number">The number of elements in the array.</param>
+        </member>
+        <member name="M:Impart.Data.Color.Hsl">
+            <summary>Generates a random Hsl value.</summary>
+        </member>
+        <member name="M:Impart.Data.Color.Hsls(System.Int32)">
+            <summary>Generates a random Hsl value array with <paramref name="number"/> as the number of elements in the array.</summary>
+            <param name="number">The number of elements in the array.</param>
+        </member>
+        <member name="M:Impart.Data.Color.Hex">
+            <summary>Generates a random Hex value.</summary>
+        </member>
+        <member name="M:Impart.Data.Color.Hexes(System.Int32)">
+            <summary>Generates a random Hex value array with <paramref name="number"/> as the number of elements in the array.</summary>
+            <param name="number">The number of elements in the array.</param>
+        </member>
+        <member name="T:Impart.Data.Letter">
+            <summary>Randomly generate a letter.</summary>
+        </member>
+        <member name="M:Impart.Data.Letter.Alphabet(System.Nullable{System.Boolean})">
+            <summary>Randomly generate an alphabetical character.</summary>
+            <param name="type">Whether to generate an uppercase or lowercase letter. Null: uppercase and lowercase</param>
+        </member>
+        <member name="M:Impart.Data.Letter.Number">
+            <summary>Randomly generate an numerical character.</summary>
+        </member>
+        <member name="M:Impart.Data.Letter.Special">
+            <summary>Randomly generate a special character.</summary>
+        </member>
+        <member name="M:Impart.Data.Letter.Any">
+            <summary>Randomly generate any character.</summary>
+        </member>
+        <member name="T:Impart.Data.Letter.Types">
+            <summary>All character types.</summary>
+        </member>
+        <member name="F:Impart.Data.Letter.Types.Any">
+            <value>Any character.</value>
+        </member>
+        <member name="F:Impart.Data.Letter.Types.Special">
+            <value>Special character.</value>
+        </member>
+        <member name="F:Impart.Data.Letter.Types.Number">
+            <value>Number character.</value>
+        </member>
+        <member name="F:Impart.Data.Letter.Types.Alphabet">
+            <value>Alphabet character.</value>
+        </member>
+        <member name="T:Impart.Data.Number">
+            <summary>Randomly generate a number.</summary>
+        </member>
+        <member name="M:Impart.Data.Number.Range(System.Int64,System.Int64)">
+            <summary>Generate a number in a specific range.</summary>
+            <param name="min">The minimum number to generate.</param>
+            <param name="max">The maximum number to generate.</param>
+        </member>
+        <member name="M:Impart.Data.Number.Length(System.Int32)">
+            <summary>Generate a number with the specified length.</summary>
+            <param name="length">The length of the number to generate.</param>
+        </member>
+        <member name="T:Impart.Data.Word">
+            <summary>Randomly generate a word.</summary>
+        </member>
+        <member name="M:Impart.Data.Word.Length(System.Int32,Impart.Data.Letter.Types)">
+            <summary>Generate a word with the specified length.</summary>
+            <param name="length">The length of the word to generate.</param>
+            <param name="type">The type of letters to include in the word. (Default is every letter.)</param>
+        </member>
+        <member name="T:Impart.Internal.DivisionScrollbar">
+            <summary>Scrollbar for Division that Impart automatically generates when using a Scrollbar with a Division.</summary>
+        </member>
+        <member name="P:Impart.Internal.DivisionScrollbar.Impart#IStyleElement#ID">
+            <value>The ID value of the DivisionScrollbar. (always returns null)</value>
+        </member>
+        <member name="P:Impart.Internal.DivisionScrollbar.Impart#IStyleElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Internal.DivisionScrollbar.#ctor(Impart.Scrollbar,System.String,System.Int32)">
+            <summary>Creates a DivisionScrollbar instance.</summary>
+            <param name="scrollbar">The Scrollbar to use.</param>
+            <param name="id">The Division ID.</param>
+            <param name=" ioid">The Scrollbar IOID.</param>
+        </member>
+        <member name="M:Impart.Internal.DivisionScrollbar.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Internal.ObjectExtensions">
+            <summary>Extensions for Objects.</summary>
+        </member>
+        <member name="M:Impart.Internal.ObjectExtensions.IsNumber(System.Object)">
+            <summary>Check if an Object is a number.</summary>
+            <param name="o">The Object to check.</param>
+        </member>
+        <member name="T:Impart.Internal.IFormField">
+            <summary>Form field interface.</summary>
+        </member>
+        <member name="T:Impart.Internal.INested">
+            <summary>Elements that can be nested.</summary>
+        </member>
+        <member name="M:Impart.Internal.INested.First">
+            <summary>The first tag of an Element with the contents.</summary>
+        </member>
+        <member name="M:Impart.Internal.INested.Last">
+            <summary>The last tag of an Element.</summary>
+        </member>
+        <member name="T:Impart.Internal.Ioid">
+            <summary>Impart Object ID.</summary>
+        </member>
+        <member name="M:Impart.Internal.Ioid.Generate">
+            <summary>Generate and return a new IOID.</summary>
+        </member>
+        <member name="M:Impart.Internal.Ioid.GenerateOtherUnique">
+            <summary>Generate and return a new IOID for multiple uses with a single instance.</summary>
+        </member>
+        <member name="T:Impart.Scripting.ClickEventArgs">
+            <summary>The event arguments passed when the user clicks.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ClickEventArgs.click">
+            <summary>The click type.</summary>
+        </member>
+        <member name="M:Impart.Scripting.ClickEventArgs.#ctor(Impart.Scripting.Click)">
+            <summary>Create a ClickEventArgs instance.</summary>
+            <returns>A ClickEventArgs instance.</returns>
+            <param name="click">The click type.</param>
+        </member>
+        <member name="T:Impart.Scripting.KeyEventArgs">
+            <summary>The event arguments passed when the user hits a key.</summary>
+        </member>
+        <member name="F:Impart.Scripting.KeyEventArgs.key">
+            <summary>The key type.</summary>
+        </member>
+        <member name="M:Impart.Scripting.KeyEventArgs.#ctor(Impart.Scripting.Key)">
+            <summary>Create a KeyEventArgs instance.</summary>
+            <returns>A KeyEventArgs instance.</returns>
+            <param name="key">The key type.</param>
+        </member>
+        <member name="T:Impart.Scripting.WebsiteEventArgs">
+            <summary>The event arguments passed for all main website events.</summary>
+        </member>
+        <member name="F:Impart.Scripting.WebsiteEventArgs.platform">
+            <summary>The platform type.</summary>
+        </member>
+        <member name="F:Impart.Scripting.WebsiteEventArgs.mobile">
+            <summary>Bool representing if the user is on a mobile device.</summary>
+        </member>
+        <member name="F:Impart.Scripting.WebsiteEventArgs.browsers">
+            <summary>List of all browsers the server is sent. (Out of the three sent, one usually the main, and another what the main is based on.)</summary>
+        </member>
+        <member name="M:Impart.Scripting.WebsiteEventArgs.#ctor(Impart.Scripting.Platform,System.Collections.Generic.List{System.ValueTuple{Impart.Scripting.Browser,System.Int32}},System.Boolean)">
+            <summary>Create a WebsiteEventArgs instance.</summary>
+            <returns>A WebsiteEventArgs instance.</returns>
+            <param name="platform">The platform type.</param>
+            <param name="browsers">List of all browsers.</param>
+            <param name="mobile">Bool representing if the user is on a mobile device.</param>
+        </member>
+        <member name="T:Impart.Scripting.Browser">
+            <summary>All browser types.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Chrome">
+            <value>Chrome browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Chromium">
+            <value>Chromium browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Opera">
+            <value>Opera browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Safari">
+            <value>Safari browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Firefox">
+            <value>Firefox browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.IE">
+            <value>IE browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Netscape">
+            <value>Netscape browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Edge">
+            <value>Edge browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Brave">
+            <value>Brave browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Vivaldi">
+            <value>Vivaldi browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Torch">
+            <value>Torch browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Maxthon">
+            <value>Maxthon browser.</value>
+        </member>
+        <member name="F:Impart.Scripting.Browser.NotBrand">
+            <value>Not a brand browser.</value>
+        </member>
+        <member name="T:Impart.Scripting.Click">
+            <summary>All click types.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Click.Left">
+            <value>Left mouse click.</value>
+        </member>
+        <member name="F:Impart.Scripting.Click.Right">
+            <value>Right mouse click.</value>
+        </member>
+        <member name="F:Impart.Scripting.Click.Middle">
+            <value>Middle (scroll) mouse click.</value>
+        </member>
+        <member name="T:Impart.Scripting.Key">
+            <summary>All key types.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Key.A">
+            <value>A key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.B">
+            <value>B key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.C">
+            <value>C key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.D">
+            <value>D key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.E">
+            <value>E key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F">
+            <value>F key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.G">
+            <value>G key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.H">
+            <value>H key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.I">
+            <value>I key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.J">
+            <value>J key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.K">
+            <value>K key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.L">
+            <value>L key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.M">
+            <value>M key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N">
+            <value>N key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.O">
+            <value>O key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.P">
+            <value>P key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Q">
+            <value>Q key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.R">
+            <value>R key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.S">
+            <value>S key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.T">
+            <value>T key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.U">
+            <value>U key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.V">
+            <value>V key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.W">
+            <value>W key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.X">
+            <value>X key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Y">
+            <value>Y key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Z">
+            <value>Z key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Tab">
+            <value>Tab key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Enter">
+            <value>Enter key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Shift">
+            <value>Shift key (either left or right).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Backspace">
+            <value>Backspace key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.CTRL">
+            <value>CTRL key (either left or right).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.ALT">
+            <value>ALT key (either left or right).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Escape">
+            <value>Escape key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Space">
+            <value>Space key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N1">
+            <value>Number 1 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N2">
+            <value>Number 2 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N3">
+            <value>Number 3 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N4">
+            <value>Number 4 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N5">
+            <value>Number 5 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N6">
+            <value>Number 6 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N7">
+            <value>Number 7 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N8">
+            <value>Number 8 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N9">
+            <value>Number 9 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.N0">
+            <value>Number 0 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F1">
+            <value>F1 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F2">
+            <value>F2 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F3">
+            <value>F3 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F4">
+            <value>F4 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F5">
+            <value>F5 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F6">
+            <value>F6 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F7">
+            <value>F7 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F8">
+            <value>F8 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F9">
+            <value>F9 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F10">
+            <value>F10 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F11">
+            <value>F11 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.F12">
+            <value>F12 key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.DEL">
+            <value>DEL key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.END">
+            <value>END key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.INS">
+            <value>INS key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.HOME">
+            <value>HOME key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.PRTSC">
+            <value>PRTSC key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.SCRLK">
+            <value>SCRLK key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.PAUSE">
+            <value>PAUSE key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.PGUP">
+            <value>PGUP key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.PGDN">
+            <value>PGDN key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.FN">
+            <value>FN key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.CapsLock">
+            <value>Caps lock key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.LeftSlash">
+            <value>Left slash key ( \ ).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.RightSlash">
+            <value>Right slash key ( / ).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.LeftBrace">
+            <value>Left brace key ( [ ).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.RightBrace">
+            <value>Right brace key ( ] ).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Minus">
+            <value>Minus key ( - ).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Equals">
+            <value>Equals key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.Backtick">
+            <value>Backtick key ( ` ).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.SingleQuote">
+            <value>Single quote key ( ' ).</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.SemiColon">
+            <value>Semicolon key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.UpArrow">
+            <value>Up arrow key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.DownArrow">
+            <value>Down arrow key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.LeftArrow">
+            <value>Left arrow key.</value>
+        </member>
+        <member name="F:Impart.Scripting.Key.RightArrow">
+            <value>Right arrow key.</value>
+        </member>
+        <member name="T:Impart.Scripting.Platform">
+            <summary>All platform types.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Platform.Windows">
+            <value>Windows operating system.</value>
+        </member>
+        <member name="F:Impart.Scripting.Platform.Linux">
+            <value>Linux operating system.</value>
+        </member>
+        <member name="F:Impart.Scripting.Platform.Mac">
+            <value>Mac operating system.</value>
+        </member>
+        <member name="F:Impart.Scripting.Platform.Chrome">
+            <value>Chrome operating system.</value>
+        </member>
+        <member name="F:Impart.Scripting.Platform.IOS">
+            <value>IOS operating system.</value>
+        </member>
+        <member name="F:Impart.Scripting.Platform.Android">
+            <value>Android operating system.</value>
+        </member>
+        <member name="F:Impart.Scripting.Platform.Unknown">
+            <value>Unknown operating system.</value>
+        </member>
+        <member name="T:Impart.Scripting.WebPageScripting">
+            <summary>Interactive scripting for WebPage.</summary>
+        </member>
+        <member name="M:Impart.Scripting.WebPageScripting.AddKeyEvent(Impart.WebPage,Impart.Scripting.Key)">
+            <summary>Add a Key event listener to the WebPage instance.</summary>
+            <param name="webPage">The WebPage to add the event listener to.</param>
+            <param name="key">The Key to add an event listener for.</param>
+        </member>
+        <member name="M:Impart.Scripting.WebPageScripting.AddClickEvent(Impart.WebPage,Impart.Scripting.Click)">
+            <summary>Add a Click event listener to the WebPage instance.</summary>
+            <param name="webPage">The WebPage to add the event listener to.</param>
+            <param name="click">The Click to add an event listener for.</param>
+        </member>
+        <member name="T:Impart.Attr">
+            <summary>An element attribute.</summary>
+        </member>
+        <member name="P:Impart.Attr.Type">
+            <Value>The AttrType.</Value>
+        </member>
+        <member name="P:Impart.Attr.Value">
+            <Value>The Attr value(s).</Value>
+        </member>
+        <member name="M:Impart.Attr.#ctor(Impart.AttrType,System.Object[])">
+            <summary>Creates an Attr instance.</summary>
+            <param name="type">The AttrType.</param>
+            <param name="value">The Attr value(s).</param>
+        </member>
+        <member name="M:Impart.Attr.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.AttrList">
+            <summary>Store a list of Attrs.</summary>
+        </member>
+        <member name="M:Impart.AttrList.#ctor">
+            <summary>Creates an AttrList instance.</summary>
+        </member>
+        <member name="P:Impart.AttrList.Item(Impart.AttrType)">
+            <summary>Return an Attr from the AttrList based on the AttrType.</summary>
+        </member>
+        <member name="M:Impart.AttrList.Add(Impart.Attr)">
+            <summary>Add an Attr to the AttrList.</summary>
+            <param name="attribute">The Attr to add.</param>
+        </member>
+        <member name="M:Impart.AttrList.Add(Impart.AttrType,System.Object[])">
+            <summary>Add an Attr to the AttrList.</summary>
+            <param name="type">The AttrType to add.</param>
+            <param name="args">The Attr value(s).</param>
+        </member>
+        <member name="M:Impart.AttrList.Clear">
+            <summary>Remove all Attrs from the AttrList.</summary>
+        </member>
+        <member name="M:Impart.AttrList.AddRange(System.Collections.Generic.IEnumerable{Impart.Attr})">
+            <summary>Add multiple Attrs to the AttrList.</summary>
+            <param name="attributes">The Attrs to add.</param>
+        </member>
+        <member name="M:Impart.AttrList.Insert(System.Int32,Impart.Attr)">
+            <summary>Add an Attr to the AttrList at the specified index.</summary>
+            <param name="index">The index to add the Attr at.</param>
+            <param name="attribute">The Attr to add.</param>
+        </member>
+        <member name="M:Impart.AttrList.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{Impart.Attr})">
+            <summary>Add multiple Attrs to the AttrList at the specified index.</summary>
+            <param name="index">The index to add the Attrs at.</param>
+            <param name="attributes">The Attrs to add.</param>
+        </member>
+        <member name="M:Impart.AttrList.Remove(Impart.Attr)">
+            <summary>Remove an Attr from the AttrList.</summary>
+            <param name="attribute">The Attr to remove.</param>
+        </member>
+        <member name="M:Impart.AttrList.RemoveAll(System.Predicate{Impart.Attr})">
+            <summary>Remove all Attrs that meet specific conditions from the AttrList.</summary>
+            <param name="conditions">The Attr conditions.</param>
+        </member>
+        <member name="M:Impart.AttrList.RemoveAt(System.Int32)">
+            <summary>Remove an Attr from the AttrList at the specified index.</summary>
+            <param name="index">The index to remove the Attr at.</param>
+        </member>
+        <member name="M:Impart.AttrList.RemoveRange(System.Int32,System.Int32)">
+            <summary>Remove multiple Attrs from the AttrList at the specified index.</summary>
+            <param name="index">The index to remove the Attrs at.</param>
+            <param name="count">The number of Attrs to remove after the index.</param>
+        </member>
+        <member name="T:Impart.AttrType">
+            <summary>All the Attribute types.</summary>
+        </member>
+        <member name="F:Impart.AttrType.BackgroundColor">
+            <value>Background color attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.ForegroundColor">
+            <value>Foreground color attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Alignment">
+            <value>Alignment attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.FontFamily">
+            <value>Font family attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.FontSize">
+            <value>Font size attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Margin">
+            <value>Margin attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Padding">
+            <value>Padding attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Width">
+            <value>Width attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Height">
+            <value>Height attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Border">
+            <value>Border attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.OverflowX">
+            <value>X-axis scrollbar overflow attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.OverflowY">
+            <value>Y-axis scrollbar overflow attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.AlignText">
+            <value>Text alignment attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Animation">
+            <value>Animation attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.Background">
+            <value>Background attribute.</value>
+        </member>
+        <member name="F:Impart.AttrType.CustomFont">
+            <value>Custom font attribute.</value>
+        </member>
+        <member name="T:Impart.ExtAttr">
+            <summary>An element external attribute.</summary>
+        </member>
+        <member name="F:Impart.ExtAttr.Type">
+            <Value>The ExtAttrType.</Value>
+        </member>
+        <member name="F:Impart.ExtAttr.Value">
+            <Value>The ExtAttr value.</Value>
+        </member>
+        <member name="M:Impart.ExtAttr.#ctor(Impart.ExtAttrType,System.String)">
+            <summary>Creates an ExtAttr instance.</summary>
+            <param name="type">The ExtAttrType.</param>
+            <param name="value">The ExtAttr value.</param>
+        </member>
+        <member name="M:Impart.ExtAttr.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.ExtAttrList">
+            <summary>Store a list of ExtAttrs.</summary>
+        </member>
+        <member name="M:Impart.ExtAttrList.#ctor">
+            <summary>Creates an ExtAttrList instance.</summary>
+        </member>
+        <member name="P:Impart.ExtAttrList.Item(Impart.ExtAttrType)">
+            <summary>Return an ExtAttr from the ExtAttrList based on the ExtAttrType.</summary>
+        </member>
+        <member name="M:Impart.ExtAttrList.Add(Impart.ExtAttr)">
+            <summary>Add an ExtAttr to the ExtAttrList.</summary>
+            <param name="attribute">The ExtAttr to add.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.Add(Impart.ExtAttrType,System.String)">
+            <summary>Add an ExtAttr to the ExtAttrList.</summary>
+            <param name="type">The ExtAttrType to add.</param>
+            <param name="value">The ExtAttr value.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.Clear">
+            <summary>Remove all ExtAttrs from the ExtAttrList.</summary>
+        </member>
+        <member name="M:Impart.ExtAttrList.AddRange(System.Collections.Generic.IEnumerable{Impart.ExtAttr})">
+            <summary>Add multiple ExtAttrs to the ExtAttrList.</summary>
+            <param name="attributes">The ExtAttrs to add.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.Insert(System.Int32,Impart.ExtAttr)">
+            <summary>Add an ExtAttr to the ExtAttrList at the specified index.</summary>
+            <param name="index">The index to add the ExtAttr at.</param>
+            <param name="attribute">The ExtAttr to add.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{Impart.ExtAttr})">
+            <summary>Add multiple ExtAttrs to the ExtAttrList at the specified index.</summary>
+            <param name="index">The index to add the ExtAttrs at.</param>
+            <param name="attributes">The ExtAttrs to add.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.Remove(Impart.ExtAttr)">
+            <summary>Remove an ExtAttr from the ExtAttrList.</summary>
+            <param name="attribute">The ExtAttr to remove.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.RemoveAll(System.Predicate{Impart.ExtAttr})">
+            <summary>Remove all ExtAttrs that meet specific conditions from the ExtAttrList.</summary>
+            <param name="conditions">The ExtAttr conditions.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.RemoveAt(System.Int32)">
+            <summary>Remove an ExtAttr from the ExtAttrList at the specified index.</summary>
+            <param name="index">The index to remove the ExtAttr at.</param>
+        </member>
+        <member name="M:Impart.ExtAttrList.RemoveRange(System.Int32,System.Int32)">
+            <summary>Remove multiple ExtAttrs from the ExtAttrList at the specified index.</summary>
+            <param name="index">The index to remove the ExtAttrs at.</param>
+            <param name="count">The number of ExtAttrs to remove after the index.</param>
+        </member>
+        <member name="T:Impart.ExtAttrType">
+            <summary>All the ExtAttr types.</summary>
+        </member>
+        <member name="F:Impart.ExtAttrType.ID">
+            <value>ID external attribute.</value>
+        </member>
+        <member name="F:Impart.ExtAttrType.HoverMessage">
+            <value>Hover message external attribute.</value>
+        </member>
+        <member name="T:Impart.ImpartError">
+            <summary>The error class used by Impart.</summary>
+        </member>
+        <member name="M:Impart.ImpartError.#ctor(System.String)">
+            <summary>Throws an ImpartError.</summary>
+            <param name="error">The error message.</param>
+        </member>
+        <member name="T:Impart.Log">
+            <summary>The class for storing logs from Logger.</summary>
+        </member>
+        <member name="F:Impart.Log.Milliseconds">
+            <value>The duration of the action in milliseconds.</value>
+        </member>
+        <member name="F:Impart.Log.Message">
+            <value>The Log message.</value>
+        </member>
+        <member name="M:Impart.Log.#ctor(System.String,System.Double)">
+            <summary>Creates a Log instance.</summary>
+            <param name="message">The Log message</param>
+            <param name="milliseconds">The duration of the action in milliseconds.</param>
+        </member>
+        <member name="T:Impart.Logger">
+            <summary>The class for logging time in Impart.</summary>
+        </member>
+        <member name="E:Impart.Logger.Event">
+            <value>The method to be called when Logger ends.</value>
+        </member>
+        <member name="M:Impart.Logger.Start">
+            <summary>Start tracking time with Logger.</summary>
+        </member>
+        <member name="M:Impart.Logger.End(System.String)">
+            <summary>Stop tracking time with <paramref name="message"/> as the log message.</summary>
+            <param name="message">The log message.</param>
+        </member>
+        <member name="T:Impart.Button">
+            <summary>Button element.</summary>
+        </member>
+        <member name="P:Impart.Button.Text">
+            <value>The Text value of the Button.</value>
+        </member>
+        <member name="F:Impart.Button.Attrs">
+            <value>The Attr values of the Button.</value>
+        </member>
+        <member name="F:Impart.Button.ExtAttrs">
+            <value>The ExtAttr values of the Button.</value>
+        </member>
+        <member name="P:Impart.Button.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Button.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Button.#ctor">
+            <summary>Creates an empty Button instance.</summary>
+        </member>
+        <member name="M:Impart.Button.#ctor(Impart.Text)">
+            <summary>Creates a Button instance.</summary>
+            <param name="text">The Button text.</param>
+        </member>
+        <member name="M:Impart.Button.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Button.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Button.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.Division">
+            <summary>Division element.</summary>
+        </member>
+        <member name="F:Impart.Division.Attrs">
+            <value>The Attr values of the Division.</value>
+        </member>
+        <member name="F:Impart.Division.ExtAttrs">
+            <value>The ExtAttr values of the Division.</value>
+        </member>
+        <member name="P:Impart.Division.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Division.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Division.#ctor">
+            <summary>Creates a Division instance.</summary>
+        </member>
+        <member name="M:Impart.Division.AddText(Impart.Text)">
+            <summary>Add a Text to the Division.</summary>
+            <param name="text">The Text instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddImage(Impart.Image)">
+            <summary>Add a Image to the Division.</summary>
+            <param name="image">The Image instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddHeader(Impart.Header)">
+            <summary>Add a Header to the Division.</summary>
+            <param name="header">The Header instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddLink(Impart.Link)">
+            <summary>Add a Link to the Division.</summary>
+            <param name="link">The Link instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddTable(Impart.Table)">
+            <summary>Add a Table to the Division.</summary>
+            <param name="table">The Table instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddDivision(Impart.Division)">
+            <summary>Add a Division to the Division.</summary>
+            <param name="division">The Division instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddForm(Impart.Form)">
+            <summary>Add a Form to the Division.</summary>
+            <param name="form">The Form instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddButton(Impart.Button)">
+            <summary>Add a Button to the Division.</summary>
+            <param name="button">The Button instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddNest(Impart.Nest)">
+            <summary>Add a Nest to the Division.</summary>
+            <param name="nest">The Nest instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.AddVideo(Impart.Video)">
+            <summary>Add a Video to the Division.</summary>
+            <param name="video">The Video instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.SetStyle(Impart.Style)">
+            <summary>Sets a Style to the Division.</summary>
+            <param name="style">The Style instance to use.</param>
+        </member>
+        <member name="M:Impart.Division.SetScrollbar(Impart.Scrollbar)">
+            <summary>Sets a Scrollbar to the Division.</summary>
+            <param name="scrollbar">The scrollbar to add.</param>
+        </member>
+        <member name="M:Impart.Division.Dispose">
+            <summary>Dispose of the Division instance.</summary>
+        </member>
+        <member name="M:Impart.Division.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Division.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Division.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.Form">
+            <summary>The main input class in Impart.</summary>
+        </member>
+        <member name="F:Impart.Form.Attrs">
+            <value>The Attr values of the Form.</value>
+        </member>
+        <member name="F:Impart.Form.ExtAttrs">
+            <value>The ExtAttr values of the Form.</value>
+        </member>
+        <member name="M:Impart.Form.#ctor">
+            <summary>Creates a Form instance.</summary>
+        </member>
+        <member name="M:Impart.Form.AddTextField(Impart.TextField[])">
+            <summary>Add <paramref name="textFields"/> to the Form.</summary>
+            <param name="textFields">The TextField array to add.</param>
+        </member>
+        <member name="M:Impart.Form.AddCheckField(Impart.CheckField[])">
+            <summary>Add <paramref name="checkFields"/> to the Form.</summary>
+            <param name="checkFields">The CheckField array to add.</param>
+        </member>
+        <member name="M:Impart.Form.AddSubmitField(Impart.SubmitField)">
+            <summary>Add <paramref name="submitField"/> to the Form.</summary>
+            <param name="submitField">The SubmitField to add.</param>
+        </member>
+        <member name="M:Impart.Form.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Form.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Form.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.CheckField">
+            <summary>Checkbox input for Form.</summary>
+        </member>
+        <member name="F:Impart.CheckField.Attrs">
+            <value>The Attr values of the SubmitField.</value>
+        </member>
+        <member name="F:Impart.CheckField.ExtAttrs">
+            <value>The ExtAttr values of the SubmitField.</value>
+        </member>
+        <member name="M:Impart.CheckField.#ctor(System.String)">
+            <summary>Creates a CheckField instance.</summary>
+            <param name="text">The CheckField text.</param>
+        </member>
+        <member name="M:Impart.CheckField.#ctor(Impart.Text,System.String)">
+            <summary>Creates a CheckField instance.</summary>
+            <param name="text">The CheckField text.</param>
+            <param name="id">The CheckField style ID.</param>
+        </member>
+        <member name="M:Impart.CheckField.ToString">
+            <summary>Returns the instance as a String.</summary>
+            <returns>A String instance.</returns>
+        </member>
+        <member name="T:Impart.SubmitField">
+            <summary>Submit button for Form.</summary>
+        </member>
+        <member name="F:Impart.SubmitField.Attrs">
+            <value>The Attr values of the SubmitField.</value>
+        </member>
+        <member name="F:Impart.SubmitField.ExtAttrs">
+            <value>The ExtAttr values of the SubmitField.</value>
+        </member>
+        <member name="M:Impart.SubmitField.#ctor">
+            <summary>Creates a SubmitField instance.</summary>
+        </member>
+        <member name="M:Impart.SubmitField.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.TextField">
+            <summary>Text field for Form.</summary>
+        </member>
+        <member name="P:Impart.TextField.Text">
+            <value>The Text value of the TextField.</value>
+        </member>
+        <member name="F:Impart.TextField.Attrs">
+            <value>The Attr values of the SubmitField.</value>
+        </member>
+        <member name="F:Impart.TextField.ExtAttrs">
+            <value>The ExtAttr values of the SubmitField.</value>
+        </member>
+        <member name="M:Impart.TextField.#ctor(System.String)">
+            <summary>Creates a TextField instance.</summary>
+            <param name="text">The TextField text.</param>
+        </member>
+        <member name="M:Impart.TextField.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Header">
+            <summary>Header element.</summary>
+        </member>
+        <member name="P:Impart.Header.TextValue">
+            <value>The text value of the Header.</value>
+        </member>
+        <member name="F:Impart.Header.Attrs">
+            <value>The Attr values of the Header.</value>
+        </member>
+        <member name="F:Impart.Header.ExtAttrs">
+            <value>The ExtAttr values of the Header.</value>
+        </member>
+        <member name="P:Impart.Header.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Header.Number">
+            <value>The Header number value of the Header.</value>
+        </member>
+        <member name="P:Impart.Header.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Header.#ctor">
+            <summary>Creates an empty Header instance.</summary>
+        </member>
+        <member name="M:Impart.Header.#ctor(System.String,System.Int32)">
+            <summary>Creates a Header instance.</summary>
+            <param name="text">The Header text.</param>
+            <param name="number">The Header type.</param>
+        </member>
+        <member name="M:Impart.Header.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Header.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Header.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.Image">
+            <summary>Image element.</summary>
+        </member>
+        <member name="P:Impart.Image.Path">
+            <value>The path value of the Image.</value>
+        </member>
+        <member name="F:Impart.Image.Attrs">
+            <value>The Attr values of the Image.</value>
+        </member>
+        <member name="F:Impart.Image.ExtAttrs">
+            <value>The ExtAttr values of the Image.</value>
+        </member>
+        <member name="P:Impart.Image.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Image.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Image.#ctor">
+            <summary>Creates an empty Image instance.</summary>
+        </member>
+        <member name="M:Impart.Image.#ctor(System.String)">
+            <summary>Creates an Image instance.</summary>
+            <param name="path">The Image path.</param>
+        </member>
+        <member name="M:Impart.Image.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Image.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Image.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.Link">
+            <summary>Link element.</summary>
+        </member>
+        <member name="P:Impart.Link.Text">
+            <value>The Text value of the Link.</value>
+        </member>
+        <member name="P:Impart.Link.Image">
+            <value>The Image value of the Link.</value>
+        </member>
+        <member name="P:Impart.Link.Path">
+            <value>The path value of the Link.</value>
+        </member>
+        <member name="F:Impart.Link.Attrs">
+            <value>The Attr values of the Link.</value>
+        </member>
+        <member name="F:Impart.Link.ExtAttrs">
+            <value>The ExtAttr values of the Link.</value>
+        </member>
+        <member name="P:Impart.Link.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Link.LinkType">
+            <value>The Type of Link.</value>
+        </member>
+        <member name="P:Impart.Link.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Link.#ctor">
+            <summary>Creates an empty Link instance.</summary>
+        </member>
+        <member name="M:Impart.Link.#ctor(Impart.Text,System.String)">
+            <summary>Creates a Link instance.</summary>
+            <param name="text">The Link text.</param>
+            <param name="path">The Link path.</param>
+        </member>
+        <member name="M:Impart.Link.#ctor(Impart.Image,System.String)">
+            <summary>Creates a Link instance.</summary>
+            <param name="image">The Link image.</param>
+            <param name="path">The Link path.</param>
+        </member>
+        <member name="M:Impart.Link.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Link.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Link.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.List">
+            <summary>List element.</summary>
+        </member>
+        <member name="P:Impart.List.Entries">
+            <value>The entry values of the List.</value>
+        </member>
+        <member name="P:Impart.List.Type">
+            <value>The type value of the List.</value>
+        </member>
+        <member name="F:Impart.List.Attrs">
+            <value>The Attr values of the List.</value>
+        </member>
+        <member name="F:Impart.List.ExtAttrs">
+            <value>The ExtAttr values of the List.</value>
+        </member>
+        <member name="P:Impart.List.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.List.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.List.#ctor(Impart.ListType,Impart.Text[])">
+            <summary>Creates a List instance.</summary>
+            <param name="type">The List type.</param>
+            <param name="textEntries">The List entries.</param>
+        </member>
+        <member name="M:Impart.List.Add(Impart.Text[])">
+            <summary>Add a Text to the List.</summary>
+            <param name="textEntries">The Text(s) to add.</param>
+        </member>
+        <member name="M:Impart.List.Remove(Impart.Text[])">
+            <summary>Remove a Text from the List.</summary>
+            <param name="textEntries">The Text(s) to remove.</param>
+        </member>
+        <member name="M:Impart.List.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.List.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.List.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.Nest">
+            <summary>A nest of IElements.</summary>
+        </member>
+        <member name="P:Impart.Nest.IElement">
+            <value>All of the IElements included in the Nest.</value>
+        </member>
+        <member name="P:Impart.Nest.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="P:Impart.Nest.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</value>
+        </member>
+        <member name="M:Impart.Nest.#ctor">
+            <summary>Creates an empty Nest instance.</summary>
+        </member>
+        <member name="M:Impart.Nest.#ctor(Impart.IElement[])">
+            <summary>Creates a Nest instance.</summary>
+            <param name="elements">The IElements to add to the Nest.</param>
+        </member>
+        <member name="M:Impart.Nest.Add(Impart.IElement[])">
+            <summary>Adds IElement(s) to the Nest.</summary>
+            <param name="elements">The IElements to add to the Nest.</param>
+        </member>
+        <member name="M:Impart.Nest.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Nest.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Nest.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.Animation">
+            <summary>Animation style element.</summary>
+        </member>
+        <member name="P:Impart.Animation.Frames">
+            <value>A list of Frames included in the Animation.</value>
+        </member>
+        <member name="P:Impart.Animation.Impart#IStyleElement#ID">
+            <value>The ID value of the Animation. (acts as the name of the Animation)</value>
+        </member>
+        <member name="P:Impart.Animation.Impart#IStyleElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Animation.#ctor(System.String)">
+            <summary>Creates an Animation instance.</summary>
+            <param name="name">The name of the Animation.</param>
+        </member>
+        <member name="M:Impart.Animation.AddFrame(Impart.Frame[])">
+            <summary>Add a Frame to the Animation.</summary>
+            <param name="frames">The Frame(s) to add.</param>
+        </member>
+        <member name="M:Impart.Animation.AddFrame(Impart.Percent,Impart.ChangeType,System.Object)">
+            <summary>Add a Frame to the Animation.</summary>
+            <param name="position">The position of the Frame to add.</param>
+            <param name="changeType">The ChangeType of the Frame to add.</param>
+            <param name="change">The change of the Frame to add.</param>
+        </member>
+        <member name="M:Impart.Animation.RemoveFrame(Impart.Percent)">
+            <summary>Remove a Frame from the Animation.</summary>
+            <param name="position">The position of the Frame to remove.</param>
+        </member>
+        <member name="M:Impart.Animation.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.AnimationArgs">
+            <summary>The arguments for calling an Animation.</summary>
+        </member>
+        <member name="F:Impart.AnimationArgs.Name">
+            <value>The Animation name.</value>
+        </member>
+        <member name="F:Impart.AnimationArgs.Duration">
+            <value>The Animation duration.</value>
+        </member>
+        <member name="F:Impart.AnimationArgs.Delay">
+            <value>The Animation delay.</value>
+        </member>
+        <member name="F:Impart.AnimationArgs.Count">
+            <value>The number of times to repeat the Animation.</value>
+        </member>
+        <member name="M:Impart.AnimationArgs.#ctor(System.String,Impart.Time)">
+            <summary>Creates an AnimationArgs instance.</summary>
+            <param name="name">The Animation name.</param>
+            <param name="duration">The Animation duration.</param>
+        </member>
+        <member name="M:Impart.AnimationArgs.#ctor(System.String,Impart.Time,Impart.Time)">
+            <summary>Creates an AnimationArgs instance.</summary>
+            <param name="name">The Animation name.</param>
+            <param name="duration">The Animation duration.</param>
+            <param name="delay">The Animation delay.</param>
+        </member>
+        <member name="M:Impart.AnimationArgs.#ctor(System.String,Impart.Time,Impart.Time,System.Int32)">
+            <summary>Creates an AnimationArgs instance.</summary>
+            <param name="name">The Animation name.</param>
+            <param name="duration">The Animation duration.</param>
+            <param name="delay">The Animation delay.</param>
+            <param name="count">The number of times to repeat the Animation.</param>
+        </member>
+        <member name="M:Impart.AnimationArgs.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.ChangeType">
+            <summary>All types of changes in the Animation.</summary>
+        </member>
+        <member name="F:Impart.ChangeType.BackgroundColor">
+            <value>Background color change.</value>
+        </member>
+        <member name="F:Impart.ChangeType.ForegroundColor">
+            <value>Foreground color change.</value>
+        </member>
+        <member name="F:Impart.ChangeType.Width">
+            <value>Width change.</value>
+        </member>
+        <member name="F:Impart.ChangeType.Height">
+            <value>Height change.</value>
+        </member>
+        <member name="F:Impart.ChangeType.Position">
+            <value>Position change.</value>
+        </member>
+        <member name="F:Impart.ChangeType.Size">
+            <value>Size change.</value>
+        </member>
+        <member name="T:Impart.Frame">
+            <summary>The class for a single Frame in an Animation.</summary>
+        </member>
+        <member name="F:Impart.Frame.Position">
+            <value>The position of the Frame.</value>
+        </member>
+        <member name="F:Impart.Frame.ChangeType">
+            <value>The type of Change.</value>
+        </member>
+        <member name="F:Impart.Frame.Change">
+            <value>The change to take place in the Frame.</value>
+        </member>
+        <member name="M:Impart.Frame.#ctor(Impart.Percent,Impart.ChangeType,System.Object)">
+            <summary>Creates a Frame instance.</summary>
+            <param name="position">The position value.</param>
+            <param name="changeType">The type of Change.</param>
+            <param name="change">The change to take place.</param>
+        </member>
+        <member name="M:Impart.Frame.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Background">
+            <summary>All types of background image options.</summary>
+        </member>
+        <member name="F:Impart.Background.Loop">
+            <summary>Loop the background image repeatedly.</summary>
+        </member>
+        <member name="F:Impart.Background.Single">
+            <summary>Display a single background image at original resolution.</summary>
+        </member>
+        <member name="F:Impart.Background.Stretch">
+            <summary>Display a single background image stretched to fill the whole background.</summary>
+        </member>
+        <member name="T:Impart.BackgroundArgs">
+            <summary>Arguments for setting the background image.</summary>
+        </member>
+        <member name="F:Impart.BackgroundArgs.Image">
+            <value>The background image.</value>
+        </member>
+        <member name="F:Impart.BackgroundArgs.Background">
+            <value>The background image options.</value>
+        </member>
+        <member name="M:Impart.BackgroundArgs.#ctor(System.String,Impart.Background)">
+            <summary>Creates a BackgroundArgs instance.</summary>
+            <param name="image">The background image.</param>
+            <param name="background">The background image options.</param>
+        </member>
+        <member name="T:Impart.BorderArgs">
+            <summary>Arguments for setting the border.</summary>
+        </member>
+        <member name="F:Impart.BorderArgs.Type">
+            <value>The border line type.</value>
+        </member>
+        <member name="F:Impart.BorderArgs.Width">
+            <value>The border line width.</value>
+        </member>
+        <member name="F:Impart.BorderArgs.Color">
+            <value>The border color.</value>
+        </member>
+        <member name="M:Impart.BorderArgs.#ctor(Impart.BorderType,Impart.Length,Impart.Color)">
+            <summary>Creates a BorderArgs instance</summary>
+            <param name="type">The border type.</param>
+            <param name="width">The border line width.</param>
+            <param name="color">The border color.</param>
+        </member>
+        <member name="T:Impart.BorderType">
+            <summary>All border line types.</summary>
+        </member>
+        <member name="F:Impart.BorderType.Normal">
+            <value>Normal border (solid line).</value>
+        </member>
+        <member name="F:Impart.BorderType.Dashed">
+            <value>Dashed border.</value>
+        </member>
+        <member name="F:Impart.BorderType.Dotted">
+            <value>Dotted border.</value>
+        </member>
+        <member name="F:Impart.BorderType.Double">
+            <value>Double border.</value>
+        </member>
+        <member name="F:Impart.BorderType.In3D">
+            <value>Inward 3D border.</value>
+        </member>
+        <member name="F:Impart.BorderType.Out3D">
+            <value>Outward 3D border.</value>
+        </member>
+        <member name="T:Impart.Scrollbar">
+            <summary>Scrollbar style element.</summary>
+        </member>
+        <member name="P:Impart.Scrollbar.Impart#IStyleElement#ID">
+            <value>The ID value of the Scrollbar. (always returns null)</value>
+        </member>
+        <member name="P:Impart.Scrollbar.Impart#IStyleElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Scrollbar.#ctor(Impart.Axis,Impart.Length,Impart.Color,Impart.Color,Impart.Length)">
+            <summary>Creates a Scrollbar instance.</summary>
+            <param name="axis">The axis of the scrollbar.</param>
+            <param name="width">The width of the scrollbar.</param>
+            <param name="backgroundColor">The background color of the scrollbar.</param>
+            <param name="foregroundColor">The foreground color of the scrollbar.</param>
+            <param name="radius">The radius of the top and bottom of the scrollbar thumb, if rounded.</param>
+        </member>
+        <member name="M:Impart.Scrollbar.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Table">
+            <summary>Table element.</summary>
+        </member>
+        <member name="P:Impart.Table.Rows">
+            <value>The TableRow values of the Table.</value>
+        </member>
+        <member name="F:Impart.Table.Attrs">
+            <value>The Attr values of the Table.</value>
+        </member>
+        <member name="F:Impart.Table.ExtAttrs">
+            <value>The ExtAttr values of the Table.</value>
+        </member>
+        <member name="P:Impart.Table.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Table.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Table.#ctor(Impart.TableRow[])">
+            <summary>Creates a Table instance.</summary>
+            <param name="rows">The TableRows to add.</param>
+        </member>
+        <member name="M:Impart.Table.AddRow(Impart.TableRow[])">
+            <summary>Add TableRows to the Table.</summary>
+            <param name="rows">The TableRows to add.</param>
+        </member>
+        <member name="M:Impart.Table.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Table.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Table.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.TableHeader">
+            <summary>A header row of a Table.</summary>
+        </member>
+        <member name="P:Impart.TableHeader.Elements">
+            <value>The IElement values of the TableHeader.</value>
+        </member>
+        <member name="F:Impart.TableHeader.Attrs">
+            <value>The Attr values of the TableHeader.</value>
+        </member>
+        <member name="F:Impart.TableHeader.ExtAttrs">
+            <value>The ExtAttr values of the TableHeader.</value>
+        </member>
+        <member name="M:Impart.TableHeader.#ctor(Impart.IElement[])">
+            <summary>Creates a TableHeader instance.</summary>
+            <param name="elements">The IElements to add.</param>
+        </member>
+        <member name="M:Impart.TableHeader.AddRow(Impart.IElement[])">
+            <summary>Add IElements to the TableHeader.</summary>
+            <param name="elements">The IElements to add.</param>
+        </member>
+        <member name="M:Impart.TableHeader.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.TableRow">
+            <summary>A row of a Table.</summary>
+        </member>
+        <member name="P:Impart.TableRow.ID">
+            <value>The ID value of the TableRow.</value>
+        </member>
+        <member name="P:Impart.TableRow.Elements">
+            <value>The IElements values of the TableRow.</value>
+        </member>
+        <member name="F:Impart.TableRow.Attrs">
+            <value>The Attr values of the TableRow.</value>
+        </member>
+        <member name="F:Impart.TableRow.ExtAttrs">
+            <value>The ExtAttr values of the TableRow.</value>
+        </member>
+        <member name="M:Impart.TableRow.#ctor(Impart.IElement[])">
+            <summary>Creates a TableRow instance.</summary>
+            <param name="elements">The IElements to add.</param>
+        </member>
+        <member name="M:Impart.TableRow.AddRow(Impart.IElement[])">
+            <summary>Add IElements to the TableRow.</summary>
+            <param name="elements">The IElements to add.</param>
+        </member>
+        <member name="M:Impart.TableRow.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Text">
+            <summary>Text element.</summary>
+        </member>
+        <member name="P:Impart.Text.TextValue">
+            <value>The text value of the Text.</value>
+        </member>
+        <member name="P:Impart.Text.Type">
+            <value>The type value of the Text.</value>
+        </member>
+        <member name="F:Impart.Text.Attrs">
+            <value>The Attr values of the Text.</value>
+        </member>
+        <member name="F:Impart.Text.ExtAttrs">
+            <value>The ExtAttr values of the Text.</value>
+        </member>
+        <member name="P:Impart.Text.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Text.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Text.#ctor">
+            <summary>Creates an empty Text instance.</summary>
+        </member>
+        <member name="M:Impart.Text.#ctor(System.String)">
+            <summary>Creates a Text instance.</summary>
+            <param name="text">The Text text.</param>
+        </member>
+        <member name="M:Impart.Text.#ctor(System.String,Impart.TextType)">
+            <summary>Creates a Text instance.</summary>
+            <param name="text">The Text text.</param>
+            <param name="type">The Text type.</param>
+        </member>
+        <member name="M:Impart.Text.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Text.op_Implicit(System.String)~Impart.Text">
+            <summary>Convert the String instance to a Text.</summary>
+            <param name="text">The String to convert.</param>
+        </member>
+        <member name="M:Impart.Text.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Text.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.Video">
+            <summary>Video element.</summary>
+        </member>
+        <member name="P:Impart.Video.Source">
+            <value>The Video source file.</value>
+        </member>
+        <member name="P:Impart.Video.Size">
+            <value>The Video player size.</value>
+        </member>
+        <member name="P:Impart.Video.Options">
+            <value>Options for the Video player.</value>
+        </member>
+        <member name="P:Impart.Video.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="F:Impart.Video.Attrs">
+            <value>The Attr values of the Video.</value>
+        </member>
+        <member name="F:Impart.Video.ExtAttrs">
+            <value>The ExtAttr values of the Video.</value>
+        </member>
+        <member name="P:Impart.Video.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="M:Impart.Video.#ctor(System.String,Impart.Length,Impart.Length,Impart.VideoOptions)">
+            <summary>Creates a Video instance.</summary>
+            <param name="source">The Video source file.</param>
+            <param name="width">The Video player width.</param>
+            <param name="height">The Video player height.</param>
+            <param name="options">Options for the Video player.</param>
+        </member>
+        <member name="M:Impart.Video.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Video.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Video.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="T:Impart.VideoOptions">
+            <summary>Arguments for setting the Video player.</summary>
+        </member>
+        <member name="F:Impart.VideoOptions.ShowControls">
+            <value>Whether to show or hide the controls.</value>
+        </member>
+        <member name="F:Impart.VideoOptions.Autoplay">
+            <value>Whether to autoplay the Video.</value>
+        </member>
+        <member name="F:Impart.VideoOptions.Mute">
+            <value>Whether to start the Video muted.</value>
+        </member>
+        <member name="M:Impart.VideoOptions.#ctor(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>Creates a VideoOptions instance.</summary>
+            <param name="showControls">Whether to show or hide the controls.</param>
+            <param name="autoplay">Whether to autoplay the Video.</param>
+            <param name="mute">Whether to start the Video muted.</param>
+        </member>
+        <member name="T:Impart.Alignment">
+            <summary>All alignment types.</summary>
+        </member>
+        <member name="F:Impart.Alignment.Left">
+            <value>Left alignment.</value>
+        </member>
+        <member name="F:Impart.Alignment.Right">
+            <value>Right alignment.</value>
+        </member>
+        <member name="F:Impart.Alignment.Center">
+            <value>Center alignment.</value>
+        </member>
+        <member name="F:Impart.Alignment.Justify">
+            <value>Justify alignment.</value>
+        </member>
+        <member name="T:Impart.Axis">
+            <summary>All axis directions.</summary>
+        </member>
+        <member name="F:Impart.Axis.X">
+            <value>X-axis.</value>
+        </member>
+        <member name="F:Impart.Axis.Y">
+            <value>Y-axis.</value>
+        </member>
+        <member name="T:Impart.ListType">
+            <summary>All list types.</summary>
+        </member>
+        <member name="F:Impart.ListType.Ordered">
+            <value>Ordered list.</value>
+        </member>
+        <member name="F:Impart.ListType.Unordered">
+            <value>Unordered list.</value>
+        </member>
+        <member name="T:Impart.TextType">
+            <summary>All of the Text types.</summary>
+        </member>
+        <member name="F:Impart.TextType.Bold">
+            <value>Bold text.</value>
+        </member>
+        <member name="F:Impart.TextType.Important">
+            <value>Important text.</value>
+        </member>
+        <member name="F:Impart.TextType.Italic">
+            <value>Italic text.</value>
+        </member>
+        <member name="F:Impart.TextType.Emphasize">
+            <value>Emphasized text.</value>
+        </member>
+        <member name="F:Impart.TextType.Mark">
+            <value>Marked text.</value>
+        </member>
+        <member name="F:Impart.TextType.Small">
+            <value>Small text.</value>
+        </member>
+        <member name="F:Impart.TextType.Delete">
+            <value>Deleted text.</value>
+        </member>
+        <member name="F:Impart.TextType.Insert">
+            <value>Inserted text.</value>
+        </member>
+        <member name="F:Impart.TextType.Subscript">
+            <value>Subscript text.</value>
+        </member>
+        <member name="F:Impart.TextType.Superscript">
+            <value>Superscript text.</value>
+        </member>
+        <member name="F:Impart.TextType.Regular">
+            <value>Regular text.</value>
+        </member>
+        <member name="T:Impart.Font">
+            <summary>A font sourced from file(s).</summary>
+        </member>
+        <member name="M:Impart.Font.#ctor(System.String,System.String,Impart.FontType)">
+            <summary>Creates a Font instance.</summary>
+            <param name="name">The name for the font family.</param>
+            <param name="url">The URL to the source file.</param>
+            <param name="type">The type of file format.</param>
+        </member>
+        <member name="M:Impart.Font.#ctor(System.String,System.ValueTuple{System.String,Impart.FontType}[])">
+            <summary>Creates a Font instance.</summary>
+            <param name="name">The name for the font family.</param>
+            <param name="args">An array of URLs to source files and those files' format types.</param>
+        </member>
+        <member name="M:Impart.Font.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.FontFamily">
+            <summary>All main font families.</summary>
+        </member>
+        <member name="F:Impart.FontFamily.Arial">
+            <value>Arial font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Helvetica">
+            <value>Helvetica font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Verdana">
+            <value>Verdana font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Calibri">
+            <value>Calibri font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Noto">
+            <value>Noto font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.LucidaSans">
+            <value>LucidaSans font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.GillSans">
+            <value>GillSans font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.CenturyGothic">
+            <value>CenturyGothic font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Candara">
+            <value>Candara font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Futara">
+            <value>Futara font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.FranklinGothicMedium">
+            <value>FranklinGothicMedium font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.TrebuchetMS">
+            <value>TrebuchetMS font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Geneva">
+            <value>Geneva font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.SegoeUI">
+            <value>SegoeUI font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Optima">
+            <value>Optima font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.AvantaGarde">
+            <value>AvantaGarde font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.TimesNewRoman">
+            <value>TimesNewRoman font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.BigCaslon">
+            <value>BigCaslon font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.BodoniMT">
+            <value>BodoniMT font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.BookAntiqua">
+            <value>BookAntiqua font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Bookman">
+            <value>Bookman font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.NewCenturySchoolbook">
+            <value>NewCenturySchoolbook font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.CalistoMT">
+            <value>CalistoMT font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Cambria">
+            <value>Cambria font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Didot">
+            <value>Didot font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Garamond">
+            <value>Garamond font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Georgia">
+            <value>Georgia font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.GoudyOldStyle">
+            <value>GoudyOldStyle font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.HoeflerText">
+            <value>HoeflerText font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.LucidaBright">
+            <value>LucidaBright font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Palatino">
+            <value>Palatino font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Perpetua">
+            <value>Perpetua font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Rockwell">
+            <value>Rockwell font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.RockwellExtraBold">
+            <value>RockwellExtraBold font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Baskerville">
+            <value>Baskerville font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Consolas">
+            <value>Consolas font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Courier">
+            <value>Courier font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.CourierNew">
+            <value>CourierNew font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.LucidaConsole">
+            <value>LucidaConsole font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.LucidaSansTypewriter">
+            <value>LucidaSansTypewriter font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Monaco">
+            <value>Monaco font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.AndaleMono">
+            <value>AndaleMono font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.ComicSans">
+            <value>ComicSans font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.ComicSansMS">
+            <value>ComicSansMS font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.AppleChancery">
+            <value>AppleChancery font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.ZapfChancery">
+            <value>ZapfChancery font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.BradleyHand">
+            <value>BradleyHand font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.BrushScriptMT">
+            <value>BrushScriptMT font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.BrushScriptStd">
+            <value>BrushScriptStd font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.SnellRoundhan">
+            <value>SnellRoundhan font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.URWChancery">
+            <value>URWChancery font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Coronetscript">
+            <value>Coronetscript font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Florence">
+            <value>Florence font.</value>
+        </member>
+        <member name="F:Impart.FontFamily.Parkavenue">
+            <value>Parkavenue font.</value>
+        </member>
+        <member name="T:Impart.FontList">
+            <summary>Store a list of Fonts.</summary>
+        </member>
+        <member name="M:Impart.FontList.#ctor">
+            <summary>Creates a FontList instance.</summary>
+        </member>
+        <member name="M:Impart.FontList.Add(Impart.Font)">
+            <summary>Add a Font to the FontList.</summary>
+            <param name="font">The Font to add.</param>
+        </member>
+        <member name="M:Impart.FontList.Clear">
+            <summary>Remove all Fonts from the FontList.</summary>
+        </member>
+        <member name="M:Impart.FontList.AddRange(System.Collections.Generic.IEnumerable{Impart.Font})">
+            <summary>Add multiple Fonts to the FontList.</summary>
+            <param name="fonts">The Fonts to add.</param>
+        </member>
+        <member name="M:Impart.FontList.Insert(System.Int32,Impart.Font)">
+            <summary>Add a Font to the FontList at the specified index.</summary>
+            <param name="index">The index to add the Font at.</param>
+            <param name="font">The Font to add.</param>
+        </member>
+        <member name="M:Impart.FontList.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{Impart.Font})">
+            <summary>Add multiple Fonts to the FontList at the specified index.</summary>
+            <param name="index">The index to add the Fonts at.</param>
+            <param name="fonts">The Fonts to add.</param>
+        </member>
+        <member name="M:Impart.FontList.Remove(Impart.Font)">
+            <summary>Remove a Font from the FontList.</summary>
+            <param name="font">The Font to remove.</param>
+        </member>
+        <member name="M:Impart.FontList.RemoveAll(System.Predicate{Impart.Font})">
+            <summary>Remove all Fonts that meet specific conditions from the FontList.</summary>
+            <param name="conditions">The Font conditions.</param>
+        </member>
+        <member name="M:Impart.FontList.RemoveAt(System.Int32)">
+            <summary>Remove a Font from the FontList at the specified index.</summary>
+            <param name="index">The index to remove the Font at.</param>
+        </member>
+        <member name="M:Impart.FontList.RemoveRange(System.Int32,System.Int32)">
+            <summary>Remove multiple Fonts from the FontList at the specified index.</summary>
+            <param name="index">The index to remove the Fonts at.</param>
+            <param name="count">The number of Fonts to remove after the index.</param>
+        </member>
+        <member name="T:Impart.FontType">
+            <summary>All the Font format types.</summary>
+        </member>
+        <member name="F:Impart.FontType.WOFF">
+            <value>Web Open Font Format.</value>
+        </member>
+        <member name="F:Impart.FontType.WOFF2">
+            <value>Web Open Font Format 2.</value>
+        </member>
+        <member name="F:Impart.FontType.TTF">
+            <value>TrueType Font.</value>
+        </member>
+        <member name="F:Impart.FontType.OTF">
+            <value>OpenType Font.</value>
+        </member>
+        <member name="F:Impart.FontType.EOT">
+            <value>Embedded OpenType Font.</value>
+        </member>
+        <member name="F:Impart.FontType.SVG">
+            <value>Scalable Vector Graphics.</value>
+        </member>
+        <member name="T:Impart.GlobalStyles">
+            <summary>Manage both global external Styles and global Styles.</summary>
+        </member>
+        <member name="F:Impart.GlobalStyles.Styles">
+            <value>The Styles that apply to every Webpage.</value>
+        </member>
+        <member name="F:Impart.GlobalStyles.ExternalStyles">
+            <value>The external Styles that apply to every Webpage.</value>
+        </member>
+        <member name="M:Impart.GlobalStyles.Add(Impart.Style)">
+            <summary>Add a Style to every WebPage.</summary>
+            <param name="style">The Style to add.</param>
+        </member>
+        <member name="M:Impart.GlobalStyles.AddExternal(System.String)">
+            <summary>Add an external Style to every WebPage.</summary>
+            <param name="url">The URL of the external Style to add.</param>
+        </member>
+        <member name="M:Impart.GlobalStyles.Remove(System.Int32)">
+            <summary>Remove a Style from being added to every WebPage.</summary>
+            <param name="index">The index of the Style to remove.</param>
+        </member>
+        <member name="M:Impart.GlobalStyles.RemoveExternal(System.Int32)">
+            <summary>Remove an external Style from being added to every WebPage.</summary>
+            <param name="index">The index of the URL of the external Style to be removed.</param>
+        </member>
+        <member name="T:Impart.IElement">
+            <summary>IElement interface.</summary>
+        </member>
+        <member name="P:Impart.IElement.IOID">
+            <value>IOID value for the IElement.</value>
+        </member>
+        <member name="M:Impart.IElement.Clone">
+            <summary>Clones the IElement (including its IOID).</summary>
+        </member>
+        <member name="P:Impart.IElement.ExtAttrs">
+            <summary>The external attributes of the IElement.</summary>
+        </member>
+        <member name="T:Impart.IStyleElement">
+            <summary>IStyleElement interface.</summary>
+        </member>
+        <member name="P:Impart.IStyleElement.IOID">
+            <value>The Impart Object ID for the IStyleElement.</value>
+        </member>
+        <member name="P:Impart.IStyleElement.ID">
+            <value>The ID for the IStyleElement.</value>
+        </member>
+        <member name="T:Impart.Style">
+            <summary>Style Elements with a certain ID.</summary>
+        </member>
+        <member name="P:Impart.Style.ID">
+            <value>The ID value of the Style.</value>
+        </member>
+        <member name="F:Impart.Style.Attrs">
+            <value>The attribute values of the Style.</value>
+        </member>
+        <member name="P:Impart.Style.Impart#IStyleElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.Style.#ctor(System.String)">
+            <summary>Creates a Style instance.</summary>
+            <param name="id">The ID.</param>
+        </member>
+        <member name="M:Impart.Style.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Style.Dispose">
+            <summary>Dispose of the Style instance.</summary>
+        </member>
+        <member name="T:Impart.ColorSet">
+            <summary>The class for a set of Colors.</summary>
+        </member>
+        <member name="M:Impart.ColorSet.#ctor(Impart.Color[])">
+            <summary>Creates a ColorSet instance with Color[] as the entries.</summary>
+            <param name="colors">The Colors to add.</param>
+        </member>
+        <member name="M:Impart.ColorSet.Sort(Impart.ColorSort,System.Int32)">
+            <summary>Temporarily sorts the ColorSet and returns the value at an index.</summary>
+            <param name="sort">The ColorSort sorting pattern.</param>
+            <param name="i">The index value to return.</param>
+        </member>
+        <member name="P:Impart.ColorSet.Item(System.Int32)">
+            <summary>Return the value at an index.</summary>
+            <param name="i">The index value to return.</param>
+        </member>
+        <member name="T:Impart.ConvertColor">
+            <summary>The class for managing Color conversions.</summary>
+        </member>
+        <member name="M:Impart.ConvertColor.ToHsl(Impart.Rgb)">
+            <summary>Converts a Rgb instance to Hsl.</summary>
+            <param name="rgb">The Rgb value to convert.</param>
+        </member>
+        <member name="M:Impart.ConvertColor.ToHex(Impart.Rgb)">
+            <summary>Converts a Rgb instance to Hex.</summary>
+            <param name="rgb">The Rgb value to convert.</param>
+        </member>
+        <member name="M:Impart.ConvertColor.ToRgb(Impart.Hsl)">
+            <summary>Converts a Hsl instance to Rgb.</summary>
+            <param name="hsl">The Hsl value to convert.</param>
+        </member>
+        <member name="M:Impart.ConvertColor.ToHex(Impart.Hsl)">
+            <summary>Converts a Hsl instance to Hex.</summary>
+            <param name="hsl">The Hsl value to convert.</param>
+        </member>
+        <member name="M:Impart.ConvertColor.ToRgb(Impart.Hex)">
+            <summary>Converts a Hex instance to Rgb.</summary>
+            <param name="hex">The Hex value to convert.</param>
+        </member>
+        <member name="M:Impart.ConvertColor.ToRgb(Impart.Color)">
+            <summary>Converts a Color instance to Rgb.</summary>
+            <param name="color">The Color value to convert.</param>
+        </member>
+        <member name="M:Impart.ConvertColor.ToHsl(Impart.Color)">
+            <summary>Converts a Color instance to Hsl.</summary>
+            <param name="color">The Color value to convert.</param>
+        </member>
+        <member name="M:Impart.ConvertColor.ToHex(Impart.Color)">
+            <summary>Converts a Color instance to Hex.</summary>
+            <param name="color">The Color value to convert.</param>
+        </member>
+        <member name="T:Impart.Color">
+            <summary>Color base class.</summary>
+        </member>
+        <member name="M:Impart.Color.op_Implicit(System.String)~Impart.Color">
+            <summary>Creates a Color instance.</summary>
+            <param name="s">The String to convert.</param>
+        </member>
+        <member name="M:Impart.Color.op_Implicit(System.ValueTuple{System.Int32,System.Int32,System.Int32})~Impart.Color">
+            <summary>Creates a Color instance.</summary>
+            <param name="r">The (int, int, int) to convert.</param>
+        </member>
+        <member name="M:Impart.Color.op_Implicit(System.ValueTuple{System.Single,System.Single,System.Single})~Impart.Color">
+            <summary>Creates a Color instance.</summary>
+            <param name="h">The (float, float, float) to convert.</param>
+        </member>
+        <member name="M:Impart.Color.Convert(System.Object)">
+            <summary>Converts an Object into a Measurement instance.</summary>
+            <param name="o">The object to convert.</param>
+        </member>
+        <member name="T:Impart.ColorSort">
+            <summary>All methods of sorting ColorSets.</summary>
+        </member>
+        <member name="F:Impart.ColorSort.Light">
+            <value>Sort the Colorset from lightest to darkest.</value>
+        </member>
+        <member name="F:Impart.ColorSort.Dark">
+            <value>Sort the Colorset from darkest to lightest.</value>
+        </member>
+        <member name="F:Impart.ColorSort.Red">
+            <value>Sort the Colorset from reddest to non-reddest.</value>
+        </member>
+        <member name="F:Impart.ColorSort.Blue">
+            <value>Sort the Colorset from bluest to non-bluest.</value>
+        </member>
+        <member name="F:Impart.ColorSort.Green">
+            <value>Sort the Colorset from greenist to non-greenist.</value>
+        </member>
+        <member name="T:Impart.Hex">
+            <summary>The class for a HEX color.</summary>
+        </member>
+        <member name="M:Impart.Hex.#ctor(System.String)">
+            <summary>Creates a Hex instance.</summary>
+            <param name="hex">The HEX value.</param>
+        </member>
+        <member name="M:Impart.Hex.op_Equality(Impart.Hex,Impart.Hex)">
+            <summary>Compares the equality of two Hex values.</summary>
+            <param name="hex1">The first Hex value to compare.</param>
+            <param name="hex2">The second Hex value to compare.</param>
+        </member>
+        <member name="M:Impart.Hex.op_Inequality(Impart.Hex,Impart.Hex)">
+            <summary>Compares the inequality of two Hex values.</summary>
+            <param name="hex1">The first Hex value to compare.</param>
+            <param name="hex2">The second Hex value to compare.</param>
+        </member>
+        <member name="M:Impart.Hex.Equals(System.Object)">
+            <summary>Compares the equality of this Hex instance and an Object value.</summary>
+            <param name="obj">The Object to compare.</param>
+        </member>
+        <member name="M:Impart.Hex.GetHashCode">
+            <summary>Returns a hash code for the current instance.</summary>
+        </member>
+        <member name="M:Impart.Hex.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Hex.op_Explicit(Impart.Hex)~System.String">
+            <summary>Convert the Hex instance to a String.</summary>
+            <param name="h">The Hex to convert.</param>
+        </member>
+        <member name="M:Impart.Hex.op_Implicit(System.String)~Impart.Hex">
+            <summary>Convert the String instance to Hex.</summary>
+            <param name="s">The String to convert.</param>
+        </member>
+        <member name="F:Impart.Hex.Red">
+            <value>Red represented by Hex.</value>
+        </member>
+        <member name="F:Impart.Hex.Orange">
+            <value>Orange represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Yellow">
+            <value>Yellow represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Lime">
+            <value>Lime represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.DarkGreen">
+            <value>Dark green represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Green">
+            <value>Green represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.LightGray">
+            <value>Light gray represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Aqua">
+            <value>Aqua represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.LightBlue">
+            <value>Light blue represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Blue">
+            <value>Blue represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.DarkBlue">
+            <value>Dark blue represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Pink">
+            <value>Pink represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Magenta">
+            <value>Magenta represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Purple">
+            <value>Purple represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.White">
+            <value>White represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Gray">
+            <value>Gray represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.DarkGray">
+            <value>Dark gray represented by Hex</value>
+        </member>
+        <member name="F:Impart.Hex.Black">
+            <value>Black represented by Hex</value>
+        </member>
+        <member name="T:Impart.Hsl">
+            <summary>The class for a HSL color.</summary>
+        </member>
+        <member name="M:Impart.Hsl.#ctor(System.Single,System.Single,System.Single)">
+            <summary>Creates a Hsl instance.</summary>
+            <param name="h">The H value.</param>
+            <param name="s">The S value.</param>
+            <param name="l">The L value.</param>
+        </member>
+        <member name="M:Impart.Hsl.#ctor(System.ValueTuple{System.Single,System.Single,System.Single})">
+            <summary>Creates a Hsl instance.</summary>
+            <param name="hsl">The HSL value.</param>
+        </member>
+        <member name="M:Impart.Hsl.op_Equality(Impart.Hsl,Impart.Hsl)">
+            <summary>Compares the equality of two Hsl values.</summary>
+            <param name="hsl1">The first Hsl value to compare.</param>
+            <param name="hsl2">The second Hsl value to compare.</param>
+        </member>
+        <member name="M:Impart.Hsl.op_Inequality(Impart.Hsl,Impart.Hsl)">
+            <summary>Compares the inequality of two Hsl values.</summary>
+            <param name="hsl1">The first Hsl value to compare.</param>
+            <param name="hsl2">The second Hsl value to compare.</param>
+        </member>
+        <member name="M:Impart.Hsl.Equals(System.Object)">
+            <summary>Compares the equality of this Hsl instance and an Object value.</summary>
+            <param name="obj">The Object to compare.</param>
+        </member>
+        <member name="M:Impart.Hsl.GetHashCode">
+            <summary>Returns a hash code for the current instance.</summary>
+        </member>
+        <member name="M:Impart.Hsl.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Hsl.op_Explicit(Impart.Hsl)~System.ValueTuple{System.Single,System.Single,System.Single}">
+            <summary>Convert the Hsl instance to a (float, float, float).</summary>
+            <param name="h">The Hsl to convert.</param>
+        </member>
+        <member name="M:Impart.Hsl.op_Implicit(System.ValueTuple{System.Single,System.Single,System.Single})~Impart.Hsl">
+            <summary>Convert the (float, float, float) instance to Hsl.</summary>
+            <param name="h">The (float, float, float) to convert.</param>
+        </member>
+        <member name="F:Impart.Hsl.Red">
+            <value>Red represented by Hsl.</value>
+        </member>
+        <member name="F:Impart.Hsl.Orange">
+            <value>Orange represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Yellow">
+            <value>Yellow represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Lime">
+            <value>Lime represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.DarkGreen">
+            <value>Dark green represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Green">
+            <value>Green represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.LightGray">
+            <value>Light gray represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Aqua">
+            <value>Aqua represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.LightBlue">
+            <value>Light blue represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Blue">
+            <value>Blue represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.DarkBlue">
+            <value>Dark blue represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Pink">
+            <value>Pink represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Magenta">
+            <value>Magenta represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Purple">
+            <value>Purple represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.White">
+            <value>White represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Gray">
+            <value>Gray represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.DarkGray">
+            <value>Dark gray represented by Hsl</value>
+        </member>
+        <member name="F:Impart.Hsl.Black">
+            <value>Black represented by Hsl</value>
+        </member>
+        <member name="T:Impart.Rgb">
+            <summary>The class for a RGB color.</summary>
+        </member>
+        <member name="M:Impart.Rgb.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>Creates a Rgb instance.</summary>
+            <param name="r">The R value.</param>
+            <param name="g">The G value.</param>
+            <param name="b">The B value.</param>
+        </member>
+        <member name="M:Impart.Rgb.#ctor(System.ValueTuple{System.Int32,System.Int32,System.Int32})">
+            <summary>Creates a Rgb instance.</summary>
+            <param name="rgb">The RGB value.</param>
+        </member>
+        <member name="M:Impart.Rgb.op_Equality(Impart.Rgb,Impart.Rgb)">
+            <summary>Compares the equality of two Rgb values.</summary>
+            <param name="rgb1">The first Rgb value to compare.</param>
+            <param name="rgb2">The second Rgb value to compare.</param>
+        </member>
+        <member name="M:Impart.Rgb.op_Inequality(Impart.Rgb,Impart.Rgb)">
+            <summary>Compares the inequality of two Rgb values.</summary>
+            <param name="rgb1">The first Rgb value to compare.</param>
+            <param name="rgb2">The second Rgb value to compare.</param>
+        </member>
+        <member name="M:Impart.Rgb.Equals(System.Object)">
+            <summary>Compares the equality of this Rgb instance and an Object value.</summary>
+            <param name="obj">The object to compare.</param>
+        </member>
+        <member name="M:Impart.Rgb.GetHashCode">
+            <summary>Returns a hash code for the current instance.</summary>
+        </member>
+        <member name="M:Impart.Rgb.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Rgb.op_Explicit(Impart.Rgb)~System.ValueTuple{System.Int32,System.Int32,System.Int32}">
+            <summary>Convert the Rgb instance to a (int, int, int).</summary>
+            <param name="r">The Rgb to convert.</param>
+        </member>
+        <member name="M:Impart.Rgb.op_Implicit(System.ValueTuple{System.Int32,System.Int32,System.Int32})~Impart.Rgb">
+            <summary>Convert the (int, int, int) instance to Rgb.</summary>
+            <param name="r">The (int, int, int) to convert.</param>
+        </member>
+        <member name="F:Impart.Rgb.Red">
+            <value>Red represented by Rgb.</value>
+        </member>
+        <member name="F:Impart.Rgb.Orange">
+            <value>Orange represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Yellow">
+            <value>Yellow represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Lime">
+            <value>Lime represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.DarkGreen">
+            <value>Dark green represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Green">
+            <value>Green represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.LightGray">
+            <value>Light gray represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Aqua">
+            <value>Aqua represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.LightBlue">
+            <value>Light blue represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Blue">
+            <value>Blue represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.DarkBlue">
+            <value>Dark blue represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Pink">
+            <value>Pink represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Magenta">
+            <value>Magenta represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Purple">
+            <value>Purple represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.White">
+            <value>White represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Gray">
+            <value>Gray represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.DarkGray">
+            <value>Dark gray represented by Rgb</value>
+        </member>
+        <member name="F:Impart.Rgb.Black">
+            <value>Black represented by Rgb</value>
+        </member>
+        <member name="T:Impart.Length">
+            <summary>Length base class.</summary>
+        </member>
+        <member name="M:Impart.Length.op_Implicit(System.Single)~Impart.Length">
+            <summary>Creates a Length instance.</summary>
+            <param name="f">The float to convert.</param>
+        </member>
+        <member name="M:Impart.Length.op_Implicit(System.Int32)~Impart.Length">
+            <summary>Creates a Length instance.</summary>
+            <param name="i">The integer to convert.</param>
+        </member>
+        <member name="M:Impart.Length.Convert(System.Object)">
+            <summary>Converts an Object into a Length instance.</summary>
+            <param name="o">The Object to convert.</param>
+        </member>
+        <member name="T:Impart.Percent">
+            <summary>Store a percent value.</summary>
+        </member>
+        <member name="M:Impart.Percent.#ctor(System.Single)">
+            <summary>Creates a Percent instance.</summary>
+            <param name="percent">The percent value.</param>
+        </member>
+        <member name="M:Impart.Percent.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Percent.op_Implicit(Impart.Percent)~System.Single">
+            <summary>Convert the Percent instance to a Float.</summary>
+            <param name="p">The Percent to convert.</param>
+        </member>
+        <member name="M:Impart.Percent.op_Implicit(System.Single)~Impart.Percent">
+            <summary>Convert the Float instance to Percent.</summary>
+            <param name="f">The Float to convert.</param>
+        </member>
+        <member name="T:Impart.Pixels">
+            <summary>Store a pixel value.</summary>
+        </member>
+        <member name="M:Impart.Pixels.#ctor(System.Int32)">
+            <summary>Creates a Pixels instance.</summary>
+            <param name="pixels">The pixels value.</param>
+        </member>
+        <member name="M:Impart.Pixels.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Pixels.op_Implicit(Impart.Pixels)~System.Int32">
+            <summary>Convert the Pixels instance to an Int.</summary>
+            <param name="p">The Pixels to convert.</param>
+        </member>
+        <member name="M:Impart.Pixels.op_Implicit(System.Int32)~Impart.Pixels">
+            <summary>Convert the Int instance to Pixels.</summary>
+            <param name="i">The Int to convert.</param>
+        </member>
+        <member name="T:Impart.ViewHeight">
+            <summary>Store a view height value (a view height is a percent of the viewport height).</summary>
+        </member>
+        <member name="M:Impart.ViewHeight.#ctor(System.Decimal)">
+            <summary>Creates a ViewHeight instance.</summary>
+            <param name="viewHeight">The view length value.</param>
+        </member>
+        <member name="M:Impart.ViewHeight.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.ViewHeight.op_Implicit(Impart.ViewHeight)~System.Decimal">
+            <summary>Convert the ViewHeight instance to a Decimal.</summary>
+            <param name="v">The ViewHeight to convert.</param>
+        </member>
+        <member name="M:Impart.ViewHeight.op_Implicit(System.Decimal)~Impart.ViewHeight">
+            <summary>Convert the Decimal instance to ViewHeight.</summary>
+            <param name="d">The Decimal to convert.</param>
+        </member>
+        <member name="T:Impart.ViewWidth">
+            <summary>Store a view width value (a view width is a percent of the viewport width).</summary>
+        </member>
+        <member name="M:Impart.ViewWidth.#ctor(System.Double)">
+            <summary>Creates a ViewWidth instance.</summary>
+            <param name="viewWidth">The view width value.</param>
+        </member>
+        <member name="M:Impart.ViewWidth.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.ViewWidth.op_Implicit(Impart.ViewWidth)~System.Double">
+            <summary>Convert the ViewWidth instance to a Double.</summary>
+            <param name="v">The ViewWidth to convert.</param>
+        </member>
+        <member name="M:Impart.ViewWidth.op_Implicit(System.Double)~Impart.ViewWidth">
+            <summary>Convert the Double instance to ViewWidth.</summary>
+            <param name="d">The Double to convert.</param>
+        </member>
+        <member name="T:Impart.Milliseconds">
+            <summary>Store milliseconds as a Float.</summary>
+        </member>
+        <member name="M:Impart.Milliseconds.#ctor(System.Single)">
+            <summary>Creates a Milliseconds instance.</summary>
+            <param name="milliseconds">The Milliseconds value.</param>
+        </member>
+        <member name="M:Impart.Milliseconds.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Milliseconds.op_Implicit(Impart.Milliseconds)~System.Single">
+            <summary>Convert the Milliseconds instance to a Float.</summary>
+            <param name="s">The Milliseconds to convert.</param>
+        </member>
+        <member name="M:Impart.Milliseconds.op_Implicit(System.Single)~Impart.Milliseconds">
+            <summary>Convert the Float instance to Milliseconds.</summary>
+            <param name="i">The Float to convert.</param>
+        </member>
+        <member name="F:Impart.Milliseconds.Second">
+            <value>A second represented by Milliseconds.</value>
+        </member>
+        <member name="F:Impart.Milliseconds.Minute">
+            <value>A minute represented by Milliseconds.</value>
+        </member>
+        <member name="T:Impart.Seconds">
+            <summary>Store seconds as an Integer.</summary>
+        </member>
+        <member name="M:Impart.Seconds.#ctor(System.Int32)">
+            <summary>Creates a Seconds instance.</summary>
+            <param name="seconds">The seconds value.</param>
+        </member>
+        <member name="M:Impart.Seconds.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.Seconds.op_Implicit(Impart.Seconds)~System.Int32">
+            <summary>Convert the Seconds instance to an Int.</summary>
+            <param name="s">The Seconds to convert.</param>
+        </member>
+        <member name="M:Impart.Seconds.op_Implicit(System.Int32)~Impart.Seconds">
+            <summary>Convert the Int instance to Seconds.</summary>
+            <param name="i">The Int to convert.</param>
+        </member>
+        <member name="F:Impart.Seconds.Minute">
+            <value>A minute represented by Seconds.</value>
+        </member>
+        <member name="F:Impart.Seconds.Hour">
+            <value>A hour represented by Seconds.</value>
+        </member>
+        <member name="T:Impart.Time">
+            <summary>Time base class.</summary>
+        </member>
+        <member name="M:Impart.Time.op_Implicit(System.Single)~Impart.Time">
+            <summary>Creates a Time instance.</summary>
+            <param name="f">The float to convert.</param>
+        </member>
+        <member name="M:Impart.Time.op_Implicit(System.Int32)~Impart.Time">
+            <summary>Creates a Time instance.</summary>
+            <param name="i">The integer to convert.</param>
+        </member>
+        <member name="M:Impart.Time.Convert(System.Object)">
+            <summary>Converts an Object into a Time instance.</summary>
+            <param name="o">The Object to convert.</param>
+        </member>
+        <member name="T:Impart.WebPage">
+            <summary>Generate a webpage for a Website.</summary>
+        </member>
+        <member name="P:Impart.WebPage.Title">
+            <value>The title value of the WebPage.</value>
+        </member>
+        <member name="P:Impart.WebPage.DefaultMargin">
+            <value>The default margin value.</value>
+        </member>
+        <member name="P:Impart.WebPage.DefaultPadding">
+            <value>The default padding value.</value>
+        </member>
+        <member name="F:Impart.WebPage.Attrs">
+            <value>The Attribute values of the WebPage.</value>
+        </member>
+        <member name="F:Impart.WebPage.Fonts">
+            <value>The Font values of the WebPage.</value>
+        </member>
+        <member name="M:Impart.WebPage.#ctor">
+            <summary>Creates a WebPage instance.</summary>
+        </member>
+        <member name="M:Impart.WebPage.ElementExists(Impart.IElement)">
+            <summary>Check if an Element exists.</summary>
+            <param name="element">The instance of the Element to check.</param>
+        </member>
+        <member name="M:Impart.WebPage.StyleElementExists(Impart.IStyleElement)">
+            <summary>Check if a IStyleElement exists.</summary>
+            <param name="element">The instance of the IStyleElement to check.</param>
+        </member>
+        <member name="M:Impart.WebPage.ElementExistsByID(System.String)">
+            <summary>Check if an IElement exists by ID.</summary>
+            <param name="id">The ID of the IElement to check.</param>
+        </member>
+        <member name="M:Impart.WebPage.GetElementByID(System.String)">
+            <summary>Get an IElement by ID.</summary>
+            <param name="id">The ID of the IElement to get.</param>
+        </member>
+        <member name="M:Impart.WebPage.RemoveElementByID(System.String)">
+            <summary>Remove an IElement by ID.</summary>
+            <param name="id">The ID of the IElement to remove.</param>
+        </member>
+        <member name="M:Impart.WebPage.RemoveElement(Impart.IElement)">
+            <summary>Remove an IElement.</summary>
+            <param name="element">The instance of the IElement to remove.</param>
+        </member>
+        <member name="M:Impart.WebPage.RemoveStyleElement(Impart.IStyleElement)">
+            <summary>Remove a IStyleElement.</summary>
+            <param name="element">The instance of the IStyleElement to remove.</param>
+        </member>
+        <member name="M:Impart.WebPage.ChangeElement(Impart.IElement)">
+            <summary>Change an IElement.</summary>
+            <param name="element">The instance of the IElement to change.</param>
+        </member>
+        <member name="M:Impart.WebPage.ChangeStyleElement(Impart.IStyleElement)">
+            <summary>Change a IStyleElement.</summary>
+            <param name="element">The instance of the IStyleElement to change.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddStyle(Impart.Style)">
+            <summary>Add a Style.</summary>
+            <param name="style">The Style instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.RemoveStyle(System.Int32)">
+            <summary>Remove a Style.</summary>
+            <param name="index">The index of the Style to remove.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddText(Impart.Text)">
+            <summary>Add a Text to the WebPage.</summary>
+            <param name="text">The Text instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddImage(Impart.Image)">
+            <summary>Add an Image to the WebPage.</summary>
+            <param name="image">The Image instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddHeader(Impart.Header)">
+            <summary>Add a Header to the WebPage.</summary>
+            <param name="header">The Header instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddLink(Impart.Link)">
+            <summary>Add a Link to the WebPage.</summary>
+            <param name="link">The Link instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddTable(Impart.Table)">
+            <summary>Add a Table to the WebPage.</summary>
+            <param name="table">The Table instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddDivision(Impart.Division)">
+            <summary>Add a Division to the WebPage.</summary>
+            <param name="division">The Division instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddList(Impart.List)">
+            <summary>Add a List to the WebPage.</summary>
+            <param name="list">The List instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.SetScrollBar(Impart.Scrollbar)">
+            <summary>Add a Scrollbar to the WebPage.</summary>
+            <param name="scrollbar">The Scrollbar instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddForm(Impart.Form)">
+            <summary>Add a Form to the WebPage.</summary>
+            <param name="form">The Form instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddButton(Impart.Button)">
+            <summary>Add a Button to the WebPage.</summary>
+            <param name="button">The Button instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddNest(Impart.Nest)">
+            <summary>Add a Nest to the WebPage.</summary>
+            <param name="nest">The Nest instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddVideo(Impart.Video)">
+            <summary>Add a Video to the WebPage.</summary>
+            <param name="video">The Video instance to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddExternalStyle(System.String)">
+            <summary>Add an external Style to the WebPage.</summary>
+            <param name="url">The URL of the external Style to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.RemoveExternalStyle(System.Int32)">
+            <summary>Remove an external Style from the WebPage.</summary>
+            <param name="index">The index of the URL of the external Style to remove.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddAnimation(Impart.Animation)">
+            <summary>Add an Animation to the WebPage.</summary>
+            <param name="animation">The Animation to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.ForceRender">
+            <summary>Force the WebPage to be rendered again, regardless of any new changes.</summary>
+        </member>
+        <member name="M:Impart.WebPage.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Website">
+            <summary>The class responsible for hosting WebPages.</summary>
+        </member>
+        <member name="P:Impart.Website.Port">
+            <value>The value of the localhost port the Website is being hosted on.</value>
+        </member>
+        <member name="F:Impart.Website.OnVisit">
+            <value>The method to be called when a client connects to the Website.</value>
+        </member>
+        <member name="M:Impart.Website.#ctor(Impart.WebPage,System.Int32,System.String)">
+            <summary>Creates a Website instance.</summary>
+            <param name="webPage">The default WebPage.</param>
+            <param name="port">The local port to use. (Default is 5050)</param>
+            <param name="rootDirectory">The subdomain for the default WebPage.</param>
+        </member>
+        <member name="M:Impart.Website.Start">
+            <summary>Start the Website.</summary>
+        </member>
+        <member name="M:Impart.Website.Stop">
+            <summary>Stop the Website.</summary>
+        </member>
+        <member name="M:Impart.Website.AddPage(Impart.WebPage,System.String)">
+            <summary>Add <paramref name="webPage"/> to the Website with <paramref name="directory"/> as the subdomain.</summary>
+            <param name="webPage">The WebPage to add.</param>
+            <param name="directory">The subdomain of the WebPage.</param>
+        </member>
+        <member name="M:Impart.Website.RemovePage(System.String)">
+            <summary>Remove the subdomain and the WebPage that goes along with it.</summary>
+            <param name="directory">The subdomain of the Website.</param>
+        </member>
+        <member name="M:Impart.Website.Set404Page(Impart.WebPage)">
+            <summary>Set the 404 page.</summary>
+            <param name="webPage">The WebPage to set as the 404 page.</param>
+        </member>
+    </members>
+</doc>
