@@ -3,7 +3,7 @@ using Impart.Internal;
 
 namespace Impart
 {
-    public class EFrame : IElement
+    public class EFrame : IElement, INested
     {
         private int _Width;
         public int Width
@@ -103,6 +103,37 @@ namespace Impart
             EFrame result = new EFrame(_Width, _Height, _Source);
             result._IOID = _IOID;
             return result;
+        }
+
+        public string First()
+        {
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            Attrs.Changed = false;
+            ExtAttrs.Changed = false;
+            StringBuilder result = new StringBuilder($"<iframe width=\"{_Width}\" height=\"{_Height}\" src=\"{_Source}\"");
+            if (Attrs.Count != 0)
+            {
+                result.Append(" style=\"");
+                foreach (Attr attribute in Attrs)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttr ExtAttr in ExtAttrs)
+            {
+                result.Append(ExtAttr);
+            }
+            return result.Append('>').ToString();
+        }
+
+        public string Last()
+        {
+            return "</iframe>";
         }
     }
 }
