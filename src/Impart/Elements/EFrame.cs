@@ -128,7 +128,8 @@ namespace Impart
             {
                 result.Append(ExtAttr);
             }
-            return result.Append('>').ToString();
+            Render = result.Append('>').ToString();
+            return Render;
         }
 
         public string Last()

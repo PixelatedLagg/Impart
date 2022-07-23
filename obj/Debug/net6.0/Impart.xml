@@ -1102,6 +1102,21 @@
         <member name="M:Impart.Division.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="F:Impart.EFrame.Attrs">
+            <value>The Attr values of the Header.</value>
+        </member>
+        <member name="F:Impart.EFrame.ExtAttrs">
+            <value>The ExtAttr values of the Header.</value>
+        </member>
+        <member name="P:Impart.EFrame.Impart#IElement#ExtAttrs">
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.EFrame.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
+        </member>
+        <member name="M:Impart.EFrame.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
         <member name="T:Impart.Form">
             <summary>The main input class in Impart.</summary>
         </member>

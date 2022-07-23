@@ -167,8 +167,34 @@ namespace Impart
 
         string INested.First()
         {
-            string result = ToString();
-            return result.Remove(result.Length - ($"</{_ListType}>".Length));
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            Attrs.Changed = false;
+            ExtAttrs.Changed = false;
+            StringBuilder result = new StringBuilder($"<{_ListType}");
+            if (Attrs.Count != 0)
+            {
+                result.Append(" style=\"");
+                foreach (Attr attribute in Attrs)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttr ExtAttr in ExtAttrs)
+            {
+                result.Append(ExtAttr);
+            }
+            result.Append('>');
+            foreach (Text text in _Entries)
+            {
+                result.Append($"<li>{text}</li>");
+            }
+            Render = result.ToString();
+            return Render;
         }
 
         string INested.Last()

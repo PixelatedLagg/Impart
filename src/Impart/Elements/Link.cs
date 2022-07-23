@@ -186,15 +186,37 @@ namespace Impart
         
         string INested.First()
         {
-            string result = ToString();
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            Attrs.Changed = false;
+            ExtAttrs.Changed = false;
+            StringBuilder result = new StringBuilder($"<a href=\"{_Path}\"");
+            if (Attrs.Count != 0)
+            {
+                result.Append(" style=\"");
+                foreach (Attr attribute in Attrs)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttr ExtAttr in ExtAttrs)
+            {
+                result.Append(ExtAttr);
+            }
             if (_LinkType == typeof(Image))
             {
-                return result.Remove(result.Length - 10);
+                result.Append($">{_Image}");
             }
             else
             {
-                return result.Remove(result.Length - ($"{((INested)_Text).Last()}</a>".Length));
+                result.Append($">{_Text}");
             }
+            Render = result.ToString();
+            return Render;
         }
 
         string INested.Last()
