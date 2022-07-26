@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>The main input class in Impart.</summary>
-    public sealed class Form : IElement
+    /// <summary>Form element.</summary>
+    public sealed class Form : IElement, INested
     {
-        /// <value>The Attr values of the Form.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Form.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList IElement.ExtAttrs
         {
@@ -19,10 +19,13 @@ namespace Impart
                 return ExtAttrs;
             }
         }
+
         private List<IFormField> Elements = new List<IFormField>();
         private bool Changed = true;
         private string Render;
         private int IOIDValue = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
         int IElement.IOID
         {
             get
@@ -90,7 +93,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
+        public IElement Clone()
         {
             Form result = new Form();
             result.Changed = Changed;
@@ -102,7 +105,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        public IElement Clone()
+        IElement IElement.Clone()
         {
             Form result = new Form();
             result.Changed = Changed;
@@ -111,6 +114,18 @@ namespace Impart
             result.IOIDValue = IOIDValue;
             result.Render = Render;
             return result;
+        }
+
+        /// <summary>Return the first part of the INested as a string.</summary>
+        string INested.First()
+        {
+            return ToString().Remove(Render.Length - 7);
+        }
+
+        /// <summary>Return the last part of the INested as a string.</summary>
+        string INested.Last()
+        {
+            return "</form>";
         }
     }
 }

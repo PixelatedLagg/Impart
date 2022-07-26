@@ -8,10 +8,10 @@ namespace Impart
     /// <summary>Division element.</summary>
     public struct Division : IElement, IDisposable, INested
     {
-        /// <value>The Attr values of the Division.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Division.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -199,19 +199,6 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
-        {
-            Division result = new Division();
-            result.Attrs = Attrs;
-            result._Elements = _Elements;
-            result.ExtAttrs = ExtAttrs;
-            result._IOID = _IOID;
-            result._StyleElements = _StyleElements;
-            result.Render = Render;
-            return result;
-        }
-
-        /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
             Division result = new Division();
@@ -224,12 +211,26 @@ namespace Impart
             return result;
         }
 
-        string INested.First()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
         {
-            string result = ToString();
-            return result.Remove(result.Length - 6);
+            Division result = new Division();
+            result.Attrs = Attrs;
+            result._Elements = _Elements;
+            result.ExtAttrs = ExtAttrs;
+            result._IOID = _IOID;
+            result._StyleElements = _StyleElements;
+            result.Render = Render;
+            return result;
         }
 
+        /// <summary>Return the first part of the INested as a string.</summary>
+        string INested.First()
+        {
+            return ToString().Remove(Render.Length - 6);
+        }
+
+        /// <summary>Return the last part of the INested as a string.</summary>
         string INested.Last()
         {
             return "</div>";

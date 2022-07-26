@@ -23,10 +23,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the Header.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Header.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -118,19 +118,6 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
-        {
-            Header result = new Header();
-            result.Attrs = Attrs;
-            result.ExtAttrs = ExtAttrs;
-            result._IOID = _IOID;
-            result._Number = _Number;
-            result._Text = _Text;
-            result.Render = Render;
-            return result;
-        }
-
-        /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
             Header result = new Header();
@@ -143,12 +130,26 @@ namespace Impart
             return result;
         }
 
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
+        {
+            Header result = new Header();
+            result.Attrs = Attrs;
+            result.ExtAttrs = ExtAttrs;
+            result._IOID = _IOID;
+            result._Number = _Number;
+            result._Text = _Text;
+            result.Render = Render;
+            return result;
+        }
+
+        /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            string result = ToString();
-            return result.Remove(result.Length - 5);
+            return ToString().Remove(Render.Length - 5);
         }
         
+        /// <summary>Return the last part of the INested as a string.</summary>
         string INested.Last()
         {
             return $"</h{_Number}>";

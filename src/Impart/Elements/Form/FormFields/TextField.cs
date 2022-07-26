@@ -21,11 +21,13 @@ namespace Impart
                 _Text = value;
             }
         }
+
         /// <value>The Attr values of the SubmitField.</value>
         public AttrList Attrs = new AttrList();
 
         /// <value>The ExtAttr values of the SubmitField.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
+        
         internal double InputID;
         private bool Changed = true;
         private string Render;

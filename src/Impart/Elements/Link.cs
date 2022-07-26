@@ -10,7 +10,7 @@ namespace Impart
         private Text _Text = new Text();
 
         /// <value>The Text value of the Link.</value>
-        public Text Text 
+        public Text Text
         {
             get 
             {
@@ -20,7 +20,7 @@ namespace Impart
         private Image _Image = new Image();
 
         /// <value>The Image value of the Link.</value>
-        public Image Image 
+        public Image Image
         {
             get
             {
@@ -30,7 +30,7 @@ namespace Impart
         private string _Path;
 
         /// <value>The path value of the Link.</value>
-        public string Path 
+        public string Path
         {
             get 
             {
@@ -43,10 +43,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the Link.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Link.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -157,20 +157,6 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
-        {
-            Link result = new Link();
-            result._Image = _Image;
-            result._LinkType = _LinkType;
-            result.Attrs = Attrs;
-            result.ExtAttrs = ExtAttrs;
-            result._IOID = _IOID;
-            result._Text = _Text;
-            result.Render = Render;
-            return result;
-        }
-
-        /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
             Link result = new Link();
@@ -184,19 +170,34 @@ namespace Impart
             return result;
         }
         
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
+        {
+            Link result = new Link();
+            result._Image = _Image;
+            result._LinkType = _LinkType;
+            result.Attrs = Attrs;
+            result.ExtAttrs = ExtAttrs;
+            result._IOID = _IOID;
+            result._Text = _Text;
+            result.Render = Render;
+            return result;
+        }
+        
+        /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            string result = ToString();
             if (_LinkType == typeof(Image))
             {
-                return result.Remove(result.Length - 10);
+                return ToString().Remove(Render.Length - 10);
             }
             else
             {
-                return result.Remove(result.Length - ($"{((INested)_Text).Last()}</a>".Length));
+                return ToString().Remove(Render.Length - $"{((INested)_Text).Last()}</a>".Length);
             }
         }
 
+        /// <summary>Return the last part of the INested as a string.</summary>
         string INested.Last()
         {
             if (_LinkType == typeof(Image))
