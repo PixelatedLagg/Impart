@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Video element.</summary>
-    public struct Video : IElement
+    public struct Video : IElement, INested
     {
         private string _Source;
 
@@ -51,22 +51,11 @@ namespace Impart
                 _Options = value;
             }
         }
-
-        private int _IOID = Ioid.Generate();
-
-        /// <value>The internal ID of the instance.</value>
-        int IElement.IOID
-        {
-            get
-            {
-                return _IOID;
-            }
-        }
         
-        /// <value>The Attr values of the Video.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Video.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -75,6 +64,16 @@ namespace Impart
             get
             {
                 return ExtAttrs;
+            }
+        }
+        private int _IOID = Ioid.Generate();
+
+        /// <value>The internal ID of the instance.</value>
+        int IElement.IOID
+        {
+            get
+            {
+                return _IOID;
             }
         }
         private bool Changed = true;
@@ -121,7 +120,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
+        IElement Clone()
         {
             Video result = new Video();
             result._IOID = _IOID;
@@ -134,7 +133,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement Clone()
+        IElement IElement.Clone()
         {
             Video result = new Video();
             result._IOID = _IOID;
@@ -144,6 +143,40 @@ namespace Impart
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             return result;
+        }
+
+        /// <summary>Return the first part of the INested as a string.</summary>
+        string INested.First()
+        {
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            Attrs.Changed = false;
+            ExtAttrs.Changed = false;
+            StringBuilder result = new StringBuilder($"<video src=\"{_Source}\" width=\"{_Size.Width}\" height=\"{_Size.Height}\"{(_Options.Autoplay ? " autoplay " : "")}{(_Options.ShowControls ? " controls " : "")}{(_Options.Mute ? " muted " : "")}");
+            if (Attrs.Count != 0)
+            {
+                result.Append("style=\"");
+                foreach (Attr attr in Attrs)
+                {
+                    result.Append(attr);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttr extAttrs in ExtAttrs)
+            {
+                result.Append(extAttrs);
+            }
+            Render = result.Append('>').ToString();
+            return Render;
+        }
+
+        /// <summary>Return the last part of the INested as a string.</summary>
+        string INested.Last()
+        {
+            return "</video>";
         }
     }
 }

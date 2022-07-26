@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Table element.</summary>
-    public class Table : IElement
+    public class Table : IElement, INested
     {
         private List<TableRow> _Rows = new List<TableRow>();
 
@@ -18,10 +18,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the Table.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Table.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -95,7 +95,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
+        public IElement Clone()
         {
             Table result = new Table();
             result.Attrs = Attrs;
@@ -107,7 +107,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        public IElement Clone()
+        IElement IElement.Clone()
         {
             Table result = new Table();
             result.Attrs = Attrs;
@@ -116,6 +116,45 @@ namespace Impart
             result._Rows = _Rows;
             result.Render = Render;
             return result;
+        }
+
+        /// <summary>Return the first part of the INested as a string.</summary>
+        string INested.First()
+        {
+            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
+            {
+                return Render;
+            }
+            Changed = false;
+            Attrs.Changed = false;
+            ExtAttrs.Changed = false;
+            StringBuilder result = new StringBuilder("<table");
+            if (Attrs.Count != 0)
+            {
+                result.Append(" style=\"");
+                foreach (Attr attribute in Attrs)
+                {
+                    result.Append(attribute);
+                }
+                result.Append('"');
+            }
+            foreach (ExtAttr ExtAttr in ExtAttrs)
+            {
+                result.Append(ExtAttr);
+            }
+            result.Append('>');
+            foreach (TableRow row in _Rows)
+            {
+                result.Append(row);
+            }
+            Render = result.ToString();
+            return Render;
+        }
+
+        /// <summary>Return the last part of the INested as a string.</summary>
+        string INested.Last()
+        {
+            return "</table>";
         }
     }
 }

@@ -99,7 +99,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
+        public IElement Clone()
         {
             Nest result = new Nest();
             result._Elements = _Elements;
@@ -109,7 +109,7 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement Clone()
+        IElement IElement.Clone()
         {
             Nest result = new Nest();
             result._Elements = _Elements;

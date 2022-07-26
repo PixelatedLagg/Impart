@@ -3,9 +3,12 @@ using Impart.Internal;
 
 namespace Impart
 {
+    /// <summary>Embed a page into your website in the form of a frame.</summary>
     public class EFrame : IElement, INested
     {
         private int _Width;
+
+        /// <value>The width (in pixels).</value>
         public int Width
         {
             get => _Width;
@@ -15,6 +18,8 @@ namespace Impart
             }
         }
         private int _Height;
+
+        /// <value>The height (in pixels).</value>
         public int Height
         {
             get => _Height;
@@ -24,6 +29,8 @@ namespace Impart
             }
         }
         private string _Source;
+
+        /// <value>The source link of the page to embed.</value>
         public string Source
         {
             get => _Source;
@@ -32,10 +39,10 @@ namespace Impart
                 _Source = value;
             }
         }
-        /// <value>The Attr values of the Header.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Header.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -59,12 +66,17 @@ namespace Impart
         private bool Changed = true;
         private string Render = "";
 
+        /// <summary>Creates an EFrame instance.</summary>
+        /// <param name="width">The width (in pixels).</param>
+        /// <param name="height">The height (in pixels).</param>
+        /// <param name="source">The source link of the page to embed.</param>
         public EFrame(int width, int height, string source)
         {
             _Width = width;
             _Height = height;
             _Source = source;
         }
+
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
@@ -92,12 +104,8 @@ namespace Impart
             Render = result.Append("></iframe>").ToString();
             return Render;
         }
-        IElement IElement.Clone()
-        {
-            EFrame result = new EFrame(_Width, _Height, _Source);
-            result._IOID = _IOID;
-            return result;
-        }
+
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
             EFrame result = new EFrame(_Width, _Height, _Source);
@@ -105,7 +113,16 @@ namespace Impart
             return result;
         }
 
-        public string First()
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
+        {
+            EFrame result = new EFrame(_Width, _Height, _Source);
+            result._IOID = _IOID;
+            return result;
+        }
+
+        /// <summary>Return the first part of the INested as a string.</summary>
+        string INested.First()
         {
             if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
             {
@@ -132,7 +149,8 @@ namespace Impart
             return Render;
         }
 
-        public string Last()
+        /// <summary>Return the last part of the INested as a string.</summary>
+        string INested.Last()
         {
             return "</iframe>";
         }

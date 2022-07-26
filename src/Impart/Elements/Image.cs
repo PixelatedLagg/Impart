@@ -6,21 +6,21 @@ namespace Impart
     /// <summary>Image element.</summary>
     public struct Image : IElement, INested
     {
-        private string _Path;
+        private string _Source;
 
-        /// <value>The path value of the Image.</value>
-        public string Path 
+        /// <value>The source link of the Image.</value>
+        public string Source
         {
             get 
             {
-                return _Path;
+                return _Source;
             }
         }
 
-        /// <value>The Attr values of the Image.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the Image.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -55,7 +55,7 @@ namespace Impart
             {
                 throw new ImpartError("Path cannot be null!");
             }
-            _Path = path;
+            _Source = path;
         }
 
         /// <summary>Returns the instance as a String.</summary>
@@ -68,7 +68,7 @@ namespace Impart
             Changed = false;
             Attrs.Changed = false;
             ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<img src=\"{_Path}\"");
+            StringBuilder result = new StringBuilder($"<img src=\"{_Source}\"");
             if (Attrs.Count != 0)
             {
                 result.Append($" style=\"");
@@ -87,29 +87,30 @@ namespace Impart
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
-        {
-            Image result = new Image();
-            result.Attrs = Attrs;
-            result.ExtAttrs = ExtAttrs;
-            result._IOID = _IOID;
-            result._Path = _Path;
-            result.Render = Render;
-            return result;
-        }
-
-        /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
             Image result = new Image();
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Path = _Path;
+            result._Source = _Source;
             result.Render = Render;
             return result;
         }
 
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
+        {
+            Image result = new Image();
+            result.Attrs = Attrs;
+            result.ExtAttrs = ExtAttrs;
+            result._IOID = _IOID;
+            result._Source = _Source;
+            result.Render = Render;
+            return result;
+        }
+
+        /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
             if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
@@ -119,7 +120,7 @@ namespace Impart
             Changed = false;
             Attrs.Changed = false;
             ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<img src=\"{_Path}\"");
+            StringBuilder result = new StringBuilder($"<img src=\"{_Source}\"");
             if (Attrs.Count != 0)
             {
                 result.Append($" style=\"");
@@ -137,6 +138,7 @@ namespace Impart
             return Render;
         }
         
+        /// <summary>Return the last part of the INested as a string.</summary>
         string INested.Last()
         {
             return "</img>";

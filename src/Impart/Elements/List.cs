@@ -19,7 +19,7 @@ namespace Impart
         }
         private ListType _Type;
 
-        /// <value>The type value of the List.</value>
+        /// <value>The ListType value of the List.</value>
         public ListType Type
         {
             get
@@ -28,10 +28,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the List.</value>
+        /// <value>The Attr values of the instance.</value>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the List.</value>
+        /// <value>The ExtAttr values of the instance.</value>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
         /// <value>The ExtAttr values of the instance.</value>
@@ -136,20 +136,6 @@ namespace Impart
             Render = result.Append($"</{_ListType}>").ToString();
             return Render;
         }
-        
-        /// <summary>Clones the IElement instance (including the internal ID).</summary>
-        IElement IElement.Clone()
-        {
-            List result = new List();
-            result.Attrs = Attrs;
-            result._Entries = _Entries;
-            result.ExtAttrs = ExtAttrs;
-            result._IOID = _IOID;
-            result._Type = _Type;
-            result.Render = Render;
-            result._ListType = _ListType;
-            return result;
-        }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
@@ -165,6 +151,21 @@ namespace Impart
             return result;
         }
 
+        /// <summary>Clones the IElement instance (including the internal ID).</summary>
+        IElement IElement.Clone()
+        {
+            List result = new List();
+            result.Attrs = Attrs;
+            result._Entries = _Entries;
+            result.ExtAttrs = ExtAttrs;
+            result._IOID = _IOID;
+            result._Type = _Type;
+            result.Render = Render;
+            result._ListType = _ListType;
+            return result;
+        }
+
+        /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
             if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
@@ -197,6 +198,7 @@ namespace Impart
             return Render;
         }
 
+        /// <summary>Return the last part of the INested as a string.</summary>
         string INested.Last()
         {
             return $"</{_ListType}>";
