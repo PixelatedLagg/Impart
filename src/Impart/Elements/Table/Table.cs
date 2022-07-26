@@ -121,34 +121,7 @@ namespace Impart
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder("<table");
-            if (Attrs.Count != 0)
-            {
-                result.Append(" style=\"");
-                foreach (Attr attribute in Attrs)
-                {
-                    result.Append(attribute);
-                }
-                result.Append('"');
-            }
-            foreach (ExtAttr ExtAttr in ExtAttrs)
-            {
-                result.Append(ExtAttr);
-            }
-            result.Append('>');
-            foreach (TableRow row in _Rows)
-            {
-                result.Append(row);
-            }
-            Render = result.ToString();
-            return Render;
+            return ToString().Remove(Render.Length - 8);
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>

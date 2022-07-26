@@ -119,7 +119,7 @@ namespace Impart
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            return ToString().Remove(Render.Length - 8);
+            return ToString().Remove(Render.Length - 7);
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>

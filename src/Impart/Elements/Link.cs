@@ -187,37 +187,14 @@ namespace Impart
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<a href=\"{_Path}\"");
-            if (Attrs.Count != 0)
-            {
-                result.Append(" style=\"");
-                foreach (Attr attribute in Attrs)
-                {
-                    result.Append(attribute);
-                }
-                result.Append('"');
-            }
-            foreach (ExtAttr ExtAttr in ExtAttrs)
-            {
-                result.Append(ExtAttr);
-            }
             if (_LinkType == typeof(Image))
             {
-                result.Append($">{_Image}");
+                return ToString().Remove(Render.Length - 10);
             }
             else
             {
-                result.Append($">{_Text}");
+                return ToString().Remove(Render.Length - $"{((INested)_Text).Last()}</a>".Length);
             }
-            Render = result.ToString();
-            return Render;
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>

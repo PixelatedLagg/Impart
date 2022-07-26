@@ -115,7 +115,7 @@ namespace Impart
             {
                 result.Append(extAttrs);
             }
-            Render = result.Append('>').ToString();
+            Render = result.Append("></video>").ToString();
             return Render;
         }
 
@@ -148,29 +148,7 @@ namespace Impart
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<video src=\"{_Source}\" width=\"{_Size.Width}\" height=\"{_Size.Height}\"{(_Options.Autoplay ? " autoplay " : "")}{(_Options.ShowControls ? " controls " : "")}{(_Options.Mute ? " muted " : "")}");
-            if (Attrs.Count != 0)
-            {
-                result.Append("style=\"");
-                foreach (Attr attr in Attrs)
-                {
-                    result.Append(attr);
-                }
-                result.Append('"');
-            }
-            foreach (ExtAttr extAttrs in ExtAttrs)
-            {
-                result.Append(extAttrs);
-            }
-            Render = result.Append('>').ToString();
-            return Render;
+            return ToString().Remove(Render.Length - 8);
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>

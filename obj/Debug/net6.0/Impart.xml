@@ -997,10 +997,10 @@
             <value>The Text value of the Button.</value>
         </member>
         <member name="F:Impart.Button.Attrs">
-            <value>The Attr values of the Button.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Button.ExtAttrs">
-            <value>The ExtAttr values of the Button.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Button.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1018,20 +1018,26 @@
         <member name="M:Impart.Button.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.Button.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Button.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Button.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Button.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Button.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Division">
             <summary>Division element.</summary>
         </member>
         <member name="F:Impart.Division.Attrs">
-            <value>The Attr values of the Division.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Division.ExtAttrs">
-            <value>The ExtAttr values of the Division.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Division.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1096,17 +1102,35 @@
         <member name="M:Impart.Division.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
-        <member name="M:Impart.Division.Impart#IElement#Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
-        </member>
         <member name="M:Impart.Division.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.Division.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Division.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Division.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
+        </member>
+        <member name="T:Impart.EFrame">
+            <summary>Embed a page into your website in the form of a frame.</summary>
+        </member>
+        <member name="P:Impart.EFrame.Width">
+            <value>The width (in pixels).</value>
+        </member>
+        <member name="P:Impart.EFrame.Height">
+            <value>The height (in pixels).</value>
+        </member>
+        <member name="P:Impart.EFrame.Source">
+            <value>The source link of the page to embed.</value>
+        </member>
         <member name="F:Impart.EFrame.Attrs">
-            <value>The Attr values of the Header.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.EFrame.ExtAttrs">
-            <value>The ExtAttr values of the Header.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.EFrame.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1114,17 +1138,38 @@
         <member name="P:Impart.EFrame.Impart#IElement#IOID">
             <value>The internal ID of the instance.</value>
         </member>
+        <member name="M:Impart.EFrame.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>Creates an EFrame instance.</summary>
+            <param name="width">The width (in pixels).</param>
+            <param name="height">The height (in pixels).</param>
+            <param name="source">The source link of the page to embed.</param>
+        </member>
         <member name="M:Impart.EFrame.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.EFrame.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.EFrame.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.EFrame.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.EFrame.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
+        </member>
         <member name="T:Impart.Form">
-            <summary>The main input class in Impart.</summary>
+            <summary>Form element.</summary>
         </member>
         <member name="F:Impart.Form.Attrs">
-            <value>The Attr values of the Form.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Form.ExtAttrs">
-            <value>The ExtAttr values of the Form.</value>
+            <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Form.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
         </member>
         <member name="M:Impart.Form.#ctor">
             <summary>Creates a Form instance.</summary>
@@ -1144,11 +1189,17 @@
         <member name="M:Impart.Form.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.Form.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Form.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Form.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Form.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Form.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.CheckField">
             <summary>Checkbox input for Form.</summary>
@@ -1213,10 +1264,10 @@
             <value>The text value of the Header.</value>
         </member>
         <member name="F:Impart.Header.Attrs">
-            <value>The Attr values of the Header.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Header.ExtAttrs">
-            <value>The ExtAttr values of the Header.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Header.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1238,23 +1289,29 @@
         <member name="M:Impart.Header.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.Header.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Header.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Header.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Header.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Header.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Image">
             <summary>Image element.</summary>
         </member>
-        <member name="P:Impart.Image.Path">
-            <value>The path value of the Image.</value>
+        <member name="P:Impart.Image.Source">
+            <value>The source link of the Image.</value>
         </member>
         <member name="F:Impart.Image.Attrs">
-            <value>The Attr values of the Image.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Image.ExtAttrs">
-            <value>The ExtAttr values of the Image.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Image.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1272,11 +1329,17 @@
         <member name="M:Impart.Image.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.Image.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Image.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Image.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Image.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Image.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Link">
             <summary>Link element.</summary>
@@ -1291,10 +1354,10 @@
             <value>The path value of the Link.</value>
         </member>
         <member name="F:Impart.Link.Attrs">
-            <value>The Attr values of the Link.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Link.ExtAttrs">
-            <value>The ExtAttr values of the Link.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Link.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1321,11 +1384,17 @@
         <member name="M:Impart.Link.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.Link.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Link.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Link.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Link.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Link.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.List">
             <summary>List element.</summary>
@@ -1334,13 +1403,13 @@
             <value>The entry values of the List.</value>
         </member>
         <member name="P:Impart.List.Type">
-            <value>The type value of the List.</value>
+            <value>The ListType value of the List.</value>
         </member>
         <member name="F:Impart.List.Attrs">
-            <value>The Attr values of the List.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.List.ExtAttrs">
-            <value>The ExtAttr values of the List.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.List.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1364,11 +1433,17 @@
         <member name="M:Impart.List.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.List.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.List.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.List.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.List.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.List.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Nest">
             <summary>A nest of IElements.</summary>
@@ -1396,10 +1471,10 @@
         <member name="M:Impart.Nest.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
-        <member name="M:Impart.Nest.Impart#IElement#Clone">
+        <member name="M:Impart.Nest.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Nest.Clone">
+        <member name="M:Impart.Nest.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
         <member name="T:Impart.Animation">
@@ -1605,10 +1680,10 @@
             <value>The TableRow values of the Table.</value>
         </member>
         <member name="F:Impart.Table.Attrs">
-            <value>The Attr values of the Table.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Table.ExtAttrs">
-            <value>The ExtAttr values of the Table.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Table.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1627,11 +1702,17 @@
         <member name="M:Impart.Table.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.Table.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Table.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Table.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Table.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Table.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.TableHeader">
             <summary>A header row of a Table.</summary>
@@ -1640,10 +1721,10 @@
             <value>The IElement values of the TableHeader.</value>
         </member>
         <member name="F:Impart.TableHeader.Attrs">
-            <value>The Attr values of the TableHeader.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.TableHeader.ExtAttrs">
-            <value>The ExtAttr values of the TableHeader.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="M:Impart.TableHeader.#ctor(Impart.IElement[])">
             <summary>Creates a TableHeader instance.</summary>
@@ -1666,10 +1747,10 @@
             <value>The IElements values of the TableRow.</value>
         </member>
         <member name="F:Impart.TableRow.Attrs">
-            <value>The Attr values of the TableRow.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.TableRow.ExtAttrs">
-            <value>The ExtAttr values of the TableRow.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="M:Impart.TableRow.#ctor(Impart.IElement[])">
             <summary>Creates a TableRow instance.</summary>
@@ -1689,13 +1770,13 @@
             <value>The text value of the Text.</value>
         </member>
         <member name="P:Impart.Text.Type">
-            <value>The type value of the Text.</value>
+            <value>The TextType value of the Text.</value>
         </member>
         <member name="F:Impart.Text.Attrs">
-            <value>The Attr values of the Text.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Text.ExtAttrs">
-            <value>The ExtAttr values of the Text.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Text.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
@@ -1722,11 +1803,17 @@
             <summary>Convert the String instance to a Text.</summary>
             <param name="text">The String to convert.</param>
         </member>
+        <member name="M:Impart.Text.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Text.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Text.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Text.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Text.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Video">
             <summary>Video element.</summary>
@@ -1740,17 +1827,17 @@
         <member name="P:Impart.Video.Options">
             <value>Options for the Video player.</value>
         </member>
-        <member name="P:Impart.Video.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
-        </member>
         <member name="F:Impart.Video.Attrs">
-            <value>The Attr values of the Video.</value>
+            <value>The Attr values of the instance.</value>
         </member>
         <member name="F:Impart.Video.ExtAttrs">
-            <value>The ExtAttr values of the Video.</value>
+            <value>The ExtAttr values of the instance.</value>
         </member>
         <member name="P:Impart.Video.Impart#IElement#ExtAttrs">
             <value>The ExtAttr values of the instance.</value>
+        </member>
+        <member name="P:Impart.Video.Impart#IElement#IOID">
+            <value>The internal ID of the instance.</value>
         </member>
         <member name="M:Impart.Video.#ctor(System.String,Impart.Length,Impart.Length,Impart.VideoOptions)">
             <summary>Creates a Video instance.</summary>
@@ -1762,11 +1849,17 @@
         <member name="M:Impart.Video.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.Video.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
         <member name="M:Impart.Video.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.Video.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
+        <member name="M:Impart.Video.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.Video.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.VideoOptions">
             <summary>Arguments for setting the Video player.</summary>
