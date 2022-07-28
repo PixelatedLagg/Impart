@@ -957,17 +957,17 @@
             <value>Hover message external attribute.</value>
         </member>
         <member name="T:Impart.ImpartError">
-            <summary>The error class used by Impart.</summary>
+            <summary>The main error class used by Impart.</summary>
         </member>
         <member name="M:Impart.ImpartError.#ctor(System.String)">
             <summary>Throws an ImpartError.</summary>
             <param name="error">The error message.</param>
         </member>
         <member name="T:Impart.Log">
-            <summary>The class for storing logs from Logger.</summary>
+            <summary>Store a log.</summary>
         </member>
         <member name="F:Impart.Log.Milliseconds">
-            <value>The duration of the action in milliseconds.</value>
+            <value>The duration of the log.</value>
         </member>
         <member name="F:Impart.Log.Message">
             <value>The Log message.</value>
@@ -978,16 +978,37 @@
             <param name="milliseconds">The duration of the action in milliseconds.</param>
         </member>
         <member name="T:Impart.Logger">
-            <summary>The class for logging time in Impart.</summary>
+            <summary>Log messages/warnings to the console.</summary>
         </member>
-        <member name="E:Impart.Logger.Event">
-            <value>The method to be called when Logger ends.</value>
+        <member name="M:Impart.Logger.Info(System.String)">
+            <summary>Log a message to the console. This method will rarely be called by Impart automatically unless you define the compile-time constant: DEBUG.</summary>
+            <param name="log">The message to log.</param>
         </member>
-        <member name="M:Impart.Logger.Start">
-            <summary>Start tracking time with Logger.</summary>
+        <member name="M:Impart.Logger.Warning(System.String)">
+            <summary>Log a warning to the console. Impart will automatically call this method when something of mild concern happens.</summary>
+            <param name="warning">The warning to log.</param>
         </member>
-        <member name="M:Impart.Logger.End(System.String)">
-            <summary>Stop tracking time with <paramref name="message"/> as the log message.</summary>
+        <member name="M:Impart.Logger.CriticalWarning(System.String)">
+            <summary>Log a critical warning to the console. Impart will automatically call this method when something severely bad happens.</summary>
+            <param name="warning">The critical warning to log.</param>
+        </member>
+        <member name="T:Impart.Timer">
+            <summary>Track a difference in time.</summary>
+        </member>
+        <member name="E:Impart.Timer.Event">
+            <value>Called when the timer is stopped.</value>
+        </member>
+        <member name="M:Impart.Timer.Start">
+            <summary>Start tracking time.</summary>
+        </member>
+        <member name="M:Impart.Timer.Pause">
+            <summary>Temporarily pause tracking time.</summary>
+        </member>
+        <member name="M:Impart.Timer.Resume">
+            <summary>Resume tracking time.</summary>
+        </member>
+        <member name="M:Impart.Timer.Log(System.String)">
+            <summary>Call the log event with a log message.</summary>
             <param name="message">The log message.</param>
         </member>
         <member name="T:Impart.Button">
@@ -2912,7 +2933,7 @@
             <summary>Returns the instance as a String.</summary>
         </member>
         <member name="T:Impart.Website">
-            <summary>The class responsible for hosting WebPages.</summary>
+            <summary>Host WebPages.</summary>
         </member>
         <member name="P:Impart.Website.Port">
             <value>The value of the localhost port the Website is being hosted on.</value>

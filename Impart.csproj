@@ -3,7 +3,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>Impart</PackageId>
-    <Version>2.0.5</Version>
+    <Version>2.0.6</Version>
     <Authors>Pixelated_Lagg</Authors>
     <Company>Pixelated_Lagg</Company>
     <PackageIcon>logo.png</PackageIcon>
@@ -16,11 +16,7 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <None Include=".github/Images/logo.png" Pack="true" PackagePath="logo.png" />
-    <None Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
-    <!--Extra for Xunit-->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+    <None Include=".github/Images/logo.png" Pack="true" PackagePath="logo.png"/>
+    <None Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md"/>
   </ItemGroup>
 </Project>

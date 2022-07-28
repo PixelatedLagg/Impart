@@ -1,9 +1,9 @@
 namespace Impart
 {
-    /// <summary>The class for storing logs from Logger.</summary>
+    /// <summary>Store a log.</summary>
     public struct Log
     {
-        /// <value>The duration of the action in milliseconds.</value>
+        /// <value>The duration of the log.</value>
         public readonly double Milliseconds;
 
         /// <value>The Log message.</value>
