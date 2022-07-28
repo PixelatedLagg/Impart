@@ -6,7 +6,7 @@ namespace Impart
     /// <summary>Log messages/warnings to the console.</summary>
     public static class Logger
     {
-        /// <summary>Log a message to the console. This method will rarely be called by Impart automatically unless you define the compile-time constant: DEBUG.</summary>
+        /// <summary>Log a message to the console. This method will rarely be called by Impart automatically unless you define the compile-time constant: LOGGING.</summary>
         /// <param name="log">The message to log.</param>
         public static void Info(string log)
         {
