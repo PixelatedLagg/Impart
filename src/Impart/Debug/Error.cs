@@ -2,7 +2,7 @@ using System;
 
 namespace Impart
 {
-    /// <summary>The error class used by Impart.</summary>
+    /// <summary>The main error class used by Impart.</summary>
     public sealed class ImpartError : Exception
     {
         /// <summary>Throws an ImpartError.</summary>

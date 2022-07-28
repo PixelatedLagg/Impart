@@ -2,43 +2,49 @@ using System;
 using System.Net;
 using System.Text;
 using System.Threading;
-using Impart.Scripting;
 using System.Net.Sockets;
 using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>The class responsible for hosting WebPages.</summary>
+    /// <summary>Host WebPages.</summary>
     public sealed class Website
     {
-        private int _Port;
+        private bool _Running;
 
-        /// <value>The value of the localhost port the Website is being hosted on.</value>
-        public int Port
+        /// <value>Whether the Website is currently running. Default is false.</value>
+        public bool Running
         {
             get
             {
-                return _Port;
+                return _Running;
             }
         }
 
-        /// <value>The method to be called when a client connects to the Website.</value>
-        public Action<WebsiteEventArgs> OnVisit;
+        /// <value>A Dictionary of all the WebPages included in the Website. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</value>
+        public Dictionary<string, WebPage> Pages = new Dictionary<string, WebPage>();
+
+        /// <value>The underlying TCP listener the Website uses. Do not manually start or stop as the listener thread depends on the Website methods to do so.</value>
+        public TcpListener Listener;
+
+        /// <value>Called when a client requests a WebPage.</value>
+        public Action<WebsiteRequestArgs> OnRequest;
+
+        /// <value>Called just before the TCP listener begins listening in a new thread.</value>
+        public Action OnListener;
 
         private TcpListener _Listener;
         private WebPage _ErrorPage;
-        private Dictionary<string, WebPage> _WebPages;
         private Thread _Thread;
         private Socket _Socket;
+        private int _Port;
 
         /// <summary>Creates a Website instance.</summary>
-        /// <param name="webPage">The default WebPage.</param>
+        /// <param name="page">The default WebPage.</param>
         /// <param name="port">The local port to use. (Default is 5050)</param>
-        /// <param name="rootDirectory">The subdomain for the default WebPage.</param>
-        public Website(WebPage webPage, int port = 5050, string rootDirectory = "")
+        public Website(WebPage page, int port = 5050)
         {
-            _WebPages = new Dictionary<string, WebPage>();
-            _WebPages.Add(rootDirectory, webPage);
+            Pages.Add("", page);
             _Port = port;
             _ErrorPage = null;
         }
@@ -48,15 +54,13 @@ namespace Impart
         {
             try  
             {
+                _Running = true;
                 _Listener = new TcpListener(Dns.GetHostAddresses("localhost")[0], _Port);
+                OnListener?.Invoke();
                 _Listener.Start();
                 _Thread = new Thread(new ThreadStart(StartListen));
                 _Thread.Start();
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine($" Website hosted on localhost:{_Port} ");
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Logger.Info($"Website hosted on localhost:{_Port}");
             }
             catch
             {
@@ -64,45 +68,22 @@ namespace Impart
             }
         }
 
-        /// <summary>Stop the Website.</summary>
-        public void Stop() => _Listener.Stop();
-
-        /// <summary>Add <paramref name="webPage"/> to the Website with <paramref name="directory"/> as the subdomain.</summary>
-        /// <param name="webPage">The WebPage to add.</param>
-        /// <param name="directory">The subdomain of the WebPage.</param>
-        public void AddPage(WebPage webPage, string directory)
+        /// <summary>Stop the Website. This will also close the TCP listener thread.</summary>
+        public void Stop()
         {
-            if (_WebPages.ContainsKey(directory))
-            {
-                throw new ImpartError("Each webpage subdomain must be different!");
-            }
-            _WebPages.Add(directory, webPage);
-        }
-
-        /// <summary>Remove the subdomain and the WebPage that goes along with it.</summary>
-        /// <param name="directory">The subdomain of the Website.</param>
-        public void RemovePage(string directory)
-        {
-            if (!_WebPages.ContainsKey(directory))
-            {
-                throw new ImpartError("The website does not contain this subdomain!");
-            }
-            _WebPages.Remove(directory);
-        }
-
-        /// <summary>Set the 404 page.</summary>
-        /// <param name="webPage">The WebPage to set as the 404 page.</param>
-        public void Set404Page(WebPage webPage)
-        {
-            _ErrorPage = webPage;
+            _Listener.Stop();
+            _Running = false;
         }
         private void StartListen()
         {
-            while (true)
+            while (_Running)
             {
                 _Socket = _Listener.AcceptSocket();
-                if (_Socket.Connected) //socket.Connected
+                if (_Socket.Connected)
                 {
+                    #if LOGGING
+                    Logger.Info($"Client connected on IP address: {IPAddress.Parse(((IPEndPoint)_Socket.RemoteEndPoint).Address.ToString())}");
+                    #endif
                     Byte[] bReceive = new Byte[1024];
                     _Socket.Receive(bReceive, bReceive.Length, 0);
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
@@ -111,7 +92,7 @@ namespace Impart
                         _Socket.Close();
                         return;
                     }
-                    if (!_WebPages.ContainsKey(sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")))
+                    if (!Pages.ContainsKey(sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")))
                     {
                         string errorResult = _ErrorPage?.ToString() ?? "";
                         byte[] errorBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {errorResult.Length} \r\n\r\n{errorResult}");
@@ -127,7 +108,7 @@ namespace Impart
                     }
                     else
                     {
-                        string result = _WebPages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].ToString();
+                        string result = Pages[sBuffer.Substring(5).Split("HTTP/")[0].Replace(" ", "")].ToString();
                         byte[] resultBytes = Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nServer: cx1193719-b\r\nContent-Type: text/html\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nContent-Length: {result.Length} \r\n\r\n{result}");
                         try
                         {
@@ -139,161 +120,7 @@ namespace Impart
                         }
                         _Socket.Close();  
                     }
-                    if (!String.IsNullOrWhiteSpace(OnVisit?.Method.ToString()))
-                    {
-                        string[] browsers = sBuffer.Split("sec-ch-ua:")[1].Split("\"");
-                        List<(Browser, int)> browserList = new List<(Browser, int)>();
-                        bool mobileResult;
-                        Platform platformResult;
-                        if (browsers[1].Contains("Brand"))
-                        {
-                            browsers[1] = "Not A Brand";
-                        }
-                        if (browsers[5].Contains("Brand"))
-                        {
-                            browsers[5] = "Not A Brand";
-                        }
-                        if (browsers[9].Contains("Brand"))
-                        {
-                            browsers[9] = "Not A Brand";
-                        }
-                        switch (browsers[1])
-                        {
-                            case "Not A Brand":
-                                browserList.Add((Browser.NotBrand, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Opera":
-                                browserList.Add((Browser.Opera, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Chromium":
-                                browserList.Add((Browser.Chromium, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Google Chrome":
-                                browserList.Add((Browser.Chrome, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Safari":
-                                browserList.Add((Browser.Safari, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Maxthon":
-                                browserList.Add((Browser.Maxthon, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Edge":
-                                browserList.Add((Browser.Edge, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Firefox":
-                                browserList.Add((Browser.Firefox, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Brave":
-                                browserList.Add((Browser.Brave, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Vivaldi":
-                                browserList.Add((Browser.Vivaldi, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Torch":
-                                browserList.Add((Browser.Torch, Convert.ToInt32(browsers[3])));
-                                break;
-                            case "Netscape":
-                                browserList.Add((Browser.Netscape, Convert.ToInt32(browsers[3])));
-                                break;
-                        }
-                        switch (browsers[5])
-                        {
-                            case "Not A Brand":
-                                browserList.Add((Browser.NotBrand, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Opera":
-                                browserList.Add((Browser.Opera, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Chromium":
-                                browserList.Add((Browser.Chromium, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Google Chrome":
-                                browserList.Add((Browser.Chrome, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Safari":
-                                browserList.Add((Browser.Safari, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Maxthon":
-                                browserList.Add((Browser.Maxthon, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Edge":
-                                browserList.Add((Browser.Edge, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Firefox":
-                                browserList.Add((Browser.Firefox, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Brave":
-                                browserList.Add((Browser.Brave, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Vivaldi":
-                                browserList.Add((Browser.Vivaldi, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Torch":
-                                browserList.Add((Browser.Torch, Convert.ToInt32(browsers[7])));
-                                break;
-                            case "Netscape":
-                                browserList.Add((Browser.Netscape, Convert.ToInt32(browsers[7])));
-                                break;
-                        }
-                        switch (browsers[9])
-                        {
-                            case "Not A Brand":
-                                browserList.Add((Browser.NotBrand, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Opera":
-                                browserList.Add((Browser.Opera, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Chromium":
-                                browserList.Add((Browser.Chromium, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Google Chrome":
-                                browserList.Add((Browser.Chrome, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Safari":
-                                browserList.Add((Browser.Safari, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Maxthon":
-                                browserList.Add((Browser.Maxthon, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Edge":
-                                browserList.Add((Browser.Edge, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Firefox":
-                                browserList.Add((Browser.Firefox, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Brave":
-                                browserList.Add((Browser.Brave, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Vivaldi":
-                                browserList.Add((Browser.Vivaldi, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Torch":
-                                browserList.Add((Browser.Torch, Convert.ToInt32(browsers[11])));
-                                break;
-                            case "Netscape":
-                                browserList.Add((Browser.Netscape, Convert.ToInt32(browsers[11])));
-                                break;
-                        }
-                        if (browsers[12].Contains("?0"))
-                        {
-                            mobileResult = false;
-                        }
-                        else
-                        {
-                            mobileResult = true;
-                        }
-                        platformResult = browsers[13] switch 
-                        {
-                            "Windows" => Platform.Windows,
-                            "Linux" => Platform.Linux,
-                            "macOS" => Platform.Mac,
-                            "Android" => Platform.Android,
-                            "iOS" => Platform.IOS,
-                            "Chrome OS" => Platform.Chrome,
-                            _ => Platform.Unknown
-                        };
-                        OnVisit?.Invoke(new WebsiteEventArgs(platformResult, browserList, mobileResult));
-                    }
+                    OnRequest?.Invoke(new WebsiteRequestArgs(sBuffer, IPAddress.Parse(((IPEndPoint)_Socket.RemoteEndPoint).Address.ToString())));
                 }
             }
         }
