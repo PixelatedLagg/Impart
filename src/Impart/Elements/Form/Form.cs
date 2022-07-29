@@ -7,10 +7,10 @@ namespace Impart
     /// <summary>Form element.</summary>
     public sealed class Form : IElement, INested
     {
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList IElement.ExtAttrs
         {
@@ -25,7 +25,7 @@ namespace Impart
         private string Render;
         private int IOIDValue = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get

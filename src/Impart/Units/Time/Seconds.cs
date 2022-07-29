@@ -26,10 +26,10 @@ namespace Impart
         /// <param name="i">The Int to convert.</param>
         public static implicit operator Seconds(int i) => new Seconds(i);
 
-        /// <value>A minute represented by Seconds.</value>
+        /// <summary>A minute represented by Seconds.</summary>
         public static Seconds Minute = new Seconds(60);
 
-        /// <value>A hour represented by Seconds.</value>
+        /// <summary>A hour represented by Seconds.</summary>
         public static Seconds Hour = new Seconds(3600);
     }
 }

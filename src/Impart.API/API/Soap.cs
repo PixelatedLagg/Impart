@@ -14,7 +14,7 @@ namespace Impart.Api
     {
         private int _Port;
 
-        /// <value>The value of the localhost port the API is being hosted on.</value>
+        /// <summary>The value of the localhost port the API is being hosted on.</summary>
         public int Port
         {
             get
@@ -23,7 +23,7 @@ namespace Impart.Api
             }
         }
 
-        /// <value>The method to be called in the event of an error.</value>
+        /// <summary>The method to be called in the event of an error.</summary>
         public Action<APIEventArgs, ErrorContext> Error;
 
         private Dictionary<string, MethodInfo> _Routes;
@@ -67,7 +67,7 @@ namespace Impart.Api
         [AttributeUsage(AttributeTargets.Method)]
         protected class SoapRequest : System.Attribute
         {
-            /// <value>The Soap route.</value>
+            /// <summary>The Soap route.</summary>
             public string Route { get; set; }
 
             /// <summary>Creates a SoapRequest instance.</summary>

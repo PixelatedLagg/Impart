@@ -8,7 +8,7 @@ namespace Impart
     {
         private int _Width;
 
-        /// <value>The width (in pixels).</value>
+        /// <summary>The width (in pixels).</summary>
         public int Width
         {
             get => _Width;
@@ -19,7 +19,7 @@ namespace Impart
         }
         private int _Height;
 
-        /// <value>The height (in pixels).</value>
+        /// <summary>The height (in pixels).</summary>
         public int Height
         {
             get => _Height;
@@ -30,7 +30,7 @@ namespace Impart
         }
         private string _Source;
 
-        /// <value>The source link of the page to embed.</value>
+        /// <summary>The source link of the page to embed.</summary>
         public string Source
         {
             get => _Source;
@@ -39,13 +39,13 @@ namespace Impart
                 _Source = value;
             }
         }
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         ExtAttrList IElement.ExtAttrs
         {
             get
@@ -55,7 +55,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
         
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get

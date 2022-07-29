@@ -5,10 +5,10 @@ namespace Impart.Api
     /// <summary>Information about current API event.</summary>
     public struct APIEventArgs
     {
-        /// <value>The type of request that was sent.</value>
+        /// <summary>The type of request that was sent.</summary>
         public readonly RequestType Request;
 
-        /// <value>The time the request was sent.</value>
+        /// <summary>The time the request was sent.</summary>
         public readonly DateTime Time;
 
         /// <summary>Creates an APIEventArgs instance with <paramref name="request"/> as the request type.</summary>

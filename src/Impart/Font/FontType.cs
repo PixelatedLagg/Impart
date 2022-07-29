@@ -3,22 +3,22 @@ namespace Impart
     /// <summary>All the Font format types.</summary>
     public enum FontType
     {
-        /// <value>Web Open Font Format.</value>
+        /// <summary>Web Open Font Format.</summary>
         WOFF,
 
-        /// <value>Web Open Font Format 2.</value>
+        /// <summary>Web Open Font Format 2.</summary>
         WOFF2,
 
-        /// <value>TrueType Font.</value>
+        /// <summary>TrueType Font.</summary>
         TTF,
 
-        /// <value>OpenType Font.</value>
+        /// <summary>OpenType Font.</summary>
         OTF,
 
-        /// <value>Embedded OpenType Font.</value>
+        /// <summary>Embedded OpenType Font.</summary>
         EOT,
 
-        /// <value>Scalable Vector Graphics.</value>
+        /// <summary>Scalable Vector Graphics.</summary>
         SVG
     }
 }

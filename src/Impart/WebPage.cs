@@ -9,7 +9,7 @@ namespace Impart
     {
         private string _Title;
 
-        /// <value>The title value of the WebPage.</value>
+        /// <summary>The title value of the WebPage.</summary>
         public string Title
         {
             get
@@ -25,7 +25,7 @@ namespace Impart
 
         private Length _DefaultMargin = 0;
 
-        /// <value>The default margin value.</value>
+        /// <summary>The default margin value.</summary>
         public Length DefaultMargin
         {
             get
@@ -41,7 +41,7 @@ namespace Impart
 
         private Length _DefaultPadding = 0;
 
-        /// <value>The default padding value.</value>
+        /// <summary>The default padding value.</summary>
         public Length DefaultPadding
         {
             get
@@ -56,10 +56,10 @@ namespace Impart
         }
 
 
-        /// <value>The Attribute values of the WebPage.</value>
+        /// <summary>The Attribute values of the WebPage.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The Font values of the WebPage.</value>
+        /// <summary>The Font values of the WebPage.</summary>
         public FontList Fonts = new FontList();
         internal Script _Script = new Script("");
         private List<IElement> _Elements = new List<IElement>();

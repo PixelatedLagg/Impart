@@ -4,10 +4,10 @@ namespace Impart
     public struct ExtAttr
     {
 
-        /// <Value>The ExtAttrType.</Value>
+        /// <summary>The ExtAttrType.</summary>
         readonly public ExtAttrType Type;
 
-        /// <Value>The ExtAttr value.</Value>
+        /// <summary>The ExtAttr value.</summary>
         readonly public string Value;
 
         /// <summary>Creates an ExtAttr instance.</summary>

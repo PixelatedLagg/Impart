@@ -3,31 +3,31 @@ namespace Impart.Api
     /// <summary>All of the request types.</summary>
     public enum RequestType
     {
-        /// <value>GET HTTP request.</value>
+        /// <summary>GET HTTP request.</summary>
         Get,
 
-        /// <value>PUSH HTTP request.</value>
+        /// <summary>PUSH HTTP request.</summary>
         Push,
 
-        /// <value>PUT HTTP request.</value>
+        /// <summary>PUT HTTP request.</summary>
         Put,
 
-        /// <value>DELETE HTTP request.</value>
+        /// <summary>DELETE HTTP request.</summary>
         Delete,
 
-        /// <value>HEAD HTTP request.</value>
+        /// <summary>HEAD HTTP request.</summary>
         Head,
 
-        /// <value>CONNECT HTTP request.</value>
+        /// <summary>CONNECT HTTP request.</summary>
         Connect,
         
-        /// <value>OPTIONS HTTP request.</value>
+        /// <summary>OPTIONS HTTP request.</summary>
         Options,
 
-        /// <value>TRACE HTTP request.</value>
+        /// <summary>TRACE HTTP request.</summary>
         Trace,
 
-        /// <value>PATCH HTTP request.</value>
+        /// <summary>PATCH HTTP request.</summary>
         Patch
     }
 }

@@ -12,7 +12,7 @@ namespace Impart
     {
         private bool _Running;
 
-        /// <value>Whether the Website is currently running. Default is false.</value>
+        /// <summary>Whether the Website is currently running. Default is false.</summary>
         public bool Running
         {
             get
@@ -21,16 +21,16 @@ namespace Impart
             }
         }
 
-        /// <value>A Dictionary of all the WebPages included in the Website. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</value>
+        /// <summary>A Dictionary of all the WebPages included in the Website. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</summary>
         public Dictionary<string, WebPage> Pages = new Dictionary<string, WebPage>();
 
-        /// <value>The underlying TCP listener the Website uses. Do not manually start or stop as the listener thread depends on the Website methods to do so.</value>
+        /// <summary>The underlying TCP listener the Website uses. Do not manually start or stop as the listener thread depends on the Website methods to do so.</summary>
         public TcpListener Listener;
 
-        /// <value>Called when a client requests a WebPage.</value>
+        /// <summary>Called when a client requests a WebPage.</summary>
         public Action<WebsiteRequestArgs> OnRequest;
 
-        /// <value>Called just before the TCP listener begins listening in a new thread.</value>
+        /// <summary>Called just before the TCP listener begins listening in a new thread.</summary>
         public Action OnListener;
 
         private TcpListener _Listener;

@@ -8,13 +8,13 @@ namespace Impart
     /// <summary>Division element.</summary>
     public struct Division : IElement, IDisposable, INested
     {
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         ExtAttrList IElement.ExtAttrs
         {
             get
@@ -24,7 +24,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get

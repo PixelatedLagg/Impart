@@ -9,7 +9,7 @@ namespace Impart
     {
         private List<Frame> _Frames = new List<Frame>();
 
-        /// <value>A list of Frames included in the Animation.</value>
+        /// <summary>A list of Frames included in the Animation.</summary>
         public List<Frame> Frames
         {
             get
@@ -18,7 +18,7 @@ namespace Impart
             }
         }
         
-        /// <value>The ID value of the Animation. (acts as the name of the Animation)</value>
+        /// <summary>The ID value of the Animation. (acts as the name of the Animation)</summary>
         string IStyleElement.ID
         {
             get
@@ -33,7 +33,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IStyleElement.IOID
         {
             get

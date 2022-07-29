@@ -106,58 +106,58 @@ namespace Impart
         /// <param name="h">The (float, float, float) to convert.</param>
         public static implicit operator Hsl((float, float, float) h) => new Hsl(h);
     
-        /// <value>Red represented by Hsl.</value>
+        /// <summary>Red represented by Hsl.</summary>
         public static Hsl Red = new Hsl(0, 100, 50);
 
-        /// <value>Orange represented by Hsl</value>
+        /// <summary>Orange represented by Hsl</summary>
         public static Hsl Orange = new Hsl(30, 100, 50);
 
-        /// <value>Yellow represented by Hsl</value>
+        /// <summary>Yellow represented by Hsl</summary>
         public static Hsl Yellow = new Hsl(60, 100, 50);
 
-        /// <value>Lime represented by Hsl</value>
+        /// <summary>Lime represented by Hsl</summary>
         public static Hsl Lime = new Hsl(90, 100, 60);
 
-        /// <value>Dark green represented by Hsl</value>
+        /// <summary>Dark green represented by Hsl</summary>
         public static Hsl DarkGreen = new Hsl(120, 100, 30);
 
-        /// <value>Green represented by Hsl</value>
+        /// <summary>Green represented by Hsl</summary>
         public static Hsl Green = new Hsl(120, 100, 50);
 
-        /// <value>Light gray represented by Hsl</value>
+        /// <summary>Light gray represented by Hsl</summary>
         public static Hsl LightGray = new Hsl(0, 0, 88);
 
-        /// <value>Aqua represented by Hsl</value>
+        /// <summary>Aqua represented by Hsl</summary>
         public static Hsl Aqua = new Hsl(180, 100, 50);
 
-        /// <value>Light blue represented by Hsl</value>
+        /// <summary>Light blue represented by Hsl</summary>
         public static Hsl LightBlue = new Hsl(210, 100, 50);
 
-        /// <value>Blue represented by Hsl</value>
+        /// <summary>Blue represented by Hsl</summary>
         public static Hsl Blue = new Hsl(240, 100, 50);
 
-        /// <value>Dark blue represented by Hsl</value>
+        /// <summary>Dark blue represented by Hsl</summary>
         public static Hsl DarkBlue = new Hsl(240, 100, 20);
 
-        /// <value>Pink represented by Hsl</value>
+        /// <summary>Pink represented by Hsl</summary>
         public static Hsl Pink = new Hsl(300, 100, 63);
 
-        /// <value>Magenta represented by Hsl</value>
+        /// <summary>Magenta represented by Hsl</summary>
         public static Hsl Magenta = new Hsl(330, 100, 30);
 
-        /// <value>Purple represented by Hsl</value>
+        /// <summary>Purple represented by Hsl</summary>
         public static Hsl Purple = new Hsl(270, 100, 50);
 
-        /// <value>White represented by Hsl</value>
+        /// <summary>White represented by Hsl</summary>
         public static Hsl White = new Hsl(0, 0, 100);
 
-        /// <value>Gray represented by Hsl</value>
+        /// <summary>Gray represented by Hsl</summary>
         public static Hsl Gray = new Hsl(0, 0, 50);
 
-        /// <value>Dark gray represented by Hsl</value>
+        /// <summary>Dark gray represented by Hsl</summary>
         public static Hsl DarkGray = new Hsl(0, 0, 25);
 
-        /// <value>Black represented by Hsl</value>
+        /// <summary>Black represented by Hsl</summary>
         public static Hsl Black = new Hsl(0, 0, 0);
     }
 }

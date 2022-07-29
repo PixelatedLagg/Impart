@@ -3,19 +3,19 @@ namespace Impart
     /// <summary>All methods of sorting ColorSets.</summary>
     public enum ColorSort
     {
-        /// <value>Sort the Colorset from lightest to darkest.</value>
+        /// <summary>Sort the Colorset from lightest to darkest.</summary>
         Light = 0,
 
-        /// <value>Sort the Colorset from darkest to lightest.</value>
+        /// <summary>Sort the Colorset from darkest to lightest.</summary>
         Dark = 1,
 
-        /// <value>Sort the Colorset from reddest to non-reddest.</value>
+        /// <summary>Sort the Colorset from reddest to non-reddest.</summary>
         Red = 2,
 
-        /// <value>Sort the Colorset from bluest to non-bluest.</value>
+        /// <summary>Sort the Colorset from bluest to non-bluest.</summary>
         Blue = 3,
 
-        /// <value>Sort the Colorset from greenist to non-greenist.</value>
+        /// <summary>Sort the Colorset from greenist to non-greenist.</summary>
         Green = 4
     }
 }

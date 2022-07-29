@@ -3,22 +3,22 @@ namespace Impart
     /// <summary>All border line types.</summary>
     public enum BorderType
     {
-        /// <value>Normal border (solid line).</value>
+        /// <summary>Normal border (solid line).</summary>
         Normal,
 
-        /// <value>Dashed border.</value>
+        /// <summary>Dashed border.</summary>
         Dashed,
 
-        /// <value>Dotted border.</value>
+        /// <summary>Dotted border.</summary>
         Dotted,
 
-        /// <value>Double border.</value>
+        /// <summary>Double border.</summary>
         Double,
 
-        /// <value>Inward 3D border.</value>
+        /// <summary>Inward 3D border.</summary>
         In3D,
 
-        /// <value>Outward 3D border.</value>
+        /// <summary>Outward 3D border.</summary>
         Out3D
     }
 }

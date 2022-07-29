@@ -3,52 +3,52 @@ namespace Impart
     /// <summary>All the Attribute types.</summary>
     public enum AttrType
     {
-        /// <value>Background color attribute.</value>
+        /// <summary>Background color attribute.</summary>
         BackgroundColor,
 
-        /// <value>Foreground color attribute.</value>
+        /// <summary>Foreground color attribute.</summary>
         ForegroundColor,
 
-        /// <value>Alignment attribute.</value>
+        /// <summary>Alignment attribute.</summary>
         Alignment,
 
-        /// <value>Font family attribute.</value>
+        /// <summary>Font family attribute.</summary>
         FontFamily,
 
-        /// <value>Font size attribute.</value>
+        /// <summary>Font size attribute.</summary>
         FontSize,
 
-        /// <value>Margin attribute.</value>
+        /// <summary>Margin attribute.</summary>
         Margin,
 
-        /// <value>Padding attribute.</value>
+        /// <summary>Padding attribute.</summary>
         Padding,
 
-        /// <value>Width attribute.</value>
+        /// <summary>Width attribute.</summary>
         Width,
 
-        /// <value>Height attribute.</value>
+        /// <summary>Height attribute.</summary>
         Height,
 
-        /// <value>Border attribute.</value>
+        /// <summary>Border attribute.</summary>
         Border,
 
-        /// <value>X-axis scrollbar overflow attribute.</value>
+        /// <summary>X-axis scrollbar overflow attribute.</summary>
         OverflowX,
 
-        /// <value>Y-axis scrollbar overflow attribute.</value>
+        /// <summary>Y-axis scrollbar overflow attribute.</summary>
         OverflowY,
 
-        /// <value>Text alignment attribute.</value>
+        /// <summary>Text alignment attribute.</summary>
         AlignText,
 
-        /// <value>Animation attribute.</value>
+        /// <summary>Animation attribute.</summary>
         Animation,
 
-        /// <value>Background attribute.</value>
+        /// <summary>Background attribute.</summary>
         Background,
 
-        /// <value>Custom font attribute.</value>
+        /// <summary>Custom font attribute.</summary>
         CustomFont
     }
 }

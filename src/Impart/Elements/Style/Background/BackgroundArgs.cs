@@ -3,10 +3,10 @@ namespace Impart
     /// <summary>Arguments for setting the background image.</summary>
     public class BackgroundArgs
     {
-        /// <value>The background image.</value>
+        /// <summary>The background image.</summary>
         public readonly string Image;
 
-        /// <value>The background image options.</value>
+        /// <summary>The background image options.</summary>
         public readonly Background Background;
 
         /// <summary>Creates a BackgroundArgs instance.</summary>

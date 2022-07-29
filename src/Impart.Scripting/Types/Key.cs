@@ -3,244 +3,244 @@ namespace Impart.Scripting
     /// <summary>All key types.</summary>
     public enum Key
     {
-        /// <value>A key.</value>
+        /// <summary>A key.</summary>
         A,
 
-        /// <value>B key.</value>
+        /// <summary>B key.</summary>
         B,
 
-        /// <value>C key.</value>
+        /// <summary>C key.</summary>
         C,
 
-        /// <value>D key.</value>
+        /// <summary>D key.</summary>
         D,
 
-        /// <value>E key.</value>
+        /// <summary>E key.</summary>
         E,
 
-        /// <value>F key.</value>
+        /// <summary>F key.</summary>
         F,
 
-        /// <value>G key.</value>
+        /// <summary>G key.</summary>
         G,
 
-        /// <value>H key.</value>
+        /// <summary>H key.</summary>
         H,
 
-        /// <value>I key.</value>
+        /// <summary>I key.</summary>
         I,
 
-        /// <value>J key.</value>
+        /// <summary>J key.</summary>
         J,
 
-        /// <value>K key.</value>
+        /// <summary>K key.</summary>
         K,
 
-        /// <value>L key.</value>
+        /// <summary>L key.</summary>
         L,
 
-        /// <value>M key.</value>
+        /// <summary>M key.</summary>
         M,
 
-        /// <value>N key.</value>
+        /// <summary>N key.</summary>
         N,
 
-        /// <value>O key.</value>
+        /// <summary>O key.</summary>
         O,
 
-        /// <value>P key.</value>
+        /// <summary>P key.</summary>
         P,
 
-        /// <value>Q key.</value>
+        /// <summary>Q key.</summary>
         Q,
 
-        /// <value>R key.</value>
+        /// <summary>R key.</summary>
         R,
 
-        /// <value>S key.</value>
+        /// <summary>S key.</summary>
         S,
 
-        /// <value>T key.</value>
+        /// <summary>T key.</summary>
         T,
 
-        /// <value>U key.</value>
+        /// <summary>U key.</summary>
         U,
 
-        /// <value>V key.</value>
+        /// <summary>V key.</summary>
         V,
 
-        /// <value>W key.</value>
+        /// <summary>W key.</summary>
         W,
 
-        /// <value>X key.</value>
+        /// <summary>X key.</summary>
         X,
 
-        /// <value>Y key.</value>
+        /// <summary>Y key.</summary>
         Y,
 
-        /// <value>Z key.</value>
+        /// <summary>Z key.</summary>
         Z,
 
-        /// <value>Tab key.</value>
+        /// <summary>Tab key.</summary>
         Tab,
 
-        /// <value>Enter key.</value>
+        /// <summary>Enter key.</summary>
         Enter,
 
-        /// <value>Shift key (either left or right).</value>
+        /// <summary>Shift key (either left or right).</summary>
         Shift,
 
-        /// <value>Backspace key.</value>
+        /// <summary>Backspace key.</summary>
         Backspace,
 
-        /// <value>CTRL key (either left or right).</value>
+        /// <summary>CTRL key (either left or right).</summary>
         CTRL,
 
-        /// <value>ALT key (either left or right).</value>
+        /// <summary>ALT key (either left or right).</summary>
         ALT,
 
-        /// <value>Escape key.</value>
+        /// <summary>Escape key.</summary>
         Escape,
 
-        /// <value>Space key.</value>
+        /// <summary>Space key.</summary>
         Space,
 
-        /// <value>Number 1 key.</value>
+        /// <summary>Number 1 key.</summary>
         N1,
 
-        /// <value>Number 2 key.</value>
+        /// <summary>Number 2 key.</summary>
         N2,
 
-        /// <value>Number 3 key.</value>
+        /// <summary>Number 3 key.</summary>
         N3,
 
-        /// <value>Number 4 key.</value>
+        /// <summary>Number 4 key.</summary>
         N4,
         
-        /// <value>Number 5 key.</value>
+        /// <summary>Number 5 key.</summary>
         N5,
 
-        /// <value>Number 6 key.</value>
+        /// <summary>Number 6 key.</summary>
         N6,
 
-        /// <value>Number 7 key.</value>
+        /// <summary>Number 7 key.</summary>
         N7,
 
-        /// <value>Number 8 key.</value>
+        /// <summary>Number 8 key.</summary>
         N8,
 
-        /// <value>Number 9 key.</value>
+        /// <summary>Number 9 key.</summary>
         N9,
 
-        /// <value>Number 0 key.</value>
+        /// <summary>Number 0 key.</summary>
         N0,
 
-        /// <value>F1 key.</value>
+        /// <summary>F1 key.</summary>
         F1,
 
-        /// <value>F2 key.</value>
+        /// <summary>F2 key.</summary>
         F2,
 
-        /// <value>F3 key.</value>
+        /// <summary>F3 key.</summary>
         F3,
 
-        /// <value>F4 key.</value>
+        /// <summary>F4 key.</summary>
         F4,
 
-        /// <value>F5 key.</value>
+        /// <summary>F5 key.</summary>
         F5,
 
-        /// <value>F6 key.</value>
+        /// <summary>F6 key.</summary>
         F6,
 
-        /// <value>F7 key.</value>
+        /// <summary>F7 key.</summary>
         F7,
 
-        /// <value>F8 key.</value>
+        /// <summary>F8 key.</summary>
         F8,
 
-        /// <value>F9 key.</value>
+        /// <summary>F9 key.</summary>
         F9,
 
-        /// <value>F10 key.</value>
+        /// <summary>F10 key.</summary>
         F10,
 
-        /// <value>F11 key.</value>
+        /// <summary>F11 key.</summary>
         F11,
 
-        /// <value>F12 key.</value>
+        /// <summary>F12 key.</summary>
         F12,
 
-        /// <value>DEL key.</value>
+        /// <summary>DEL key.</summary>
         DEL,
 
-        /// <value>END key.</value>
+        /// <summary>END key.</summary>
         END,
     
-        /// <value>INS key.</value>
+        /// <summary>INS key.</summary>
         INS,
 
-        /// <value>HOME key.</value>
+        /// <summary>HOME key.</summary>
         HOME,
 
-        /// <value>PRTSC key.</value>
+        /// <summary>PRTSC key.</summary>
         PRTSC,
 
-        /// <value>SCRLK key.</value>
+        /// <summary>SCRLK key.</summary>
         SCRLK,
 
-        /// <value>PAUSE key.</value>
+        /// <summary>PAUSE key.</summary>
         PAUSE,
 
-        /// <value>PGUP key.</value>
+        /// <summary>PGUP key.</summary>
         PGUP,
 
-        /// <value>PGDN key.</value>
+        /// <summary>PGDN key.</summary>
         PGDN,
 
-        /// <value>FN key.</value>
+        /// <summary>FN key.</summary>
         FN,
 
-        /// <value>Caps lock key.</value>
+        /// <summary>Caps lock key.</summary>
         CapsLock,
 
-        /// <value>Left slash key ( \ ).</value>
+        /// <summary>Left slash key ( \ ).</summary>
         LeftSlash,
 
-        /// <value>Right slash key ( / ).</value>
+        /// <summary>Right slash key ( / ).</summary>
         RightSlash,
 
-        /// <value>Left brace key ( [ ).</value>
+        /// <summary>Left brace key ( [ ).</summary>
         LeftBrace,
 
-        /// <value>Right brace key ( ] ).</value>
+        /// <summary>Right brace key ( ] ).</summary>
         RightBrace,
 
-        /// <value>Minus key ( - ).</value>
+        /// <summary>Minus key ( - ).</summary>
         Minus,
 
-        /// <value>Equals key.</value>
+        /// <summary>Equals key.</summary>
         Equals,
 
-        /// <value>Backtick key ( ` ).</value>
+        /// <summary>Backtick key ( ` ).</summary>
         Backtick,
 
-        /// <value>Single quote key ( ' ).</value>
+        /// <summary>Single quote key ( ' ).</summary>
         SingleQuote,
 
-        /// <value>Semicolon key.</value>
+        /// <summary>Semicolon key.</summary>
         SemiColon,
 
-        /// <value>Up arrow key.</value>
+        /// <summary>Up arrow key.</summary>
         UpArrow,
 
-        /// <value>Down arrow key.</value>
+        /// <summary>Down arrow key.</summary>
         DownArrow,
 
-        /// <value>Left arrow key.</value>
+        /// <summary>Left arrow key.</summary>
         LeftArrow,
 
-        /// <value>Right arrow key.</value>
+        /// <summary>Right arrow key.</summary>
         RightArrow
     }
 }

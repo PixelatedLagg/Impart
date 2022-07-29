@@ -5,10 +5,10 @@ namespace Impart
     /// <summary>The event arguments passed when a client requests a WebPage from the Website.</summary>
     public struct WebsiteRequestArgs
     {
-        /// <value>The full request from the client.</value>
+        /// <summary>The full request from the client.</summary>
         public readonly string Request;
 
-        /// <value>The IP address of the client.</value>
+        /// <summary>The IP address of the client.</summary>
         public readonly IPAddress Address;
 
         /// <summary>Create a WebsiteRequestArgs instance.</summary>

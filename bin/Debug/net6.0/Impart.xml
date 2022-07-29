@@ -8,10 +8,10 @@
             <summary>The class for hosting a REST API.</summary>
         </member>
         <member name="P:Impart.Api.Rest.Port">
-            <value>The value of the localhost port the API is being hosted on.</value>
+            <summary>The value of the localhost port the API is being hosted on.</summary>
         </member>
         <member name="F:Impart.Api.Rest.Error">
-            <value>The method to be called in the event of an error.</value>
+            <summary>The method to be called in the event of an error.</summary>
         </member>
         <member name="M:Impart.Api.Rest.#ctor(System.Int32)">
             <summary>Creates a Rest instance with <paramref name="port"/> as the port.</summary>
@@ -27,7 +27,7 @@
             <summary>Attribute to hook Rest routes to methods.</summary>
         </member>
         <member name="P:Impart.Api.Rest.RestRequest.Route">
-            <value>The Rest route.</value>
+            <summary>The Rest route.</summary>
         </member>
         <member name="M:Impart.Api.Rest.RestRequest.#ctor(System.String)">
             <summary>Creates a RestRequest instance.</summary>
@@ -37,10 +37,10 @@
             <summary>The class for hosting a SOAP API.</summary>
         </member>
         <member name="P:Impart.Api.Soap.Port">
-            <value>The value of the localhost port the API is being hosted on.</value>
+            <summary>The value of the localhost port the API is being hosted on.</summary>
         </member>
         <member name="F:Impart.Api.Soap.Error">
-            <value>The method to be called in the event of an error.</value>
+            <summary>The method to be called in the event of an error.</summary>
         </member>
         <member name="M:Impart.Api.Soap.#ctor(System.Int32)">
             <summary>Creates a Soap instance.</summary>
@@ -56,7 +56,7 @@
             <summary>Attribute to hook Soap routes to methods.</summary>
         </member>
         <member name="P:Impart.Api.Soap.SoapRequest.Route">
-            <value>The Soap route.</value>
+            <summary>The Soap route.</summary>
         </member>
         <member name="M:Impart.Api.Soap.SoapRequest.#ctor(System.String)">
             <summary>Creates a SoapRequest instance.</summary>
@@ -66,7 +66,7 @@
             <summary>Information about an error from an API.</summary>
         </member>
         <member name="P:Impart.Api.ErrorContext.Type">
-            <value>The error type.</value>
+            <summary>The error type.</summary>
         </member>
         <member name="M:Impart.Api.ErrorContext.#ctor(System.Net.Sockets.Socket,Impart.Api.ErrorType)">
             <summary>Creates an ErrorContext instance.</summary>
@@ -103,10 +103,10 @@
             <summary>Information about current API event.</summary>
         </member>
         <member name="F:Impart.Api.APIEventArgs.Request">
-            <value>The type of request that was sent.</value>
+            <summary>The type of request that was sent.</summary>
         </member>
         <member name="F:Impart.Api.APIEventArgs.Time">
-            <value>The time the request was sent.</value>
+            <summary>The time the request was sent.</summary>
         </member>
         <member name="M:Impart.Api.APIEventArgs.#ctor(Impart.Api.RequestType)">
             <summary>Creates an APIEventArgs instance with <paramref name="request"/> as the request type.</summary>
@@ -116,151 +116,151 @@
             <summary>All of the API server-side error types.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.BadRequest">
-            <value>BadRequest error.</value>
+            <summary>BadRequest error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.Unauthorized">
-            <value>Unauthorized error.</value>
+            <summary>Unauthorized error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.PaymentRequired">
-            <value>PaymentRequired error.</value>
+            <summary>PaymentRequired error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.Forbidden">
-            <value>Forbidden error.</value>
+            <summary>Forbidden error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.NotFound">
-            <value>NotFound error.</value>
+            <summary>NotFound error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.MethodNotAllowed">
-            <value>MethodNotAllowed error.</value>
+            <summary>MethodNotAllowed error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.NotAcceptable">
-            <value>NotAcceptable error.</value>
+            <summary>NotAcceptable error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.ProxyAuthenticationRequired">
-            <value>ProxyAuthenticationRequired error.</value>
+            <summary>ProxyAuthenticationRequired error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.RequestTimeout">
-            <value>RequestTimeout error.</value>
+            <summary>RequestTimeout error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.Conflict">
-            <value>Conflict error.</value>
+            <summary>Conflict error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.Gone">
-            <value>Gone error.</value>
+            <summary>Gone error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.LengthRequest">
-            <value>LengthRequest error.</value>
+            <summary>LengthRequest error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.PreconditionFailed">
-            <value>PreconditionFailed error.</value>
+            <summary>PreconditionFailed error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.PayloadTooLarge">
-            <value>PayloadTooLarge error.</value>
+            <summary>PayloadTooLarge error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.URITooLong">
-            <value>URITooLong error.</value>
+            <summary>URITooLong error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.UnsupportedMediaType">
-            <value>UnsupportedMediaType error.</value>
+            <summary>UnsupportedMediaType error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.RangeNotSatisfiable">
-            <value>RangeNotSatisfiable error.</value>
+            <summary>RangeNotSatisfiable error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.ExpectationFailed">
-            <value>ExpectationFailed error.</value>
+            <summary>ExpectationFailed error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.MisdirectedRequest">
-            <value>MisdirectedRequest error.</value>
+            <summary>MisdirectedRequest error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.UnprocessableEntity">
-            <value>UnprocessableEntity error.</value>
+            <summary>UnprocessableEntity error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.Locked">
-            <value>Locked error.</value>
+            <summary>Locked error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.FailedDependency">
-            <value>FailedDependency error.</value>
+            <summary>FailedDependency error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.TooEarly">
-            <value>TooEarly error.</value>
+            <summary>TooEarly error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.UpgradeRequired">
-            <value>UpgradeRequired error.</value>
+            <summary>UpgradeRequired error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.PreconditionRequired">
-            <value>PreconditionRequired error.</value>
+            <summary>PreconditionRequired error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.TooManyRequests">
-            <value>TooManyRequests error.</value>
+            <summary>TooManyRequests error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.RequestHeaderFieldsTooLarge">
-            <value>RequestHeaderFieldsTooLarge error.</value>
+            <summary>RequestHeaderFieldsTooLarge error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.UnavailableForLegalReasons">
-            <value>UnavailableForLegalReasons error.</value>
+            <summary>UnavailableForLegalReasons error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.InternalServerError">
-            <value>InternalServerError error.</value>
+            <summary>InternalServerError error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.NotImplemented">
-            <value>NotImplemented error.</value>
+            <summary>NotImplemented error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.BadGateway">
-            <value>BadGateway error.</value>
+            <summary>BadGateway error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.ServiceUnavailable">
-            <value>ServiceUnavailable error.</value>
+            <summary>ServiceUnavailable error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.GatewayTimeout">
-            <value>GatewayTimeout error.</value>
+            <summary>GatewayTimeout error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.HTTPVersionNotSupported">
-            <value>HTTPVersionNotSupported error.</value>
+            <summary>HTTPVersionNotSupported error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.VariantAlsoNegotiates">
-            <value>VariantAlsoNegotiates error.</value>
+            <summary>VariantAlsoNegotiates error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.InsufficientStorage">
-            <value>InsufficientStorage error.</value>
+            <summary>InsufficientStorage error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.LoopDetected">
-            <value>LoopDetected error.</value>
+            <summary>LoopDetected error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.NotExtended">
-            <value>NotExtended error.</value>
+            <summary>NotExtended error.</summary>
         </member>
         <member name="F:Impart.Api.ErrorType.NetworkAuthenticationRequired">
-            <value>NetworkAuthenticationRequired error.</value>
+            <summary>NetworkAuthenticationRequired error.</summary>
         </member>
         <member name="T:Impart.Api.RequestType">
             <summary>All of the request types.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Get">
-            <value>GET HTTP request.</value>
+            <summary>GET HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Push">
-            <value>PUSH HTTP request.</value>
+            <summary>PUSH HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Put">
-            <value>PUT HTTP request.</value>
+            <summary>PUT HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Delete">
-            <value>DELETE HTTP request.</value>
+            <summary>DELETE HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Head">
-            <value>HEAD HTTP request.</value>
+            <summary>HEAD HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Connect">
-            <value>CONNECT HTTP request.</value>
+            <summary>CONNECT HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Options">
-            <value>OPTIONS HTTP request.</value>
+            <summary>OPTIONS HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Trace">
-            <value>TRACE HTTP request.</value>
+            <summary>TRACE HTTP request.</summary>
         </member>
         <member name="F:Impart.Api.RequestType.Patch">
-            <value>PATCH HTTP request.</value>
+            <summary>PATCH HTTP request.</summary>
         </member>
         <member name="T:Impart.Data.Color">
             <summary>The class for generating random colors.</summary>
@@ -306,16 +306,16 @@
             <summary>All character types.</summary>
         </member>
         <member name="F:Impart.Data.Letter.Types.Any">
-            <value>Any character.</value>
+            <summary>Any character.</summary>
         </member>
         <member name="F:Impart.Data.Letter.Types.Special">
-            <value>Special character.</value>
+            <summary>Special character.</summary>
         </member>
         <member name="F:Impart.Data.Letter.Types.Number">
-            <value>Number character.</value>
+            <summary>Number character.</summary>
         </member>
         <member name="F:Impart.Data.Letter.Types.Alphabet">
-            <value>Alphabet character.</value>
+            <summary>Alphabet character.</summary>
         </member>
         <member name="T:Impart.Data.Number">
             <summary>Randomly generate a number.</summary>
@@ -341,10 +341,10 @@
             <summary>Scrollbar for Division that Impart automatically generates when using a Scrollbar with a Division.</summary>
         </member>
         <member name="P:Impart.Internal.DivisionScrollbar.Impart#IStyleElement#ID">
-            <value>The ID value of the DivisionScrollbar. (always returns null)</value>
+            <summary>The ID value of the DivisionScrollbar. (always returns null)</summary>
         </member>
         <member name="P:Impart.Internal.DivisionScrollbar.Impart#IStyleElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Internal.DivisionScrollbar.#ctor(Impart.Scrollbar,System.String,System.Int32)">
             <summary>Creates a DivisionScrollbar instance.</summary>
@@ -428,322 +428,322 @@
             <summary>All browser types.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Chrome">
-            <value>Chrome browser.</value>
+            <summary>Chrome browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Chromium">
-            <value>Chromium browser.</value>
+            <summary>Chromium browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Opera">
-            <value>Opera browser.</value>
+            <summary>Opera browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Safari">
-            <value>Safari browser.</value>
+            <summary>Safari browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Firefox">
-            <value>Firefox browser.</value>
+            <summary>Firefox browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.IE">
-            <value>IE browser.</value>
+            <summary>IE browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Netscape">
-            <value>Netscape browser.</value>
+            <summary>Netscape browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Edge">
-            <value>Edge browser.</value>
+            <summary>Edge browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Brave">
-            <value>Brave browser.</value>
+            <summary>Brave browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Vivaldi">
-            <value>Vivaldi browser.</value>
+            <summary>Vivaldi browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Torch">
-            <value>Torch browser.</value>
+            <summary>Torch browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.Maxthon">
-            <value>Maxthon browser.</value>
+            <summary>Maxthon browser.</summary>
         </member>
         <member name="F:Impart.Scripting.Browser.NotBrand">
-            <value>Not a brand browser.</value>
+            <summary>Not a brand browser.</summary>
         </member>
         <member name="T:Impart.Scripting.Click">
             <summary>All click types.</summary>
         </member>
         <member name="F:Impart.Scripting.Click.Left">
-            <value>Left mouse click.</value>
+            <summary>Left mouse click.</summary>
         </member>
         <member name="F:Impart.Scripting.Click.Right">
-            <value>Right mouse click.</value>
+            <summary>Right mouse click.</summary>
         </member>
         <member name="F:Impart.Scripting.Click.Middle">
-            <value>Middle (scroll) mouse click.</value>
+            <summary>Middle (scroll) mouse click.</summary>
         </member>
         <member name="T:Impart.Scripting.Key">
             <summary>All key types.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.A">
-            <value>A key.</value>
+            <summary>A key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.B">
-            <value>B key.</value>
+            <summary>B key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.C">
-            <value>C key.</value>
+            <summary>C key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.D">
-            <value>D key.</value>
+            <summary>D key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.E">
-            <value>E key.</value>
+            <summary>E key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F">
-            <value>F key.</value>
+            <summary>F key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.G">
-            <value>G key.</value>
+            <summary>G key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.H">
-            <value>H key.</value>
+            <summary>H key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.I">
-            <value>I key.</value>
+            <summary>I key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.J">
-            <value>J key.</value>
+            <summary>J key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.K">
-            <value>K key.</value>
+            <summary>K key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.L">
-            <value>L key.</value>
+            <summary>L key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.M">
-            <value>M key.</value>
+            <summary>M key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N">
-            <value>N key.</value>
+            <summary>N key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.O">
-            <value>O key.</value>
+            <summary>O key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.P">
-            <value>P key.</value>
+            <summary>P key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Q">
-            <value>Q key.</value>
+            <summary>Q key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.R">
-            <value>R key.</value>
+            <summary>R key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.S">
-            <value>S key.</value>
+            <summary>S key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.T">
-            <value>T key.</value>
+            <summary>T key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.U">
-            <value>U key.</value>
+            <summary>U key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.V">
-            <value>V key.</value>
+            <summary>V key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.W">
-            <value>W key.</value>
+            <summary>W key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.X">
-            <value>X key.</value>
+            <summary>X key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Y">
-            <value>Y key.</value>
+            <summary>Y key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Z">
-            <value>Z key.</value>
+            <summary>Z key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Tab">
-            <value>Tab key.</value>
+            <summary>Tab key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Enter">
-            <value>Enter key.</value>
+            <summary>Enter key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Shift">
-            <value>Shift key (either left or right).</value>
+            <summary>Shift key (either left or right).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Backspace">
-            <value>Backspace key.</value>
+            <summary>Backspace key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.CTRL">
-            <value>CTRL key (either left or right).</value>
+            <summary>CTRL key (either left or right).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.ALT">
-            <value>ALT key (either left or right).</value>
+            <summary>ALT key (either left or right).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Escape">
-            <value>Escape key.</value>
+            <summary>Escape key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Space">
-            <value>Space key.</value>
+            <summary>Space key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N1">
-            <value>Number 1 key.</value>
+            <summary>Number 1 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N2">
-            <value>Number 2 key.</value>
+            <summary>Number 2 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N3">
-            <value>Number 3 key.</value>
+            <summary>Number 3 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N4">
-            <value>Number 4 key.</value>
+            <summary>Number 4 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N5">
-            <value>Number 5 key.</value>
+            <summary>Number 5 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N6">
-            <value>Number 6 key.</value>
+            <summary>Number 6 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N7">
-            <value>Number 7 key.</value>
+            <summary>Number 7 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N8">
-            <value>Number 8 key.</value>
+            <summary>Number 8 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N9">
-            <value>Number 9 key.</value>
+            <summary>Number 9 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.N0">
-            <value>Number 0 key.</value>
+            <summary>Number 0 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F1">
-            <value>F1 key.</value>
+            <summary>F1 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F2">
-            <value>F2 key.</value>
+            <summary>F2 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F3">
-            <value>F3 key.</value>
+            <summary>F3 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F4">
-            <value>F4 key.</value>
+            <summary>F4 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F5">
-            <value>F5 key.</value>
+            <summary>F5 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F6">
-            <value>F6 key.</value>
+            <summary>F6 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F7">
-            <value>F7 key.</value>
+            <summary>F7 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F8">
-            <value>F8 key.</value>
+            <summary>F8 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F9">
-            <value>F9 key.</value>
+            <summary>F9 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F10">
-            <value>F10 key.</value>
+            <summary>F10 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F11">
-            <value>F11 key.</value>
+            <summary>F11 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.F12">
-            <value>F12 key.</value>
+            <summary>F12 key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.DEL">
-            <value>DEL key.</value>
+            <summary>DEL key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.END">
-            <value>END key.</value>
+            <summary>END key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.INS">
-            <value>INS key.</value>
+            <summary>INS key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.HOME">
-            <value>HOME key.</value>
+            <summary>HOME key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.PRTSC">
-            <value>PRTSC key.</value>
+            <summary>PRTSC key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.SCRLK">
-            <value>SCRLK key.</value>
+            <summary>SCRLK key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.PAUSE">
-            <value>PAUSE key.</value>
+            <summary>PAUSE key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.PGUP">
-            <value>PGUP key.</value>
+            <summary>PGUP key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.PGDN">
-            <value>PGDN key.</value>
+            <summary>PGDN key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.FN">
-            <value>FN key.</value>
+            <summary>FN key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.CapsLock">
-            <value>Caps lock key.</value>
+            <summary>Caps lock key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.LeftSlash">
-            <value>Left slash key ( \ ).</value>
+            <summary>Left slash key ( \ ).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.RightSlash">
-            <value>Right slash key ( / ).</value>
+            <summary>Right slash key ( / ).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.LeftBrace">
-            <value>Left brace key ( [ ).</value>
+            <summary>Left brace key ( [ ).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.RightBrace">
-            <value>Right brace key ( ] ).</value>
+            <summary>Right brace key ( ] ).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Minus">
-            <value>Minus key ( - ).</value>
+            <summary>Minus key ( - ).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Equals">
-            <value>Equals key.</value>
+            <summary>Equals key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.Backtick">
-            <value>Backtick key ( ` ).</value>
+            <summary>Backtick key ( ` ).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.SingleQuote">
-            <value>Single quote key ( ' ).</value>
+            <summary>Single quote key ( ' ).</summary>
         </member>
         <member name="F:Impart.Scripting.Key.SemiColon">
-            <value>Semicolon key.</value>
+            <summary>Semicolon key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.UpArrow">
-            <value>Up arrow key.</value>
+            <summary>Up arrow key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.DownArrow">
-            <value>Down arrow key.</value>
+            <summary>Down arrow key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.LeftArrow">
-            <value>Left arrow key.</value>
+            <summary>Left arrow key.</summary>
         </member>
         <member name="F:Impart.Scripting.Key.RightArrow">
-            <value>Right arrow key.</value>
+            <summary>Right arrow key.</summary>
         </member>
         <member name="T:Impart.Scripting.Platform">
             <summary>All platform types.</summary>
         </member>
         <member name="F:Impart.Scripting.Platform.Windows">
-            <value>Windows operating system.</value>
+            <summary>Windows operating system.</summary>
         </member>
         <member name="F:Impart.Scripting.Platform.Linux">
-            <value>Linux operating system.</value>
+            <summary>Linux operating system.</summary>
         </member>
         <member name="F:Impart.Scripting.Platform.Mac">
-            <value>Mac operating system.</value>
+            <summary>Mac operating system.</summary>
         </member>
         <member name="F:Impart.Scripting.Platform.Chrome">
-            <value>Chrome operating system.</value>
+            <summary>Chrome operating system.</summary>
         </member>
         <member name="F:Impart.Scripting.Platform.IOS">
-            <value>IOS operating system.</value>
+            <summary>IOS operating system.</summary>
         </member>
         <member name="F:Impart.Scripting.Platform.Android">
-            <value>Android operating system.</value>
+            <summary>Android operating system.</summary>
         </member>
         <member name="F:Impart.Scripting.Platform.Unknown">
-            <value>Unknown operating system.</value>
+            <summary>Unknown operating system.</summary>
         </member>
         <member name="T:Impart.Scripting.WebPageScripting">
             <summary>Interactive scripting for WebPage.</summary>
@@ -762,10 +762,10 @@
             <summary>An element attribute.</summary>
         </member>
         <member name="P:Impart.Attr.Type">
-            <Value>The AttrType.</Value>
+            <summary>The AttrType.</summary>
         </member>
         <member name="P:Impart.Attr.Value">
-            <Value>The Attr value(s).</Value>
+            <summary>The Attr value(s).</summary>
         </member>
         <member name="M:Impart.Attr.#ctor(Impart.AttrType,System.Object[])">
             <summary>Creates an Attr instance.</summary>
@@ -831,61 +831,61 @@
             <summary>All the Attribute types.</summary>
         </member>
         <member name="F:Impart.AttrType.BackgroundColor">
-            <value>Background color attribute.</value>
+            <summary>Background color attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.ForegroundColor">
-            <value>Foreground color attribute.</value>
+            <summary>Foreground color attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Alignment">
-            <value>Alignment attribute.</value>
+            <summary>Alignment attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.FontFamily">
-            <value>Font family attribute.</value>
+            <summary>Font family attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.FontSize">
-            <value>Font size attribute.</value>
+            <summary>Font size attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Margin">
-            <value>Margin attribute.</value>
+            <summary>Margin attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Padding">
-            <value>Padding attribute.</value>
+            <summary>Padding attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Width">
-            <value>Width attribute.</value>
+            <summary>Width attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Height">
-            <value>Height attribute.</value>
+            <summary>Height attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Border">
-            <value>Border attribute.</value>
+            <summary>Border attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.OverflowX">
-            <value>X-axis scrollbar overflow attribute.</value>
+            <summary>X-axis scrollbar overflow attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.OverflowY">
-            <value>Y-axis scrollbar overflow attribute.</value>
+            <summary>Y-axis scrollbar overflow attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.AlignText">
-            <value>Text alignment attribute.</value>
+            <summary>Text alignment attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Animation">
-            <value>Animation attribute.</value>
+            <summary>Animation attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.Background">
-            <value>Background attribute.</value>
+            <summary>Background attribute.</summary>
         </member>
         <member name="F:Impart.AttrType.CustomFont">
-            <value>Custom font attribute.</value>
+            <summary>Custom font attribute.</summary>
         </member>
         <member name="T:Impart.ExtAttr">
             <summary>An element external attribute.</summary>
         </member>
         <member name="F:Impart.ExtAttr.Type">
-            <Value>The ExtAttrType.</Value>
+            <summary>The ExtAttrType.</summary>
         </member>
         <member name="F:Impart.ExtAttr.Value">
-            <Value>The ExtAttr value.</Value>
+            <summary>The ExtAttr value.</summary>
         </member>
         <member name="M:Impart.ExtAttr.#ctor(Impart.ExtAttrType,System.String)">
             <summary>Creates an ExtAttr instance.</summary>
@@ -951,10 +951,10 @@
             <summary>All the ExtAttr types.</summary>
         </member>
         <member name="F:Impart.ExtAttrType.ID">
-            <value>ID external attribute.</value>
+            <summary>ID external attribute.</summary>
         </member>
         <member name="F:Impart.ExtAttrType.HoverMessage">
-            <value>Hover message external attribute.</value>
+            <summary>Hover message external attribute.</summary>
         </member>
         <member name="T:Impart.ImpartError">
             <summary>The main error class used by Impart.</summary>
@@ -967,10 +967,10 @@
             <summary>Store a log.</summary>
         </member>
         <member name="F:Impart.Log.Milliseconds">
-            <value>The duration of the log.</value>
+            <summary>The duration of the log.</summary>
         </member>
         <member name="F:Impart.Log.Message">
-            <value>The Log message.</value>
+            <summary>The Log message.</summary>
         </member>
         <member name="M:Impart.Log.#ctor(System.String,System.Double)">
             <summary>Creates a Log instance.</summary>
@@ -996,7 +996,7 @@
             <summary>Track a difference in time.</summary>
         </member>
         <member name="E:Impart.Timer.Event">
-            <value>Called when the timer is stopped.</value>
+            <summary>Called when the timer is stopped.</summary>
         </member>
         <member name="M:Impart.Timer.Start">
             <summary>Start tracking time.</summary>
@@ -1015,19 +1015,19 @@
             <summary>Button element.</summary>
         </member>
         <member name="P:Impart.Button.Text">
-            <value>The Text value of the Button.</value>
+            <summary>The Text value of the Button.</summary>
         </member>
         <member name="F:Impart.Button.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Button.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Button.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Button.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Button.#ctor">
             <summary>Creates an empty Button instance.</summary>
@@ -1055,16 +1055,16 @@
             <summary>Division element.</summary>
         </member>
         <member name="F:Impart.Division.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Division.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Division.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Division.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Division.#ctor">
             <summary>Creates a Division instance.</summary>
@@ -1139,25 +1139,25 @@
             <summary>Embed a page into your website in the form of a frame.</summary>
         </member>
         <member name="P:Impart.EFrame.Width">
-            <value>The width (in pixels).</value>
+            <summary>The width (in pixels).</summary>
         </member>
         <member name="P:Impart.EFrame.Height">
-            <value>The height (in pixels).</value>
+            <summary>The height (in pixels).</summary>
         </member>
         <member name="P:Impart.EFrame.Source">
-            <value>The source link of the page to embed.</value>
+            <summary>The source link of the page to embed.</summary>
         </member>
         <member name="F:Impart.EFrame.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.EFrame.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.EFrame.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.EFrame.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.EFrame.#ctor(System.Int32,System.Int32,System.String)">
             <summary>Creates an EFrame instance.</summary>
@@ -1184,13 +1184,13 @@
             <summary>Form element.</summary>
         </member>
         <member name="F:Impart.Form.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Form.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Form.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Form.#ctor">
             <summary>Creates a Form instance.</summary>
@@ -1226,10 +1226,10 @@
             <summary>Checkbox input for Form.</summary>
         </member>
         <member name="F:Impart.CheckField.Attrs">
-            <value>The Attr values of the SubmitField.</value>
+            <summary>The Attr values of the SubmitField.</summary>
         </member>
         <member name="F:Impart.CheckField.ExtAttrs">
-            <value>The ExtAttr values of the SubmitField.</value>
+            <summary>The ExtAttr values of the SubmitField.</summary>
         </member>
         <member name="M:Impart.CheckField.#ctor(System.String)">
             <summary>Creates a CheckField instance.</summary>
@@ -1248,10 +1248,10 @@
             <summary>Submit button for Form.</summary>
         </member>
         <member name="F:Impart.SubmitField.Attrs">
-            <value>The Attr values of the SubmitField.</value>
+            <summary>The Attr values of the SubmitField.</summary>
         </member>
         <member name="F:Impart.SubmitField.ExtAttrs">
-            <value>The ExtAttr values of the SubmitField.</value>
+            <summary>The ExtAttr values of the SubmitField.</summary>
         </member>
         <member name="M:Impart.SubmitField.#ctor">
             <summary>Creates a SubmitField instance.</summary>
@@ -1263,13 +1263,13 @@
             <summary>Text field for Form.</summary>
         </member>
         <member name="P:Impart.TextField.Text">
-            <value>The Text value of the TextField.</value>
+            <summary>The Text value of the TextField.</summary>
         </member>
         <member name="F:Impart.TextField.Attrs">
-            <value>The Attr values of the SubmitField.</value>
+            <summary>The Attr values of the SubmitField.</summary>
         </member>
         <member name="F:Impart.TextField.ExtAttrs">
-            <value>The ExtAttr values of the SubmitField.</value>
+            <summary>The ExtAttr values of the SubmitField.</summary>
         </member>
         <member name="M:Impart.TextField.#ctor(System.String)">
             <summary>Creates a TextField instance.</summary>
@@ -1282,22 +1282,22 @@
             <summary>Header element.</summary>
         </member>
         <member name="P:Impart.Header.TextValue">
-            <value>The text value of the Header.</value>
+            <summary>The text value of the Header.</summary>
         </member>
         <member name="F:Impart.Header.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Header.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Header.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Header.Number">
-            <value>The Header number value of the Header.</value>
+            <summary>The Header number value of the Header.</summary>
         </member>
         <member name="P:Impart.Header.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Header.#ctor">
             <summary>Creates an empty Header instance.</summary>
@@ -1326,19 +1326,19 @@
             <summary>Image element.</summary>
         </member>
         <member name="P:Impart.Image.Source">
-            <value>The source link of the Image.</value>
+            <summary>The source link of the Image.</summary>
         </member>
         <member name="F:Impart.Image.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Image.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Image.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Image.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Image.#ctor">
             <summary>Creates an empty Image instance.</summary>
@@ -1366,28 +1366,28 @@
             <summary>Link element.</summary>
         </member>
         <member name="P:Impart.Link.Text">
-            <value>The Text value of the Link.</value>
+            <summary>The Text value of the Link.</summary>
         </member>
         <member name="P:Impart.Link.Image">
-            <value>The Image value of the Link.</value>
+            <summary>The Image value of the Link.</summary>
         </member>
         <member name="P:Impart.Link.Path">
-            <value>The path value of the Link.</value>
+            <summary>The path value of the Link.</summary>
         </member>
         <member name="F:Impart.Link.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Link.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Link.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Link.LinkType">
-            <value>The Type of Link.</value>
+            <summary>The Type of Link.</summary>
         </member>
         <member name="P:Impart.Link.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Link.#ctor">
             <summary>Creates an empty Link instance.</summary>
@@ -1421,22 +1421,22 @@
             <summary>List element.</summary>
         </member>
         <member name="P:Impart.List.Entries">
-            <value>The entry values of the List.</value>
+            <summary>The entry values of the List.</summary>
         </member>
         <member name="P:Impart.List.Type">
-            <value>The ListType value of the List.</value>
+            <summary>The ListType value of the List.</summary>
         </member>
         <member name="F:Impart.List.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.List.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.List.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.List.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.List.#ctor(Impart.ListType,Impart.Text[])">
             <summary>Creates a List instance.</summary>
@@ -1470,13 +1470,13 @@
             <summary>A nest of IElements.</summary>
         </member>
         <member name="P:Impart.Nest.IElement">
-            <value>All of the IElements included in the Nest.</value>
+            <summary>All of the IElements included in the Nest.</summary>
         </member>
         <member name="P:Impart.Nest.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="P:Impart.Nest.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</value>
+            <summary>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</summary>
         </member>
         <member name="M:Impart.Nest.#ctor">
             <summary>Creates an empty Nest instance.</summary>
@@ -1502,13 +1502,13 @@
             <summary>Animation style element.</summary>
         </member>
         <member name="P:Impart.Animation.Frames">
-            <value>A list of Frames included in the Animation.</value>
+            <summary>A list of Frames included in the Animation.</summary>
         </member>
         <member name="P:Impart.Animation.Impart#IStyleElement#ID">
-            <value>The ID value of the Animation. (acts as the name of the Animation)</value>
+            <summary>The ID value of the Animation. (acts as the name of the Animation)</summary>
         </member>
         <member name="P:Impart.Animation.Impart#IStyleElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Animation.#ctor(System.String)">
             <summary>Creates an Animation instance.</summary>
@@ -1535,16 +1535,16 @@
             <summary>The arguments for calling an Animation.</summary>
         </member>
         <member name="F:Impart.AnimationArgs.Name">
-            <value>The Animation name.</value>
+            <summary>The Animation name.</summary>
         </member>
         <member name="F:Impart.AnimationArgs.Duration">
-            <value>The Animation duration.</value>
+            <summary>The Animation duration.</summary>
         </member>
         <member name="F:Impart.AnimationArgs.Delay">
-            <value>The Animation delay.</value>
+            <summary>The Animation delay.</summary>
         </member>
         <member name="F:Impart.AnimationArgs.Count">
-            <value>The number of times to repeat the Animation.</value>
+            <summary>The number of times to repeat the Animation.</summary>
         </member>
         <member name="M:Impart.AnimationArgs.#ctor(System.String,Impart.Time)">
             <summary>Creates an AnimationArgs instance.</summary>
@@ -1571,34 +1571,34 @@
             <summary>All types of changes in the Animation.</summary>
         </member>
         <member name="F:Impart.ChangeType.BackgroundColor">
-            <value>Background color change.</value>
+            <summary>Background color change.</summary>
         </member>
         <member name="F:Impart.ChangeType.ForegroundColor">
-            <value>Foreground color change.</value>
+            <summary>Foreground color change.</summary>
         </member>
         <member name="F:Impart.ChangeType.Width">
-            <value>Width change.</value>
+            <summary>Width change.</summary>
         </member>
         <member name="F:Impart.ChangeType.Height">
-            <value>Height change.</value>
+            <summary>Height change.</summary>
         </member>
         <member name="F:Impart.ChangeType.Position">
-            <value>Position change.</value>
+            <summary>Position change.</summary>
         </member>
         <member name="F:Impart.ChangeType.Size">
-            <value>Size change.</value>
+            <summary>Size change.</summary>
         </member>
         <member name="T:Impart.Frame">
             <summary>The class for a single Frame in an Animation.</summary>
         </member>
         <member name="F:Impart.Frame.Position">
-            <value>The position of the Frame.</value>
+            <summary>The position of the Frame.</summary>
         </member>
         <member name="F:Impart.Frame.ChangeType">
-            <value>The type of Change.</value>
+            <summary>The type of Change.</summary>
         </member>
         <member name="F:Impart.Frame.Change">
-            <value>The change to take place in the Frame.</value>
+            <summary>The change to take place in the Frame.</summary>
         </member>
         <member name="M:Impart.Frame.#ctor(Impart.Percent,Impart.ChangeType,System.Object)">
             <summary>Creates a Frame instance.</summary>
@@ -1625,10 +1625,10 @@
             <summary>Arguments for setting the background image.</summary>
         </member>
         <member name="F:Impart.BackgroundArgs.Image">
-            <value>The background image.</value>
+            <summary>The background image.</summary>
         </member>
         <member name="F:Impart.BackgroundArgs.Background">
-            <value>The background image options.</value>
+            <summary>The background image options.</summary>
         </member>
         <member name="M:Impart.BackgroundArgs.#ctor(System.String,Impart.Background)">
             <summary>Creates a BackgroundArgs instance.</summary>
@@ -1639,13 +1639,13 @@
             <summary>Arguments for setting the border.</summary>
         </member>
         <member name="F:Impart.BorderArgs.Type">
-            <value>The border line type.</value>
+            <summary>The border line type.</summary>
         </member>
         <member name="F:Impart.BorderArgs.Width">
-            <value>The border line width.</value>
+            <summary>The border line width.</summary>
         </member>
         <member name="F:Impart.BorderArgs.Color">
-            <value>The border color.</value>
+            <summary>The border color.</summary>
         </member>
         <member name="M:Impart.BorderArgs.#ctor(Impart.BorderType,Impart.Length,Impart.Color)">
             <summary>Creates a BorderArgs instance</summary>
@@ -1657,31 +1657,31 @@
             <summary>All border line types.</summary>
         </member>
         <member name="F:Impart.BorderType.Normal">
-            <value>Normal border (solid line).</value>
+            <summary>Normal border (solid line).</summary>
         </member>
         <member name="F:Impart.BorderType.Dashed">
-            <value>Dashed border.</value>
+            <summary>Dashed border.</summary>
         </member>
         <member name="F:Impart.BorderType.Dotted">
-            <value>Dotted border.</value>
+            <summary>Dotted border.</summary>
         </member>
         <member name="F:Impart.BorderType.Double">
-            <value>Double border.</value>
+            <summary>Double border.</summary>
         </member>
         <member name="F:Impart.BorderType.In3D">
-            <value>Inward 3D border.</value>
+            <summary>Inward 3D border.</summary>
         </member>
         <member name="F:Impart.BorderType.Out3D">
-            <value>Outward 3D border.</value>
+            <summary>Outward 3D border.</summary>
         </member>
         <member name="T:Impart.Scrollbar">
             <summary>Scrollbar style element.</summary>
         </member>
         <member name="P:Impart.Scrollbar.Impart#IStyleElement#ID">
-            <value>The ID value of the Scrollbar. (always returns null)</value>
+            <summary>The ID value of the Scrollbar. (always returns null)</summary>
         </member>
         <member name="P:Impart.Scrollbar.Impart#IStyleElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Scrollbar.#ctor(Impart.Axis,Impart.Length,Impart.Color,Impart.Color,Impart.Length)">
             <summary>Creates a Scrollbar instance.</summary>
@@ -1698,19 +1698,19 @@
             <summary>Table element.</summary>
         </member>
         <member name="P:Impart.Table.Rows">
-            <value>The TableRow values of the Table.</value>
+            <summary>The TableRow values of the Table.</summary>
         </member>
         <member name="F:Impart.Table.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Table.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Table.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Table.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Table.#ctor(Impart.TableRow[])">
             <summary>Creates a Table instance.</summary>
@@ -1739,13 +1739,13 @@
             <summary>A header row of a Table.</summary>
         </member>
         <member name="P:Impart.TableHeader.Elements">
-            <value>The IElement values of the TableHeader.</value>
+            <summary>The IElement values of the TableHeader.</summary>
         </member>
         <member name="F:Impart.TableHeader.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.TableHeader.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.TableHeader.#ctor(Impart.IElement[])">
             <summary>Creates a TableHeader instance.</summary>
@@ -1762,16 +1762,16 @@
             <summary>A row of a Table.</summary>
         </member>
         <member name="P:Impart.TableRow.ID">
-            <value>The ID value of the TableRow.</value>
+            <summary>The ID value of the TableRow.</summary>
         </member>
         <member name="P:Impart.TableRow.Elements">
-            <value>The IElements values of the TableRow.</value>
+            <summary>The IElements values of the TableRow.</summary>
         </member>
         <member name="F:Impart.TableRow.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.TableRow.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.TableRow.#ctor(Impart.IElement[])">
             <summary>Creates a TableRow instance.</summary>
@@ -1788,22 +1788,22 @@
             <summary>Text element.</summary>
         </member>
         <member name="P:Impart.Text.TextValue">
-            <value>The text value of the Text.</value>
+            <summary>The text value of the Text.</summary>
         </member>
         <member name="P:Impart.Text.Type">
-            <value>The TextType value of the Text.</value>
+            <summary>The TextType value of the Text.</summary>
         </member>
         <member name="F:Impart.Text.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Text.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Text.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Text.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Text.#ctor">
             <summary>Creates an empty Text instance.</summary>
@@ -1840,25 +1840,25 @@
             <summary>Video element.</summary>
         </member>
         <member name="P:Impart.Video.Source">
-            <value>The Video source file.</value>
+            <summary>The Video source file.</summary>
         </member>
         <member name="P:Impart.Video.Size">
-            <value>The Video player size.</value>
+            <summary>The Video player size.</summary>
         </member>
         <member name="P:Impart.Video.Options">
-            <value>Options for the Video player.</value>
+            <summary>Options for the Video player.</summary>
         </member>
         <member name="F:Impart.Video.Attrs">
-            <value>The Attr values of the instance.</value>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Video.ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Video.Impart#IElement#ExtAttrs">
-            <value>The ExtAttr values of the instance.</value>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Video.Impart#IElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Video.#ctor(System.String,Impart.Length,Impart.Length,Impart.VideoOptions)">
             <summary>Creates a Video instance.</summary>
@@ -1886,13 +1886,13 @@
             <summary>Arguments for setting the Video player.</summary>
         </member>
         <member name="F:Impart.VideoOptions.ShowControls">
-            <value>Whether to show or hide the controls.</value>
+            <summary>Whether to show or hide the controls.</summary>
         </member>
         <member name="F:Impart.VideoOptions.Autoplay">
-            <value>Whether to autoplay the Video.</value>
+            <summary>Whether to autoplay the Video.</summary>
         </member>
         <member name="F:Impart.VideoOptions.Mute">
-            <value>Whether to start the Video muted.</value>
+            <summary>Whether to start the Video muted.</summary>
         </member>
         <member name="M:Impart.VideoOptions.#ctor(System.Boolean,System.Boolean,System.Boolean)">
             <summary>Creates a VideoOptions instance.</summary>
@@ -1904,70 +1904,70 @@
             <summary>All alignment types.</summary>
         </member>
         <member name="F:Impart.Alignment.Left">
-            <value>Left alignment.</value>
+            <summary>Left alignment.</summary>
         </member>
         <member name="F:Impart.Alignment.Right">
-            <value>Right alignment.</value>
+            <summary>Right alignment.</summary>
         </member>
         <member name="F:Impart.Alignment.Center">
-            <value>Center alignment.</value>
+            <summary>Center alignment.</summary>
         </member>
         <member name="F:Impart.Alignment.Justify">
-            <value>Justify alignment.</value>
+            <summary>Justify alignment.</summary>
         </member>
         <member name="T:Impart.Axis">
             <summary>All axis directions.</summary>
         </member>
         <member name="F:Impart.Axis.X">
-            <value>X-axis.</value>
+            <summary>X-axis.</summary>
         </member>
         <member name="F:Impart.Axis.Y">
-            <value>Y-axis.</value>
+            <summary>Y-axis.</summary>
         </member>
         <member name="T:Impart.ListType">
             <summary>All list types.</summary>
         </member>
         <member name="F:Impart.ListType.Ordered">
-            <value>Ordered list.</value>
+            <summary>Ordered list.</summary>
         </member>
         <member name="F:Impart.ListType.Unordered">
-            <value>Unordered list.</value>
+            <summary>Unordered list.</summary>
         </member>
         <member name="T:Impart.TextType">
             <summary>All of the Text types.</summary>
         </member>
         <member name="F:Impart.TextType.Bold">
-            <value>Bold text.</value>
+            <summary>Bold text.</summary>
         </member>
         <member name="F:Impart.TextType.Important">
-            <value>Important text.</value>
+            <summary>Important text.</summary>
         </member>
         <member name="F:Impart.TextType.Italic">
-            <value>Italic text.</value>
+            <summary>Italic text.</summary>
         </member>
         <member name="F:Impart.TextType.Emphasize">
-            <value>Emphasized text.</value>
+            <summary>Emphasized text.</summary>
         </member>
         <member name="F:Impart.TextType.Mark">
-            <value>Marked text.</value>
+            <summary>Marked text.</summary>
         </member>
         <member name="F:Impart.TextType.Small">
-            <value>Small text.</value>
+            <summary>Small text.</summary>
         </member>
         <member name="F:Impart.TextType.Delete">
-            <value>Deleted text.</value>
+            <summary>Deleted text.</summary>
         </member>
         <member name="F:Impart.TextType.Insert">
-            <value>Inserted text.</value>
+            <summary>Inserted text.</summary>
         </member>
         <member name="F:Impart.TextType.Subscript">
-            <value>Subscript text.</value>
+            <summary>Subscript text.</summary>
         </member>
         <member name="F:Impart.TextType.Superscript">
-            <value>Superscript text.</value>
+            <summary>Superscript text.</summary>
         </member>
         <member name="F:Impart.TextType.Regular">
-            <value>Regular text.</value>
+            <summary>Regular text.</summary>
         </member>
         <member name="T:Impart.Font">
             <summary>A font sourced from file(s).</summary>
@@ -1990,166 +1990,166 @@
             <summary>All main font families.</summary>
         </member>
         <member name="F:Impart.FontFamily.Arial">
-            <value>Arial font.</value>
+            <summary>Arial font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Helvetica">
-            <value>Helvetica font.</value>
+            <summary>Helvetica font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Verdana">
-            <value>Verdana font.</value>
+            <summary>Verdana font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Calibri">
-            <value>Calibri font.</value>
+            <summary>Calibri font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Noto">
-            <value>Noto font.</value>
+            <summary>Noto font.</summary>
         </member>
         <member name="F:Impart.FontFamily.LucidaSans">
-            <value>LucidaSans font.</value>
+            <summary>LucidaSans font.</summary>
         </member>
         <member name="F:Impart.FontFamily.GillSans">
-            <value>GillSans font.</value>
+            <summary>GillSans font.</summary>
         </member>
         <member name="F:Impart.FontFamily.CenturyGothic">
-            <value>CenturyGothic font.</value>
+            <summary>CenturyGothic font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Candara">
-            <value>Candara font.</value>
+            <summary>Candara font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Futara">
-            <value>Futara font.</value>
+            <summary>Futara font.</summary>
         </member>
         <member name="F:Impart.FontFamily.FranklinGothicMedium">
-            <value>FranklinGothicMedium font.</value>
+            <summary>FranklinGothicMedium font.</summary>
         </member>
         <member name="F:Impart.FontFamily.TrebuchetMS">
-            <value>TrebuchetMS font.</value>
+            <summary>TrebuchetMS font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Geneva">
-            <value>Geneva font.</value>
+            <summary>Geneva font.</summary>
         </member>
         <member name="F:Impart.FontFamily.SegoeUI">
-            <value>SegoeUI font.</value>
+            <summary>SegoeUI font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Optima">
-            <value>Optima font.</value>
+            <summary>Optima font.</summary>
         </member>
         <member name="F:Impart.FontFamily.AvantaGarde">
-            <value>AvantaGarde font.</value>
+            <summary>AvantaGarde font.</summary>
         </member>
         <member name="F:Impart.FontFamily.TimesNewRoman">
-            <value>TimesNewRoman font.</value>
+            <summary>TimesNewRoman font.</summary>
         </member>
         <member name="F:Impart.FontFamily.BigCaslon">
-            <value>BigCaslon font.</value>
+            <summary>BigCaslon font.</summary>
         </member>
         <member name="F:Impart.FontFamily.BodoniMT">
-            <value>BodoniMT font.</value>
+            <summary>BodoniMT font.</summary>
         </member>
         <member name="F:Impart.FontFamily.BookAntiqua">
-            <value>BookAntiqua font.</value>
+            <summary>BookAntiqua font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Bookman">
-            <value>Bookman font.</value>
+            <summary>Bookman font.</summary>
         </member>
         <member name="F:Impart.FontFamily.NewCenturySchoolbook">
-            <value>NewCenturySchoolbook font.</value>
+            <summary>NewCenturySchoolbook font.</summary>
         </member>
         <member name="F:Impart.FontFamily.CalistoMT">
-            <value>CalistoMT font.</value>
+            <summary>CalistoMT font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Cambria">
-            <value>Cambria font.</value>
+            <summary>Cambria font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Didot">
-            <value>Didot font.</value>
+            <summary>Didot font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Garamond">
-            <value>Garamond font.</value>
+            <summary>Garamond font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Georgia">
-            <value>Georgia font.</value>
+            <summary>Georgia font.</summary>
         </member>
         <member name="F:Impart.FontFamily.GoudyOldStyle">
-            <value>GoudyOldStyle font.</value>
+            <summary>GoudyOldStyle font.</summary>
         </member>
         <member name="F:Impart.FontFamily.HoeflerText">
-            <value>HoeflerText font.</value>
+            <summary>HoeflerText font.</summary>
         </member>
         <member name="F:Impart.FontFamily.LucidaBright">
-            <value>LucidaBright font.</value>
+            <summary>LucidaBright font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Palatino">
-            <value>Palatino font.</value>
+            <summary>Palatino font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Perpetua">
-            <value>Perpetua font.</value>
+            <summary>Perpetua font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Rockwell">
-            <value>Rockwell font.</value>
+            <summary>Rockwell font.</summary>
         </member>
         <member name="F:Impart.FontFamily.RockwellExtraBold">
-            <value>RockwellExtraBold font.</value>
+            <summary>RockwellExtraBold font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Baskerville">
-            <value>Baskerville font.</value>
+            <summary>Baskerville font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Consolas">
-            <value>Consolas font.</value>
+            <summary>Consolas font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Courier">
-            <value>Courier font.</value>
+            <summary>Courier font.</summary>
         </member>
         <member name="F:Impart.FontFamily.CourierNew">
-            <value>CourierNew font.</value>
+            <summary>CourierNew font.</summary>
         </member>
         <member name="F:Impart.FontFamily.LucidaConsole">
-            <value>LucidaConsole font.</value>
+            <summary>LucidaConsole font.</summary>
         </member>
         <member name="F:Impart.FontFamily.LucidaSansTypewriter">
-            <value>LucidaSansTypewriter font.</value>
+            <summary>LucidaSansTypewriter font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Monaco">
-            <value>Monaco font.</value>
+            <summary>Monaco font.</summary>
         </member>
         <member name="F:Impart.FontFamily.AndaleMono">
-            <value>AndaleMono font.</value>
+            <summary>AndaleMono font.</summary>
         </member>
         <member name="F:Impart.FontFamily.ComicSans">
-            <value>ComicSans font.</value>
+            <summary>ComicSans font.</summary>
         </member>
         <member name="F:Impart.FontFamily.ComicSansMS">
-            <value>ComicSansMS font.</value>
+            <summary>ComicSansMS font.</summary>
         </member>
         <member name="F:Impart.FontFamily.AppleChancery">
-            <value>AppleChancery font.</value>
+            <summary>AppleChancery font.</summary>
         </member>
         <member name="F:Impart.FontFamily.ZapfChancery">
-            <value>ZapfChancery font.</value>
+            <summary>ZapfChancery font.</summary>
         </member>
         <member name="F:Impart.FontFamily.BradleyHand">
-            <value>BradleyHand font.</value>
+            <summary>BradleyHand font.</summary>
         </member>
         <member name="F:Impart.FontFamily.BrushScriptMT">
-            <value>BrushScriptMT font.</value>
+            <summary>BrushScriptMT font.</summary>
         </member>
         <member name="F:Impart.FontFamily.BrushScriptStd">
-            <value>BrushScriptStd font.</value>
+            <summary>BrushScriptStd font.</summary>
         </member>
         <member name="F:Impart.FontFamily.SnellRoundhan">
-            <value>SnellRoundhan font.</value>
+            <summary>SnellRoundhan font.</summary>
         </member>
         <member name="F:Impart.FontFamily.URWChancery">
-            <value>URWChancery font.</value>
+            <summary>URWChancery font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Coronetscript">
-            <value>Coronetscript font.</value>
+            <summary>Coronetscript font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Florence">
-            <value>Florence font.</value>
+            <summary>Florence font.</summary>
         </member>
         <member name="F:Impart.FontFamily.Parkavenue">
-            <value>Parkavenue font.</value>
+            <summary>Parkavenue font.</summary>
         </member>
         <member name="T:Impart.FontList">
             <summary>Store a list of Fonts.</summary>
@@ -2199,31 +2199,31 @@
             <summary>All the Font format types.</summary>
         </member>
         <member name="F:Impart.FontType.WOFF">
-            <value>Web Open Font Format.</value>
+            <summary>Web Open Font Format.</summary>
         </member>
         <member name="F:Impart.FontType.WOFF2">
-            <value>Web Open Font Format 2.</value>
+            <summary>Web Open Font Format 2.</summary>
         </member>
         <member name="F:Impart.FontType.TTF">
-            <value>TrueType Font.</value>
+            <summary>TrueType Font.</summary>
         </member>
         <member name="F:Impart.FontType.OTF">
-            <value>OpenType Font.</value>
+            <summary>OpenType Font.</summary>
         </member>
         <member name="F:Impart.FontType.EOT">
-            <value>Embedded OpenType Font.</value>
+            <summary>Embedded OpenType Font.</summary>
         </member>
         <member name="F:Impart.FontType.SVG">
-            <value>Scalable Vector Graphics.</value>
+            <summary>Scalable Vector Graphics.</summary>
         </member>
         <member name="T:Impart.GlobalStyles">
             <summary>Manage both global external Styles and global Styles.</summary>
         </member>
         <member name="F:Impart.GlobalStyles.Styles">
-            <value>The Styles that apply to every Webpage.</value>
+            <summary>The Styles that apply to every Webpage.</summary>
         </member>
         <member name="F:Impart.GlobalStyles.ExternalStyles">
-            <value>The external Styles that apply to every Webpage.</value>
+            <summary>The external Styles that apply to every Webpage.</summary>
         </member>
         <member name="M:Impart.GlobalStyles.Add(Impart.Style)">
             <summary>Add a Style to every WebPage.</summary>
@@ -2245,7 +2245,7 @@
             <summary>IElement interface.</summary>
         </member>
         <member name="P:Impart.IElement.IOID">
-            <value>IOID value for the IElement.</value>
+            <summary>IOID value for the IElement.</summary>
         </member>
         <member name="M:Impart.IElement.Clone">
             <summary>Clones the IElement (including its IOID).</summary>
@@ -2257,22 +2257,22 @@
             <summary>IStyleElement interface.</summary>
         </member>
         <member name="P:Impart.IStyleElement.IOID">
-            <value>The Impart Object ID for the IStyleElement.</value>
+            <summary>The Impart Object ID for the IStyleElement.</summary>
         </member>
         <member name="P:Impart.IStyleElement.ID">
-            <value>The ID for the IStyleElement.</value>
+            <summary>The ID for the IStyleElement.</summary>
         </member>
         <member name="T:Impart.Style">
             <summary>Style Elements with a certain ID.</summary>
         </member>
         <member name="P:Impart.Style.ID">
-            <value>The ID value of the Style.</value>
+            <summary>The ID value of the Style.</summary>
         </member>
         <member name="F:Impart.Style.Attrs">
-            <value>The attribute values of the Style.</value>
+            <summary>The attribute values of the Style.</summary>
         </member>
         <member name="P:Impart.Style.Impart#IStyleElement#IOID">
-            <value>The internal ID of the instance.</value>
+            <summary>The internal ID of the instance.</summary>
         </member>
         <member name="M:Impart.Style.#ctor(System.String)">
             <summary>Creates a Style instance.</summary>
@@ -2358,19 +2358,19 @@
             <summary>All methods of sorting ColorSets.</summary>
         </member>
         <member name="F:Impart.ColorSort.Light">
-            <value>Sort the Colorset from lightest to darkest.</value>
+            <summary>Sort the Colorset from lightest to darkest.</summary>
         </member>
         <member name="F:Impart.ColorSort.Dark">
-            <value>Sort the Colorset from darkest to lightest.</value>
+            <summary>Sort the Colorset from darkest to lightest.</summary>
         </member>
         <member name="F:Impart.ColorSort.Red">
-            <value>Sort the Colorset from reddest to non-reddest.</value>
+            <summary>Sort the Colorset from reddest to non-reddest.</summary>
         </member>
         <member name="F:Impart.ColorSort.Blue">
-            <value>Sort the Colorset from bluest to non-bluest.</value>
+            <summary>Sort the Colorset from bluest to non-bluest.</summary>
         </member>
         <member name="F:Impart.ColorSort.Green">
-            <value>Sort the Colorset from greenist to non-greenist.</value>
+            <summary>Sort the Colorset from greenist to non-greenist.</summary>
         </member>
         <member name="T:Impart.Hex">
             <summary>The class for a HEX color.</summary>
@@ -2408,58 +2408,58 @@
             <param name="s">The String to convert.</param>
         </member>
         <member name="F:Impart.Hex.Red">
-            <value>Red represented by Hex.</value>
+            <summary>Red represented by Hex.</summary>
         </member>
         <member name="F:Impart.Hex.Orange">
-            <value>Orange represented by Hex</value>
+            <summary>Orange represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Yellow">
-            <value>Yellow represented by Hex</value>
+            <summary>Yellow represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Lime">
-            <value>Lime represented by Hex</value>
+            <summary>Lime represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.DarkGreen">
-            <value>Dark green represented by Hex</value>
+            <summary>Dark green represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Green">
-            <value>Green represented by Hex</value>
+            <summary>Green represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.LightGray">
-            <value>Light gray represented by Hex</value>
+            <summary>Light gray represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Aqua">
-            <value>Aqua represented by Hex</value>
+            <summary>Aqua represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.LightBlue">
-            <value>Light blue represented by Hex</value>
+            <summary>Light blue represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Blue">
-            <value>Blue represented by Hex</value>
+            <summary>Blue represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.DarkBlue">
-            <value>Dark blue represented by Hex</value>
+            <summary>Dark blue represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Pink">
-            <value>Pink represented by Hex</value>
+            <summary>Pink represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Magenta">
-            <value>Magenta represented by Hex</value>
+            <summary>Magenta represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Purple">
-            <value>Purple represented by Hex</value>
+            <summary>Purple represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.White">
-            <value>White represented by Hex</value>
+            <summary>White represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Gray">
-            <value>Gray represented by Hex</value>
+            <summary>Gray represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.DarkGray">
-            <value>Dark gray represented by Hex</value>
+            <summary>Dark gray represented by Hex</summary>
         </member>
         <member name="F:Impart.Hex.Black">
-            <value>Black represented by Hex</value>
+            <summary>Black represented by Hex</summary>
         </member>
         <member name="T:Impart.Hsl">
             <summary>The class for a HSL color.</summary>
@@ -2503,58 +2503,58 @@
             <param name="h">The (float, float, float) to convert.</param>
         </member>
         <member name="F:Impart.Hsl.Red">
-            <value>Red represented by Hsl.</value>
+            <summary>Red represented by Hsl.</summary>
         </member>
         <member name="F:Impart.Hsl.Orange">
-            <value>Orange represented by Hsl</value>
+            <summary>Orange represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Yellow">
-            <value>Yellow represented by Hsl</value>
+            <summary>Yellow represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Lime">
-            <value>Lime represented by Hsl</value>
+            <summary>Lime represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.DarkGreen">
-            <value>Dark green represented by Hsl</value>
+            <summary>Dark green represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Green">
-            <value>Green represented by Hsl</value>
+            <summary>Green represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.LightGray">
-            <value>Light gray represented by Hsl</value>
+            <summary>Light gray represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Aqua">
-            <value>Aqua represented by Hsl</value>
+            <summary>Aqua represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.LightBlue">
-            <value>Light blue represented by Hsl</value>
+            <summary>Light blue represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Blue">
-            <value>Blue represented by Hsl</value>
+            <summary>Blue represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.DarkBlue">
-            <value>Dark blue represented by Hsl</value>
+            <summary>Dark blue represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Pink">
-            <value>Pink represented by Hsl</value>
+            <summary>Pink represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Magenta">
-            <value>Magenta represented by Hsl</value>
+            <summary>Magenta represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Purple">
-            <value>Purple represented by Hsl</value>
+            <summary>Purple represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.White">
-            <value>White represented by Hsl</value>
+            <summary>White represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Gray">
-            <value>Gray represented by Hsl</value>
+            <summary>Gray represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.DarkGray">
-            <value>Dark gray represented by Hsl</value>
+            <summary>Dark gray represented by Hsl</summary>
         </member>
         <member name="F:Impart.Hsl.Black">
-            <value>Black represented by Hsl</value>
+            <summary>Black represented by Hsl</summary>
         </member>
         <member name="T:Impart.Rgb">
             <summary>The class for a RGB color.</summary>
@@ -2598,58 +2598,58 @@
             <param name="r">The (int, int, int) to convert.</param>
         </member>
         <member name="F:Impart.Rgb.Red">
-            <value>Red represented by Rgb.</value>
+            <summary>Red represented by Rgb.</summary>
         </member>
         <member name="F:Impart.Rgb.Orange">
-            <value>Orange represented by Rgb</value>
+            <summary>Orange represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Yellow">
-            <value>Yellow represented by Rgb</value>
+            <summary>Yellow represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Lime">
-            <value>Lime represented by Rgb</value>
+            <summary>Lime represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.DarkGreen">
-            <value>Dark green represented by Rgb</value>
+            <summary>Dark green represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Green">
-            <value>Green represented by Rgb</value>
+            <summary>Green represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.LightGray">
-            <value>Light gray represented by Rgb</value>
+            <summary>Light gray represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Aqua">
-            <value>Aqua represented by Rgb</value>
+            <summary>Aqua represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.LightBlue">
-            <value>Light blue represented by Rgb</value>
+            <summary>Light blue represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Blue">
-            <value>Blue represented by Rgb</value>
+            <summary>Blue represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.DarkBlue">
-            <value>Dark blue represented by Rgb</value>
+            <summary>Dark blue represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Pink">
-            <value>Pink represented by Rgb</value>
+            <summary>Pink represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Magenta">
-            <value>Magenta represented by Rgb</value>
+            <summary>Magenta represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Purple">
-            <value>Purple represented by Rgb</value>
+            <summary>Purple represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.White">
-            <value>White represented by Rgb</value>
+            <summary>White represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Gray">
-            <value>Gray represented by Rgb</value>
+            <summary>Gray represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.DarkGray">
-            <value>Dark gray represented by Rgb</value>
+            <summary>Dark gray represented by Rgb</summary>
         </member>
         <member name="F:Impart.Rgb.Black">
-            <value>Black represented by Rgb</value>
+            <summary>Black represented by Rgb</summary>
         </member>
         <member name="T:Impart.Length">
             <summary>Length base class.</summary>
@@ -2757,10 +2757,10 @@
             <param name="i">The Float to convert.</param>
         </member>
         <member name="F:Impart.Milliseconds.Second">
-            <value>A second represented by Milliseconds.</value>
+            <summary>A second represented by Milliseconds.</summary>
         </member>
         <member name="F:Impart.Milliseconds.Minute">
-            <value>A minute represented by Milliseconds.</value>
+            <summary>A minute represented by Milliseconds.</summary>
         </member>
         <member name="T:Impart.Seconds">
             <summary>Store seconds as an Integer.</summary>
@@ -2781,10 +2781,10 @@
             <param name="i">The Int to convert.</param>
         </member>
         <member name="F:Impart.Seconds.Minute">
-            <value>A minute represented by Seconds.</value>
+            <summary>A minute represented by Seconds.</summary>
         </member>
         <member name="F:Impart.Seconds.Hour">
-            <value>A hour represented by Seconds.</value>
+            <summary>A hour represented by Seconds.</summary>
         </member>
         <member name="T:Impart.Time">
             <summary>Time base class.</summary>
@@ -2805,19 +2805,19 @@
             <summary>Generate a webpage for a Website.</summary>
         </member>
         <member name="P:Impart.WebPage.Title">
-            <value>The title value of the WebPage.</value>
+            <summary>The title value of the WebPage.</summary>
         </member>
         <member name="P:Impart.WebPage.DefaultMargin">
-            <value>The default margin value.</value>
+            <summary>The default margin value.</summary>
         </member>
         <member name="P:Impart.WebPage.DefaultPadding">
-            <value>The default padding value.</value>
+            <summary>The default padding value.</summary>
         </member>
         <member name="F:Impart.WebPage.Attrs">
-            <value>The Attribute values of the WebPage.</value>
+            <summary>The Attribute values of the WebPage.</summary>
         </member>
         <member name="F:Impart.WebPage.Fonts">
-            <value>The Font values of the WebPage.</value>
+            <summary>The Font values of the WebPage.</summary>
         </member>
         <member name="M:Impart.WebPage.#ctor">
             <summary>Creates a WebPage instance.</summary>
@@ -2936,10 +2936,10 @@
             <summary>Host WebPages.</summary>
         </member>
         <member name="P:Impart.Website.Port">
-            <value>The value of the localhost port the Website is being hosted on.</value>
+            <summary>The value of the localhost port the Website is being hosted on.</summary>
         </member>
         <member name="F:Impart.Website.OnVisit">
-            <value>The method to be called when a client connects to the Website.</value>
+            <summary>The method to be called when a client connects to the Website.</summary>
         </member>
         <member name="M:Impart.Website.#ctor(Impart.WebPage,System.Int32,System.String)">
             <summary>Creates a Website instance.</summary>

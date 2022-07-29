@@ -3,13 +3,13 @@ namespace Impart
     /// <summary>Arguments for setting the Video player.</summary>
     public class VideoOptions
     {
-        /// <value>Whether to show or hide the controls.</value>
+        /// <summary>Whether to show or hide the controls.</summary>
         public readonly bool ShowControls;
 
-        /// <value>Whether to autoplay the Video.</value>
+        /// <summary>Whether to autoplay the Video.</summary>
         public readonly bool Autoplay;
 
-        /// <value>Whether to start the Video muted.</value>
+        /// <summary>Whether to start the Video muted.</summary>
         public readonly bool Mute;
 
         /// <summary>Creates a VideoOptions instance.</summary>

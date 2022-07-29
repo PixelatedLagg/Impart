@@ -6,10 +6,10 @@ namespace Impart
     /// <summary>Submit button for Form.</summary>
     public sealed class SubmitField : IFormField
     {
-        /// <value>The Attr values of the SubmitField.</value>
+        /// <summary>The Attr values of the SubmitField.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the SubmitField.</value>
+        /// <summary>The ExtAttr values of the SubmitField.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         
         internal double InputID;

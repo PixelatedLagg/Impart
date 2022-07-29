@@ -8,7 +8,7 @@ namespace Impart
     {
         private string _TextValue;
 
-        /// <value>The text value of the Text.</value>
+        /// <summary>The text value of the Text.</summary>
         public string TextValue
         {
             get 
@@ -23,7 +23,7 @@ namespace Impart
         }
         private TextType _Type;
 
-        /// <value>The TextType value of the Text.</value>
+        /// <summary>The TextType value of the Text.</summary>
         public TextType Type
         {
             get
@@ -32,13 +32,13 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         ExtAttrList IElement.ExtAttrs
         {
             get
@@ -48,7 +48,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get

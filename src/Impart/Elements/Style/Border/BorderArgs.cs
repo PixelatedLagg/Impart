@@ -3,13 +3,13 @@ namespace Impart
     /// <summary>Arguments for setting the border.</summary>
     public class BorderArgs
     {
-        /// <value>The border line type.</value>
+        /// <summary>The border line type.</summary>
         public BorderType Type;
 
-        /// <value>The border line width.</value>
+        /// <summary>The border line width.</summary>
         public Length Width;
 
-        /// <value>The border color.</value>
+        /// <summary>The border color.</summary>
         public Color Color;
 
         /// <summary>Creates a BorderArgs instance</summary>

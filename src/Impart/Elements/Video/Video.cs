@@ -8,7 +8,7 @@ namespace Impart
     {
         private string _Source;
 
-        /// <value>The Video source file.</value>
+        /// <summary>The Video source file.</summary>
         public string Source
         {
             get
@@ -23,7 +23,7 @@ namespace Impart
         }
         private (Length Width, Length Height) _Size;
 
-        /// <value>The Video player size.</value>
+        /// <summary>The Video player size.</summary>
         public (Length Width, Length Height) Size
         {
             get
@@ -38,7 +38,7 @@ namespace Impart
         }
         private VideoOptions _Options;
 
-        /// <value>Options for the Video player.</value>
+        /// <summary>Options for the Video player.</summary>
         public VideoOptions Options
         {
             get
@@ -52,13 +52,13 @@ namespace Impart
             }
         }
         
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         ExtAttrList IElement.ExtAttrs
         {
             get
@@ -68,7 +68,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get

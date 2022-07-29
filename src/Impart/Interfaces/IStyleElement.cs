@@ -3,10 +3,10 @@ namespace Impart
     /// <summary>IStyleElement interface.</summary>
     public interface IStyleElement
     {
-        /// <value>The Impart Object ID for the IStyleElement.</value>
+        /// <summary>The Impart Object ID for the IStyleElement.</summary>
         int IOID { get; }
 
-        /// <value>The ID for the IStyleElement.</value>
+        /// <summary>The ID for the IStyleElement.</summary>
         string ID { get; set; }
     }
 }

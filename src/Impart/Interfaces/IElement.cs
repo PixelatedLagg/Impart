@@ -3,7 +3,7 @@ namespace Impart
     /// <summary>IElement interface.</summary>
     public interface IElement 
     {
-        /// <value>IOID value for the IElement.</value>
+        /// <summary>IOID value for the IElement.</summary>
         int IOID { get; }
 
         /// <summary>Clones the IElement (including its IOID).</summary>

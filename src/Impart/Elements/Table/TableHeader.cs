@@ -8,7 +8,7 @@ namespace Impart
     {
         private List<IElement> _Elements = new List<IElement>();
 
-        /// <value>The IElement values of the TableHeader.</value>
+        /// <summary>The IElement values of the TableHeader.</summary>
         public new IElement[] Elements
         {
             get
@@ -17,10 +17,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         new public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         new public ExtAttrList ExtAttrs = new ExtAttrList();
         private bool Changed = true;
         private string Render = "";

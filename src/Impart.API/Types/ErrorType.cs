@@ -3,121 +3,121 @@ namespace Impart.Api
     /// <summary>All of the API server-side error types.</summary>
     public enum ErrorType
     {
-        /// <value>BadRequest error.</value>
+        /// <summary>BadRequest error.</summary>
         BadRequest = 400,
 
-        /// <value>Unauthorized error.</value>
+        /// <summary>Unauthorized error.</summary>
         Unauthorized = 401,
 
-        /// <value>PaymentRequired error.</value>
+        /// <summary>PaymentRequired error.</summary>
         PaymentRequired = 402,
         
-        /// <value>Forbidden error.</value>
+        /// <summary>Forbidden error.</summary>
         Forbidden = 403,
 
-        /// <value>NotFound error.</value>
+        /// <summary>NotFound error.</summary>
         NotFound = 404,
 
-        /// <value>MethodNotAllowed error.</value>
+        /// <summary>MethodNotAllowed error.</summary>
         MethodNotAllowed = 405,
 
-        /// <value>NotAcceptable error.</value>
+        /// <summary>NotAcceptable error.</summary>
         NotAcceptable = 406,
 
-        /// <value>ProxyAuthenticationRequired error.</value>
+        /// <summary>ProxyAuthenticationRequired error.</summary>
         ProxyAuthenticationRequired = 407,
 
-        /// <value>RequestTimeout error.</value>
+        /// <summary>RequestTimeout error.</summary>
         RequestTimeout = 408,
 
-        /// <value>Conflict error.</value>
+        /// <summary>Conflict error.</summary>
         Conflict = 409,
 
-        /// <value>Gone error.</value>
+        /// <summary>Gone error.</summary>
         Gone = 410,
 
-        /// <value>LengthRequest error.</value>
+        /// <summary>LengthRequest error.</summary>
         LengthRequest = 411,
 
-        /// <value>PreconditionFailed error.</value>
+        /// <summary>PreconditionFailed error.</summary>
         PreconditionFailed = 412,
 
-        /// <value>PayloadTooLarge error.</value>
+        /// <summary>PayloadTooLarge error.</summary>
         PayloadTooLarge = 413,
 
-        /// <value>URITooLong error.</value>
+        /// <summary>URITooLong error.</summary>
         URITooLong = 414,
 
-        /// <value>UnsupportedMediaType error.</value>
+        /// <summary>UnsupportedMediaType error.</summary>
         UnsupportedMediaType = 415,
 
-        /// <value>RangeNotSatisfiable error.</value>
+        /// <summary>RangeNotSatisfiable error.</summary>
         RangeNotSatisfiable = 416,
 
-        /// <value>ExpectationFailed error.</value>
+        /// <summary>ExpectationFailed error.</summary>
         ExpectationFailed = 417,
 
-        /// <value>MisdirectedRequest error.</value>
+        /// <summary>MisdirectedRequest error.</summary>
         MisdirectedRequest = 421,
 
-        /// <value>UnprocessableEntity error.</value>
+        /// <summary>UnprocessableEntity error.</summary>
         UnprocessableEntity = 422,
 
-        /// <value>Locked error.</value>
+        /// <summary>Locked error.</summary>
         Locked = 423,
 
-        /// <value>FailedDependency error.</value>
+        /// <summary>FailedDependency error.</summary>
         FailedDependency = 424,
 
-        /// <value>TooEarly error.</value>
+        /// <summary>TooEarly error.</summary>
         TooEarly = 425,
 
-        /// <value>UpgradeRequired error.</value>
+        /// <summary>UpgradeRequired error.</summary>
         UpgradeRequired = 426,
 
-        /// <value>PreconditionRequired error.</value>
+        /// <summary>PreconditionRequired error.</summary>
         PreconditionRequired = 428,
 
-        /// <value>TooManyRequests error.</value>
+        /// <summary>TooManyRequests error.</summary>
         TooManyRequests = 429,
 
-        /// <value>RequestHeaderFieldsTooLarge error.</value>
+        /// <summary>RequestHeaderFieldsTooLarge error.</summary>
         RequestHeaderFieldsTooLarge = 431,
 
-        /// <value>UnavailableForLegalReasons error.</value>
+        /// <summary>UnavailableForLegalReasons error.</summary>
         UnavailableForLegalReasons = 451,
 
-        /// <value>InternalServerError error.</value>
+        /// <summary>InternalServerError error.</summary>
         InternalServerError = 500,
 
-        /// <value>NotImplemented error.</value>
+        /// <summary>NotImplemented error.</summary>
         NotImplemented = 501,
 
-        /// <value>BadGateway error.</value>
+        /// <summary>BadGateway error.</summary>
         BadGateway = 502,
 
-        /// <value>ServiceUnavailable error.</value>
+        /// <summary>ServiceUnavailable error.</summary>
         ServiceUnavailable = 503,
 
-        /// <value>GatewayTimeout error.</value>
+        /// <summary>GatewayTimeout error.</summary>
         GatewayTimeout = 504,
 
-        /// <value>HTTPVersionNotSupported error.</value>
+        /// <summary>HTTPVersionNotSupported error.</summary>
         HTTPVersionNotSupported = 505,
 
-        /// <value>VariantAlsoNegotiates error.</value>
+        /// <summary>VariantAlsoNegotiates error.</summary>
         VariantAlsoNegotiates = 506,
 
-        /// <value>InsufficientStorage error.</value>
+        /// <summary>InsufficientStorage error.</summary>
         InsufficientStorage = 507,
 
-        /// <value>LoopDetected error.</value>
+        /// <summary>LoopDetected error.</summary>
         LoopDetected = 508,
 
-        /// <value>NotExtended error.</value>
+        /// <summary>NotExtended error.</summary>
         NotExtended = 510,
 
-        /// <value>NetworkAuthenticationRequired error.</value>
+        /// <summary>NetworkAuthenticationRequired error.</summary>
         NetworkAuthenticationRequired = 511
     }
 }

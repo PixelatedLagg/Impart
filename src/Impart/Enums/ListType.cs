@@ -3,10 +3,10 @@ namespace Impart
     /// <summary>All list types.</summary>
     public enum ListType
     {
-        /// <value>Ordered list.</value>
+        /// <summary>Ordered list.</summary>
         Ordered,
 
-        /// <value>Unordered list.</value>
+        /// <summary>Unordered list.</summary>
         Unordered
     }
 }

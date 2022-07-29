@@ -3,10 +3,10 @@ namespace Impart
     /// <summary>All the ExtAttr types.</summary>
     public enum ExtAttrType
     {
-        /// <value>ID external attribute.</value>
+        /// <summary>ID external attribute.</summary>
         ID,
 
-        /// <value>Hover message external attribute.</value>
+        /// <summary>Hover message external attribute.</summary>
         HoverMessage
     }
 }
