@@ -72,9 +72,9 @@ namespace Impart
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
 
-        /// <summary>Check if an Element exists.</summary>
-        /// <param name="element">The instance of the Element to check.</param>
-        protected bool ElementExists(IElement element)
+        /// <summary>Checks if an Element exists.</summary>
+        /// <param name="element">The Element reference to check.</param>
+        protected bool ElementExists(ElementRef element)
         {
             foreach (IElement entry in _Elements)
             {
@@ -86,7 +86,7 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Check if a IStyleElement exists.</summary>
+        /// <summary>Checks if an IStyleElement exists.</summary>
         /// <param name="element">The instance of the IStyleElement to check.</param>
         protected bool StyleElementExists(IStyleElement element)
         {
@@ -100,7 +100,7 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Check if an IElement exists by ID.</summary>
+        /// <summary>Checks if an IElement exists by ID.</summary>
         /// <param name="id">The ID of the IElement to check.</param>
         protected bool ElementExistsByID(string id)
         {
@@ -114,7 +114,7 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Get an IElement by ID.</summary>
+        /// <summary>Gets an IElement by ID.</summary>
         /// <param name="id">The ID of the IElement to get.</param>
         protected IElement GetElementByID(string id)
         {
@@ -128,7 +128,7 @@ namespace Impart
             return null;
         }
 
-        /// <summary>Remove an IElement by ID.</summary>
+        /// <summary>Removes an IElement by ID.</summary>
         /// <param name="id">The ID of the IElement to remove.</param>
         protected void RemoveElementByID(string id)
         {
@@ -142,7 +142,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Remove an IElement.</summary>
+        /// <summary>Removes an IElement.</summary>
         /// <param name="element">The instance of the IElement to remove.</param>
         protected void RemoveElement(IElement element)
         {
@@ -156,7 +156,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Remove a IStyleElement.</summary>
+        /// <summary>Removes an IStyleElement.</summary>
         /// <param name="element">The instance of the IStyleElement to remove.</param>
         protected void RemoveStyleElement(IStyleElement element)
         {
@@ -170,7 +170,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Change an IElement.</summary>
+        /// <summary>Changes an IElement.</summary>
         /// <param name="element">The instance of the IElement to change.</param>
         protected void ChangeElement(IElement element)
         {
@@ -184,7 +184,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Change a IStyleElement.</summary>
+        /// <summary>Changes an IStyleElement.</summary>
         /// <param name="element">The instance of the IStyleElement to change.</param>
         protected void ChangeStyleElement(IStyleElement element)
         {
@@ -198,7 +198,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Add a Style.</summary>
+        /// <summary>Adds a Style.</summary>
         /// <param name="style">The Style instance to add.</param>
         protected void AddStyle(Style style)
         {
@@ -206,7 +206,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Remove a Style.</summary>
+        /// <summary>Removes a Style.</summary>
         /// <param name="index">The index of the Style to remove.</param>
         protected void RemoveStyle(int index)
         {
@@ -214,7 +214,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Text to the WebPage.</summary>
+        /// <summary>Adds a Text to the WebPage.</summary>
         /// <param name="text">The Text instance to add.</param>
         protected void AddText(Text text)
         {
@@ -222,7 +222,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add an Image to the WebPage.</summary>
+        /// <summary>Adds an Image to the WebPage.</summary>
         /// <param name="image">The Image instance to add.</param>
         protected void AddImage(Image image)
         {
@@ -230,7 +230,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Header to the WebPage.</summary>
+        /// <summary>Adds a Header to the WebPage.</summary>
         /// <param name="header">The Header instance to add.</param>
         protected void AddHeader(Header header)
         {
@@ -238,7 +238,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Link to the WebPage.</summary>
+        /// <summary>Adds a Link to the WebPage.</summary>
         /// <param name="link">The Link instance to add.</param>
         protected void AddLink(Link link)
         {
@@ -246,7 +246,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Table to the WebPage.</summary>
+        /// <summary>Adds a Table to the WebPage.</summary>
         /// <param name="table">The Table instance to add.</param>
         protected void AddTable(Table table)
         {
@@ -254,7 +254,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Division to the WebPage.</summary>
+        /// <summary>Adds a Division to the WebPage.</summary>
         /// <param name="division">The Division instance to add.</param>
         protected void AddDivision(Division division)
         {
@@ -266,7 +266,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a List to the WebPage.</summary>
+        /// <summary>Adds a List to the WebPage.</summary>
         /// <param name="list">The List instance to add.</param>
         protected void AddList(List list)
         {
@@ -274,7 +274,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Scrollbar to the WebPage.</summary>
+        /// <summary>Adds a Scrollbar to the WebPage.</summary>
         /// <param name="scrollbar">The Scrollbar instance to add.</param>
         protected void SetScrollBar(Scrollbar scrollbar)
         {
@@ -293,7 +293,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Form to the WebPage.</summary>
+        /// <summary>Adds a Form to the WebPage.</summary>
         /// <param name="form">The Form instance to add.</param>
         protected void AddForm(Form form)
         {
@@ -301,7 +301,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Button to the WebPage.</summary>
+        /// <summary>Adds a Button to the WebPage.</summary>
         /// <param name="button">The Button instance to add.</param>
         protected void AddButton(Button button)
         {
@@ -309,7 +309,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Nest to the WebPage.</summary>
+        /// <summary>Adds a Nest to the WebPage.</summary>
         /// <param name="nest">The Nest instance to add.</param>
         protected void AddNest(Nest nest)
         {
@@ -317,7 +317,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add a Video to the WebPage.</summary>
+        /// <summary>Adds a Video to the WebPage.</summary>
         /// <param name="video">The Video instance to add.</param>
         protected void AddVideo(Video video)
         {
@@ -325,7 +325,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add an external Style to the WebPage.</summary>
+        /// <summary>Adds an external Style to the WebPage.</summary>
         /// <param name="url">The URL of the external Style to add.</param>
         protected void AddExternalStyle(string url)
         {
@@ -333,7 +333,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Remove an external Style from the WebPage.</summary>
+        /// <summary>Removes an external Style from the WebPage.</summary>
         /// <param name="index">The index of the URL of the external Style to remove.</param>
         protected void RemoveExternalStyle(int index)
         {
@@ -341,7 +341,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Add an Animation to the WebPage.</summary>
+        /// <summary>Adds an Animation to the WebPage.</summary>
         /// <param name="animation">The Animation to add.</param>
         protected void AddAnimation(Animation animation)
         {
@@ -349,7 +349,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Force the WebPage to be rendered again, regardless of any new changes.</summary>
+        /// <summary>Forces the WebPage to be rendered again, regardless of any new changes.</summary>
         protected void ForceRender()
         {
             Changed = true;
