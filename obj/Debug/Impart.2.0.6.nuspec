@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Impart</id>
+    <version>2.0.6</version>
+    <authors>Pixelated_Lagg</authors>
+    <license type="file">LICENSE.md</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>logo.png</icon>
+    <description>A C# library dedicated to streamlining web development by replacing HTML/CSS fluency with simple C# methods.</description>
+    <repository url="https://github.com/PixelatedLagg/Impart" />
+    <dependencies>
+      <group targetFramework="net6.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Michi\OneDrive\Desktop\Impart\bin\Debug\net6.0\Impart.runtimeconfig.json" target="lib\net6.0\Impart.runtimeconfig.json" />
+    <file src="C:\Users\Michi\OneDrive\Desktop\Impart\bin\Debug\net6.0\Impart.dll" target="lib\net6.0\Impart.dll" />
+    <file src="C:\Users\Michi\OneDrive\Desktop\Impart\bin\Debug\net6.0\Impart.xml" target="lib\net6.0\Impart.xml" />
+    <file src="C:\Users\Michi\OneDrive\Desktop\Impart\.github\Images\logo.png" target="logo.png" />
+    <file src="C:\Users\Michi\OneDrive\Desktop\Impart\LICENSE.md" target="LICENSE.md" />
+  </files>
+</package>

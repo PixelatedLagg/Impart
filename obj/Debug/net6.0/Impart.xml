@@ -405,25 +405,6 @@
             <returns>A KeyEventArgs instance.</returns>
             <param name="key">The key type.</param>
         </member>
-        <member name="T:Impart.Scripting.WebsiteEventArgs">
-            <summary>The event arguments passed for all main website events.</summary>
-        </member>
-        <member name="F:Impart.Scripting.WebsiteEventArgs.platform">
-            <summary>The platform type.</summary>
-        </member>
-        <member name="F:Impart.Scripting.WebsiteEventArgs.mobile">
-            <summary>Bool representing if the user is on a mobile device.</summary>
-        </member>
-        <member name="F:Impart.Scripting.WebsiteEventArgs.browsers">
-            <summary>List of all browsers the server is sent. (Out of the three sent, one usually the main, and another what the main is based on.)</summary>
-        </member>
-        <member name="M:Impart.Scripting.WebsiteEventArgs.#ctor(Impart.Scripting.Platform,System.Collections.Generic.List{System.ValueTuple{Impart.Scripting.Browser,System.Int32}},System.Boolean)">
-            <summary>Create a WebsiteEventArgs instance.</summary>
-            <returns>A WebsiteEventArgs instance.</returns>
-            <param name="platform">The platform type.</param>
-            <param name="browsers">List of all browsers.</param>
-            <param name="mobile">Bool representing if the user is on a mobile device.</param>
-        </member>
         <member name="T:Impart.Scripting.Browser">
             <summary>All browser types.</summary>
         </member>
@@ -981,7 +962,7 @@
             <summary>Log messages/warnings to the console.</summary>
         </member>
         <member name="M:Impart.Logger.Info(System.String)">
-            <summary>Log a message to the console. This method will rarely be called by Impart automatically unless you define the compile-time constant: DEBUG.</summary>
+            <summary>Log a message to the console. This method will rarely be called by Impart automatically unless you define the compile-time constant: LOGGING.</summary>
             <param name="log">The message to log.</param>
         </member>
         <member name="M:Impart.Logger.Warning(System.String)">
@@ -1041,6 +1022,12 @@
         </member>
         <member name="M:Impart.Button.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Button.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Button.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
         </member>
         <member name="M:Impart.Button.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -1126,6 +1113,12 @@
         <member name="M:Impart.Division.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.Division.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Division.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
         <member name="M:Impart.Division.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
@@ -1171,6 +1164,12 @@
         <member name="M:Impart.EFrame.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.EFrame.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.EFrame.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
         <member name="M:Impart.EFrame.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
@@ -1179,6 +1178,30 @@
         </member>
         <member name="M:Impart.EFrame.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
+        </member>
+        <member name="T:Impart.ElementRef">
+            <summary> Hold a reference to an IElement.</summary>
+        </member>
+        <member name="M:Impart.ElementRef.#ctor(Impart.IElement)">
+            <summary>Creates an ElementRef instance.</summary>
+            <param name="element">The IElement instance to create the reference to.</param>
+        </member>
+        <member name="M:Impart.ElementRef.op_Equality(Impart.IElement,Impart.ElementRef)">
+            <summary>Compares the equality of an IElement instance and an ElementRef instance.</summary>
+            <param name="element">The IElement instance to compare.</param>
+            <param name="reference">The ElementRef instance to compare.</param>
+        </member>
+        <member name="M:Impart.ElementRef.op_Inequality(Impart.IElement,Impart.ElementRef)">
+            <summary>Compares the inequality of an IElement instance and an ElementRef instance.</summary>
+            <param name="element">The IElement instance to compare.</param>
+            <param name="reference">The ElementRef instance to compare.</param>
+        </member>
+        <member name="M:Impart.ElementRef.Equals(System.Object)">
+            <summary>Compares the equality of an Object instance and this instance.</summary>
+            <param name="obj">The Object instance to compare.</param>
+        </member>
+        <member name="M:Impart.ElementRef.GetHashCode">
+            <summary>Get the hash code of this instance.</summary>
         </member>
         <member name="T:Impart.Form">
             <summary>Form element.</summary>
@@ -1212,6 +1235,12 @@
         </member>
         <member name="M:Impart.Form.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Form.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Form.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
         </member>
         <member name="M:Impart.Form.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -1313,6 +1342,12 @@
         <member name="M:Impart.Header.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.Header.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Header.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
         <member name="M:Impart.Header.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
@@ -1352,6 +1387,12 @@
         </member>
         <member name="M:Impart.Image.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Image.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Image.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
         </member>
         <member name="M:Impart.Image.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -1408,6 +1449,12 @@
         <member name="M:Impart.Link.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.Link.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Link.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
         <member name="M:Impart.Link.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
@@ -1457,6 +1504,12 @@
         <member name="M:Impart.List.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.List.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.List.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
         <member name="M:Impart.List.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
@@ -1494,6 +1547,12 @@
         </member>
         <member name="M:Impart.Nest.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Nest.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Nest.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
         </member>
         <member name="M:Impart.Nest.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -1726,6 +1785,12 @@
         <member name="M:Impart.Table.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.Table.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Table.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
         <member name="M:Impart.Table.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
@@ -1827,6 +1892,12 @@
         <member name="M:Impart.Text.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
+        <member name="M:Impart.Text.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Text.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
         <member name="M:Impart.Text.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
@@ -1872,6 +1943,12 @@
         </member>
         <member name="M:Impart.Video.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.Video.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.Video.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
         </member>
         <member name="M:Impart.Video.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -1968,6 +2045,20 @@
         </member>
         <member name="F:Impart.TextType.Regular">
             <summary>Regular text.</summary>
+        </member>
+        <member name="T:Impart.WebsiteRequestArgs">
+            <summary>The event arguments passed when a client requests a WebPage from the Website.</summary>
+        </member>
+        <member name="F:Impart.WebsiteRequestArgs.Request">
+            <summary>The full request from the client.</summary>
+        </member>
+        <member name="F:Impart.WebsiteRequestArgs.Address">
+            <summary>The IP address of the client.</summary>
+        </member>
+        <member name="M:Impart.WebsiteRequestArgs.#ctor(System.String,System.Net.IPAddress)">
+            <summary>Create a WebsiteRequestArgs instance.</summary>
+            <param name="request">The full request from the client.</param>
+            <param name="address">The IP address of the client.</param>
         </member>
         <member name="T:Impart.Font">
             <summary>A font sourced from file(s).</summary>
@@ -2252,6 +2343,9 @@
         </member>
         <member name="P:Impart.IElement.ExtAttrs">
             <summary>The external attributes of the IElement.</summary>
+        </member>
+        <member name="M:Impart.IElement.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
         </member>
         <member name="T:Impart.IStyleElement">
             <summary>IStyleElement interface.</summary>
@@ -2822,149 +2916,147 @@
         <member name="M:Impart.WebPage.#ctor">
             <summary>Creates a WebPage instance.</summary>
         </member>
-        <member name="M:Impart.WebPage.ElementExists(Impart.IElement)">
-            <summary>Check if an Element exists.</summary>
-            <param name="element">The instance of the Element to check.</param>
+        <member name="M:Impart.WebPage.ElementExists(Impart.ElementRef)">
+            <summary>Checks if an Element exists.</summary>
+            <param name="element">The Element reference to check.</param>
         </member>
         <member name="M:Impart.WebPage.StyleElementExists(Impart.IStyleElement)">
-            <summary>Check if a IStyleElement exists.</summary>
+            <summary>Checks if an IStyleElement exists.</summary>
             <param name="element">The instance of the IStyleElement to check.</param>
         </member>
         <member name="M:Impart.WebPage.ElementExistsByID(System.String)">
-            <summary>Check if an IElement exists by ID.</summary>
+            <summary>Checks if an IElement exists by ID.</summary>
             <param name="id">The ID of the IElement to check.</param>
         </member>
         <member name="M:Impart.WebPage.GetElementByID(System.String)">
-            <summary>Get an IElement by ID.</summary>
+            <summary>Gets an IElement by ID.</summary>
             <param name="id">The ID of the IElement to get.</param>
         </member>
         <member name="M:Impart.WebPage.RemoveElementByID(System.String)">
-            <summary>Remove an IElement by ID.</summary>
+            <summary>Removes an IElement by ID.</summary>
             <param name="id">The ID of the IElement to remove.</param>
         </member>
         <member name="M:Impart.WebPage.RemoveElement(Impart.IElement)">
-            <summary>Remove an IElement.</summary>
+            <summary>Removes an IElement.</summary>
             <param name="element">The instance of the IElement to remove.</param>
         </member>
         <member name="M:Impart.WebPage.RemoveStyleElement(Impart.IStyleElement)">
-            <summary>Remove a IStyleElement.</summary>
+            <summary>Removes an IStyleElement.</summary>
             <param name="element">The instance of the IStyleElement to remove.</param>
         </member>
         <member name="M:Impart.WebPage.ChangeElement(Impart.IElement)">
-            <summary>Change an IElement.</summary>
+            <summary>Changes an IElement.</summary>
             <param name="element">The instance of the IElement to change.</param>
         </member>
         <member name="M:Impart.WebPage.ChangeStyleElement(Impart.IStyleElement)">
-            <summary>Change a IStyleElement.</summary>
+            <summary>Changes an IStyleElement.</summary>
             <param name="element">The instance of the IStyleElement to change.</param>
         </member>
         <member name="M:Impart.WebPage.AddStyle(Impart.Style)">
-            <summary>Add a Style.</summary>
+            <summary>Adds a Style.</summary>
             <param name="style">The Style instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.RemoveStyle(System.Int32)">
-            <summary>Remove a Style.</summary>
+            <summary>Removes a Style.</summary>
             <param name="index">The index of the Style to remove.</param>
         </member>
         <member name="M:Impart.WebPage.AddText(Impart.Text)">
-            <summary>Add a Text to the WebPage.</summary>
+            <summary>Adds a Text to the WebPage.</summary>
             <param name="text">The Text instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddImage(Impart.Image)">
-            <summary>Add an Image to the WebPage.</summary>
+            <summary>Adds an Image to the WebPage.</summary>
             <param name="image">The Image instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddHeader(Impart.Header)">
-            <summary>Add a Header to the WebPage.</summary>
+            <summary>Adds a Header to the WebPage.</summary>
             <param name="header">The Header instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddLink(Impart.Link)">
-            <summary>Add a Link to the WebPage.</summary>
+            <summary>Adds a Link to the WebPage.</summary>
             <param name="link">The Link instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddTable(Impart.Table)">
-            <summary>Add a Table to the WebPage.</summary>
+            <summary>Adds a Table to the WebPage.</summary>
             <param name="table">The Table instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddDivision(Impart.Division)">
-            <summary>Add a Division to the WebPage.</summary>
+            <summary>Adds a Division to the WebPage.</summary>
             <param name="division">The Division instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddList(Impart.List)">
-            <summary>Add a List to the WebPage.</summary>
+            <summary>Adds a List to the WebPage.</summary>
             <param name="list">The List instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.SetScrollBar(Impart.Scrollbar)">
-            <summary>Add a Scrollbar to the WebPage.</summary>
+            <summary>Adds a Scrollbar to the WebPage.</summary>
             <param name="scrollbar">The Scrollbar instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddForm(Impart.Form)">
-            <summary>Add a Form to the WebPage.</summary>
+            <summary>Adds a Form to the WebPage.</summary>
             <param name="form">The Form instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddButton(Impart.Button)">
-            <summary>Add a Button to the WebPage.</summary>
+            <summary>Adds a Button to the WebPage.</summary>
             <param name="button">The Button instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddNest(Impart.Nest)">
-            <summary>Add a Nest to the WebPage.</summary>
+            <summary>Adds a Nest to the WebPage.</summary>
             <param name="nest">The Nest instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddVideo(Impart.Video)">
-            <summary>Add a Video to the WebPage.</summary>
+            <summary>Adds a Video to the WebPage.</summary>
             <param name="video">The Video instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddExternalStyle(System.String)">
-            <summary>Add an external Style to the WebPage.</summary>
+            <summary>Adds an external Style to the WebPage.</summary>
             <param name="url">The URL of the external Style to add.</param>
         </member>
         <member name="M:Impart.WebPage.RemoveExternalStyle(System.Int32)">
-            <summary>Remove an external Style from the WebPage.</summary>
+            <summary>Removes an external Style from the WebPage.</summary>
             <param name="index">The index of the URL of the external Style to remove.</param>
         </member>
         <member name="M:Impart.WebPage.AddAnimation(Impart.Animation)">
-            <summary>Add an Animation to the WebPage.</summary>
+            <summary>Adds an Animation to the WebPage.</summary>
             <param name="animation">The Animation to add.</param>
         </member>
         <member name="M:Impart.WebPage.ForceRender">
-            <summary>Force the WebPage to be rendered again, regardless of any new changes.</summary>
+            <summary>Forces the WebPage to be rendered again, regardless of any new changes.</summary>
         </member>
         <member name="M:Impart.WebPage.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
+        <member name="M:Impart.WebPage.ToStringAsync">
+            <summary>Returns the instance as a String asynchronously.</summary>
+        </member>
         <member name="T:Impart.Website">
             <summary>Host WebPages.</summary>
         </member>
-        <member name="P:Impart.Website.Port">
-            <summary>The value of the localhost port the Website is being hosted on.</summary>
+        <member name="P:Impart.Website.Running">
+            <summary>Whether the Website is currently running. Default is false.</summary>
         </member>
-        <member name="F:Impart.Website.OnVisit">
-            <summary>The method to be called when a client connects to the Website.</summary>
+        <member name="F:Impart.Website.Pages">
+            <summary>A Dictionary of all the WebPages included in the Website. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</summary>
         </member>
-        <member name="M:Impart.Website.#ctor(Impart.WebPage,System.Int32,System.String)">
+        <member name="F:Impart.Website.Listener">
+            <summary>The underlying TCP listener the Website uses. Do not manually start or stop as the listener thread depends on the Website methods to do so.</summary>
+        </member>
+        <member name="F:Impart.Website.OnRequest">
+            <summary>Called when a client requests a WebPage.</summary>
+        </member>
+        <member name="F:Impart.Website.OnListener">
+            <summary>Called just before the TCP listener begins listening in a new thread.</summary>
+        </member>
+        <member name="M:Impart.Website.#ctor(Impart.WebPage,System.Int32)">
             <summary>Creates a Website instance.</summary>
-            <param name="webPage">The default WebPage.</param>
+            <param name="page">The default WebPage.</param>
             <param name="port">The local port to use. (Default is 5050)</param>
-            <param name="rootDirectory">The subdomain for the default WebPage.</param>
         </member>
         <member name="M:Impart.Website.Start">
             <summary>Start the Website.</summary>
         </member>
         <member name="M:Impart.Website.Stop">
-            <summary>Stop the Website.</summary>
-        </member>
-        <member name="M:Impart.Website.AddPage(Impart.WebPage,System.String)">
-            <summary>Add <paramref name="webPage"/> to the Website with <paramref name="directory"/> as the subdomain.</summary>
-            <param name="webPage">The WebPage to add.</param>
-            <param name="directory">The subdomain of the WebPage.</param>
-        </member>
-        <member name="M:Impart.Website.RemovePage(System.String)">
-            <summary>Remove the subdomain and the WebPage that goes along with it.</summary>
-            <param name="directory">The subdomain of the Website.</param>
-        </member>
-        <member name="M:Impart.Website.Set404Page(Impart.WebPage)">
-            <summary>Set the 404 page.</summary>
-            <param name="webPage">The WebPage to set as the 404 page.</param>
+            <summary>Stop the Website. This will also close the TCP listener thread.</summary>
         </member>
     </members>
 </doc>

@@ -11,5 +11,8 @@ namespace Impart
 
         /// <summary>The external attributes of the IElement.</summary>
         ExtAttrList ExtAttrs { get; }
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        ElementRef Reference();
     }
 }

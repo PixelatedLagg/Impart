@@ -23,14 +23,14 @@ namespace Impart
         private List<IFormField> Elements = new List<IFormField>();
         private bool Changed = true;
         private string Render;
-        private int IOIDValue = Ioid.Generate();
+        private int _IOID = Ioid.Generate();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get
             {
-                return IOIDValue;
+                return _IOID;
             }
         }
 
@@ -99,10 +99,16 @@ namespace Impart
             result.Changed = Changed;
             result.Elements = Elements;
             result.ExtAttrs = ExtAttrs;
-            result.IOIDValue = IOIDValue;
+            result._IOID = _IOID;
             result.Render = Render;
             return result;
         }
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        public ElementRef Reference() => new ElementRef(_IOID);
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        ElementRef IElement.Reference() => new ElementRef(_IOID);
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
@@ -111,7 +117,7 @@ namespace Impart
             result.Changed = Changed;
             result.Elements = Elements;
             result.ExtAttrs = ExtAttrs;
-            result.IOIDValue = IOIDValue;
+            result._IOID = _IOID;
             result.Render = Render;
             return result;
         }
