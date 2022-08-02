@@ -17,5 +17,6 @@ class test : WebPage
     public test() : base()
     {
         AddText("eek!");
+        GetIElement<Image>(x => x.)
     }
 }

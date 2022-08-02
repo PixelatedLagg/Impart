@@ -1,7 +1,9 @@
+using System.Linq;
 using System.Text;
 using Impart.Scripting;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System;
 
 namespace Impart
 {
@@ -72,6 +74,12 @@ namespace Impart
 
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
+
+        protected IElement[] GetIElements<T1>(Func<T1, T1> selector) where T1 : IElement
+        {
+            List<T1> results = new List<T1>();
+            foreach (var item in selector.EndInvoke
+        }
 
         /// <summary>Checks if an Element exists.</summary>
         /// <param name="element">The Element reference to check.</param>
