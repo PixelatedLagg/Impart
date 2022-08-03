@@ -9,7 +9,8 @@ class Program
     public static void Main(string[] args) => MainAsync().GetAwaiter().GetResult();
     public static async Task MainAsync()
     {
-        Console.WriteLine((await new test().ToStringAsync()));
+        new test();
+        //Console.WriteLine((await new test().ToStringAsync()));
     }
 }
 class test : WebPage
@@ -17,6 +18,11 @@ class test : WebPage
     public test() : base()
     {
         AddText("eek!");
-        GetIElement<Image>(x => x.)
+        AddImage(new Image("aids"));
+        AddText("hepatitis :D");
+        foreach (Text t in GetIElements<Text>(x => x.TextValue.Contains('e')))
+        {
+            Console.WriteLine(t);
+        }
     }
 }

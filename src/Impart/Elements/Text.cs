@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Text element.</summary>
-    public struct Text : IElement, INested
+    public class Text : IElement, INested
     {
         private string _TextValue;
 

@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Button element.</summary>
-    public struct Button : IElement, INested
+    public class Button : IElement, INested
     {
         private Text _Text;
 

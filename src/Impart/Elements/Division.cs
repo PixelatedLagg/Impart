@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Division element.</summary>
-    public struct Division : IElement, IDisposable, INested
+    public class Division : IElement, IDisposable, INested
     {
         /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();

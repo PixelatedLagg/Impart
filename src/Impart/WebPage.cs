@@ -75,10 +75,21 @@ namespace Impart
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
 
-        protected IElement[] GetIElements<T1>(Func<T1, T1> selector) where T1 : IElement
+        protected T1[] GetIElements<T1>(Func<T1, bool> selector) where T1 : class, IElement
         {
             List<T1> results = new List<T1>();
-            foreach (var item in selector.EndInvoke
+            foreach (IElement element in _Elements)
+            {
+                if (element as T1 == null)
+                {
+                    continue;
+                }
+                if (selector.Invoke((T1)element))
+                {
+                    results.Add((T1)element);
+                }
+            }
+            return results.ToArray();
         }
 
         /// <summary>Checks if an Element exists.</summary>

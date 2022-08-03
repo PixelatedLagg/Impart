@@ -5,7 +5,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Header element.</summary>
-    public struct Header : IElement, INested
+    public class Header : IElement, INested
     {
         private string _Text = "";
 

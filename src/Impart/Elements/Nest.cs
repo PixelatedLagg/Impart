@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>A nest of IElements.</summary>
-    public struct Nest : IElement
+    public class Nest : IElement
     {
         private List<IElement> _Elements = new List<IElement>();
 

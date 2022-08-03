@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>List element.</summary>
-    public struct List : IElement, INested
+    public class List : IElement, INested
     {
         private List<Text> _Entries = new List<Text>();
 
@@ -140,12 +140,11 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            List result = new List();
+            List result = new List(_Type);
             result.Attrs = Attrs;
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Type = _Type;
             result.Render = Render;
             result._ListType = _ListType;
             return result;
@@ -160,12 +159,11 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            List result = new List();
+            List result = new List(_Type);
             result.Attrs = Attrs;
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Type = _Type;
             result.Render = Render;
             result._ListType = _ListType;
             return result;

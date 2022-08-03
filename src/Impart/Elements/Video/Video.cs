@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Video element.</summary>
-    public struct Video : IElement, INested
+    public class Video : IElement, INested
     {
         private string _Source;
 
@@ -122,11 +122,8 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            Video result = new Video();
+            Video result = new Video(_Source, _Size.Width, _Size.Height, _Options);
             result._IOID = _IOID;
-            result._Options = _Options;
-            result._Size = _Size;
-            result._Source = _Source;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             return result;
@@ -141,11 +138,8 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            Video result = new Video();
+            Video result = new Video(_Source, _Size.Width, _Size.Height, _Options);
             result._IOID = _IOID;
-            result._Options = _Options;
-            result._Size = _Size;
-            result._Source = _Source;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             return result;

@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Image element.</summary>
-    public struct Image : IElement, INested
+    public class Image : IElement, INested
     {
         private string _Source;
 

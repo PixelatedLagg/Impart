@@ -5,7 +5,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Link element.</summary>
-    public struct Link : IElement, INested
+    public class Link : IElement, INested
     {
         private Text _Text = new Text();
 
