@@ -7,6 +7,14 @@ namespace Impart
     /// <summary>List element.</summary>
     public class List : IElement, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private List<Text> _Entries = new List<Text>();
 
         /// <summary>The entry values of the List.</summary>

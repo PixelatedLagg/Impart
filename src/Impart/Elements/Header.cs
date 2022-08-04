@@ -7,6 +7,14 @@ namespace Impart
     /// <summary>Header element.</summary>
     public class Header : IElement, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private string _Text = "";
 
         /// <summary>The text value of the Header.</summary>

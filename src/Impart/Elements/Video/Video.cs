@@ -6,6 +6,14 @@ namespace Impart
     /// <summary>Video element.</summary>
     public class Video : IElement, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private string _Source;
 
         /// <summary>The Video source file.</summary>

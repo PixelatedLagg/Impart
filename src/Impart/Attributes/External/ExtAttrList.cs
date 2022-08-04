@@ -23,7 +23,7 @@ namespace Impart
                         return extattr;
                     }
                 }
-                return default;
+                return null;
             }
         }
         /// <summary>Add an ExtAttr to the ExtAttrList.</summary>

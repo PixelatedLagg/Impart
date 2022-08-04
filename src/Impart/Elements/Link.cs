@@ -7,6 +7,14 @@ namespace Impart
     /// <summary>Link element.</summary>
     public class Link : IElement, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private Text _Text = new Text();
 
         /// <summary>The Text value of the Link.</summary>

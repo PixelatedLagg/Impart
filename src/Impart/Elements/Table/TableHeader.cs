@@ -6,6 +6,14 @@ namespace Impart
     /// <summary>A header row of a Table.</summary>
     public class TableHeader : TableRow
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public new string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private List<IElement> _Elements = new List<IElement>();
 
         /// <summary>The IElement values of the TableHeader.</summary>

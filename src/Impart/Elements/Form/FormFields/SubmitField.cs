@@ -6,6 +6,14 @@ namespace Impart
     /// <summary>Submit button for Form.</summary>
     public sealed class SubmitField : IFormField
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         /// <summary>The Attr values of the SubmitField.</summary>
         public AttrList Attrs = new AttrList();
 

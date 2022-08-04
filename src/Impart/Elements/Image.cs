@@ -6,6 +6,14 @@ namespace Impart
     /// <summary>Image element.</summary>
     public class Image : IElement, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private string _Source;
 
         /// <summary>The source link of the Image.</summary>

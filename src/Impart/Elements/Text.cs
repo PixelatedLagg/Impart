@@ -6,6 +6,14 @@ namespace Impart
     /// <summary>Text element.</summary>
     public class Text : IElement, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private string _TextValue;
 
         /// <summary>The text value of the Text.</summary>

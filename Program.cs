@@ -17,12 +17,12 @@ class test : WebPage
 {
     public test() : base()
     {
-        AddText("eek!");
-        AddImage(new Image("aids"));
-        AddText("hepatitis :D");
-        foreach (Text t in GetIElements<Text>(x => x.TextValue.Contains('e')))
-        {
-            Console.WriteLine(t);
-        }
+        Text t = new Text("aids");
+        t.ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, "hepatitis!"));
+        Text t2 = new Text("test2");
+        t2.ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, "test"));
+        Add(t);
+        Add(t2);
+        Console.WriteLine(Get<Text>(x => x.ID == "hepatitis!").TextValue);
     }
 }

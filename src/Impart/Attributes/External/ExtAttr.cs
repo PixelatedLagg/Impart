@@ -1,7 +1,7 @@
 namespace Impart
 {
     /// <summary>An element external attribute.</summary>
-    public struct ExtAttr
+    public class ExtAttr
     {
 
         /// <summary>The ExtAttrType.</summary>

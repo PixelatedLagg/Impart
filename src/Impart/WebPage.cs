@@ -75,7 +75,23 @@ namespace Impart
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
 
-        protected T1[] GetIElements<T1>(Func<T1, bool> selector) where T1 : class, IElement
+        protected T1 Get<T1>(Func<T1, bool> selector) where T1 : class, IElement
+        {
+            foreach (IElement element in _Elements)
+            {
+                if (element as T1 == null)
+                {
+                    continue;
+                }
+                if (selector.Invoke((T1)element))
+                {
+                    return (T1)element;
+                }
+            }
+            return null;
+        }
+
+        protected T1[] GetMany<T1>(Func<T1, bool> selector) where T1 : class, IElement
         {
             List<T1> results = new List<T1>();
             foreach (IElement element in _Elements)
@@ -94,7 +110,21 @@ namespace Impart
 
         /// <summary>Checks if an Element exists.</summary>
         /// <param name="element">The Element reference to check.</param>
-        protected bool ElementExists(ElementRef element)
+        protected bool Exists(ElementRef element)
+        {
+            foreach (IElement entry in _Elements)
+            {
+                if (entry.IOID == element.IOID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>Checks if an Element exists.</summary>
+        /// <param name="element">The Element instance to check.</param>
+        protected bool Exists(IElement element)
         {
             foreach (IElement entry in _Elements)
             {
@@ -108,7 +138,7 @@ namespace Impart
 
         /// <summary>Checks if an IStyleElement exists.</summary>
         /// <param name="element">The instance of the IStyleElement to check.</param>
-        protected bool StyleElementExists(IStyleElement element)
+        protected bool Exists(IStyleElement element)
         {
             foreach (IStyleElement entry in _StyleElements)
             {
@@ -120,51 +150,9 @@ namespace Impart
             return false;
         }
 
-        /// <summary>Checks if an IElement exists by ID.</summary>
-        /// <param name="id">The ID of the IElement to check.</param>
-        protected bool ElementExistsByID(string id)
-        {
-            foreach (IElement entry in _Elements)
-            {
-                if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>Gets an IElement by ID.</summary>
-        /// <param name="id">The ID of the IElement to get.</param>
-        protected IElement GetElementByID(string id)
-        {
-            foreach (IElement entry in _Elements)
-            {
-                if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
-                {
-                    return entry;
-                }
-            }
-            return null;
-        }
-
-        /// <summary>Removes an IElement by ID.</summary>
-        /// <param name="id">The ID of the IElement to remove.</param>
-        protected void RemoveElementByID(string id)
-        {
-            foreach (IElement entry in _Elements.ToArray())
-            {
-                if (entry.ExtAttrs[ExtAttrType.ID].Value == id)
-                {
-                    Changed = true;
-                    _Elements.Remove(entry);
-                }
-            }
-        }
-
         /// <summary>Removes an IElement.</summary>
         /// <param name="element">The instance of the IElement to remove.</param>
-        protected void RemoveElement(IElement element)
+        protected void Remove(IElement element)
         {
             foreach (IElement entry in _Elements.ToArray())
             {
@@ -178,7 +166,7 @@ namespace Impart
 
         /// <summary>Removes an IStyleElement.</summary>
         /// <param name="element">The instance of the IStyleElement to remove.</param>
-        protected void RemoveStyleElement(IStyleElement element)
+        protected void Remove(IStyleElement element)
         {
             foreach (IStyleElement entry in _Elements.ToArray())
             {
@@ -190,9 +178,9 @@ namespace Impart
             }
         }
 
-        /// <summary>Changes an IElement.</summary>
-        /// <param name="element">The instance of the IElement to change.</param>
-        protected void ChangeElement(IElement element)
+        /// <summary>Edits an IElement.</summary>
+        /// <param name="element">The instance of the IElement to edit.</param>
+        protected void Edit(IElement element)
         {
             foreach (IElement entry in _Elements.ToArray())
             {
@@ -204,9 +192,9 @@ namespace Impart
             }
         }
 
-        /// <summary>Changes an IStyleElement.</summary>
-        /// <param name="element">The instance of the IStyleElement to change.</param>
-        protected void ChangeStyleElement(IStyleElement element)
+        /// <summary>Edits an IStyleElement.</summary>
+        /// <param name="element">The instance of the IStyleElement to edit.</param>
+        protected void Edit(IStyleElement element)
         {
             foreach (IStyleElement entry in _StyleElements.ToArray())
             {
@@ -220,7 +208,7 @@ namespace Impart
 
         /// <summary>Adds a Style.</summary>
         /// <param name="style">The Style instance to add.</param>
-        protected void AddStyle(Style style)
+        protected void Add(Style style)
         {
             _Styles.Add(style.ToString());
             Changed = true;
@@ -228,7 +216,7 @@ namespace Impart
 
         /// <summary>Removes a Style.</summary>
         /// <param name="index">The index of the Style to remove.</param>
-        protected void RemoveStyle(int index)
+        protected void Add(int index)
         {
             _Styles.RemoveAt(index);
             Changed = true;
@@ -236,7 +224,7 @@ namespace Impart
 
         /// <summary>Adds a Text to the WebPage.</summary>
         /// <param name="text">The Text instance to add.</param>
-        protected void AddText(Text text)
+        protected void Add(Text text)
         {
             _Elements.Add(text);
             Changed = true;
@@ -244,7 +232,7 @@ namespace Impart
 
         /// <summary>Adds an Image to the WebPage.</summary>
         /// <param name="image">The Image instance to add.</param>
-        protected void AddImage(Image image)
+        protected void Add(Image image)
         {
             _Elements.Add(image);
             Changed = true;
@@ -252,7 +240,7 @@ namespace Impart
 
         /// <summary>Adds a Header to the WebPage.</summary>
         /// <param name="header">The Header instance to add.</param>
-        protected void AddHeader(Header header)
+        protected void Add(Header header)
         {
             _Elements.Add(header);
             Changed = true;
@@ -260,7 +248,7 @@ namespace Impart
 
         /// <summary>Adds a Link to the WebPage.</summary>
         /// <param name="link">The Link instance to add.</param>
-        protected void AddLink(Link link)
+        protected void Add(Link link)
         {
             _Elements.Add(link);
             Changed = true;
@@ -268,7 +256,7 @@ namespace Impart
 
         /// <summary>Adds a Table to the WebPage.</summary>
         /// <param name="table">The Table instance to add.</param>
-        protected void AddTable(Table table)
+        protected void Add(Table table)
         {
             _Elements.Add(table);
             Changed = true;
@@ -276,7 +264,7 @@ namespace Impart
 
         /// <summary>Adds a Division to the WebPage.</summary>
         /// <param name="division">The Division instance to add.</param>
-        protected void AddDivision(Division division)
+        protected void Add(Division division)
         {
             _Elements.Add(division);
             foreach (IStyleElement element in division._StyleElements)
@@ -288,7 +276,7 @@ namespace Impart
 
         /// <summary>Adds a List to the WebPage.</summary>
         /// <param name="list">The List instance to add.</param>
-        protected void AddList(List list)
+        protected void Add(List list)
         {
             _Elements.Add(list);
             Changed = true;
@@ -296,7 +284,7 @@ namespace Impart
 
         /// <summary>Adds a Scrollbar to the WebPage.</summary>
         /// <param name="scrollbar">The Scrollbar instance to add.</param>
-        protected void SetScrollBar(Scrollbar scrollbar)
+        protected void Add(Scrollbar scrollbar)
         {
             switch (scrollbar.Axis)
             {
@@ -315,7 +303,7 @@ namespace Impart
 
         /// <summary>Adds a Form to the WebPage.</summary>
         /// <param name="form">The Form instance to add.</param>
-        protected void AddForm(Form form)
+        protected void Add(Form form)
         {
             _Elements.Add(form);
             Changed = true;
@@ -323,7 +311,7 @@ namespace Impart
 
         /// <summary>Adds a Button to the WebPage.</summary>
         /// <param name="button">The Button instance to add.</param>
-        protected void AddButton(Button button)
+        protected void Add(Button button)
         {
             _Elements.Add(button);
             Changed = true;
@@ -331,7 +319,7 @@ namespace Impart
 
         /// <summary>Adds a Nest to the WebPage.</summary>
         /// <param name="nest">The Nest instance to add.</param>
-        protected void AddNest(Nest nest)
+        protected void Add(Nest nest)
         {
             _Elements.Add(nest);
             Changed = true;
@@ -339,7 +327,7 @@ namespace Impart
 
         /// <summary>Adds a Video to the WebPage.</summary>
         /// <param name="video">The Video instance to add.</param>
-        protected void AddVideo(Video video)
+        protected void Add(Video video)
         {
             _Elements.Add(video);
             Changed = true;
@@ -353,19 +341,74 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Removes an external Style from the WebPage.</summary>
-        /// <param name="index">The index of the URL of the external Style to remove.</param>
-        protected void RemoveExternalStyle(int index)
-        {
-            _ExternalStyles.RemoveAt(index);
-            Changed = true;
-        }
-
         /// <summary>Adds an Animation to the WebPage.</summary>
         /// <param name="animation">The Animation to add.</param>
-        protected void AddAnimation(Animation animation)
+        protected void Add(Animation animation)
         {
             _StyleElements.Add(animation);
+            Changed = true;
+        }
+        protected void AddMany(params Text[] texts)
+        {
+            foreach (Text text in texts)
+            {
+                Add(text);
+            }
+        }
+
+        protected void AddMany(params Image[] images)
+        {
+            foreach (Image image in images)
+            {
+                Add(image);
+            }
+        }
+
+        protected void AddMany(params Header[] headers)
+        {
+            foreach (Header header in headers)
+            {
+                Add(header);
+            }
+        }
+
+        protected void AddMany(params Link[] links)
+        {
+            foreach (Link link in links)
+            {
+                Add(link);
+            }
+        }
+
+        protected void AddMany(params Table[] tables)
+        {
+            foreach (Table table in tables)
+            {
+                Add(table);
+            }
+        }
+
+        protected void AddMany(params Division[] divisions)
+        {
+            foreach (Division division in divisions)
+            {
+                Add(division);
+            }
+        }
+
+        protected void AddMany(params List[] lists)
+        {
+            foreach (List list in lists)
+            {
+                Add(list);
+            }
+        }
+
+        /// <summary>Removes an external Style from the WebPage.</summary>
+        /// <param name="index">The index of the URL of the external Style to remove.</param>
+        protected void Remove(int index)
+        {
+            _ExternalStyles.RemoveAt(index);
             Changed = true;
         }
 

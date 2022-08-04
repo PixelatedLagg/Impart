@@ -6,6 +6,14 @@ namespace Impart
     /// <summary>Embed a page into your website in the form of a frame.</summary>
     public class EFrame : IElement, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private int _Width;
 
         /// <summary>The width (in pixels).</summary>

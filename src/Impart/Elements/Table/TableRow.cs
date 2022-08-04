@@ -6,19 +6,12 @@ namespace Impart
     /// <summary>A row of a Table.</summary>
     public class TableRow
     {
-        private string _ID = null;
-        
-        /// <summary>The ID value of the TableRow.</summary>
+        /// <summary>The ID value of the IElement.</summary>
         public string ID
         {
             get
             {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
             }
         }
         private List<IElement> _Elements = new List<IElement>();

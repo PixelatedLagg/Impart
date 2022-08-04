@@ -6,6 +6,14 @@ namespace Impart
     /// <summary>Text field for Form.</summary>
     public sealed class TextField : IFormField
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private string _Text;
 
         /// <summary>The Text value of the TextField.</summary>

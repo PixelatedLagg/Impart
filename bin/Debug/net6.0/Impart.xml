@@ -995,6 +995,9 @@
         <member name="T:Impart.Button">
             <summary>Button element.</summary>
         </member>
+        <member name="P:Impart.Button.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="P:Impart.Button.Text">
             <summary>The Text value of the Button.</summary>
         </member>
@@ -1040,6 +1043,9 @@
         </member>
         <member name="T:Impart.Division">
             <summary>Division element.</summary>
+        </member>
+        <member name="P:Impart.Division.ID">
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="F:Impart.Division.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1131,6 +1137,9 @@
         <member name="T:Impart.EFrame">
             <summary>Embed a page into your website in the form of a frame.</summary>
         </member>
+        <member name="P:Impart.EFrame.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="P:Impart.EFrame.Width">
             <summary>The width (in pixels).</summary>
         </member>
@@ -1206,6 +1215,9 @@
         <member name="T:Impart.Form">
             <summary>Form element.</summary>
         </member>
+        <member name="P:Impart.Form.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="F:Impart.Form.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
@@ -1254,6 +1266,9 @@
         <member name="T:Impart.CheckField">
             <summary>Checkbox input for Form.</summary>
         </member>
+        <member name="P:Impart.CheckField.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="F:Impart.CheckField.Attrs">
             <summary>The Attr values of the SubmitField.</summary>
         </member>
@@ -1276,6 +1291,9 @@
         <member name="T:Impart.SubmitField">
             <summary>Submit button for Form.</summary>
         </member>
+        <member name="P:Impart.SubmitField.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="F:Impart.SubmitField.Attrs">
             <summary>The Attr values of the SubmitField.</summary>
         </member>
@@ -1290,6 +1308,9 @@
         </member>
         <member name="T:Impart.TextField">
             <summary>Text field for Form.</summary>
+        </member>
+        <member name="P:Impart.TextField.ID">
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="P:Impart.TextField.Text">
             <summary>The Text value of the TextField.</summary>
@@ -1309,6 +1330,9 @@
         </member>
         <member name="T:Impart.Header">
             <summary>Header element.</summary>
+        </member>
+        <member name="P:Impart.Header.ID">
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="P:Impart.Header.TextValue">
             <summary>The text value of the Header.</summary>
@@ -1360,6 +1384,9 @@
         <member name="T:Impart.Image">
             <summary>Image element.</summary>
         </member>
+        <member name="P:Impart.Image.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="P:Impart.Image.Source">
             <summary>The source link of the Image.</summary>
         </member>
@@ -1405,6 +1432,9 @@
         </member>
         <member name="T:Impart.Link">
             <summary>Link element.</summary>
+        </member>
+        <member name="P:Impart.Link.ID">
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="P:Impart.Link.Text">
             <summary>The Text value of the Link.</summary>
@@ -1466,6 +1496,9 @@
         </member>
         <member name="T:Impart.List">
             <summary>List element.</summary>
+        </member>
+        <member name="P:Impart.List.ID">
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="P:Impart.List.Entries">
             <summary>The entry values of the List.</summary>
@@ -1756,6 +1789,9 @@
         <member name="T:Impart.Table">
             <summary>Table element.</summary>
         </member>
+        <member name="P:Impart.Table.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="P:Impart.Table.Rows">
             <summary>The TableRow values of the Table.</summary>
         </member>
@@ -1803,6 +1839,9 @@
         <member name="T:Impart.TableHeader">
             <summary>A header row of a Table.</summary>
         </member>
+        <member name="P:Impart.TableHeader.ID">
+            <summary>The ID value of the IElement.</summary>
+        </member>
         <member name="P:Impart.TableHeader.Elements">
             <summary>The IElement values of the TableHeader.</summary>
         </member>
@@ -1827,7 +1866,7 @@
             <summary>A row of a Table.</summary>
         </member>
         <member name="P:Impart.TableRow.ID">
-            <summary>The ID value of the TableRow.</summary>
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="P:Impart.TableRow.Elements">
             <summary>The IElements values of the TableRow.</summary>
@@ -1851,6 +1890,9 @@
         </member>
         <member name="T:Impart.Text">
             <summary>Text element.</summary>
+        </member>
+        <member name="P:Impart.Text.ID">
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="P:Impart.Text.TextValue">
             <summary>The text value of the Text.</summary>
@@ -1909,6 +1951,9 @@
         </member>
         <member name="T:Impart.Video">
             <summary>Video element.</summary>
+        </member>
+        <member name="P:Impart.Video.ID">
+            <summary>The ID value of the IElement.</summary>
         </member>
         <member name="P:Impart.Video.Source">
             <summary>The Video source file.</summary>
@@ -2916,95 +2961,87 @@
         <member name="M:Impart.WebPage.#ctor">
             <summary>Creates a WebPage instance.</summary>
         </member>
-        <member name="M:Impart.WebPage.ElementExists(Impart.ElementRef)">
+        <member name="M:Impart.WebPage.Exists(Impart.ElementRef)">
             <summary>Checks if an Element exists.</summary>
             <param name="element">The Element reference to check.</param>
         </member>
-        <member name="M:Impart.WebPage.StyleElementExists(Impart.IStyleElement)">
+        <member name="M:Impart.WebPage.Exists(Impart.IElement)">
+            <summary>Checks if an Element exists.</summary>
+            <param name="element">The Element instance to check.</param>
+        </member>
+        <member name="M:Impart.WebPage.Exists(Impart.IStyleElement)">
             <summary>Checks if an IStyleElement exists.</summary>
             <param name="element">The instance of the IStyleElement to check.</param>
         </member>
-        <member name="M:Impart.WebPage.ElementExistsByID(System.String)">
-            <summary>Checks if an IElement exists by ID.</summary>
-            <param name="id">The ID of the IElement to check.</param>
-        </member>
-        <member name="M:Impart.WebPage.GetElementByID(System.String)">
-            <summary>Gets an IElement by ID.</summary>
-            <param name="id">The ID of the IElement to get.</param>
-        </member>
-        <member name="M:Impart.WebPage.RemoveElementByID(System.String)">
-            <summary>Removes an IElement by ID.</summary>
-            <param name="id">The ID of the IElement to remove.</param>
-        </member>
-        <member name="M:Impart.WebPage.RemoveElement(Impart.IElement)">
+        <member name="M:Impart.WebPage.Remove(Impart.IElement)">
             <summary>Removes an IElement.</summary>
             <param name="element">The instance of the IElement to remove.</param>
         </member>
-        <member name="M:Impart.WebPage.RemoveStyleElement(Impart.IStyleElement)">
+        <member name="M:Impart.WebPage.Remove(Impart.IStyleElement)">
             <summary>Removes an IStyleElement.</summary>
             <param name="element">The instance of the IStyleElement to remove.</param>
         </member>
-        <member name="M:Impart.WebPage.ChangeElement(Impart.IElement)">
-            <summary>Changes an IElement.</summary>
-            <param name="element">The instance of the IElement to change.</param>
+        <member name="M:Impart.WebPage.Edit(Impart.IElement)">
+            <summary>Edits an IElement.</summary>
+            <param name="element">The instance of the IElement to edit.</param>
         </member>
-        <member name="M:Impart.WebPage.ChangeStyleElement(Impart.IStyleElement)">
-            <summary>Changes an IStyleElement.</summary>
-            <param name="element">The instance of the IStyleElement to change.</param>
+        <member name="M:Impart.WebPage.Edit(Impart.IStyleElement)">
+            <summary>Edits an IStyleElement.</summary>
+            <param name="element">The instance of the IStyleElement to edit.</param>
         </member>
-        <member name="M:Impart.WebPage.AddStyle(Impart.Style)">
+        <member name="M:Impart.WebPage.Add(Impart.Style)">
             <summary>Adds a Style.</summary>
             <param name="style">The Style instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.RemoveStyle(System.Int32)">
+        <member name="M:Impart.WebPage.Add(System.Int32)">
             <summary>Removes a Style.</summary>
             <param name="index">The index of the Style to remove.</param>
         </member>
-        <member name="M:Impart.WebPage.AddText(Impart.Text)">
+        <member name="M:Impart.WebPage.Add(Impart.Text)">
             <summary>Adds a Text to the WebPage.</summary>
             <param name="text">The Text instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddImage(Impart.Image)">
+        <member name="M:Impart.WebPage.Add(Impart.Image)">
             <summary>Adds an Image to the WebPage.</summary>
             <param name="image">The Image instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddHeader(Impart.Header)">
+        <member name="M:Impart.WebPage.Add(Impart.Header)">
             <summary>Adds a Header to the WebPage.</summary>
             <param name="header">The Header instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddLink(Impart.Link)">
+        <member name="M:Impart.WebPage.Add(Impart.Link)">
             <summary>Adds a Link to the WebPage.</summary>
             <param name="link">The Link instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddTable(Impart.Table)">
+        <member name="M:Impart.WebPage.Add(Impart.Table)">
             <summary>Adds a Table to the WebPage.</summary>
             <param name="table">The Table instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddDivision(Impart.Division)">
+        <member name="M:Impart.WebPage.Add(Impart.Division)">
             <summary>Adds a Division to the WebPage.</summary>
             <param name="division">The Division instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddList(Impart.List)">
+        <member name="M:Impart.WebPage.Add(Impart.List)">
             <summary>Adds a List to the WebPage.</summary>
             <param name="list">The List instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.SetScrollBar(Impart.Scrollbar)">
+        <member name="M:Impart.WebPage.Add(Impart.Scrollbar)">
             <summary>Adds a Scrollbar to the WebPage.</summary>
             <param name="scrollbar">The Scrollbar instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddForm(Impart.Form)">
+        <member name="M:Impart.WebPage.Add(Impart.Form)">
             <summary>Adds a Form to the WebPage.</summary>
             <param name="form">The Form instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddButton(Impart.Button)">
+        <member name="M:Impart.WebPage.Add(Impart.Button)">
             <summary>Adds a Button to the WebPage.</summary>
             <param name="button">The Button instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddNest(Impart.Nest)">
+        <member name="M:Impart.WebPage.Add(Impart.Nest)">
             <summary>Adds a Nest to the WebPage.</summary>
             <param name="nest">The Nest instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddVideo(Impart.Video)">
+        <member name="M:Impart.WebPage.Add(Impart.Video)">
             <summary>Adds a Video to the WebPage.</summary>
             <param name="video">The Video instance to add.</param>
         </member>
@@ -3012,13 +3049,13 @@
             <summary>Adds an external Style to the WebPage.</summary>
             <param name="url">The URL of the external Style to add.</param>
         </member>
-        <member name="M:Impart.WebPage.RemoveExternalStyle(System.Int32)">
-            <summary>Removes an external Style from the WebPage.</summary>
-            <param name="index">The index of the URL of the external Style to remove.</param>
-        </member>
-        <member name="M:Impart.WebPage.AddAnimation(Impart.Animation)">
+        <member name="M:Impart.WebPage.Add(Impart.Animation)">
             <summary>Adds an Animation to the WebPage.</summary>
             <param name="animation">The Animation to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.Remove(System.Int32)">
+            <summary>Removes an external Style from the WebPage.</summary>
+            <param name="index">The index of the URL of the external Style to remove.</param>
         </member>
         <member name="M:Impart.WebPage.ForceRender">
             <summary>Forces the WebPage to be rendered again, regardless of any new changes.</summary>

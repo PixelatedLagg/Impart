@@ -8,6 +8,14 @@ namespace Impart
     /// <summary>Division element.</summary>
     public class Division : IElement, IDisposable, INested
     {
+        /// <summary>The ID value of the IElement.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
