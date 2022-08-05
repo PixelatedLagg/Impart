@@ -7,7 +7,7 @@ namespace Impart
     /// <summary>Form element.</summary>
     public sealed class Form : IElement, INested
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the IElement. Returns null if ID is not set.</summary>
         public string ID
         {
             get

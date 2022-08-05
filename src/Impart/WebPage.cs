@@ -64,7 +64,6 @@ namespace Impart
 
         /// <summary>The Font values of the WebPage.</summary>
         public FontList Fonts = new FontList();
-        internal Script _Script = new Script("");
         private List<IElement> _Elements = new List<IElement>();
         private List<IStyleElement> _StyleElements = new List<IStyleElement>();
         private List<string> _Styles = new List<string>();
@@ -75,6 +74,8 @@ namespace Impart
         /// <summary>Creates a WebPage instance.</summary>
         protected WebPage() { }
 
+        /// <summary>Gets the specified IElement from the WebPage.</summary>
+        /// <param name="selector">The specifications to be met by the IElement.</param>
         protected T1 Get<T1>(Func<T1, bool> selector) where T1 : class, IElement
         {
             foreach (IElement element in _Elements)
@@ -348,6 +349,9 @@ namespace Impart
             _StyleElements.Add(animation);
             Changed = true;
         }
+
+        /// <summary>Adds multiple Texts to the WebPage..</summary>
+        /// <param name="texts">The Texts to add.</param>
         protected void AddMany(params Text[] texts)
         {
             foreach (Text text in texts)
@@ -356,6 +360,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Adds multiple Images to the WebPage..</summary>
+        /// <param name="images">The Images to add.</param>
         protected void AddMany(params Image[] images)
         {
             foreach (Image image in images)
@@ -364,6 +370,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Adds multiple Headers to the WebPage..</summary>
+        /// <param name="headers">The Headers to add.</param>
         protected void AddMany(params Header[] headers)
         {
             foreach (Header header in headers)
@@ -372,6 +380,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Adds multiple Links to the WebPage..</summary>
+        /// <param name="links">The Links to add.</param>
         protected void AddMany(params Link[] links)
         {
             foreach (Link link in links)
@@ -380,6 +390,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Adds multiple Tables to the WebPage..</summary>
+        /// <param name="tables">The Tables to add.</param>
         protected void AddMany(params Table[] tables)
         {
             foreach (Table table in tables)
@@ -388,6 +400,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Adds multiple Divisions to the WebPage..</summary>
+        /// <param name="divisions">The Divisions to add.</param>
         protected void AddMany(params Division[] divisions)
         {
             foreach (Division division in divisions)
@@ -396,6 +410,8 @@ namespace Impart
             }
         }
 
+        /// <summary>Adds multiple Lists to the WebPage..</summary>
+        /// <param name="lists">The Lists to add.</param>
         protected void AddMany(params List[] lists)
         {
             foreach (List list in lists)

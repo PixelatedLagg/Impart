@@ -7,7 +7,7 @@ namespace Impart
     /// <summary>Header element.</summary>
     public class Header : IElement, INested
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
         {
             get

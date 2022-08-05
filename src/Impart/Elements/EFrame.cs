@@ -6,7 +6,7 @@ namespace Impart
     /// <summary>Embed a page into your website in the form of a frame.</summary>
     public class EFrame : IElement, INested
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
         {
             get

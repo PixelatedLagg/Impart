@@ -6,7 +6,7 @@ namespace Impart
     /// <summary>Submit button for Form.</summary>
     public sealed class SubmitField : IFormField
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
         {
             get
@@ -14,10 +14,10 @@ namespace Impart
                 return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
             }
         }
-        /// <summary>The Attr values of the SubmitField.</summary>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <summary>The ExtAttr values of the SubmitField.</summary>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         
         internal double InputID;

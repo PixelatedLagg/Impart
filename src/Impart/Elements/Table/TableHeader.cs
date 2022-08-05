@@ -6,7 +6,7 @@ namespace Impart
     /// <summary>A header row of a Table.</summary>
     public class TableHeader : TableRow
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public new string ID
         {
             get
@@ -16,7 +16,7 @@ namespace Impart
         }
         private List<IElement> _Elements = new List<IElement>();
 
-        /// <summary>The IElement values of the TableHeader.</summary>
+        /// <summary>The IElement values of the instance.</summary>
         public new IElement[] Elements
         {
             get

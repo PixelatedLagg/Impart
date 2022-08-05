@@ -7,7 +7,7 @@ namespace Impart
     /// <summary>Table element.</summary>
     public class Table : IElement, INested
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
         {
             get
@@ -17,7 +17,7 @@ namespace Impart
         }
         private List<TableRow> _Rows = new List<TableRow>();
 
-        /// <summary>The TableRow values of the Table.</summary>
+        /// <summary>The TableRow values of the instance.</summary>
         public TableRow[] Rows
         {
             get

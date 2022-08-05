@@ -7,7 +7,7 @@ namespace Impart
     /// <summary>List element.</summary>
     public class List : IElement, INested
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
         {
             get

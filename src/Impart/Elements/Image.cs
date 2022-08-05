@@ -6,7 +6,7 @@ namespace Impart
     /// <summary>Image element.</summary>
     public class Image : IElement, INested
     {
-        /// <summary>The ID value of the IElement.</summary>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
         {
             get
