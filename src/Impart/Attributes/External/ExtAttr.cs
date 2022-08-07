@@ -1,13 +1,13 @@
 namespace Impart
 {
     /// <summary>An element external attribute.</summary>
-    public struct ExtAttr
+    public class ExtAttr
     {
 
-        /// <Value>The ExtAttrType.</Value>
+        /// <summary>The ExtAttrType.</summary>
         readonly public ExtAttrType Type;
 
-        /// <Value>The ExtAttr value.</Value>
+        /// <summary>The ExtAttr value.</summary>
         readonly public string Value;
 
         /// <summary>Creates an ExtAttr instance.</summary>

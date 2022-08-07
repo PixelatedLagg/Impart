@@ -5,7 +5,7 @@ namespace Impart
     /// <summary>Track a difference in time.</summary>
     public static class Timer
     {
-        /// <value>Called when the timer is stopped.</value>
+        /// <summary>Called when the timer is stopped.</summary>
         public static event Action<Log> Event;
 
         private static DateTime Timestamp;

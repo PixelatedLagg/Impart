@@ -26,10 +26,10 @@ namespace Impart
         /// <param name="i">The Float to convert.</param>
         public static implicit operator Milliseconds(float i) => new Milliseconds(i);
 
-        /// <value>A second represented by Milliseconds.</value>
+        /// <summary>A second represented by Milliseconds.</summary>
         public static Milliseconds Second = new Milliseconds(1000);
 
-        /// <value>A minute represented by Milliseconds.</value>
+        /// <summary>A minute represented by Milliseconds.</summary>
         public static Milliseconds Minute = new Milliseconds(60000);
     }
 }

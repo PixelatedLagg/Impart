@@ -9,7 +9,7 @@ namespace Impart
     {
         private string _ID;
 
-        /// <value>The ID value of the Style.</value>
+        /// <summary>The ID value of the Style.</summary>
         public string ID
         {
             get
@@ -23,11 +23,11 @@ namespace Impart
             }
         }
 
-        /// <value>The attribute values of the Style.</value>
+        /// <summary>The attribute values of the Style.</summary>
         public AttrList Attrs = new AttrList();
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IStyleElement.IOID
         {
             get

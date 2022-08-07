@@ -83,58 +83,58 @@ namespace Impart
         /// <param name="s">The String to convert.</param>
         public static implicit operator Hex(string s) => new Hex(s);
 
-        /// <value>Red represented by Hex.</value>
+        /// <summary>Red represented by Hex.</summary>
         public static Hex Red = new Hex("FF0000");
 
-        /// <value>Orange represented by Hex</value>
+        /// <summary>Orange represented by Hex</summary>
         public static Hex Orange = new Hex("FF8000");
 
-        /// <value>Yellow represented by Hex</value>
+        /// <summary>Yellow represented by Hex</summary>
         public static Hex Yellow = new Hex("FFFF00");
 
-        /// <value>Lime represented by Hex</value>
+        /// <summary>Lime represented by Hex</summary>
         public static Hex Lime = new Hex("99FF33");
 
-        /// <value>Dark green represented by Hex</value>
+        /// <summary>Dark green represented by Hex</summary>
         public static Hex DarkGreen = new Hex("009900");
 
-        /// <value>Green represented by Hex</value>
+        /// <summary>Green represented by Hex</summary>
         public static Hex Green = new Hex("00FF00");
 
-        /// <value>Light gray represented by Hex</value>
+        /// <summary>Light gray represented by Hex</summary>
         public static Hex LightGray = new Hex("E0E0E0");
 
-        /// <value>Aqua represented by Hex</value>
+        /// <summary>Aqua represented by Hex</summary>
         public static Hex Aqua = new Hex("00FFFF");
 
-        /// <value>Light blue represented by Hex</value>
+        /// <summary>Light blue represented by Hex</summary>
         public static Hex LightBlue = new Hex("0080FF");
 
-        /// <value>Blue represented by Hex</value>
+        /// <summary>Blue represented by Hex</summary>
         public static Hex Blue = new Hex("0000FF");
 
-        /// <value>Dark blue represented by Hex</value>
+        /// <summary>Dark blue represented by Hex</summary>
         public static Hex DarkBlue = new Hex("000066");
 
-        /// <value>Pink represented by Hex</value>
+        /// <summary>Pink represented by Hex</summary>
         public static Hex Pink = new Hex("FF40FF");
 
-        /// <value>Magenta represented by Hex</value>
+        /// <summary>Magenta represented by Hex</summary>
         public static Hex Magenta = new Hex("99004C");
 
-        /// <value>Purple represented by Hex</value>
+        /// <summary>Purple represented by Hex</summary>
         public static Hex Purple = new Hex("7F00FF");
 
-        /// <value>White represented by Hex</value>
+        /// <summary>White represented by Hex</summary>
         public static Hex White = new Hex("FFFFFF");
 
-        /// <value>Gray represented by Hex</value>
+        /// <summary>Gray represented by Hex</summary>
         public static Hex Gray = new Hex("808080");
 
-        /// <value>Dark gray represented by Hex</value>
+        /// <summary>Dark gray represented by Hex</summary>
         public static Hex DarkGray = new Hex("404040");
 
-        /// <value>Black represented by Hex</value>
+        /// <summary>Black represented by Hex</summary>
         public static Hex Black = new Hex("000000");
     }
 }

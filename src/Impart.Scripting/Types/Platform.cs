@@ -3,25 +3,25 @@ namespace Impart.Scripting
     /// <summary>All platform types.</summary>
     public enum Platform
     {
-        /// <value>Windows operating system.</value>
+        /// <summary>Windows operating system.</summary>
         Windows,
 
-        /// <value>Linux operating system.</value>
+        /// <summary>Linux operating system.</summary>
         Linux,
 
-        /// <value>Mac operating system.</value>
+        /// <summary>Mac operating system.</summary>
         Mac,
 
-        /// <value>Chrome operating system.</value>
+        /// <summary>Chrome operating system.</summary>
         Chrome,
 
-        /// <value>IOS operating system.</value>
+        /// <summary>IOS operating system.</summary>
         IOS,
 
-        /// <value>Android operating system.</value>
+        /// <summary>Android operating system.</summary>
         Android,
 
-        /// <value>Unknown operating system.</value>
+        /// <summary>Unknown operating system.</summary>
         Unknown
     }
 }

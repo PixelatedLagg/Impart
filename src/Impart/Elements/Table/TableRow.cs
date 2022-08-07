@@ -6,24 +6,17 @@ namespace Impart
     /// <summary>A row of a Table.</summary>
     public class TableRow
     {
-        private string _ID = null;
-        
-        /// <value>The ID value of the TableRow.</value>
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
         {
             get
             {
-                return _ID;
-            }
-            set
-            {
-                Changed = true;
-                _ID = value;
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
             }
         }
         private List<IElement> _Elements = new List<IElement>();
 
-        /// <value>The IElements values of the TableRow.</value>
+        /// <summary>The IElements values of the instance.</summary>
         public IElement[] Elements
         {
             get
@@ -32,10 +25,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         private bool Changed = true;
         private string Render = "";

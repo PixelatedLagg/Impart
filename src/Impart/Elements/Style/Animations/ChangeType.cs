@@ -3,22 +3,22 @@ namespace Impart
     /// <summary>All types of changes in the Animation.</summary>
     public enum ChangeType
     {
-        /// <value>Background color change.</value>
+        /// <summary>Background color change.</summary>
         BackgroundColor,
 
-        /// <value>Foreground color change.</value>
+        /// <summary>Foreground color change.</summary>
         ForegroundColor,
 
-        /// <value>Width change.</value>
+        /// <summary>Width change.</summary>
         Width,
 
-        /// <value>Height change.</value>
+        /// <summary>Height change.</summary>
         Height,
 
-        /// <value>Position change.</value>
+        /// <summary>Position change.</summary>
         Position,
 
-        /// <value>Size change.</value>
+        /// <summary>Size change.</summary>
         Size
     }
 }

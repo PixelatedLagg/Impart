@@ -3,10 +3,10 @@ namespace Impart
     /// <summary>All axis directions.</summary>
     public enum Axis
     {
-        /// <value>X-axis.</value>
+        /// <summary>X-axis.</summary>
         X,
 
-        /// <value>Y-axis.</value>
+        /// <summary>Y-axis.</summary>
         Y
     }
 }

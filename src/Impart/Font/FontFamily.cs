@@ -3,166 +3,166 @@ namespace Impart
     /// <summary>All main font families.</summary>
     public enum FontFamily
     {
-        /// <value>Arial font.</value>
+        /// <summary>Arial font.</summary>
         Arial,
 
-        /// <value>Helvetica font.</value>
+        /// <summary>Helvetica font.</summary>
         Helvetica,
 
-        /// <value>Verdana font.</value>
+        /// <summary>Verdana font.</summary>
         Verdana,
 
-        /// <value>Calibri font.</value>
+        /// <summary>Calibri font.</summary>
         Calibri,
 
-        /// <value>Noto font.</value>
+        /// <summary>Noto font.</summary>
         Noto,
 
-        /// <value>LucidaSans font.</value>
+        /// <summary>LucidaSans font.</summary>
         LucidaSans,
 
-        /// <value>GillSans font.</value>
+        /// <summary>GillSans font.</summary>
         GillSans,
 
-        /// <value>CenturyGothic font.</value>
+        /// <summary>CenturyGothic font.</summary>
         CenturyGothic,
 
-        /// <value>Candara font.</value>
+        /// <summary>Candara font.</summary>
         Candara,
 
-        /// <value>Futara font.</value>
+        /// <summary>Futara font.</summary>
         Futara,
 
-        /// <value>FranklinGothicMedium font.</value>
+        /// <summary>FranklinGothicMedium font.</summary>
         FranklinGothicMedium,
 
-        /// <value>TrebuchetMS font.</value>
+        /// <summary>TrebuchetMS font.</summary>
         TrebuchetMS,
 
-        /// <value>Geneva font.</value>
+        /// <summary>Geneva font.</summary>
         Geneva,
 
-        /// <value>SegoeUI font.</value>
+        /// <summary>SegoeUI font.</summary>
         SegoeUI,
 
-        /// <value>Optima font.</value>
+        /// <summary>Optima font.</summary>
         Optima,
 
-        /// <value>AvantaGarde font.</value>
+        /// <summary>AvantaGarde font.</summary>
         AvantaGarde,
 
-        /// <value>TimesNewRoman font.</value>
+        /// <summary>TimesNewRoman font.</summary>
         TimesNewRoman,
 
-        /// <value>BigCaslon font.</value>
+        /// <summary>BigCaslon font.</summary>
         BigCaslon,
 
-        /// <value>BodoniMT font.</value>
+        /// <summary>BodoniMT font.</summary>
         BodoniMT,
 
-        /// <value>BookAntiqua font.</value>
+        /// <summary>BookAntiqua font.</summary>
         BookAntiqua,
 
-        /// <value>Bookman font.</value>
+        /// <summary>Bookman font.</summary>
         Bookman,
 
-        /// <value>NewCenturySchoolbook font.</value>
+        /// <summary>NewCenturySchoolbook font.</summary>
         NewCenturySchoolbook,
 
-        /// <value>CalistoMT font.</value>
+        /// <summary>CalistoMT font.</summary>
         CalistoMT,
 
-        /// <value>Cambria font.</value>
+        /// <summary>Cambria font.</summary>
         Cambria,
 
-        /// <value>Didot font.</value>
+        /// <summary>Didot font.</summary>
         Didot,
 
-        /// <value>Garamond font.</value>
+        /// <summary>Garamond font.</summary>
         Garamond,
 
-        /// <value>Georgia font.</value>
+        /// <summary>Georgia font.</summary>
         Georgia,
 
-        /// <value>GoudyOldStyle font.</value>
+        /// <summary>GoudyOldStyle font.</summary>
         GoudyOldStyle,
 
-        /// <value>HoeflerText font.</value>
+        /// <summary>HoeflerText font.</summary>
         HoeflerText,
 
-        /// <value>LucidaBright font.</value>
+        /// <summary>LucidaBright font.</summary>
         LucidaBright,
 
-        /// <value>Palatino font.</value>
+        /// <summary>Palatino font.</summary>
         Palatino,
 
-        /// <value>Perpetua font.</value>
+        /// <summary>Perpetua font.</summary>
         Perpetua,
 
-        /// <value>Rockwell font.</value>
+        /// <summary>Rockwell font.</summary>
         Rockwell,
 
-        /// <value>RockwellExtraBold font.</value>
+        /// <summary>RockwellExtraBold font.</summary>
         RockwellExtraBold,
 
-        /// <value>Baskerville font.</value>
+        /// <summary>Baskerville font.</summary>
         Baskerville,
 
-        /// <value>Consolas font.</value>
+        /// <summary>Consolas font.</summary>
         Consolas,
 
-        /// <value>Courier font.</value>
+        /// <summary>Courier font.</summary>
         Courier,
 
-        /// <value>CourierNew font.</value>
+        /// <summary>CourierNew font.</summary>
         CourierNew,
 
-        /// <value>LucidaConsole font.</value>
+        /// <summary>LucidaConsole font.</summary>
         LucidaConsole,
 
-        /// <value>LucidaSansTypewriter font.</value>
+        /// <summary>LucidaSansTypewriter font.</summary>
         LucidaSansTypewriter,
 
-        /// <value>Monaco font.</value>
+        /// <summary>Monaco font.</summary>
         Monaco,
 
-        /// <value>AndaleMono font.</value>
+        /// <summary>AndaleMono font.</summary>
         AndaleMono,
 
-        /// <value>ComicSans font.</value>
+        /// <summary>ComicSans font.</summary>
         ComicSans,
 
-        /// <value>ComicSansMS font.</value>
+        /// <summary>ComicSansMS font.</summary>
         ComicSansMS,
 
-        /// <value>AppleChancery font.</value>
+        /// <summary>AppleChancery font.</summary>
         AppleChancery,
 
-        /// <value>ZapfChancery font.</value>
+        /// <summary>ZapfChancery font.</summary>
         ZapfChancery,
 
-        /// <value>BradleyHand font.</value>
+        /// <summary>BradleyHand font.</summary>
         BradleyHand,
 
-        /// <value>BrushScriptMT font.</value>
+        /// <summary>BrushScriptMT font.</summary>
         BrushScriptMT,
 
-        /// <value>BrushScriptStd font.</value>
+        /// <summary>BrushScriptStd font.</summary>
         BrushScriptStd,
 
-        /// <value>SnellRoundhan font.</value>
+        /// <summary>SnellRoundhan font.</summary>
         SnellRoundhan,
 
-        /// <value>URWChancery font.</value>
+        /// <summary>URWChancery font.</summary>
         URWChancery,
 
-        /// <value>Coronetscript font.</value>
+        /// <summary>Coronetscript font.</summary>
         Coronetscript,
 
-        /// <value>Florence font.</value>
+        /// <summary>Florence font.</summary>
         Florence,
 
-        /// <value>Parkavenue font.</value>
+        /// <summary>Parkavenue font.</summary>
         Parkavenue
     }
 }

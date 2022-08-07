@@ -3,37 +3,37 @@ namespace Impart
     /// <summary>All of the Text types.</summary>
     public enum TextType
     {
-        /// <value>Bold text.</value>
+        /// <summary>Bold text.</summary>
         Bold,
 
-        /// <value>Important text.</value>
+        /// <summary>Important text.</summary>
         Important,
 
-        /// <value>Italic text.</value>
+        /// <summary>Italic text.</summary>
         Italic,
 
-        /// <value>Emphasized text.</value>
+        /// <summary>Emphasized text.</summary>
         Emphasize,
 
-        /// <value>Marked text.</value>
+        /// <summary>Marked text.</summary>
         Mark,
 
-        /// <value>Small text.</value>
+        /// <summary>Small text.</summary>
         Small,
 
-        /// <value>Deleted text.</value>
+        /// <summary>Deleted text.</summary>
         Delete,
 
-        /// <value>Inserted text.</value>
+        /// <summary>Inserted text.</summary>
         Insert,
 
-        /// <value>Subscript text.</value>
+        /// <summary>Subscript text.</summary>
         Subscript,
 
-        /// <value>Superscript text.</value>
+        /// <summary>Superscript text.</summary>
         Superscript,
 
-        /// <value>Regular text.</value>
+        /// <summary>Regular text.</summary>
         Regular
     }
 }

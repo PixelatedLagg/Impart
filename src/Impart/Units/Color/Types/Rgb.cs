@@ -90,58 +90,58 @@ namespace Impart
         /// <param name="r">The (int, int, int) to convert.</param>
         public static implicit operator Rgb((int, int, int) r) => new Rgb(r);
 
-        /// <value>Red represented by Rgb.</value>
+        /// <summary>Red represented by Rgb.</summary>
         public static Rgb Red = new Rgb(255, 0, 0);
 
-        /// <value>Orange represented by Rgb</value>
+        /// <summary>Orange represented by Rgb</summary>
         public static Rgb Orange = new Rgb(255, 128, 0);
 
-        /// <value>Yellow represented by Rgb</value>
+        /// <summary>Yellow represented by Rgb</summary>
         public static Rgb Yellow = new Rgb(255, 255, 0);
 
-        /// <value>Lime represented by Rgb</value>
+        /// <summary>Lime represented by Rgb</summary>
         public static Rgb Lime = new Rgb(153, 255, 51);
 
-        /// <value>Dark green represented by Rgb</value>
+        /// <summary>Dark green represented by Rgb</summary>
         public static Rgb DarkGreen = new Rgb(0, 153, 0);
 
-        /// <value>Green represented by Rgb</value>
+        /// <summary>Green represented by Rgb</summary>
         public static Rgb Green = new Rgb(0, 255, 0);
 
-        /// <value>Light gray represented by Rgb</value>
+        /// <summary>Light gray represented by Rgb</summary>
         public static Rgb LightGray = new Rgb(224, 224, 224);
 
-        /// <value>Aqua represented by Rgb</value>
+        /// <summary>Aqua represented by Rgb</summary>
         public static Rgb Aqua = new Rgb(0, 255, 255);
 
-        /// <value>Light blue represented by Rgb</value>
+        /// <summary>Light blue represented by Rgb</summary>
         public static Rgb LightBlue = new Rgb(0, 128, 255);
 
-        /// <value>Blue represented by Rgb</value>
+        /// <summary>Blue represented by Rgb</summary>
         public static Rgb Blue = new Rgb(0, 0, 255);
 
-        /// <value>Dark blue represented by Rgb</value>
+        /// <summary>Dark blue represented by Rgb</summary>
         public static Rgb DarkBlue = new Rgb(0, 0, 102);
 
-        /// <value>Pink represented by Rgb</value>
+        /// <summary>Pink represented by Rgb</summary>
         public static Rgb Pink = new Rgb(255, 64, 255);
 
-        /// <value>Magenta represented by Rgb</value>
+        /// <summary>Magenta represented by Rgb</summary>
         public static Rgb Magenta = new Rgb(153, 0, 76);
 
-        /// <value>Purple represented by Rgb</value>
+        /// <summary>Purple represented by Rgb</summary>
         public static Rgb Purple = new Rgb(127, 0, 255);
 
-        /// <value>White represented by Rgb</value>
+        /// <summary>White represented by Rgb</summary>
         public static Rgb White = new Rgb(255, 255, 255);
 
-        /// <value>Gray represented by Rgb</value>
+        /// <summary>Gray represented by Rgb</summary>
         public static Rgb Gray = new Rgb(128, 128, 128);
 
-        /// <value>Dark gray represented by Rgb</value>
+        /// <summary>Dark gray represented by Rgb</summary>
         public static Rgb DarkGray = new Rgb(64, 64, 64);
 
-        /// <value>Black represented by Rgb</value>
+        /// <summary>Black represented by Rgb</summary>
         public static Rgb Black = new Rgb(0, 0, 0);
     }
 }

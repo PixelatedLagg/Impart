@@ -3,10 +3,10 @@ namespace Impart
     /// <summary>Store a log.</summary>
     public struct Log
     {
-        /// <value>The duration of the log.</value>
+        /// <summary>The duration of the log.</summary>
         public readonly double Milliseconds;
 
-        /// <value>The Log message.</value>
+        /// <summary>The Log message.</summary>
         public readonly string Message;
 
         /// <summary>Creates a Log instance.</summary>

@@ -3,16 +3,16 @@ namespace Impart
     /// <summary>All alignment types.</summary>
     public enum Alignment
     {
-        /// <value>Left alignment.</value>
+        /// <summary>Left alignment.</summary>
         Left,
 
-        /// <value>Right alignment.</value>
+        /// <summary>Right alignment.</summary>
         Right,
 
-        /// <value>Center alignment.</value>
+        /// <summary>Center alignment.</summary>
         Center,
 
-        /// <value>Justify alignment.</value>
+        /// <summary>Justify alignment.</summary>
         Justify
     }
 }

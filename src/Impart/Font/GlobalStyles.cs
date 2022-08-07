@@ -5,10 +5,10 @@ namespace Impart
     /// <summary>Manage both global external Styles and global Styles.</summary>
     public static class GlobalStyles
     {
-        /// <value>The Styles that apply to every Webpage.</value>
+        /// <summary>The Styles that apply to every Webpage.</summary>
         public static List<Style> Styles = new List<Style>();
 
-        /// <value>The external Styles that apply to every Webpage.</value>
+        /// <summary>The external Styles that apply to every Webpage.</summary>
         public static List<string> ExternalStyles = new List<string>();
 
         /// <summary>Add a Style to every WebPage.</summary>

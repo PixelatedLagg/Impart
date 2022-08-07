@@ -6,9 +6,17 @@ namespace Impart
     /// <summary>Text field for Form.</summary>
     public sealed class TextField : IFormField
     {
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private string _Text;
 
-        /// <value>The Text value of the TextField.</value>
+        /// <summary>The Text value of the instance.</summary>
         public string Text
         {
             get
@@ -22,10 +30,10 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the SubmitField.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the SubmitField.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         
         internal double InputID;

@@ -4,11 +4,19 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Image element.</summary>
-    public struct Image : IElement, INested
+    public class Image : IElement, INested
     {
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private string _Source;
 
-        /// <value>The source link of the Image.</value>
+        /// <summary>The source link of the Image.</summary>
         public string Source
         {
             get 
@@ -17,13 +25,13 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         ExtAttrList IElement.ExtAttrs
         {
             get
@@ -33,7 +41,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get
@@ -97,6 +105,12 @@ namespace Impart
             result.Render = Render;
             return result;
         }
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        public ElementRef Reference() => new ElementRef(_IOID);
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        ElementRef IElement.Reference() => new ElementRef(_IOID);
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()

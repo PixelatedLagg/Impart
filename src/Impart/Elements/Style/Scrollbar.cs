@@ -12,7 +12,7 @@ namespace Impart
         internal Color ForegroundColor;
         internal Length Radius = null;
 
-        /// <value>The ID value of the Scrollbar. (always returns null)</value>
+        /// <summary>The ID value of the Scrollbar. (always returns null)</summary>
         string IStyleElement.ID
         {
             get
@@ -23,7 +23,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IStyleElement.IOID
         {
             get

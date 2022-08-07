@@ -3,16 +3,16 @@ namespace Impart
     /// <summary>The arguments for calling an Animation.</summary>
     public class AnimationArgs
     {
-        /// <value>The Animation name.</value>
+        /// <summary>The Animation name.</summary>
         public readonly string Name;
 
-        /// <value>The Animation duration.</value>
+        /// <summary>The Animation duration.</summary>
         public readonly Time Duration;
 
-        /// <value>The Animation delay.</value>
+        /// <summary>The Animation delay.</summary>
         public readonly Time Delay;
 
-        /// <value>The number of times to repeat the Animation.</value>
+        /// <summary>The number of times to repeat the Animation.</summary>
         public readonly int Count;
 
         /// <summary>Creates an AnimationArgs instance.</summary>

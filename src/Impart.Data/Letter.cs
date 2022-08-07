@@ -42,16 +42,16 @@ namespace Impart.Data
         /// <summary>All character types.</summary>
         public enum Types
         {
-            /// <value>Any character.</value>
+            /// <summary>Any character.</summary>
             Any,
 
-            /// <value>Special character.</value>
+            /// <summary>Special character.</summary>
             Special,
 
-            /// <value>Number character.</value>
+            /// <summary>Number character.</summary>
             Number,
 
-            /// <value>Alphabet character.</value>
+            /// <summary>Alphabet character.</summary>
             Alphabet
         }
     }

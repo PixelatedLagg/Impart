@@ -7,10 +7,18 @@ namespace Impart
     /// <summary>Form element.</summary>
     public sealed class Form : IElement, INested
     {
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The ID value of the IElement. Returns null if ID is not set.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
         ExtAttrList IElement.ExtAttrs
         {
@@ -23,14 +31,14 @@ namespace Impart
         private List<IFormField> Elements = new List<IFormField>();
         private bool Changed = true;
         private string Render;
-        private int IOIDValue = Ioid.Generate();
+        private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get
             {
-                return IOIDValue;
+                return _IOID;
             }
         }
 
@@ -99,10 +107,16 @@ namespace Impart
             result.Changed = Changed;
             result.Elements = Elements;
             result.ExtAttrs = ExtAttrs;
-            result.IOIDValue = IOIDValue;
+            result._IOID = _IOID;
             result.Render = Render;
             return result;
         }
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        public ElementRef Reference() => new ElementRef(_IOID);
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        ElementRef IElement.Reference() => new ElementRef(_IOID);
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
@@ -111,7 +125,7 @@ namespace Impart
             result.Changed = Changed;
             result.Elements = Elements;
             result.ExtAttrs = ExtAttrs;
-            result.IOIDValue = IOIDValue;
+            result._IOID = _IOID;
             result.Render = Render;
             return result;
         }

@@ -3,13 +3,13 @@ namespace Impart
     /// <summary>The class for a single Frame in an Animation.</summary>
     public struct Frame
     {
-        /// <value>The position of the Frame.</value>
+        /// <summary>The position of the Frame.</summary>
         public readonly Percent Position;
 
-        /// <value>The type of Change.</value>
+        /// <summary>The type of Change.</summary>
         public readonly ChangeType ChangeType;
 
-        /// <value>The change to take place in the Frame.</value>
+        /// <summary>The change to take place in the Frame.</summary>
         public readonly object Change;
         private string Render;
 

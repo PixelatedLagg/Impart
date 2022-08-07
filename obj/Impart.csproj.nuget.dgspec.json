@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pixil\\Desktop\\Impart\\Impart.csproj": {}
+    "C:\\Users\\Michi\\OneDrive\\Desktop\\Impart\\Impart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pixil\\Desktop\\Impart\\Impart.csproj": {
-      "version": "2.0.5",
+    "C:\\Users\\Michi\\OneDrive\\Desktop\\Impart\\Impart.csproj": {
+      "version": "2.0.6",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pixil\\Desktop\\Impart\\Impart.csproj",
+        "projectUniqueName": "C:\\Users\\Michi\\OneDrive\\Desktop\\Impart\\Impart.csproj",
         "projectName": "Impart",
-        "projectPath": "C:\\Users\\pixil\\Desktop\\Impart\\Impart.csproj",
-        "packagesPath": "C:\\Users\\pixil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pixil\\Desktop\\Impart\\obj\\",
+        "projectPath": "C:\\Users\\Michi\\OneDrive\\Desktop\\Impart\\Impart.csproj",
+        "packagesPath": "C:\\Users\\Michi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Michi\\OneDrive\\Desktop\\Impart\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\pixil\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Michi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,16 +39,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[15.7.0, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.4.1, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -68,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

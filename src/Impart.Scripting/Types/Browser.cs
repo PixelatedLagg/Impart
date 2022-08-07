@@ -3,43 +3,43 @@ namespace Impart.Scripting
     /// <summary>All browser types.</summary>
     public enum Browser
     {
-        /// <value>Chrome browser.</value>
+        /// <summary>Chrome browser.</summary>
         Chrome,
 
-        /// <value>Chromium browser.</value>
+        /// <summary>Chromium browser.</summary>
         Chromium,
 
-        /// <value>Opera browser.</value>
+        /// <summary>Opera browser.</summary>
         Opera,
 
-        /// <value>Safari browser.</value>
+        /// <summary>Safari browser.</summary>
         Safari,
 
-        /// <value>Firefox browser.</value>
+        /// <summary>Firefox browser.</summary>
         Firefox,
 
-        /// <value>IE browser.</value>
+        /// <summary>IE browser.</summary>
         IE,
 
-        /// <value>Netscape browser.</value>
+        /// <summary>Netscape browser.</summary>
         Netscape,
 
-        /// <value>Edge browser.</value>
+        /// <summary>Edge browser.</summary>
         Edge,
 
-        /// <value>Brave browser.</value>
+        /// <summary>Brave browser.</summary>
         Brave,
 
-        /// <value>Vivaldi browser.</value>
+        /// <summary>Vivaldi browser.</summary>
         Vivaldi,
 
-        /// <value>Torch browser.</value>
+        /// <summary>Torch browser.</summary>
         Torch,
 
-        /// <value>Maxthon browser.</value>
+        /// <summary>Maxthon browser.</summary>
         Maxthon,
 
-        /// <value>Not a brand browser.</value>
+        /// <summary>Not a brand browser.</summary>
         NotBrand
     }
 }

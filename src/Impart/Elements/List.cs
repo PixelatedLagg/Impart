@@ -5,11 +5,19 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>List element.</summary>
-    public struct List : IElement, INested
+    public class List : IElement, INested
     {
+        /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
+        public string ID
+        {
+            get
+            {
+                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+            }
+        }
         private List<Text> _Entries = new List<Text>();
 
-        /// <value>The entry values of the List.</value>
+        /// <summary>The entry values of the List.</summary>
         public List<Text> Entries 
         {
             get 
@@ -19,7 +27,7 @@ namespace Impart
         }
         private ListType _Type;
 
-        /// <value>The ListType value of the List.</value>
+        /// <summary>The ListType value of the List.</summary>
         public ListType Type
         {
             get
@@ -28,13 +36,13 @@ namespace Impart
             }
         }
 
-        /// <value>The Attr values of the instance.</value>
+        /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
-        /// <value>The ExtAttr values of the instance.</value>
+        /// <summary>The ExtAttr values of the instance.</summary>
         ExtAttrList IElement.ExtAttrs
         {
             get
@@ -44,7 +52,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get
@@ -140,26 +148,30 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            List result = new List();
+            List result = new List(_Type);
             result.Attrs = Attrs;
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Type = _Type;
             result.Render = Render;
             result._ListType = _ListType;
             return result;
         }
 
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        public ElementRef Reference() => new ElementRef(_IOID);
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        ElementRef IElement.Reference() => new ElementRef(_IOID);
+
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            List result = new List();
+            List result = new List(_Type);
             result.Attrs = Attrs;
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Type = _Type;
             result.Render = Render;
             result._ListType = _ListType;
             return result;

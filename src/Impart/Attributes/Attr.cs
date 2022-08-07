@@ -7,7 +7,7 @@ namespace Impart
     {
         private AttrType _Type;
 
-        /// <Value>The AttrType.</Value>
+        /// <summary>The AttrType.</summary>
         public AttrType Type
         {
             get
@@ -17,7 +17,7 @@ namespace Impart
         }
         private object[] _Value;
 
-        /// <Value>The Attr value(s).</Value>
+        /// <summary>The Attr value(s).</summary>
         public object[] Value
         {
             get

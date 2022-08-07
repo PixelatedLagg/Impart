@@ -3,12 +3,12 @@ namespace Impart.Scripting
     /// <summary>All click types.</summary>
     public enum Click
     {
-        /// <value>Left mouse click.</value>
+        /// <summary>Left mouse click.</summary>
         Left,
 
-        /// <value>Right mouse click.</value>
+        /// <summary>Right mouse click.</summary>
         Right,
-        /// <value>Middle (scroll) mouse click.</value>
+        /// <summary>Middle (scroll) mouse click.</summary>
         Middle
     }
 }

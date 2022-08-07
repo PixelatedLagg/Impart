@@ -6,7 +6,7 @@ namespace Impart.Api
     /// <summary>Information about an error from an API.</summary>
     public sealed class ErrorContext
     {
-        /// <value>The error type.</value>
+        /// <summary>The error type.</summary>
         public ErrorType Type
         {
             get

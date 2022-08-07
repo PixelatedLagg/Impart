@@ -5,11 +5,11 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>A nest of IElements.</summary>
-    public struct Nest : IElement
+    public class Nest : IElement
     {
         private List<IElement> _Elements = new List<IElement>();
 
-        /// <value>All of the IElements included in the Nest.</value>
+        /// <summary>All of the IElements included in the Nest.</summary>
         public IElement[] IElement
         {
             get
@@ -19,7 +19,7 @@ namespace Impart
         }
         private int _IOID = Ioid.Generate();
 
-        /// <value>The internal ID of the instance.</value>
+        /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
         {
             get
@@ -30,7 +30,7 @@ namespace Impart
         
         private List<INested> _Nested = new List<INested>();
 
-        /// <value>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</value>
+        /// <summary>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</summary>
         ExtAttrList IElement.ExtAttrs
         {
             get
@@ -107,6 +107,12 @@ namespace Impart
             result._Nested = _Nested;
             return result;
         }
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        public ElementRef Reference() => new ElementRef(_IOID);
+
+        /// <summary>Create an ElementRef referencing the IElement</summary>
+        ElementRef IElement.Reference() => new ElementRef(_IOID);
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
