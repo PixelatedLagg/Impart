@@ -353,7 +353,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Adds multiple Texts to the WebPage..</summary>
+        /// <summary>Adds multiple Texts to the WebPage.</summary>
         /// <param name="texts">The Texts to add.</param>
         protected void AddMany(params Text[] texts)
         {
@@ -363,7 +363,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Images to the WebPage..</summary>
+        /// <summary>Adds multiple Images to the WebPage.</summary>
         /// <param name="images">The Images to add.</param>
         protected void AddMany(params Image[] images)
         {
@@ -373,7 +373,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Headers to the WebPage..</summary>
+        /// <summary>Adds multiple Headers to the WebPage.</summary>
         /// <param name="headers">The Headers to add.</param>
         protected void AddMany(params Header[] headers)
         {
@@ -383,7 +383,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Links to the WebPage..</summary>
+        /// <summary>Adds multiple Links to the WebPage.</summary>
         /// <param name="links">The Links to add.</param>
         protected void AddMany(params Link[] links)
         {
@@ -393,7 +393,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Tables to the WebPage..</summary>
+        /// <summary>Adds multiple Tables to the WebPage.</summary>
         /// <param name="tables">The Tables to add.</param>
         protected void AddMany(params Table[] tables)
         {
@@ -403,7 +403,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Divisions to the WebPage..</summary>
+        /// <summary>Adds multiple Divisions to the WebPage.</summary>
         /// <param name="divisions">The Divisions to add.</param>
         protected void AddMany(params Division[] divisions)
         {
@@ -413,13 +413,63 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Lists to the WebPage..</summary>
+        /// <summary>Adds multiple Lists to the WebPage.</summary>
         /// <param name="lists">The Lists to add.</param>
         protected void AddMany(params List[] lists)
         {
             foreach (List list in lists)
             {
                 Add(list);
+            }
+        }
+
+        /// <summary>Adds multiple Forms to the WebPage.</summary>
+        /// <param name="forms">The Forms to add.</param>
+        protected void AddMany(params Form[] forms)
+        {
+            foreach (Form form in forms)
+            {
+                Add(form);
+            }
+        }
+
+        /// <summary>Adds multiple Buttons to the WebPage.</summary>
+        /// <param name="buttons">The Buttons to add.</param>
+        protected void AddMany(params Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                Add(button);
+            }
+        }
+
+        /// <summary>Adds multiple Nests to the WebPage.</summary>
+        /// <param name="nests">The Nests to add.</param>
+        protected void AddMany(params Nest[] nests)
+        {
+            foreach (Nest nest in nests)
+            {
+                Add(nest);
+            }
+        }
+
+        /// <summary>Adds multiple Videos to the WebPage.</summary>
+        /// <param name="videos">The Videos to add.</param>
+        protected void AddMany(params Video[] videos)
+        {
+            foreach (Video video in videos)
+            {
+                Add(video);
+            }
+        }
+
+        /// <summary>Adds multiple Animations to the WebPage.</summary>
+        /// <param name="animations">The Animations to add.</param>
+        protected void AddMany(params Animation[] animations)
+        {
+            foreach (Animation animation in animations)
+            {
+                Add(animation);
             }
         }
 
