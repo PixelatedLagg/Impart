@@ -12,11 +12,12 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Description>A C# library dedicated to streamlining web development by replacing HTML/CSS fluency with simple C# methods.</Description>
     <RepositoryUrl>https://github.com/PixelatedLagg/Impart</RepositoryUrl>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <IsPackable>true</IsPackable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <None Include=".github/Images/logo.png" Pack="true" PackagePath="logo.png"/>
-    <None Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md"/>
   </ItemGroup>
 </Project>

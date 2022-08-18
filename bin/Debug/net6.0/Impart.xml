@@ -996,7 +996,7 @@
             <summary>Button element.</summary>
         </member>
         <member name="P:Impart.Button.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Button.Text">
             <summary>The Text value of the Button.</summary>
@@ -1045,7 +1045,7 @@
             <summary>Division element.</summary>
         </member>
         <member name="P:Impart.Division.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.Division.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1138,7 +1138,7 @@
             <summary>Embed a page into your website in the form of a frame.</summary>
         </member>
         <member name="P:Impart.EFrame.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.EFrame.Width">
             <summary>The width (in pixels).</summary>
@@ -1216,7 +1216,7 @@
             <summary>Form element.</summary>
         </member>
         <member name="P:Impart.Form.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the IElement. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.Form.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1267,13 +1267,13 @@
             <summary>Checkbox input for Form.</summary>
         </member>
         <member name="P:Impart.CheckField.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.CheckField.Attrs">
-            <summary>The Attr values of the SubmitField.</summary>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.CheckField.ExtAttrs">
-            <summary>The ExtAttr values of the SubmitField.</summary>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.CheckField.#ctor(System.String)">
             <summary>Creates a CheckField instance.</summary>
@@ -1292,13 +1292,13 @@
             <summary>Submit button for Form.</summary>
         </member>
         <member name="P:Impart.SubmitField.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.SubmitField.Attrs">
-            <summary>The Attr values of the SubmitField.</summary>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.SubmitField.ExtAttrs">
-            <summary>The ExtAttr values of the SubmitField.</summary>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.SubmitField.#ctor">
             <summary>Creates a SubmitField instance.</summary>
@@ -1310,16 +1310,16 @@
             <summary>Text field for Form.</summary>
         </member>
         <member name="P:Impart.TextField.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.TextField.Text">
-            <summary>The Text value of the TextField.</summary>
+            <summary>The Text value of the instance.</summary>
         </member>
         <member name="F:Impart.TextField.Attrs">
-            <summary>The Attr values of the SubmitField.</summary>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.TextField.ExtAttrs">
-            <summary>The ExtAttr values of the SubmitField.</summary>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.TextField.#ctor(System.String)">
             <summary>Creates a TextField instance.</summary>
@@ -1332,7 +1332,7 @@
             <summary>Header element.</summary>
         </member>
         <member name="P:Impart.Header.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Header.TextValue">
             <summary>The text value of the Header.</summary>
@@ -1385,7 +1385,7 @@
             <summary>Image element.</summary>
         </member>
         <member name="P:Impart.Image.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Image.Source">
             <summary>The source link of the Image.</summary>
@@ -1434,7 +1434,7 @@
             <summary>Link element.</summary>
         </member>
         <member name="P:Impart.Link.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Link.Text">
             <summary>The Text value of the Link.</summary>
@@ -1498,7 +1498,7 @@
             <summary>List element.</summary>
         </member>
         <member name="P:Impart.List.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.List.Entries">
             <summary>The entry values of the List.</summary>
@@ -1790,10 +1790,10 @@
             <summary>Table element.</summary>
         </member>
         <member name="P:Impart.Table.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Table.Rows">
-            <summary>The TableRow values of the Table.</summary>
+            <summary>The TableRow values of the instance.</summary>
         </member>
         <member name="F:Impart.Table.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1840,10 +1840,10 @@
             <summary>A header row of a Table.</summary>
         </member>
         <member name="P:Impart.TableHeader.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.TableHeader.Elements">
-            <summary>The IElement values of the TableHeader.</summary>
+            <summary>The IElement values of the instance.</summary>
         </member>
         <member name="F:Impart.TableHeader.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1866,10 +1866,10 @@
             <summary>A row of a Table.</summary>
         </member>
         <member name="P:Impart.TableRow.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.TableRow.Elements">
-            <summary>The IElements values of the TableRow.</summary>
+            <summary>The IElements values of the instance.</summary>
         </member>
         <member name="F:Impart.TableRow.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1892,7 +1892,7 @@
             <summary>Text element.</summary>
         </member>
         <member name="P:Impart.Text.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Text.TextValue">
             <summary>The text value of the Text.</summary>
@@ -1953,7 +1953,7 @@
             <summary>Video element.</summary>
         </member>
         <member name="P:Impart.Video.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Video.Source">
             <summary>The Video source file.</summary>
@@ -2961,6 +2961,14 @@
         <member name="M:Impart.WebPage.#ctor">
             <summary>Creates a WebPage instance.</summary>
         </member>
+        <member name="M:Impart.WebPage.Get``1(System.Func{``0,System.Boolean})">
+            <summary>Gets the specified IElement from the WebPage.</summary>
+            <param name="selector">The specifications to be met by the IElement.</param>
+        </member>
+        <member name="M:Impart.WebPage.GetMany``1(System.Func{``0,System.Boolean})">
+            <summary>Gets the many specified IElements from the WebPage.</summary>
+            <param name="selector">The specifications to be met by the IElements.</param>
+        </member>
         <member name="M:Impart.WebPage.Exists(Impart.ElementRef)">
             <summary>Checks if an Element exists.</summary>
             <param name="element">The Element reference to check.</param>
@@ -3053,6 +3061,54 @@
             <summary>Adds an Animation to the WebPage.</summary>
             <param name="animation">The Animation to add.</param>
         </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Text[])">
+            <summary>Adds multiple Texts to the WebPage.</summary>
+            <param name="texts">The Texts to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Image[])">
+            <summary>Adds multiple Images to the WebPage.</summary>
+            <param name="images">The Images to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Header[])">
+            <summary>Adds multiple Headers to the WebPage.</summary>
+            <param name="headers">The Headers to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Link[])">
+            <summary>Adds multiple Links to the WebPage.</summary>
+            <param name="links">The Links to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Table[])">
+            <summary>Adds multiple Tables to the WebPage.</summary>
+            <param name="tables">The Tables to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Division[])">
+            <summary>Adds multiple Divisions to the WebPage.</summary>
+            <param name="divisions">The Divisions to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.List[])">
+            <summary>Adds multiple Lists to the WebPage.</summary>
+            <param name="lists">The Lists to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Form[])">
+            <summary>Adds multiple Forms to the WebPage.</summary>
+            <param name="forms">The Forms to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Button[])">
+            <summary>Adds multiple Buttons to the WebPage.</summary>
+            <param name="buttons">The Buttons to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Nest[])">
+            <summary>Adds multiple Nests to the WebPage.</summary>
+            <param name="nests">The Nests to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Video[])">
+            <summary>Adds multiple Videos to the WebPage.</summary>
+            <param name="videos">The Videos to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Animation[])">
+            <summary>Adds multiple Animations to the WebPage.</summary>
+            <param name="animations">The Animations to add.</param>
+        </member>
         <member name="M:Impart.WebPage.Remove(System.Int32)">
             <summary>Removes an external Style from the WebPage.</summary>
             <param name="index">The index of the URL of the external Style to remove.</param>
@@ -3062,9 +3118,6 @@
         </member>
         <member name="M:Impart.WebPage.ToString">
             <summary>Returns the instance as a String.</summary>
-        </member>
-        <member name="M:Impart.WebPage.ToStringAsync">
-            <summary>Returns the instance as a String asynchronously.</summary>
         </member>
         <member name="T:Impart.Website">
             <summary>Host WebPages.</summary>

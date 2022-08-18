@@ -4,7 +4,7 @@ using Impart.Internal;
 namespace Impart
 {
     /// <summary>Text element.</summary>
-    public class Text : IElement, INested
+    public partial class Text : IElement, INested
     {
         /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
