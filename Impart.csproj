@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/PixelatedLagg/Impart</RepositoryUrl>
     <IsPackable>true</IsPackable>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>

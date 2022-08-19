@@ -1,13 +1,11 @@
-using System.Linq;
+using System;
 using System.Text;
 using Impart.Scripting;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
 
 namespace Impart
 {
-    /// <summary>Generate a webpage for a Website.</summary>
+    /// <summary>Generate a Webpage for a Website.</summary>
     public class WebPage
     {
         private string _Title;
@@ -90,7 +88,7 @@ namespace Impart
                     return (T1)element;
                 }
             }
-            return null;
+            throw new ImpartError("Element with the specified conditions does not exist!");
         }
 
         /// <summary>Gets the many specified IElements from the WebPage.</summary>
@@ -538,6 +536,10 @@ namespace Impart
             }
             Render = result.Append($"</body>{_Script}</html>").ToString();
             return Render;
+        }
+        private void ChangeHandler(bool value)
+        {
+            Changed = value;
         }
     }
 }

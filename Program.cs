@@ -23,6 +23,6 @@ class test : WebPage
         t2.ExtAttrs.Add(new ExtAttr(ExtAttrType.ID, "test"));
         Add(t);
         Add(t2);
-        Console.WriteLine(Get<Text>(x => x.ID == "hepatitis!").TextValue);
+        Console.WriteLine(Get<Text>(x => x.ID == "hepatitis!").);
     }
 }

@@ -4,7 +4,14 @@ namespace Impart.Scripting
 {
     public class EventManager
     {
-        List<Event> Events;
-
+        public List<Event> Events = new List<Event>();
+        public bool InUse()
+        {
+            if (Events.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

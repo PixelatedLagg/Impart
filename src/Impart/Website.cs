@@ -120,7 +120,7 @@ namespace Impart
                         }
                         _Socket.Close();  
                     }
-                    OnRequest?.Invoke(new WebsiteRequestArgs(sBuffer, IPAddress.Parse(((IPEndPoint)_Socket.RemoteEndPoint).Address.ToString())));
+                    OnRequest?.Invoke(new WebsiteRequestArgs(sBuffer, IPAddress.Parse(((IPEndPoint)(_Socket.RemoteEndPoint ??)).Address.ToString())));
                 }
             }
         }
