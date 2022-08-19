@@ -1,6 +1,6 @@
 # Contributing
 
-TLDR: Be nice and use common sense, in both your coding and your actions. Alse, thanks for showing interest in contributing to Impart :)
+TLDR: Be nice and use common sense, in both your coding and your actions. Also, thanks for showing interest in contributing to Impart :)
 
 ## Our Pledge
 

@@ -4,7 +4,8 @@
 
 <img src=".github/Images/logo.png" width="300"></img>
 ## Important links
-[Discord](https://discord.gg/tSc35kjHMG)
+[Discord](https://discord.gg/tSc35kjHMG) 
+||
 [License](https://licenses.nuget.org/LGPL-2.1-only)
 
 ## How to Use:
