@@ -17,7 +17,6 @@ namespace Impart
                 return _Elements.ToArray();
             }
         }
-        private int _IOID = Ioid.Generate();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -38,6 +37,8 @@ namespace Impart
                 return null;
             }
         }
+
+        internal int _IOID = Ioid.Generate();
 
         /// <summary>Creates an empty Nest instance.</summary>
         public Nest() { }

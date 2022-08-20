@@ -1,5 +1,6 @@
 using System.Text;
 using Impart.Internal;
+using Impart.Scripting;
 
 namespace Impart
 {
@@ -54,7 +55,6 @@ namespace Impart
                 return ExtAttrs;
             }
         }
-        private int _IOID = Ioid.Generate();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -64,8 +64,11 @@ namespace Impart
                 return _IOID;
             }
         }
+
+        internal int _IOID = Ioid.Generate();
+        internal EventManager _Events = new EventManager();
+        internal bool Changed = true;
         private string _TextType;
-        private bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates an empty Text instance.</summary>
@@ -122,7 +125,7 @@ namespace Impart
             Changed = false;
             Attrs.Changed = false;
             ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<{_TextType}");
+            StringBuilder result = new StringBuilder($"<{_TextType} class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");

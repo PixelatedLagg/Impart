@@ -1,5 +1,6 @@
 using System.Text;
 using Impart.Internal;
+using Impart.Scripting;
 
 namespace Impart
 {
@@ -21,7 +22,9 @@ namespace Impart
         public ExtAttrList ExtAttrs = new ExtAttrList();
         
         internal double InputID;
-        private bool Changed = true;
+        internal int _IOID = Ioid.Generate();
+        internal EventManager _Events = new EventManager();
+        internal bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates a SubmitField instance.</summary>
@@ -45,7 +48,7 @@ namespace Impart
                 {
                     result.Append(attribute);
                 }
-                result.Append('"');
+                result.Append($"\"class=\"{_IOID}\"{_Events}");
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {

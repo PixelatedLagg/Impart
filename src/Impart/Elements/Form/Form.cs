@@ -1,5 +1,6 @@
 using System.Text;
 using Impart.Internal;
+using Impart.Scripting;
 using System.Collections.Generic;
 
 namespace Impart
@@ -28,10 +29,11 @@ namespace Impart
             }
         }
 
+        internal int _IOID = Ioid.Generate();
+        internal EventManager _Events = new EventManager();
+        internal bool Changed = true;
         private List<IFormField> Elements = new List<IFormField>();
-        private bool Changed = true;
         private string Render;
-        private int _IOID = Ioid.Generate();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -91,7 +93,21 @@ namespace Impart
             Changed = false;
             Attrs.Changed = false;
             ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder("<form>");
+            StringBuilder result = new StringBuilder("<form");
+            if (Attrs.Count != 0)
+            {
+                result.Append(" style=\"");
+                foreach (Attr attribute in Attrs)
+                {
+                    result.Append(attribute);
+                }
+                result.Append($"\"class=\"{_IOID}\"{_Events}");
+            }
+            foreach (ExtAttr ExtAttr in ExtAttrs)
+            {
+                result.Append(ExtAttr);
+            }
+            result.Append('>');
             foreach (IFormField field in Elements)
             {
                 result.Append(field);

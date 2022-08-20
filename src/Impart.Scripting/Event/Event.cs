@@ -2,22 +2,25 @@ namespace Impart.Scripting
 {
     public struct Event
     {
-        public readonly EventType EventType;
-        public readonly ExtAttrType ExtAttrChange = default;
-        public readonly AttrType AttrChange = default;
-        public readonly object[] Args;
-        public Event(EventType eventType, ExtAttrType extAttrChange, params object[] args)
+        private string Render;
+        public Event(EventType eventType, IFunction function)
         {
-            EventType = eventType;
-            ExtAttrChange = extAttrChange;
-            Args = args;
+            switch (eventType)
+            {
+                case EventType.Click:
+                    Render = $"onclick=\"{function}\"";
+                    break;
+                case EventType.Hover:
+                    Render = $"onmouseover=\"{function}\"";
+                    break;
+                default:
+                    Render = "";
+                    break;
+            }
         }
-
-        public Event(EventType eventType, AttrType attrChange, params object[] args)
+        public override string ToString()
         {
-            EventType = eventType;
-            AttrChange = attrChange;
-            Args = args;
+            return Render;
         }
     }
 }

@@ -2941,7 +2941,7 @@
             <param name="o">The Object to convert.</param>
         </member>
         <member name="T:Impart.WebPage">
-            <summary>Generate a webpage for a Website.</summary>
+            <summary>Generate a Webpage for a Website.</summary>
         </member>
         <member name="P:Impart.WebPage.Title">
             <summary>The title value of the WebPage.</summary>

@@ -1,3 +1,4 @@
+using System.Text;
 using System.Collections.Generic;
 
 namespace Impart.Scripting
@@ -5,13 +6,18 @@ namespace Impart.Scripting
     public class EventManager
     {
         public List<Event> Events = new List<Event>();
-        public bool InUse()
+        public override string ToString()
         {
-            if (Events.Count > 0)
+            if (Events.Count == 0)
             {
-                return true;
+                return "";
             }
-            return false;
+            StringBuilder result = new StringBuilder();
+            foreach (Event e in Events)
+            {
+                result.Append(e);
+            }
+            return result.ToString();
         }
     }
 }
