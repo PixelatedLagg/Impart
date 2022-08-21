@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Impart
 {
     /// <summary>An element attribute.</summary>
