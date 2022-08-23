@@ -57,10 +57,10 @@ namespace Impart
                 case AttrType.Alignment:
                     return Value[0] switch
                     {
-                        Alignment.Center => "align: center;",
-                        Alignment.Justify => "align: justify;",
-                        Alignment.Left => "align: left;",
-                        Alignment.Right => "align: right;",
+                        Alignment.Center => "margin: auto;",
+                        Alignment.Justify => "justify-content: center;",
+                        Alignment.Left => "float: left;",
+                        Alignment.Right => "float: right;",
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     };
                 case AttrType.FontFamily:

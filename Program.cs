@@ -19,7 +19,7 @@ class test : WebPage
     {
         Text text = new Text("test!");
         text.Attrs.Add(new Attr(AttrType.FontSize, 60));
-        text.Set(EventType.Click, text.Get(AttrType.BackgroundColor, Rgb.Blue));
+        text.Set(EventType.Click, DevTools.WriteLine("test!"));
         Add(text);
     }
 }
