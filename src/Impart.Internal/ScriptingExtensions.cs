@@ -2,11 +2,16 @@ using Impart.Scripting;
 
 namespace Impart.Internal
 {
+    /// <summary>Common methods used by multiple extensions in the Impart.Scripting namespace.</summary>
     public static class ScriptingExtensions
     {
-        public static Edit Get(Text text, AttrType attrType, params object[] args)
+        /// <summary>Get an event.</summary>
+        /// <param name="element">The IElement to get the event from.</param>
+        /// <param name="attrType">The AttrType that is changed in the event.</param>
+        /// <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        public static Edit Get(this IElement element, AttrType attrType, params object[] args)
         {
-            return new Edit($@"document.getElementsByClassName('{text._IOID}')[0].style.{attrType switch
+            return new Edit($@"document.getElementsByClassName('{element.IOID}')[0].style.{attrType switch
             {
                 AttrType.BackgroundColor => $@"backgroundColor = '{Color.Convert(args[0]) switch
                     {

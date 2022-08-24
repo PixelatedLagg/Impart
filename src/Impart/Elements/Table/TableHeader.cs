@@ -33,9 +33,9 @@ namespace Impart
         /// <summary>The ExtAttr values of the instance.</summary>
         new public ExtAttrList ExtAttrs = new ExtAttrList();
 
-        internal int _IOID = Ioid.Generate();
-        internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
+        internal new int _IOID = Ioid.Generate();
+        internal new EventManager _Events = new EventManager();
+        internal new bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates a TableHeader instance.</summary>

@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Impart.Scripting
 {
-    /// <summary>Interface with developer tools such as the console.</summary>
+    /// <summary>Interact with developer tools such as the console.</summary>
     public static class DevTools
     {
         /// <summary>Writes the specified Object to the console and terminates the line.</summary>

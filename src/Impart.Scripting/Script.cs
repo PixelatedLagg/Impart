@@ -1,22 +1,27 @@
 using System.Text;
+using System.Collections.Generic;
 
 namespace Impart.Scripting
 {
-    internal class Script
+    /// <summary>A collection of IFunctions, all called when the WebPage first loads.</summary>
+    public class Script
     {
-        internal StringBuilder Cache = new StringBuilder();
-        internal Script(string text)
-        {
-            Cache.Append(text);
-        }
-        internal void Append(string text) => Cache.Append(text);
+        /// <summary>All of the IFunctions currently registered in the Script.</summary>
+        public List<IFunction> Functions = new List<IFunction>();
+
+        /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (Cache.ToString() == "")
+            if (Functions.Count == 0)
             {
                 return "";
             }
-            return $"<style>{Cache.ToString()}</style>";
+            StringBuilder builder = new StringBuilder($"<script>");
+            foreach (IFunction function in Functions)
+            {
+                builder.Append(function);
+            }
+            return builder.Append("</script>").ToString();
         }
     }
 }

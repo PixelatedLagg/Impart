@@ -1,7 +1,5 @@
 namespace Impart.Scripting
 {
-    public interface IFunction
-    {
-        
-    }
+    /// <summary>Interface for all Javascript function invocations.</summary>
+    public interface IFunction { }
 }
