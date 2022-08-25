@@ -68,7 +68,7 @@ namespace Impart
         internal int _IOID = Ioid.Generate();
         internal EventManager _Events = new EventManager();
         internal bool Changed = true;
-        private string _TextType;
+        internal string _TextType;
         private string Render = "";
 
         /// <summary>Creates an empty Text instance.</summary>

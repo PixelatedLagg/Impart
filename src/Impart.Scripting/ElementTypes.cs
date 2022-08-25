@@ -1,0 +1,35 @@
+namespace Impart.Scripting
+{
+    public enum ElementType
+    {
+        RegularText,
+        BoldText,
+        DeleteText,
+        EmphasizeText,
+        ImportantText,
+        InsertText,
+        ItalicText,
+        MarkText,
+        SmallText,
+        SubscriptText,
+        SuperscriptText,
+        OrderedList,
+        UnorderedList,
+        Link,
+        Image,
+        Header1,
+        Header2,
+        Header3,
+        Header4,
+        Header5,
+        EFrame,
+        Division,
+        Button,
+        Video,
+        TableRow,
+        TableHeader,
+        Table,
+        Form,
+        FormInput
+    }
+}

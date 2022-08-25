@@ -1,17 +1,82 @@
-using Impart.Scripting;
-
-namespace Impart.Internal
+namespace Impart.Scripting
 {
-    /// <summary>Common methods used by multiple extensions in the Impart.Scripting namespace.</summary>
-    public static class ScriptingExtensions
+    public static class Element
     {
-        /// <summary>Get an event.</summary>
-        /// <param name="element">The IElement to get the event from.</param>
-        /// <param name="attrType">The AttrType that is changed in the event.</param>
-        /// <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
-        public static Edit Get(IElement element, AttrType attrType, params object[] args)
+        public static Edit GetMany(ElementType type, AttrType attrType, params object[] args)
         {
-            return new Edit($@"document.getElementsByClassName('{element.IOID}')[0].style.{attrType switch
+            return new Edit($@"Array.from(document.getElementsByTagName('{type switch
+            {
+                ElementType.RegularText => "p",
+                ElementType.BoldText => "b",
+                ElementType.DeleteText => "del",
+                ElementType.EmphasizeText => "em",
+                ElementType.ImportantText => "strong",
+                ElementType.InsertText => "ins",
+                ElementType.ItalicText => "i",
+                ElementType.MarkText => "mark",
+                ElementType.SmallText => "small",
+                ElementType.SubscriptText => "sub",
+                ElementType.SuperscriptText => "sup",
+                ElementType.OrderedList => "ol",
+                ElementType.UnorderedList => "ul",
+                ElementType.Link => "a",
+                ElementType.Image => "img",
+                ElementType.Header1 => "h1",
+                ElementType.Header2 => "h2",
+                ElementType.Header3 => "h3",
+                ElementType.Header4 => "h4",
+                ElementType.Header5 => "h5",
+                ElementType.EFrame => "iframe",
+                ElementType.Division => "div",
+                ElementType.Button => "button",
+                ElementType.Video => "video",
+                ElementType.TableRow => "tr",
+                ElementType.Table => "table",
+                ElementType.Form => "form",
+                ElementType.FormInput => "input",
+                _ => throw new ImpartError("Invalid type parameters.")
+            }}')).forEach(e => {{e.{GetEdit(type, attrType, args)}}});");
+        }
+
+        public static Edit Get(ElementType type, AttrType attrType, params object[] args)
+        {
+            return new Edit($@"document.getElementsByTagName('{type switch
+            {
+                ElementType.RegularText => "p",
+                ElementType.BoldText => "b",
+                ElementType.DeleteText => "del",
+                ElementType.EmphasizeText => "em",
+                ElementType.ImportantText => "strong",
+                ElementType.InsertText => "ins",
+                ElementType.ItalicText => "i",
+                ElementType.MarkText => "mark",
+                ElementType.SmallText => "small",
+                ElementType.SubscriptText => "sub",
+                ElementType.SuperscriptText => "sup",
+                ElementType.OrderedList => "ol",
+                ElementType.UnorderedList => "ul",
+                ElementType.Link => "a",
+                ElementType.Image => "img",
+                ElementType.Header1 => "h1",
+                ElementType.Header2 => "h2",
+                ElementType.Header3 => "h3",
+                ElementType.Header4 => "h4",
+                ElementType.Header5 => "h5",
+                ElementType.EFrame => "iframe",
+                ElementType.Division => "div",
+                ElementType.Button => "button",
+                ElementType.Video => "video",
+                ElementType.TableRow => "tr",
+                ElementType.Table => "table",
+                ElementType.Form => "form",
+                ElementType.FormInput => "input",
+                _ => throw new ImpartError("Invalid type parameters.")
+            }}')[0].{GetEdit(type, attrType, args)}");
+        }
+
+        private static string GetEdit(ElementType type, AttrType attrType, object[] args)
+        {
+            return $@"style.{attrType switch
             {
                 AttrType.BackgroundColor => $@"backgroundColor = '{Color.Convert(args[0]) switch
                     {
@@ -94,7 +159,7 @@ namespace Impart.Internal
                         _ => throw new ImpartError("Invalid attribute parameters.")
                     }}';",
                 _ => ""
-            }}");
+            }}";
         }
     }
 }

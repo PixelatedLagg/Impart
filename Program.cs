@@ -17,9 +17,6 @@ class test : WebPage
 {
     public test() : base()
     {
-        Text text = new Text("test!");
-        text.Attrs.Add(new Attr(AttrType.FontSize, 60));
-        //text.Set(EventType.Click, De);
-        Add(text);
+        
     }
 }

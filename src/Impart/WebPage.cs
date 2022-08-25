@@ -24,38 +24,6 @@ namespace Impart
             }
         }
 
-        private Length _DefaultMargin = 0;
-
-        /// <summary>The default margin value.</summary>
-        public Length DefaultMargin
-        {
-            get
-            {
-                return _DefaultMargin;
-            }
-            set
-            {
-                Changed = true;
-                _DefaultMargin = value;
-            }
-        }
-
-        private Length _DefaultPadding = 0;
-
-        /// <summary>The default padding value.</summary>
-        public Length DefaultPadding
-        {
-            get
-            {
-                return _DefaultPadding;
-            }
-            set
-            {
-                Changed = true;
-                _DefaultPadding = value;
-            }
-        }
-
 
         /// <summary>The Attribute values of the WebPage.</summary>
         public AttrList Attrs = new AttrList();
@@ -516,7 +484,7 @@ namespace Impart
             {
                 result.Append(element);
             }
-            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style>");
+            result.Append("</style>");
             if (Attrs.Count != 0)
             {
                 result.Append("<body style=\"");
@@ -537,9 +505,9 @@ namespace Impart
             Render = result.Append($"</body>{_Script}</html>").ToString();
             return Render;
         }
-        private void ChangeHandler(bool value)
+        private void ChangeHandler()
         {
-            Changed = value;
+            Changed = true;
         }
     }
 }

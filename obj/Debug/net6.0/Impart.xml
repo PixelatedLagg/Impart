@@ -3062,12 +3062,6 @@
         <member name="P:Impart.WebPage.Title">
             <summary>The title value of the WebPage.</summary>
         </member>
-        <member name="P:Impart.WebPage.DefaultMargin">
-            <summary>The default margin value.</summary>
-        </member>
-        <member name="P:Impart.WebPage.DefaultPadding">
-            <summary>The default padding value.</summary>
-        </member>
         <member name="F:Impart.WebPage.Attrs">
             <summary>The Attribute values of the WebPage.</summary>
         </member>
