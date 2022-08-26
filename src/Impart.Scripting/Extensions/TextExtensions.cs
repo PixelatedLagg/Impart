@@ -20,7 +20,12 @@ namespace Impart.Scripting
         /// <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         public static Edit Get(this Text text, AttrType attrType, params object[] args)
         {
-            return ScriptingExtensions.Get(text, attrType, args);
+            return new Edit($"document.GetElementsByClassName('{text._IOID})[0].{ScriptingExtensions.GetEdit(attrType, args)}");
+        }
+
+        public static Edit GetMany(this Text text, AttrType attrType, params object[] args)
+        {
+            return new Edit($@"Array.from(document.GetElementsByClassName('{text._IOID}'){ScriptingExtensions.GetEdit(attrType, args)}");
         }
     }
 }
