@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace Impart
 {
-    /// <summary>List element.</summary>
-    public class List : IElement, INested
+    /// <summary>Store a list of IElements.</summary>
+    public class EList<T> : IElement, INested where T : IElement
     {
         /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
@@ -16,20 +16,20 @@ namespace Impart
                 return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
             }
         }
-        private List<Text> _Entries = new List<Text>();
+        private List<T> _Entries = new List<T>();
 
-        /// <summary>The entry values of the List.</summary>
-        public List<Text> Entries 
+        /// <summary>The entry values of the EList.</summary>
+        public List<T> Entries 
         {
             get 
             {
                 return _Entries;
             }
         }
-        private ListType _Type;
+        private EListType _Type;
 
-        /// <summary>The ListType value of the List.</summary>
-        public ListType Type
+        /// <summary>The EListType value of the EList.</summary>
+        public EListType Type
         {
             get
             {
@@ -64,52 +64,52 @@ namespace Impart
         internal int _IOID = Ioid.Generate();
         internal EventManager _Events = new EventManager();
         internal bool Changed = true;
-        private string _ListType;
+        private string _EListType;
         private string Render = "";
 
-        /// <summary>Creates a List instance.</summary>
-        /// <param name="type">The List type.</param>
-        /// <param name="textEntries">The List entries.</param>
-        public List(ListType type, params Text[] textEntries)
+        /// <summary>Creates an EList instance.</summary>
+        /// <param name="type">The EList type.</param>
+        /// <param name="entries">The EList entries.</param>
+        public EList(EListType type, params T[] entries)
         {
             _Type = type;
-            if (type == ListType.Ordered)
+            if (type == EListType.Ordered)
             {
-                _ListType = "ol";
+                _EListType = "ol";
             }
             else
             {
-                _ListType = "ul";
+                _EListType = "ul";
             }
-            foreach (Text text in textEntries)
+            foreach (T entry in entries)
             {
-                _Entries.Add(text);
+                _Entries.Add(entry);
             }
         }
 
-        /// <summary>Add a Text to the List.</summary>
-        /// <param name="textEntries">The Text(s) to add.</param>
-        public List Add(params Text[] textEntries)
+        /// <summary>Add entries to the EList.</summary>
+        /// <param name="entries">The entry to add.</param>
+        public EList<T> Add(params T[] entries)
         {
-            foreach (Text text in textEntries)
+            foreach (T entry in entries)
             {
-                _Entries.Add(text);
+                _Entries.Add(entry);
             }
             Changed = true;
             return this;
         }
 
-        /// <summary>Remove a Text from the List.</summary>
-        /// <param name="textEntries">The Text(s) to remove.</param>
-        public List Remove(params Text[] textEntries)
+        /// <summary>Remove entries from the EList.</summary>
+        /// <param name="entries">The entries to remove.</param>
+        public EList<T> Remove(params T[] entries)
         {
-            foreach (Text text in textEntries)
+            foreach (T entry in entries)
             {
-                if (!_Entries.Contains(text))
+                if (!_Entries.Contains(entry))
                 {
-                    throw new ImpartError("List does not contain this Text!");
+                    throw new ImpartError("EList does not contain this entry!");
                 }
-                _Entries.Remove(text);
+                _Entries.Remove(entry);
             }
             Changed = true;
             return this;
@@ -125,7 +125,7 @@ namespace Impart
             Changed = false;
             Attrs.Changed = false;
             ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<{_ListType}");
+            StringBuilder result = new StringBuilder($"<{_EListType}");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
@@ -140,24 +140,24 @@ namespace Impart
                 result.Append(ExtAttr);
             }
             result.Append('>');
-            foreach (Text text in _Entries)
+            foreach (T entry in _Entries)
             {
-                result.Append($"<li>{text}</li>");
+                result.Append($"<li>{entry}</li>");
             }
-            Render = result.Append($"</{_ListType}>").ToString();
+            Render = result.Append($"</{_EListType}>").ToString();
             return Render;
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            List result = new List(_Type);
+            EList<T> result = new EList<T>(_Type);
             result.Attrs = Attrs;
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result.Render = Render;
-            result._ListType = _ListType;
+            result._EListType = _EListType;
             return result;
         }
 
@@ -170,13 +170,13 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            List result = new List(_Type);
+            EList<T> result = new EList<T>(_Type);
             result.Attrs = Attrs;
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result.Render = Render;
-            result._ListType = _ListType;
+            result._EListType = _EListType;
             return result;
         }
 
@@ -189,7 +189,7 @@ namespace Impart
         /// <summary>Return the last part of the INested as a string.</summary>
         string INested.Last()
         {
-            return $"</{_ListType}>";
+            return $"</{_EListType}>";
         }
     }
 }

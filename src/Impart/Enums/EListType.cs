@@ -1,7 +1,7 @@
 namespace Impart
 {
     /// <summary>All list types.</summary>
-    public enum ListType
+    public enum EListType
     {
         /// <summary>Ordered list.</summary>
         Ordered,

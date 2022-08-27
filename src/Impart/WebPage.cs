@@ -244,11 +244,11 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Adds a List to the WebPage.</summary>
-        /// <param name="list">The List instance to add.</param>
-        protected void Add(List list)
+        /// <summary>Adds an EList to the WebPage.</summary>
+        /// <param name="eList">The EList instance to add.</param>
+        protected void Add<T>(EList<T> eList) where T : IElement
         {
-            _Elements.Add(list);
+            _Elements.Add(eList);
             Changed = true;
         }
 
@@ -379,13 +379,13 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Lists to the WebPage.</summary>
-        /// <param name="lists">The Lists to add.</param>
-        protected void AddMany(params List[] lists)
+        /// <summary>Adds multiple ELists to the WebPage.</summary>
+        /// <param name="eLists">The ELists to add.</param>
+        protected void AddMany<T>(params EList<T>[] eLists) where T : IElement
         {
-            foreach (List list in lists)
+            foreach (EList<T> eList in eLists)
             {
-                Add(list);
+                Add(eList);
             }
         }
 
