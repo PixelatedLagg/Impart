@@ -16,6 +16,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <DefineConstants>LOGGING</DefineConstants> <!--For logging-->
   </PropertyGroup>
   <ItemGroup>
     <None Include=".github/Images/logo.png" Pack="true" PackagePath="logo.png"/>

@@ -505,9 +505,5 @@ namespace Impart
             Render = result.Append($"</body>{_Script}</html>").ToString();
             return Render;
         }
-        private void ChangeHandler()
-        {
-            Changed = true;
-        }
     }
 }

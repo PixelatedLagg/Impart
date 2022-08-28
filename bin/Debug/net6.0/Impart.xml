@@ -386,9 +386,8 @@
         <member name="T:Impart.Internal.ScriptingExtensions">
             <summary>Common methods used by multiple extensions in the Impart.Scripting namespace.</summary>
         </member>
-        <member name="M:Impart.Internal.ScriptingExtensions.Get(Impart.IElement,Impart.AttrType,System.Object[])">
-            <summary>Get an event.</summary>
-            <param name="element">The IElement to get the event from.</param>
+        <member name="M:Impart.Internal.ScriptingExtensions.GetEdit(Impart.AttrType,System.Object[])">
+            <summary>Get an event string finding eleents by class.</summary>
             <param name="attrType">The AttrType that is changed in the event.</param>
             <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         </member>
@@ -1610,62 +1609,62 @@
         <member name="M:Impart.Link.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
         </member>
-        <member name="T:Impart.List">
-            <summary>List element.</summary>
+        <member name="T:Impart.EList`1">
+            <summary>Store a list of IElements.</summary>
         </member>
-        <member name="P:Impart.List.ID">
+        <member name="P:Impart.EList`1.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.List.Entries">
-            <summary>The entry values of the List.</summary>
+        <member name="P:Impart.EList`1.Entries">
+            <summary>The entry values of the EList.</summary>
         </member>
-        <member name="P:Impart.List.Type">
-            <summary>The ListType value of the List.</summary>
+        <member name="P:Impart.EList`1.Type">
+            <summary>The EListType value of the EList.</summary>
         </member>
-        <member name="F:Impart.List.Attrs">
+        <member name="F:Impart.EList`1.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="F:Impart.List.ExtAttrs">
+        <member name="F:Impart.EList`1.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
-        <member name="P:Impart.List.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.EList`1.Impart#IElement#ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
-        <member name="P:Impart.List.Impart#IElement#IOID">
+        <member name="P:Impart.EList`1.Impart#IElement#IOID">
             <summary>The internal ID of the instance.</summary>
         </member>
-        <member name="M:Impart.List.#ctor(Impart.ListType,Impart.Text[])">
-            <summary>Creates a List instance.</summary>
-            <param name="type">The List type.</param>
-            <param name="textEntries">The List entries.</param>
+        <member name="M:Impart.EList`1.#ctor(Impart.EListType,`0[])">
+            <summary>Creates an EList instance.</summary>
+            <param name="type">The EList type.</param>
+            <param name="entries">The EList entries.</param>
         </member>
-        <member name="M:Impart.List.Add(Impart.Text[])">
-            <summary>Add a Text to the List.</summary>
-            <param name="textEntries">The Text(s) to add.</param>
+        <member name="M:Impart.EList`1.Add(`0[])">
+            <summary>Add entries to the EList.</summary>
+            <param name="entries">The entry to add.</param>
         </member>
-        <member name="M:Impart.List.Remove(Impart.Text[])">
-            <summary>Remove a Text from the List.</summary>
-            <param name="textEntries">The Text(s) to remove.</param>
+        <member name="M:Impart.EList`1.Remove(`0[])">
+            <summary>Remove entries from the EList.</summary>
+            <param name="entries">The entries to remove.</param>
         </member>
-        <member name="M:Impart.List.ToString">
+        <member name="M:Impart.EList`1.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
-        <member name="M:Impart.List.Clone">
+        <member name="M:Impart.EList`1.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.List.Reference">
+        <member name="M:Impart.EList`1.Reference">
             <summary>Create an ElementRef referencing the IElement</summary>
         </member>
-        <member name="M:Impart.List.Impart#IElement#Reference">
+        <member name="M:Impart.EList`1.Impart#IElement#Reference">
             <summary>Create an ElementRef referencing the IElement</summary>
         </member>
-        <member name="M:Impart.List.Impart#IElement#Clone">
+        <member name="M:Impart.EList`1.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.List.Impart#Internal#INested#First">
+        <member name="M:Impart.EList`1.Impart#Internal#INested#First">
             <summary>Return the first part of the INested as a string.</summary>
         </member>
-        <member name="M:Impart.List.Impart#Internal#INested#Last">
+        <member name="M:Impart.EList`1.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Nest">
@@ -2162,13 +2161,13 @@
         <member name="F:Impart.Axis.Y">
             <summary>Y-axis.</summary>
         </member>
-        <member name="T:Impart.ListType">
+        <member name="T:Impart.EListType">
             <summary>All list types.</summary>
         </member>
-        <member name="F:Impart.ListType.Ordered">
+        <member name="F:Impart.EListType.Ordered">
             <summary>Ordered list.</summary>
         </member>
-        <member name="F:Impart.ListType.Unordered">
+        <member name="F:Impart.EListType.Unordered">
             <summary>Unordered list.</summary>
         </member>
         <member name="T:Impart.TextType">
@@ -3139,9 +3138,9 @@
             <summary>Adds a Division to the WebPage.</summary>
             <param name="division">The Division instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.Add(Impart.List)">
-            <summary>Adds a List to the WebPage.</summary>
-            <param name="list">The List instance to add.</param>
+        <member name="M:Impart.WebPage.Add``1(Impart.EList{``0})">
+            <summary>Adds an EList to the WebPage.</summary>
+            <param name="eList">The EList instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.Add(Impart.Scrollbar)">
             <summary>Adds a Scrollbar to the WebPage.</summary>
@@ -3195,9 +3194,9 @@
             <summary>Adds multiple Divisions to the WebPage.</summary>
             <param name="divisions">The Divisions to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddMany(Impart.List[])">
-            <summary>Adds multiple Lists to the WebPage.</summary>
-            <param name="lists">The Lists to add.</param>
+        <member name="M:Impart.WebPage.AddMany``1(Impart.EList{``0}[])">
+            <summary>Adds multiple ELists to the WebPage.</summary>
+            <param name="eLists">The ELists to add.</param>
         </member>
         <member name="M:Impart.WebPage.AddMany(Impart.Form[])">
             <summary>Adds multiple Forms to the WebPage.</summary>
