@@ -71,3 +71,27 @@ Added:
 	<li>Removing Style and external Style via index</li>
 	<li>Various documentation corrections</li>
 </ul>
+
+# July 28th (2.0.6) Total Downloads: 1.3K
+Impart is gradually turning more into an established library with code management. For starters, I've finally added a development branch and made the old main branch into a more stable one. Additionally, code analysis has been enabled for the main branch to weed out any wonky code I might have kept in. I am also shaping the final product of Impart. This library isn't meant to handle JSON/XML, it never was. Focus will shift on improving what everyone came here for: websites.
+
+Added:
+<ul>
+	<li>Global Font management</li>
+	<li>Integration of actual Font files</li>
+	<li>Nesting of all Elements</li>
+	<li>EFrame Element</li>
+	<li>Overhaul of Website Fields</li>
+	<li>WebsiteRequestArgs</li>
+	<li>Pausing/Resuming of Timer</li>
+	<li>Start of using compile-time constant LOGGING for extra logs</li>
+	<li>Logger system</li>
+	<li>Various documentation corrections</li>
+</ul>
+
+Removed:
+<ul>
+	<li>Entire data format namespace</li>
+	<li>Excessive response parsing for Website</li>
+	<li>Xunit dependency</li>
+</ul>
