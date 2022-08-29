@@ -3,7 +3,7 @@ namespace Impart.Internal
     /// <summary>Common methods used by multiple extensions in the Impart.Scripting namespace.</summary>
     public static class ScriptingExtensions
     {
-        /// <summary>Get an event string finding eleents by class.</summary>
+        /// <summary>Get an event string finding elements by internally generated class.</summary>
         /// <param name="attrType">The AttrType that is changed in the event.</param>
         /// <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         public static string GetEdit(AttrType attrType, object[] args)

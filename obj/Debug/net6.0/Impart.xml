@@ -387,7 +387,7 @@
             <summary>Common methods used by multiple extensions in the Impart.Scripting namespace.</summary>
         </member>
         <member name="M:Impart.Internal.ScriptingExtensions.GetEdit(Impart.AttrType,System.Object[])">
-            <summary>Get an event string finding eleents by class.</summary>
+            <summary>Get an event string finding elements by internally generated class.</summary>
             <param name="attrType">The AttrType that is changed in the event.</param>
             <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         </member>
@@ -413,112 +413,110 @@
             <returns>A KeyEventArgs instance.</returns>
             <param name="key">The key type.</param>
         </member>
-        <member name="T:Impart.Scripting.Event">
-            <summary>Stores an Event.</summary>
+        <member name="T:Impart.Scripting.Element">
+            <summary>Get events sorted by the element.</summary>
         </member>
-        <member name="M:Impart.Scripting.Event.#ctor(Impart.Scripting.EventType,Impart.Scripting.IFunction)">
-            <summary>Creates an Event instance.</summary>
-            <param name="eventType">The EventType.</param>
-            <param name="function">The IFunction to call when the Event is triggered.</param>
-        </member>
-        <member name="M:Impart.Scripting.Event.ToString">
-            <summary>Returns the instance as a String.</summary>
-        </member>
-        <member name="T:Impart.Scripting.EventManager">
-            <summary>Stores every Event for an IElement.</summary>
-        </member>
-        <member name="F:Impart.Scripting.EventManager.Events">
-            <summary>A List of all currently registered Events for the IElement.</summary>
-        </member>
-        <member name="M:Impart.Scripting.EventManager.ToString">
-            <summary>Returns the instance as a String.</summary>
-        </member>
-        <member name="T:Impart.Scripting.EventType">
-            <summary>All of the Event triggers.</summary>
-        </member>
-        <member name="F:Impart.Scripting.EventType.Click">
-            <summary>Triggers when clicked.</summary>
-        </member>
-        <member name="F:Impart.Scripting.EventType.Hover">
-            <summary>Triggers when hovered over.</summary>
-        </member>
-        <member name="T:Impart.Scripting.TextExtensions">
-            <summary>Extensions to the Text class for the purpose of adding events.</summary>
-        </member>
-        <member name="M:Impart.Scripting.TextExtensions.Set(Impart.Text,Impart.Scripting.EventType,Impart.Scripting.IFunction)">
-            <summary>Set an event.</summary>
-            <param name="text">The Text to add the event.</param>
-            <param name="eventType">The EventType of the event.</param>
-            <param name="function">The IFunction to call when the event is triggered.</param>
-        </member>
-        <member name="M:Impart.Scripting.TextExtensions.Get(Impart.Text,Impart.AttrType,System.Object[])">
-            <summary>Get an event.</summary>
-            <param name="text">The Text to get the event from.</param>
+        <member name="M:Impart.Scripting.Element.GetMany(Impart.Scripting.ElementType,Impart.AttrType,System.Object[])">
+            <summary>Get muliple events.</summary>
+            <param name="type">The ElementType of the elements to add the event.</param>
             <param name="attrType">The AttrType that is changed in the event.</param>
             <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         </member>
-        <member name="T:Impart.Scripting.Edit">
-            <summary>Stores an edit made to an IElement.</summary>
+        <member name="M:Impart.Scripting.Element.Get(Impart.Scripting.ElementType,Impart.AttrType,System.Object[])">
+            <summary>Get an event.</summary>
+            <param name="type">The ElementType of the element to add the event.</param>
+            <param name="attrType">The AttrType that is changed in the event.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         </member>
-        <member name="M:Impart.Scripting.Edit.#ctor(System.String)">
-            <summary>Creates an Edit instance.</summary>
-            <param name="render">The edit render to store.</param>
+        <member name="T:Impart.Scripting.ElementType">
+            <summary>All types of elements.</summary>
         </member>
-        <member name="M:Impart.Scripting.Edit.ToString">
-            <summary>Returns the instance as a String.</summary>
+        <member name="F:Impart.Scripting.ElementType.RegularText">
+            <summary>Regular Text.</summary>
         </member>
-        <member name="T:Impart.Scripting.IFunction">
-            <summary>Interface for all Javascript function invocations.</summary>
+        <member name="F:Impart.Scripting.ElementType.BoldText">
+            <summary>Bold Text.</summary>
         </member>
-        <member name="T:Impart.Scripting.Invoke">
-            <summary>Stores a function invocation.</summary>
+        <member name="F:Impart.Scripting.ElementType.DeleteText">
+            <summary>Delete Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.Invoke.#ctor(System.String)">
-            <summary>Creates an Invoke instance.</summary>
-            <param name="render">The invocation render to store.</param>
+        <member name="F:Impart.Scripting.ElementType.EmphasizeText">
+            <summary>Emphasize Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.Invoke.ToString">
-            <summary>Returns the instance as a String.</summary>
+        <member name="F:Impart.Scripting.ElementType.ImportantText">
+            <summary>Important Text.</summary>
         </member>
-        <member name="T:Impart.Scripting.DevTools">
-            <summary>Interact with developer tools such as the console.</summary>
+        <member name="F:Impart.Scripting.ElementType.InsertText">
+            <summary>Insert Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.DevTools.WriteLine(System.Object)">
-            <summary>Writes the specified Object to the console and terminates the line.</summary>
-            <param name="obj">The Object to write to the console.</param>
+        <member name="F:Impart.Scripting.ElementType.ItalicText">
+            <summary>Italic Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.DevTools.Warn(System.Object)">
-            <summary>Sends the console a warning.</summary>
-            <param name="obj">The Object to use as the warning message.</param>
+        <member name="F:Impart.Scripting.ElementType.MarkText">
+            <summary>Mark Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.DevTools.TimeStart(System.Object)">
-            <summary>Begins a timer.</summary>
-            <param name="obj">The Object to use as the timer name.</param>
+        <member name="F:Impart.Scripting.ElementType.SmallText">
+            <summary>Small Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.DevTools.TimeEnd(System.Object)">
-            <summary>Ends a timer identified by the timer name.</summary>
-            <param name="obj">The Object to use as the timer name.</param>
+        <member name="F:Impart.Scripting.ElementType.SubscriptText">
+            <summary>Subscript Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.DevTools.WriteTime(System.Object)">
-            <summary>Writes a timer's current elapsed time, identified by the timer name.</summary>
-            <param name="obj">The Object to use as the timer name.</param>
+        <member name="F:Impart.Scripting.ElementType.SuperscriptText">
+            <summary>Superscript Text.</summary>
         </member>
-        <member name="M:Impart.Scripting.DevTools.Group(System.Object,Impart.Scripting.Invoke[])">
-            <summary>Groups a series of Invokes together under a specified name.</summary>
-            <param name="obj">The Object to use as the group name.</param>
-            <param name="invokes">The Invokes to group together.</param>
+        <member name="F:Impart.Scripting.ElementType.OrderedList">
+            <summary>Ordered List.</summary>
         </member>
-        <member name="M:Impart.Scripting.DevTools.Clear">
-            <summary>Clears the console.</summary>
+        <member name="F:Impart.Scripting.ElementType.UnorderedList">
+            <summary>Unordered List.</summary>
         </member>
-        <member name="T:Impart.Scripting.Script">
-            <summary>A collection of IFunctions, all called when the WebPage first loads.</summary>
+        <member name="F:Impart.Scripting.ElementType.Link">
+            <summary>Link.</summary>
         </member>
-        <member name="F:Impart.Scripting.Script.Functions">
-            <summary>All of the IFunctions currently registered in the Script.</summary>
+        <member name="F:Impart.Scripting.ElementType.Image">
+            <summary>Image.</summary>
         </member>
-        <member name="M:Impart.Scripting.Script.ToString">
-            <summary>Returns the instance as a String.</summary>
+        <member name="F:Impart.Scripting.ElementType.Header1">
+            <summary>Header 1.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header2">
+            <summary>Header 2.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header3">
+            <summary>Header 3.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header4">
+            <summary>Header 4.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header5">
+            <summary>Header 5.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.EFrame">
+            <summary>EFrame.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Division">
+            <summary>Division.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Button">
+            <summary>Button.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Video">
+            <summary>Video.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.TableRow">
+            <summary>TableRow.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.TableHeader">
+            <summary>TableHeader.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Table">
+            <summary>Table.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Form">
+            <summary>Form.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.FormInput">
+            <summary>FormInput.</summary>
         </member>
         <member name="T:Impart.Scripting.Browser">
             <summary>All browser types.</summary>
@@ -841,6 +839,119 @@
         <member name="F:Impart.Scripting.Platform.Unknown">
             <summary>Unknown operating system.</summary>
         </member>
+        <member name="T:Impart.Scripting.Event">
+            <summary>Stores an Event.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Event.#ctor(Impart.Scripting.EventType,Impart.Scripting.IFunction)">
+            <summary>Creates an Event instance.</summary>
+            <param name="eventType">The EventType.</param>
+            <param name="function">The IFunction to call when the Event is triggered.</param>
+        </member>
+        <member name="M:Impart.Scripting.Event.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.EventManager">
+            <summary>Stores every Event for an IElement.</summary>
+        </member>
+        <member name="F:Impart.Scripting.EventManager.Events">
+            <summary>A List of all currently registered Events for the IElement.</summary>
+        </member>
+        <member name="M:Impart.Scripting.EventManager.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.EventType">
+            <summary>All of the Event triggers.</summary>
+        </member>
+        <member name="F:Impart.Scripting.EventType.Click">
+            <summary>Triggers when clicked.</summary>
+        </member>
+        <member name="F:Impart.Scripting.EventType.Hover">
+            <summary>Triggers when hovered over.</summary>
+        </member>
+        <member name="T:Impart.Scripting.TextExtensions">
+            <summary>Extensions to the Text class for the purpose of adding events.</summary>
+        </member>
+        <member name="M:Impart.Scripting.TextExtensions.Set(Impart.Text,Impart.Scripting.EventType,Impart.Scripting.IFunction)">
+            <summary>Set an event.</summary>
+            <param name="text">The Text to add the event.</param>
+            <param name="eventType">The EventType of the event.</param>
+            <param name="function">The IFunction to call when the event is triggered.</param>
+        </member>
+        <member name="M:Impart.Scripting.TextExtensions.Get(Impart.Text,Impart.AttrType,System.Object[])">
+            <summary>Get an event.</summary>
+            <param name="text">The Text to get the event from.</param>
+            <param name="attrType">The AttrType that is changed in the event.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        </member>
+        <member name="M:Impart.Scripting.TextExtensions.GetMany(Impart.Text,Impart.AttrType,System.Object[])">
+            <summary>Get multiple events.</summary>
+            <param name="text">The Text to get the events from.</param>
+            <param name="attrType">The AttrType that is changed in the events.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the events.</param>
+        </member>
+        <member name="T:Impart.Scripting.Edit">
+            <summary>Stores an edit made to an IElement.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Edit.#ctor(System.String)">
+            <summary>Creates an Edit instance.</summary>
+            <param name="render">The edit render to store.</param>
+        </member>
+        <member name="M:Impart.Scripting.Edit.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.IFunction">
+            <summary>Interface for all Javascript function invocations.</summary>
+        </member>
+        <member name="T:Impart.Scripting.Invoke">
+            <summary>Stores a function invocation.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Invoke.#ctor(System.String)">
+            <summary>Creates an Invoke instance.</summary>
+            <param name="render">The invocation render to store.</param>
+        </member>
+        <member name="M:Impart.Scripting.Invoke.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.DevTools">
+            <summary>Interact with developer tools such as the console.</summary>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.WriteLine(System.Object)">
+            <summary>Writes the specified Object to the console and terminates the line.</summary>
+            <param name="obj">The Object to write to the console.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.Warn(System.Object)">
+            <summary>Sends the console a warning.</summary>
+            <param name="obj">The Object to use as the warning message.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.TimeStart(System.Object)">
+            <summary>Begins a timer.</summary>
+            <param name="obj">The Object to use as the timer name.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.TimeEnd(System.Object)">
+            <summary>Ends a timer identified by the timer name.</summary>
+            <param name="obj">The Object to use as the timer name.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.WriteTime(System.Object)">
+            <summary>Writes a timer's current elapsed time, identified by the timer name.</summary>
+            <param name="obj">The Object to use as the timer name.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.Group(System.Object,Impart.Scripting.Invoke[])">
+            <summary>Groups a series of Invokes together under a specified name.</summary>
+            <param name="obj">The Object to use as the group name.</param>
+            <param name="invokes">The Invokes to group together.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.Clear">
+            <summary>Clears the console.</summary>
+        </member>
+        <member name="T:Impart.Scripting.Script">
+            <summary>A collection of IFunctions, all called when the WebPage first loads.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Script.Functions">
+            <summary>All of the IFunctions currently registered in the Script.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Script.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
         <member name="T:Impart.Scripting.WebPageScripting">
             <summary>Interactive scripting for WebPage - NOT FINISHED YET.</summary>
         </member>
@@ -1077,7 +1188,10 @@
             <summary>Log messages/warnings to the console.</summary>
         </member>
         <member name="M:Impart.Logger.Info(System.String)">
-            <summary>Log a message to the console. This method will rarely be called by Impart automatically unless you define the compile-time constant: LOGGING.</summary>
+            <summary>
+                Log a message to the console. This method will rarely be called by Impart automatically unless you add the following to your .csproj file:
+                <code>{ DefineConstants } LOGGING { /DefineConstants }</code>
+            </summary>
             <param name="log">The message to log.</param>
         </member>
         <member name="M:Impart.Logger.Warning(System.String)">

@@ -2,8 +2,13 @@ using Impart.Internal;
 
 namespace Impart.Scripting
 {
+    /// <summary>Get events sorted by the element.</summary>
     public static class Element
     {
+        /// <summary>Get muliple events.</summary>
+        /// <param name="type">The ElementType of the elements to add the event.</param>
+        /// <param name="attrType">The AttrType that is changed in the event.</param>
+        /// <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         public static Edit GetMany(ElementType type, AttrType attrType, params object[] args)
         {
             return new Edit($@"Array.from(document.getElementsByTagName('{type switch
@@ -40,6 +45,10 @@ namespace Impart.Scripting
             }}')).forEach(e => {{e.{ScriptingExtensions.GetEdit(attrType, args)}}});");
         }
 
+        /// <summary>Get an event.</summary>
+        /// <param name="type">The ElementType of the element to add the event.</param>
+        /// <param name="attrType">The AttrType that is changed in the event.</param>
+        /// <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         public static Edit Get(ElementType type, AttrType attrType, params object[] args)
         {
             return new Edit($@"document.getElementsByTagName('{type switch
