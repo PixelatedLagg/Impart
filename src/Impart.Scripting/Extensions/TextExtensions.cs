@@ -23,6 +23,10 @@ namespace Impart.Scripting
             return new Edit($"document.getElementsByClassName('{text._IOID})[0].{ScriptingExtensions.GetEdit(attrType, args)}");
         }
 
+        /// <summary>Get multiple events.</summary>
+        /// <param name="text">The Text to get the events from.</param>
+        /// <param name="attrType">The AttrType that is changed in the events.</param>
+        /// <param name="args">The Attr value(s) to assign to the AttrType in the events.</param>
         public static Edit GetMany(this Text text, AttrType attrType, params object[] args)
         {
             return new Edit($@"Array.from(document.getElementsByClassName('{text._IOID}')).forEach(e => {{e.{ScriptingExtensions.GetEdit(attrType, args)}}});");
