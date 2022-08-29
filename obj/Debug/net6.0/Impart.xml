@@ -383,6 +383,14 @@
         <member name="M:Impart.Internal.Ioid.GenerateOtherUnique">
             <summary>Generate and return a new IOID for multiple uses with a single instance.</summary>
         </member>
+        <member name="T:Impart.Internal.ScriptingExtensions">
+            <summary>Common methods used by multiple extensions in the Impart.Scripting namespace.</summary>
+        </member>
+        <member name="M:Impart.Internal.ScriptingExtensions.GetEdit(Impart.AttrType,System.Object[])">
+            <summary>Get an event string finding elements by internally generated class.</summary>
+            <param name="attrType">The AttrType that is changed in the event.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        </member>
         <member name="T:Impart.Scripting.ClickEventArgs">
             <summary>The event arguments passed when the user clicks.</summary>
         </member>
@@ -404,6 +412,111 @@
             <summary>Create a KeyEventArgs instance.</summary>
             <returns>A KeyEventArgs instance.</returns>
             <param name="key">The key type.</param>
+        </member>
+        <member name="T:Impart.Scripting.Element">
+            <summary>Get events sorted by the element.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Element.GetMany(Impart.Scripting.ElementType,Impart.AttrType,System.Object[])">
+            <summary>Get muliple events.</summary>
+            <param name="type">The ElementType of the elements to add the event.</param>
+            <param name="attrType">The AttrType that is changed in the event.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        </member>
+        <member name="M:Impart.Scripting.Element.Get(Impart.Scripting.ElementType,Impart.AttrType,System.Object[])">
+            <summary>Get an event.</summary>
+            <param name="type">The ElementType of the element to add the event.</param>
+            <param name="attrType">The AttrType that is changed in the event.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        </member>
+        <member name="T:Impart.Scripting.ElementType">
+            <summary>All types of elements.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.RegularText">
+            <summary>Regular Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.BoldText">
+            <summary>Bold Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.DeleteText">
+            <summary>Delete Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.EmphasizeText">
+            <summary>Emphasize Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.ImportantText">
+            <summary>Important Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.InsertText">
+            <summary>Insert Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.ItalicText">
+            <summary>Italic Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.MarkText">
+            <summary>Mark Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.SmallText">
+            <summary>Small Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.SubscriptText">
+            <summary>Subscript Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.SuperscriptText">
+            <summary>Superscript Text.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.OrderedList">
+            <summary>Ordered List.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.UnorderedList">
+            <summary>Unordered List.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Link">
+            <summary>Link.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Image">
+            <summary>Image.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header1">
+            <summary>Header 1.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header2">
+            <summary>Header 2.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header3">
+            <summary>Header 3.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header4">
+            <summary>Header 4.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Header5">
+            <summary>Header 5.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.EFrame">
+            <summary>EFrame.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Division">
+            <summary>Division.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Button">
+            <summary>Button.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Video">
+            <summary>Video.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.TableRow">
+            <summary>TableRow.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.TableHeader">
+            <summary>TableHeader.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Table">
+            <summary>Table.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.Form">
+            <summary>Form.</summary>
+        </member>
+        <member name="F:Impart.Scripting.ElementType.FormInput">
+            <summary>FormInput.</summary>
         </member>
         <member name="T:Impart.Scripting.Browser">
             <summary>All browser types.</summary>
@@ -726,8 +839,121 @@
         <member name="F:Impart.Scripting.Platform.Unknown">
             <summary>Unknown operating system.</summary>
         </member>
+        <member name="T:Impart.Scripting.Event">
+            <summary>Stores an Event.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Event.#ctor(Impart.Scripting.EventType,Impart.Scripting.IFunction)">
+            <summary>Creates an Event instance.</summary>
+            <param name="eventType">The EventType.</param>
+            <param name="function">The IFunction to call when the Event is triggered.</param>
+        </member>
+        <member name="M:Impart.Scripting.Event.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.EventManager">
+            <summary>Stores every Event for an IElement.</summary>
+        </member>
+        <member name="F:Impart.Scripting.EventManager.Events">
+            <summary>A List of all currently registered Events for the IElement.</summary>
+        </member>
+        <member name="M:Impart.Scripting.EventManager.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.EventType">
+            <summary>All of the Event triggers.</summary>
+        </member>
+        <member name="F:Impart.Scripting.EventType.Click">
+            <summary>Triggers when clicked.</summary>
+        </member>
+        <member name="F:Impart.Scripting.EventType.Hover">
+            <summary>Triggers when hovered over.</summary>
+        </member>
+        <member name="T:Impart.Scripting.TextExtensions">
+            <summary>Extensions to the Text class for the purpose of adding events.</summary>
+        </member>
+        <member name="M:Impart.Scripting.TextExtensions.Set(Impart.Text,Impart.Scripting.EventType,Impart.Scripting.IFunction)">
+            <summary>Set an event.</summary>
+            <param name="text">The Text to add the event.</param>
+            <param name="eventType">The EventType of the event.</param>
+            <param name="function">The IFunction to call when the event is triggered.</param>
+        </member>
+        <member name="M:Impart.Scripting.TextExtensions.Get(Impart.Text,Impart.AttrType,System.Object[])">
+            <summary>Get an event.</summary>
+            <param name="text">The Text to get the event from.</param>
+            <param name="attrType">The AttrType that is changed in the event.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        </member>
+        <member name="M:Impart.Scripting.TextExtensions.GetMany(Impart.Text,Impart.AttrType,System.Object[])">
+            <summary>Get multiple events.</summary>
+            <param name="text">The Text to get the events from.</param>
+            <param name="attrType">The AttrType that is changed in the events.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the events.</param>
+        </member>
+        <member name="T:Impart.Scripting.Edit">
+            <summary>Stores an edit made to an IElement.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Edit.#ctor(System.String)">
+            <summary>Creates an Edit instance.</summary>
+            <param name="render">The edit render to store.</param>
+        </member>
+        <member name="M:Impart.Scripting.Edit.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.IFunction">
+            <summary>Interface for all Javascript function invocations.</summary>
+        </member>
+        <member name="T:Impart.Scripting.Invoke">
+            <summary>Stores a function invocation.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Invoke.#ctor(System.String)">
+            <summary>Creates an Invoke instance.</summary>
+            <param name="render">The invocation render to store.</param>
+        </member>
+        <member name="M:Impart.Scripting.Invoke.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="T:Impart.Scripting.DevTools">
+            <summary>Interact with developer tools such as the console.</summary>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.WriteLine(System.Object)">
+            <summary>Writes the specified Object to the console and terminates the line.</summary>
+            <param name="obj">The Object to write to the console.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.Warn(System.Object)">
+            <summary>Sends the console a warning.</summary>
+            <param name="obj">The Object to use as the warning message.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.TimeStart(System.Object)">
+            <summary>Begins a timer.</summary>
+            <param name="obj">The Object to use as the timer name.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.TimeEnd(System.Object)">
+            <summary>Ends a timer identified by the timer name.</summary>
+            <param name="obj">The Object to use as the timer name.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.WriteTime(System.Object)">
+            <summary>Writes a timer's current elapsed time, identified by the timer name.</summary>
+            <param name="obj">The Object to use as the timer name.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.Group(System.Object,Impart.Scripting.Invoke[])">
+            <summary>Groups a series of Invokes together under a specified name.</summary>
+            <param name="obj">The Object to use as the group name.</param>
+            <param name="invokes">The Invokes to group together.</param>
+        </member>
+        <member name="M:Impart.Scripting.DevTools.Clear">
+            <summary>Clears the console.</summary>
+        </member>
+        <member name="T:Impart.Scripting.Script">
+            <summary>A collection of IFunctions, all called when the WebPage first loads.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Script.Functions">
+            <summary>All of the IFunctions currently registered in the Script.</summary>
+        </member>
+        <member name="M:Impart.Scripting.Script.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
         <member name="T:Impart.Scripting.WebPageScripting">
-            <summary>Interactive scripting for WebPage.</summary>
+            <summary>Interactive scripting for WebPage - NOT FINISHED YET.</summary>
         </member>
         <member name="M:Impart.Scripting.WebPageScripting.AddKeyEvent(Impart.WebPage,Impart.Scripting.Key)">
             <summary>Add a Key event listener to the WebPage instance.</summary>
@@ -962,7 +1188,10 @@
             <summary>Log messages/warnings to the console.</summary>
         </member>
         <member name="M:Impart.Logger.Info(System.String)">
-            <summary>Log a message to the console. This method will rarely be called by Impart automatically unless you define the compile-time constant: LOGGING.</summary>
+            <summary>
+                Log a message to the console. This method will rarely be called by Impart automatically unless you add the following to your .csproj file:
+                <code>{ DefineConstants } LOGGING { /DefineConstants }</code>
+            </summary>
             <param name="log">The message to log.</param>
         </member>
         <member name="M:Impart.Logger.Warning(System.String)">
@@ -996,7 +1225,7 @@
             <summary>Button element.</summary>
         </member>
         <member name="P:Impart.Button.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Button.Text">
             <summary>The Text value of the Button.</summary>
@@ -1045,7 +1274,7 @@
             <summary>Division element.</summary>
         </member>
         <member name="P:Impart.Division.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.Division.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1138,7 +1367,7 @@
             <summary>Embed a page into your website in the form of a frame.</summary>
         </member>
         <member name="P:Impart.EFrame.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.EFrame.Width">
             <summary>The width (in pixels).</summary>
@@ -1216,7 +1445,7 @@
             <summary>Form element.</summary>
         </member>
         <member name="P:Impart.Form.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the IElement. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.Form.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1267,13 +1496,13 @@
             <summary>Checkbox input for Form.</summary>
         </member>
         <member name="P:Impart.CheckField.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.CheckField.Attrs">
-            <summary>The Attr values of the SubmitField.</summary>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.CheckField.ExtAttrs">
-            <summary>The ExtAttr values of the SubmitField.</summary>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.CheckField.#ctor(System.String)">
             <summary>Creates a CheckField instance.</summary>
@@ -1292,13 +1521,13 @@
             <summary>Submit button for Form.</summary>
         </member>
         <member name="P:Impart.SubmitField.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.SubmitField.Attrs">
-            <summary>The Attr values of the SubmitField.</summary>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.SubmitField.ExtAttrs">
-            <summary>The ExtAttr values of the SubmitField.</summary>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.SubmitField.#ctor">
             <summary>Creates a SubmitField instance.</summary>
@@ -1310,16 +1539,16 @@
             <summary>Text field for Form.</summary>
         </member>
         <member name="P:Impart.TextField.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.TextField.Text">
-            <summary>The Text value of the TextField.</summary>
+            <summary>The Text value of the instance.</summary>
         </member>
         <member name="F:Impart.TextField.Attrs">
-            <summary>The Attr values of the SubmitField.</summary>
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.TextField.ExtAttrs">
-            <summary>The ExtAttr values of the SubmitField.</summary>
+            <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.TextField.#ctor(System.String)">
             <summary>Creates a TextField instance.</summary>
@@ -1332,7 +1561,7 @@
             <summary>Header element.</summary>
         </member>
         <member name="P:Impart.Header.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Header.TextValue">
             <summary>The text value of the Header.</summary>
@@ -1385,7 +1614,7 @@
             <summary>Image element.</summary>
         </member>
         <member name="P:Impart.Image.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Image.Source">
             <summary>The source link of the Image.</summary>
@@ -1434,7 +1663,7 @@
             <summary>Link element.</summary>
         </member>
         <member name="P:Impart.Link.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Link.Text">
             <summary>The Text value of the Link.</summary>
@@ -1494,62 +1723,62 @@
         <member name="M:Impart.Link.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
         </member>
-        <member name="T:Impart.List">
-            <summary>List element.</summary>
+        <member name="T:Impart.EList`1">
+            <summary>Store a list of IElements.</summary>
         </member>
-        <member name="P:Impart.List.ID">
-            <summary>The ID value of the IElement.</summary>
+        <member name="P:Impart.EList`1.ID">
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.List.Entries">
-            <summary>The entry values of the List.</summary>
+        <member name="P:Impart.EList`1.Entries">
+            <summary>The entry values of the EList.</summary>
         </member>
-        <member name="P:Impart.List.Type">
-            <summary>The ListType value of the List.</summary>
+        <member name="P:Impart.EList`1.Type">
+            <summary>The EListType value of the EList.</summary>
         </member>
-        <member name="F:Impart.List.Attrs">
+        <member name="F:Impart.EList`1.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="F:Impart.List.ExtAttrs">
+        <member name="F:Impart.EList`1.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
-        <member name="P:Impart.List.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.EList`1.Impart#IElement#ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
-        <member name="P:Impart.List.Impart#IElement#IOID">
+        <member name="P:Impart.EList`1.Impart#IElement#IOID">
             <summary>The internal ID of the instance.</summary>
         </member>
-        <member name="M:Impart.List.#ctor(Impart.ListType,Impart.Text[])">
-            <summary>Creates a List instance.</summary>
-            <param name="type">The List type.</param>
-            <param name="textEntries">The List entries.</param>
+        <member name="M:Impart.EList`1.#ctor(Impart.EListType,`0[])">
+            <summary>Creates an EList instance.</summary>
+            <param name="type">The EList type.</param>
+            <param name="entries">The EList entries.</param>
         </member>
-        <member name="M:Impart.List.Add(Impart.Text[])">
-            <summary>Add a Text to the List.</summary>
-            <param name="textEntries">The Text(s) to add.</param>
+        <member name="M:Impart.EList`1.Add(`0[])">
+            <summary>Add entries to the EList.</summary>
+            <param name="entries">The entry to add.</param>
         </member>
-        <member name="M:Impart.List.Remove(Impart.Text[])">
-            <summary>Remove a Text from the List.</summary>
-            <param name="textEntries">The Text(s) to remove.</param>
+        <member name="M:Impart.EList`1.Remove(`0[])">
+            <summary>Remove entries from the EList.</summary>
+            <param name="entries">The entries to remove.</param>
         </member>
-        <member name="M:Impart.List.ToString">
+        <member name="M:Impart.EList`1.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
-        <member name="M:Impart.List.Clone">
+        <member name="M:Impart.EList`1.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.List.Reference">
+        <member name="M:Impart.EList`1.Reference">
             <summary>Create an ElementRef referencing the IElement</summary>
         </member>
-        <member name="M:Impart.List.Impart#IElement#Reference">
+        <member name="M:Impart.EList`1.Impart#IElement#Reference">
             <summary>Create an ElementRef referencing the IElement</summary>
         </member>
-        <member name="M:Impart.List.Impart#IElement#Clone">
+        <member name="M:Impart.EList`1.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.List.Impart#Internal#INested#First">
+        <member name="M:Impart.EList`1.Impart#Internal#INested#First">
             <summary>Return the first part of the INested as a string.</summary>
         </member>
-        <member name="M:Impart.List.Impart#Internal#INested#Last">
+        <member name="M:Impart.EList`1.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Nest">
@@ -1790,10 +2019,10 @@
             <summary>Table element.</summary>
         </member>
         <member name="P:Impart.Table.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Table.Rows">
-            <summary>The TableRow values of the Table.</summary>
+            <summary>The TableRow values of the instance.</summary>
         </member>
         <member name="F:Impart.Table.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1840,10 +2069,10 @@
             <summary>A header row of a Table.</summary>
         </member>
         <member name="P:Impart.TableHeader.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.TableHeader.Elements">
-            <summary>The IElement values of the TableHeader.</summary>
+            <summary>The IElement values of the instance.</summary>
         </member>
         <member name="F:Impart.TableHeader.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1866,10 +2095,10 @@
             <summary>A row of a Table.</summary>
         </member>
         <member name="P:Impart.TableRow.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.TableRow.Elements">
-            <summary>The IElements values of the TableRow.</summary>
+            <summary>The IElements values of the instance.</summary>
         </member>
         <member name="F:Impart.TableRow.Attrs">
             <summary>The Attr values of the instance.</summary>
@@ -1892,7 +2121,7 @@
             <summary>Text element.</summary>
         </member>
         <member name="P:Impart.Text.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Text.TextValue">
             <summary>The text value of the Text.</summary>
@@ -1953,7 +2182,7 @@
             <summary>Video element.</summary>
         </member>
         <member name="P:Impart.Video.ID">
-            <summary>The ID value of the IElement.</summary>
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="P:Impart.Video.Source">
             <summary>The Video source file.</summary>
@@ -2046,13 +2275,13 @@
         <member name="F:Impart.Axis.Y">
             <summary>Y-axis.</summary>
         </member>
-        <member name="T:Impart.ListType">
+        <member name="T:Impart.EListType">
             <summary>All list types.</summary>
         </member>
-        <member name="F:Impart.ListType.Ordered">
+        <member name="F:Impart.EListType.Ordered">
             <summary>Ordered list.</summary>
         </member>
-        <member name="F:Impart.ListType.Unordered">
+        <member name="F:Impart.EListType.Unordered">
             <summary>Unordered list.</summary>
         </member>
         <member name="T:Impart.TextType">
@@ -2941,16 +3170,10 @@
             <param name="o">The Object to convert.</param>
         </member>
         <member name="T:Impart.WebPage">
-            <summary>Generate a webpage for a Website.</summary>
+            <summary>Generate a Webpage for a Website.</summary>
         </member>
         <member name="P:Impart.WebPage.Title">
             <summary>The title value of the WebPage.</summary>
-        </member>
-        <member name="P:Impart.WebPage.DefaultMargin">
-            <summary>The default margin value.</summary>
-        </member>
-        <member name="P:Impart.WebPage.DefaultPadding">
-            <summary>The default padding value.</summary>
         </member>
         <member name="F:Impart.WebPage.Attrs">
             <summary>The Attribute values of the WebPage.</summary>
@@ -2960,6 +3183,14 @@
         </member>
         <member name="M:Impart.WebPage.#ctor">
             <summary>Creates a WebPage instance.</summary>
+        </member>
+        <member name="M:Impart.WebPage.Get``1(System.Func{``0,System.Boolean})">
+            <summary>Gets the specified IElement from the WebPage.</summary>
+            <param name="selector">The specifications to be met by the IElement.</param>
+        </member>
+        <member name="M:Impart.WebPage.GetMany``1(System.Func{``0,System.Boolean})">
+            <summary>Gets the many specified IElements from the WebPage.</summary>
+            <param name="selector">The specifications to be met by the IElements.</param>
         </member>
         <member name="M:Impart.WebPage.Exists(Impart.ElementRef)">
             <summary>Checks if an Element exists.</summary>
@@ -3021,9 +3252,9 @@
             <summary>Adds a Division to the WebPage.</summary>
             <param name="division">The Division instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.Add(Impart.List)">
-            <summary>Adds a List to the WebPage.</summary>
-            <param name="list">The List instance to add.</param>
+        <member name="M:Impart.WebPage.Add``1(Impart.EList{``0})">
+            <summary>Adds an EList to the WebPage.</summary>
+            <param name="eList">The EList instance to add.</param>
         </member>
         <member name="M:Impart.WebPage.Add(Impart.Scrollbar)">
             <summary>Adds a Scrollbar to the WebPage.</summary>
@@ -3053,6 +3284,54 @@
             <summary>Adds an Animation to the WebPage.</summary>
             <param name="animation">The Animation to add.</param>
         </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Text[])">
+            <summary>Adds multiple Texts to the WebPage.</summary>
+            <param name="texts">The Texts to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Image[])">
+            <summary>Adds multiple Images to the WebPage.</summary>
+            <param name="images">The Images to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Header[])">
+            <summary>Adds multiple Headers to the WebPage.</summary>
+            <param name="headers">The Headers to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Link[])">
+            <summary>Adds multiple Links to the WebPage.</summary>
+            <param name="links">The Links to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Table[])">
+            <summary>Adds multiple Tables to the WebPage.</summary>
+            <param name="tables">The Tables to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Division[])">
+            <summary>Adds multiple Divisions to the WebPage.</summary>
+            <param name="divisions">The Divisions to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany``1(Impart.EList{``0}[])">
+            <summary>Adds multiple ELists to the WebPage.</summary>
+            <param name="eLists">The ELists to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Form[])">
+            <summary>Adds multiple Forms to the WebPage.</summary>
+            <param name="forms">The Forms to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Button[])">
+            <summary>Adds multiple Buttons to the WebPage.</summary>
+            <param name="buttons">The Buttons to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Nest[])">
+            <summary>Adds multiple Nests to the WebPage.</summary>
+            <param name="nests">The Nests to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Video[])">
+            <summary>Adds multiple Videos to the WebPage.</summary>
+            <param name="videos">The Videos to add.</param>
+        </member>
+        <member name="M:Impart.WebPage.AddMany(Impart.Animation[])">
+            <summary>Adds multiple Animations to the WebPage.</summary>
+            <param name="animations">The Animations to add.</param>
+        </member>
         <member name="M:Impart.WebPage.Remove(System.Int32)">
             <summary>Removes an external Style from the WebPage.</summary>
             <param name="index">The index of the URL of the external Style to remove.</param>
@@ -3062,9 +3341,6 @@
         </member>
         <member name="M:Impart.WebPage.ToString">
             <summary>Returns the instance as a String.</summary>
-        </member>
-        <member name="M:Impart.WebPage.ToStringAsync">
-            <summary>Returns the instance as a String asynchronously.</summary>
         </member>
         <member name="T:Impart.Website">
             <summary>Host WebPages.</summary>

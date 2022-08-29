@@ -1,4 +1,6 @@
 using System.Text;
+using Impart.Internal;
+using Impart.Scripting;
 using System.Collections.Generic;
 
 namespace Impart
@@ -30,7 +32,10 @@ namespace Impart
 
         /// <summary>The ExtAttr values of the instance.</summary>
         new public ExtAttrList ExtAttrs = new ExtAttrList();
-        private bool Changed = true;
+
+        internal new int _IOID = Ioid.Generate();
+        internal new EventManager _Events = new EventManager();
+        internal new bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates a TableHeader instance.</summary>
@@ -67,7 +72,7 @@ namespace Impart
                 {
                     result.Append(attribute);
                 }
-                result.Append('"');
+                result.Append($"\"class=\"{_IOID}\"{_Events}");
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {

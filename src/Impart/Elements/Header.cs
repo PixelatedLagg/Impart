@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using Impart.Internal;
+using Impart.Scripting;
 
 namespace Impart
 {
@@ -64,7 +65,6 @@ namespace Impart
                 _Number = value;
             }
         }
-        private int _IOID = Ioid.Generate();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -74,7 +74,10 @@ namespace Impart
                 return _IOID;
             }
         }
-        private bool Changed = true;
+
+        internal int _IOID = Ioid.Generate();
+        internal EventManager _Events = new EventManager();
+        internal bool Changed = true;
         private string Render = "";
 
         /// <summary>Creates an empty Header instance.</summary>
@@ -115,7 +118,7 @@ namespace Impart
                 {
                     result.Append(attribute);
                 }
-                result.Append('"');
+                result.Append($"\"class=\"{_IOID}\"{_Events}");
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {

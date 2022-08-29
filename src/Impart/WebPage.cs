@@ -1,13 +1,11 @@
-using System.Linq;
+using System;
 using System.Text;
 using Impart.Scripting;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
 
 namespace Impart
 {
-    /// <summary>Generate a webpage for a Website.</summary>
+    /// <summary>Generate a Webpage for a Website.</summary>
     public class WebPage
     {
         private string _Title;
@@ -26,45 +24,13 @@ namespace Impart
             }
         }
 
-        private Length _DefaultMargin = 0;
-
-        /// <summary>The default margin value.</summary>
-        public Length DefaultMargin
-        {
-            get
-            {
-                return _DefaultMargin;
-            }
-            set
-            {
-                Changed = true;
-                _DefaultMargin = value;
-            }
-        }
-
-        private Length _DefaultPadding = 0;
-
-        /// <summary>The default padding value.</summary>
-        public Length DefaultPadding
-        {
-            get
-            {
-                return _DefaultPadding;
-            }
-            set
-            {
-                Changed = true;
-                _DefaultPadding = value;
-            }
-        }
-
 
         /// <summary>The Attribute values of the WebPage.</summary>
         public AttrList Attrs = new AttrList();
 
         /// <summary>The Font values of the WebPage.</summary>
         public FontList Fonts = new FontList();
-        internal Script _Script;
+        internal Script _Script = new Script();
         private List<IElement> _Elements = new List<IElement>();
         private List<IStyleElement> _StyleElements = new List<IStyleElement>();
         private List<string> _Styles = new List<string>();
@@ -90,7 +56,7 @@ namespace Impart
                     return (T1)element;
                 }
             }
-            return null;
+            throw new ImpartError("Element with the specified conditions does not exist!");
         }
 
         /// <summary>Gets the many specified IElements from the WebPage.</summary>
@@ -278,11 +244,11 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Adds a List to the WebPage.</summary>
-        /// <param name="list">The List instance to add.</param>
-        protected void Add(List list)
+        /// <summary>Adds an EList to the WebPage.</summary>
+        /// <param name="eList">The EList instance to add.</param>
+        protected void Add<T>(EList<T> eList) where T : IElement
         {
-            _Elements.Add(list);
+            _Elements.Add(eList);
             Changed = true;
         }
 
@@ -353,7 +319,7 @@ namespace Impart
             Changed = true;
         }
 
-        /// <summary>Adds multiple Texts to the WebPage..</summary>
+        /// <summary>Adds multiple Texts to the WebPage.</summary>
         /// <param name="texts">The Texts to add.</param>
         protected void AddMany(params Text[] texts)
         {
@@ -363,7 +329,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Images to the WebPage..</summary>
+        /// <summary>Adds multiple Images to the WebPage.</summary>
         /// <param name="images">The Images to add.</param>
         protected void AddMany(params Image[] images)
         {
@@ -373,7 +339,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Headers to the WebPage..</summary>
+        /// <summary>Adds multiple Headers to the WebPage.</summary>
         /// <param name="headers">The Headers to add.</param>
         protected void AddMany(params Header[] headers)
         {
@@ -383,7 +349,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Links to the WebPage..</summary>
+        /// <summary>Adds multiple Links to the WebPage.</summary>
         /// <param name="links">The Links to add.</param>
         protected void AddMany(params Link[] links)
         {
@@ -393,7 +359,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Tables to the WebPage..</summary>
+        /// <summary>Adds multiple Tables to the WebPage.</summary>
         /// <param name="tables">The Tables to add.</param>
         protected void AddMany(params Table[] tables)
         {
@@ -403,7 +369,7 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Divisions to the WebPage..</summary>
+        /// <summary>Adds multiple Divisions to the WebPage.</summary>
         /// <param name="divisions">The Divisions to add.</param>
         protected void AddMany(params Division[] divisions)
         {
@@ -413,13 +379,63 @@ namespace Impart
             }
         }
 
-        /// <summary>Adds multiple Lists to the WebPage..</summary>
-        /// <param name="lists">The Lists to add.</param>
-        protected void AddMany(params List[] lists)
+        /// <summary>Adds multiple ELists to the WebPage.</summary>
+        /// <param name="eLists">The ELists to add.</param>
+        protected void AddMany<T>(params EList<T>[] eLists) where T : IElement
         {
-            foreach (List list in lists)
+            foreach (EList<T> eList in eLists)
             {
-                Add(list);
+                Add(eList);
+            }
+        }
+
+        /// <summary>Adds multiple Forms to the WebPage.</summary>
+        /// <param name="forms">The Forms to add.</param>
+        protected void AddMany(params Form[] forms)
+        {
+            foreach (Form form in forms)
+            {
+                Add(form);
+            }
+        }
+
+        /// <summary>Adds multiple Buttons to the WebPage.</summary>
+        /// <param name="buttons">The Buttons to add.</param>
+        protected void AddMany(params Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                Add(button);
+            }
+        }
+
+        /// <summary>Adds multiple Nests to the WebPage.</summary>
+        /// <param name="nests">The Nests to add.</param>
+        protected void AddMany(params Nest[] nests)
+        {
+            foreach (Nest nest in nests)
+            {
+                Add(nest);
+            }
+        }
+
+        /// <summary>Adds multiple Videos to the WebPage.</summary>
+        /// <param name="videos">The Videos to add.</param>
+        protected void AddMany(params Video[] videos)
+        {
+            foreach (Video video in videos)
+            {
+                Add(video);
+            }
+        }
+
+        /// <summary>Adds multiple Animations to the WebPage.</summary>
+        /// <param name="animations">The Animations to add.</param>
+        protected void AddMany(params Animation[] animations)
+        {
+            foreach (Animation animation in animations)
+            {
+                Add(animation);
             }
         }
 
@@ -468,61 +484,7 @@ namespace Impart
             {
                 result.Append(element);
             }
-            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style>");
-            if (Attrs.Count != 0)
-            {
-                result.Append("<body style=\"");
-                foreach (Attr attribute in Attrs)
-                {
-                    result.Append(attribute);
-                }
-                result.Append("\">");
-            }
-            else
-            {
-                result.Append("<body>");
-            }
-            foreach (IElement entry in _Elements)
-            {
-                result.Append(entry);
-            }
-            Render = result.Append($"</body>{_Script}</html>").ToString();
-            return Render;
-        }
-
-        /// <summary>Returns the instance as a String asynchronously.</summary>
-        public async Task<string> ToStringAsync()
-        {
-            await Task.Delay(0);
-            if (!Changed && !Attrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            StringBuilder result = new StringBuilder("<!-- Generated by Impart - https://github.com/PixelatedLagg/Impart --><!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\">");
-            foreach (string url in _ExternalStyles)
-            {
-                result.Append($"<link type=\"text/css\" rel=\"stylesheet\" href=\"{url}\">");
-            }
-            foreach (string url in GlobalStyles.ExternalStyles)
-            {
-                result.Append($"<link type=\"text/css\" rel=\"stylesheet\" href=\"{url}\">");
-            }
-            result.Append($"<meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style>");
-            foreach (Font font in Fonts)
-            {
-                result.Append($"@font-face {{{font}}}");
-            }
-            foreach (string style in _Styles)
-            {
-                result.Append(style);
-            }
-            foreach (IStyleElement element in _StyleElements)
-            {
-                result.Append(element);
-            }
-            result.Append($"* {{padding: {_DefaultPadding};margin: {_DefaultMargin};}}</style>");
+            result.Append("</style>");
             if (Attrs.Count != 0)
             {
                 result.Append("<body style=\"");
