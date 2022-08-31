@@ -31,11 +31,11 @@ namespace Impart
         /// <summary>The Font values of the WebPage.</summary>
         public FontList Fonts = new FontList();
         internal Script _Script = new Script();
+        internal bool Changed = true;
         private List<IElement> _Elements = new List<IElement>();
         private List<IStyleElement> _StyleElements = new List<IStyleElement>();
         private List<string> _Styles = new List<string>();
         private List<string> _ExternalStyles = new List<string>();
-        private bool Changed = true;
         private string Render;
 
         /// <summary>Creates a WebPage instance.</summary>

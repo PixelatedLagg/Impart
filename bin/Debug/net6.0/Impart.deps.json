@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "Impart/2.0.6": {
+      "Impart/2.0.7": {
         "runtime": {
           "Impart.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "Impart/2.0.6": {
+    "Impart/2.0.7": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

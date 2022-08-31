@@ -897,7 +897,7 @@
             <param name="args">The Attr value(s) to assign to the AttrType in the events.</param>
         </member>
         <member name="T:Impart.Scripting.WebPageScripting">
-            <summary>Extensions to the WebPage class for the purpose of adding events.</summary>
+            <summary>Extensions to the WebPage class for client-side scripting.</summary>
         </member>
         <member name="M:Impart.Scripting.WebPageScripting.Set(Impart.WebPage,Impart.Scripting.EventType,Impart.Scripting.IFunction[])">
             <summary>Set an event.</summary>
@@ -910,6 +910,20 @@
             <param name="webPage">The WebPage to get the event from.</param>
             <param name="attrType">The AttrType that is changed in the event.</param>
             <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        </member>
+        <member name="M:Impart.Scripting.WebPageScripting.Add(Impart.WebPage,Impart.Scripting.IFunction[])">
+            <summary>Add an IFunction to the WebPage's Script.</summary>
+            <param name="webPage">The WebPage to add the IFunction to its Script.</param>
+            <param name="functions">The IFunction(s) to add to the WebPage's Script.</param>
+        </member>
+        <member name="M:Impart.Scripting.WebPageScripting.Remove(Impart.WebPage,Impart.Scripting.IFunction[])">
+            <summary>Remove an IFunction from the WebPage's Script.</summary>
+            <param name="webPage">The WebPage to remove the IFunction from its Script.</param>
+            <param name="functions">The IFunction(s) to remove from the WebPage's Script.</param>
+        </member>
+        <member name="M:Impart.Scripting.WebPageScripting.Clear(Impart.WebPage)">
+            <summary>Clear all IFunctions from the WebPage's Script.</summary>
+            <param name="webPage">The WebPage to clear all IFunctions from its Script.</param>
         </member>
         <member name="T:Impart.Scripting.Edit">
             <summary>Stores an edit made to an IElement.</summary>

@@ -95,3 +95,19 @@ Removed:
 	<li>Excessive response parsing for Website</li>
 	<li>Xunit dependency</li>
 </ul>
+
+# August 31st (2.0.7) Total Downloads: 1.5K
+This is a day I've been waiting on for a long time. Throughout every update this project has gotten, adding client-side scripting has been on the back of my mind. Now it is finally here. Additionally, I am realising that Impart is no longer a library, it is definitely a framework. Extensions to the currently small scope of client-side scripting are soon to come.
+
+Added:
+<ul>
+	<li>Use of Func<> in sorting through IElements from WebPage and Division</li>
+	<li>IFunctions, Events, Invokes, Edits</li>
+	<li>Events by ElementType</li>
+	<li>Events by individual IElement</li>
+	<li>Central way to add Events to WebPage</li>
+	<li>Editing of WebPage Script</li>
+	<li>DevTools class for simple debugging IFunctions</li>
+	<li>List as generic List of any IElement type</li>
+	<li>Fixed alignment CSS for attributes</li>
+</ul>

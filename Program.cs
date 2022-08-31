@@ -1,23 +1,7 @@
-﻿using System.Text;
-using Impart;
-using System;
-using Impart.Scripting;
-using Impart.Internal;
-using System.Threading.Tasks;
-
-class Program
+﻿class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
-        WebSite w = new WebSite(new test());
-        w.Start();
-    }
-}
-class test : WebPage
-{
-    public test() : base()
-    {
-        Add("aids!");
-        this.Set(EventType.DoubleClick, DevTools.Alert("aids!"));
+        
     }
 }
