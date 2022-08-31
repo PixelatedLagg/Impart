@@ -59,5 +59,12 @@ namespace Impart.Scripting
         {
             return new Invoke("console.clear();");
         }
+
+        /// <summary>Triggers a popup alert with a message.</summary>
+        /// <param name="obj">The Object to use as the alert message.</param>
+        public static Invoke Alert(object obj)
+        {
+            return new Invoke($"alert('{obj}');");
+        }
     }
 }

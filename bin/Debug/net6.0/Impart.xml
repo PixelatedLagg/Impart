@@ -391,6 +391,10 @@
             <param name="attrType">The AttrType that is changed in the event.</param>
             <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         </member>
+        <member name="M:Impart.Internal.ScriptingExtensions.GetEventName(Impart.Scripting.EventType)">
+            <summary>Get the event name from the EventType.</summary>
+            <param name="eventType">The EventType to get the name from.</param>
+        </member>
         <member name="T:Impart.Scripting.ClickEventArgs">
             <summary>The event arguments passed when the user clicks.</summary>
         </member>
@@ -427,6 +431,60 @@
             <param name="type">The ElementType of the element to add the event.</param>
             <param name="attrType">The AttrType that is changed in the event.</param>
             <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
+        </member>
+        <member name="T:Impart.Scripting.Browser">
+            <summary>All browser types.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Chrome">
+            <summary>Chrome browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Chromium">
+            <summary>Chromium browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Opera">
+            <summary>Opera browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Safari">
+            <summary>Safari browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Firefox">
+            <summary>Firefox browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.IE">
+            <summary>IE browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Netscape">
+            <summary>Netscape browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Edge">
+            <summary>Edge browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Brave">
+            <summary>Brave browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Vivaldi">
+            <summary>Vivaldi browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Torch">
+            <summary>Torch browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.Maxthon">
+            <summary>Maxthon browser.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Browser.NotBrand">
+            <summary>Not a brand browser.</summary>
+        </member>
+        <member name="T:Impart.Scripting.Click">
+            <summary>All click types.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Click.Left">
+            <summary>Left mouse click.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Click.Right">
+            <summary>Right mouse click.</summary>
+        </member>
+        <member name="F:Impart.Scripting.Click.Middle">
+            <summary>Middle (scroll) mouse click.</summary>
         </member>
         <member name="T:Impart.Scripting.ElementType">
             <summary>All types of elements.</summary>
@@ -517,60 +575,6 @@
         </member>
         <member name="F:Impart.Scripting.ElementType.FormInput">
             <summary>FormInput.</summary>
-        </member>
-        <member name="T:Impart.Scripting.Browser">
-            <summary>All browser types.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Chrome">
-            <summary>Chrome browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Chromium">
-            <summary>Chromium browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Opera">
-            <summary>Opera browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Safari">
-            <summary>Safari browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Firefox">
-            <summary>Firefox browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.IE">
-            <summary>IE browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Netscape">
-            <summary>Netscape browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Edge">
-            <summary>Edge browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Brave">
-            <summary>Brave browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Vivaldi">
-            <summary>Vivaldi browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Torch">
-            <summary>Torch browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.Maxthon">
-            <summary>Maxthon browser.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Browser.NotBrand">
-            <summary>Not a brand browser.</summary>
-        </member>
-        <member name="T:Impart.Scripting.Click">
-            <summary>All click types.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Click.Left">
-            <summary>Left mouse click.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Click.Right">
-            <summary>Right mouse click.</summary>
-        </member>
-        <member name="F:Impart.Scripting.Click.Middle">
-            <summary>Middle (scroll) mouse click.</summary>
         </member>
         <member name="T:Impart.Scripting.Key">
             <summary>All key types.</summary>
@@ -865,6 +869,9 @@
         <member name="F:Impart.Scripting.EventType.Click">
             <summary>Triggers when clicked.</summary>
         </member>
+        <member name="F:Impart.Scripting.EventType.DoubleClick">
+            <summary>Triggers when double-clicked.</summary>
+        </member>
         <member name="F:Impart.Scripting.EventType.Hover">
             <summary>Triggers when hovered over.</summary>
         </member>
@@ -888,6 +895,21 @@
             <param name="text">The Text to get the events from.</param>
             <param name="attrType">The AttrType that is changed in the events.</param>
             <param name="args">The Attr value(s) to assign to the AttrType in the events.</param>
+        </member>
+        <member name="T:Impart.Scripting.WebPageScripting">
+            <summary>Extensions to the WebPage class for the purpose of adding events.</summary>
+        </member>
+        <member name="M:Impart.Scripting.WebPageScripting.Set(Impart.WebPage,Impart.Scripting.EventType,Impart.Scripting.IFunction[])">
+            <summary>Set an event.</summary>
+            <param name="webPage">The WebPage to add the event.</param>
+            <param name="eventType">The EventType of the event.</param>
+            <param name="functions">The IFunction(s) to call when the event is triggered.</param>
+        </member>
+        <member name="M:Impart.Scripting.WebPageScripting.Get(Impart.WebPage,Impart.AttrType,System.Object[])">
+            <summary>Get an event.</summary>
+            <param name="webPage">The WebPage to get the event from.</param>
+            <param name="attrType">The AttrType that is changed in the event.</param>
+            <param name="args">The Attr value(s) to assign to the AttrType in the event.</param>
         </member>
         <member name="T:Impart.Scripting.Edit">
             <summary>Stores an edit made to an IElement.</summary>
@@ -943,6 +965,10 @@
         <member name="M:Impart.Scripting.DevTools.Clear">
             <summary>Clears the console.</summary>
         </member>
+        <member name="M:Impart.Scripting.DevTools.Alert(System.Object)">
+            <summary>Triggers a popup alert with a message.</summary>
+            <param name="obj">The Object to use as the alert message.</param>
+        </member>
         <member name="T:Impart.Scripting.Script">
             <summary>A collection of IFunctions, all called when the WebPage first loads.</summary>
         </member>
@@ -951,19 +977,6 @@
         </member>
         <member name="M:Impart.Scripting.Script.ToString">
             <summary>Returns the instance as a String.</summary>
-        </member>
-        <member name="T:Impart.Scripting.WebPageScripting">
-            <summary>Interactive scripting for WebPage - NOT FINISHED YET.</summary>
-        </member>
-        <member name="M:Impart.Scripting.WebPageScripting.AddKeyEvent(Impart.WebPage,Impart.Scripting.Key)">
-            <summary>Add a Key event listener to the WebPage instance.</summary>
-            <param name="webPage">The WebPage to add the event listener to.</param>
-            <param name="key">The Key to add an event listener for.</param>
-        </member>
-        <member name="M:Impart.Scripting.WebPageScripting.AddClickEvent(Impart.WebPage,Impart.Scripting.Click)">
-            <summary>Add a Click event listener to the WebPage instance.</summary>
-            <param name="webPage">The WebPage to add the event listener to.</param>
-            <param name="click">The Click to add an event listener for.</param>
         </member>
         <member name="T:Impart.Attr">
             <summary>An element attribute.</summary>
@@ -2320,17 +2333,17 @@
         <member name="F:Impart.TextType.Regular">
             <summary>Regular text.</summary>
         </member>
-        <member name="T:Impart.WebsiteRequestArgs">
-            <summary>The event arguments passed when a client requests a WebPage from the Website.</summary>
+        <member name="T:Impart.WebSiteRequestArgs">
+            <summary>The event arguments passed when a client requests a WebPage from the WebSite.</summary>
         </member>
-        <member name="F:Impart.WebsiteRequestArgs.Request">
+        <member name="F:Impart.WebSiteRequestArgs.Request">
             <summary>The full request from the client.</summary>
         </member>
-        <member name="F:Impart.WebsiteRequestArgs.Address">
+        <member name="F:Impart.WebSiteRequestArgs.Address">
             <summary>The IP address of the client.</summary>
         </member>
-        <member name="M:Impart.WebsiteRequestArgs.#ctor(System.String,System.Net.IPAddress)">
-            <summary>Create a WebsiteRequestArgs instance.</summary>
+        <member name="M:Impart.WebSiteRequestArgs.#ctor(System.String,System.Net.IPAddress)">
+            <summary>Create a WebSiteRequestArgs instance.</summary>
             <param name="request">The full request from the client.</param>
             <param name="address">The IP address of the client.</param>
         </member>
@@ -3170,7 +3183,7 @@
             <param name="o">The Object to convert.</param>
         </member>
         <member name="T:Impart.WebPage">
-            <summary>Generate a Webpage for a Website.</summary>
+            <summary>Generate a webpage for a Website.</summary>
         </member>
         <member name="P:Impart.WebPage.Title">
             <summary>The title value of the WebPage.</summary>
@@ -3342,34 +3355,34 @@
         <member name="M:Impart.WebPage.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
-        <member name="T:Impart.Website">
+        <member name="T:Impart.WebSite">
             <summary>Host WebPages.</summary>
         </member>
-        <member name="P:Impart.Website.Running">
-            <summary>Whether the Website is currently running. Default is false.</summary>
+        <member name="P:Impart.WebSite.Running">
+            <summary>Whether the WebSite is currently running. Default is false.</summary>
         </member>
-        <member name="F:Impart.Website.Pages">
-            <summary>A Dictionary of all the WebPages included in the Website. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</summary>
+        <member name="F:Impart.WebSite.Pages">
+            <summary>A Dictionary of all the WebPages included in the WebSite. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</summary>
         </member>
-        <member name="F:Impart.Website.Listener">
-            <summary>The underlying TCP listener the Website uses. Do not manually start or stop as the listener thread depends on the Website methods to do so.</summary>
+        <member name="F:Impart.WebSite.Listener">
+            <summary>The underlying TCP listener the WebSite uses. Do not manually start or stop as the listener thread depends on the WebSite methods to do so.</summary>
         </member>
-        <member name="F:Impart.Website.OnRequest">
+        <member name="F:Impart.WebSite.OnRequest">
             <summary>Called when a client requests a WebPage.</summary>
         </member>
-        <member name="F:Impart.Website.OnListener">
+        <member name="F:Impart.WebSite.OnListener">
             <summary>Called just before the TCP listener begins listening in a new thread.</summary>
         </member>
-        <member name="M:Impart.Website.#ctor(Impart.WebPage,System.Int32)">
-            <summary>Creates a Website instance.</summary>
+        <member name="M:Impart.WebSite.#ctor(Impart.WebPage,System.Int32)">
+            <summary>Creates a WebSite instance.</summary>
             <param name="page">The default WebPage.</param>
             <param name="port">The local port to use. (Default is 5050)</param>
         </member>
-        <member name="M:Impart.Website.Start">
-            <summary>Start the Website.</summary>
+        <member name="M:Impart.WebSite.Start">
+            <summary>Start the WebSite.</summary>
         </member>
-        <member name="M:Impart.Website.Stop">
-            <summary>Stop the Website. This will also close the TCP listener thread.</summary>
+        <member name="M:Impart.WebSite.Stop">
+            <summary>Stop the WebSite. This will also close the TCP listener thread.</summary>
         </member>
     </members>
 </doc>

@@ -1,3 +1,5 @@
+using Impart.Scripting;
+
 namespace Impart.Internal
 {
     /// <summary>Common methods used by multiple extensions in the Impart.Scripting namespace.</summary>
@@ -92,6 +94,19 @@ namespace Impart.Internal
                     }}';",
                 _ => ""
             }}";
+        }
+
+        /// <summary>Get the event name from the EventType.</summary>
+        /// <param name="eventType">The EventType to get the name from.</param>
+        public static string GetEventName(EventType eventType)
+        {
+            return (eventType) switch 
+            {
+                EventType.Click => "click",
+                EventType.Hover => "mouseover",
+                EventType.DoubleClick => "dblclick",
+                _ => ""
+            };
         }
     }
 }

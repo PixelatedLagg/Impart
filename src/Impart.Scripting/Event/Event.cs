@@ -1,3 +1,5 @@
+using Impart.Internal;
+
 namespace Impart.Scripting
 {
     /// <summary>Stores an Event.</summary>
@@ -10,18 +12,7 @@ namespace Impart.Scripting
         /// <param name="function">The IFunction to call when the Event is triggered.</param>
         public Event(EventType eventType, IFunction function)
         {
-            switch (eventType)
-            {
-                case EventType.Click:
-                    Render = $"onclick=\"{function}\"";
-                    break;
-                case EventType.Hover:
-                    Render = $"onmouseover=\"{function}\"";
-                    break;
-                default:
-                    Render = "";
-                    break;
-            }
+            Render = $"on{ScriptingExtensions.GetEventName(eventType)}=\"{function}\"";
         }
 
         /// <summary>Returns the instance as a String.</summary>

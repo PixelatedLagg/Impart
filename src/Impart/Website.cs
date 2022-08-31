@@ -2,17 +2,18 @@ using System;
 using System.Net;
 using System.Text;
 using System.Threading;
+using Impart.Scripting;
 using System.Net.Sockets;
 using System.Collections.Generic;
 
 namespace Impart
 {
     /// <summary>Host WebPages.</summary>
-    public sealed class Website
+    public sealed class WebSite
     {
         private bool _Running;
 
-        /// <summary>Whether the Website is currently running. Default is false.</summary>
+        /// <summary>Whether the WebSite is currently running. Default is false.</summary>
         public bool Running
         {
             get
@@ -21,35 +22,34 @@ namespace Impart
             }
         }
 
-        /// <summary>A Dictionary of all the WebPages included in the Website. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</summary>
+        /// <summary>A Dictionary of all the WebPages included in the WebSite. Each key is a URL path, while each value is a WebPage accessed via that path. To set a 404 WebPage, simply name the path "404".</summary>
         public Dictionary<string, WebPage> Pages = new Dictionary<string, WebPage>();
 
-        /// <summary>The underlying TCP listener the Website uses. Do not manually start or stop as the listener thread depends on the Website methods to do so.</summary>
+        /// <summary>The underlying TCP listener the WebSite uses. Do not manually start or stop as the listener thread depends on the WebSite methods to do so.</summary>
         public TcpListener Listener;
 
         /// <summary>Called when a client requests a WebPage.</summary>
-        public Action<WebsiteRequestArgs> OnRequest;
+        public Action<WebSiteRequestArgs> OnRequest;
 
         /// <summary>Called just before the TCP listener begins listening in a new thread.</summary>
         public Action OnListener;
 
         private TcpListener _Listener;
-        private WebPage _ErrorPage;
+        private WebPage _ErrorPage = null;
         private Thread _Thread;
         private Socket _Socket;
         private int _Port;
 
-        /// <summary>Creates a Website instance.</summary>
+        /// <summary>Creates a WebSite instance.</summary>
         /// <param name="page">The default WebPage.</param>
         /// <param name="port">The local port to use. (Default is 5050)</param>
-        public Website(WebPage page, int port = 5050)
+        public WebSite(WebPage page, int port = 5050)
         {
             Pages.Add("", page);
             _Port = port;
-            _ErrorPage = null;
         }
 
-        /// <summary>Start the Website.</summary>
+        /// <summary>Start the WebSite.</summary>
         public void Start()
         {
             try  
@@ -60,15 +60,15 @@ namespace Impart
                 _Listener.Start();
                 _Thread = new Thread(new ThreadStart(StartListen));
                 _Thread.Start();
-                Logger.Info($"Website hosted on localhost:{_Port}");
+                Logger.Info($"WebSite hosted on localhost:{_Port}");
             }
             catch
             {
-                throw new ImpartError("Error in starting the Website.");
+                throw new ImpartError("Error in starting the WebSite.");
             }
         }
 
-        /// <summary>Stop the Website. This will also close the TCP listener thread.</summary>
+        /// <summary>Stop the WebSite. This will also close the TCP listener thread.</summary>
         public void Stop()
         {
             _Listener.Stop();
@@ -120,7 +120,7 @@ namespace Impart
                         }
                         _Socket.Close();  
                     }
-                    OnRequest?.Invoke(new WebsiteRequestArgs(sBuffer, IPAddress.Parse(((IPEndPoint)(_Socket.RemoteEndPoint)).Address.ToString())));
+                    OnRequest?.Invoke(new WebSiteRequestArgs(sBuffer, IPAddress.Parse(((IPEndPoint)(_Socket.RemoteEndPoint)).Address.ToString())));
                 }
             }
         }

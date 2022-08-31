@@ -6,6 +6,9 @@ namespace Impart.Scripting
         /// <summary>Triggers when clicked.</summary>
         Click,
 
+        /// <summary>Triggers when double-clicked.</summary>
+        DoubleClick,
+
         /// <summary>Triggers when hovered over.</summary>
         Hover
     }
