@@ -65,14 +65,6 @@ namespace Impart
                     result = new Text("", TextType.Mark);
                     break;
             }
-            for (int i = 0; i < Cache.Length; i++)
-            {
-                switch (Cache[i])
-                {
-                    case '':
-                        break;
-                }
-            }
             return result;
         }
     }
