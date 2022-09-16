@@ -2,6 +2,6 @@ namespace Impart
 {
     public interface IStorage
     {
-        IElement Parse();
+        IElement ToBuilder();
     }
 }
