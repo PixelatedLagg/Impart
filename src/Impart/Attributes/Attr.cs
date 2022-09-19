@@ -74,7 +74,7 @@ namespace Impart
                         FontFamily.BigCaslon => "font-family: Big Caslon;",
                         FontFamily.BodoniMT => "font-family: Bodoni MT;",
                         FontFamily.BookAntiqua => "font-family: Book Antiqua;",
-                        FontFamily.Bookman => "font-family Book Antiqua;",
+                        FontFamily.Bookman => "font-family Bookman;",
                         FontFamily.BradleyHand => " font-family: Bradley Hand;",
                         FontFamily.BrushScriptMT => "font-family: Brush Script MT;",
                         FontFamily.BrushScriptStd => "font-family: Brush Script Std;",

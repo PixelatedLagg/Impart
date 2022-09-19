@@ -163,6 +163,9 @@ namespace Impart
         Florence,
 
         /// <summary>Parkavenue font.</summary>
-        Parkavenue
+        Parkavenue,
+
+        /// <summary>Placeholder for a custom font.</summary>
+        Custom
     }
 }

@@ -1,4 +1,5 @@
 using System.Text;
+using Impart.Internal;
 
 namespace Impart
 {
@@ -15,7 +16,7 @@ namespace Impart
         {
             int index;
             Text result;
-            StringBuilder token = new StringBuilder(), value = new StringBuilder();
+            StringBuilder tokenId = new StringBuilder(), tokenValue = new StringBuilder();
             switch (Cache[1])
             {
                 case 'p':
@@ -76,12 +77,37 @@ namespace Impart
                     index = 5;
                     break;
             }
-            if (char.IsWhiteSpace(Cache[index]))
+            while (Cache[index] == ' ')
             {
-                ExtAttrType extAttrType;
-                while (Cache[index] != '=')
+                index++;
+                while (true)
                 {
-
+                    if (Cache[index] == '=')
+                    {
+                        index += 2;
+                        while (Cache[index] != '"')
+                        {
+                            tokenValue.Append(Cache[index]);
+                            index++;
+                        }
+                        string idRender = tokenId.ToString();
+                        if (idRender == "style")
+                        {
+                            //style rendering
+                        }
+                        else
+                        {
+                            result.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));
+                        }
+                        tokenId.Clear();
+                        tokenValue.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        tokenId.Append(Cache[index]);
+                    }
+                    index++;
                 }
             }
             return result;

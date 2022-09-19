@@ -49,6 +49,9 @@ namespace Impart
         Background,
 
         /// <summary>Custom font attribute.</summary>
-        CustomFont
+        CustomFont,
+
+        /// <summary>Represents an empty Attr. No actual attribute is recognised with this value, so do not use.</summary>
+        Empty
     }
 }

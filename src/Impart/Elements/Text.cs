@@ -65,7 +65,7 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
         internal bool Changed = true;
         internal string _TextType;
@@ -78,13 +78,10 @@ namespace Impart
         /// <param name="text">The Text text.</param>
         public Text(string text)
         {
-            if (text == null)
-            {
-                throw new ImpartError("Text cannot be null!");
-            }
             _TextValue = text;
             _Type = TextType.Regular;
             _TextType = "p";
+            _IOID = Ioid.Generate();
         }
 
         /// <summary>Creates a Text instance.</summary>
@@ -92,10 +89,6 @@ namespace Impart
         /// <param name="type">The Text type.</param>
         public Text(string text, TextType type)
         {
-            if (text == null)
-            {
-                throw new ImpartError("Text cannot be null!");
-            }
             _TextValue = text;
             _Type = type;
             _TextType = type switch
@@ -113,6 +106,37 @@ namespace Impart
                 TextType.Superscript => "sup",
                 _ => ""
             };
+            _IOID = Ioid.Generate();
+        }
+
+        internal Text(string text, int ioid)
+        {
+            _TextValue = text;
+            _Type = TextType.Regular;
+            _TextType = "p";
+            _IOID = ioid;
+        }
+
+        internal Text(string text, TextType type, int ioid)
+        {
+            _TextValue = text;
+            _Type = type;
+            _TextType = type switch
+            {
+                TextType.Regular => "p",
+                TextType.Bold => "b",
+                TextType.Delete => "del",
+                TextType.Emphasize => "em",
+                TextType.Important => "strong",
+                TextType.Insert => "ins",
+                TextType.Italic => "i",
+                TextType.Mark => "mark",
+                TextType.Small => "small",
+                TextType.Subscript => "sub",
+                TextType.Superscript => "sup",
+                _ => ""
+            };
+            _IOID = ioid;
         }
 
         /// <summary>Returns the instance as a String.</summary>
