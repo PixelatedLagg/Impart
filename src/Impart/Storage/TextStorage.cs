@@ -1,5 +1,6 @@
 using System.Text;
 using Impart.Internal;
+using System;
 
 namespace Impart
 {
@@ -93,7 +94,41 @@ namespace Impart
                         string idRender = tokenId.ToString();
                         if (idRender == "style")
                         {
-                            //style rendering
+                            int styleIndex = 0;
+                            string style = tokenValue.ToString();
+                            StringBuilder styleId = new StringBuilder(), styleValue = new StringBuilder();
+                            bool readingId = true;
+                            while (styleIndex < style.Length)
+                            {
+                                switch (style[styleIndex])
+                                {
+                                    case ';':
+                                        readingId = true;
+                                        result.Attrs.Add(StorageExtensions.GetAttr(styleId.ToString(), styleValue.ToString()));
+                                        styleId.Clear();
+                                        styleValue.Clear();
+                                        if (styleIndex + 2 < style.Length)
+                                        {
+                                            styleIndex++;
+                                        }
+                                        break;
+                                    case ':':
+                                        readingId = false;
+                                        styleIndex++;
+                                        break;
+                                    default:
+                                        if (readingId)
+                                        {
+                                            styleId.Append(style[styleIndex]);
+                                        }
+                                        else
+                                        {
+                                            styleValue.Append(style[styleIndex]);
+                                        }
+                                        break;
+                                }
+                                styleIndex++;
+                            }
                         }
                         else
                         {
@@ -101,6 +136,7 @@ namespace Impart
                         }
                         tokenId.Clear();
                         tokenValue.Clear();
+                        index++;
                         break;
                     }
                     else
@@ -110,6 +146,18 @@ namespace Impart
                     index++;
                 }
             }
+            index++;
+            StringBuilder content = new StringBuilder();
+            while (true)
+            {
+                if (Cache[index] == '<')
+                {
+                    break;
+                }
+                content.Append(Cache[index]);
+                index++;
+            }
+            result.TextValue = content.ToString();
             return result;
         }
     }

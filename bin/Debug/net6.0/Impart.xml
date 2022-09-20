@@ -1112,6 +1112,9 @@
         <member name="F:Impart.AttrType.CustomFont">
             <summary>Custom font attribute.</summary>
         </member>
+        <member name="F:Impart.AttrType.Empty">
+            <summary>Represents an empty Attr. No actual attribute is recognised with this value, so do not use.</summary>
+        </member>
         <member name="T:Impart.ExtAttr">
             <summary>An element external attribute.</summary>
         </member>
@@ -2542,6 +2545,9 @@
         </member>
         <member name="F:Impart.FontFamily.Parkavenue">
             <summary>Parkavenue font.</summary>
+        </member>
+        <member name="F:Impart.FontFamily.Custom">
+            <summary>Placeholder for a custom font.</summary>
         </member>
         <member name="T:Impart.FontList">
             <summary>Store a list of Fonts.</summary>

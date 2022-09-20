@@ -6,12 +6,8 @@ class Program
 {
     public static void Main()
     {
-        TextStorage text = new TextStorage("<p id=\"test\">ahhhh</p>")
+        TextStorage text = new TextStorage("<p style=\"font-family: Verdana;\" id=\"aids\" title=\"ahhhh\">ahhhh</p>");
+        Text t = text.ToBuilder();
+        Console.WriteLine(t.TextValue);
     }
 }
-
-/*
-
-<div style="display: flex; position: relative;" id="inputLine"></div>
-
-*/
