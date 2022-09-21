@@ -92,10 +92,11 @@ namespace Impart.Internal
         }
         public static Length GetLength(string lengthValue)
         {
+            Console.WriteLine(Int32.Parse(lengthValue.Remove(lengthValue.Length - 2, 2)));
             switch (lengthValue[lengthValue.Length - 1])
             {
                 case '%':
-                    return new Percent(Int32.Parse(lengthValue.Remove(lengthValue.Length - 1, 1)));
+                    return new Percent(float.Parse(lengthValue.Remove(lengthValue.Length - 1, 1)));
                 case 'x':
                     return new Pixels(Int32.Parse(lengthValue.Remove(lengthValue.Length - 2, 2)));
                 case 'h':

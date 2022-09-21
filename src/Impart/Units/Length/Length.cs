@@ -17,6 +17,10 @@ namespace Impart
         {
             return o switch
             {
+                Pixels => (Pixels)o,
+                Percent => (Percent)o,
+                ViewHeight => (ViewHeight)o,
+                ViewWidth => (ViewWidth)o,
                 int => new Pixels((int)o),
                 float => new Percent((float)o),
                 double => new ViewWidth((double)o),

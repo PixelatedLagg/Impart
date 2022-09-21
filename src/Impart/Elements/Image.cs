@@ -20,9 +20,14 @@ namespace Impart
         /// <summary>The source link of the Image.</summary>
         public string Source
         {
-            get 
+            get
             {
                 return _Source;
+            }
+            set
+            {
+                Changed = true;
+                _Source = value;
             }
         }
 
