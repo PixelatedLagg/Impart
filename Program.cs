@@ -6,8 +6,8 @@ class Program
 {
     public static void Main()
     {
-        TextStorage text = new TextStorage("<p style=\"font-family: Verdana; margin: 10px;\" id=\"aids\" title=\"ahhhh\">ahhhh</p>");
-        Text t = text.ToBuilder();
+        HeaderStorage text = new HeaderStorage("<h1 style=\"font-family: Verdana; margin: 10px;\" id=\"aids\" title=\"ahhhh\">ahhhh</h1>");
+        Header t = text.ToBuilder();
         foreach (Attr attr in t.Attrs)
         {
             Console.WriteLine(t);

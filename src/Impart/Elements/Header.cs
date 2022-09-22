@@ -57,7 +57,7 @@ namespace Impart
             }
             set
             {
-                if (value > 5 || value < 1)
+                if (value > 6 || value < 1)
                 {
                     throw new ImpartError("Header number must be between 1 and 5!");
                 }
@@ -88,13 +88,9 @@ namespace Impart
         /// <param name="number">The Header type.</param>
         public Header(string text, int number = 1)
         {
-            if (number > 5 || number < 1)
+            if (number > 6 || number < 1)
             {
                 throw new ImpartError("Header number must be between 1 and 5.");
-            }
-            if (String.IsNullOrEmpty(text))
-            {
-                throw new ImpartError("Text cannot be null or empty.");
             }
             _Text = text;
             _Number = number;
