@@ -4,25 +4,39 @@ using Impart.Internal;
 
 namespace Impart
 {
-    public class ListStorage : IStorage
+    public class ListStorage<T> : IStorage where T : IElement
     {
         private string Cache;
-        public ListStorage(string cache)
+        private int _IOID;
+        int IStorage.IOID
+        {
+            get
+            {
+                return _IOID;
+            }
+        }
+
+        public ListStorage(string cache, int ioid)
         {
             Cache = cache;
+            _IOID = ioid;
         }
 
         IElement IStorage.ToBuilder() => ToBuilder();
-        public List ToBuilder()
+        public EList<T> ToBuilder()
         {
-            /*int index = 3;
-            List result;
+            int index = 3;
+            EList<T> result;
             StringBuilder tokenId = new StringBuilder(), tokenValue = new StringBuilder();
             if (Cache[2] == 'u')
             {
-                result = new List();
+                result = new EList<T>(EListType.Unordered);
             }
-            while (Cache[index] == ' ')
+            else
+            {
+                result = new EList<T>(EListType.Ordered);
+            }
+            while (Cache[index] == ' ') 
             {
                 index++;
                 while (true)
@@ -91,19 +105,12 @@ namespace Impart
                 }
             }
             index++;
-            StringBuilder content = new StringBuilder();
-            while (true)
+            System.Console.WriteLine(Cache[index + 1]);
+            switch (Cache[index + 1])
             {
-                if (Cache[index] == '<')
-                {
-                    break;
-                }
-                content.Append(Cache[index]);
-                index++;
+
             }
-            result.TextValue = content.ToString();
-            return result;*/
-            return new Impart.List<T>();
+            return result;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Impart.Internal;
 
@@ -6,12 +7,23 @@ namespace Impart
     public class HeaderStorage : IStorage
     {
         private string Cache;
-        public HeaderStorage(string cache)
+        private int _IOID;
+        int IStorage.IOID
+        {
+            get
+            {
+                return _IOID;
+            }
+        }
+
+        public HeaderStorage(string cache, int ioid)
         {
             Cache = cache;
+            _IOID = ioid;
         }
 
         IElement IStorage.ToBuilder() => ToBuilder();
+
         public Header ToBuilder()
         {
             int index;
@@ -96,6 +108,10 @@ namespace Impart
                                 }
                                 styleIndex++;
                             }
+                        }
+                        else if (idRender == "class")
+                        {
+                            result._IOID = Convert.ToInt32(tokenValue.ToString());
                         }
                         else
                         {

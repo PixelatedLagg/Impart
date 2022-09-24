@@ -1765,6 +1765,9 @@
         <member name="P:Impart.EList`1.Type">
             <summary>The EListType value of the EList.</summary>
         </member>
+        <member name="P:Impart.EList`1.GetEntryType">
+            <summary>The EList entry type.</summary>
+        </member>
         <member name="F:Impart.EList`1.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>

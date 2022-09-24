@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Impart.Internal;
 
@@ -6,12 +7,23 @@ namespace Impart
     public class TextStorage : IStorage
     {
         private string Cache;
-        public TextStorage(string cache)
+        private int _IOID;
+        int IStorage.IOID
+        {
+            get
+            {
+                return _IOID;
+            }
+        }
+
+        public TextStorage(string cache, int ioid)
         {
             Cache = cache;
+            _IOID = ioid;
         }
 
         IElement IStorage.ToBuilder() => ToBuilder();
+
         public Text ToBuilder()
         {
             int index;
@@ -20,41 +32,41 @@ namespace Impart
             switch (Cache[1])
             {
                 case 'p':
-                    result = new Text("", TextType.Regular);
+                    result = new Text("", TextType.Regular, 0);
                     index = 2;
                     break;
                 case 'b':
-                    result = new Text("", TextType.Bold);
+                    result = new Text("", TextType.Bold, 0);
                     index = 2;
                     break;
                 case 'd':
-                    result = new Text("", TextType.Delete);
+                    result = new Text("", TextType.Delete, 0);
                     index = 4;
                     break;
                 case 'e':
-                    result = new Text("", TextType.Emphasize);
+                    result = new Text("", TextType.Emphasize, 0);
                     index = 2;
                     break;
                 case 's':
                     switch (Cache[2])
                     {
                         case 't':
-                            result = new Text("", TextType.Important);
+                            result = new Text("", TextType.Important, 0);
                             index = 7;
                             break;
                         case 'm':
-                            result = new Text("", TextType.Small);
+                            result = new Text("", TextType.Small, 0);
                             index = 6;
                             break;
                         default:
                             if (Cache[3] == 'b')
                             {
-                                result = new Text("", TextType.Subscript);
+                                result = new Text("", TextType.Subscript, 0);
                                 index = 4;
                             }
                             else
                             {
-                                result = new Text("", TextType.Superscript);
+                                result = new Text("", TextType.Superscript, 0);
                                 index = 4;
                             }
                             break;
@@ -63,17 +75,17 @@ namespace Impart
                 case 'i':
                     if (Cache[2] == 'n')
                     {
-                        result = new Text("", TextType.Insert);
+                        result = new Text("", TextType.Insert, 0);
                         index = 4;
                     }
                     else
                     {
-                        result = new Text("", TextType.Italic);
+                        result = new Text("", TextType.Italic, 0);
                         index = 2;
                     }
                     break;
                 default:
-                    result = new Text("", TextType.Mark);
+                    result = new Text("", TextType.Mark, 0);
                     index = 5;
                     break;
             }
@@ -128,6 +140,10 @@ namespace Impart
                                 }
                                 styleIndex++;
                             }
+                        }
+                        else if (idRender == "class")
+                        {
+                            result._IOID = Convert.ToInt32(tokenValue.ToString());
                         }
                         else
                         {

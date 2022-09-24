@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
@@ -34,6 +35,15 @@ namespace Impart
             get
             {
                 return _Type;
+            }
+        }
+
+        /// <summary>The EList entry type.</summary>
+        public Type GetEntryType
+        {
+            get
+            {
+                return typeof(T);
             }
         }
 

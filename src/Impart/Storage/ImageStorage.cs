@@ -7,9 +7,19 @@ namespace Impart
     public class ImageStorage : IStorage
     {
         private string Cache;
-        public ImageStorage(string cache)
+        private int _IOID;
+        int IStorage.IOID
+        {
+            get
+            {
+                return _IOID;
+            }
+        }
+
+        public ImageStorage(string cache, int ioid)
         {
             Cache = cache;
+            _IOID = ioid;
         }
 
         IElement IStorage.ToBuilder() => ToBuilder();
@@ -74,6 +84,10 @@ namespace Impart
                                 }
                                 styleIndex++;
                             }
+                        }
+                        else if (idRender == "class")
+                        {
+                            result._IOID = Convert.ToInt32(tokenValue.ToString());
                         }
                         else
                         {
