@@ -50,6 +50,15 @@ namespace Impart
         /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
+        /// <summary>The Attr values of the instance.</summary>
+        AttrList IElement.Attrs
+        {
+            get
+            {
+                return Attrs;
+            }
+        }
+
         /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
@@ -71,7 +80,7 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
         internal bool Changed = true;
         private string _EListType;
@@ -83,6 +92,7 @@ namespace Impart
         public EList(EListType type, params T[] entries)
         {
             _Type = type;
+            _IOID = Ioid.Generate();
             if (type == EListType.Ordered)
             {
                 _EListType = "ol";
@@ -95,6 +105,29 @@ namespace Impart
             {
                 _Entries.Add(entry);
             }
+        }
+
+        internal EList(EListType type, int ioid, params T[] entries)
+        {
+            _Type = type;
+            _IOID = ioid;
+            if (type == EListType.Ordered)
+            {
+                _EListType = "ol";
+            }
+            else
+            {
+                _EListType = "ul";
+            }
+            foreach (T entry in entries)
+            {
+                _Entries.Add(entry);
+            }
+        }
+
+        internal EListStorage<T> GetStorage()
+        {
+            return new EListStorage<T>(ToString(), _IOID);
         }
 
         /// <summary>Add entries to the EList.</summary>

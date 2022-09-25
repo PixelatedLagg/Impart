@@ -33,27 +33,27 @@ namespace Impart
             switch (Cache[2])
             {
                 case '1':
-                    result = new Header("", 1);
+                    result = new Header("", 1, 0);
                     index = 3;
                     break;
                 case '2':
-                    result = new Header("", 2);
+                    result = new Header("", 2, 0);
                     index = 3;
                     break;
                 case '3':
-                    result = new Header("", 3);
+                    result = new Header("", 3, 0);
                     index = 3;
                     break;
                 case '4':
-                    result = new Header("", 4);
+                    result = new Header("", 4, 0);
                     index = 3;
                     break;
                 case '5':
-                    result = new Header("", 5);
+                    result = new Header("", 5, 0);
                     index = 3;
                     break;
                 default:
-                    result = new Header("", 6);
+                    result = new Header("", 6, 0);
                     index = 3;
                     break;
             }
@@ -73,41 +73,7 @@ namespace Impart
                         string idRender = tokenId.ToString();
                         if (idRender == "style")
                         {
-                            int styleIndex = 0;
-                            string style = tokenValue.ToString();
-                            StringBuilder styleId = new StringBuilder(), styleValue = new StringBuilder();
-                            bool readingId = true;
-                            while (styleIndex < style.Length)
-                            {
-                                switch (style[styleIndex])
-                                {
-                                    case ';':
-                                        readingId = true;
-                                        result.Attrs.Add(StorageExtensions.GetAttr(styleId.ToString(), styleValue.ToString()));
-                                        styleId.Clear();
-                                        styleValue.Clear();
-                                        if (styleIndex + 2 < style.Length)
-                                        {
-                                            styleIndex++;
-                                        }
-                                        break;
-                                    case ':':
-                                        readingId = false;
-                                        styleIndex++;
-                                        break;
-                                    default:
-                                        if (readingId)
-                                        {
-                                            styleId.Append(style[styleIndex]);
-                                        }
-                                        else
-                                        {
-                                            styleValue.Append(style[styleIndex]);
-                                        }
-                                        break;
-                                }
-                                styleIndex++;
-                            }
+                            StorageExtensions.GetStyleAttrs(tokenValue.ToString(), result);
                         }
                         else if (idRender == "class")
                         {

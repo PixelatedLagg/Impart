@@ -38,6 +38,15 @@ namespace Impart
             }
         }
 
+        /// <summary>The Attr values of the instance (will always return null, as this is a group of IElements).</summary>
+        AttrList IElement.Attrs
+        {
+            get
+            {
+                return null;
+            }
+        }
+
         internal int _IOID = Ioid.Generate();
 
         /// <summary>Creates an empty Nest instance.</summary>

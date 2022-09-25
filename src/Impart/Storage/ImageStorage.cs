@@ -26,7 +26,7 @@ namespace Impart
         public Image ToBuilder()
         {
             int index = 4;
-            Image result = new Image();
+            Image result = new Image("/", 0);
             StringBuilder tokenId = new StringBuilder(), tokenValue = new StringBuilder();
             while (Cache[index] == ' ')
             {
@@ -48,42 +48,7 @@ namespace Impart
                         }
                         else if (idRender == "style")
                         {
-                            int styleIndex = 0;
-                            string style = tokenValue.ToString();
-                            StringBuilder styleId = new StringBuilder(), styleValue = new StringBuilder();
-                            bool readingId = true;
-                            while (styleIndex < style.Length)
-                            {
-                                switch (style[styleIndex])
-                                {
-                                    case ';':
-                                        readingId = true;
-                                        Console.WriteLine($"added {styleValue.ToString()}");
-                                        result.Attrs.Add(StorageExtensions.GetAttr(styleId.ToString(), styleValue.ToString()));
-                                        styleId.Clear();
-                                        styleValue.Clear();
-                                        if (styleIndex + 2 < style.Length)
-                                        {
-                                            styleIndex++;
-                                        }
-                                        break;
-                                    case ':':
-                                        readingId = false;
-                                        styleIndex++;
-                                        break;
-                                    default:
-                                        if (readingId)
-                                        {
-                                            styleId.Append(style[styleIndex]);
-                                        }
-                                        else
-                                        {
-                                            styleValue.Append(style[styleIndex]);
-                                        }
-                                        break;
-                                }
-                                styleIndex++;
-                            }
+                            StorageExtensions.GetStyleAttrs(tokenValue.ToString(), result);
                         }
                         else if (idRender == "class")
                         {

@@ -35,6 +35,14 @@ namespace Impart
         /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
+        /// <summary>The Attr values of the instance.</summary>
+        AttrList IElement.Attrs
+        {
+            get
+            {
+                return Attrs;
+            }
+        }
         /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
@@ -75,7 +83,7 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
         internal bool Changed = true;
         private string Render = "";
@@ -94,6 +102,18 @@ namespace Impart
             }
             _Text = text;
             _Number = number;
+            _IOID = Ioid.Generate();
+        }
+
+        internal Header(string text, int number, int ioid)
+        {
+            if (number > 6 || number < 1)
+            {
+                throw new ImpartError("Header number must be between 1 and 5.");
+            }
+            _Text = text;
+            _Number = number;
+            _IOID = ioid;
         }
 
         /// <summary>Returns the instance as a String.</summary>

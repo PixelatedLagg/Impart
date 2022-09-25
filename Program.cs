@@ -6,7 +6,8 @@ class Program
 {
     public static void Main()
     {
-        EList<Text> list = new EList<Text>(EListType.Unordered, "aids", "ahhh", "eek");
-        Console.WriteLine(list);
+        EListStorage<Text> storage = new EListStorage<Text>("<ul><li><p class=\"1\">aids</p></li><li><p class=\"2\">ahhh</p></li><li><p class=\"3\">eek</p></li></ul>", 1);
+        EList<Text> list = storage.ToBuilder();
+
     }
 }

@@ -48,8 +48,18 @@ namespace Impart
                 _Source = value;
             }
         }
+        
         /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
+
+        /// <summary>The Attr values of the instance.</summary>
+        AttrList IElement.Attrs
+        {
+            get
+            {
+                return Attrs;
+            }
+        }
 
         /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();

@@ -5,7 +5,7 @@ using Impart.Scripting;
 namespace Impart
 {
     /// <summary>Text element.</summary>
-    public partial class Text : IElement, INested
+    public class Text : IElement, INested
     {
         /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
@@ -43,6 +43,15 @@ namespace Impart
 
         /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
+
+        /// <summary>The Attr values of the instance.</summary>
+        AttrList IElement.Attrs
+        {
+            get
+            {
+                return Attrs;
+            }
+        }
 
         /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();

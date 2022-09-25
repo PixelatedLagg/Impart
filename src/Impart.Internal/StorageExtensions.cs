@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Impart.Internal
 {
@@ -165,6 +166,43 @@ namespace Impart.Internal
                 "Zapf Chancery" => FontFamily.ZapfChancery,
                 _ => FontFamily.Custom
             };
+        }
+        public static void GetStyleAttrs(string style, IElement element)
+        {
+            int styleIndex = 0;
+            StringBuilder styleId = new StringBuilder(), styleValue = new StringBuilder();
+            bool readingId = true;
+            while (styleIndex < style.Length)
+            {
+                switch (style[styleIndex])
+                {
+                    case ';':
+                        readingId = true;
+                        element.Attrs.Add(StorageExtensions.GetAttr(styleId.ToString(), styleValue.ToString()));
+                        styleId.Clear();
+                        styleValue.Clear();
+                        if (styleIndex + 2 < style.Length)
+                        {
+                            styleIndex++;
+                        }
+                        break;
+                    case ':':
+                        readingId = false;
+                        styleIndex++;
+                        break;
+                    default:
+                        if (readingId)
+                        {
+                            styleId.Append(style[styleIndex]);
+                        }
+                        else
+                        {
+                            styleValue.Append(style[styleIndex]);
+                        }
+                        break;
+                }
+                styleIndex++;
+            }
         }
     }
 }

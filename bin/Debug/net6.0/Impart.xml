@@ -1263,6 +1263,9 @@
         <member name="F:Impart.Button.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
+        <member name="P:Impart.Button.Impart#IElement#Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
         <member name="F:Impart.Button.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
@@ -1307,6 +1310,9 @@
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.Division.Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
+        <member name="P:Impart.Division.Impart#IElement#Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Division.ExtAttrs">
@@ -1411,6 +1417,9 @@
         <member name="F:Impart.EFrame.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
+        <member name="P:Impart.EFrame.Impart#IElement#Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
         <member name="F:Impart.EFrame.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
@@ -1478,6 +1487,9 @@
             <summary>The ID value of the IElement. Returns null if ID is not set.</summary>
         </member>
         <member name="F:Impart.Form.Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
+        <member name="P:Impart.Form.Impart#IElement#Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Form.ExtAttrs">
@@ -1599,6 +1611,9 @@
         <member name="F:Impart.Header.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
+        <member name="P:Impart.Header.Impart#IElement#Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
         <member name="F:Impart.Header.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
@@ -1650,6 +1665,9 @@
             <summary>The source link of the Image.</summary>
         </member>
         <member name="F:Impart.Image.Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
+        <member name="P:Impart.Image.Impart#IElement#Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Image.ExtAttrs">
@@ -1705,6 +1723,9 @@
             <summary>The path value of the Link.</summary>
         </member>
         <member name="F:Impart.Link.Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
+        <member name="P:Impart.Link.Impart#IElement#Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Link.ExtAttrs">
@@ -1771,6 +1792,9 @@
         <member name="F:Impart.EList`1.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
+        <member name="P:Impart.EList`1.Impart#IElement#Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
         <member name="F:Impart.EList`1.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
@@ -1825,6 +1849,9 @@
         </member>
         <member name="P:Impart.Nest.Impart#IElement#ExtAttrs">
             <summary>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</summary>
+        </member>
+        <member name="P:Impart.Nest.Impart#IElement#Attrs">
+            <summary>The Attr values of the instance (will always return null, as this is a group of IElements).</summary>
         </member>
         <member name="M:Impart.Nest.#ctor">
             <summary>Creates an empty Nest instance.</summary>
@@ -2060,6 +2087,9 @@
         <member name="F:Impart.Table.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
+        <member name="P:Impart.Table.Impart#IElement#Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
         <member name="F:Impart.Table.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
@@ -2165,6 +2195,9 @@
         <member name="F:Impart.Text.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
+        <member name="P:Impart.Text.Impart#IElement#Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
         <member name="F:Impart.Text.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
@@ -2227,6 +2260,9 @@
             <summary>Options for the Video player.</summary>
         </member>
         <member name="F:Impart.Video.Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
+        <member name="P:Impart.Video.Impart#IElement#Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
         <member name="F:Impart.Video.ExtAttrs">
@@ -2653,6 +2689,9 @@
         </member>
         <member name="P:Impart.IElement.ExtAttrs">
             <summary>The external attributes of the IElement.</summary>
+        </member>
+        <member name="P:Impart.IElement.Attrs">
+            <summary>The attributes of the IElement.</summary>
         </member>
         <member name="M:Impart.IElement.Reference">
             <summary>Create an ElementRef referencing the IElement</summary>

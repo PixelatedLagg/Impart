@@ -34,6 +34,15 @@ namespace Impart
         /// <summary>The Attr values of the instance.</summary>
         public AttrList Attrs = new AttrList();
 
+        /// <summary>The Attr values of the instance.</summary>
+        AttrList IElement.Attrs
+        {
+            get
+            {
+                return Attrs;
+            }
+        }
+
         /// <summary>The ExtAttr values of the instance.</summary>
         public ExtAttrList ExtAttrs = new ExtAttrList();
 
@@ -55,7 +64,7 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
         internal bool Changed = true;
         private string Render = "";
@@ -72,6 +81,17 @@ namespace Impart
                 throw new ImpartError("Path cannot be null!");
             }
             _Source = path;
+            _IOID = Ioid.Generate();
+        }
+
+        internal Image(string path, int ioid)
+        {
+            if (path == null) 
+            {
+                throw new ImpartError("Path cannot be null!");
+            }
+            _Source = path;
+            _IOID = ioid;
         }
 
         /// <summary>Returns the instance as a String.</summary>
