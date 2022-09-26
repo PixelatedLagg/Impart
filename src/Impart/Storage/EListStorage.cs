@@ -37,7 +37,7 @@ namespace Impart
             {
                 result = new EList<T>(EListType.Ordered, 0);
             }
-            while (Cache[index] == ' ') 
+            while (Cache[index] == ' ')
             {
                 index++;
                 while (true)
@@ -76,89 +76,182 @@ namespace Impart
                 }
             }
             index++;
-            bool typeSet = false;
             int listType = 0;
-            Console.WriteLine($"start: {index}");
-            while (Cache[index + 3] != 'l')
+            switch (Cache[index + 5])
             {
-                Console.WriteLine($"while check: {index + 3}");
-                if (!typeSet)
-                {
-                    switch (Cache[index + 5])
+                case 'p':
+                    listType = 0;
+                    break;
+                case 'b':
+                    listType = 1;
+                    break;
+                case 'd':
+                    listType = 2;
+                    break;
+                case 'e':
+                    listType = 3;
+                    break;
+                case 's':
+                    switch (Cache[2])
                     {
-                        case 'p':
-                            listType = 0;
-                            typeSet = true;
-                            index += 6;
+                        case 't':
+                            listType = 4;
+                            break;
+                        case 'm':
+                            listType = 5;
+                            break;
+                        default:
+                            if (Cache[index + 6] == 'b')
+                            {
+                                listType = 6;
+                            }
+                            else
+                            {
+                                listType = 7;
+                            }
                             break;
                     }
-                }
-                else
-                {
-                    switch (listType)
+                    break;
+                case 'i':
+                    if (Cache[index + 6] == 'n')
                     {
-                        case 0:
-                            Text entry = new Text("", 0);
-                            while (Cache[index] == ' ')
+                        listType = 8;
+                    }
+                    else
+                    {
+                        listType = 9;
+                    }
+                    break;
+                default:
+                    listType = 0;
+                    break;
+            }
+            while (true)
+            {
+                switch (listType)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        Text entry;
+                        switch (listType)
+                        {
+                            case 0:
+                                entry = new Text("", TextType.Regular, 0);
+                                index += 6;
+                                break;
+                            case 1:
+                                entry = new Text("", TextType.Bold, 0);
+                                index += 6;
+                                break;
+                            case 2:
+                                entry = new Text("", TextType.Delete, 0);
+                                index += 8;
+                                break;
+                            case 3:
+                                entry = new Text("", TextType.Emphasize, 0);
+                                index += 7;
+                                break;
+                            case 4:
+                                entry = new Text("", TextType.Important, 0);
+                                index += 11;
+                                break;
+                            case 5:
+                                entry = new Text("", TextType.Small, 0);
+                                index += 10;
+                                break;
+                            case 6:
+                                entry = new Text("", TextType.Subscript, 0);
+                                index += 8;
+                                break;
+                            case 7:
+                                entry = new Text("", TextType.Superscript, 0);
+                                index += 8;
+                                break;
+                            case 8:
+                                entry = new Text("", TextType.Insert, 0);
+                                index += 8;
+                                break;
+                            default:
+                                entry = new Text("", TextType.Italic, 0);
+                                index += 6;
+                                break;
+                        }
+                        while (Cache[index] == ' ')
+                        {
+                            index++;
+                            while (true)
                             {
-                                index++;
-                                while (true)
+                                if (Cache[index] == '=')
                                 {
-                                    if (Cache[index] == '=')
+                                    index += 2;
+                                    while (Cache[index] != '"')
                                     {
-                                        index += 2;
-                                        while (Cache[index] != '"')
-                                        {
-                                            tokenValue.Append(Cache[index]);
-                                            index++;
-                                        }
-                                        string idRender = tokenId.ToString();
-                                        if (idRender == "style")
-                                        {
-                                            Console.WriteLine($"style: {tokenValue.ToString()}");
-                                            StorageExtensions.GetStyleAttrs(tokenValue.ToString(), entry);
-                                        }
-                                        else if (idRender == "class")
-                                        {
-                                            Console.WriteLine($"class: {tokenValue.ToString()}");
-                                            entry._IOID = Convert.ToInt32(tokenValue.ToString());
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine($"ext attr: {idRender} - {tokenValue.ToString()}");
-                                            entry.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));
-                                        }
-                                        tokenId.Clear();
-                                        tokenValue.Clear();
+                                        tokenValue.Append(Cache[index]);
                                         index++;
-                                        break;
+                                    }
+                                    string idRender = tokenId.ToString();
+                                    if (idRender == "style")
+                                    {
+                                        StorageExtensions.GetStyleAttrs(tokenValue.ToString(), entry);
+                                    }
+                                    else if (idRender == "class")
+                                    {
+                                        entry._IOID = Convert.ToInt32(tokenValue.ToString());
                                     }
                                     else
                                     {
-                                        tokenId.Append(Cache[index]);
+                                        entry.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));
                                     }
+                                    tokenId.Clear();
+                                    tokenValue.Clear();
                                     index++;
-                                }
-                            }
-                            index++;
-                            Console.WriteLine($"a: {index}");
-                            StringBuilder content = new StringBuilder();
-                            while (true)
-                            {
-                                if (Cache[index] == '<')
-                                {
                                     break;
                                 }
-                                content.Append(Cache[index]);
+                                else
+                                {
+                                    tokenId.Append(Cache[index]);
+                                }
                                 index++;
                             }
-                            index += 4;
-                            Console.WriteLine($"b: {index}");
-                            Console.WriteLine($"text value: {content.ToString()}");
-                            entry.TextValue = content.ToString();
-                            result.Add((T)(IElement)(entry));
-                            break;
-                    }
+                        }
+                        index++;
+                        StringBuilder content = new StringBuilder();
+                        while (true)
+                        {
+                            if (Cache[index] == '<')
+                            {
+                                break;
+                            }
+                            content.Append(Cache[index]);
+                            index++;
+                        }
+                        entry.TextValue = content.ToString();
+                        result.Add((T)(IElement)(entry));
+                        index += listType switch {
+                            0 => 9,
+                            1 => 9,
+                            2 => 11,
+                            3 => 10,
+                            4 => 14,
+                            5 => 13,
+                            6 => 11,
+                            7 => 11,
+                            8 => 11,
+                            _ => 9
+                        };
+                        break;
+                }
+                if (Cache[index + 3] == 'l')
+                {
+                    break;
                 }
             }
             return result;
@@ -167,7 +260,8 @@ namespace Impart
 }
 
 /*
-
+                                                                                            <  /  u  l  >
+        |         |                                  |                       |  |      
 < u l > < l i > < p    c  l  a  s  s  =  "  1  "  >  a  i  d  s  <  /  p  >  <  /  l  i  >  <  l  i  >  <  p     c  l  a  s  s  =  "  2  "  >  a  h  h  h  <  /  p  >  <  /  l  i  >  <  l  i  >  <  p     c  l  a  s  s  =  "  3  "  >  e  e  k  <  /  p  >  <  /  l  i  >  <  /  u  l  >
 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97
 
