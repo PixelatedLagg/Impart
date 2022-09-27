@@ -36,7 +36,56 @@ namespace Impart
                     Console.WriteLine(index);
                     if (Cache[index] == ' ')
                     {
-                        Console.WriteLine(tokenId.ToString());
+                        switch (tokenId.ToString())
+                        {
+                            case "controls":
+                                controls = true;
+                                break;
+                            case "autoplay":
+                                autoplay = true;
+                                break;
+                            case "muted":
+                                muted = true;
+                                break;
+                        }
+                        tokenId.Clear();
+                        index++;
+                        while (Cache[index] != '>')
+                        {
+                            if (Cache[index] == ' ')
+                            {
+                                switch (tokenId.ToString())
+                                {
+                                    case "controls":
+                                        controls = true;
+                                        break;
+                                    case "autoplay":
+                                        autoplay = true;
+                                        break;
+                                    case "muted":
+                                        muted = true;
+                                        break;
+                                }
+                                tokenId.Clear();
+                            }
+                            else
+                            {
+                                tokenId.Append(Cache[index]);
+                            }
+                            index++;
+                        }
+                        switch (tokenId.ToString())
+                        {
+                            case "controls":
+                                controls = true;
+                                break;
+                            case "autoplay":
+                                autoplay = true;
+                                break;
+                            case "muted":
+                                muted = true;
+                                break;
+                        }
                         tokenId.Clear();
                         break;
                     }
@@ -63,21 +112,21 @@ namespace Impart
                             case "width":
                                 if (temp == null)
                                 {
-                                    temp = StorageExtensions.GetLength(tokenValue.ToString());
+                                    temp = new Pixels(Convert.ToInt32(tokenValue.ToString()));
                                 }
                                 else
                                 {
-                                    result.Size = (StorageExtensions.GetLength(tokenValue.ToString()), temp);
+                                    result.Size = (new Pixels(Convert.ToInt32(tokenValue.ToString())), temp);
                                 }
                                 break;
                             case "height":
                                 if (temp == null)
                                 {
-                                    temp = StorageExtensions.GetLength(tokenValue.ToString());
+                                    temp = new Pixels(Convert.ToInt32(tokenValue.ToString()));
                                 }
                                 else
                                 {
-                                    result.Size = (temp, StorageExtensions.GetLength(tokenValue.ToString()));
+                                    result.Size = (temp, new Pixels(Convert.ToInt32(tokenValue.ToString())));
                                 }
                                 break;
                             default:
