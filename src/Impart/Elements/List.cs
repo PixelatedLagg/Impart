@@ -14,7 +14,14 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
         private List<T> _Entries = new List<T>();
@@ -47,29 +54,11 @@ namespace Impart
             }
         }
 
-        /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
-
-        /// <summary>The Attr values of the instance.</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return Attrs;
-            }
-        }
-
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
 
-        /// <summary>The ExtAttr values of the instance.</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
-            }
-        }
+        /// <summary>The Attr values of the instance.</summary>
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -82,9 +71,7 @@ namespace Impart
 
         internal int _IOID;
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
         private string _EListType;
-        private string Render = "";
 
         /// <summary>Creates an EList instance.</summary>
         /// <param name="type">The EList type.</param>
@@ -138,7 +125,6 @@ namespace Impart
             {
                 _Entries.Add(entry);
             }
-            Changed = true;
             return this;
         }
 
@@ -154,20 +140,12 @@ namespace Impart
                 }
                 _Entries.Remove(entry);
             }
-            Changed = true;
             return this;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<{_EListType}");
             if (Attrs.Count != 0)
             {
@@ -187,8 +165,7 @@ namespace Impart
             {
                 result.Append($"<li>{entry}</li>");
             }
-            Render = result.Append($"</{_EListType}>").ToString();
-            return Render;
+            return result.Append($"</{_EListType}>").ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -199,7 +176,6 @@ namespace Impart
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result.Render = Render;
             result._EListType = _EListType;
             return result;
         }
@@ -218,7 +194,6 @@ namespace Impart
             result._Entries = _Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result.Render = Render;
             result._EListType = _EListType;
             return result;
         }
@@ -226,7 +201,8 @@ namespace Impart
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            return ToString().Remove(Render.Length - 5);
+            string render = ToString();
+            return render.Remove(render.Length - 5);
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>

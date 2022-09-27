@@ -30,22 +30,10 @@ namespace Impart
         private List<INested> _Nested = new List<INested>();
 
         /// <summary>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public List<ExtAttr> ExtAttrs { get; set; }
 
         /// <summary>The Attr values of the instance (will always return null, as this is a group of IElements).</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public List<Attr> Attrs { get; set; }
 
         internal int _IOID = Ioid.Generate();
 

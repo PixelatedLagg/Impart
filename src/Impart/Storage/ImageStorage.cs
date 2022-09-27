@@ -26,7 +26,7 @@ namespace Impart
         public Image ToBuilder()
         {
             int index = 4;
-            Image result = new Image("/", 0);
+            Image result = new Image("", 0);
             StringBuilder tokenId = new StringBuilder(), tokenValue = new StringBuilder();
             while (Cache[index] == ' ')
             {
@@ -69,17 +69,6 @@ namespace Impart
                     }
                     index++;
                 }
-            }
-            index++;
-            StringBuilder content = new StringBuilder();
-            while (true)
-            {
-                if (Cache[index] == '<')
-                {
-                    break;
-                }
-                content.Append(Cache[index]);
-                index++;
             }
             return result;
         }

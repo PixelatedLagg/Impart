@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -13,68 +14,32 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
-        private Text _Text = new Text();
 
         /// <summary>The Text value of the Link.</summary>
-        public Text Text
-        {
-            get 
-            {
-                return _Text;
-            }
-        }
-        private Image _Image = new Image();
+        public Text Text;
 
         /// <summary>The Image value of the Link.</summary>
-        public Image Image
-        {
-            get
-            {
-                return _Image;
-            }
-        }
-        private string _Path;
+        public Image Image;
 
         /// <summary>The path value of the Link.</summary>
-        public string Path
-        {
-            get 
-            {
-                return _Path;
-            }
-            set
-            {
-                Changed = true;
-                _Path = value;
-            }
-        }
+        public string Path;
 
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
-
-        /// <summary>The Attr values of the instance.</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return Attrs;
-            }
-        }
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
 
-        /// <summary>The ExtAttr values of the instance.</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
-            }
-        }
         private Type _LinkType;
 
         /// <summary>The Type of Link.</summary>
@@ -90,7 +55,6 @@ namespace Impart
                 {
                     throw new ImpartError("Link Type must be Text or Image!");
                 }
-                Changed = true;
                 _LinkType = value;
             }
         }
@@ -104,10 +68,8 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
-        private string Render = "";
 
         /// <summary>Creates an empty Link instance.</summary>
         public Link() : this(new Text(), "/") {}
@@ -117,13 +79,10 @@ namespace Impart
         /// <param name="path">The Link path.</param>
         public Link(Text text, string path)
         {
-            if (path == null)
-            {
-                throw new ImpartError("Path cannot be null!");
-            }
-            _Text = text;
-            _Path = path;
+            Text = text;
+            Path = path;
             _LinkType = typeof(Text);
+            _IOID = Ioid.Generate();
         }
 
         /// <summary>Creates a Link instance.</summary>
@@ -131,26 +90,22 @@ namespace Impart
         /// <param name="path">The Link path.</param>
         public Link(Image image, string path)
         {
-            if (path == null)
-            {
-                throw new ImpartError("Path cannot be null!");
-            }
-            _Path = path;
-            _Image = image;
+            Path = path;
+            Image = image;
             _LinkType = typeof(Image);
+            _IOID = Ioid.Generate();
+        }
+
+        internal Link(string path, int ioid)
+        {
+            Path = path;
+            _IOID = ioid;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<a href=\"{_Path}\"");
+            StringBuilder result = new StringBuilder($"<a href=\"{Path}\"");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
@@ -166,27 +121,25 @@ namespace Impart
             }
             if (_LinkType == typeof(Image))
             {
-                result.Append($">{_Image}</a>");
+                result.Append($">{Image}</a>");
             }
             else
             {
-                result.Append($">{_Text}</a>");
+                result.Append($">{Text}</a>");
             }
-            Render = result.ToString();
-            return Render;
+            return result.ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
             Link result = new Link();
-            result._Image = _Image;
+            result.Image = Image;
             result._LinkType = _LinkType;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Text = _Text;
-            result.Render = Render;
+            result.Text = Text;
             return result;
         }
 
@@ -200,26 +153,26 @@ namespace Impart
         IElement IElement.Clone()
         {
             Link result = new Link();
-            result._Image = _Image;
+            result.Image = Image;
             result._LinkType = _LinkType;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._Text = _Text;
-            result.Render = Render;
+            result.Text = Text;
             return result;
         }
         
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
+            string render = ToString();
             if (_LinkType == typeof(Image))
             {
-                return ToString().Remove(Render.Length - 10);
+                return render.Remove(render.Length - 10);
             }
             else
             {
-                return ToString().Remove(Render.Length - $"{((INested)_Text).Last()}</a>".Length);
+                return render.Remove(render.Length - $"{((INested)Text).Last()}</a>".Length);
             }
         }
 
@@ -232,7 +185,7 @@ namespace Impart
             }
             else
             {
-                return $"{((INested)_Text).Last()}</a>";
+                return $"{((INested)Text).Last()}</a>";
             }
         }
     }

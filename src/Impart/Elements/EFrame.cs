@@ -1,6 +1,7 @@
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -12,66 +13,31 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
-        private int _Width;
 
         /// <summary>The width (in pixels).</summary>
-        public int Width
-        {
-            get => _Width;
-            set
-            {
-                _Width = value;
-            }
-        }
-        private int _Height;
+        public int Width;
 
         /// <summary>The height (in pixels).</summary>
-        public int Height
-        {
-            get => _Height;
-            set
-            {
-                _Height = value;
-            }
-        }
-        private string _Source;
+        public int Height;
 
         /// <summary>The source link of the page to embed.</summary>
-        public string Source
-        {
-            get => _Source;
-            set
-            {
-                _Source = value;
-            }
-        }
+        public string Source;
         
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
-
-        /// <summary>The Attr values of the instance.</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return Attrs;
-            }
-        }
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
-
-        /// <summary>The ExtAttr values of the instance.</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
-            }
-        }
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
         
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -84,8 +50,6 @@ namespace Impart
 
         internal int _IOID = Ioid.Generate();
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
-        private string Render = "";
 
         /// <summary>Creates an EFrame instance.</summary>
         /// <param name="width">The width (in pixels).</param>
@@ -93,22 +57,15 @@ namespace Impart
         /// <param name="source">The source link of the page to embed.</param>
         public EFrame(int width, int height, string source)
         {
-            _Width = width;
-            _Height = height;
-            _Source = source;
+            Width = width;
+            Height = height;
+            Source = source;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<iframe width=\"{_Width}\" height=\"{_Height}\" src=\"{_Source}\"");
+            StringBuilder result = new StringBuilder($"<iframe width=\"{Width}\" height=\"{Height}\" src=\"{Source}\"");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
@@ -122,14 +79,13 @@ namespace Impart
             {
                 result.Append(ExtAttr);
             }
-            Render = result.Append("></iframe>").ToString();
-            return Render;
+            return result.Append("></iframe>").ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            EFrame result = new EFrame(_Width, _Height, _Source);
+            EFrame result = new EFrame(Width, Height, Source);
             result._IOID = _IOID;
             return result;
         }
@@ -143,7 +99,7 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            EFrame result = new EFrame(_Width, _Height, _Source);
+            EFrame result = new EFrame(Width, Height, Source);
             result._IOID = _IOID;
             return result;
         }
@@ -151,7 +107,8 @@ namespace Impart
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            return ToString().Remove(Render.Length - 9);
+            string render = ToString();
+            return render.Remove(render.Length - 9);
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>

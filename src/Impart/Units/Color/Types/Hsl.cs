@@ -95,7 +95,7 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            return $"hsl({Value.h}, {Value.s}%, {Value.l}%)";
+            return $"hsl({Value.h},{Value.s}%,{Value.l}%)";
         }
 
         /// <summary>Convert the Hsl instance to a (float, float, float).</summary>

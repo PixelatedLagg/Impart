@@ -117,10 +117,26 @@ namespace Impart
                     {
                         listType = 8;
                     }
+                    else if (Cache[index + 6] == 'm')
+                    {
+                        listType = 10;
+                    }
                     else
                     {
                         listType = 9;
                     }
+                    break;
+                case 'h':
+                    listType = Cache[index + 6] - '0' + 10;
+                    break;
+                case 'o':
+                    listType = 17;
+                    break;
+                case 'u':
+                    listType = 18;
+                    break;
+                case 'a':
+                    listType = 19;
                     break;
                 default:
                     listType = 0;
@@ -140,47 +156,47 @@ namespace Impart
                     case 7:
                     case 8:
                     case 9:
-                        Text entry;
+                        Text entryText;
                         switch (listType)
                         {
                             case 0:
-                                entry = new Text("", TextType.Regular, 0);
+                                entryText = new Text("", TextType.Regular, 0);
                                 index += 6;
                                 break;
                             case 1:
-                                entry = new Text("", TextType.Bold, 0);
+                                entryText = new Text("", TextType.Bold, 0);
                                 index += 6;
                                 break;
                             case 2:
-                                entry = new Text("", TextType.Delete, 0);
+                                entryText = new Text("", TextType.Delete, 0);
                                 index += 8;
                                 break;
                             case 3:
-                                entry = new Text("", TextType.Emphasize, 0);
+                                entryText = new Text("", TextType.Emphasize, 0);
                                 index += 7;
                                 break;
                             case 4:
-                                entry = new Text("", TextType.Important, 0);
+                                entryText = new Text("", TextType.Important, 0);
                                 index += 11;
                                 break;
                             case 5:
-                                entry = new Text("", TextType.Small, 0);
+                                entryText = new Text("", TextType.Small, 0);
                                 index += 10;
                                 break;
                             case 6:
-                                entry = new Text("", TextType.Subscript, 0);
+                                entryText = new Text("", TextType.Subscript, 0);
                                 index += 8;
                                 break;
                             case 7:
-                                entry = new Text("", TextType.Superscript, 0);
+                                entryText = new Text("", TextType.Superscript, 0);
                                 index += 8;
                                 break;
                             case 8:
-                                entry = new Text("", TextType.Insert, 0);
+                                entryText = new Text("", TextType.Insert, 0);
                                 index += 8;
                                 break;
                             default:
-                                entry = new Text("", TextType.Italic, 0);
+                                entryText = new Text("", TextType.Italic, 0);
                                 index += 6;
                                 break;
                         }
@@ -200,15 +216,15 @@ namespace Impart
                                     string idRender = tokenId.ToString();
                                     if (idRender == "style")
                                     {
-                                        StorageExtensions.GetStyleAttrs(tokenValue.ToString(), entry);
+                                        StorageExtensions.GetStyleAttrs(tokenValue.ToString(), entryText);
                                     }
                                     else if (idRender == "class")
                                     {
-                                        entry._IOID = Convert.ToInt32(tokenValue.ToString());
+                                        entryText._IOID = Convert.ToInt32(tokenValue.ToString());
                                     }
                                     else
                                     {
-                                        entry.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));
+                                        entryText.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));
                                     }
                                     tokenId.Clear();
                                     tokenValue.Clear();
@@ -223,18 +239,18 @@ namespace Impart
                             }
                         }
                         index++;
-                        StringBuilder content = new StringBuilder();
+                        StringBuilder contentText = new StringBuilder();
                         while (true)
                         {
                             if (Cache[index] == '<')
                             {
                                 break;
                             }
-                            content.Append(Cache[index]);
+                            contentText.Append(Cache[index]);
                             index++;
                         }
-                        entry.TextValue = content.ToString();
-                        result.Add((T)(IElement)(entry));
+                        entryText.TextValue = contentText.ToString();
+                        result.Add((T)(IElement)(entryText));
                         index += listType switch {
                             0 => 9,
                             1 => 9,
@@ -248,6 +264,113 @@ namespace Impart
                             _ => 9
                         };
                         break;
+                    case 10:
+                        Image entryImage = new Image("/", 0);
+                        if (Cache[index] == '=')
+                        {
+                            index += 2;
+                            while (Cache[index] != '"')
+                            {
+                                tokenValue.Append(Cache[index]);
+                                index++;
+                            }
+                            string idRender = tokenId.ToString();
+                            if (idRender == "src")
+                            {
+                                entryImage.Source = tokenValue.ToString();
+                            }
+                            else if (idRender == "style")
+                            {
+                                StorageExtensions.GetStyleAttrs(tokenValue.ToString(), entryImage);
+                            }
+                            else if (idRender == "class")
+                            {
+                                entryImage._IOID = Convert.ToInt32(tokenValue.ToString());
+                            }
+                            else
+                            {
+                                entryImage.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));
+                            }
+                            tokenId.Clear();
+                            tokenValue.Clear();
+                            index++;
+                            break;
+                        }
+                        else
+                        {
+                            tokenId.Append(Cache[index]);
+                        }
+                        result.Add((T)(IElement)(entryImage));
+                        index += 12;
+                        break;
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                        Header entryHeader = new Header("", listType - 10, 0);
+                        index += 7;
+                        while (Cache[index] == ' ')
+                        {
+                            index++;
+                            while (true)
+                            {
+                                if (Cache[index] == '=')
+                                {
+                                    index += 2;
+                                    while (Cache[index] != '"')
+                                    {
+                                        tokenValue.Append(Cache[index]);
+                                        index++;
+                                    }
+                                    string idRender = tokenId.ToString();
+                                    if (idRender == "style")
+                                    {
+                                        StorageExtensions.GetStyleAttrs(tokenValue.ToString(), entryHeader);
+                                    }
+                                    else if (idRender == "class")
+                                    {
+                                        entryHeader._IOID = Convert.ToInt32(tokenValue.ToString());
+                                    }
+                                    else
+                                    {
+                                        entryHeader.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));
+                                    }
+                                    tokenId.Clear();
+                                    tokenValue.Clear();
+                                    index++;
+                                    break;
+                                }
+                                else
+                                {
+                                    tokenId.Append(Cache[index]);
+                                }
+                                index++;
+                            }
+                        }
+                        index++;
+                        StringBuilder contentHeader = new StringBuilder();
+                        while (true)
+                        {
+                            if (Cache[index] == '<')
+                            {
+                                break;
+                            }
+                            contentHeader.Append(Cache[index]);
+                            index++;
+                        }
+                        entryHeader.TextValue = contentHeader.ToString();
+                        index += 10;
+                        break;
+                    case 17:
+                    case 18:
+                        //17 is ol
+                        //18 is ul
+                        break;
+                    case 19:
+                    
+                        break;
                 }
                 if (Cache[index + 3] == 'l')
                 {
@@ -258,11 +381,3 @@ namespace Impart
         }
     }
 }
-
-/*
-                                                                                            <  /  u  l  >
-        |         |                                  |                       |  |      
-< u l > < l i > < p    c  l  a  s  s  =  "  1  "  >  a  i  d  s  <  /  p  >  <  /  l  i  >  <  l  i  >  <  p     c  l  a  s  s  =  "  2  "  >  a  h  h  h  <  /  p  >  <  /  l  i  >  <  l  i  >  <  p     c  l  a  s  s  =  "  3  "  >  e  e  k  <  /  p  >  <  /  l  i  >  <  /  u  l  >
-0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97
-
-*/

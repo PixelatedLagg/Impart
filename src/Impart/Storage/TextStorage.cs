@@ -26,8 +26,8 @@ namespace Impart
 
         public Text ToBuilder()
         {
-            int index;
             Text result;
+            int index;
             StringBuilder tokenId = new StringBuilder(), tokenValue = new StringBuilder();
             switch (Cache[1])
             {

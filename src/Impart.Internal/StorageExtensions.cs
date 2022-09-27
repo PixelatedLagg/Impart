@@ -84,16 +84,15 @@ namespace Impart.Internal
                 case '#':
                     return new Hex(colorValue.Remove(0, 1));
                 case 'r':
-                    string[] rbgValues = colorValue.Remove(0, 4).Remove(colorValue.Length - 5, 1).Split(',');
+                    string[] rbgValues = colorValue.Remove(0, 4).Replace(" ", "").Remove(colorValue.Length - 5, 1).Split(',');
                     return new Rgb(Int32.Parse(rbgValues[0]), Int32.Parse(rbgValues[1]), Int32.Parse(rbgValues[2]));
                 default:
-                    string[] hslValues = colorValue.Remove(0, 4).Remove(colorValue.Length - 5, 1).Split(',');
+                    string[] hslValues = colorValue.Remove(0, 4).Replace(" ", "").Remove(colorValue.Length - 5, 1).Split(',');
                     return new Hsl(Int32.Parse(hslValues[0]), Int32.Parse(hslValues[1].Remove(hslValues[1].Length - 1, 1)), Int32.Parse(hslValues[2].Remove(hslValues[2].Length - 1, 1)));
             }
         }
         public static Length GetLength(string lengthValue)
         {
-            Console.WriteLine(Int32.Parse(lengthValue.Remove(lengthValue.Length - 2, 2)));
             switch (lengthValue[lengthValue.Length - 1])
             {
                 case '%':

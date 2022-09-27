@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -13,47 +14,26 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
-        private string _Text = "";
 
         /// <summary>The text value of the Header.</summary>
-        public string TextValue
-        {
-            get
-            {
-                return _Text;
-            }
-            set
-            {
-                Changed = true;
-                _Text = value;
-            }
-        }
+        public string TextValue;
 
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
-
-        /// <summary>The Attr values of the instance.</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return Attrs;
-            }
-        }
-        /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
+        public List<Attr> Attrs { get; set; }= new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
-            }
-        }
+        public List<ExtAttr> ExtAttrs { get; set; }= new List<ExtAttr>();
+
         private int _Number = 1;
 
         /// <summary>The Header number value of the Header.</summary>
@@ -69,7 +49,6 @@ namespace Impart
                 {
                     throw new ImpartError("Header number must be between 1 and 5!");
                 }
-                Changed = true;
                 _Number = value;
             }
         }
@@ -85,8 +64,6 @@ namespace Impart
 
         internal int _IOID;
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
-        private string Render = "";
 
         /// <summary>Creates an empty Header instance.</summary>
         public Header() : this("") { }
@@ -100,7 +77,7 @@ namespace Impart
             {
                 throw new ImpartError("Header number must be between 1 and 5.");
             }
-            _Text = text;
+            TextValue = text;
             _Number = number;
             _IOID = Ioid.Generate();
         }
@@ -111,7 +88,7 @@ namespace Impart
             {
                 throw new ImpartError("Header number must be between 1 and 5.");
             }
-            _Text = text;
+            TextValue = text;
             _Number = number;
             _IOID = ioid;
         }
@@ -119,13 +96,6 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<h{_Number}");
             if (Attrs.Count != 0)
             {
@@ -140,8 +110,7 @@ namespace Impart
             {
                 result.Append(ExtAttr);
             }
-            Render = result.Append($">{_Text}</h{_Number}>").ToString();
-            return Render;
+            return result.Append($">{TextValue}</h{Number}>").ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -152,8 +121,7 @@ namespace Impart
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Number = _Number;
-            result._Text = _Text;
-            result.Render = Render;
+            result.TextValue = TextValue;
             return result;
         }
 
@@ -171,15 +139,15 @@ namespace Impart
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Number = _Number;
-            result._Text = _Text;
-            result.Render = Render;
+            result.TextValue = TextValue;
             return result;
         }
 
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            return ToString().Remove(Render.Length - 5);
+            string render = ToString();
+            return render.Remove(render.Length - 5);
         }
         
         /// <summary>Return the last part of the INested as a string.</summary>

@@ -1257,19 +1257,13 @@
         <member name="P:Impart.Button.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.Button.Text">
+        <member name="F:Impart.Button.Text">
             <summary>The Text value of the Button.</summary>
         </member>
-        <member name="F:Impart.Button.Attrs">
+        <member name="P:Impart.Button.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Button.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Button.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Button.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Button.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Button.Impart#IElement#IOID">
@@ -1309,16 +1303,10 @@
         <member name="P:Impart.Division.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="F:Impart.Division.Attrs">
+        <member name="P:Impart.Division.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Division.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Division.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Division.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Division.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Division.Impart#IElement#IOID">
@@ -1405,25 +1393,19 @@
         <member name="P:Impart.EFrame.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.EFrame.Width">
+        <member name="F:Impart.EFrame.Width">
             <summary>The width (in pixels).</summary>
         </member>
-        <member name="P:Impart.EFrame.Height">
+        <member name="F:Impart.EFrame.Height">
             <summary>The height (in pixels).</summary>
         </member>
-        <member name="P:Impart.EFrame.Source">
+        <member name="F:Impart.EFrame.Source">
             <summary>The source link of the page to embed.</summary>
         </member>
-        <member name="F:Impart.EFrame.Attrs">
+        <member name="P:Impart.EFrame.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.EFrame.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.EFrame.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.EFrame.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.EFrame.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.EFrame.Impart#IElement#IOID">
@@ -1486,13 +1468,10 @@
         <member name="P:Impart.Form.ID">
             <summary>The ID value of the IElement. Returns null if ID is not set.</summary>
         </member>
-        <member name="F:Impart.Form.Attrs">
+        <member name="P:Impart.Form.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Form.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Form.ExtAttrs">
+        <member name="P:Impart.Form.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Form.Impart#IElement#IOID">
@@ -1605,19 +1584,13 @@
         <member name="P:Impart.Header.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.Header.TextValue">
+        <member name="F:Impart.Header.TextValue">
             <summary>The text value of the Header.</summary>
         </member>
-        <member name="F:Impart.Header.Attrs">
+        <member name="P:Impart.Header.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Header.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Header.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Header.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Header.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Header.Number">
@@ -1661,19 +1634,13 @@
         <member name="P:Impart.Image.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.Image.Source">
+        <member name="F:Impart.Image.Source">
             <summary>The source link of the Image.</summary>
         </member>
-        <member name="F:Impart.Image.Attrs">
+        <member name="P:Impart.Image.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Image.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Image.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Image.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Image.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Image.Impart#IElement#IOID">
@@ -1713,25 +1680,19 @@
         <member name="P:Impart.Link.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.Link.Text">
+        <member name="F:Impart.Link.Text">
             <summary>The Text value of the Link.</summary>
         </member>
-        <member name="P:Impart.Link.Image">
+        <member name="F:Impart.Link.Image">
             <summary>The Image value of the Link.</summary>
         </member>
-        <member name="P:Impart.Link.Path">
+        <member name="F:Impart.Link.Path">
             <summary>The path value of the Link.</summary>
         </member>
-        <member name="F:Impart.Link.Attrs">
+        <member name="P:Impart.Link.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Link.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Link.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Link.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Link.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Link.LinkType">
@@ -1789,17 +1750,11 @@
         <member name="P:Impart.EList`1.GetEntryType">
             <summary>The EList entry type.</summary>
         </member>
-        <member name="F:Impart.EList`1.Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.EList`1.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.EList`1.ExtAttrs">
+        <member name="P:Impart.EList`1.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
-        <member name="P:Impart.EList`1.Impart#IElement#ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
+        <member name="P:Impart.EList`1.Attrs">
+            <summary>The Attr values of the instance.</summary>
         </member>
         <member name="P:Impart.EList`1.Impart#IElement#IOID">
             <summary>The internal ID of the instance.</summary>
@@ -1847,10 +1802,10 @@
         <member name="P:Impart.Nest.Impart#IElement#IOID">
             <summary>The internal ID of the instance.</summary>
         </member>
-        <member name="P:Impart.Nest.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Nest.ExtAttrs">
             <summary>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</summary>
         </member>
-        <member name="P:Impart.Nest.Impart#IElement#Attrs">
+        <member name="P:Impart.Nest.Attrs">
             <summary>The Attr values of the instance (will always return null, as this is a group of IElements).</summary>
         </member>
         <member name="M:Impart.Nest.#ctor">
@@ -2084,16 +2039,10 @@
         <member name="P:Impart.Table.Rows">
             <summary>The TableRow values of the instance.</summary>
         </member>
-        <member name="F:Impart.Table.Attrs">
+        <member name="P:Impart.Table.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Table.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Table.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Table.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Table.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Table.Impart#IElement#IOID">
@@ -2186,22 +2135,16 @@
         <member name="P:Impart.Text.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.Text.TextValue">
+        <member name="F:Impart.Text.TextValue">
             <summary>The text value of the Text.</summary>
         </member>
-        <member name="P:Impart.Text.Type">
+        <member name="F:Impart.Text.Type">
             <summary>The TextType value of the Text.</summary>
         </member>
-        <member name="F:Impart.Text.Attrs">
+        <member name="P:Impart.Text.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Text.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Text.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Text.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Text.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Text.Impart#IElement#IOID">
@@ -2250,25 +2193,19 @@
         <member name="P:Impart.Video.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.Video.Source">
+        <member name="F:Impart.Video.Source">
             <summary>The Video source file.</summary>
         </member>
-        <member name="P:Impart.Video.Size">
+        <member name="F:Impart.Video.Size">
             <summary>The Video player size.</summary>
         </member>
-        <member name="P:Impart.Video.Options">
+        <member name="F:Impart.Video.Options">
             <summary>Options for the Video player.</summary>
         </member>
-        <member name="F:Impart.Video.Attrs">
+        <member name="P:Impart.Video.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.Video.Impart#IElement#Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="F:Impart.Video.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.Video.Impart#IElement#ExtAttrs">
+        <member name="P:Impart.Video.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="P:Impart.Video.Impart#IElement#IOID">

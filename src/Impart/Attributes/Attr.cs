@@ -125,7 +125,6 @@ namespace Impart
                 case AttrType.FontSize:
                     return $"font-size: {Length.Convert(Value[0])};";
                 case AttrType.Margin:
-                    System.Console.WriteLine($"test! {Length.Convert(Value[0])}");
                     return $"margin: {Length.Convert(Value[0])};";
                 case AttrType.Padding:
                     return $"padding: {Length.Convert(Value[0])};";

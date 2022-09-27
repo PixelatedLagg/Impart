@@ -1,6 +1,7 @@
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -12,58 +13,28 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
-        private string _TextValue;
 
         /// <summary>The text value of the Text.</summary>
-        public string TextValue
-        {
-            get 
-            {
-                return _TextValue;
-            }
-            set
-            {
-                Changed = true;
-                _TextValue = value;
-            }
-        }
-        private TextType _Type;
+        public string TextValue;
 
         /// <summary>The TextType value of the Text.</summary>
-        public TextType Type
-        {
-            get
-            {
-                return _Type;
-            }
-        }
+        public TextType Type;
 
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
-
-        /// <summary>The Attr values of the instance.</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return Attrs;
-            }
-        }
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
-
-        /// <summary>The ExtAttr values of the instance.</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
-            }
-        }
+        public List<ExtAttr> ExtAttrs {get; set; } = new ExtAttrList();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -76,9 +47,7 @@ namespace Impart
 
         internal int _IOID;
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
         internal string _TextType;
-        private string Render = "";
 
         /// <summary>Creates an empty Text instance.</summary>
         public Text() : this("") {}
@@ -87,8 +56,8 @@ namespace Impart
         /// <param name="text">The Text text.</param>
         public Text(string text)
         {
-            _TextValue = text;
-            _Type = TextType.Regular;
+            TextValue = text;
+            Type = TextType.Regular;
             _TextType = "p";
             _IOID = Ioid.Generate();
         }
@@ -98,8 +67,8 @@ namespace Impart
         /// <param name="type">The Text type.</param>
         public Text(string text, TextType type)
         {
-            _TextValue = text;
-            _Type = type;
+            TextValue = text;
+            Type = type;
             _TextType = type switch
             {
                 TextType.Regular => "p",
@@ -120,16 +89,16 @@ namespace Impart
 
         internal Text(string text, int ioid)
         {
-            _TextValue = text;
-            _Type = TextType.Regular;
+            TextValue = text;
+            Type = TextType.Regular;
             _TextType = "p";
             _IOID = ioid;
         }
 
         internal Text(string text, TextType type, int ioid)
         {
-            _TextValue = text;
-            _Type = type;
+            TextValue = text;
+            Type = type;
             _TextType = type switch
             {
                 TextType.Regular => "p",
@@ -151,13 +120,6 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder($"<{_TextType} class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
@@ -172,8 +134,7 @@ namespace Impart
             {
                 result.Append(ExtAttr);
             }
-            Render = result.Append($">{_TextValue}</{_TextType}>").ToString();
-            return Render;
+            return result.Append($">{TextValue}</{_TextType}>").ToString();
         }
 
         /// <summary>Convert the String instance to a Text.</summary>
@@ -190,10 +151,9 @@ namespace Impart
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._TextValue = _TextValue;
+            result.TextValue = TextValue;
             result._TextType = _TextType;
-            result._Type = _Type;
-            result.Render = Render;
+            result.Type = Type;
             return result;
         }
 
@@ -210,17 +170,17 @@ namespace Impart
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._TextValue = _TextValue;
+            result.TextValue = TextValue;
             result._TextType = _TextType;
-            result._Type = _Type;
-            result.Render = Render;
+            result.Type = Type;
             return result;
         }
 
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            return ToString().Remove(Render.Length - $"</{_TextType}>".Length);
+            string render = ToString();
+            return render.Remove(render.Length - $"</{_TextType}>".Length);
         }
         
         /// <summary>Return the last part of the INested as a string.</summary>

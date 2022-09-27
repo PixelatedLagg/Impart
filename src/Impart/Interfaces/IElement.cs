@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Impart
 {
     /// <summary>IElement interface.</summary>
@@ -10,10 +12,10 @@ namespace Impart
         IElement Clone();
 
         /// <summary>The external attributes of the IElement.</summary>
-        ExtAttrList ExtAttrs { get; }
+        List<ExtAttr> ExtAttrs { get; set; }
 
         /// <summary>The attributes of the IElement.</summary>
-        AttrList Attrs { get; }
+        List<Attr> Attrs { get; set; }
 
         /// <summary>Create an ElementRef referencing the IElement</summary>
         ElementRef Reference();

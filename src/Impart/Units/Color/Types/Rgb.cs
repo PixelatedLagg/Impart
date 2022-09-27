@@ -79,7 +79,7 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            return $"rgb({Value.r}, {Value.g}, {Value.b})";
+            return $"rgb({Value.r},{Value.g},{Value.b})";
         }
 
         /// <summary>Convert the Rgb instance to a (int, int, int).</summary>

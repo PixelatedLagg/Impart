@@ -13,7 +13,14 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
         private List<TableRow> _Rows = new List<TableRow>();
@@ -28,28 +35,10 @@ namespace Impart
         }
 
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
-
-        /// <summary>The Attr values of the instance.</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return Attrs;
-            }
-        }
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
-
-        /// <summary>The ExtAttr values of the instance.</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
-            }
-        }
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -62,8 +51,6 @@ namespace Impart
 
         internal int _IOID = Ioid.Generate();
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
-        private string Render;
 
         /// <summary>Creates a Table instance.</summary>
         /// <param name="rows">The TableRows to add.</param>
@@ -77,20 +64,12 @@ namespace Impart
         public Table AddRow(params TableRow[] rows)
         {
             _Rows.AddRange(rows);
-            Changed = true;
             return this;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
             StringBuilder result = new StringBuilder("<table");
             if (Attrs.Count != 0)
             {
@@ -110,8 +89,7 @@ namespace Impart
             {
                 result.Append(row);
             }
-            Render = result.Append("</table>").ToString();
-            return Render;
+            return result.Append("</table>").ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -122,7 +100,6 @@ namespace Impart
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Rows = _Rows;
-            result.Render = Render;
             return result;
         }
 
@@ -140,14 +117,14 @@ namespace Impart
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._Rows = _Rows;
-            result.Render = Render;
             return result;
         }
 
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            return ToString().Remove(Render.Length - 8);
+            string render = ToString();
+            return render.Remove(render.Length - 8);
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>

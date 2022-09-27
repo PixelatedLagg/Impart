@@ -1,6 +1,7 @@
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -12,78 +13,31 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
-        private string _Source;
 
         /// <summary>The Video source file.</summary>
-        public string Source
-        {
-            get
-            {
-                return _Source;
-            }
-            set
-            {
-                Changed = true;
-                _Source = value;
-            }
-        }
-        private (Length Width, Length Height) _Size;
+        public string Source;
 
         /// <summary>The Video player size.</summary>
-        public (Length Width, Length Height) Size
-        {
-            get
-            {
-                return _Size;
-            }
-            set
-            {
-                Changed = true;
-                _Size = value;
-            }
-        }
-        private VideoOptions _Options;
+        public (Length Width, Length Height) Size;
 
         /// <summary>Options for the Video player.</summary>
-        public VideoOptions Options
-        {
-            get
-            {
-                return _Options;
-            }
-            set
-            {
-                Changed = true;
-                _Options = value;
-            }
-        }
+        public VideoOptions Options;
         
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
-
-        /// <summary>The Attr values of the instance.</summary>
-        AttrList IElement.Attrs
-        {
-            get
-            {
-                return Attrs;
-            }
-        }
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
-
-        /// <summary>The ExtAttr values of the instance.</summary>
-        ExtAttrList IElement.ExtAttrs
-        {
-            get
-            {
-                return ExtAttrs;
-            }
-        }
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
 
         /// <summary>The internal ID of the instance.</summary>
         int IElement.IOID
@@ -96,8 +50,6 @@ namespace Impart
 
         internal int _IOID = Ioid.Generate();
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
-        private string Render = "";
 
         /// <summary>Creates a Video instance.</summary>
         /// <param name="source">The Video source file.</param>
@@ -106,22 +58,20 @@ namespace Impart
         /// <param name="options">Options for the Video player.</param>
         public Video(string source, Length width, Length height, VideoOptions options)
         {
-            _Source = source;
-            _Size = (width, height);
-            _Options = options;
+            Source = source;
+            Size = (width, height);
+            Options = options;
+        }
+
+        internal Video(int ioid)
+        {
+            _IOID = ioid;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<video src=\"{_Source}\" width=\"{_Size.Width}\" height=\"{_Size.Height}\"{(_Options.Autoplay ? " autoplay " : "")}{(_Options.ShowControls ? " controls " : "")}{(_Options.Mute ? " muted " : "")}");
+            StringBuilder result = new StringBuilder($"<video src=\"{Source}\" width=\"{Size.Width}\" height=\"{Size.Height}\"{(Options.Autoplay ? " autoplay " : "")}{(Options.ShowControls ? " controls " : "")}{(Options.Mute ? " muted " : "")}");
             if (Attrs.Count != 0)
             {
                 result.Append("style=\"");
@@ -135,14 +85,13 @@ namespace Impart
             {
                 result.Append(extAttrs);
             }
-            Render = result.Append("></video>").ToString();
-            return Render;
+            return result.Append("></video>").ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            Video result = new Video(_Source, _Size.Width, _Size.Height, _Options);
+            Video result = new Video(Source, Size.Width, Size.Height, Options);
             result._IOID = _IOID;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
@@ -158,7 +107,7 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            Video result = new Video(_Source, _Size.Width, _Size.Height, _Options);
+            Video result = new Video(Source, Size.Width, Size.Height, Options);
             result._IOID = _IOID;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
@@ -168,7 +117,8 @@ namespace Impart
         /// <summary>Return the first part of the INested as a string.</summary>
         string INested.First()
         {
-            return ToString().Remove(Render.Length - 8);
+            string render = ToString();
+            return render.Remove(render.Length - 8);
         }
 
         /// <summary>Return the last part of the INested as a string.</summary>
