@@ -27,8 +27,11 @@ namespace Impart
         /// <summary>The Video source file.</summary>
         public string Source;
 
-        /// <summary>The Video player size.</summary>
-        public (Length Width, Length Height) Size;
+        /// <summary>The width (in pixels).</summary>
+        public int Width;
+
+        /// <summary>The height (in pixels).</summary>
+        public int Height;
 
         /// <summary>Options for the Video player.</summary>
         public VideoOptions Options;
@@ -52,14 +55,15 @@ namespace Impart
         internal EventManager _Events = new EventManager();
 
         /// <summary>Creates a Video instance.</summary>
-        /// <param name="source">The Video source file.</param>
-        /// <param name="width">The Video player width.</param>
-        /// <param name="height">The Video player height.</param>
+        /// <param name="source">The source file.</param>
+        /// <param name="width">The width (in pixels).</param>
+        /// <param name="height">The height (in pixels).</param>
         /// <param name="options">Options for the Video player.</param>
-        public Video(string source, Length width, Length height, VideoOptions options)
+        public Video(string source, int width, int height, VideoOptions options)
         {
             Source = source;
-            Size = (width, height);
+            Width = width;
+            Height = height;
             Options = options;
         }
 
@@ -71,7 +75,7 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder($"<video src=\"{Source}\" width=\"{Size.Width}\" height=\"{Size.Height}\"{(Options.Autoplay ? " autoplay " : "")}{(Options.ShowControls ? " controls " : "")}{(Options.Mute ? " muted " : "")}");
+            StringBuilder result = new StringBuilder($"<video src=\"{Source}\" width=\"{Width}\" height=\"{Height}\"{(Options.Autoplay ? " autoplay " : "")}{(Options.ShowControls ? " controls " : "")}{(Options.Mute ? " muted " : "")}");
             if (Attrs.Count != 0)
             {
                 result.Append("style=\"");
@@ -91,7 +95,7 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            Video result = new Video(Source, Size.Width, Size.Height, Options);
+            Video result = new Video(Source, Width, Height, Options);
             result._IOID = _IOID;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;
@@ -107,7 +111,7 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            Video result = new Video(Source, Size.Width, Size.Height, Options);
+            Video result = new Video(Source, Width, Height, Options);
             result._IOID = _IOID;
             result.Attrs = Attrs;
             result.ExtAttrs = ExtAttrs;

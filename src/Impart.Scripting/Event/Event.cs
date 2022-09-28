@@ -12,7 +12,7 @@ namespace Impart.Scripting
         /// <param name="function">The IFunction to call when the Event is triggered.</param>
         public Event(EventType eventType, IFunction function)
         {
-            Render = $"on{ScriptingExtensions.GetEventName(eventType)}=\"{function}\"";
+            Render = $" on{ScriptingExtensions.GetEventName(eventType)}=\"{function}\"";
         }
 
         /// <summary>Returns the instance as a String.</summary>

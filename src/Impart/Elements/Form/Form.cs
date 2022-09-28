@@ -30,7 +30,7 @@ namespace Impart
         /// <summary>The ExtAttr values of the instance.</summary>
         public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
         private List<IFormField> Elements = new List<IFormField>();
 
@@ -44,37 +44,44 @@ namespace Impart
         }
 
         /// <summary>Creates a Form instance.</summary>
-        public Form() { }
+        public Form()
+        {
+            _IOID = Ioid.Generate();
+        }
 
-        /// <summary>Add <paramref name="textFields"/> to the Form.</summary>
-        /// <param name="textFields">The TextField array to add.</param>
+        internal Form(int ioid)
+        {
+            _IOID = ioid;
+        }
+
+        /// <summary>Add a TextField to the Form.</summary>
+        /// <param name="textFields">All TextFields to add.</param>
         public Form AddTextField(params TextField[] textFields)
         {
-            foreach (TextField tf in textFields)
+            foreach (TextField textField in textFields)
             {
-                tf.InputID = Ioid.GenerateOtherUnique();
-                Elements.Add(tf);
+                textField._OtherIOID = Ioid.GenerateOtherUnique();
+                Elements.Add(textField);
             }
             return this;
         }
 
-        /// <summary>Add <paramref name="checkFields"/> to the Form.</summary>
-        /// <param name="checkFields">The CheckField array to add.</param>
+        /// <summary>Add a CheckField to the Form.</summary>
+        /// <param name="checkFields">All CheckFields to add.</param>
         public Form AddCheckField(params CheckField[] checkFields)
         {
-            foreach (CheckField cf in checkFields)
+            foreach (CheckField checkField in checkFields)
             {
-                cf.InputID = Ioid.GenerateOtherUnique();
-                Elements.Add(cf);
+                checkField._OtherIOID = Ioid.GenerateOtherUnique();
+                Elements.Add(checkField);
             }
             return this;
         }
 
-        /// <summary>Add <paramref name="submitField"/> to the Form.</summary>
+        /// <summary>Add a SubmitField to the Form.</summary>
         /// <param name="submitField">The SubmitField to add.</param>
         public Form AddSubmitField(SubmitField submitField)
         {
-            submitField.InputID = Ioid.GenerateOtherUnique();
             Elements.Add(submitField);
             return this;
         }

@@ -48,7 +48,7 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
 
         /// <summary>Creates an EFrame instance.</summary>
@@ -60,6 +60,12 @@ namespace Impart
             Width = width;
             Height = height;
             Source = source;
+            _IOID = Ioid.Generate();
+        }
+
+        internal EFrame(int ioid)
+        {
+            _IOID = ioid;
         }
 
         /// <summary>Returns the instance as a String.</summary>

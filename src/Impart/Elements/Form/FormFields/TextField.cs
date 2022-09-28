@@ -1,6 +1,7 @@
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -12,70 +13,60 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
-            }
-        }
-        private string _Text;
-
-        /// <summary>The Text value of the instance.</summary>
-        public string Text
-        {
-            get
-            {
-                return _Text;
-            }
-            set
-            {
-                Changed = true;
-                _Text = value;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
 
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
         
-        internal double InputID;
-        internal int _IOID = Ioid.Generate();
+        public Text Text;
+
+        internal double _OtherIOID;
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
-        private string Render;
 
         /// <summary>Creates a TextField instance.</summary>
         /// <param name="text">The TextField text.</param>
         public TextField(string text)
         {
-            Text = text;
+            Text = new Text(text);
+            _IOID = Ioid.Generate();
+        }
+
+        internal TextField(int ioid)
+        {
+            _IOID = ioid;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<label for=\"{InputID}\"");
+            StringBuilder result = new StringBuilder($"<label for=\"{_OtherIOID}\" class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
-                result.Append("style=\"");
+                result.Append(" style=\"");
                 foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }
-                result.Append($"\"class=\"{_IOID}\"{_Events}");
+                result.Append('"');
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
-            Render = result.Append($">{Text}</label><input type=\"text\" name=\"{InputID}\">").ToString();
-            return Render;
+            return result.Append($">{Text}</label><input type=\"text\" name=\"{_OtherIOID}\">").ToString();
         }
     }
 }

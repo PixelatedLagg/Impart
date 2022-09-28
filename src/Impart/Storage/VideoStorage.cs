@@ -26,14 +26,12 @@ namespace Impart
             Video result = new Video(0);
             int index = 6;
             StringBuilder tokenId = new StringBuilder(), tokenValue = new StringBuilder();
-            Length temp = null;
             bool controls = false, autoplay = false, muted = false;
             while (Cache[index] == ' ')
             {
                 index++;
                 while (true)
                 {
-                    Console.WriteLine(index);
                     if (Cache[index] == ' ')
                     {
                         switch (tokenId.ToString())
@@ -110,24 +108,10 @@ namespace Impart
                                 result.Source = tokenValue.ToString();
                                 break;
                             case "width":
-                                if (temp == null)
-                                {
-                                    temp = new Pixels(Convert.ToInt32(tokenValue.ToString()));
-                                }
-                                else
-                                {
-                                    result.Size = (new Pixels(Convert.ToInt32(tokenValue.ToString())), temp);
-                                }
+                                result.Width = Convert.ToInt32(tokenValue.ToString());
                                 break;
                             case "height":
-                                if (temp == null)
-                                {
-                                    temp = new Pixels(Convert.ToInt32(tokenValue.ToString()));
-                                }
-                                else
-                                {
-                                    result.Size = (temp, new Pixels(Convert.ToInt32(tokenValue.ToString())));
-                                }
+                                result.Height = Convert.ToInt32(tokenValue.ToString());
                                 break;
                             default:
                                 result.ExtAttrs.Add(StorageExtensions.GetExtAttr(idRender, tokenValue.ToString()));

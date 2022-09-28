@@ -1,6 +1,7 @@
 using System.Text;
 using Impart.Internal;
 using Impart.Scripting;
+using System.Collections.Generic;
 
 namespace Impart
 {
@@ -12,50 +13,55 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
+
         /// <summary>The Attr values of the instance.</summary>
-        public AttrList Attrs = new AttrList();
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        public ExtAttrList ExtAttrs = new ExtAttrList();
-        
-        internal double InputID;
-        internal int _IOID = Ioid.Generate();
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
+
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
-        internal bool Changed = true;
-        private string Render = "";
 
         /// <summary>Creates a SubmitField instance.</summary>
-        public SubmitField() { }
+        public SubmitField() 
+        {
+            _IOID = Ioid.Generate();
+        }
+
+        internal SubmitField(int ioid)
+        {
+            _IOID = ioid;
+        }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder($"<input type=\"submit\"");
+            StringBuilder result = new StringBuilder($"<input type=\"submit\" class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
-                result.Append("style=\"");
+                result.Append(" style=\"");
                 foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }
-                result.Append($"\"class=\"{_IOID}\"{_Events}");
+                result.Append('"');
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
-            Render = result.Append('>').ToString();
-            return Render;
+            return result.Append('>').ToString();
         }
     }
 }

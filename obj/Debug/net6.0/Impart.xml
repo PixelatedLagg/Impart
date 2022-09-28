@@ -362,9 +362,6 @@
             <summary>Check if an Object is a number.</summary>
             <param name="o">The Object to check.</param>
         </member>
-        <member name="T:Impart.Internal.IFormField">
-            <summary>Form field interface.</summary>
-        </member>
         <member name="T:Impart.Internal.INested">
             <summary>Elements that can be nested.</summary>
         </member>
@@ -1481,15 +1478,15 @@
             <summary>Creates a Form instance.</summary>
         </member>
         <member name="M:Impart.Form.AddTextField(Impart.TextField[])">
-            <summary>Add <paramref name="textFields"/> to the Form.</summary>
-            <param name="textFields">The TextField array to add.</param>
+            <summary>Add a TextField to the Form.</summary>
+            <param name="textFields">All TextFields to add.</param>
         </member>
         <member name="M:Impart.Form.AddCheckField(Impart.CheckField[])">
-            <summary>Add <paramref name="checkFields"/> to the Form.</summary>
-            <param name="checkFields">The CheckField array to add.</param>
+            <summary>Add a CheckField to the Form.</summary>
+            <param name="checkFields">All CheckFields to add.</param>
         </member>
         <member name="M:Impart.Form.AddSubmitField(Impart.SubmitField)">
-            <summary>Add <paramref name="submitField"/> to the Form.</summary>
+            <summary>Add a SubmitField to the Form.</summary>
             <param name="submitField">The SubmitField to add.</param>
         </member>
         <member name="M:Impart.Form.ToString">
@@ -1519,10 +1516,10 @@
         <member name="P:Impart.CheckField.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="F:Impart.CheckField.Attrs">
+        <member name="P:Impart.CheckField.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="F:Impart.CheckField.ExtAttrs">
+        <member name="P:Impart.CheckField.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.CheckField.#ctor(System.String)">
@@ -1538,16 +1535,25 @@
             <summary>Returns the instance as a String.</summary>
             <returns>A String instance.</returns>
         </member>
+        <member name="T:Impart.IFormField">
+            <summary>Form field interface.</summary>
+        </member>
+        <member name="P:Impart.IFormField.ExtAttrs">
+            <summary>The external attributes of the IFormField.</summary>
+        </member>
+        <member name="P:Impart.IFormField.Attrs">
+            <summary>The attributes of the IFormField.</summary>
+        </member>
         <member name="T:Impart.SubmitField">
             <summary>Submit button for Form.</summary>
         </member>
         <member name="P:Impart.SubmitField.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="F:Impart.SubmitField.Attrs">
+        <member name="P:Impart.SubmitField.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="F:Impart.SubmitField.ExtAttrs">
+        <member name="P:Impart.SubmitField.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.SubmitField.#ctor">
@@ -1562,13 +1568,10 @@
         <member name="P:Impart.TextField.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.TextField.Text">
-            <summary>The Text value of the instance.</summary>
-        </member>
-        <member name="F:Impart.TextField.Attrs">
+        <member name="P:Impart.TextField.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="F:Impart.TextField.ExtAttrs">
+        <member name="P:Impart.TextField.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.TextField.#ctor(System.String)">
@@ -2196,8 +2199,11 @@
         <member name="F:Impart.Video.Source">
             <summary>The Video source file.</summary>
         </member>
-        <member name="F:Impart.Video.Size">
-            <summary>The Video player size.</summary>
+        <member name="F:Impart.Video.Width">
+            <summary>The width (in pixels).</summary>
+        </member>
+        <member name="F:Impart.Video.Height">
+            <summary>The height (in pixels).</summary>
         </member>
         <member name="F:Impart.Video.Options">
             <summary>Options for the Video player.</summary>
@@ -2211,11 +2217,11 @@
         <member name="P:Impart.Video.Impart#IElement#IOID">
             <summary>The internal ID of the instance.</summary>
         </member>
-        <member name="M:Impart.Video.#ctor(System.String,Impart.Length,Impart.Length,Impart.VideoOptions)">
+        <member name="M:Impart.Video.#ctor(System.String,System.Int32,System.Int32,Impart.VideoOptions)">
             <summary>Creates a Video instance.</summary>
-            <param name="source">The Video source file.</param>
-            <param name="width">The Video player width.</param>
-            <param name="height">The Video player height.</param>
+            <param name="source">The source file.</param>
+            <param name="width">The width (in pixels).</param>
+            <param name="height">The height (in pixels).</param>
             <param name="options">Options for the Video player.</param>
         </member>
         <member name="M:Impart.Video.ToString">
