@@ -18,12 +18,12 @@ namespace Impart
             }
         }
 
-        /// <summary>The internal ID of the instance.</summary>
+        /// <summary>The internal ID of the instance (will always return 0 for Nests).</summary>
         int IElement.IOID
         {
             get
             {
-                return _IOID;
+                return 0;
             }
         }
         
@@ -34,8 +34,6 @@ namespace Impart
 
         /// <summary>The Attr values of the instance (will always return null, as this is a group of IElements).</summary>
         public List<Attr> Attrs { get; set; }
-
-        internal int _IOID = Ioid.Generate();
 
         /// <summary>Creates an empty Nest instance.</summary>
         public Nest() { }
@@ -101,23 +99,21 @@ namespace Impart
         {
             Nest result = new Nest();
             result._Elements = _Elements;
-            result._IOID = _IOID;
             result._Nested = _Nested;
             return result;
         }
 
-        /// <summary>Create an ElementRef referencing the IElement</summary>
-        public ElementRef Reference() => new ElementRef(_IOID);
+        /// <summary>Create an ElementRef referencing the IElement (will always return null for Nests).</summary>
+        public ElementRef Reference() => null;
 
-        /// <summary>Create an ElementRef referencing the IElement</summary>
-        ElementRef IElement.Reference() => new ElementRef(_IOID);
+        /// <summary>Create an ElementRef referencing the IElement (will always return null for Nests).</summary>
+        ElementRef IElement.Reference() => null;
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
             Nest result = new Nest();
             result._Elements = _Elements;
-            result._IOID = _IOID;
             result._Nested = _Nested;
             return result;
         }

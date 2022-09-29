@@ -246,7 +246,7 @@ namespace Impart
 
         /// <summary>Adds an EList to the WebPage.</summary>
         /// <param name="eList">The EList instance to add.</param>
-        protected void Add<T>(EList<T> eList) where T : IElement
+        protected void Add(EList eList)
         {
             _Elements.Add(eList);
             Changed = true;
@@ -381,9 +381,9 @@ namespace Impart
 
         /// <summary>Adds multiple ELists to the WebPage.</summary>
         /// <param name="eLists">The ELists to add.</param>
-        protected void AddMany<T>(params EList<T>[] eLists) where T : IElement
+        protected void AddMany(params EList[] eLists)
         {
-            foreach (EList<T> eList in eLists)
+            foreach (EList eList in eLists)
             {
                 Add(eList);
             }

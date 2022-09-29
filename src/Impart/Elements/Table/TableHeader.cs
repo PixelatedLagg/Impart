@@ -13,7 +13,14 @@ namespace Impart
         {
             get
             {
-                return ExtAttrs[ExtAttrType.ID]?.Value ?? null;
+                foreach (ExtAttr ext in ExtAttrs)
+                {
+                    if (ext.Type == ExtAttrType.ID)
+                    {
+                        return ext.Value;
+                    }
+                }
+                return null;
             }
         }
         private List<IElement> _Elements = new List<IElement>();
@@ -28,21 +35,25 @@ namespace Impart
         }
 
         /// <summary>The Attr values of the instance.</summary>
-        new public AttrList Attrs = new AttrList();
+        public List<Attr> Attrs { get; set; } = new List<Attr>();
 
         /// <summary>The ExtAttr values of the instance.</summary>
-        new public ExtAttrList ExtAttrs = new ExtAttrList();
+        public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
 
-        internal new int _IOID = Ioid.Generate();
+        internal new int _IOID;
         internal new EventManager _Events = new EventManager();
-        internal new bool Changed = true;
-        private string Render = "";
 
         /// <summary>Creates a TableHeader instance.</summary>
         /// <param name="elements">The IElements to add.</param>
         public TableHeader(params IElement[] elements)
         {
+            _IOID = Ioid.Generate();
             _Elements.AddRange(elements);
+        }
+
+        internal TableHeader(int ioid)
+        {
+            _IOID = ioid;
         }
 
         /// <summary>Add IElements to the TableHeader.</summary>
@@ -50,21 +61,13 @@ namespace Impart
         public new TableHeader AddRow(params IElement[] elements)
         {
             _Elements.AddRange(elements);
-            Changed = true;
             return this;
         }
 
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            if (!Changed && !Attrs.Changed && !ExtAttrs.Changed)
-            {
-                return Render;
-            }
-            Changed = false;
-            Attrs.Changed = false;
-            ExtAttrs.Changed = false;
-            StringBuilder result = new StringBuilder("<tr");
+            StringBuilder result = new StringBuilder($"<tr class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
@@ -72,7 +75,7 @@ namespace Impart
                 {
                     result.Append(attribute);
                 }
-                result.Append($"\"class=\"{_IOID}\"{_Events}");
+                result.Append('"');
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {
@@ -83,8 +86,7 @@ namespace Impart
             {
                 result.Append($"<th>{element}</th>");
             }
-            Render = result.Append("</tr>").ToString();
-            return Render;
+            return result.Append("</tr>").ToString();
         }
     }
 }

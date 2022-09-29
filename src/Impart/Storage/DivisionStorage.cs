@@ -1,10 +1,8 @@
-using System;
-using System.Text;
 using Impart.Internal;
 
 namespace Impart
 {
-    public class LinkStorage : IStorage
+    public class DivisionStorage : IStorage
     {
         private string Cache;
         private int _IOID;
@@ -16,17 +14,17 @@ namespace Impart
             }
         }
 
-        public LinkStorage(string cache, int ioid)
+        public DivisionStorage(string cache, int ioid)
         {
             Cache = cache;
             _IOID = ioid;
         }
 
         IElement IStorage.ToBuilder() => ToBuilder();
-        public Link ToBuilder()
+        public Division ToBuilder()
         {
             int index = 1;
-            return LinkParser.Parse(Cache, ref index);
+            return DivisionParser.Parse(Cache, ref index);
         }
     }
 }

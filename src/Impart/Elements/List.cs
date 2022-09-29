@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Impart
 {
     /// <summary>Store a list of IElements.</summary>
-    public class EList<T> : IElement, INested where T : IElement
+    public class EList : IElement, INested
     {
         /// <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         public string ID
@@ -24,16 +24,9 @@ namespace Impart
                 return null;
             }
         }
-        private List<T> _Entries = new List<T>();
 
         /// <summary>The entry values of the EList.</summary>
-        public List<T> Entries 
-        {
-            get 
-            {
-                return _Entries;
-            }
-        }
+        public List<IElement> Entries = new List<IElement>();
         private EListType _Type;
 
         /// <summary>The EListType value of the EList.</summary>
@@ -42,15 +35,6 @@ namespace Impart
             get
             {
                 return _Type;
-            }
-        }
-
-        /// <summary>The EList entry type.</summary>
-        public Type GetEntryType
-        {
-            get
-            {
-                return typeof(T);
             }
         }
 
@@ -76,7 +60,7 @@ namespace Impart
         /// <summary>Creates an EList instance.</summary>
         /// <param name="type">The EList type.</param>
         /// <param name="entries">The EList entries.</param>
-        public EList(EListType type, params T[] entries)
+        public EList(EListType type, params IElement[] entries)
         {
             _Type = type;
             _IOID = Ioid.Generate();
@@ -88,13 +72,13 @@ namespace Impart
             {
                 _EListType = "ul";
             }
-            foreach (T entry in entries)
+            foreach (IElement entry in entries)
             {
-                _Entries.Add(entry);
+                Entries.Add(entry);
             }
         }
 
-        internal EList(EListType type, int ioid, params T[] entries)
+        internal EList(EListType type, int ioid, params IElement[] entries)
         {
             _Type = type;
             _IOID = ioid;
@@ -106,39 +90,34 @@ namespace Impart
             {
                 _EListType = "ul";
             }
-            foreach (T entry in entries)
+            foreach (IElement entry in entries)
             {
-                _Entries.Add(entry);
+                Entries.Add(entry);
             }
-        }
-
-        internal EListStorage<T> GetStorage()
-        {
-            return new EListStorage<T>(ToString(), _IOID);
         }
 
         /// <summary>Add entries to the EList.</summary>
         /// <param name="entries">The entry to add.</param>
-        public EList<T> Add(params T[] entries)
+        public EList Add(params IElement[] entries)
         {
-            foreach (T entry in entries)
+            foreach (IElement entry in entries)
             {
-                _Entries.Add(entry);
+                Entries.Add(entry);
             }
             return this;
         }
 
         /// <summary>Remove entries from the EList.</summary>
         /// <param name="entries">The entries to remove.</param>
-        public EList<T> Remove(params T[] entries)
+        public EList Remove(params IElement[] entries)
         {
-            foreach (T entry in entries)
+            foreach (IElement entry in entries)
             {
-                if (!_Entries.Contains(entry))
+                if (!Entries.Contains(entry))
                 {
                     throw new ImpartError("EList does not contain this entry!");
                 }
-                _Entries.Remove(entry);
+                Entries.Remove(entry);
             }
             return this;
         }
@@ -146,7 +125,7 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder($"<{_EListType}");
+            StringBuilder result = new StringBuilder($"<{_EListType} class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
@@ -154,14 +133,14 @@ namespace Impart
                 {
                     result.Append(attribute);
                 }
-                result.Append($"\"class=\"{_IOID}\"{_Events}");
+                result.Append('"');
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {
                 result.Append(ExtAttr);
             }
             result.Append('>');
-            foreach (T entry in _Entries)
+            foreach (IElement entry in Entries)
             {
                 result.Append($"<li>{entry}</li>");
             }
@@ -171,9 +150,9 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            EList<T> result = new EList<T>(_Type);
+            EList result = new EList(_Type);
             result.Attrs = Attrs;
-            result._Entries = _Entries;
+            result.Entries = Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._EListType = _EListType;
@@ -189,9 +168,9 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            EList<T> result = new EList<T>(_Type);
+            EList result = new EList(_Type);
             result.Attrs = Attrs;
-            result._Entries = _Entries;
+            result.Entries = Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
             result._EListType = _EListType;

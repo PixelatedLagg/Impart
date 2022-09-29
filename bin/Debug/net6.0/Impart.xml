@@ -1312,45 +1312,49 @@
         <member name="M:Impart.Division.#ctor">
             <summary>Creates a Division instance.</summary>
         </member>
-        <member name="M:Impart.Division.AddText(Impart.Text)">
+        <member name="M:Impart.Division.Add(Impart.Text)">
             <summary>Add a Text to the Division.</summary>
             <param name="text">The Text instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddImage(Impart.Image)">
+        <member name="M:Impart.Division.Add(Impart.Image)">
             <summary>Add a Image to the Division.</summary>
             <param name="image">The Image instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddHeader(Impart.Header)">
+        <member name="M:Impart.Division.Add(Impart.Header)">
             <summary>Add a Header to the Division.</summary>
             <param name="header">The Header instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddLink(Impart.Link)">
+        <member name="M:Impart.Division.Add(Impart.Link)">
             <summary>Add a Link to the Division.</summary>
             <param name="link">The Link instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddTable(Impart.Table)">
+        <member name="M:Impart.Division.Add(Impart.Table)">
             <summary>Add a Table to the Division.</summary>
             <param name="table">The Table instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddDivision(Impart.Division)">
+        <member name="M:Impart.Division.Add(Impart.Division)">
             <summary>Add a Division to the Division.</summary>
             <param name="division">The Division instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddForm(Impart.Form)">
+        <member name="M:Impart.Division.Add(Impart.Form)">
             <summary>Add a Form to the Division.</summary>
             <param name="form">The Form instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddButton(Impart.Button)">
+        <member name="M:Impart.Division.Add(Impart.Button)">
             <summary>Add a Button to the Division.</summary>
             <param name="button">The Button instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddNest(Impart.Nest)">
+        <member name="M:Impart.Division.Add(Impart.Nest)">
             <summary>Add a Nest to the Division.</summary>
             <param name="nest">The Nest instance to add.</param>
         </member>
-        <member name="M:Impart.Division.AddVideo(Impart.Video)">
+        <member name="M:Impart.Division.Add(Impart.Video)">
             <summary>Add a Video to the Division.</summary>
             <param name="video">The Video instance to add.</param>
+        </member>
+        <member name="M:Impart.Division.Add(Impart.EFrame)">
+            <summary>Add an EFrame to the Division.</summary>
+            <param name="eFrame">The EFrame instance to add.</param>
         </member>
         <member name="M:Impart.Division.SetStyle(Impart.Style)">
             <summary>Sets a Style to the Division.</summary>
@@ -1738,62 +1742,59 @@
         <member name="M:Impart.Link.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
         </member>
-        <member name="T:Impart.EList`1">
+        <member name="T:Impart.EList">
             <summary>Store a list of IElements.</summary>
         </member>
-        <member name="P:Impart.EList`1.ID">
+        <member name="P:Impart.EList.ID">
             <summary>The ID value of the instance. Returns null if ID is not set.</summary>
         </member>
-        <member name="P:Impart.EList`1.Entries">
+        <member name="F:Impart.EList.Entries">
             <summary>The entry values of the EList.</summary>
         </member>
-        <member name="P:Impart.EList`1.Type">
+        <member name="P:Impart.EList.Type">
             <summary>The EListType value of the EList.</summary>
         </member>
-        <member name="P:Impart.EList`1.GetEntryType">
-            <summary>The EList entry type.</summary>
-        </member>
-        <member name="P:Impart.EList`1.ExtAttrs">
+        <member name="P:Impart.EList.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
-        <member name="P:Impart.EList`1.Attrs">
+        <member name="P:Impart.EList.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="P:Impart.EList`1.Impart#IElement#IOID">
+        <member name="P:Impart.EList.Impart#IElement#IOID">
             <summary>The internal ID of the instance.</summary>
         </member>
-        <member name="M:Impart.EList`1.#ctor(Impart.EListType,`0[])">
+        <member name="M:Impart.EList.#ctor(Impart.EListType,Impart.IElement[])">
             <summary>Creates an EList instance.</summary>
             <param name="type">The EList type.</param>
             <param name="entries">The EList entries.</param>
         </member>
-        <member name="M:Impart.EList`1.Add(`0[])">
+        <member name="M:Impart.EList.Add(Impart.IElement[])">
             <summary>Add entries to the EList.</summary>
             <param name="entries">The entry to add.</param>
         </member>
-        <member name="M:Impart.EList`1.Remove(`0[])">
+        <member name="M:Impart.EList.Remove(Impart.IElement[])">
             <summary>Remove entries from the EList.</summary>
             <param name="entries">The entries to remove.</param>
         </member>
-        <member name="M:Impart.EList`1.ToString">
+        <member name="M:Impart.EList.ToString">
             <summary>Returns the instance as a String.</summary>
         </member>
-        <member name="M:Impart.EList`1.Clone">
+        <member name="M:Impart.EList.Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.EList`1.Reference">
+        <member name="M:Impart.EList.Reference">
             <summary>Create an ElementRef referencing the IElement</summary>
         </member>
-        <member name="M:Impart.EList`1.Impart#IElement#Reference">
+        <member name="M:Impart.EList.Impart#IElement#Reference">
             <summary>Create an ElementRef referencing the IElement</summary>
         </member>
-        <member name="M:Impart.EList`1.Impart#IElement#Clone">
+        <member name="M:Impart.EList.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
-        <member name="M:Impart.EList`1.Impart#Internal#INested#First">
+        <member name="M:Impart.EList.Impart#Internal#INested#First">
             <summary>Return the first part of the INested as a string.</summary>
         </member>
-        <member name="M:Impart.EList`1.Impart#Internal#INested#Last">
+        <member name="M:Impart.EList.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Nest">
@@ -1803,7 +1804,7 @@
             <summary>All of the IElements included in the Nest.</summary>
         </member>
         <member name="P:Impart.Nest.Impart#IElement#IOID">
-            <summary>The internal ID of the instance.</summary>
+            <summary>The internal ID of the instance (will always return 0 for Nests).</summary>
         </member>
         <member name="P:Impart.Nest.ExtAttrs">
             <summary>The ExtAttr values of the instance (will always return null, as this is a group of IElements).</summary>
@@ -1829,10 +1830,10 @@
             <summary>Clones the IElement instance (including the internal ID).</summary>
         </member>
         <member name="M:Impart.Nest.Reference">
-            <summary>Create an ElementRef referencing the IElement</summary>
+            <summary>Create an ElementRef referencing the IElement (will always return null for Nests).</summary>
         </member>
         <member name="M:Impart.Nest.Impart#IElement#Reference">
-            <summary>Create an ElementRef referencing the IElement</summary>
+            <summary>Create an ElementRef referencing the IElement (will always return null for Nests).</summary>
         </member>
         <member name="M:Impart.Nest.Impart#IElement#Clone">
             <summary>Clones the IElement instance (including the internal ID).</summary>
@@ -2089,10 +2090,10 @@
         <member name="P:Impart.TableHeader.Elements">
             <summary>The IElement values of the instance.</summary>
         </member>
-        <member name="F:Impart.TableHeader.Attrs">
+        <member name="P:Impart.TableHeader.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="F:Impart.TableHeader.ExtAttrs">
+        <member name="P:Impart.TableHeader.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.TableHeader.#ctor(Impart.IElement[])">
@@ -2115,10 +2116,10 @@
         <member name="P:Impart.TableRow.Elements">
             <summary>The IElements values of the instance.</summary>
         </member>
-        <member name="F:Impart.TableRow.Attrs">
+        <member name="P:Impart.TableRow.Attrs">
             <summary>The Attr values of the instance.</summary>
         </member>
-        <member name="F:Impart.TableRow.ExtAttrs">
+        <member name="P:Impart.TableRow.ExtAttrs">
             <summary>The ExtAttr values of the instance.</summary>
         </member>
         <member name="M:Impart.TableRow.#ctor(Impart.IElement[])">
@@ -3270,7 +3271,7 @@
             <summary>Adds a Division to the WebPage.</summary>
             <param name="division">The Division instance to add.</param>
         </member>
-        <member name="M:Impart.WebPage.Add``1(Impart.EList{``0})">
+        <member name="M:Impart.WebPage.Add(Impart.EList)">
             <summary>Adds an EList to the WebPage.</summary>
             <param name="eList">The EList instance to add.</param>
         </member>
@@ -3326,7 +3327,7 @@
             <summary>Adds multiple Divisions to the WebPage.</summary>
             <param name="divisions">The Divisions to add.</param>
         </member>
-        <member name="M:Impart.WebPage.AddMany``1(Impart.EList{``0}[])">
+        <member name="M:Impart.WebPage.AddMany(Impart.EList[])">
             <summary>Adds multiple ELists to the WebPage.</summary>
             <param name="eLists">The ELists to add.</param>
         </member>

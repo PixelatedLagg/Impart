@@ -40,17 +40,25 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
         internal List<IStyleElement> _StyleElements = new List<IStyleElement>();
         private List<IElement> _Elements = new List<IElement>();
 
         /// <summary>Creates a Division instance.</summary>
-        public Division() { }
+        public Division() 
+        {
+            _IOID = Ioid.Generate();
+        }
+
+        internal Division(int ioid)
+        {
+            _IOID = ioid;
+        }
 
         /// <summary>Add a Text to the Division.</summary>
         /// <param name="text">The Text instance to add.</param>
-        public Division AddText(Text text)
+        public Division Add(Text text)
         {
             _Elements.Add(text);
             return this;
@@ -58,7 +66,7 @@ namespace Impart
 
         /// <summary>Add a Image to the Division.</summary>
         /// <param name="image">The Image instance to add.</param>
-        public Division AddImage(Image image)
+        public Division Add(Image image)
         {
             _Elements.Add(image);
             return this;
@@ -66,7 +74,7 @@ namespace Impart
 
         /// <summary>Add a Header to the Division.</summary>
         /// <param name="header">The Header instance to add.</param>
-        public Division AddHeader(Header header)
+        public Division Add(Header header)
         {
             _Elements.Add(header);
             return this;
@@ -74,7 +82,7 @@ namespace Impart
 
         /// <summary>Add a Link to the Division.</summary>
         /// <param name="link">The Link instance to add.</param>
-        public Division AddLink(Link link)
+        public Division Add(Link link)
         {
             _Elements.Add(link);
             return this;
@@ -82,7 +90,7 @@ namespace Impart
 
         /// <summary>Add a Table to the Division.</summary>
         /// <param name="table">The Table instance to add.</param>
-        public Division AddTable(Table table)
+        public Division Add(Table table)
         {
             _Elements.Add(table);
             return this;
@@ -90,7 +98,7 @@ namespace Impart
 
         /// <summary>Add a Division to the Division.</summary>
         /// <param name="division">The Division instance to add.</param>
-        public Division AddDivision(Division division)
+        public Division Add(Division division)
         {
             _Elements.Add(division);
             return this;
@@ -98,7 +106,7 @@ namespace Impart
 
         /// <summary>Add a Form to the Division.</summary>
         /// <param name="form">The Form instance to add.</param>
-        public Division AddForm(Form form)
+        public Division Add(Form form)
         {
             _Elements.Add(form);
             return this;
@@ -106,7 +114,7 @@ namespace Impart
 
         /// <summary>Add a Button to the Division.</summary>
         /// <param name="button">The Button instance to add.</param>
-        public Division AddButton(Button button)
+        public Division Add(Button button)
         {
             _Elements.Add(button);
             return this;
@@ -114,7 +122,7 @@ namespace Impart
 
         /// <summary>Add a Nest to the Division.</summary>
         /// <param name="nest">The Nest instance to add.</param>
-        public Division AddNest(Nest nest)
+        public Division Add(Nest nest)
         {
             _Elements.Add(nest);
             return this;
@@ -122,9 +130,17 @@ namespace Impart
 
         /// <summary>Add a Video to the Division.</summary>
         /// <param name="video">The Video instance to add.</param>
-        public Division AddVideo(Video video)
+        public Division Add(Video video)
         {
             _Elements.Add(video);
+            return this;
+        }
+
+        /// <summary>Add an EFrame to the Division.</summary>
+        /// <param name="eFrame">The EFrame instance to add.</param>
+        public Division Add(EFrame eFrame)
+        {
+            _Elements.Add(eFrame);
             return this;
         }
 
@@ -164,15 +180,15 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder("<div ");
+            StringBuilder result = new StringBuilder($"<div class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
-                result.Append("style=\"");
+                result.Append(" style=\"");
                 foreach (Attr attribute in Attrs)
                 {
                     result.Append(attribute);
                 }
-                result.Append($"\"class=\"{_IOID}\"{_Events}");
+                result.Append('"');
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {

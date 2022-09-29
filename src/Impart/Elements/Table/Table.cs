@@ -49,14 +49,20 @@ namespace Impart
             }
         }
 
-        internal int _IOID = Ioid.Generate();
+        internal int _IOID;
         internal EventManager _Events = new EventManager();
 
         /// <summary>Creates a Table instance.</summary>
         /// <param name="rows">The TableRows to add.</param>
         public Table(params TableRow[] rows)
         {
+            _IOID = Ioid.Generate();
             _Rows.AddRange(rows);
+        }
+
+        internal Table(int ioid)
+        {
+            _IOID = ioid;
         }
 
         /// <summary>Add TableRows to the Table.</summary>
@@ -70,7 +76,7 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder("<table");
+            StringBuilder result = new StringBuilder($"<table class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
@@ -78,7 +84,7 @@ namespace Impart
                 {
                     result.Append(attribute);
                 }
-                result.Append($"\"class=\"{_IOID}\"{_Events}");
+                result.Append('"');
             }
             foreach (ExtAttr ExtAttr in ExtAttrs)
             {
