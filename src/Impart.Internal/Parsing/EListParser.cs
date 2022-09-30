@@ -8,16 +8,8 @@ namespace Impart.Internal
         public static EList Parse(string cache, ref int index)
         {
             EList result;
-            index += 2;
             StringBuilder tokenId = new StringBuilder(), tokenValue = new StringBuilder();
-            if (cache[2] == 'u')
-            {
-                result = new EList(EListType.Unordered, 0);
-            }
-            else
-            {
-                result = new EList(EListType.Ordered, 0);
-            }
+            result = (cache[2] == 'u' ? new EList(false, 0) : new EList(true, 0));
             while (cache[index] == ' ')
             {
                 index++;
@@ -57,8 +49,14 @@ namespace Impart.Internal
                 }
             }
             index++;
+            Console.WriteLine(index);
             while (cache[index] != '/')
             {
+                if (NestParser.IsNest(cache, index))
+                {
+                    result.Add(NestParser.Parse(cache, ref index));
+                    break;
+                }
                 int type = 1;
                 switch (cache[index])
                 {
@@ -66,13 +64,13 @@ namespace Impart.Internal
                         type = 1;
                         break;
                     case 'b':
-                        if (cache[index + 1] != 'u')
+                        if (cache[index + 1] == 'u')
                         {
-                            type = 2;
+                            type = 3;
                         }
                         else
                         {
-                            type = 3;
+                            type = 2;
                         }
                         break;
                     case 'd':
@@ -98,13 +96,13 @@ namespace Impart.Internal
                         switch (cache[index + 1])
                         {
                             case 'f':
-                                type = 15;
+                                type = 17;
                                 break;
                             case 'm':
-                                type = 16;
+                                type = 15;
                                 break;
                             case 'n':
-                                type = 17;
+                                type = 16;
                                 break;
                             default:
                                 type = 14;
@@ -194,9 +192,10 @@ namespace Impart.Internal
                         break;
                     case 19:
                     case 26:
-                        EListParser.Parse(cache, ref index);
+                        result.Add(EListParser.Parse(cache, ref index));
                         break;
-                    case 25: //table
+                    case 25:
+                        result.Add(TableParser.Parse(cache, ref index));
                         break;
                     case 27:
                         result.Add(VideoParser.Parse(cache, ref index));
@@ -208,3 +207,10 @@ namespace Impart.Internal
         }
     }
 }
+
+/*
+
+< u l   c l a s s = "  1  "  >  <  l  i  >  <  p     c  l  a  s  s  =  "  2  "  >  a  i  d  s  <  / p > <  /  l  i  >  <  l  i  >  <  p     c  l  a  s  s  =  "  3  "  >  t  e  s  t  !  <  /  p  >  <  /  l  i  >  <  /  u  l  >
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78
+
+*/

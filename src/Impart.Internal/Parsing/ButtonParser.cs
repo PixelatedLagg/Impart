@@ -101,6 +101,7 @@ namespace Impart.Internal
             }
             innerText.TextValue = content.ToString();
             result.Text = innerText;
+            index += 12;
             return result;
         }
     }

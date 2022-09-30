@@ -96,7 +96,6 @@ namespace Impart.Internal
                     }
                     result.AddSubmitField(submitField);
                     index += 3;
-                    Console.WriteLine(cache[index - 1] + "" + cache[index] + "" + cache[index + 1]);
                     continue;
                 }
                 if (cache[index] == 'l')
@@ -225,11 +224,11 @@ namespace Impart.Internal
                         index += 17 + otherIOID.ToString().Length;
                     }
                     index += 2;
-                    Console.WriteLine(cache[index - 1] + "" + cache[index] + "" + cache[index + 1]);
                     continue;
                 }
                 break;
             }
+            index += 4;
             return result;
         }
     }

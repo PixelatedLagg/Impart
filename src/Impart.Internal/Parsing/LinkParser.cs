@@ -155,7 +155,7 @@ namespace Impart.Internal
                 }
                 result.Image = innerImage;
                 result.LinkType = typeof(Image);
-                index += 9;
+                index += 10;
             }
             Console.WriteLine(cache[index]);
             return result;

@@ -58,9 +58,10 @@ namespace Impart
 
         /// <summary>Add IElements to the TableRow.</summary>
         /// <param name="elements">The IElements to add.</param>
-        public TableRow AddRow(params IElement[] elements)
+        public TableRow Add(params IElement[] elements)
         {
             _Elements.AddRange(elements);
+            System.Console.WriteLine(elements[0]);
             return this;
         }
 
@@ -86,6 +87,7 @@ namespace Impart
             {
                 result.Append($"<td>{element}</td>");
             }
+            System.Console.WriteLine(result.ToString());
             return result.Append("</tr>").ToString();
         }
     }

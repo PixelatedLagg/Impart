@@ -144,6 +144,14 @@ namespace Impart
             return this;
         }
 
+        /// <summary>Add an EList to the Division.</summary>
+        /// <param name="eList">The EList instance to add.</param>
+        public Division Add(EList eList)
+        {
+            _Elements.Add(eList);
+            return this;
+        }
+
         /// <summary>Sets a Style to the Division.</summary>
         /// <param name="style">The Style instance to use.</param>
         public Division SetStyle(Style style)

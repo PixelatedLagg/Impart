@@ -52,6 +52,7 @@ namespace Impart.Internal
                     index++;
                 }
             }
+            Console.WriteLine(cache[index]);
             return result;
         }
     }

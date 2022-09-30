@@ -11,12 +11,7 @@ namespace Impart.Internal
         }
         public static bool IsNest(string cache, int index)
         {
-            do
-            {
-                index++;
-            }
-            while (cache[index] != '<');
-            return cache[index + 1] != '/';
+            return cache[cache.IndexOf('<', index) + 1] != '/';
         }
     }
 }

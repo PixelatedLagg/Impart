@@ -57,6 +57,7 @@ namespace Impart.Internal
                     index++;
                 }
             }
+            index += 9;
             return result;
         }
     }

@@ -76,7 +76,7 @@ namespace Impart.Internal
                 {
                     if (cache[index] == '=')
                     {
-                        index++;
+                        index += 2;
                         while (cache[index] != '"')
                         {
                             tokenValue.Append(cache[index]);
@@ -99,7 +99,7 @@ namespace Impart.Internal
                         tokenValue.Clear();
                         index++;
                         break;
-                    }
+                    } 
                     else
                     {
                         tokenId.Append(cache[index]);
@@ -120,6 +120,7 @@ namespace Impart.Internal
             }
             result.TextValue = content.ToString();
             index += 3;
+            Console.WriteLine(cache[index]);
             return result;
         }
     }

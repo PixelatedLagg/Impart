@@ -87,7 +87,7 @@ namespace Impart
             {
                 result.Append(ExtAttr);
             }
-            return result.Append('>').ToString();
+            return result.Append("></img>").ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>

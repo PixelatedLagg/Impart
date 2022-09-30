@@ -115,6 +115,7 @@ namespace Impart.Internal
             }
             result.Options = new VideoOptions(controls, autoplay, muted);
             index += 8;
+            Console.WriteLine(cache[index]);
             return result;
         }
     }

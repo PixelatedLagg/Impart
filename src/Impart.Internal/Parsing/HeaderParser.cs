@@ -69,6 +69,7 @@ namespace Impart.Internal
                 index++;
             }
             result.TextValue = content.ToString();
+            index += 4;
             return result;
         }
     }

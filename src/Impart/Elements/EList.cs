@@ -27,16 +27,9 @@ namespace Impart
 
         /// <summary>The entry values of the EList.</summary>
         public List<IElement> Entries = new List<IElement>();
-        private EListType _Type;
 
-        /// <summary>The EListType value of the EList.</summary>
-        public EListType Type
-        {
-            get
-            {
-                return _Type;
-            }
-        }
+        /// <summary>Whether or not the entries in the EList are ordered.</summary>
+        public bool IsOrdered;
 
         /// <summary>The ExtAttr values of the instance.</summary>
         public List<ExtAttr> ExtAttrs { get; set; } = new List<ExtAttr>();
@@ -55,45 +48,36 @@ namespace Impart
 
         internal int _IOID;
         internal EventManager _Events = new EventManager();
-        private string _EListType;
 
         /// <summary>Creates an EList instance.</summary>
-        /// <param name="type">The EList type.</param>
         /// <param name="entries">The EList entries.</param>
-        public EList(EListType type, params IElement[] entries)
+        public EList(params IElement[] entries)
         {
-            _Type = type;
+            IsOrdered = false;
             _IOID = Ioid.Generate();
-            if (type == EListType.Ordered)
-            {
-                _EListType = "ol";
-            }
-            else
-            {
-                _EListType = "ul";
-            }
             foreach (IElement entry in entries)
             {
                 Entries.Add(entry);
             }
         }
 
-        internal EList(EListType type, int ioid, params IElement[] entries)
+        /// <summary>Creates an EList instance.</summary>
+        /// <param name="isOrdered">Whether or not the entries in the EList are ordered.</param>
+        /// <param name="entries">The EList entries.</param>
+        public EList(bool isOrdered, params IElement[] entries)
         {
-            _Type = type;
-            _IOID = ioid;
-            if (type == EListType.Ordered)
-            {
-                _EListType = "ol";
-            }
-            else
-            {
-                _EListType = "ul";
-            }
+            IsOrdered = isOrdered;
+            _IOID = Ioid.Generate();
             foreach (IElement entry in entries)
             {
                 Entries.Add(entry);
             }
+        }
+
+        internal EList(bool isOrdered, int ioid)
+        {
+            IsOrdered = isOrdered;
+            _IOID = ioid;
         }
 
         /// <summary>Add entries to the EList.</summary>
@@ -125,7 +109,7 @@ namespace Impart
         /// <summary>Returns the instance as a String.</summary>
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder($"<{_EListType} class=\"{_IOID}\"{_Events}");
+            StringBuilder result = new StringBuilder($"<{(IsOrdered ? "ol" : "ul")} class=\"{_IOID}\"{_Events}");
             if (Attrs.Count != 0)
             {
                 result.Append(" style=\"");
@@ -144,18 +128,17 @@ namespace Impart
             {
                 result.Append($"<li>{entry}</li>");
             }
-            return result.Append($"</{_EListType}>").ToString();
+            return result.Append($"</{(IsOrdered ? "ol" : "ul")}>").ToString();
         }
 
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         public IElement Clone()
         {
-            EList result = new EList(_Type);
+            EList result = new EList(IsOrdered);
             result.Attrs = Attrs;
             result.Entries = Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._EListType = _EListType;
             return result;
         }
 
@@ -168,12 +151,11 @@ namespace Impart
         /// <summary>Clones the IElement instance (including the internal ID).</summary>
         IElement IElement.Clone()
         {
-            EList result = new EList(_Type);
+            EList result = new EList(IsOrdered);
             result.Attrs = Attrs;
             result.Entries = Entries;
             result.ExtAttrs = ExtAttrs;
             result._IOID = _IOID;
-            result._EListType = _EListType;
             return result;
         }
 
@@ -187,7 +169,7 @@ namespace Impart
         /// <summary>Return the last part of the INested as a string.</summary>
         string INested.Last()
         {
-            return $"</{_EListType}>";
+            return $"</{(IsOrdered ? "ol" : "ul")}>";
         }
     }
 }

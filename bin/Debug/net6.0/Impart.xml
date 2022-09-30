@@ -1356,6 +1356,10 @@
             <summary>Add an EFrame to the Division.</summary>
             <param name="eFrame">The EFrame instance to add.</param>
         </member>
+        <member name="M:Impart.Division.Add(Impart.EList)">
+            <summary>Add an EList to the Division.</summary>
+            <param name="eList">The EList instance to add.</param>
+        </member>
         <member name="M:Impart.Division.SetStyle(Impart.Style)">
             <summary>Sets a Style to the Division.</summary>
             <param name="style">The Style instance to use.</param>
@@ -1462,6 +1466,65 @@
         </member>
         <member name="M:Impart.ElementRef.GetHashCode">
             <summary>Get the hash code of this instance.</summary>
+        </member>
+        <member name="T:Impart.EList">
+            <summary>Store a list of IElements.</summary>
+        </member>
+        <member name="P:Impart.EList.ID">
+            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
+        </member>
+        <member name="F:Impart.EList.Entries">
+            <summary>The entry values of the EList.</summary>
+        </member>
+        <member name="F:Impart.EList.IsOrdered">
+            <summary>Whether or not the entries in the EList are ordered.</summary>
+        </member>
+        <member name="P:Impart.EList.ExtAttrs">
+            <summary>The ExtAttr values of the instance.</summary>
+        </member>
+        <member name="P:Impart.EList.Attrs">
+            <summary>The Attr values of the instance.</summary>
+        </member>
+        <member name="P:Impart.EList.Impart#IElement#IOID">
+            <summary>The internal ID of the instance.</summary>
+        </member>
+        <member name="M:Impart.EList.#ctor(Impart.IElement[])">
+            <summary>Creates an EList instance.</summary>
+            <param name="entries">The EList entries.</param>
+        </member>
+        <member name="M:Impart.EList.#ctor(System.Boolean,Impart.IElement[])">
+            <summary>Creates an EList instance.</summary>
+            <param name="isOrdered">Whether or not the entries in the EList are ordered.</param>
+            <param name="entries">The EList entries.</param>
+        </member>
+        <member name="M:Impart.EList.Add(Impart.IElement[])">
+            <summary>Add entries to the EList.</summary>
+            <param name="entries">The entry to add.</param>
+        </member>
+        <member name="M:Impart.EList.Remove(Impart.IElement[])">
+            <summary>Remove entries from the EList.</summary>
+            <param name="entries">The entries to remove.</param>
+        </member>
+        <member name="M:Impart.EList.ToString">
+            <summary>Returns the instance as a String.</summary>
+        </member>
+        <member name="M:Impart.EList.Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.EList.Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.EList.Impart#IElement#Reference">
+            <summary>Create an ElementRef referencing the IElement</summary>
+        </member>
+        <member name="M:Impart.EList.Impart#IElement#Clone">
+            <summary>Clones the IElement instance (including the internal ID).</summary>
+        </member>
+        <member name="M:Impart.EList.Impart#Internal#INested#First">
+            <summary>Return the first part of the INested as a string.</summary>
+        </member>
+        <member name="M:Impart.EList.Impart#Internal#INested#Last">
+            <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Form">
             <summary>Form element.</summary>
@@ -1740,61 +1803,6 @@
             <summary>Return the first part of the INested as a string.</summary>
         </member>
         <member name="M:Impart.Link.Impart#Internal#INested#Last">
-            <summary>Return the last part of the INested as a string.</summary>
-        </member>
-        <member name="T:Impart.EList">
-            <summary>Store a list of IElements.</summary>
-        </member>
-        <member name="P:Impart.EList.ID">
-            <summary>The ID value of the instance. Returns null if ID is not set.</summary>
-        </member>
-        <member name="F:Impart.EList.Entries">
-            <summary>The entry values of the EList.</summary>
-        </member>
-        <member name="P:Impart.EList.Type">
-            <summary>The EListType value of the EList.</summary>
-        </member>
-        <member name="P:Impart.EList.ExtAttrs">
-            <summary>The ExtAttr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.EList.Attrs">
-            <summary>The Attr values of the instance.</summary>
-        </member>
-        <member name="P:Impart.EList.Impart#IElement#IOID">
-            <summary>The internal ID of the instance.</summary>
-        </member>
-        <member name="M:Impart.EList.#ctor(Impart.EListType,Impart.IElement[])">
-            <summary>Creates an EList instance.</summary>
-            <param name="type">The EList type.</param>
-            <param name="entries">The EList entries.</param>
-        </member>
-        <member name="M:Impart.EList.Add(Impart.IElement[])">
-            <summary>Add entries to the EList.</summary>
-            <param name="entries">The entry to add.</param>
-        </member>
-        <member name="M:Impart.EList.Remove(Impart.IElement[])">
-            <summary>Remove entries from the EList.</summary>
-            <param name="entries">The entries to remove.</param>
-        </member>
-        <member name="M:Impart.EList.ToString">
-            <summary>Returns the instance as a String.</summary>
-        </member>
-        <member name="M:Impart.EList.Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
-        </member>
-        <member name="M:Impart.EList.Reference">
-            <summary>Create an ElementRef referencing the IElement</summary>
-        </member>
-        <member name="M:Impart.EList.Impart#IElement#Reference">
-            <summary>Create an ElementRef referencing the IElement</summary>
-        </member>
-        <member name="M:Impart.EList.Impart#IElement#Clone">
-            <summary>Clones the IElement instance (including the internal ID).</summary>
-        </member>
-        <member name="M:Impart.EList.Impart#Internal#INested#First">
-            <summary>Return the first part of the INested as a string.</summary>
-        </member>
-        <member name="M:Impart.EList.Impart#Internal#INested#Last">
             <summary>Return the last part of the INested as a string.</summary>
         </member>
         <member name="T:Impart.Nest">
@@ -2126,7 +2134,7 @@
             <summary>Creates a TableRow instance.</summary>
             <param name="elements">The IElements to add.</param>
         </member>
-        <member name="M:Impart.TableRow.AddRow(Impart.IElement[])">
+        <member name="M:Impart.TableRow.Add(Impart.IElement[])">
             <summary>Add IElements to the TableRow.</summary>
             <param name="elements">The IElements to add.</param>
         </member>
