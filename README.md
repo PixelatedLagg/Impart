@@ -2,7 +2,7 @@
 ![Downloads](https://shields.io/nuget/dt/impart?style=for-the-badge&logo=appveyor&color=blue)
 ![Discord](https://shields.io/discord/962888590113792061?style=for-the-badge&logo=appveyor&color=blue)
 
-### Everything is subject to change as it is in beta.
+### Most things are subject to change as Impart experiences a growth of new features.
 <img src=".github/Images/logo.png" width="300"></img>
 ## Important links
 [Discord](https://discord.gg/tSc35kjHMG) 
