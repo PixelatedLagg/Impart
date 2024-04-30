@@ -8,15 +8,15 @@
     <licenseUrl>https://licenses.nuget.org/LGPL-2.1-only</licenseUrl>
     <icon>logo.png</icon>
     <description>A C# library dedicated to streamlining web development by replacing HTML/CSS fluency with simple C# methods.</description>
-    <repository url="https://github.com/PixelatedLagg/Impart" />
+    <repository type="git" url="https://github.com/PixelatedLagg/Impart" commit="6db0ca018ff4733021262e32f0de839f60494914" />
     <dependencies>
       <group targetFramework="net6.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\pixil\Desktop\Impart\bin\Debug\net6.0\Impart.runtimeconfig.json" target="lib\net6.0\Impart.runtimeconfig.json" />
-    <file src="C:\Users\pixil\Desktop\Impart\bin\Debug\net6.0\Impart.dll" target="lib\net6.0\Impart.dll" />
-    <file src="C:\Users\pixil\Desktop\Impart\bin\Debug\net6.0\Impart.xml" target="lib\net6.0\Impart.xml" />
-    <file src="C:\Users\pixil\Desktop\Impart\.github\Images\logo.png" target="logo.png" />
+    <file src="C:\Users\William\Desktop\Impart\bin\Debug\net6.0\Impart.runtimeconfig.json" target="lib\net6.0\Impart.runtimeconfig.json" />
+    <file src="C:\Users\William\Desktop\Impart\bin\Debug\net6.0\Impart.dll" target="lib\net6.0\Impart.dll" />
+    <file src="C:\Users\William\Desktop\Impart\bin\Debug\net6.0\Impart.xml" target="lib\net6.0\Impart.xml" />
+    <file src="C:\Users\William\Desktop\Impart\.github\Images\logo.png" target="logo.png" />
   </files>
 </package>

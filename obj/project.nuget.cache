@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "4B14ue7b0CYBrgP4/nmwJpVhSg7JMg82qFK1ZEq6WYO4HjHzBz44BjRUmQlS40vwxTRhr+QWQaInMzOT3jUbmg==",
+  "dgSpecHash": "8Vze6+vPan9EwF3jPIk0qUlKDoguzZqdPSaNxVe4xORltqEPwIFpLfpcI7dicArQYzSXRAigKNgHD8/x1WE2sg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pixil\\Desktop\\Impart\\Impart.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\William\\Desktop\\Impart\\Impart.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\William\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\William\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\William\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\William\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.25\\microsoft.netcore.app.host.win-x64.6.0.25.nupkg.sha512"
+  ],
   "logs": []
 }
