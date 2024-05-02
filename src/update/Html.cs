@@ -26,7 +26,7 @@ namespace Impart
 
         public void AppendFormatted(IElement e)
         {
-            Elements[Array.FindIndex(Elements, item => item == null)]
+            //find next available (empty) index
             Elements.Add((Message.Length - 1, e));
         }
 
