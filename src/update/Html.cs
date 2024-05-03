@@ -11,35 +11,45 @@ namespace Impart
     public ref struct Html
     {
         private readonly StringBuilder Message;
-        private readonly (int index, IElement)[] Elements;
+        private readonly object[] Variables;
+        private readonly int[] Indexes;
 
         public Html(int length, int count)
         {
             Message = new StringBuilder(length);
-            Elements = new (int index, IElement)[count];
+            Variables = new object[count];
+            Indexes = new int[count];
         }
 
         public void AppendLiteral(string s)
         {
-            Message.Append(s);
-        }
-
-        public void AppendFormatted(IElement e)
-        {
-            //find next available (empty) index
-            Elements.Add((Message.Length - 1, e));
+            for (int i = 0; i < Variables.Length; i++)
+            {
+                if (Variables[i] == null)
+                {
+                    Variables[i] = s;
+                    Indexes[i] = Message.Length - 1;
+                }
+            }
         }
 
         public void AppendFormatted<T>(T t)
         {
-            Message.Append(t);
+            for (int i = 0; i < Variables.Length; i++)
+            {
+                if (Variables[i] == null)
+                {
+                    Variables[i] = t;
+                    Indexes[i] = Message.Length - 1;
+                }
+            }
         }
 
         public string BuildMessage()
         {
-            foreach ((int index, IElement e) in Elements)
+            for (int i = 0; i < Variables.Length; i++)
             {
-                Message.Insert(index, e);
+                Message.Insert(Indexes[i], Variables[i]);
             }
             return Message.ToString();
         }
